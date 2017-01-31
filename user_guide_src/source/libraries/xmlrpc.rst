@@ -85,7 +85,7 @@ Here is a basic example that sends a simple Weblogs.com ping to the
 	$request = array('My Photoblog', 'http://www.my-site.com/photoblog/');
 	$this->xmlrpc->request($request);
 
-	if ( ! $this->xmlrpc->send_request())
+	if(  ! $this->xmlrpc->send_request())
 	{
 		echo $this->xmlrpc->display_error();
 	}
@@ -223,7 +223,7 @@ email address, etc.). Here is how the processing function might look::
 
 			$parameters = $request->output_parameters();
 
-			if ($parameters[1] != $username && $parameters[2] != $password)
+			if( $parameters[1] != $username && $parameters[2] != $password)
 			{
 				return $this->xmlrpc->send_error_message('100', 'Invalid Access');
 			}
@@ -331,7 +331,7 @@ folder::
 			$request = array('How is it going?');
 			$this->xmlrpc->request($request);
 
-			if ( ! $this->xmlrpc->send_request())
+			if(  ! $this->xmlrpc->send_request())
 			{
 				echo $this->xmlrpc->display_error();
 			}

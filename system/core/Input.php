@@ -145,7 +145,7 @@ class CI_Input {
 		$this->security =& load_class('Security', 'core');
 
 		// Do we need the UTF-8 class?
-		if (UTF8_ENABLED === TRUE)
+		if( UTF8_ENABLED === TRUE)
 		{
 			$this->uni =& load_class('Utf8', 'core');
 		}
@@ -154,7 +154,7 @@ class CI_Input {
 		$this->_sanitize_globals();
 
 		// CSRF Protection check
-		if ($this->_enable_csrf === TRUE && ! is_cli())
+		if( $this->_enable_csrf === TRUE && ! is_cli())
 		{
 			$this->security->csrf_verify();
 		}
@@ -182,7 +182,7 @@ class CI_Input {
 		isset($index) OR $index = array_keys($array);
 
 		// allow fetching multiple keys at once
-		if (is_array($index))
+		if( is_array($index))
 		{
 			$output = array();
 			foreach ($index as $key)
@@ -193,22 +193,22 @@ class CI_Input {
 			return $output;
 		}
 
-		if (isset($array[$index]))
+		if( isset($array[$index]))
 		{
 			$value = $array[$index];
 		}
-		elseif (($count = preg_match_all('/(?:^[^\[]+)|\[[^]]*\]/', $index, $matches)) > 1) // Does the index contain array notation
+		elseif( ($count = preg_match_all('/(?:^[^\[]+)|\[[^]]*\]/', $index, $matches)) > 1) // Does the index contain array notation
 		{
 			$value = $array;
 			for ($i = 0; $i < $count; $i++)
 			{
 				$key = trim($matches[0][$i], '[]');
-				if ($key === '') // Empty notation will return the value as array
+				if( $key === '') // Empty notation will return the value as array
 				{
 					break;
 				}
 
-				if (isset($value[$key]))
+				if( isset($value[$key]))
 				{
 					$value = $value[$key];
 				}
@@ -331,7 +331,7 @@ class CI_Input {
 	{
 		// Prior to PHP 5.6, the input stream can only be read once,
 		// so we'll need to check if we have already done that first.
-		if ( ! is_array($this->_input_stream))
+		if(  ! is_array($this->_input_stream))
 		{
 			// $this->raw_input_stream will trigger __get().
 			parse_str($this->raw_input_stream, $this->_input_stream);
@@ -361,44 +361,44 @@ class CI_Input {
 	 */
 	public function set_cookie($name, $value = '', $expire = '', $domain = '', $path = '/', $prefix = '', $secure = FALSE, $httponly = FALSE)
 	{
-		if (is_array($name))
+		if( is_array($name))
 		{
 			// always leave 'name' in last place, as the loop will break otherwise, due to $$item
 			foreach (array('value', 'expire', 'domain', 'path', 'prefix', 'secure', 'httponly', 'name') as $item)
 			{
-				if (isset($name[$item]))
+				if( isset($name[$item]))
 				{
 					$$item = $name[$item];
 				}
 			}
 		}
 
-		if ($prefix === '' && config_item('cookie_prefix') !== '')
+		if( $prefix === '' && config_item('cookie_prefix') !== '')
 		{
 			$prefix = config_item('cookie_prefix');
 		}
 
-		if ($domain == '' && config_item('cookie_domain') != '')
+		if( $domain == '' && config_item('cookie_domain') != '')
 		{
 			$domain = config_item('cookie_domain');
 		}
 
-		if ($path === '/' && config_item('cookie_path') !== '/')
+		if( $path === '/' && config_item('cookie_path') !== '/')
 		{
 			$path = config_item('cookie_path');
 		}
 
-		if ($secure === FALSE && config_item('cookie_secure') === TRUE)
+		if( $secure === FALSE && config_item('cookie_secure') === TRUE)
 		{
 			$secure = config_item('cookie_secure');
 		}
 
-		if ($httponly === FALSE && config_item('cookie_httponly') !== FALSE)
+		if( $httponly === FALSE && config_item('cookie_httponly') !== FALSE)
 		{
 			$httponly = config_item('cookie_httponly');
 		}
 
-		if ( ! is_numeric($expire))
+		if(  ! is_numeric($expire))
 		{
 			$expire = time() - 86500;
 		}
@@ -421,31 +421,31 @@ class CI_Input {
 	 */
 	public function ip_address()
 	{
-		if ($this->ip_address !== FALSE)
+		if( $this->ip_address !== FALSE)
 		{
 			return $this->ip_address;
 		}
 
 		$proxy_ips = config_item('proxy_ips');
-		if ( ! empty($proxy_ips) && ! is_array($proxy_ips))
+		if(  ! empty($proxy_ips) && ! is_array($proxy_ips))
 		{
 			$proxy_ips = explode(',', str_replace(' ', '', $proxy_ips));
 		}
 
 		$this->ip_address = $this->server('REMOTE_ADDR');
 
-		if ($proxy_ips)
+		if( $proxy_ips)
 		{
 			foreach (array('HTTP_X_FORWARDED_FOR', 'HTTP_CLIENT_IP', 'HTTP_X_CLIENT_IP', 'HTTP_X_CLUSTER_CLIENT_IP') as $header)
 			{
-				if (($spoof = $this->server($header)) !== NULL)
+				if( ($spoof = $this->server($header)) !== NULL)
 				{
 					// Some proxies typically list the whole chain of IP
 					// addresses through which the client has reached us.
 					// e.g. client_ip, proxy_ip1, proxy_ip2, etc.
 					sscanf($spoof, '%[^,]', $spoof);
 
-					if ( ! $this->valid_ip($spoof))
+					if(  ! $this->valid_ip($spoof))
 					{
 						$spoof = NULL;
 					}
@@ -456,16 +456,16 @@ class CI_Input {
 				}
 			}
 
-			if ($spoof)
+			if( $spoof)
 			{
 				for ($i = 0, $c = count($proxy_ips); $i < $c; $i++)
 				{
 					// Check if we have an IP address or a subnet
-					if (strpos($proxy_ips[$i], '/') === FALSE)
+					if( strpos($proxy_ips[$i], '/') === FALSE)
 					{
 						// An IP address (and not a subnet) is specified.
 						// We can compare right away.
-						if ($proxy_ips[$i] === $this->ip_address)
+						if( $proxy_ips[$i] === $this->ip_address)
 						{
 							$this->ip_address = $spoof;
 							break;
@@ -478,15 +478,15 @@ class CI_Input {
 					isset($separator) OR $separator = $this->valid_ip($this->ip_address, 'ipv6') ? ':' : '.';
 
 					// If the proxy entry doesn't match the IP protocol - skip it
-					if (strpos($proxy_ips[$i], $separator) === FALSE)
+					if( strpos($proxy_ips[$i], $separator) === FALSE)
 					{
 						continue;
 					}
 
 					// Convert the REMOTE_ADDR IP address to binary, if needed
-					if ( ! isset($ip, $sprintf))
+					if(  ! isset($ip, $sprintf))
 					{
-						if ($separator === ':')
+						if( $separator === ':')
 						{
 							// Make sure we're have the "full" IPv6 format
 							$ip = explode(':',
@@ -516,7 +516,7 @@ class CI_Input {
 					sscanf($proxy_ips[$i], '%[^/]/%d', $netaddr, $masklen);
 
 					// Again, an IPv6 address is most likely in a compressed form
-					if ($separator === ':')
+					if( $separator === ':')
 					{
 						$netaddr = explode(':', str_replace('::', str_repeat(':', 9 - substr_count($netaddr, ':')), $netaddr));
 						for ($i = 0; $i < 8; $i++)
@@ -530,7 +530,7 @@ class CI_Input {
 					}
 
 					// Convert to binary and finally compare
-					if (strncmp($ip, vsprintf($sprintf, $netaddr), $masklen) === 0)
+					if( strncmp($ip, vsprintf($sprintf, $netaddr), $masklen) === 0)
 					{
 						$this->ip_address = $spoof;
 						break;
@@ -539,7 +539,7 @@ class CI_Input {
 			}
 		}
 
-		if ( ! $this->valid_ip($this->ip_address))
+		if(  ! $this->valid_ip($this->ip_address))
 		{
 			return $this->ip_address = '0.0.0.0';
 		}
@@ -558,7 +558,7 @@ class CI_Input {
 	 */
 	public function valid_ip($ip, $which = '')
 	{
-		switch (strtolower($which))
+		switch( strtolower($which))
 		{
 			case 'ipv4':
 				$which = FILTER_FLAG_IPV4;
@@ -602,11 +602,11 @@ class CI_Input {
 	protected function _sanitize_globals()
 	{
 		// Is $_GET data allowed? If not we'll set the $_GET to an empty array
-		if ($this->_allow_get_array === FALSE)
+		if( $this->_allow_get_array === FALSE)
 		{
 			$_GET = array();
 		}
-		elseif (is_array($_GET))
+		elseif( is_array($_GET))
 		{
 			foreach ($_GET as $key => $val)
 			{
@@ -615,7 +615,7 @@ class CI_Input {
 		}
 
 		// Clean $_POST Data
-		if (is_array($_POST))
+		if( is_array($_POST))
 		{
 			foreach ($_POST as $key => $val)
 			{
@@ -624,7 +624,7 @@ class CI_Input {
 		}
 
 		// Clean $_COOKIE Data
-		if (is_array($_COOKIE))
+		if( is_array($_COOKIE))
 		{
 			// Also get rid of specially treated cookies that might be set by a server
 			// or silly application, that are of no use to a CI application anyway
@@ -639,7 +639,7 @@ class CI_Input {
 
 			foreach ($_COOKIE as $key => $val)
 			{
-				if (($cookie_key = $this->_clean_input_keys($key)) !== FALSE)
+				if( ($cookie_key = $this->_clean_input_keys($key)) !== FALSE)
 				{
 					$_COOKIE[$cookie_key] = $this->_clean_input_data($val);
 				}
@@ -669,7 +669,7 @@ class CI_Input {
 	 */
 	protected function _clean_input_data($str)
 	{
-		if (is_array($str))
+		if( is_array($str))
 		{
 			$new_array = array();
 			foreach (array_keys($str) as $key)
@@ -684,13 +684,13 @@ class CI_Input {
 		   NOTE: In PHP 5.4 get_magic_quotes_gpc() will always return 0 and
 		         it will probably not exist in future versions at all.
 		*/
-		if ( ! is_php('5.4') && get_magic_quotes_gpc())
+		if(  ! is_php('5.4') && get_magic_quotes_gpc())
 		{
 			$str = stripslashes($str);
 		}
 
 		// Clean UTF-8 if supported
-		if (UTF8_ENABLED === TRUE)
+		if( UTF8_ENABLED === TRUE)
 		{
 			$str = $this->uni->clean_string($str);
 		}
@@ -699,7 +699,7 @@ class CI_Input {
 		$str = remove_invisible_characters($str, FALSE);
 
 		// Standardize newlines if needed
-		if ($this->_standardize_newlines === TRUE)
+		if( $this->_standardize_newlines === TRUE)
 		{
 			return preg_replace('/(?:\r\n|[\r\n])/', PHP_EOL, $str);
 		}
@@ -724,9 +724,9 @@ class CI_Input {
 	 */
 	protected function _clean_input_keys($str, $fatal = TRUE)
 	{
-		if ( ! preg_match('/^[a-z0-9:_\/|-]+$/i', $str))
+		if(  ! preg_match('/^[a-z0-9:_\/|-]+$/i', $str))
 		{
-			if ($fatal === TRUE)
+			if( $fatal === TRUE)
 			{
 				return FALSE;
 			}
@@ -739,7 +739,7 @@ class CI_Input {
 		}
 
 		// Clean UTF-8 if supported
-		if (UTF8_ENABLED === TRUE)
+		if( UTF8_ENABLED === TRUE)
 		{
 			return $this->uni->clean_string($str);
 		}
@@ -758,13 +758,13 @@ class CI_Input {
 	public function request_headers($xss_clean = FALSE)
 	{
 		// If header is already defined, return it immediately
-		if ( ! empty($this->headers))
+		if(  ! empty($this->headers))
 		{
 			return $this->headers;
 		}
 
 		// In Apache, you can simply call apache_request_headers()
-		if (function_exists('apache_request_headers'))
+		if( function_exists('apache_request_headers'))
 		{
 			return $this->headers = apache_request_headers();
 		}
@@ -773,7 +773,7 @@ class CI_Input {
 
 		foreach ($_SERVER as $key => $val)
 		{
-			if (sscanf($key, 'HTTP_%s', $header) === 1)
+			if( sscanf($key, 'HTTP_%s', $header) === 1)
 			{
 				// take SOME_HEADER and turn it into Some-Header
 				$header = str_replace('_', ' ', strtolower($header));
@@ -801,7 +801,7 @@ class CI_Input {
 	{
 		static $headers;
 
-		if ( ! isset($headers))
+		if(  ! isset($headers))
 		{
 			empty($this->headers) && $this->request_headers();
 			foreach ($this->headers as $key => $value)
@@ -812,7 +812,7 @@ class CI_Input {
 
 		$index = strtolower($index);
 
-		if ( ! isset($headers[$index]))
+		if(  ! isset($headers[$index]))
 		{
 			return NULL;
 		}
@@ -881,12 +881,12 @@ class CI_Input {
 	 */
 	public function __get($name)
 	{
-		if ($name === 'raw_input_stream')
+		if( $name === 'raw_input_stream')
 		{
 			isset($this->_raw_input_stream) OR $this->_raw_input_stream = file_get_contents('php://input');
 			return $this->_raw_input_stream;
 		}
-		elseif ($name === 'ip_address')
+		elseif( $name === 'ip_address')
 		{
 			return $this->ip_address;
 		}

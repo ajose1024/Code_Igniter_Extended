@@ -173,7 +173,7 @@ helper </helpers/form_helper>`.
 			<td>
 				<?php echo $items['name']; ?>
 
-				<?php if ($this->cart->has_options($items['rowid']) == TRUE): ?>
+				<?php if( $this->cart->has_options($items['rowid']) == TRUE): ?>
 
 					<p>
 						<?php foreach ($this->cart->product_options($items['rowid']) as $option_name => $option_value): ?>

@@ -101,7 +101,7 @@ class CI_Cache_file extends CI_Driver {
 			'data'		=> $data
 		);
 
-		if (write_file($this->_cache_path.$id, serialize($contents)))
+		if( write_file($this->_cache_path.$id, serialize($contents)))
 		{
 			chmod($this->_cache_path.$id, 0640);
 			return TRUE;
@@ -136,11 +136,11 @@ class CI_Cache_file extends CI_Driver {
 	{
 		$data = $this->_get($id);
 
-		if ($data === FALSE)
+		if( $data === FALSE)
 		{
 			$data = array('data' => 0, 'ttl' => 60);
 		}
-		elseif ( ! is_int($data['data']))
+		elseif(  ! is_int($data['data']))
 		{
 			return FALSE;
 		}
@@ -164,11 +164,11 @@ class CI_Cache_file extends CI_Driver {
 	{
 		$data = $this->_get($id);
 
-		if ($data === FALSE)
+		if( $data === FALSE)
 		{
 			$data = array('data' => 0, 'ttl' => 60);
 		}
-		elseif ( ! is_int($data['data']))
+		elseif(  ! is_int($data['data']))
 		{
 			return FALSE;
 		}
@@ -216,18 +216,18 @@ class CI_Cache_file extends CI_Driver {
 	 */
 	public function get_metadata($id)
 	{
-		if ( ! file_exists($this->_cache_path.$id))
+		if(  ! file_exists($this->_cache_path.$id))
 		{
 			return FALSE;
 		}
 
 		$data = unserialize(file_get_contents($this->_cache_path.$id));
 
-		if (is_array($data))
+		if( is_array($data))
 		{
 			$mtime = filemtime($this->_cache_path.$id);
 
-			if ( ! isset($data['ttl']))
+			if(  ! isset($data['ttl']))
 			{
 				return FALSE;
 			}
@@ -267,14 +267,14 @@ class CI_Cache_file extends CI_Driver {
 	 */
 	protected function _get($id)
 	{
-		if ( ! is_file($this->_cache_path.$id))
+		if(  ! is_file($this->_cache_path.$id))
 		{
 			return FALSE;
 		}
 
 		$data = unserialize(file_get_contents($this->_cache_path.$id));
 
-		if ($data['ttl'] > 0 && time() > $data['time'] + $data['ttl'])
+		if( $data['ttl'] > 0 && time() > $data['time'] + $data['ttl'])
 		{
 			unlink($this->_cache_path.$id);
 			return FALSE;

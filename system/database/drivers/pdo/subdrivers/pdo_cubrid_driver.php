@@ -87,7 +87,7 @@ class CI_DB_pdo_cubrid_driver extends CI_DB_pdo_driver {
 	{
 		parent::__construct($params);
 
-		if (empty($this->dsn))
+		if( empty($this->dsn))
 		{
 			$this->dsn = 'cubrid:host='.(empty($this->hostname) ? '127.0.0.1' : $this->hostname);
 
@@ -111,7 +111,7 @@ class CI_DB_pdo_cubrid_driver extends CI_DB_pdo_driver {
 	{
 		$sql = 'SHOW TABLES';
 
-		if ($prefix_limit === TRUE && $this->dbprefix !== '')
+		if( $prefix_limit === TRUE && $this->dbprefix !== '')
 		{
 			return $sql." LIKE '".$this->escape_like_str($this->dbprefix)."%'";
 		}
@@ -144,7 +144,7 @@ class CI_DB_pdo_cubrid_driver extends CI_DB_pdo_driver {
 	 */
 	public function field_data($table)
 	{
-		if (($query = $this->query('SHOW COLUMNS FROM '.$this->protect_identifiers($table, TRUE, NULL, FALSE))) === FALSE)
+		if( ($query = $this->query('SHOW COLUMNS FROM '.$this->protect_identifiers($table, TRUE, NULL, FALSE))) === FALSE)
 		{
 			return FALSE;
 		}
@@ -189,7 +189,7 @@ class CI_DB_pdo_cubrid_driver extends CI_DB_pdo_driver {
 
 			foreach (array_keys($val) as $field)
 			{
-				if ($field !== $index)
+				if( $field !== $index)
 				{
 					$final[$field][] = 'WHEN '.$index.' = '.$val[$index].' THEN '.$val[$field];
 				}
@@ -239,7 +239,7 @@ class CI_DB_pdo_cubrid_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _from_tables()
 	{
-		if ( ! empty($this->qb_join) && count($this->qb_from) > 1)
+		if(  ! empty($this->qb_join) && count($this->qb_from) > 1)
 		{
 			return '('.implode(', ', $this->qb_from).')';
 		}

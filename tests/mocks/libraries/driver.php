@@ -9,7 +9,7 @@ class Mock_Libraries_Driver extends CI_Driver_Library {
 	 */
 	public function driver_list($drivers = NULL)
 	{
-		if (empty($drivers))
+		if( empty($drivers))
 		{
 			return $this->valid_drivers;
 		}

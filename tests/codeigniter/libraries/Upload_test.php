@@ -26,7 +26,7 @@ class Upload_test extends CI_TestCase {
 		);
 
 		// ReflectionProperty::setAccessible() is not available in PHP 5.2.x
-		if (is_php('5.3'))
+		if( is_php('5.3'))
 		{
 			$reflection = new ReflectionClass($upload);
 			$reflection = $reflection->getProperty('_file_name_override');

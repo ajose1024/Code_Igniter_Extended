@@ -92,7 +92,7 @@ If they fail you can retrieve the error message using this function::
 A good practice is to use the processing function conditionally, showing an
 error upon failure, like this::
 
-	if ( ! $this->image_lib->resize())
+	if(  ! $this->image_lib->resize())
 	{
 		echo $this->image_lib->display_errors();
 	}
@@ -398,7 +398,7 @@ Class Reference
 
 			$this->image_lib->initialize($config); 
 
-			if ( ! $this->image_lib->crop())
+			if(  ! $this->image_lib->crop())
 			{
 				echo $this->image_lib->display_errors();
 			}
@@ -436,7 +436,7 @@ Class Reference
 
 			$this->image_lib->initialize($config); 
 
-			if ( ! $this->image_lib->rotate())
+			if(  ! $this->image_lib->rotate())
 			{
 				echo $this->image_lib->display_errors();
 			}

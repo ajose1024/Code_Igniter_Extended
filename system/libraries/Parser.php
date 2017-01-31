@@ -135,7 +135,7 @@ class CI_Parser {
 	 */
 	protected function _parse($template, $data, $return = FALSE)
 	{
-		if ($template === '')
+		if( $template === '')
 		{
 			return FALSE;
 		}
@@ -154,7 +154,7 @@ class CI_Parser {
 		unset($data);
 		$template = strtr($template, $replace);
 
-		if ($return === FALSE)
+		if( $return === FALSE)
 		{
 			$this->CI->output->append_output($template);
 		}
@@ -222,10 +222,10 @@ class CI_Parser {
 				$temp = array();
 				foreach ($row as $key => $val)
 				{
-					if (is_array($val))
+					if( is_array($val))
 					{
 						$pair = $this->_parse_pair($key, $val, $match[1]);
-						if ( ! empty($pair))
+						if(  ! empty($pair))
 						{
 							$temp = array_merge($temp, $pair);
 						}

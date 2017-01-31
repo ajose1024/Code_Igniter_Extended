@@ -83,9 +83,9 @@ class CI_Cache_memcached extends CI_Driver {
 		$CI =& get_instance();
 		$defaults = $this->_memcache_conf['default'];
 
-		if ($CI->config->load('memcached', TRUE, TRUE))
+		if( $CI->config->load('memcached', TRUE, TRUE))
 		{
-			if (is_array($CI->config->config['memcached']))
+			if( is_array($CI->config->config['memcached']))
 			{
 				$this->_memcache_conf = array();
 
@@ -96,11 +96,11 @@ class CI_Cache_memcached extends CI_Driver {
 			}
 		}
 
-		if (class_exists('Memcached', FALSE))
+		if( class_exists('Memcached', FALSE))
 		{
 			$this->_memcached = new Memcached();
 		}
-		elseif (class_exists('Memcache', FALSE))
+		elseif( class_exists('Memcache', FALSE))
 		{
 			$this->_memcached = new Memcache();
 		}
@@ -115,7 +115,7 @@ class CI_Cache_memcached extends CI_Driver {
 			isset($cache_server['port']) OR $cache_server['port'] = $defaults['port'];
 			isset($cache_server['weight']) OR $cache_server['weight'] = $defaults['weight'];
 
-			if (get_class($this->_memcached) === 'Memcache')
+			if( get_class($this->_memcached) === 'Memcache')
 			{
 				// Third parameter is persistance and defaults to TRUE.
 				$this->_memcached->addServer(
@@ -164,16 +164,16 @@ class CI_Cache_memcached extends CI_Driver {
 	 */
 	public function save($id, $data, $ttl = 60, $raw = FALSE)
 	{
-		if ($raw !== TRUE)
+		if( $raw !== TRUE)
 		{
 			$data = array($data, time(), $ttl);
 		}
 
-		if (get_class($this->_memcached) === 'Memcached')
+		if( get_class($this->_memcached) === 'Memcached')
 		{
 			return $this->_memcached->set($id, $data, $ttl);
 		}
-		elseif (get_class($this->_memcached) === 'Memcache')
+		elseif( get_class($this->_memcached) === 'Memcache')
 		{
 			return $this->_memcached->set($id, $data, 0, $ttl);
 		}
@@ -258,7 +258,7 @@ class CI_Cache_memcached extends CI_Driver {
 	{
 		$stored = $this->_memcached->get($id);
 
-		if (count($stored) !== 3)
+		if( count($stored) !== 3)
 		{
 			return FALSE;
 		}

@@ -24,7 +24,7 @@ class Mock_Core_Security extends CI_Security {
 	// Override inaccessible protected method
 	public function __call($method, $params)
 	{
-		if (is_callable(array($this, '_'.$method)))
+		if( is_callable(array($this, '_'.$method)))
 		{
 			return call_user_func_array(array($this, '_'.$method), $params);
 		}

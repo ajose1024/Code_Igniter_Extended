@@ -129,7 +129,7 @@ this code and save it to your application/controllers/ folder::
 
 			$this->load->library('form_validation');
 
-			if ($this->form_validation->run() == FALSE)
+			if( $this->form_validation->run() == FALSE)
 			{
 				$this->load->view('myform');
 			}
@@ -232,7 +232,7 @@ Your controller should now look like this::
 			$this->form_validation->set_rules('passconf', 'Password Confirmation', 'required');
 			$this->form_validation->set_rules('email', 'Email', 'required');
 
-			if ($this->form_validation->run() == FALSE)
+			if( $this->form_validation->run() == FALSE)
 			{
 				$this->load->view('myform');
 			}
@@ -433,7 +433,7 @@ Here's how your controller should now look::
 			$this->form_validation->set_rules('passconf', 'Password Confirmation', 'required');
 			$this->form_validation->set_rules('email', 'Email', 'required|is_unique[users.email]');
 
-			if ($this->form_validation->run() == FALSE)
+			if( $this->form_validation->run() == FALSE)
 			{
 				$this->load->view('myform');
 			}
@@ -445,7 +445,7 @@ Here's how your controller should now look::
 
 		public function username_check($str)
 		{
-			if ($str == 'test')
+			if( $str == 'test')
 			{
 				$this->form_validation->set_message('username_check', 'The {field} field can not be the word "test"');
 				return FALSE;
@@ -814,7 +814,7 @@ Calling a Specific Rule Group
 In order to call a specific group, you will pass its name to the ``run()``
 method. For example, to call the signup rule you will do this::
 
-	if ($this->form_validation->run('signup') == FALSE)
+	if( $this->form_validation->run('signup') == FALSE)
 	{
 		$this->load->view('myform');
 	}
@@ -839,7 +839,7 @@ method named signup. Here's what your class might look like::
 		{
 			$this->load->library('form_validation');
 
-			if ($this->form_validation->run() == FALSE)
+			if( $this->form_validation->run() == FALSE)
 			{
 				$this->load->view('myform');
 			}

@@ -62,7 +62,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *  Load the framework constants
  * ------------------------------------------------------
  */
-	if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/constants.php'))
+	if( file_exists(APPPATH.'config/'.ENVIRONMENT.'/constants.php'))
 	{
 		require_once(APPPATH.'config/'.ENVIRONMENT.'/constants.php');
 	}
@@ -74,7 +74,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *  Load the global functions
  * ------------------------------------------------------
  */
-	require_once(BASEPATH.'core/Common.php');
+	require_once(BASEPATH . 'core/Common.php');
 
 
 /*
@@ -83,11 +83,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * ------------------------------------------------------
  */
 
-if ( ! is_php('5.4'))
+if(  ! is_php('5.4'))
 {
 	ini_set('magic_quotes_runtime', 0);
 
-	if ((bool) ini_get('register_globals'))
+	if( (bool) ini_get('register_globals'))
 	{
 		$_protected = array(
 			'_SERVER',
@@ -110,14 +110,14 @@ if ( ! is_php('5.4'))
 		$_registered = ini_get('variables_order');
 		foreach (array('E' => '_ENV', 'G' => '_GET', 'P' => '_POST', 'C' => '_COOKIE', 'S' => '_SERVER') as $key => $superglobal)
 		{
-			if (strpos($_registered, $key) === FALSE)
+			if( strpos($_registered, $key) === FALSE)
 			{
 				continue;
 			}
 
 			foreach (array_keys($$superglobal) as $var)
 			{
-				if (isset($GLOBALS[$var]) && ! in_array($var, $_protected, TRUE))
+				if( isset($GLOBALS[$var]) && ! in_array($var, $_protected, TRUE))
 				{
 					$GLOBALS[$var] = NULL;
 				}
@@ -152,7 +152,7 @@ if ( ! is_php('5.4'))
  * Note: Since the config file data is cached it doesn't
  * hurt to load it here.
  */
-	if ( ! empty($assign_to_config['subclass_prefix']))
+	if(  ! empty($assign_to_config['subclass_prefix']))
 	{
 		get_config(array('subclass_prefix' => $assign_to_config['subclass_prefix']));
 	}
@@ -162,15 +162,15 @@ if ( ! is_php('5.4'))
  *  Should we use a Composer autoloader?
  * ------------------------------------------------------
  */
-	if ($composer_autoload = config_item('composer_autoload'))
+	if( $composer_autoload = config_item('composer_autoload'))
 	{
-		if ($composer_autoload === TRUE)
+		if( $composer_autoload === TRUE)
 		{
 			file_exists(APPPATH.'vendor/autoload.php')
 				? require_once(APPPATH.'vendor/autoload.php')
 				: log_message('error', '$config[\'composer_autoload\'] is set to TRUE but '.APPPATH.'vendor/autoload.php was not found.');
 		}
-		elseif (file_exists($composer_autoload))
+		elseif( file_exists($composer_autoload))
 		{
 			require_once($composer_autoload);
 		}
@@ -216,7 +216,7 @@ if ( ! is_php('5.4'))
 	$CFG =& load_class('Config', 'core');
 
 	// Do we have any manually set config items in the index.php file?
-	if (isset($assign_to_config) && is_array($assign_to_config))
+	if( isset($assign_to_config) && is_array($assign_to_config))
 	{
 		foreach ($assign_to_config as $key => $value)
 		{
@@ -241,7 +241,7 @@ if ( ! is_php('5.4'))
 	$charset = strtoupper(config_item('charset'));
 	ini_set('default_charset', $charset);
 
-	if (extension_loaded('mbstring'))
+	if( extension_loaded('mbstring'))
 	{
 		define('MB_ENABLED', TRUE);
 		// mbstring.internal_encoding is deprecated starting with PHP 5.6
@@ -258,7 +258,7 @@ if ( ! is_php('5.4'))
 
 	// There's an ICONV_IMPL constant, but the PHP manual says that using
 	// iconv's predefined constants is "strongly discouraged".
-	if (extension_loaded('iconv'))
+	if( extension_loaded('iconv'))
 	{
 		define('ICONV_ENABLED', TRUE);
 		// iconv.internal_encoding is deprecated starting with PHP 5.6
@@ -270,7 +270,7 @@ if ( ! is_php('5.4'))
 		define('ICONV_ENABLED', FALSE);
 	}
 
-	if (is_php('5.6'))
+	if( is_php('5.6'))
 	{
 		ini_set('php.internal_encoding', $charset);
 	}
@@ -281,10 +281,10 @@ if ( ! is_php('5.4'))
  * ------------------------------------------------------
  */
 
-	require_once(BASEPATH.'core/compat/mbstring.php');
-	require_once(BASEPATH.'core/compat/hash.php');
-	require_once(BASEPATH.'core/compat/password.php');
-	require_once(BASEPATH.'core/compat/standard.php');
+	require_once(BASEPATH . 'core/compat/mbstring.php');
+	require_once(BASEPATH . 'core/compat/hash.php');
+	require_once(BASEPATH . 'core/compat/password.php');
+	require_once(BASEPATH . 'core/compat/standard.php');
 
 /*
  * ------------------------------------------------------
@@ -319,7 +319,7 @@ if ( ! is_php('5.4'))
  *	Is there a valid cache file? If so, we're done...
  * ------------------------------------------------------
  */
-	if ($EXT->call_hook('cache_override') === FALSE && $OUT->_display_cache($CFG, $URI) === TRUE)
+	if( $EXT->call_hook('cache_override') === FALSE && $OUT->_display_cache($CFG, $URI) === TRUE)
 	{
 		exit;
 	}
@@ -352,7 +352,7 @@ if ( ! is_php('5.4'))
  *
  */
 	// Load the base controller class
-	require_once BASEPATH.'core/Controller.php';
+	require_once BASEPATH . 'core/Controller.php';
 
 	/**
 	 * Reference to the CI_Controller method.
@@ -366,7 +366,7 @@ if ( ! is_php('5.4'))
 		return CI_Controller::get_instance();
 	}
 
-	if (file_exists(APPPATH.'core/'.$CFG->config['subclass_prefix'].'Controller.php'))
+	if( file_exists(APPPATH.'core/'.$CFG->config['subclass_prefix'].'Controller.php'))
 	{
 		require_once APPPATH.'core/'.$CFG->config['subclass_prefix'].'Controller.php';
 	}
@@ -399,7 +399,7 @@ if ( ! is_php('5.4'))
 	$class = ucfirst($RTR->class);
 	$method = $RTR->method;
 
-	if (empty($class) OR ! file_exists(APPPATH.'controllers/'.$RTR->directory.$class.'.php'))
+	if( empty($class) OR ! file_exists(APPPATH.'controllers/'.$RTR->directory.$class.'.php'))
 	{
 		$e404 = TRUE;
 	}
@@ -407,11 +407,11 @@ if ( ! is_php('5.4'))
 	{
 		require_once(APPPATH.'controllers/'.$RTR->directory.$class.'.php');
 
-		if ( ! class_exists($class, FALSE) OR $method[0] === '_' OR method_exists('CI_Controller', $method))
+		if(  ! class_exists($class, FALSE) OR $method[0] === '_' OR method_exists('CI_Controller', $method))
 		{
 			$e404 = TRUE;
 		}
-		elseif (method_exists($class, '_remap'))
+		elseif( method_exists($class, '_remap'))
 		{
 			$params = array($method, array_slice($URI->rsegments, 2));
 			$method = '_remap';
@@ -420,35 +420,35 @@ if ( ! is_php('5.4'))
 		// Furthermore, there are bug reports and feature/change requests related to it
 		// that make it unreliable to use in this context. Please, DO NOT change this
 		// work-around until a better alternative is available.
-		elseif ( ! in_array(strtolower($method), array_map('strtolower', get_class_methods($class)), TRUE))
+		elseif(  ! in_array(strtolower($method), array_map('strtolower', get_class_methods($class)), TRUE))
 		{
 			$e404 = TRUE;
 		}
 	}
 
-	if ($e404)
+	if( $e404)
 	{
-		if ( ! empty($RTR->routes['404_override']))
+		if(  ! empty($RTR->routes['404_override']))
 		{
-			if (sscanf($RTR->routes['404_override'], '%[^/]/%s', $error_class, $error_method) !== 2)
+			if( sscanf($RTR->routes['404_override'], '%[^/]/%s', $error_class, $error_method) !== 2)
 			{
 				$error_method = 'index';
 			}
 
 			$error_class = ucfirst($error_class);
 
-			if ( ! class_exists($error_class, FALSE))
+			if(  ! class_exists($error_class, FALSE))
 			{
-				if (file_exists(APPPATH.'controllers/'.$RTR->directory.$error_class.'.php'))
+				if( file_exists(APPPATH.'controllers/'.$RTR->directory.$error_class.'.php'))
 				{
 					require_once(APPPATH.'controllers/'.$RTR->directory.$error_class.'.php');
 					$e404 = ! class_exists($error_class, FALSE);
 				}
 				// Were we in a directory? If so, check for a global override
-				elseif ( ! empty($RTR->directory) && file_exists(APPPATH.'controllers/'.$error_class.'.php'))
+				elseif(  ! empty($RTR->directory) && file_exists(APPPATH.'controllers/'.$error_class.'.php'))
 				{
 					require_once(APPPATH.'controllers/'.$error_class.'.php');
-					if (($e404 = ! class_exists($error_class, FALSE)) === FALSE)
+					if( ($e404 = ! class_exists($error_class, FALSE)) === FALSE)
 					{
 						$RTR->directory = '';
 					}
@@ -461,7 +461,7 @@ if ( ! is_php('5.4'))
 		}
 
 		// Did we reset the $e404 flag? If so, set the rsegments, starting from index 1
-		if ( ! $e404)
+		if(  ! $e404)
 		{
 			$class = $error_class;
 			$method = $error_method;
@@ -477,7 +477,7 @@ if ( ! is_php('5.4'))
 		}
 	}
 
-	if ($method !== '_remap')
+	if( $method !== '_remap')
 	{
 		$params = array_slice($URI->rsegments, 2);
 	}
@@ -528,7 +528,7 @@ if ( ! is_php('5.4'))
  *  Send the final rendered output to the browser
  * ------------------------------------------------------
  */
-	if ($EXT->call_hook('display_override') === FALSE)
+	if( $EXT->call_hook('display_override') === FALSE)
 	{
 		$OUT->_display();
 	}

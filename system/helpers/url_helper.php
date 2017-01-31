@@ -49,12 +49,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('site_url'))
+if(  ! function_exists('site_url'))
 {
 	/**
 	 * Site URL
 	 *
-	 * Create a local URL based on your basepath. Segments can be passed via the
+	 * Create a local URL based on your BASEPATH .  Segments can be passed via the
 	 * first parameter either as a string or an array.
 	 *
 	 * @param	string	$uri
@@ -69,12 +69,12 @@ if ( ! function_exists('site_url'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('base_url'))
+if(  ! function_exists('base_url'))
 {
 	/**
 	 * Base URL
 	 *
-	 * Create a local URL based on your basepath.
+	 * Create a local URL based on your BASEPATH . 
 	 * Segments can be passed in as a string or an array, same as site_url
 	 * or a URL to a file can be passed in, e.g. to an image file.
 	 *
@@ -90,7 +90,7 @@ if ( ! function_exists('base_url'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('current_url'))
+if(  ! function_exists('current_url'))
 {
 	/**
 	 * Current URL
@@ -109,7 +109,7 @@ if ( ! function_exists('current_url'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('uri_string'))
+if(  ! function_exists('uri_string'))
 {
 	/**
 	 * URL String
@@ -126,7 +126,7 @@ if ( ! function_exists('uri_string'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('index_page'))
+if(  ! function_exists('index_page'))
 {
 	/**
 	 * Index page
@@ -143,7 +143,7 @@ if ( ! function_exists('index_page'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('anchor'))
+if(  ! function_exists('anchor'))
 {
 	/**
 	 * Anchor Link
@@ -163,12 +163,12 @@ if ( ! function_exists('anchor'))
 			? site_url($uri)
 			: (preg_match('#^(\w+:)?//#i', $uri) ? $uri : site_url($uri));
 
-		if ($title === '')
+		if( $title === '')
 		{
 			$title = $site_url;
 		}
 
-		if ($attributes !== '')
+		if( $attributes !== '')
 		{
 			$attributes = _stringify_attributes($attributes);
 		}
@@ -179,7 +179,7 @@ if ( ! function_exists('anchor'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('anchor_popup'))
+if(  ! function_exists('anchor_popup'))
 {
 	/**
 	 * Anchor Link - Pop-up version
@@ -197,24 +197,24 @@ if ( ! function_exists('anchor_popup'))
 		$title = (string) $title;
 		$site_url = preg_match('#^(\w+:)?//#i', $uri) ? $uri : site_url($uri);
 
-		if ($title === '')
+		if( $title === '')
 		{
 			$title = $site_url;
 		}
 
-		if ($attributes === FALSE)
+		if( $attributes === FALSE)
 		{
 			return '<a href="'.$site_url.'" onclick="window.open(\''.$site_url."', '_blank'); return false;\">".$title.'</a>';
 		}
 
-		if ( ! is_array($attributes))
+		if(  ! is_array($attributes))
 		{
 			$attributes = array($attributes);
 
 			// Ref: http://www.w3schools.com/jsref/met_win_open.asp
 			$window_name = '_blank';
 		}
-		elseif ( ! empty($attributes['window_name']))
+		elseif(  ! empty($attributes['window_name']))
 		{
 			$window_name = $attributes['window_name'];
 			unset($attributes['window_name']);
@@ -240,7 +240,7 @@ if ( ! function_exists('anchor_popup'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('mailto'))
+if(  ! function_exists('mailto'))
 {
 	/**
 	 * Mailto Link
@@ -254,7 +254,7 @@ if ( ! function_exists('mailto'))
 	{
 		$title = (string) $title;
 
-		if ($title === '')
+		if( $title === '')
 		{
 			$title = $email;
 		}
@@ -265,7 +265,7 @@ if ( ! function_exists('mailto'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('safe_mailto'))
+if(  ! function_exists('safe_mailto'))
 {
 	/**
 	 * Encoded Mailto Link
@@ -281,7 +281,7 @@ if ( ! function_exists('safe_mailto'))
 	{
 		$title = (string) $title;
 
-		if ($title === '')
+		if( $title === '')
 		{
 			$title = $email;
 		}
@@ -295,9 +295,9 @@ if ( ! function_exists('safe_mailto'))
 
 		$x[] = '"';
 
-		if ($attributes !== '')
+		if( $attributes !== '')
 		{
-			if (is_array($attributes))
+			if( is_array($attributes))
 			{
 				foreach ($attributes as $key => $val)
 				{
@@ -325,19 +325,19 @@ if ( ! function_exists('safe_mailto'))
 		{
 			$ordinal = ord($title[$i]);
 
-			if ($ordinal < 128)
+			if( $ordinal < 128)
 			{
 				$x[] = '|'.$ordinal;
 			}
 			else
 			{
-				if (count($temp) === 0)
+				if( count($temp) === 0)
 				{
 					$count = ($ordinal < 224) ? 2 : 3;
 				}
 
 				$temp[] = $ordinal;
-				if (count($temp) === $count)
+				if( count($temp) === $count)
 				{
 					$number = ($count === 3)
 							? (($temp[0] % 16) * 4096) + (($temp[1] % 64) * 64) + ($temp[2] % 64)
@@ -363,7 +363,7 @@ if ( ! function_exists('safe_mailto'))
 		}
 
 		$output .= "\n\tfor (var i = l.length-1; i >= 0; i=i-1) {\n"
-			."\t\tif (l[i].substring(0, 1) === '|') document.write(\"&#\"+unescape(l[i].substring(1))+\";\");\n"
+			."\t\tif( l[i].substring(0, 1) === '|') document.write(\"&#\"+unescape(l[i].substring(1))+\";\");\n"
 			."\t\telse document.write(unescape(l[i]));\n"
 			."\t}\n"
 			."\t//]]>\n"
@@ -375,7 +375,7 @@ if ( ! function_exists('safe_mailto'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('auto_link'))
+if(  ! function_exists('auto_link'))
 {
 	/**
 	 * Auto-linker
@@ -393,7 +393,7 @@ if ( ! function_exists('auto_link'))
 	function auto_link($str, $type = 'both', $popup = FALSE)
 	{
 		// Find and replace any URLs.
-		if ($type !== 'email' && preg_match_all('#(\w*://|www\.)[^\s()<>;]+\w#i', $str, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER))
+		if( $type !== 'email' && preg_match_all('#(\w*://|www\.)[^\s()<>;]+\w#i', $str, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER))
 		{
 			// Set our target HTML if using popup links.
 			$target = ($popup) ? ' target="_blank"' : '';
@@ -414,11 +414,11 @@ if ( ! function_exists('auto_link'))
 		}
 
 		// Find and replace any emails.
-		if ($type !== 'url' && preg_match_all('#([\w\.\-\+]+@[a-z0-9\-]+\.[a-z0-9\-\.]+[^[:punct:]\s])#i', $str, $matches, PREG_OFFSET_CAPTURE))
+		if( $type !== 'url' && preg_match_all('#([\w\.\-\+]+@[a-z0-9\-]+\.[a-z0-9\-\.]+[^[:punct:]\s])#i', $str, $matches, PREG_OFFSET_CAPTURE))
 		{
 			foreach (array_reverse($matches[0]) as $match)
 			{
-				if (filter_var($match[0], FILTER_VALIDATE_EMAIL) !== FALSE)
+				if( filter_var($match[0], FILTER_VALIDATE_EMAIL) !== FALSE)
 				{
 					$str = substr_replace($str, safe_mailto($match[0]), $match[1], strlen($match[0]));
 				}
@@ -431,7 +431,7 @@ if ( ! function_exists('auto_link'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('prep_url'))
+if(  ! function_exists('prep_url'))
 {
 	/**
 	 * Prep URL
@@ -443,14 +443,14 @@ if ( ! function_exists('prep_url'))
 	 */
 	function prep_url($str = '')
 	{
-		if ($str === 'http://' OR $str === '')
+		if( $str === 'http://' OR $str === '')
 		{
 			return '';
 		}
 
 		$url = parse_url($str);
 
-		if ( ! $url OR ! isset($url['scheme']))
+		if(  ! $url OR ! isset($url['scheme']))
 		{
 			return 'http://'.$str;
 		}
@@ -461,7 +461,7 @@ if ( ! function_exists('prep_url'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('url_title'))
+if(  ! function_exists('url_title'))
 {
 	/**
 	 * Create URL Title
@@ -479,11 +479,11 @@ if ( ! function_exists('url_title'))
 	 */
 	function url_title($str, $separator = '-', $lowercase = FALSE)
 	{
-		if ($separator === 'dash')
+		if( $separator === 'dash')
 		{
 			$separator = '-';
 		}
-		elseif ($separator === 'underscore')
+		elseif( $separator === 'underscore')
 		{
 			$separator = '_';
 		}
@@ -503,7 +503,7 @@ if ( ! function_exists('url_title'))
 			$str = preg_replace('#'.$key.'#i'.(UTF8_ENABLED ? 'u' : ''), $val, $str);
 		}
 
-		if ($lowercase === TRUE)
+		if( $lowercase === TRUE)
 		{
 			$str = strtolower($str);
 		}
@@ -514,7 +514,7 @@ if ( ! function_exists('url_title'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('redirect'))
+if(  ! function_exists('redirect'))
 {
 	/**
 	 * Header Redirect
@@ -531,19 +531,19 @@ if ( ! function_exists('redirect'))
 	 */
 	function redirect($uri = '', $method = 'auto', $code = NULL)
 	{
-		if ( ! preg_match('#^(\w+:)?//#i', $uri))
+		if(  ! preg_match('#^(\w+:)?//#i', $uri))
 		{
 			$uri = site_url($uri);
 		}
 
 		// IIS environment likely? Use 'refresh' for better compatibility
-		if ($method === 'auto' && isset($_SERVER['SERVER_SOFTWARE']) && strpos($_SERVER['SERVER_SOFTWARE'], 'Microsoft-IIS') !== FALSE)
+		if( $method === 'auto' && isset($_SERVER['SERVER_SOFTWARE']) && strpos($_SERVER['SERVER_SOFTWARE'], 'Microsoft-IIS') !== FALSE)
 		{
 			$method = 'refresh';
 		}
-		elseif ($method !== 'refresh' && (empty($code) OR ! is_numeric($code)))
+		elseif( $method !== 'refresh' && (empty($code) OR ! is_numeric($code)))
 		{
-			if (isset($_SERVER['SERVER_PROTOCOL'], $_SERVER['REQUEST_METHOD']) && $_SERVER['SERVER_PROTOCOL'] === 'HTTP/1.1')
+			if( isset($_SERVER['SERVER_PROTOCOL'], $_SERVER['REQUEST_METHOD']) && $_SERVER['SERVER_PROTOCOL'] === 'HTTP/1.1')
 			{
 				$code = ($_SERVER['REQUEST_METHOD'] !== 'GET')
 					? 303	// reference: http://en.wikipedia.org/wiki/Post/Redirect/Get
@@ -555,7 +555,7 @@ if ( ! function_exists('redirect'))
 			}
 		}
 
-		switch ($method)
+		switch( $method)
 		{
 			case 'refresh':
 				header('Refresh:0;url='.$uri);

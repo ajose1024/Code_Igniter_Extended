@@ -104,7 +104,7 @@ class CI_DB_odbc_driver extends CI_DB {
 		parent::__construct($params);
 
 		// Legacy support for DSN in the hostname field
-		if (empty($this->dsn))
+		if( empty($this->dsn))
 		{
 			$this->dsn = $this->hostname;
 		}
@@ -159,7 +159,7 @@ class CI_DB_odbc_driver extends CI_DB {
 	 */
 	protected function _trans_commit()
 	{
-		if (odbc_commit($this->conn_id))
+		if( odbc_commit($this->conn_id))
 		{
 			odbc_autocommit($this->conn_id, TRUE);
 			return TRUE;
@@ -177,7 +177,7 @@ class CI_DB_odbc_driver extends CI_DB {
 	 */
 	protected function _trans_rollback()
 	{
-		if (odbc_rollback($this->conn_id))
+		if( odbc_rollback($this->conn_id))
 		{
 			odbc_autocommit($this->conn_id, TRUE);
 			return TRUE;
@@ -237,7 +237,7 @@ class CI_DB_odbc_driver extends CI_DB {
 	{
 		$sql = "SELECT table_name FROM information_schema.tables WHERE table_schema = '".$this->schema."'";
 
-		if ($prefix_limit !== FALSE && $this->dbprefix !== '')
+		if( $prefix_limit !== FALSE && $this->dbprefix !== '')
 		{
 			return $sql." AND table_name LIKE '".$this->escape_like_str($this->dbprefix)."%' "
 				.sprintf($this->_like_escape_str, $this->_like_escape_chr);

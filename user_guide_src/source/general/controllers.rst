@@ -169,7 +169,7 @@ be passed as a parameter to the ``_remap()`` method::
 
 	public function _remap($method)
 	{
-		if ($method === 'some_method')
+		if( $method === 'some_method')
 		{
 			$this->$method();
 		}
@@ -189,7 +189,7 @@ Example::
 	public function _remap($method, $params = array())
 	{
 		$method = 'process_'.$method;
-		if (method_exists($this, $method))
+		if( method_exists($this, $method))
 		{
 			return call_user_func_array(array($this, $method), $params);
 		}
@@ -230,7 +230,7 @@ Here is an example::
 	To have your controller's output cached properly, its
 	``_output()`` method can use::
 
-		if ($this->output->cache_expiration > 0)
+		if( $this->output->cache_expiration > 0)
 		{
 			$this->output->_write_cache($output);
 		}

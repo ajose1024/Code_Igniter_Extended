@@ -36,13 +36,13 @@ class Mock_Database_DB {
 	 */
 	public function set_dsn($group = 'default')
 	{
-		if ( ! isset($this->config[$group]))
+		if(  ! isset($this->config[$group]))
 		{
 			throw new InvalidArgumentException('Group '.$group.' not exists');
 		}
 
 		self::$dbdriver = $this->config[$group]['dbdriver'];
-		if (isset($this->config[$group]['subdriver']))
+		if( isset($this->config[$group]['subdriver']))
 		{
 			self::$subdriver = $this->config[$group]['subdriver'];
 		}
@@ -69,9 +69,9 @@ class Mock_Database_DB {
 
 		// Build the parameter
 		$other_params = array_slice($config, 6);
-		if ($dsnstring) $other_params['dsn'] = $dsnstring;
-		if ($subdriver) $other_params['subdriver'] = $subdriver;
-		if ($failover) $other_params['failover'] = $failover;
+		if( $dsnstring) $other_params['dsn'] = $dsnstring;
+		if( $subdriver) $other_params['subdriver'] = $subdriver;
+		if( $failover) $other_params['failover'] = $failover;
 
 		return $dsn.'?'.http_build_query($other_params);
 	}
@@ -109,7 +109,7 @@ class Mock_Database_DB {
 			'DB_forge.php' => '',
 			'DB_query_builder.php' => ''
 		), '', $case->ci_base_root, 'database');
-		if (file_exists(SYSTEM_PATH.'database/drivers/'.$driver.'/'.$driver.'_driver.php'))
+		if( file_exists(SYSTEM_PATH.'database/drivers/'.$driver.'/'.$driver.'_driver.php'))
 		{
 			$case->ci_vfs_create(array(
 				$driver.'_driver.php' => '',
@@ -117,7 +117,7 @@ class Mock_Database_DB {
 				$driver.'_forge.php' => ''
 			), '', $case->ci_base_root, 'database/drivers/'.$driver);
 		}
-		if ($subdriver)
+		if( $subdriver)
 		{
 			$case->ci_vfs_create(array(
 				$driver.'_'.$subdriver.'_driver.php' => '',

@@ -116,7 +116,7 @@ class CI_Migration {
 	public function __construct($config = array())
 	{
 		// Only run this constructor on main library load
-		if ( ! in_array(get_class($this), array('CI_Migration', config_item('subclass_prefix').'Migration'), TRUE))
+		if(  ! in_array(get_class($this), array('CI_Migration', config_item('subclass_prefix').'Migration'), TRUE))
 		{
 			return;
 		}
@@ -129,7 +129,7 @@ class CI_Migration {
 		log_message('info', 'Migrations Class Initialized');
 
 		// Are they trying to use migrations while it is disabled?
-		if ($this->_migration_enabled !== TRUE)
+		if( $this->_migration_enabled !== TRUE)
 		{
 			show_error('Migrations has been loaded but is disabled or set up incorrectly.');
 		}
@@ -147,7 +147,7 @@ class CI_Migration {
 		$this->load->dbforge();
 
 		// Make sure the migration table name was set.
-		if (empty($this->_migration_table))
+		if( empty($this->_migration_table))
 		{
 			show_error('Migrations configuration file (migration.php) must have "migration_table" set.');
 		}
@@ -158,13 +158,13 @@ class CI_Migration {
 			: '/^\d{3}_(\w+)$/';
 
 		// Make sure a valid migration numbering type was set.
-		if ( ! in_array($this->_migration_type, array('sequential', 'timestamp')))
+		if(  ! in_array($this->_migration_type, array('sequential', 'timestamp')))
 		{
 			show_error('An invalid migration numbering type was specified: '.$this->_migration_type);
 		}
 
 		// If the migrations table is missing, make it
-		if ( ! $this->db->table_exists($this->_migration_table))
+		if(  ! $this->db->table_exists($this->_migration_table))
 		{
 			$this->dbforge->add_field(array(
 				'version' => array('type' => 'BIGINT', 'constraint' => 20),
@@ -176,7 +176,7 @@ class CI_Migration {
 		}
 
 		// Do we auto migrate to the latest migration?
-		if ($this->_migration_auto_latest === TRUE && ! $this->latest())
+		if( $this->_migration_auto_latest === TRUE && ! $this->latest())
 		{
 			show_error($this->error_string());
 		}
@@ -198,7 +198,7 @@ class CI_Migration {
 		// Note: We use strings, so that timestamp versions work on 32-bit systems
 		$current_version = $this->_get_version();
 
-		if ($this->_migration_type === 'sequential')
+		if( $this->_migration_type === 'sequential')
 		{
 			$target_version = sprintf('%03d', $target_version);
 		}
@@ -209,13 +209,13 @@ class CI_Migration {
 
 		$migrations = $this->find_migrations();
 
-		if ($target_version > 0 && ! isset($migrations[$target_version]))
+		if( $target_version > 0 && ! isset($migrations[$target_version]))
 		{
 			$this->_error_string = sprintf($this->lang->line('migration_not_found'), $target_version);
 			return FALSE;
 		}
 
-		if ($target_version > $current_version)
+		if( $target_version > $current_version)
 		{
 			// Moving Up
 			$method = 'up';
@@ -227,7 +227,7 @@ class CI_Migration {
 			krsort($migrations);
 		}
 
-		if (empty($migrations))
+		if( empty($migrations))
 		{
 			return TRUE;
 		}
@@ -238,7 +238,7 @@ class CI_Migration {
 		foreach ($migrations as $number => $file)
 		{
 			// Check for sequence gaps
-			if ($this->_migration_type === 'sequential' && $previous !== FALSE && abs($number - $previous) > 1)
+			if( $this->_migration_type === 'sequential' && $previous !== FALSE && abs($number - $previous) > 1)
 			{
 				$this->_error_string = sprintf($this->lang->line('migration_sequence_gap'), $number);
 				return FALSE;
@@ -248,7 +248,7 @@ class CI_Migration {
 			$class = 'Migration_'.ucfirst(strtolower($this->_get_migration_name(basename($file, '.php'))));
 
 			// Validate the migration file structure
-			if ( ! class_exists($class, FALSE))
+			if(  ! class_exists($class, FALSE))
 			{
 				$this->_error_string = sprintf($this->lang->line('migration_class_doesnt_exist'), $class);
 				return FALSE;
@@ -257,13 +257,13 @@ class CI_Migration {
 			$previous = $number;
 
 			// Run migrations that are inside the target range
-			if (
+			if( 
 				($method === 'up'   && $number > $current_version && $number <= $target_version) OR
 				($method === 'down' && $number <= $current_version && $number > $target_version)
 			)
 			{
 				$instance = new $class();
-				if ( ! is_callable(array($instance, $method)))
+				if(  ! is_callable(array($instance, $method)))
 				{
 					$this->_error_string = sprintf($this->lang->line('migration_missing_'.$method.'_method'), $class);
 					return FALSE;
@@ -278,7 +278,7 @@ class CI_Migration {
 
 		// This is necessary when moving down, since the the last migration applied
 		// will be the down() method for the next migration up from the target
-		if ($current_version <> $target_version)
+		if( $current_version <> $target_version)
 		{
 			$current_version = $target_version;
 			$this->_update_version($current_version);
@@ -300,7 +300,7 @@ class CI_Migration {
 	{
 		$migrations = $this->find_migrations();
 
-		if (empty($migrations))
+		if( empty($migrations))
 		{
 			$this->_error_string = $this->lang->line('migration_none_found');
 			return FALSE;
@@ -354,12 +354,12 @@ class CI_Migration {
 			$name = basename($file, '.php');
 
 			// Filter out non-migration files
-			if (preg_match($this->_migration_regex, $name))
+			if( preg_match($this->_migration_regex, $name))
 			{
 				$number = $this->_get_migration_number($name);
 
 				// There cannot be duplicate migration numbers
-				if (isset($migrations[$number]))
+				if( isset($migrations[$number]))
 				{
 					$this->_error_string = sprintf($this->lang->line('migration_multiple_version'), $number);
 					show_error($this->_error_string);

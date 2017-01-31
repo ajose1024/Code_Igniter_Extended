@@ -22,7 +22,7 @@ window.SphinxRtdTheme = (function (jquery) {
             win,
             stickyNavCssClass = 'stickynav',
             applyStickNav = function () {
-                if (navBar.height() <= win.height()) {
+                if( navBar.height() <= win.height()) {
                     navBar.addClass(stickyNavCssClass);
                 } else {
                     navBar.removeClass(stickyNavCssClass);

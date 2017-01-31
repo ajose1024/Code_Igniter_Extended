@@ -39,7 +39,7 @@ fetchable results.
 
 ::
 
-	if ($this->db->simple_query('YOUR QUERY'))
+	if( $this->db->simple_query('YOUR QUERY'))
 	{
 		echo "Success!";
 	}
@@ -163,7 +163,7 @@ If you need to get the last error that has occured, the error() method
 will return an array containing its code and message. Here's a quick
 example::
 
-	if ( ! $this->db->simple_query('SELECT `example_field` FROM `example_table`'))
+	if(  ! $this->db->simple_query('SELECT `example_field` FROM `example_table`'))
 	{
 		$error = $this->db->error(); // Has keys 'code' and 'message'
 	}

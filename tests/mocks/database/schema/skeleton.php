@@ -22,11 +22,11 @@ class Mock_Database_Schema_Skeleton {
 	 */
 	public static function init($driver)
 	{
-		if (empty(self::$db) && empty(self::$forge))
+		if( empty(self::$db) && empty(self::$forge))
 		{
 			// E_DEPRECATED notices thrown by mysql_connect(), mysql_pconnect()
 			// on PHP 5.5+ cause the tests to fail
-			if ($driver === 'mysql' && version_compare(PHP_VERSION, '5.5', '>='))
+			if( $driver === 'mysql' && version_compare(PHP_VERSION, '5.5', '>='))
 			{
 				error_reporting(E_ALL & ~E_DEPRECATED);
 			}

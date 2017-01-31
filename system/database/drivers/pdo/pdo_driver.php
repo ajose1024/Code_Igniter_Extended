@@ -80,7 +80,7 @@ class CI_DB_pdo_driver extends CI_DB {
 	{
 		parent::__construct($params);
 
-		if (preg_match('/([^:]+):/', $this->dsn, $match) && count($match) === 2)
+		if( preg_match('/([^:]+):/', $this->dsn, $match) && count($match) === 2)
 		{
 			// If there is a minimum valid dsn string pattern found, we're done
 			// This is for general PDO users, who tend to have a full DSN string.
@@ -88,26 +88,26 @@ class CI_DB_pdo_driver extends CI_DB {
 			return;
 		}
 		// Legacy support for DSN specified in the hostname field
-		elseif (preg_match('/([^:]+):/', $this->hostname, $match) && count($match) === 2)
+		elseif( preg_match('/([^:]+):/', $this->hostname, $match) && count($match) === 2)
 		{
 			$this->dsn = $this->hostname;
 			$this->hostname = NULL;
 			$this->subdriver = $match[1];
 			return;
 		}
-		elseif (in_array($this->subdriver, array('mssql', 'sybase'), TRUE))
+		elseif( in_array($this->subdriver, array('mssql', 'sybase'), TRUE))
 		{
 			$this->subdriver = 'dblib';
 		}
-		elseif ($this->subdriver === '4D')
+		elseif( $this->subdriver === '4D')
 		{
 			$this->subdriver = '4d';
 		}
-		elseif ( ! in_array($this->subdriver, array('4d', 'cubrid', 'dblib', 'firebird', 'ibm', 'informix', 'mysql', 'oci', 'odbc', 'pgsql', 'sqlite', 'sqlsrv'), TRUE))
+		elseif(  ! in_array($this->subdriver, array('4d', 'cubrid', 'dblib', 'firebird', 'ibm', 'informix', 'mysql', 'oci', 'odbc', 'pgsql', 'sqlite', 'sqlsrv'), TRUE))
 		{
 			log_message('error', 'PDO: Invalid or non-existent subdriver');
 
-			if ($this->db_debug)
+			if( $this->db_debug)
 			{
 				show_error('Invalid or non-existent PDO subdriver');
 			}
@@ -134,7 +134,7 @@ class CI_DB_pdo_driver extends CI_DB {
 		}
 		catch (PDOException $e)
 		{
-			if ($this->db_debug && empty($this->failover))
+			if( $this->db_debug && empty($this->failover))
 			{
 				$this->display_error($e->getMessage(), '', TRUE);
 			}
@@ -152,7 +152,7 @@ class CI_DB_pdo_driver extends CI_DB {
 	 */
 	public function version()
 	{
-		if (isset($this->data_cache['version']))
+		if( isset($this->data_cache['version']))
 		{
 			return $this->data_cache['version'];
 		}
@@ -291,13 +291,13 @@ class CI_DB_pdo_driver extends CI_DB {
 		$error = array('code' => '00000', 'message' => '');
 		$pdo_error = $this->conn_id->errorInfo();
 
-		if (empty($pdo_error[0]))
+		if( empty($pdo_error[0]))
 		{
 			return $error;
 		}
 
 		$error['code'] = isset($pdo_error[1]) ? $pdo_error[0].'/'.$pdo_error[1] : $pdo_error[0];
-		if (isset($pdo_error[2]))
+		if( isset($pdo_error[2]))
 		{
 			 $error['message'] = $pdo_error[2];
 		}
@@ -326,7 +326,7 @@ class CI_DB_pdo_driver extends CI_DB {
 
 			foreach (array_keys($val) as $field)
 			{
-				if ($field !== $index)
+				if( $field !== $index)
 				{
 					$final[$field][] = 'WHEN '.$index.' = '.$val[$index].' THEN '.$val[$field];
 				}

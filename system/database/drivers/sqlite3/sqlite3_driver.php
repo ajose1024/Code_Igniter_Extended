@@ -78,7 +78,7 @@ class CI_DB_sqlite3_driver extends CI_DB {
 	 */
 	public function db_connect($persistent = FALSE)
 	{
-		if ($persistent)
+		if( $persistent)
 		{
 			log_message('debug', 'SQLite3 doesn\'t support persistent connections');
 		}
@@ -104,7 +104,7 @@ class CI_DB_sqlite3_driver extends CI_DB {
 	 */
 	public function version()
 	{
-		if (isset($this->data_cache['version']))
+		if( isset($this->data_cache['version']))
 		{
 			return $this->data_cache['version'];
 		}
@@ -231,12 +231,12 @@ class CI_DB_sqlite3_driver extends CI_DB {
 	public function list_fields($table)
 	{
 		// Is there a cached result?
-		if (isset($this->data_cache['field_names'][$table]))
+		if( isset($this->data_cache['field_names'][$table]))
 		{
 			return $this->data_cache['field_names'][$table];
 		}
 
-		if (($result = $this->query('PRAGMA TABLE_INFO('.$this->protect_identifiers($table, TRUE, NULL, FALSE).')')) === FALSE)
+		if( ($result = $this->query('PRAGMA TABLE_INFO('.$this->protect_identifiers($table, TRUE, NULL, FALSE).')')) === FALSE)
 		{
 			return FALSE;
 		}
@@ -260,13 +260,13 @@ class CI_DB_sqlite3_driver extends CI_DB {
 	 */
 	public function field_data($table)
 	{
-		if (($query = $this->query('PRAGMA TABLE_INFO('.$this->protect_identifiers($table, TRUE, NULL, FALSE).')')) === FALSE)
+		if( ($query = $this->query('PRAGMA TABLE_INFO('.$this->protect_identifiers($table, TRUE, NULL, FALSE).')')) === FALSE)
 		{
 			return FALSE;
 		}
 
 		$query = $query->result_array();
-		if (empty($query))
+		if( empty($query))
 		{
 			return FALSE;
 		}

@@ -101,13 +101,13 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 	{
 		parent::__construct($params);
 
-		if (empty($this->dsn))
+		if( empty($this->dsn))
 		{
 			$this->dsn = 'oci:dbname=';
 
 			// Oracle has a slightly different PDO DSN format (Easy Connect),
 			// which also supports pre-defined DSNs.
-			if (empty($this->hostname) && empty($this->port))
+			if( empty($this->hostname) && empty($this->port))
 			{
 				$this->dsn .= $this->database;
 			}
@@ -121,7 +121,7 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 
 			empty($this->char_set) OR $this->dsn .= ';charset='.$this->char_set;
 		}
-		elseif ( ! empty($this->char_set) && strpos($this->dsn, 'charset=', 4) === FALSE)
+		elseif(  ! empty($this->char_set) && strpos($this->dsn, 'charset=', 4) === FALSE)
 		{
 			$this->dsn .= ';charset='.$this->char_set;
 		}
@@ -141,7 +141,7 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 	{
 		$sql = 'SELECT "TABLE_NAME" FROM "ALL_TABLES"';
 
-		if ($prefix_limit === TRUE && $this->dbprefix !== '')
+		if( $prefix_limit === TRUE && $this->dbprefix !== '')
 		{
 			return $sql.' WHERE "TABLE_NAME" LIKE \''.$this->escape_like_str($this->dbprefix)."%' "
 				.sprintf($this->_like_escape_str, $this->_like_escape_chr);
@@ -162,7 +162,7 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _list_columns($table = '')
 	{
-		if (strpos($table, '.') !== FALSE)
+		if( strpos($table, '.') !== FALSE)
 		{
 			sscanf($table, '%[^.].%s', $owner, $table);
 		}
@@ -186,7 +186,7 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 	 */
 	public function field_data($table)
 	{
-		if (strpos($table, '.') !== FALSE)
+		if( strpos($table, '.') !== FALSE)
 		{
 			sscanf($table, '%[^.].%s', $owner, $table);
 		}
@@ -200,7 +200,7 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 			WHERE UPPER(OWNER) = '.$this->escape(strtoupper($owner)).'
 				AND UPPER(TABLE_NAME) = '.$this->escape(strtoupper($table));
 
-		if (($query = $this->query($sql)) === FALSE)
+		if( ($query = $this->query($sql)) === FALSE)
 		{
 			return FALSE;
 		}
@@ -215,14 +215,14 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 
 			$length = ($query[$i]->CHAR_LENGTH > 0)
 				? $query[$i]->CHAR_LENGTH : $query[$i]->DATA_PRECISION;
-			if ($length === NULL)
+			if( $length === NULL)
 			{
 				$length = $query[$i]->DATA_LENGTH;
 			}
 			$retval[$i]->max_length		= $length;
 
 			$default = $query[$i]->DATA_DEFAULT;
-			if ($default === NULL && $query[$i]->NULLABLE === 'N')
+			if( $default === NULL && $query[$i]->NULLABLE === 'N')
 			{
 				$default = '';
 			}
@@ -267,7 +267,7 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _delete($table)
 	{
-		if ($this->qb_limit)
+		if( $this->qb_limit)
 		{
 			$this->where('rownum <= ',$this->qb_limit, FALSE);
 			$this->qb_limit = FALSE;

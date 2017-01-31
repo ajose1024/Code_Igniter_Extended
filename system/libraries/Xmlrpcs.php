@@ -37,12 +37,12 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-if ( ! function_exists('xml_parser_create'))
+if(  ! function_exists('xml_parser_create'))
 {
 	show_error('Your PHP installation does not support XML');
 }
 
-if ( ! class_exists('CI_Xmlrpc', FALSE))
+if(  ! class_exists('CI_Xmlrpc', FALSE))
 {
 	show_error('You must load the Xmlrpc class before loading the Xmlrpcs class in order to create a server.');
 }
@@ -99,7 +99,7 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 		parent::__construct();
 		$this->set_system_methods();
 
-		if (isset($config['functions']) && is_array($config['functions']))
+		if( isset($config['functions']) && is_array($config['functions']))
 		{
 			$this->methods = array_merge($this->methods, $config['functions']);
 		}
@@ -117,22 +117,22 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 	 */
 	public function initialize($config = array())
 	{
-		if (isset($config['functions']) && is_array($config['functions']))
+		if( isset($config['functions']) && is_array($config['functions']))
 		{
 			$this->methods = array_merge($this->methods, $config['functions']);
 		}
 
-		if (isset($config['debug']))
+		if( isset($config['debug']))
 		{
 			$this->debug = $config['debug'];
 		}
 
-		if (isset($config['object']) && is_object($config['object']))
+		if( isset($config['object']) && is_object($config['object']))
 		{
 			$this->object = $config['object'];
 		}
 
-		if (isset($config['xss_clean']))
+		if( isset($config['xss_clean']))
 		{
 			$this->xss_clean = $config['xss_clean'];
 		}
@@ -218,10 +218,10 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 		//  Get Data
 		//-------------------------------------
 
-		if ($data === '')
+		if( $data === '')
 		{
 			$CI =& get_instance();
-			if ($CI->input->method() === 'post')
+			if( $CI->input->method() === 'post')
 			{
 				$data = $CI->input->raw_input_stream;
 			}
@@ -254,7 +254,7 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 		// PARSE + PROCESS XML DATA
 		//-------------------------------------
 
-		if ( ! xml_parse($parser, $data, 1))
+		if(  ! xml_parse($parser, $data, 1))
 		{
 			// Return XML error as a faultCode
 			$r = new XML_RPC_Response(0,
@@ -264,7 +264,7 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 				xml_get_current_line_number($parser)));
 			xml_parser_free($parser);
 		}
-		elseif ($parser_object->xh[$pname]['isf'])
+		elseif( $parser_object->xh[$pname]['isf'])
 		{
 			return new XML_RPC_Response(0, $this->xmlrpcerr['invalid_return'], $this->xmlrpcstr['invalid_return']);
 		}
@@ -277,7 +277,7 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 
 			for ($i = 0, $c = count($parser_object->xh[$pname]['params']); $i < $c; $i++)
 			{
-				if ($this->debug === TRUE)
+				if( $this->debug === TRUE)
 				{
 					$plist .= $i.' - '.print_r(get_object_vars($parser_object->xh[$pname]['params'][$i]), TRUE).";\n";
 				}
@@ -285,7 +285,7 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 				$m->addParam($parser_object->xh[$pname]['params'][$i]);
 			}
 
-			if ($this->debug === TRUE)
+			if( $this->debug === TRUE)
 			{
 				echo "<pre>---PLIST---\n".$plist."\n---PLIST END---\n\n</pre>";
 			}
@@ -297,7 +297,7 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 		// SET DEBUGGING MESSAGE
 		//-------------------------------------
 
-		if ($this->debug === TRUE)
+		if( $this->debug === TRUE)
 		{
 			$this->debug_msg = "<!-- DEBUG INFO:\n\n".$plist."\n END DEBUG-->\n";
 		}
@@ -320,7 +320,7 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 		// Check to see if it is a system call
 		$system_call = (strpos($methName, 'system') === 0);
 
-		if ($this->xss_clean === FALSE)
+		if( $this->xss_clean === FALSE)
 		{
 			$m->xss_clean = FALSE;
 		}
@@ -329,7 +329,7 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 		// Valid Method
 		//-------------------------------------
 
-		if ( ! isset($this->methods[$methName]['function']))
+		if(  ! isset($this->methods[$methName]['function']))
 		{
 			return new XML_RPC_Response(0, $this->xmlrpcerr['unknown_method'], $this->xmlrpcstr['unknown_method']);
 		}
@@ -341,14 +341,14 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 		$method_parts = explode('.', $this->methods[$methName]['function']);
 		$objectCall = (isset($method_parts[1]) && $method_parts[1] !== '');
 
-		if ($system_call === TRUE)
+		if( $system_call === TRUE)
 		{
-			if ( ! is_callable(array($this,$method_parts[1])))
+			if(  ! is_callable(array($this,$method_parts[1])))
 			{
 				return new XML_RPC_Response(0, $this->xmlrpcerr['unknown_method'], $this->xmlrpcstr['unknown_method']);
 			}
 		}
-		elseif (($objectCall && ! is_callable(array($method_parts[0], $method_parts[1])))
+		elseif( ($objectCall && ! is_callable(array($method_parts[0], $method_parts[1])))
 			OR ( ! $objectCall && ! is_callable($this->methods[$methName]['function']))
 		)
 		{
@@ -359,21 +359,21 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 		// Checking Methods Signature
 		//-------------------------------------
 
-		if (isset($this->methods[$methName]['signature']))
+		if( isset($this->methods[$methName]['signature']))
 		{
 			$sig = $this->methods[$methName]['signature'];
 			for ($i = 0, $c = count($sig); $i < $c; $i++)
 			{
 				$current_sig = $sig[$i];
 
-				if (count($current_sig) === count($m->params)+1)
+				if( count($current_sig) === count($m->params)+1)
 				{
 					for ($n = 0, $mc = count($m->params); $n < $mc; $n++)
 					{
 						$p = $m->params[$n];
 						$pt = ($p->kindOf() === 'scalar') ? $p->scalarval() : $p->kindOf();
 
-						if ($pt !== $current_sig[$n+1])
+						if( $pt !== $current_sig[$n+1])
 						{
 							$pno = $n+1;
 							$wanted = $current_sig[$n+1];
@@ -392,13 +392,13 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 		// Calls the Function
 		//-------------------------------------
 
-		if ($objectCall === TRUE)
+		if( $objectCall === TRUE)
 		{
-			if ($method_parts[0] === 'this' && $system_call === TRUE)
+			if( $method_parts[0] === 'this' && $system_call === TRUE)
 			{
 				return call_user_func(array($this, $method_parts[1]), $m);
 			}
-			elseif ($this->object === FALSE)
+			elseif( $this->object === FALSE)
 			{
 				return get_instance()->$method_parts[1]($m);
 			}
@@ -453,9 +453,9 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 		$parameters = $m->output_parameters();
 		$method_name = $parameters[0];
 
-		if (isset($this->methods[$method_name]))
+		if( isset($this->methods[$method_name]))
 		{
-			if ($this->methods[$method_name]['signature'])
+			if( $this->methods[$method_name]['signature'])
 			{
 				$sigs = array();
 				$signature = $this->methods[$method_name]['signature'];
@@ -493,7 +493,7 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 		$parameters = $m->output_parameters();
 		$method_name = $parameters[0];
 
-		if (isset($this->methods[$method_name]))
+		if( isset($this->methods[$method_name]))
 		{
 			$docstring = isset($this->methods[$method_name]['docstring']) ? $this->methods[$method_name]['docstring'] : '';
 
@@ -535,7 +535,7 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 
 			$attempt = $this->_execute($m);
 
-			if ($attempt->faultCode() !== 0)
+			if( $attempt->faultCode() !== 0)
 			{
 				return $attempt;
 			}
@@ -575,11 +575,11 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 	 */
 	public function do_multicall($call)
 	{
-		if ($call->kindOf() !== 'struct')
+		if( $call->kindOf() !== 'struct')
 		{
 			return $this->multicall_error('notstruct');
 		}
-		elseif ( ! $methName = $call->me['struct']['methodName'])
+		elseif(  ! $methName = $call->me['struct']['methodName'])
 		{
 			return $this->multicall_error('nomethod');
 		}
@@ -587,19 +587,19 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 		list($scalar_type, $scalar_value) = each($methName->me);
 		$scalar_type = $scalar_type === $this->xmlrpcI4 ? $this->xmlrpcInt : $scalar_type;
 
-		if ($methName->kindOf() !== 'scalar' OR $scalar_type !== 'string')
+		if( $methName->kindOf() !== 'scalar' OR $scalar_type !== 'string')
 		{
 			return $this->multicall_error('notstring');
 		}
-		elseif ($scalar_value === 'system.multicall')
+		elseif( $scalar_value === 'system.multicall')
 		{
 			return $this->multicall_error('recursion');
 		}
-		elseif ( ! $params = $call->me['struct']['params'])
+		elseif(  ! $params = $call->me['struct']['params'])
 		{
 			return $this->multicall_error('noparams');
 		}
-		elseif ($params->kindOf() !== 'array')
+		elseif( $params->kindOf() !== 'array')
 		{
 			return $this->multicall_error('notarray');
 		}
@@ -614,7 +614,7 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 
 		$result = $this->_execute($msg);
 
-		if ($result->faultCode() !== 0)
+		if( $result->faultCode() !== 0)
 		{
 			return $this->multicall_error($result);
 		}

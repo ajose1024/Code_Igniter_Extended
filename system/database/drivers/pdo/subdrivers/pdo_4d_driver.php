@@ -80,7 +80,7 @@ class CI_DB_pdo_4d_driver extends CI_DB_pdo_driver {
 	{
 		parent::__construct($params);
 
-		if (empty($this->dsn))
+		if( empty($this->dsn))
 		{
 			$this->dsn = '4D:host='.(empty($this->hostname) ? '127.0.0.1' : $this->hostname);
 
@@ -88,7 +88,7 @@ class CI_DB_pdo_4d_driver extends CI_DB_pdo_driver {
 			empty($this->database) OR $this->dsn .= ';dbname='.$this->database;
 			empty($this->char_set) OR $this->dsn .= ';charset='.$this->char_set;
 		}
-		elseif ( ! empty($this->char_set) && strpos($this->dsn, 'charset=', 3) === FALSE)
+		elseif(  ! empty($this->char_set) && strpos($this->dsn, 'charset=', 3) === FALSE)
 		{
 			$this->dsn .= ';charset='.$this->char_set;
 		}
@@ -108,7 +108,7 @@ class CI_DB_pdo_4d_driver extends CI_DB_pdo_driver {
 	{
 		$sql = 'SELECT '.$this->escape_identifiers('TABLE_NAME').' FROM '.$this->escape_identifiers('_USER_TABLES');
 
-		if ($prefix_limit === TRUE && $this->dbprefix !== '')
+		if( $prefix_limit === TRUE && $this->dbprefix !== '')
 		{
 			$sql .= ' WHERE '.$this->escape_identifiers('TABLE_NAME')." LIKE '".$this->escape_like_str($this->dbprefix)."%' "
 				.sprintf($this->_like_escape_str, $this->_like_escape_chr);

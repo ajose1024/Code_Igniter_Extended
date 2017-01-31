@@ -63,7 +63,7 @@ The following functions are available:
 	Example::
 
 		$data = 'Some file data';
-		if ( ! write_file('./path/to/file.php', $data))
+		if(  ! write_file('./path/to/file.php', $data))
 		{     
 			echo 'Unable to write the file';
 		}

@@ -103,7 +103,7 @@ class CI_Profiler {
 		// default all sections to display
 		foreach ($this->_available_sections as $section)
 		{
-			if ( ! isset($config[$section]))
+			if(  ! isset($config[$section]))
 			{
 				$this->_compile_{$section} = TRUE;
 			}
@@ -125,7 +125,7 @@ class CI_Profiler {
 	 */
 	public function set_sections($config)
 	{
-		if (isset($config['query_toggle_count']))
+		if( isset($config['query_toggle_count']))
 		{
 			$this->_query_toggle_count = (int) $config['query_toggle_count'];
 			unset($config['query_toggle_count']);
@@ -133,7 +133,7 @@ class CI_Profiler {
 
 		foreach ($config as $method => $enable)
 		{
-			if (in_array($method, $this->_available_sections))
+			if( in_array($method, $this->_available_sections))
 			{
 				$this->_compile_{$method} = ($enable !== FALSE);
 			}
@@ -159,7 +159,7 @@ class CI_Profiler {
 		{
 			// We match the "end" marker so that the list ends
 			// up in the order that it was defined
-			if (preg_match('/(.+?)_end$/i', $key, $match)
+			if( preg_match('/(.+?)_end$/i', $key, $match)
 				&& isset($this->CI->benchmark->marker[$match[1].'_end'], $this->CI->benchmark->marker[$match[1].'_start']))
 			{
 				$profile[$match[1]] = $this->CI->benchmark->elapsed_time($match[1].'_start', $key);
@@ -201,17 +201,17 @@ class CI_Profiler {
 		// Let's determine which databases are currently connected to
 		foreach (get_object_vars($this->CI) as $name => $cobject)
 		{
-			if (is_object($cobject))
+			if( is_object($cobject))
 			{
-				if ($cobject instanceof CI_DB)
+				if( $cobject instanceof CI_DB)
 				{
 					$dbs[get_class($this->CI).':$'.$name] = $cobject;
 				}
-				elseif ($cobject instanceof CI_Model)
+				elseif( $cobject instanceof CI_Model)
 				{
 					foreach (get_object_vars($cobject) as $mname => $mobject)
 					{
-						if ($mobject instanceof CI_DB)
+						if( $mobject instanceof CI_DB)
 						{
 							$dbs[get_class($cobject).':$'.$mname] = $mobject;
 						}
@@ -220,7 +220,7 @@ class CI_Profiler {
 			}
 		}
 
-		if (count($dbs) === 0)
+		if( count($dbs) === 0)
 		{
 			return "\n\n"
 				.'<fieldset id="ci_profiler_queries" style="border:1px solid #0000FF;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
@@ -248,7 +248,7 @@ class CI_Profiler {
 
 			$show_hide_js = '(<span style="cursor: pointer;" onclick="var s=document.getElementById(\'ci_profiler_queries_db_'.$count.'\').style;s.display=s.display==\'none\'?\'\':\'none\';this.innerHTML=this.innerHTML==\''.$this->CI->lang->line('profiler_section_hide').'\'?\''.$this->CI->lang->line('profiler_section_show').'\':\''.$this->CI->lang->line('profiler_section_hide').'\';">'.$this->CI->lang->line('profiler_section_hide').'</span>)';
 
-			if ($hide_queries !== '')
+			if( $hide_queries !== '')
 			{
 				$show_hide_js = '(<span style="cursor: pointer;" onclick="var s=document.getElementById(\'ci_profiler_queries_db_'.$count.'\').style;s.display=s.display==\'none\'?\'\':\'none\';this.innerHTML=this.innerHTML==\''.$this->CI->lang->line('profiler_section_show').'\'?\''.$this->CI->lang->line('profiler_section_hide').'\':\''.$this->CI->lang->line('profiler_section_show').'\';">'.$this->CI->lang->line('profiler_section_show').'</span>)';
 			}
@@ -260,7 +260,7 @@ class CI_Profiler {
 				.': '.count($db->queries).' ('.$total_time.')&nbsp;&nbsp;'.$show_hide_js."</legend>\n\n\n"
 				.'<table style="width:100%;'.$hide_queries.'" id="ci_profiler_queries_db_'.$count."\">\n";
 
-			if (count($db->queries) === 0)
+			if( count($db->queries) === 0)
 			{
 				$output .= '<tr><td style="width:100%;color:#0000FF;font-weight:normal;background-color:#eee;padding:5px;">'
 						.$this->CI->lang->line('profiler_no_queries')."</td></tr>\n";
@@ -304,7 +304,7 @@ class CI_Profiler {
 			."\n"
 			.'<legend style="color:#cd6e00;">&nbsp;&nbsp;'.$this->CI->lang->line('profiler_get_data')."&nbsp;&nbsp;</legend>\n";
 
-		if (count($_GET) === 0)
+		if( count($_GET) === 0)
 		{
 			$output .= '<div style="color:#cd6e00;font-weight:normal;padding:4px 0 4px 0;">'.$this->CI->lang->line('profiler_no_get').'</div>';
 		}
@@ -342,7 +342,7 @@ class CI_Profiler {
 			."\n"
 			.'<legend style="color:#009900;">&nbsp;&nbsp;'.$this->CI->lang->line('profiler_post_data')."&nbsp;&nbsp;</legend>\n";
 
-		if (count($_POST) === 0 && count($_FILES) === 0)
+		if( count($_POST) === 0 && count($_FILES) === 0)
 		{
 			$output .= '<div style="color:#009900;font-weight:normal;padding:4px 0 4px 0;">'.$this->CI->lang->line('profiler_no_post').'</div>';
 		}
@@ -357,7 +357,7 @@ class CI_Profiler {
 				$output .= '<tr><td style="width:50%;padding:5px;color:#000;background-color:#ddd;">&#36;_POST['
 					.$key.']&nbsp;&nbsp; </td><td style="width:50%;padding:5px;color:#009900;font-weight:normal;background-color:#ddd;">';
 
-				if (is_array($val) OR is_object($val))
+				if( is_array($val) OR is_object($val))
 				{
 					$output .= '<pre>'.htmlspecialchars(stripslashes(print_r($val, TRUE))).'</pre>';
 				}
@@ -376,7 +376,7 @@ class CI_Profiler {
 				$output .= '<tr><td style="width:50%;padding:5px;color:#000;background-color:#ddd;">&#36;_FILES['
 					.$key.']&nbsp;&nbsp; </td><td style="width:50%;padding:5px;color:#009900;font-weight:normal;background-color:#ddd;">';
 
-				if (is_array($val) OR is_object($val))
+				if( is_array($val) OR is_object($val))
 				{
 					$output .= '<pre>'.htmlspecialchars(stripslashes(print_r($val, TRUE))).'</pre>';
 				}
@@ -492,7 +492,7 @@ class CI_Profiler {
 
 		foreach ($this->CI->config->config as $config => $val)
 		{
-			if (is_array($val) OR is_object($val))
+			if( is_array($val) OR is_object($val))
 			{
 				$val = print_r($val, TRUE);
 			}
@@ -513,7 +513,7 @@ class CI_Profiler {
 	 */
 	protected function _compile_session_data()
 	{
-		if ( ! isset($this->CI->session))
+		if(  ! isset($this->CI->session))
 		{
 			return;
 		}
@@ -524,7 +524,7 @@ class CI_Profiler {
 
 		foreach ($this->CI->session->userdata() as $key => $val)
 		{
-			if (is_array($val) OR is_object($val))
+			if( is_array($val) OR is_object($val))
 			{
 				$val = print_r($val, TRUE);
 			}
@@ -550,7 +550,7 @@ class CI_Profiler {
 
 		foreach ($this->_available_sections as $section)
 		{
-			if ($this->_compile_{$section} !== FALSE)
+			if( $this->_compile_{$section} !== FALSE)
 			{
 				$func = '_compile_'.$section;
 				$output .= $this->{$func}();
@@ -558,7 +558,7 @@ class CI_Profiler {
 			}
 		}
 
-		if ($fields_displayed === 0)
+		if( $fields_displayed === 0)
 		{
 			$output .= '<p style="border:1px solid #5a0099;padding:10px;margin:20px 0;background-color:#eee;">'
 				.$this->CI->lang->line('profiler_no_profiles').'</p>';

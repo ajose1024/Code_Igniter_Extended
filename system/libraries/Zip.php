@@ -130,7 +130,7 @@ class CI_Zip {
 	{
 		foreach ((array) $directory as $dir)
 		{
-			if ( ! preg_match('|.+/$|', $dir))
+			if(  ! preg_match('|.+/$|', $dir))
 			{
 				$dir .= '/';
 			}
@@ -225,7 +225,7 @@ class CI_Zip {
 	 */
 	public function add_data($filepath, $data = NULL)
 	{
-		if (is_array($filepath))
+		if( is_array($filepath))
 		{
 			foreach ($filepath as $path => $data)
 			{
@@ -304,9 +304,9 @@ class CI_Zip {
 	 */
 	public function read_file($path, $archive_filepath = FALSE)
 	{
-		if (file_exists($path) && FALSE !== ($data = file_get_contents($path)))
+		if( file_exists($path) && FALSE !== ($data = file_get_contents($path)))
 		{
-			if (is_string($archive_filepath))
+			if( is_string($archive_filepath))
 			{
 				$name = str_replace('\\', '/', $archive_filepath);
 			}
@@ -314,7 +314,7 @@ class CI_Zip {
 			{
 				$name = str_replace('\\', '/', $path);
 
-				if ($archive_filepath === FALSE)
+				if( $archive_filepath === FALSE)
 				{
 					$name = preg_replace('|.*/(.+)|', '\\1', $name);
 				}
@@ -344,32 +344,32 @@ class CI_Zip {
 	public function read_dir($path, $preserve_filepath = TRUE, $root_path = NULL)
 	{
 		$path = rtrim($path, '/\\').DIRECTORY_SEPARATOR;
-		if ( ! $fp = @opendir($path))
+		if(  ! $fp = @opendir($path))
 		{
 			return FALSE;
 		}
 
 		// Set the original directory root for child dir's to use as relative
-		if ($root_path === NULL)
+		if( $root_path === NULL)
 		{
 			$root_path = str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, dirname($path)).DIRECTORY_SEPARATOR;
 		}
 
 		while (FALSE !== ($file = readdir($fp)))
 		{
-			if ($file[0] === '.')
+			if( $file[0] === '.')
 			{
 				continue;
 			}
 
-			if (is_dir($path.$file))
+			if( is_dir($path.$file))
 			{
 				$this->read_dir($path.$file.DIRECTORY_SEPARATOR, $preserve_filepath, $root_path);
 			}
-			elseif (FALSE !== ($data = file_get_contents($path.$file)))
+			elseif( FALSE !== ($data = file_get_contents($path.$file)))
 			{
 				$name = str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $path);
-				if ($preserve_filepath === FALSE)
+				if( $preserve_filepath === FALSE)
 				{
 					$name = str_replace($root_path, '', $name);
 				}
@@ -392,7 +392,7 @@ class CI_Zip {
 	public function get_zip()
 	{
 		// Is there any data to return?
-		if ($this->entries === 0)
+		if( $this->entries === 0)
 		{
 			return FALSE;
 		}
@@ -418,7 +418,7 @@ class CI_Zip {
 	 */
 	public function archive($filepath)
 	{
-		if ( ! ($fp = @fopen($filepath, 'w+b')))
+		if(  ! ($fp = @fopen($filepath, 'w+b')))
 		{
 			return FALSE;
 		}
@@ -427,7 +427,7 @@ class CI_Zip {
 
 		for ($result = $written = 0, $data = $this->get_zip(), $length = strlen($data); $written < $length; $written += $result)
 		{
-			if (($result = fwrite($fp, substr($data, $written))) === FALSE)
+			if( ($result = fwrite($fp, substr($data, $written))) === FALSE)
 			{
 				break;
 			}
@@ -449,7 +449,7 @@ class CI_Zip {
 	 */
 	public function download($filename = 'backup.zip')
 	{
-		if ( ! preg_match('|.+?\.zip$|', $filename))
+		if(  ! preg_match('|.+?\.zip$|', $filename))
 		{
 			$filename .= '.zip';
 		}

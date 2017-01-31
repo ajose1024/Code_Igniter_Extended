@@ -60,7 +60,7 @@ Determine If a Database Exists
 Sometimes it's helpful to know whether a particular database exists.
 Returns a boolean TRUE/FALSE. Usage example::
 
-	if ($this->dbutil->database_exists('database_name'))
+	if( $this->dbutil->database_exists('database_name'))
 	{
 		// some code...
 	}
@@ -74,7 +74,7 @@ Optimize a Table
 Permits you to optimize a table using the table name specified in the
 first parameter. Returns TRUE/FALSE based on success or failure::
 
-	if ($this->dbutil->optimize_table('table_name'))
+	if( $this->dbutil->optimize_table('table_name'))
 	{
 		echo 'Success!';
 	}
@@ -88,7 +88,7 @@ Repair a Table
 Permits you to repair a table using the table name specified in the
 first parameter. Returns TRUE/FALSE based on success or failure::
 
-	if ($this->dbutil->repair_table('table_name'))
+	if( $this->dbutil->repair_table('table_name'))
 	{
 		echo 'Success!';
 	}
@@ -106,7 +106,7 @@ FALSE on failure.
 
 	$result = $this->dbutil->optimize_database();
 
-	if ($result !== FALSE)
+	if( $result !== FALSE)
 	{
 		print_r($result);
 	}

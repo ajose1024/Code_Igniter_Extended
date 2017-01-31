@@ -48,7 +48,7 @@ similar to this example::
 		'charset'   => 'utf-8'
 	);
 
-	if ( ! $this->trackback->send($tb_data))
+	if(  ! $this->trackback->send($tb_data))
 	{
 		echo $this->trackback->display_errors();
 	}
@@ -145,12 +145,12 @@ where you expect to receive Trackbacks.::
 	$this->load->library('trackback');
 	$this->load->database();
 
-	if ($this->uri->segment(3) == FALSE)
+	if( $this->uri->segment(3) == FALSE)
 	{
 		$this->trackback->send_error('Unable to determine the entry ID');
 	}
 
-	if ( ! $this->trackback->receive())
+	if(  ! $this->trackback->receive())
 	{
 		$this->trackback->send_error('The Trackback did not contain valid data');
 	}

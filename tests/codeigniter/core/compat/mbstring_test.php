@@ -4,7 +4,7 @@ class mbstring_test extends CI_TestCase {
 
 	public function test_bootstrap()
 	{
-		if (MB_ENABLED)
+		if( MB_ENABLED)
 		{
 			return $this->markTestSkipped('ext/mbstring is loaded');
 		}

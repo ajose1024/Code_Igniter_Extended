@@ -118,18 +118,18 @@ class CI_DB_pdo_mysql_forge extends CI_DB_pdo_forge {
 
 		foreach (array_keys($attributes) as $key)
 		{
-			if (is_string($key))
+			if( is_string($key))
 			{
 				$sql .= ' '.strtoupper($key).' = '.$attributes[$key];
 			}
 		}
 
-		if ( ! empty($this->db->char_set) && ! strpos($sql, 'CHARACTER SET') && ! strpos($sql, 'CHARSET'))
+		if(  ! empty($this->db->char_set) && ! strpos($sql, 'CHARACTER SET') && ! strpos($sql, 'CHARSET'))
 		{
 			$sql .= ' DEFAULT CHARACTER SET = '.$this->db->char_set;
 		}
 
-		if ( ! empty($this->db->dbcollat) && ! strpos($sql, 'COLLATE'))
+		if(  ! empty($this->db->dbcollat) && ! strpos($sql, 'COLLATE'))
 		{
 			$sql .= ' COLLATE = '.$this->db->dbcollat;
 		}
@@ -149,7 +149,7 @@ class CI_DB_pdo_mysql_forge extends CI_DB_pdo_forge {
 	 */
 	protected function _alter_table($alter_type, $table, $field)
 	{
-		if ($alter_type === 'DROP')
+		if( $alter_type === 'DROP')
 		{
 			return parent::_alter_table($alter_type, $table, $field);
 		}
@@ -157,7 +157,7 @@ class CI_DB_pdo_mysql_forge extends CI_DB_pdo_forge {
 		$sql = 'ALTER TABLE '.$this->db->escape_identifiers($table);
 		for ($i = 0, $c = count($field); $i < $c; $i++)
 		{
-			if ($field[$i]['_literal'] !== FALSE)
+			if( $field[$i]['_literal'] !== FALSE)
 			{
 				$field[$i] = ($alter_type === 'ADD')
 						? "\n\tADD ".$field[$i]['_literal']
@@ -165,7 +165,7 @@ class CI_DB_pdo_mysql_forge extends CI_DB_pdo_forge {
 			}
 			else
 			{
-				if ($alter_type === 'ADD')
+				if( $alter_type === 'ADD')
 				{
 					$field[$i]['_literal'] = "\n\tADD ";
 				}
@@ -194,7 +194,7 @@ class CI_DB_pdo_mysql_forge extends CI_DB_pdo_forge {
 		$extra_clause = isset($field['after'])
 			? ' AFTER '.$this->db->escape_identifiers($field['after']) : '';
 
-		if (empty($extra_clause) && isset($field['first']) && $field['first'] === TRUE)
+		if( empty($extra_clause) && isset($field['first']) && $field['first'] === TRUE)
 		{
 			$extra_clause = ' FIRST';
 		}
@@ -225,18 +225,18 @@ class CI_DB_pdo_mysql_forge extends CI_DB_pdo_forge {
 
 		for ($i = 0, $c = count($this->keys); $i < $c; $i++)
 		{
-			if (is_array($this->keys[$i]))
+			if( is_array($this->keys[$i]))
 			{
 				for ($i2 = 0, $c2 = count($this->keys[$i]); $i2 < $c2; $i2++)
 				{
-					if ( ! isset($this->fields[$this->keys[$i][$i2]]))
+					if(  ! isset($this->fields[$this->keys[$i][$i2]]))
 					{
 						unset($this->keys[$i][$i2]);
 						continue;
 					}
 				}
 			}
-			elseif ( ! isset($this->fields[$this->keys[$i]]))
+			elseif(  ! isset($this->fields[$this->keys[$i]]))
 			{
 				unset($this->keys[$i]);
 				continue;

@@ -47,15 +47,15 @@ is available.
 
 	$this->load->library('user_agent');
 
-	if ($this->agent->is_browser())
+	if( $this->agent->is_browser())
 	{
 		$agent = $this->agent->browser().' '.$this->agent->version();
 	}
-	elseif ($this->agent->is_robot())
+	elseif( $this->agent->is_robot())
 	{
 		$agent = $this->agent->robot();
 	}
-	elseif ($this->agent->is_mobile())
+	elseif( $this->agent->is_mobile())
 	{
 		$agent = $this->agent->mobile();
 	}
@@ -83,11 +83,11 @@ Class Reference
 		Returns TRUE/FALSE (boolean) if the user agent is a known web browser.
 		::
 
-			if ($this->agent->is_browser('Safari'))
+			if( $this->agent->is_browser('Safari'))
 			{
 				echo 'You are using Safari.';
 			}
-			elseif ($this->agent->is_browser())
+			elseif( $this->agent->is_browser())
 			{
 				echo 'You are using a browser.';
 			}
@@ -105,11 +105,11 @@ Class Reference
 		Returns TRUE/FALSE (boolean) if the user agent is a known mobile device.
 		::
 
-			if ($this->agent->is_mobile('iphone'))
+			if( $this->agent->is_mobile('iphone'))
 			{
 				$this->load->view('iphone/home');
 			}
-			elseif ($this->agent->is_mobile())
+			elseif( $this->agent->is_mobile())
 			{
 				$this->load->view('mobile/home');
 			}
@@ -180,7 +180,7 @@ Class Reference
 
 		The referrer, if the user agent was referred from another site. Typically you'll test for this as follows::
 
-			if ($this->agent->is_referral())
+			if( $this->agent->is_referral())
 			{
 				echo $this->agent->referrer();
 			}
@@ -202,7 +202,7 @@ Class Reference
 
 		Lets you determine if the user agent accepts a particular language. Example::
 
-			if ($this->agent->accept_lang('en'))
+			if( $this->agent->accept_lang('en'))
 			{
 				echo 'You accept English!';
 			}
@@ -225,7 +225,7 @@ Class Reference
 
 		Lets you determine if the user agent accepts a particular character set. Example::
 
-			if ($this->agent->accept_charset('utf-8'))
+			if( $this->agent->accept_charset('utf-8'))
 			{
 				echo 'You browser supports UTF-8!';
 			}

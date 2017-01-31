@@ -57,19 +57,19 @@ class CI_DB_pdo_result extends CI_DB_result {
 	 */
 	public function num_rows()
 	{
-		if (is_int($this->num_rows))
+		if( is_int($this->num_rows))
 		{
 			return $this->num_rows;
 		}
-		elseif (count($this->result_array) > 0)
+		elseif( count($this->result_array) > 0)
 		{
 			return $this->num_rows = count($this->result_array);
 		}
-		elseif (count($this->result_object) > 0)
+		elseif( count($this->result_object) > 0)
 		{
 			return $this->num_rows = count($this->result_object);
 		}
-		elseif (($num_rows = $this->result_id->rowCount()) > 0)
+		elseif( ($num_rows = $this->result_id->rowCount()) > 0)
 		{
 			return $this->num_rows = $num_rows;
 		}
@@ -142,7 +142,7 @@ class CI_DB_pdo_result extends CI_DB_result {
 		}
 		catch (Exception $e)
 		{
-			if ($this->db->db_debug)
+			if( $this->db->db_debug)
 			{
 				return $this->db->display_error('db_unsupported_feature');
 			}
@@ -160,7 +160,7 @@ class CI_DB_pdo_result extends CI_DB_result {
 	 */
 	public function free_result()
 	{
-		if (is_object($this->result_id))
+		if( is_object($this->result_id))
 		{
 			$this->result_id = FALSE;
 		}

@@ -40,7 +40,7 @@ class Mock_Core_Input extends CI_Input {
 
 	public function __set($name, $value)
 	{
-		if ($name === 'ip_address')
+		if( $name === 'ip_address')
 		{
 			$this->ip_address = $value;
 		}

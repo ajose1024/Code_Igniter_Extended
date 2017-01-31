@@ -137,7 +137,7 @@ abstract class CI_Session_driver implements SessionHandlerInterface {
 	 */
 	protected function _release_lock()
 	{
-		if ($this->_lock)
+		if( $this->_lock)
 		{
 			$this->_lock = FALSE;
 		}

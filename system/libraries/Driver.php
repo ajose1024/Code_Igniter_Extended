@@ -93,7 +93,7 @@ class CI_Driver_Library {
 		// Get CodeIgniter instance and subclass prefix
 		$prefix = config_item('subclass_prefix');
 
-		if ( ! isset($this->lib_name))
+		if(  ! isset($this->lib_name))
 		{
 			// Get library name without any prefix
 			$this->lib_name = str_replace(array('CI_', $prefix), '', get_class($this));
@@ -103,7 +103,7 @@ class CI_Driver_Library {
 		$child_name = $this->lib_name.'_'.$child;
 
 		// See if requested child is a valid driver
-		if ( ! in_array($child, $this->valid_drivers))
+		if(  ! in_array($child, $this->valid_drivers))
 		{
 			// The requested driver isn't valid!
 			$msg = 'Invalid driver requested: '.$child_name;
@@ -118,18 +118,18 @@ class CI_Driver_Library {
 		// Is there an extension?
 		$class_name = $prefix.$child_name;
 		$found = class_exists($class_name, FALSE);
-		if ( ! $found)
+		if(  ! $found)
 		{
 			// Check for subclass file
 			foreach ($paths as $path)
 			{
 				// Does the file exist?
 				$file = $path.'libraries/'.$this->lib_name.'/drivers/'.$prefix.$child_name.'.php';
-				if (file_exists($file))
+				if( file_exists($file))
 				{
 					// Yes - require base class from BASEPATH
-					$basepath = BASEPATH.'libraries/'.$this->lib_name.'/drivers/'.$child_name.'.php';
-					if ( ! file_exists($basepath))
+					$basepath = BASEPATH . 'libraries/'.$this->lib_name.'/drivers/'.$child_name.'.php';
+					if(  ! file_exists($basepath))
 					{
 						$msg = 'Unable to load the requested class: CI_'.$child_name;
 						log_message('error', $msg);
@@ -146,18 +146,18 @@ class CI_Driver_Library {
 		}
 
 		// Do we need to search for the class?
-		if ( ! $found)
+		if(  ! $found)
 		{
 			// Use standard class name
 			$class_name = 'CI_'.$child_name;
-			if ( ! class_exists($class_name, FALSE))
+			if(  ! class_exists($class_name, FALSE))
 			{
 				// Check package paths
 				foreach ($paths as $path)
 				{
 					// Does the file exist?
 					$file = $path.'libraries/'.$this->lib_name.'/drivers/'.$child_name.'.php';
-					if (file_exists($file))
+					if( file_exists($file))
 					{
 						// Include source
 						include_once($file);
@@ -168,9 +168,9 @@ class CI_Driver_Library {
 		}
 
 		// Did we finally find the class?
-		if ( ! class_exists($class_name, FALSE))
+		if(  ! class_exists($class_name, FALSE))
 		{
-			if (class_exists($child_name, FALSE))
+			if( class_exists($child_name, FALSE))
 			{
 				$class_name = $child_name;
 			}
@@ -253,13 +253,13 @@ class CI_Driver {
 
 		$class_name = get_class($parent);
 
-		if ( ! isset(self::$_reflections[$class_name]))
+		if(  ! isset(self::$_reflections[$class_name]))
 		{
 			$r = new ReflectionObject($parent);
 
 			foreach ($r->getMethods() as $method)
 			{
-				if ($method->isPublic())
+				if( $method->isPublic())
 				{
 					$this->_methods[] = $method->getName();
 				}
@@ -267,7 +267,7 @@ class CI_Driver {
 
 			foreach ($r->getProperties() as $prop)
 			{
-				if ($prop->isPublic())
+				if( $prop->isPublic())
 				{
 					$this->_properties[] = $prop->getName();
 				}
@@ -294,7 +294,7 @@ class CI_Driver {
 	 */
 	public function __call($method, $args = array())
 	{
-		if (in_array($method, $this->_methods))
+		if( in_array($method, $this->_methods))
 		{
 			return call_user_func_array(array($this->_parent, $method), $args);
 		}
@@ -314,7 +314,7 @@ class CI_Driver {
 	 */
 	public function __get($var)
 	{
-		if (in_array($var, $this->_properties))
+		if( in_array($var, $this->_properties))
 		{
 			return $this->_parent->$var;
 		}
@@ -333,7 +333,7 @@ class CI_Driver {
 	 */
 	public function __set($var, $val)
 	{
-		if (in_array($var, $this->_properties))
+		if( in_array($var, $this->_properties))
 		{
 			$this->_parent->$var = $val;
 		}

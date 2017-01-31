@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('set_cookie'))
+if(  ! function_exists('set_cookie'))
 {
 	/**
 	 * Set cookie
@@ -76,7 +76,7 @@ if ( ! function_exists('set_cookie'))
 
 // --------------------------------------------------------------------
 
-if ( ! function_exists('get_cookie'))
+if(  ! function_exists('get_cookie'))
 {
 	/**
 	 * Fetch an item from the COOKIE array
@@ -95,7 +95,7 @@ if ( ! function_exists('get_cookie'))
 
 // --------------------------------------------------------------------
 
-if ( ! function_exists('delete_cookie'))
+if(  ! function_exists('delete_cookie'))
 {
 	/**
 	 * Delete a COOKIE

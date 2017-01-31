@@ -92,7 +92,7 @@ class CI_Encrypt {
 	 */
 	public function __construct()
 	{
-		if (($this->_mcrypt_exists = function_exists('mcrypt_encrypt')) === FALSE)
+		if( ($this->_mcrypt_exists = function_exists('mcrypt_encrypt')) === FALSE)
 		{
 			show_error('The Encrypt library requires the Mcrypt extension.');
 		}
@@ -113,16 +113,16 @@ class CI_Encrypt {
 	 */
 	public function get_key($key = '')
 	{
-		if ($key === '')
+		if( $key === '')
 		{
-			if ($this->encryption_key !== '')
+			if( $this->encryption_key !== '')
 			{
 				return $this->encryption_key;
 			}
 
 			$key = config_item('encryption_key');
 
-			if ( ! strlen($key))
+			if(  ! strlen($key))
 			{
 				show_error('In order to use the encryption class requires that you set an encryption key in your config file.');
 			}
@@ -180,7 +180,7 @@ class CI_Encrypt {
 	 */
 	public function decode($string, $key = '')
 	{
-		if (preg_match('/[^a-zA-Z0-9\/\+=]/', $string) OR base64_encode(base64_decode($string)) !== $string)
+		if( preg_match('/[^a-zA-Z0-9\/\+=]/', $string) OR base64_encode(base64_decode($string)) !== $string)
 		{
 			return FALSE;
 		}
@@ -207,7 +207,7 @@ class CI_Encrypt {
 	 */
 	public function encode_from_legacy($string, $legacy_mode = MCRYPT_MODE_ECB, $key = '')
 	{
-		if (preg_match('/[^a-zA-Z0-9\/\+=]/', $string))
+		if( preg_match('/[^a-zA-Z0-9\/\+=]/', $string))
 		{
 			return FALSE;
 		}
@@ -220,7 +220,7 @@ class CI_Encrypt {
 
 		$key = $this->get_key($key);
 		$dec = base64_decode($string);
-		if (($dec = $this->mcrypt_decode($dec, $key)) === FALSE)
+		if( ($dec = $this->mcrypt_decode($dec, $key)) === FALSE)
 		{
 			$this->set_mode($current_mode);
 			return FALSE;
@@ -313,7 +313,7 @@ class CI_Encrypt {
 		$data = $this->_remove_cipher_noise($data, $key);
 		$init_size = mcrypt_get_iv_size($this->_get_cipher(), $this->_get_mode());
 
-		if ($init_size > strlen($data))
+		if( $init_size > strlen($data))
 		{
 			return FALSE;
 		}
@@ -341,7 +341,7 @@ class CI_Encrypt {
 
 		for ($i = 0, $j = 0, $ld = strlen($data), $lk = strlen($key); $i < $ld; ++$i, ++$j)
 		{
-			if ($j >= $lk)
+			if( $j >= $lk)
 			{
 				$j = 0;
 			}
@@ -371,14 +371,14 @@ class CI_Encrypt {
 
 		for ($i = 0, $j = 0, $ld = strlen($data), $lk = strlen($key); $i < $ld; ++$i, ++$j)
 		{
-			if ($j >= $lk)
+			if( $j >= $lk)
 			{
 				$j = 0;
 			}
 
 			$temp = ord($data[$i]) - ord($key[$j]);
 
-			if ($temp < 0)
+			if( $temp < 0)
 			{
 				$temp += 256;
 			}
@@ -426,7 +426,7 @@ class CI_Encrypt {
 	 */
 	protected function _get_cipher()
 	{
-		if ($this->_mcrypt_cipher === NULL)
+		if( $this->_mcrypt_cipher === NULL)
 		{
 			return $this->_mcrypt_cipher = MCRYPT_RIJNDAEL_256;
 		}
@@ -443,7 +443,7 @@ class CI_Encrypt {
 	 */
 	protected function _get_mode()
 	{
-		if ($this->_mcrypt_mode === NULL)
+		if( $this->_mcrypt_mode === NULL)
 		{
 			return $this->_mcrypt_mode = MCRYPT_MODE_CBC;
 		}

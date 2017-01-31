@@ -82,18 +82,18 @@ class CI_DB_pdo_informix_driver extends CI_DB_pdo_driver {
 	{
 		parent::__construct($params);
 
-		if (empty($this->dsn))
+		if( empty($this->dsn))
 		{
 			$this->dsn = 'informix:';
 
 			// Pre-defined DSN
-			if (empty($this->hostname) && empty($this->host) && empty($this->port) && empty($this->service))
+			if( empty($this->hostname) && empty($this->host) && empty($this->port) && empty($this->service))
 			{
-				if (isset($this->DSN))
+				if( isset($this->DSN))
 				{
 					$this->dsn .= 'DSN='.$this->DSN;
 				}
-				elseif ( ! empty($this->database))
+				elseif(  ! empty($this->database))
 				{
 					$this->dsn .= 'DSN='.$this->database;
 				}
@@ -101,7 +101,7 @@ class CI_DB_pdo_informix_driver extends CI_DB_pdo_driver {
 				return;
 			}
 
-			if (isset($this->host))
+			if( isset($this->host))
 			{
 				$this->dsn .= 'host='.$this->host;
 			}
@@ -110,11 +110,11 @@ class CI_DB_pdo_informix_driver extends CI_DB_pdo_driver {
 				$this->dsn .= 'host='.(empty($this->hostname) ? '127.0.0.1' : $this->hostname);
 			}
 
-			if (isset($this->service))
+			if( isset($this->service))
 			{
 				$this->dsn .= '; service='.$this->service;
 			}
-			elseif ( ! empty($this->port))
+			elseif(  ! empty($this->port))
 			{
 				$this->dsn .= '; service='.$this->port;
 			}
@@ -142,7 +142,7 @@ class CI_DB_pdo_informix_driver extends CI_DB_pdo_driver {
 		$sql = 'SELECT "tabname" FROM "systables"
 			WHERE "tabid" > 99 AND "tabtype" = \'T\' AND LOWER("owner") = '.$this->escape(strtolower($this->username));
 
-		if ($prefix_limit === TRUE && $this->dbprefix !== '')
+		if( $prefix_limit === TRUE && $this->dbprefix !== '')
 		{
 			$sql .= ' AND "tabname" LIKE \''.$this->escape_like_str($this->dbprefix)."%' "
 				.sprintf($this->_like_escape_str, $this->_like_escape_chr);
@@ -163,7 +163,7 @@ class CI_DB_pdo_informix_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _list_columns($table = '')
 	{
-		if (strpos($table, '.') !== FALSE)
+		if( strpos($table, '.') !== FALSE)
 		{
 			sscanf($table, '%[^.].%s', $owner, $table);
 		}

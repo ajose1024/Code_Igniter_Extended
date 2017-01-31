@@ -71,7 +71,7 @@ return;
 	{
 return;
 		// Restore environment
-		if (session_id()) session_destroy();
+		if( session_id()) session_destroy();
 		$_SESSION = array();
 		$_COOKIE = $this->cookie_vals;
 

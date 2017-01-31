@@ -122,7 +122,7 @@ this::
 	$query = $this->db->query($sql, $binds);
 	$row = $query->row();
 
-	if ($row->count == 0)
+	if( $row->count == 0)
 	{     
 		echo 'You must submit the word that appears in the image.';
 	}

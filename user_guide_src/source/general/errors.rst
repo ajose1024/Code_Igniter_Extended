@@ -92,7 +92,7 @@ The following functions let you generate errors:
 
 	Example::
 
-		if ($some_var == '')
+		if( $some_var == '')
 		{
 			log_message('error', 'Some variable did not contain a value.');
 		}

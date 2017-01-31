@@ -126,7 +126,7 @@ class CI_Unit_test {
 	 */
 	public function set_test_items($items)
 	{
-		if ( ! empty($items) && is_array($items))
+		if(  ! empty($items) && is_array($items))
 		{
 			$this->_test_items_visible = $items;
 		}
@@ -147,12 +147,12 @@ class CI_Unit_test {
 	 */
 	public function run($test, $expected = TRUE, $test_name = 'undefined', $notes = '')
 	{
-		if ($this->active === FALSE)
+		if( $this->active === FALSE)
 		{
 			return FALSE;
 		}
 
-		if (in_array($expected, array('is_object', 'is_string', 'is_bool', 'is_true', 'is_false', 'is_int', 'is_numeric', 'is_float', 'is_double', 'is_array', 'is_null', 'is_resource'), TRUE))
+		if( in_array($expected, array('is_object', 'is_string', 'is_bool', 'is_true', 'is_false', 'is_int', 'is_numeric', 'is_float', 'is_double', 'is_array', 'is_null', 'is_resource'), TRUE))
 		{
 			$expected = str_replace('is_double', 'is_float', $expected);
 			$result = $expected($test);
@@ -193,7 +193,7 @@ class CI_Unit_test {
 	 */
 	public function report($result = array())
 	{
-		if (count($result) === 0)
+		if( count($result) === 0)
 		{
 			$result = $this->result();
 		}
@@ -210,13 +210,13 @@ class CI_Unit_test {
 
 			foreach ($res as $key => $val)
 			{
-				if ($key === $CI->lang->line('ut_result'))
+				if( $key === $CI->lang->line('ut_result'))
 				{
-					if ($val === $CI->lang->line('ut_passed'))
+					if( $val === $CI->lang->line('ut_passed'))
 					{
 						$val = '<span style="color: #0C0;">'.$val.'</span>';
 					}
-					elseif ($val === $CI->lang->line('ut_failed'))
+					elseif( $val === $CI->lang->line('ut_failed'))
 					{
 						$val = '<span style="color: #C00;">'.$val.'</span>';
 					}
@@ -276,7 +276,7 @@ class CI_Unit_test {
 		$CI =& get_instance();
 		$CI->load->language('unit_test');
 
-		if (count($results) === 0)
+		if( count($results) === 0)
 		{
 			$results = $this->results;
 		}
@@ -287,13 +287,13 @@ class CI_Unit_test {
 			$temp = array();
 			foreach ($result as $key => $val)
 			{
-				if ( ! in_array($key, $this->_test_items_visible))
+				if(  ! in_array($key, $this->_test_items_visible))
 				{
 					continue;
 				}
-				elseif (in_array($key, array('test_name', 'test_datatype', 'test_res_datatype', 'result'), TRUE))
+				elseif( in_array($key, array('test_name', 'test_datatype', 'test_res_datatype', 'result'), TRUE))
 				{
-					if (FALSE !== ($line = $CI->lang->line(strtolower('ut_'.$val), FALSE)))
+					if( FALSE !== ($line = $CI->lang->line(strtolower('ut_'.$val), FALSE)))
 					{
 						$val = $line;
 					}
@@ -367,12 +367,12 @@ class CI_Unit_test {
 	 */
 	protected function _parse_template()
 	{
-		if ($this->_template_rows !== NULL)
+		if( $this->_template_rows !== NULL)
 		{
 			return;
 		}
 
-		if ($this->_template === NULL OR ! preg_match('/\{rows\}(.*?)\{\/rows\}/si', $this->_template, $match))
+		if( $this->_template === NULL OR ! preg_match('/\{rows\}(.*?)\{\/rows\}/si', $this->_template, $match))
 		{
 			$this->_default_template();
 			return;

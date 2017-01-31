@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('lang'))
+if(  ! function_exists('lang'))
 {
 	/**
 	 * Lang
@@ -65,7 +65,7 @@ if ( ! function_exists('lang'))
 	{
 		$line = get_instance()->lang->line($line);
 
-		if ($for !== '')
+		if( $for !== '')
 		{
 			$line = '<label for="'.$for.'"'._stringify_attributes($attributes).'>'.$line.'</label>';
 		}

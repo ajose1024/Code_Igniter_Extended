@@ -236,7 +236,7 @@ class Encryption_test extends CI_TestCase {
 	 */
 	public function test__mcrypt_get_handle()
 	{
-		if ($this->encryption->drivers['mcrypt'] === FALSE)
+		if( $this->encryption->drivers['mcrypt'] === FALSE)
 		{
 			return $this->markTestSkipped('Cannot test MCrypt because it is not available.');
 		}
@@ -251,7 +251,7 @@ class Encryption_test extends CI_TestCase {
 	 */
 	public function test__openssl_mcrypt_get_handle()
 	{
-		if ($this->encryption->drivers['openssl'] === FALSE)
+		if( $this->encryption->drivers['openssl'] === FALSE)
 		{
 			return $this->markTestSkipped('Cannot test OpenSSL because it is not available.');
 		}
@@ -269,7 +269,7 @@ class Encryption_test extends CI_TestCase {
 	 */
 	public function test_portability()
 	{
-		if ( ! $this->encryption->drivers['mcrypt'] OR ! $this->encryption->drivers['openssl'])
+		if(  ! $this->encryption->drivers['mcrypt'] OR ! $this->encryption->drivers['openssl'])
 		{
 			$this->markTestSkipped('Both MCrypt and OpenSSL support are required for portability tests.');
 			return;

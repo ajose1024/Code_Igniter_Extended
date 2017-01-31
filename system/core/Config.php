@@ -86,9 +86,9 @@ class CI_Config {
 		$this->config =& get_config();
 
 		// Set the base_url automatically if none was provided
-		if (empty($this->config['base_url']))
+		if( empty($this->config['base_url']))
 		{
-			if (isset($_SERVER['SERVER_ADDR']))
+			if( isset($_SERVER['SERVER_ADDR']))
 			{
 				$base_url = (is_https() ? 'https' : 'http').'://'.$_SERVER['SERVER_ADDR']
 					.substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])));
@@ -124,21 +124,21 @@ class CI_Config {
 			foreach (array($file, ENVIRONMENT.DIRECTORY_SEPARATOR.$file) as $location)
 			{
 				$file_path = $path.'config/'.$location.'.php';
-				if (in_array($file_path, $this->is_loaded, TRUE))
+				if( in_array($file_path, $this->is_loaded, TRUE))
 				{
 					return TRUE;
 				}
 
-				if ( ! file_exists($file_path))
+				if(  ! file_exists($file_path))
 				{
 					continue;
 				}
 
 				include($file_path);
 
-				if ( ! isset($config) OR ! is_array($config))
+				if(  ! isset($config) OR ! is_array($config))
 				{
-					if ($fail_gracefully === TRUE)
+					if( $fail_gracefully === TRUE)
 					{
 						return FALSE;
 					}
@@ -146,7 +146,7 @@ class CI_Config {
 					show_error('Your '.$file_path.' file does not appear to contain a valid configuration array.');
 				}
 
-				if ($use_sections === TRUE)
+				if( $use_sections === TRUE)
 				{
 					$this->config[$file] = isset($this->config[$file])
 						? array_merge($this->config[$file], $config)
@@ -164,11 +164,11 @@ class CI_Config {
 			}
 		}
 
-		if ($loaded === TRUE)
+		if( $loaded === TRUE)
 		{
 			return TRUE;
 		}
-		elseif ($fail_gracefully === TRUE)
+		elseif( $fail_gracefully === TRUE)
 		{
 			return FALSE;
 		}
@@ -187,7 +187,7 @@ class CI_Config {
 	 */
 	public function item($item, $index = '')
 	{
-		if ($index == '')
+		if( $index == '')
 		{
 			return isset($this->config[$item]) ? $this->config[$item] : NULL;
 		}
@@ -205,11 +205,11 @@ class CI_Config {
 	 */
 	public function slash_item($item)
 	{
-		if ( ! isset($this->config[$item]))
+		if(  ! isset($this->config[$item]))
 		{
 			return NULL;
 		}
-		elseif (trim($this->config[$item]) === '')
+		elseif( trim($this->config[$item]) === '')
 		{
 			return '';
 		}
@@ -234,10 +234,10 @@ class CI_Config {
 	{
 		$base_url = $this->slash_item('base_url');
 
-		if (isset($protocol))
+		if( isset($protocol))
 		{
 			// For protocol-relative links
-			if ($protocol === '')
+			if( $protocol === '')
 			{
 				$base_url = substr($base_url, strpos($base_url, '//'));
 			}
@@ -247,20 +247,20 @@ class CI_Config {
 			}
 		}
 
-		if (empty($uri))
+		if( empty($uri))
 		{
 			return $base_url.$this->item('index_page');
 		}
 
 		$uri = $this->_uri_string($uri);
 
-		if ($this->item('enable_query_strings') === FALSE)
+		if( $this->item('enable_query_strings') === FALSE)
 		{
 			$suffix = isset($this->config['url_suffix']) ? $this->config['url_suffix'] : '';
 
-			if ($suffix !== '')
+			if( $suffix !== '')
 			{
-				if (($offset = strpos($uri, '?')) !== FALSE)
+				if( ($offset = strpos($uri, '?')) !== FALSE)
 				{
 					$uri = substr($uri, 0, $offset).$suffix.substr($uri, $offset);
 				}
@@ -272,7 +272,7 @@ class CI_Config {
 
 			return $base_url.$this->slash_item('index_page').$uri;
 		}
-		elseif (strpos($uri, '?') === FALSE)
+		elseif( strpos($uri, '?') === FALSE)
 		{
 			$uri = '?'.$uri;
 		}
@@ -297,10 +297,10 @@ class CI_Config {
 	{
 		$base_url = $this->slash_item('base_url');
 
-		if (isset($protocol))
+		if( isset($protocol))
 		{
 			// For protocol-relative links
-			if ($protocol === '')
+			if( $protocol === '')
 			{
 				$base_url = substr($base_url, strpos($base_url, '//'));
 			}
@@ -326,15 +326,15 @@ class CI_Config {
 	 */
 	protected function _uri_string($uri)
 	{
-		if ($this->item('enable_query_strings') === FALSE)
+		if( $this->item('enable_query_strings') === FALSE)
 		{
-			if (is_array($uri))
+			if( is_array($uri))
 			{
 				$uri = implode('/', $uri);
 			}
 			return trim($uri, '/');
 		}
-		elseif (is_array($uri))
+		elseif( is_array($uri))
 		{
 			return http_build_query($uri);
 		}

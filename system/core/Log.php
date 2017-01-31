@@ -121,27 +121,27 @@ class CI_Log {
 
 		file_exists($this->_log_path) OR mkdir($this->_log_path, 0755, TRUE);
 
-		if ( ! is_dir($this->_log_path) OR ! is_really_writable($this->_log_path))
+		if(  ! is_dir($this->_log_path) OR ! is_really_writable($this->_log_path))
 		{
 			$this->_enabled = FALSE;
 		}
 
-		if (is_numeric($config['log_threshold']))
+		if( is_numeric($config['log_threshold']))
 		{
 			$this->_threshold = (int) $config['log_threshold'];
 		}
-		elseif (is_array($config['log_threshold']))
+		elseif( is_array($config['log_threshold']))
 		{
 			$this->_threshold = 0;
 			$this->_threshold_array = array_flip($config['log_threshold']);
 		}
 
-		if ( ! empty($config['log_date_format']))
+		if(  ! empty($config['log_date_format']))
 		{
 			$this->_date_fmt = $config['log_date_format'];
 		}
 
-		if ( ! empty($config['log_file_permissions']) && is_int($config['log_file_permissions']))
+		if(  ! empty($config['log_file_permissions']) && is_int($config['log_file_permissions']))
 		{
 			$this->_file_permissions = $config['log_file_permissions'];
 		}
@@ -160,14 +160,14 @@ class CI_Log {
 	 */
 	public function write_log($level, $msg)
 	{
-		if ($this->_enabled === FALSE)
+		if( $this->_enabled === FALSE)
 		{
 			return FALSE;
 		}
 
 		$level = strtoupper($level);
 
-		if (( ! isset($this->_levels[$level]) OR ($this->_levels[$level] > $this->_threshold))
+		if( ( ! isset($this->_levels[$level]) OR ($this->_levels[$level] > $this->_threshold))
 			&& ! isset($this->_threshold_array[$this->_levels[$level]]))
 		{
 			return FALSE;
@@ -176,23 +176,23 @@ class CI_Log {
 		$filepath = $this->_log_path.'log-'.date('Y-m-d').'.'.$this->_file_ext;
 		$message = '';
 
-		if ( ! file_exists($filepath))
+		if(  ! file_exists($filepath))
 		{
 			$newfile = TRUE;
 			// Only add protection to php files
-			if ($this->_file_ext === 'php')
+			if( $this->_file_ext === 'php')
 			{
 				$message .= "<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>\n\n";
 			}
 		}
 
-		if ( ! $fp = @fopen($filepath, 'ab'))
+		if(  ! $fp = @fopen($filepath, 'ab'))
 		{
 			return FALSE;
 		}
 
 		// Instantiating DateTime with microseconds appended to initial date is needed for proper support of this format
-		if (strpos($this->_date_fmt, 'u') !== FALSE)
+		if( strpos($this->_date_fmt, 'u') !== FALSE)
 		{
 			$microtime_full = microtime(TRUE);
 			$microtime_short = sprintf("%06d", ($microtime_full - floor($microtime_full)) * 1000000);
@@ -210,7 +210,7 @@ class CI_Log {
 
 		for ($written = 0, $length = strlen($message); $written < $length; $written += $result)
 		{
-			if (($result = fwrite($fp, substr($message, $written))) === FALSE)
+			if( ($result = fwrite($fp, substr($message, $written))) === FALSE)
 			{
 				break;
 			}
@@ -219,7 +219,7 @@ class CI_Log {
 		flock($fp, LOCK_UN);
 		fclose($fp);
 
-		if (isset($newfile) && $newfile === TRUE)
+		if( isset($newfile) && $newfile === TRUE)
 		{
 			chmod($filepath, $this->_file_permissions);
 		}

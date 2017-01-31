@@ -378,7 +378,7 @@ Class Reference
 
 		::
 
-			if ( ! $this->input->valid_ip($ip))
+			if(  ! $this->input->valid_ip($ip))
 			{
 				echo 'Not Valid';
 			}

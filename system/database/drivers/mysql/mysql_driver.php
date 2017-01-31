@@ -107,7 +107,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	{
 		parent::__construct($params);
 
-		if ( ! empty($this->port))
+		if(  ! empty($this->port))
 		{
 			$this->hostname .= ':'.$this->port;
 		}
@@ -125,7 +125,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	{
 		$client_flags = ($this->compress === FALSE) ? 0 : MYSQL_CLIENT_COMPRESS;
 
-		if ($this->encrypt === TRUE)
+		if( $this->encrypt === TRUE)
 		{
 			$client_flags = $client_flags | MYSQL_CLIENT_SSL;
 		}
@@ -138,7 +138,7 @@ class CI_DB_mysql_driver extends CI_DB {
 		// ----------------------------------------------------------------
 
 		// Select the DB... assuming a database name is specified in the config file
-		if ($this->database !== '' && ! $this->db_select())
+		if( $this->database !== '' && ! $this->db_select())
 		{
 			log_message('error', 'Unable to select database: '.$this->database);
 
@@ -147,7 +147,7 @@ class CI_DB_mysql_driver extends CI_DB {
 				: FALSE;
 		}
 
-		if ($this->stricton && is_resource($this->conn_id))
+		if( $this->stricton && is_resource($this->conn_id))
 		{
 			$this->simple_query('SET SESSION sql_mode="STRICT_ALL_TABLES"');
 		}
@@ -167,7 +167,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	 */
 	public function reconnect()
 	{
-		if (mysql_ping($this->conn_id) === FALSE)
+		if( mysql_ping($this->conn_id) === FALSE)
 		{
 			$this->conn_id = FALSE;
 		}
@@ -183,12 +183,12 @@ class CI_DB_mysql_driver extends CI_DB {
 	 */
 	public function db_select($database = '')
 	{
-		if ($database === '')
+		if( $database === '')
 		{
 			$database = $this->database;
 		}
 
-		if (mysql_select_db($database, $this->conn_id))
+		if( mysql_select_db($database, $this->conn_id))
 		{
 			$this->database = $database;
 			return TRUE;
@@ -219,12 +219,12 @@ class CI_DB_mysql_driver extends CI_DB {
 	 */
 	public function version()
 	{
-		if (isset($this->data_cache['version']))
+		if( isset($this->data_cache['version']))
 		{
 			return $this->data_cache['version'];
 		}
 
-		if ( ! $this->conn_id OR ($version = mysql_get_server_info($this->conn_id)) === FALSE)
+		if(  ! $this->conn_id OR ($version = mysql_get_server_info($this->conn_id)) === FALSE)
 		{
 			return FALSE;
 		}
@@ -259,7 +259,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	{
 		// mysql_affected_rows() returns 0 for "DELETE FROM TABLE" queries. This hack
 		// modifies the query so that it a proper number of affected rows is returned.
-		if ($this->delete_hack === TRUE && preg_match('/^\s*DELETE\s+FROM\s+(\S+)\s*$/i', $sql))
+		if( $this->delete_hack === TRUE && preg_match('/^\s*DELETE\s+FROM\s+(\S+)\s*$/i', $sql))
 		{
 			return trim($sql).' WHERE 1=1';
 		}
@@ -289,7 +289,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	 */
 	protected function _trans_commit()
 	{
-		if ($this->simple_query('COMMIT'))
+		if( $this->simple_query('COMMIT'))
 		{
 			$this->simple_query('SET AUTOCOMMIT=1');
 			return TRUE;
@@ -307,7 +307,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	 */
 	protected function _trans_rollback()
 	{
-		if ($this->simple_query('ROLLBACK'))
+		if( $this->simple_query('ROLLBACK'))
 		{
 			$this->simple_query('SET AUTOCOMMIT=1');
 			return TRUE;
@@ -367,7 +367,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	{
 		$sql = 'SHOW TABLES FROM '.$this->escape_identifiers($this->database);
 
-		if ($prefix_limit !== FALSE && $this->dbprefix !== '')
+		if( $prefix_limit !== FALSE && $this->dbprefix !== '')
 		{
 			return $sql." LIKE '".$this->escape_like_str($this->dbprefix)."%'";
 		}
@@ -400,7 +400,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	 */
 	public function field_data($table)
 	{
-		if (($query = $this->query('SHOW COLUMNS FROM '.$this->protect_identifiers($table, TRUE, NULL, FALSE))) === FALSE)
+		if( ($query = $this->query('SHOW COLUMNS FROM '.$this->protect_identifiers($table, TRUE, NULL, FALSE))) === FALSE)
 		{
 			return FALSE;
 		}
@@ -451,7 +451,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	 */
 	protected function _from_tables()
 	{
-		if ( ! empty($this->qb_join) && count($this->qb_from) > 1)
+		if(  ! empty($this->qb_join) && count($this->qb_from) > 1)
 		{
 			return '('.implode(', ', $this->qb_from).')';
 		}

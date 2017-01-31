@@ -24,7 +24,7 @@ loading any libraries or helpers.
 
 	Example::
 
-		if (is_php('5.3'))
+		if( is_php('5.3'))
 		{
 			$str = quoted_printable_encode($str);
 		}
@@ -49,7 +49,7 @@ loading any libraries or helpers.
 
 	Example::
 
-		if (is_really_writable('file.txt'))
+		if( is_really_writable('file.txt'))
 		{
 			echo "I could write to this if I wanted to";
 		}

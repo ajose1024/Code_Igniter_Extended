@@ -105,18 +105,18 @@ class CI_DB_pdo_odbc_driver extends CI_DB_pdo_driver {
 	{
 		parent::__construct($params);
 
-		if (empty($this->dsn))
+		if( empty($this->dsn))
 		{
 			$this->dsn = 'odbc:';
 
 			// Pre-defined DSN
-			if (empty($this->hostname) && empty($this->HOSTNAME) && empty($this->port) && empty($this->PORT))
+			if( empty($this->hostname) && empty($this->HOSTNAME) && empty($this->port) && empty($this->PORT))
 			{
-				if (isset($this->DSN))
+				if( isset($this->DSN))
 				{
 					$this->dsn .= 'DSN='.$this->DSN;
 				}
-				elseif ( ! empty($this->database))
+				elseif(  ! empty($this->database))
 				{
 					$this->dsn .= 'DSN='.$this->database;
 				}
@@ -127,16 +127,16 @@ class CI_DB_pdo_odbc_driver extends CI_DB_pdo_driver {
 			// If the DSN is not pre-configured - try to build an IBM DB2 connection string
 			$this->dsn .= 'DRIVER='.(isset($this->DRIVER) ? '{'.$this->DRIVER.'}' : '{IBM DB2 ODBC DRIVER}').';';
 
-			if (isset($this->DATABASE))
+			if( isset($this->DATABASE))
 			{
 				$this->dsn .= 'DATABASE='.$this->DATABASE.';';
 			}
-			elseif ( ! empty($this->database))
+			elseif(  ! empty($this->database))
 			{
 				$this->dsn .= 'DATABASE='.$this->database.';';
 			}
 
-			if (isset($this->HOSTNAME))
+			if( isset($this->HOSTNAME))
 			{
 				$this->dsn .= 'HOSTNAME='.$this->HOSTNAME.';';
 			}
@@ -145,11 +145,11 @@ class CI_DB_pdo_odbc_driver extends CI_DB_pdo_driver {
 				$this->dsn .= 'HOSTNAME='.(empty($this->hostname) ? '127.0.0.1;' : $this->hostname.';');
 			}
 
-			if (isset($this->PORT))
+			if( isset($this->PORT))
 			{
 				$this->dsn .= 'PORT='.$this->port.';';
 			}
-			elseif ( ! empty($this->port))
+			elseif(  ! empty($this->port))
 			{
 				$this->dsn .= ';PORT='.$this->port.';';
 			}
@@ -172,7 +172,7 @@ class CI_DB_pdo_odbc_driver extends CI_DB_pdo_driver {
 	{
 		$sql = "SELECT table_name FROM information_schema.tables WHERE table_schema = '".$this->schema."'";
 
-		if ($prefix_limit !== FALSE && $this->dbprefix !== '')
+		if( $prefix_limit !== FALSE && $this->dbprefix !== '')
 		{
 			return $sql." AND table_name LIKE '".$this->escape_like_str($this->dbprefix)."%' "
 				.sprintf($this->_like_escape_str, $this->_like_escape_chr);

@@ -210,7 +210,7 @@ class CI_Output {
 		// but it will not modify the content-length header to compensate for
 		// the reduction, causing the browser to hang waiting for more data.
 		// We'll just skip content-length in those cases.
-		if ($this->_zlib_oc && strncasecmp($header, 'content-length', 14) === 0)
+		if( $this->_zlib_oc && strncasecmp($header, 'content-length', 14) === 0)
 		{
 			return $this;
 		}
@@ -230,16 +230,16 @@ class CI_Output {
 	 */
 	public function set_content_type($mime_type, $charset = NULL)
 	{
-		if (strpos($mime_type, '/') === FALSE)
+		if( strpos($mime_type, '/') === FALSE)
 		{
 			$extension = ltrim($mime_type, '.');
 
 			// Is this extension supported?
-			if (isset($this->mimes[$extension]))
+			if( isset($this->mimes[$extension]))
 			{
 				$mime_type =& $this->mimes[$extension];
 
-				if (is_array($mime_type))
+				if( is_array($mime_type))
 				{
 					$mime_type = current($mime_type);
 				}
@@ -248,7 +248,7 @@ class CI_Output {
 
 		$this->mime_type = $mime_type;
 
-		if (empty($charset))
+		if( empty($charset))
 		{
 			$charset = config_item('charset');
 		}
@@ -271,7 +271,7 @@ class CI_Output {
 	{
 		for ($i = 0, $c = count($this->headers); $i < $c; $i++)
 		{
-			if (sscanf($this->headers[$i][0], 'Content-Type: %[^;]', $content_type) === 1)
+			if( sscanf($this->headers[$i][0], 'Content-Type: %[^;]', $content_type) === 1)
 			{
 				return $content_type;
 			}
@@ -297,14 +297,14 @@ class CI_Output {
 			headers_list()
 		);
 
-		if (empty($headers) OR empty($header))
+		if( empty($headers) OR empty($header))
 		{
 			return NULL;
 		}
 
 		for ($i = 0, $c = count($headers); $i < $c; $i++)
 		{
-			if (strncasecmp($header, $headers[$i], $l = strlen($header)) === 0)
+			if( strncasecmp($header, $headers[$i], $l = strlen($header)) === 0)
 			{
 				return trim(substr($headers[$i], $l+1));
 			}
@@ -358,7 +358,7 @@ class CI_Output {
 	 */
 	public function set_profiler_sections($sections)
 	{
-		if (isset($sections['query_toggle_count']))
+		if( isset($sections['query_toggle_count']))
 		{
 			$this->_profiler_sections['query_toggle_count'] = (int) $sections['query_toggle_count'];
 			unset($sections['query_toggle_count']);
@@ -411,7 +411,7 @@ class CI_Output {
 		$CFG =& load_class('Config', 'core');
 
 		// Grab the super object if we can.
-		if (class_exists('CI_Controller', FALSE))
+		if( class_exists('CI_Controller', FALSE))
 		{
 			$CI =& get_instance();
 		}
@@ -419,7 +419,7 @@ class CI_Output {
 		// --------------------------------------------------------------------
 
 		// Set the output data
-		if ($output === '')
+		if( $output === '')
 		{
 			$output =& $this->final_output;
 		}
@@ -429,7 +429,7 @@ class CI_Output {
 		// Do we need to write a cache file? Only if the controller does not have its
 		// own _output() method and we are not dealing with a cache file, which we
 		// can determine by the existence of the $CI object above
-		if ($this->cache_expiration > 0 && isset($CI) && ! method_exists($CI, '_output'))
+		if( $this->cache_expiration > 0 && isset($CI) && ! method_exists($CI, '_output'))
 		{
 			$this->_write_cache($output);
 		}
@@ -441,7 +441,7 @@ class CI_Output {
 
 		$elapsed = $BM->elapsed_time('total_execution_time_start', 'total_execution_time_end');
 
-		if ($this->parse_exec_vars === TRUE)
+		if( $this->parse_exec_vars === TRUE)
 		{
 			$memory	= round(memory_get_usage() / 1024 / 1024, 2).'MB';
 			$output = str_replace(array('{elapsed_time}', '{memory_usage}'), array($elapsed, $memory), $output);
@@ -450,7 +450,7 @@ class CI_Output {
 		// --------------------------------------------------------------------
 
 		// Is compression requested?
-		if (isset($CI) // This means that we're not serving a cache file, if we were, it would already be compressed
+		if( isset($CI) // This means that we're not serving a cache file, if we were, it would already be compressed
 			&& $this->_compress_output === TRUE
 			&& isset($_SERVER['HTTP_ACCEPT_ENCODING']) && strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== FALSE)
 		{
@@ -460,7 +460,7 @@ class CI_Output {
 		// --------------------------------------------------------------------
 
 		// Are there any server headers to send?
-		if (count($this->headers) > 0)
+		if( count($this->headers) > 0)
 		{
 			foreach ($this->headers as $header)
 			{
@@ -473,11 +473,11 @@ class CI_Output {
 		// Does the $CI object exist?
 		// If not we know we are dealing with a cache file so we'll
 		// simply echo out the data and exit.
-		if ( ! isset($CI))
+		if(  ! isset($CI))
 		{
-			if ($this->_compress_output === TRUE)
+			if( $this->_compress_output === TRUE)
 			{
-				if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) && strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== FALSE)
+				if( isset($_SERVER['HTTP_ACCEPT_ENCODING']) && strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== FALSE)
 				{
 					header('Content-Encoding: gzip');
 					header('Content-Length: '.strlen($output));
@@ -500,10 +500,10 @@ class CI_Output {
 
 		// Do we need to generate profile data?
 		// If so, load the Profile class and run it.
-		if ($this->enable_profiler === TRUE)
+		if( $this->enable_profiler === TRUE)
 		{
 			$CI->load->library('profiler');
-			if ( ! empty($this->_profiler_sections))
+			if(  ! empty($this->_profiler_sections))
 			{
 				$CI->profiler->set_sections($this->_profiler_sections);
 			}
@@ -511,7 +511,7 @@ class CI_Output {
 			// If the output data contains closing </body> and </html> tags
 			// we will remove them and add them back after we insert the profile data
 			$output = preg_replace('|</body>.*?</html>|is', '', $output, -1, $count).$CI->profiler->run();
-			if ($count > 0)
+			if( $count > 0)
 			{
 				$output .= '</body></html>';
 			}
@@ -519,7 +519,7 @@ class CI_Output {
 
 		// Does the controller contain a function named _output()?
 		// If so send the output there.  Otherwise, echo it.
-		if (method_exists($CI, '_output'))
+		if( method_exists($CI, '_output'))
 		{
 			$CI->_output($output);
 		}
@@ -546,7 +546,7 @@ class CI_Output {
 		$path = $CI->config->item('cache_path');
 		$cache_path = ($path === '') ? APPPATH.'cache/' : $path;
 
-		if ( ! is_dir($cache_path) OR ! is_really_writable($cache_path))
+		if(  ! is_dir($cache_path) OR ! is_really_writable($cache_path))
 		{
 			log_message('error', 'Unable to write cache file: '.$cache_path);
 			return;
@@ -556,9 +556,9 @@ class CI_Output {
 			.$CI->config->item('index_page')
 			.$CI->uri->uri_string();
 
-		if (($cache_query_string = $CI->config->item('cache_query_string')) && ! empty($_SERVER['QUERY_STRING']))
+		if( ($cache_query_string = $CI->config->item('cache_query_string')) && ! empty($_SERVER['QUERY_STRING']))
 		{
-			if (is_array($cache_query_string))
+			if( is_array($cache_query_string))
 			{
 				$uri .= '?'.http_build_query(array_intersect_key($_GET, array_flip($cache_query_string)));
 			}
@@ -570,22 +570,22 @@ class CI_Output {
 
 		$cache_path .= md5($uri);
 
-		if ( ! $fp = @fopen($cache_path, 'w+b'))
+		if(  ! $fp = @fopen($cache_path, 'w+b'))
 		{
 			log_message('error', 'Unable to write cache file: '.$cache_path);
 			return;
 		}
 
-		if (flock($fp, LOCK_EX))
+		if( flock($fp, LOCK_EX))
 		{
 			// If output compression is enabled, compress the cache
 			// itself, so that we don't have to do that each time
 			// we're serving it
-			if ($this->_compress_output === TRUE)
+			if( $this->_compress_output === TRUE)
 			{
 				$output = gzencode($output);
 
-				if ($this->get_header('content-type') === NULL)
+				if( $this->get_header('content-type') === NULL)
 				{
 					$this->set_content_type($this->mime_type);
 				}
@@ -603,7 +603,7 @@ class CI_Output {
 
 			for ($written = 0, $length = strlen($output); $written < $length; $written += $result)
 			{
-				if (($result = fwrite($fp, substr($output, $written))) === FALSE)
+				if( ($result = fwrite($fp, substr($output, $written))) === FALSE)
 				{
 					break;
 				}
@@ -619,7 +619,7 @@ class CI_Output {
 
 		fclose($fp);
 
-		if (is_int($result))
+		if( is_int($result))
 		{
 			chmod($cache_path, 0640);
 			log_message('debug', 'Cache file written: '.$cache_path);
@@ -653,9 +653,9 @@ class CI_Output {
 		// Build the file path. The file name is an MD5 hash of the full URI
 		$uri = $CFG->item('base_url').$CFG->item('index_page').$URI->uri_string;
 
-		if (($cache_query_string = $CFG->item('cache_query_string')) && ! empty($_SERVER['QUERY_STRING']))
+		if( ($cache_query_string = $CFG->item('cache_query_string')) && ! empty($_SERVER['QUERY_STRING']))
 		{
-			if (is_array($cache_query_string))
+			if( is_array($cache_query_string))
 			{
 				$uri .= '?'.http_build_query(array_intersect_key($_GET, array_flip($cache_query_string)));
 			}
@@ -667,7 +667,7 @@ class CI_Output {
 
 		$filepath = $cache_path.md5($uri);
 
-		if ( ! file_exists($filepath) OR ! $fp = @fopen($filepath, 'rb'))
+		if(  ! file_exists($filepath) OR ! $fp = @fopen($filepath, 'rb'))
 		{
 			return FALSE;
 		}
@@ -680,7 +680,7 @@ class CI_Output {
 		fclose($fp);
 
 		// Look for embedded serialized file info.
-		if ( ! preg_match('/^(.*)ENDCI--->/', $cache, $match))
+		if(  ! preg_match('/^(.*)ENDCI--->/', $cache, $match))
 		{
 			return FALSE;
 		}
@@ -691,7 +691,7 @@ class CI_Output {
 		$last_modified = filemtime($filepath);
 
 		// Has the file expired?
-		if ($_SERVER['REQUEST_TIME'] >= $expire && is_really_writable($cache_path))
+		if( $_SERVER['REQUEST_TIME'] >= $expire && is_really_writable($cache_path))
 		{
 			// If so we'll delete it.
 			@unlink($filepath);
@@ -728,24 +728,24 @@ class CI_Output {
 	{
 		$CI =& get_instance();
 		$cache_path = $CI->config->item('cache_path');
-		if ($cache_path === '')
+		if( $cache_path === '')
 		{
 			$cache_path = APPPATH.'cache/';
 		}
 
-		if ( ! is_dir($cache_path))
+		if(  ! is_dir($cache_path))
 		{
 			log_message('error', 'Unable to find cache path: '.$cache_path);
 			return FALSE;
 		}
 
-		if (empty($uri))
+		if( empty($uri))
 		{
 			$uri = $CI->uri->uri_string();
 
-			if (($cache_query_string = $CI->config->item('cache_query_string')) && ! empty($_SERVER['QUERY_STRING']))
+			if( ($cache_query_string = $CI->config->item('cache_query_string')) && ! empty($_SERVER['QUERY_STRING']))
 			{
-				if (is_array($cache_query_string))
+				if( is_array($cache_query_string))
 				{
 					$uri .= '?'.http_build_query(array_intersect_key($_GET, array_flip($cache_query_string)));
 				}
@@ -758,7 +758,7 @@ class CI_Output {
 
 		$cache_path .= md5($CI->config->item('base_url').$CI->config->item('index_page').ltrim($uri, '/'));
 
-		if ( ! @unlink($cache_path))
+		if(  ! @unlink($cache_path))
 		{
 			log_message('error', 'Unable to delete cache file for '.$uri);
 			return FALSE;
@@ -783,7 +783,7 @@ class CI_Output {
 	{
 		$max_age = $expiration - $_SERVER['REQUEST_TIME'];
 
-		if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && $last_modified <= strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']))
+		if( isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && $last_modified <= strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']))
 		{
 			$this->set_status_header(304);
 			exit;

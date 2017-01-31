@@ -50,14 +50,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // ------------------------------------------------------------------------
 
-if (is_php('5.6'))
+if( is_php('5.6'))
 {
 	return;
 }
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('hash_equals'))
+if(  ! function_exists('hash_equals'))
 {
 	/**
 	 * hash_equals()
@@ -69,17 +69,17 @@ if ( ! function_exists('hash_equals'))
 	 */
 	function hash_equals($known_string, $user_string)
 	{
-		if ( ! is_string($known_string))
+		if(  ! is_string($known_string))
 		{
 			trigger_error('hash_equals(): Expected known_string to be a string, '.strtolower(gettype($known_string)).' given', E_USER_WARNING);
 			return FALSE;
 		}
-		elseif ( ! is_string($user_string))
+		elseif(  ! is_string($user_string))
 		{
 			trigger_error('hash_equals(): Expected user_string to be a string, '.strtolower(gettype($user_string)).' given', E_USER_WARNING);
 			return FALSE;
 		}
-		elseif (($length = strlen($known_string)) !== strlen($user_string))
+		elseif( ($length = strlen($known_string)) !== strlen($user_string))
 		{
 			return FALSE;
 		}
@@ -96,14 +96,14 @@ if ( ! function_exists('hash_equals'))
 
 // ------------------------------------------------------------------------
 
-if (is_php('5.5'))
+if( is_php('5.5'))
 {
 	return;
 }
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('hash_pbkdf2'))
+if(  ! function_exists('hash_pbkdf2'))
 {
 	/**
 	 * hash_pbkdf2()
@@ -119,20 +119,20 @@ if ( ! function_exists('hash_pbkdf2'))
 	 */
 	function hash_pbkdf2($algo, $password, $salt, $iterations, $length = 0, $raw_output = FALSE)
 	{
-		if ( ! in_array($algo, hash_algos(), TRUE))
+		if(  ! in_array($algo, hash_algos(), TRUE))
 		{
 			trigger_error('hash_pbkdf2(): Unknown hashing algorithm: '.$algo, E_USER_WARNING);
 			return FALSE;
 		}
 
-		if (($type = gettype($iterations)) !== 'integer')
+		if( ($type = gettype($iterations)) !== 'integer')
 		{
-			if ($type === 'object' && method_exists($iterations, '__toString'))
+			if( $type === 'object' && method_exists($iterations, '__toString'))
 			{
 				$iterations = (string) $iterations;
 			}
 
-			if (is_string($iterations) && is_numeric($iterations))
+			if( is_string($iterations) && is_numeric($iterations))
 			{
 				$iterations = (int) $iterations;
 			}
@@ -143,20 +143,20 @@ if ( ! function_exists('hash_pbkdf2'))
 			}
 		}
 
-		if ($iterations < 1)
+		if( $iterations < 1)
 		{
 			trigger_error('hash_pbkdf2(): Iterations must be a positive integer: '.$iterations, E_USER_WARNING);
 			return FALSE;
 		}
 
-		if (($type = gettype($length)) !== 'integer')
+		if( ($type = gettype($length)) !== 'integer')
 		{
-			if ($type === 'object' && method_exists($length, '__toString'))
+			if( $type === 'object' && method_exists($length, '__toString'))
 			{
 				$length = (string) $length;
 			}
 
-			if (is_string($length) && is_numeric($length))
+			if( is_string($length) && is_numeric($length))
 			{
 				$length = (int) $length;
 			}
@@ -167,7 +167,7 @@ if ( ! function_exists('hash_pbkdf2'))
 			}
 		}
 
-		if ($length < 0)
+		if( $length < 0)
 		{
 			trigger_error('hash_pbkdf2(): Length must be greater than or equal to 0: '.$length, E_USER_WARNING);
 			return FALSE;
@@ -221,7 +221,7 @@ if ( ! function_exists('hash_pbkdf2'))
 			'whirlpool' => 64
 		);
 
-		if (isset($block_sizes[$algo]) && strlen($password) > $block_sizes[$algo])
+		if( isset($block_sizes[$algo]) && strlen($password) > $block_sizes[$algo])
 		{
 			$password = hash($algo, $password, TRUE);
 		}

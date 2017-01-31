@@ -129,7 +129,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 	 */
 	public function free_result()
 	{
-		if (is_resource($this->result_id))
+		if( is_resource($this->result_id))
 		{
 			mssql_free_result($this->result_id);
 			$this->result_id = FALSE;
@@ -181,7 +181,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 	{
 		$row = mssql_fetch_object($this->result_id);
 
-		if ($class_name === 'stdClass' OR ! $row)
+		if( $class_name === 'stdClass' OR ! $row)
 		{
 			return $row;
 		}

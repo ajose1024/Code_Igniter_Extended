@@ -132,7 +132,7 @@ class CI_Router {
 		$this->_set_routing();
 
 		// Set any routing overrides that may exist in the main index file
-		if (is_array($routing))
+		if( is_array($routing))
 		{
 			empty($routing['controller']) OR $this->set_class($routing['controller']);
 			empty($routing['function'])   OR $this->set_method($routing['function']);
@@ -156,18 +156,18 @@ class CI_Router {
 		// Load the routes.php file. It would be great if we could
 		// skip this for enable_query_strings = TRUE, but then
 		// default_controller would be empty ...
-		if (file_exists(APPPATH.'config/routes.php'))
+		if( file_exists(APPPATH.'config/routes.php'))
 		{
 			include(APPPATH.'config/routes.php');
 		}
 
-		if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/routes.php'))
+		if( file_exists(APPPATH.'config/'.ENVIRONMENT.'/routes.php'))
 		{
 			include(APPPATH.'config/'.ENVIRONMENT.'/routes.php');
 		}
 
 		// Validate & get reserved routes
-		if (isset($route) && is_array($route))
+		if( isset($route) && is_array($route))
 		{
 			isset($route['default_controller']) && $this->default_controller = $route['default_controller'];
 			isset($route['translate_uri_dashes']) && $this->translate_uri_dashes = $route['translate_uri_dashes'];
@@ -178,15 +178,15 @@ class CI_Router {
 		// Are query strings enabled in the config file? Normally CI doesn't utilize query strings
 		// since URI segments are more search-engine friendly, but they can optionally be used.
 		// If this feature is enabled, we will gather the directory/class/method a little differently
-		if ($this->enable_query_strings)
+		if( $this->enable_query_strings)
 		{
 			// If the directory is set at this time, it means an override exists, so skip the checks
-			if ( ! isset($this->directory))
+			if(  ! isset($this->directory))
 			{
 				$_d = $this->config->item('directory_trigger');
 				$_d = isset($_GET[$_d]) ? trim($_GET[$_d], " \t\n\r\0\x0B/") : '';
 
-				if ($_d !== '')
+				if( $_d !== '')
 				{
 					$this->uri->filter_uri($_d);
 					$this->set_directory($_d);
@@ -194,13 +194,13 @@ class CI_Router {
 			}
 
 			$_c = trim($this->config->item('controller_trigger'));
-			if ( ! empty($_GET[$_c]))
+			if(  ! empty($_GET[$_c]))
 			{
 				$this->uri->filter_uri($_GET[$_c]);
 				$this->set_class($_GET[$_c]);
 
 				$_f = trim($this->config->item('function_trigger'));
-				if ( ! empty($_GET[$_f]))
+				if(  ! empty($_GET[$_f]))
 				{
 					$this->uri->filter_uri($_GET[$_f]);
 					$this->set_method($_GET[$_f]);
@@ -222,7 +222,7 @@ class CI_Router {
 		}
 
 		// Is there anything to parse?
-		if ($this->uri->uri_string !== '')
+		if( $this->uri->uri_string !== '')
 		{
 			$this->_parse_routes();
 		}
@@ -249,23 +249,23 @@ class CI_Router {
 		$segments = $this->_validate_request($segments);
 		// If we don't have any segments left - try the default controller;
 		// WARNING: Directories get shifted out of the segments array!
-		if (empty($segments))
+		if( empty($segments))
 		{
 			$this->_set_default_controller();
 			return;
 		}
 
-		if ($this->translate_uri_dashes === TRUE)
+		if( $this->translate_uri_dashes === TRUE)
 		{
 			$segments[0] = str_replace('-', '_', $segments[0]);
-			if (isset($segments[1]))
+			if( isset($segments[1]))
 			{
 				$segments[1] = str_replace('-', '_', $segments[1]);
 			}
 		}
 
 		$this->set_class($segments[0]);
-		if (isset($segments[1]))
+		if( isset($segments[1]))
 		{
 			$this->set_method($segments[1]);
 		}
@@ -288,18 +288,18 @@ class CI_Router {
 	 */
 	protected function _set_default_controller()
 	{
-		if (empty($this->default_controller))
+		if( empty($this->default_controller))
 		{
 			show_error('Unable to determine what should be displayed. A default route has not been specified in the routing file.');
 		}
 
 		// Is the method being specified?
-		if (sscanf($this->default_controller, '%[^/]/%s', $class, $method) !== 2)
+		if( sscanf($this->default_controller, '%[^/]/%s', $class, $method) !== 2)
 		{
 			$method = 'index';
 		}
 
-		if ( ! file_exists(APPPATH.'controllers/'.$this->directory.ucfirst($class).'.php'))
+		if(  ! file_exists(APPPATH.'controllers/'.$this->directory.ucfirst($class).'.php'))
 		{
 			// This will trigger 404 later
 			return;
@@ -340,7 +340,7 @@ class CI_Router {
 			$test = $this->directory
 				.ucfirst($this->translate_uri_dashes === TRUE ? str_replace('-', '_', $segments[0]) : $segments[0]);
 
-			if ( ! file_exists(APPPATH.'controllers/'.$test.'.php')
+			if(  ! file_exists(APPPATH.'controllers/'.$test.'.php')
 				&& $directory_override === FALSE
 				&& is_dir(APPPATH.'controllers/'.$this->directory.$segments[0])
 			)
@@ -378,10 +378,10 @@ class CI_Router {
 		foreach ($this->routes as $key => $val)
 		{
 			// Check if route format is using HTTP verbs
-			if (is_array($val))
+			if( is_array($val))
 			{
 				$val = array_change_key_case($val, CASE_LOWER);
-				if (isset($val[$http_verb]))
+				if( isset($val[$http_verb]))
 				{
 					$val = $val[$http_verb];
 				}
@@ -395,10 +395,10 @@ class CI_Router {
 			$key = str_replace(array(':any', ':num'), array('[^/]+', '[0-9]+'), $key);
 
 			// Does the RegEx match?
-			if (preg_match('#^'.$key.'$#', $uri, $matches))
+			if( preg_match('#^'.$key.'$#', $uri, $matches))
 			{
 				// Are we using callbacks to process back-references?
-				if ( ! is_string($val) && is_callable($val))
+				if(  ! is_string($val) && is_callable($val))
 				{
 					// Remove the original string from the matches array.
 					array_shift($matches);
@@ -407,7 +407,7 @@ class CI_Router {
 					$val = call_user_func_array($val, $matches);
 				}
 				// Are we using the default routing method for back-references?
-				elseif (strpos($val, '$') !== FALSE && strpos($key, '(') !== FALSE)
+				elseif( strpos($val, '$') !== FALSE && strpos($key, '(') !== FALSE)
 				{
 					$val = preg_replace('#^'.$key.'$#', $val, $uri);
 				}
@@ -485,7 +485,7 @@ class CI_Router {
 	 */
 	public function set_directory($dir, $append = FALSE)
 	{
-		if ($append !== TRUE OR empty($this->directory))
+		if( $append !== TRUE OR empty($this->directory))
 		{
 			$this->directory = str_replace('.', '', trim($dir, '/')).'/';
 		}

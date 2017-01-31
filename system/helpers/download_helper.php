@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('force_download'))
+if(  ! function_exists('force_download'))
 {
 	/**
 	 * Force Download
@@ -63,13 +63,13 @@ if ( ! function_exists('force_download'))
 	 */
 	function force_download($filename = '', $data = '', $set_mime = FALSE)
 	{
-		if ($filename === '' OR $data === '')
+		if( $filename === '' OR $data === '')
 		{
 			return;
 		}
-		elseif ($data === NULL)
+		elseif( $data === NULL)
 		{
-			if ( ! @is_file($filename) OR ($filesize = @filesize($filename)) === FALSE)
+			if(  ! @is_file($filename) OR ($filesize = @filesize($filename)) === FALSE)
 			{
 				return;
 			}
@@ -89,9 +89,9 @@ if ( ! function_exists('force_download'))
 		$x = explode('.', $filename);
 		$extension = end($x);
 
-		if ($set_mime === TRUE)
+		if( $set_mime === TRUE)
 		{
-			if (count($x) === 1 OR $extension === '')
+			if( count($x) === 1 OR $extension === '')
 			{
 				/* If we're going to detect the MIME type,
 				 * we'll need a file extension.
@@ -103,7 +103,7 @@ if ( ! function_exists('force_download'))
 			$mimes =& get_mimes();
 
 			// Only change the default MIME if we can find one
-			if (isset($mimes[$extension]))
+			if( isset($mimes[$extension]))
 			{
 				$mime = is_array($mimes[$extension]) ? $mimes[$extension][0] : $mimes[$extension];
 			}
@@ -115,19 +115,19 @@ if ( ! function_exists('force_download'))
 		 *
 		 * Reference: http://digiblog.de/2011/04/19/android-and-the-download-file-headers/
 		 */
-		if (count($x) !== 1 && isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/Android\s(1|2\.[01])/', $_SERVER['HTTP_USER_AGENT']))
+		if( count($x) !== 1 && isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/Android\s(1|2\.[01])/', $_SERVER['HTTP_USER_AGENT']))
 		{
 			$x[count($x) - 1] = strtoupper($extension);
 			$filename = implode('.', $x);
 		}
 
-		if ($data === NULL && ($fp = @fopen($filepath, 'rb')) === FALSE)
+		if( $data === NULL && ($fp = @fopen($filepath, 'rb')) === FALSE)
 		{
 			return;
 		}
 
 		// Clean output buffer
-		if (ob_get_level() !== 0 && @ob_end_clean() === FALSE)
+		if( ob_get_level() !== 0 && @ob_end_clean() === FALSE)
 		{
 			@ob_clean();
 		}
@@ -141,7 +141,7 @@ if ( ! function_exists('force_download'))
 		header('Cache-Control: private, no-transform, no-store, must-revalidate');
 
 		// If we have raw data - just dump it
-		if ($data !== NULL)
+		if( $data !== NULL)
 		{
 			exit($data);
 		}

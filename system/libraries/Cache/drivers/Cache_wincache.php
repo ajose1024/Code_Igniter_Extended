@@ -166,7 +166,7 @@ class CI_Cache_wincache extends CI_Driver {
 	 */
 	public function get_metadata($id)
 	{
-		if ($stored = wincache_ucache_info(FALSE, $id))
+		if( $stored = wincache_ucache_info(FALSE, $id))
 		{
 			$age = $stored['ucache_entries'][1]['age_seconds'];
 			$ttl = $stored['ucache_entries'][1]['ttl_seconds'];
@@ -194,7 +194,7 @@ class CI_Cache_wincache extends CI_Driver {
 	 */
 	public function is_supported()
 	{
-		if ( ! extension_loaded('wincache') OR ! ini_get('wincache.ucenabled'))
+		if(  ! extension_loaded('wincache') OR ! ini_get('wincache.ucenabled'))
 		{
 			log_message('debug', 'The Wincache PHP extension must be loaded to use Wincache Cache.');
 			return FALSE;

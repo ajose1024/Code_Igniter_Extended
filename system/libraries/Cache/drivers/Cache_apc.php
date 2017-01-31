@@ -62,7 +62,7 @@ class CI_Cache_apc extends CI_Driver {
 		$success = FALSE;
 		$data = apc_fetch($id, $success);
 
-		if ($success === TRUE)
+		if( $success === TRUE)
 		{
 			return is_array($data)
 				? unserialize($data[0])
@@ -173,7 +173,7 @@ class CI_Cache_apc extends CI_Driver {
 		$success = FALSE;
 		$stored = apc_fetch($id, $success);
 
-		if ($success === FALSE OR count($stored) !== 3)
+		if( $success === FALSE OR count($stored) !== 3)
 		{
 			return FALSE;
 		}
@@ -198,7 +198,7 @@ class CI_Cache_apc extends CI_Driver {
 	 */
 	public function is_supported()
 	{
-		if ( ! extension_loaded('apc') OR ! ini_get('apc.enabled'))
+		if(  ! extension_loaded('apc') OR ! ini_get('apc.enabled'))
 		{
 			log_message('debug', 'The APC PHP extension must be loaded to use APC Cache.');
 			return FALSE;

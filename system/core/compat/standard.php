@@ -49,14 +49,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // ------------------------------------------------------------------------
 
-if (is_php('5.5'))
+if( is_php('5.5'))
 {
 	return;
 }
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('array_column'))
+if(  ! function_exists('array_column'))
 {
 	/**
 	 * array_column()
@@ -69,13 +69,13 @@ if ( ! function_exists('array_column'))
 	 */
 	function array_column(array $array, $column_key, $index_key = NULL)
 	{
-		if ( ! in_array($type = gettype($column_key), array('integer', 'string', 'NULL'), TRUE))
+		if(  ! in_array($type = gettype($column_key), array('integer', 'string', 'NULL'), TRUE))
 		{
-			if ($type === 'double')
+			if( $type === 'double')
 			{
 				$column_key = (int) $column_key;
 			}
-			elseif ($type === 'object' && method_exists($column_key, '__toString'))
+			elseif( $type === 'object' && method_exists($column_key, '__toString'))
 			{
 				$column_key = (string) $column_key;
 			}
@@ -86,13 +86,13 @@ if ( ! function_exists('array_column'))
 			}
 		}
 
-		if ( ! in_array($type = gettype($index_key), array('integer', 'string', 'NULL'), TRUE))
+		if(  ! in_array($type = gettype($index_key), array('integer', 'string', 'NULL'), TRUE))
 		{
-			if ($type === 'double')
+			if( $type === 'double')
 			{
 				$index_key = (int) $index_key;
 			}
-			elseif ($type === 'object' && method_exists($index_key, '__toString'))
+			elseif( $type === 'object' && method_exists($index_key, '__toString'))
 			{
 				$index_key = (string) $index_key;
 			}
@@ -106,11 +106,11 @@ if ( ! function_exists('array_column'))
 		$result = array();
 		foreach ($array as &$a)
 		{
-			if ($column_key === NULL)
+			if( $column_key === NULL)
 			{
 				$value = $a;
 			}
-			elseif (is_array($a) && array_key_exists($column_key, $a))
+			elseif( is_array($a) && array_key_exists($column_key, $a))
 			{
 				$value = $a[$column_key];
 			}
@@ -119,7 +119,7 @@ if ( ! function_exists('array_column'))
 				continue;
 			}
 
-			if ($index_key === NULL OR ! array_key_exists($index_key, $a))
+			if( $index_key === NULL OR ! array_key_exists($index_key, $a))
 			{
 				$result[] = $value;
 			}
@@ -135,14 +135,14 @@ if ( ! function_exists('array_column'))
 
 // ------------------------------------------------------------------------
 
-if (is_php('5.4'))
+if( is_php('5.4'))
 {
 	return;
 }
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('hex2bin'))
+if(  ! function_exists('hex2bin'))
 {
 	/**
 	 * hex2bin()
@@ -153,9 +153,9 @@ if ( ! function_exists('hex2bin'))
 	 */
 	function hex2bin($data)
 	{
-		if (in_array($type = gettype($data), array('array', 'double', 'object'), TRUE))
+		if( in_array($type = gettype($data), array('array', 'double', 'object'), TRUE))
 		{
-			if ($type === 'object' && method_exists($data, '__toString'))
+			if( $type === 'object' && method_exists($data, '__toString'))
 			{
 				$data = (string) $data;
 			}
@@ -166,12 +166,12 @@ if ( ! function_exists('hex2bin'))
 			}
 		}
 
-		if (strlen($data) % 2 !== 0)
+		if( strlen($data) % 2 !== 0)
 		{
 			trigger_error('Hexadecimal input string must have an even length', E_USER_WARNING);
 			return FALSE;
 		}
-		elseif ( ! preg_match('/^[0-9a-f]*$/i', $data))
+		elseif(  ! preg_match('/^[0-9a-f]*$/i', $data))
 		{
 			trigger_error('Input string must be hexadecimal string', E_USER_WARNING);
 			return FALSE;
@@ -183,14 +183,14 @@ if ( ! function_exists('hex2bin'))
 
 // ------------------------------------------------------------------------
 
-if (is_php('5.3'))
+if( is_php('5.3'))
 {
 	return;
 }
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('array_replace'))
+if(  ! function_exists('array_replace'))
 {
 	/**
 	 * array_replace()
@@ -202,14 +202,14 @@ if ( ! function_exists('array_replace'))
 	{
 		$arrays = func_get_args();
 
-		if (($c = count($arrays)) === 0)
+		if( ($c = count($arrays)) === 0)
 		{
 			trigger_error('array_replace() expects at least 1 parameter, 0 given', E_USER_WARNING);
 			return NULL;
 		}
-		elseif ($c === 1)
+		elseif( $c === 1)
 		{
-			if ( ! is_array($arrays[0]))
+			if(  ! is_array($arrays[0]))
 			{
 				trigger_error('array_replace(): Argument #1 is not an array', E_USER_WARNING);
 				return NULL;
@@ -223,12 +223,12 @@ if ( ! function_exists('array_replace'))
 
 		for ($i = 0; $i < $c; $i++)
 		{
-			if ( ! is_array($arrays[$i]))
+			if(  ! is_array($arrays[$i]))
 			{
 				trigger_error('array_replace(): Argument #'.($i + 2).' is not an array', E_USER_WARNING);
 				return NULL;
 			}
-			elseif (empty($arrays[$i]))
+			elseif( empty($arrays[$i]))
 			{
 				continue;
 			}
@@ -245,7 +245,7 @@ if ( ! function_exists('array_replace'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('array_replace_recursive'))
+if(  ! function_exists('array_replace_recursive'))
 {
 	/**
 	 * array_replace_recursive()
@@ -257,14 +257,14 @@ if ( ! function_exists('array_replace_recursive'))
 	{
 		$arrays = func_get_args();
 
-		if (($c = count($arrays)) === 0)
+		if( ($c = count($arrays)) === 0)
 		{
 			trigger_error('array_replace_recursive() expects at least 1 parameter, 0 given', E_USER_WARNING);
 			return NULL;
 		}
-		elseif ($c === 1)
+		elseif( $c === 1)
 		{
-			if ( ! is_array($arrays[0]))
+			if(  ! is_array($arrays[0]))
 			{
 				trigger_error('array_replace_recursive(): Argument #1 is not an array', E_USER_WARNING);
 				return NULL;
@@ -278,12 +278,12 @@ if ( ! function_exists('array_replace_recursive'))
 
 		for ($i = 0; $i < $c; $i++)
 		{
-			if ( ! is_array($arrays[$i]))
+			if(  ! is_array($arrays[$i]))
 			{
 				trigger_error('array_replace_recursive(): Argument #'.($i + 2).' is not an array', E_USER_WARNING);
 				return NULL;
 			}
-			elseif (empty($arrays[$i]))
+			elseif( empty($arrays[$i]))
 			{
 				continue;
 			}
@@ -302,7 +302,7 @@ if ( ! function_exists('array_replace_recursive'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('quoted_printable_encode'))
+if(  ! function_exists('quoted_printable_encode'))
 {
 	/**
 	 * quoted_printable_encode()
@@ -313,13 +313,13 @@ if ( ! function_exists('quoted_printable_encode'))
 	 */
 	function quoted_printable_encode($str)
 	{
-		if (strlen($str) === 0)
+		if( strlen($str) === 0)
 		{
 			return '';
 		}
-		elseif (in_array($type = gettype($str), array('array', 'object'), TRUE))
+		elseif( in_array($type = gettype($str), array('array', 'object'), TRUE))
 		{
-			if ($type === 'object' && method_exists($str, '__toString'))
+			if( $type === 'object' && method_exists($str, '__toString'))
 			{
 				$str = (string) $str;
 			}
@@ -330,7 +330,7 @@ if ( ! function_exists('quoted_printable_encode'))
 			}
 		}
 
-		if (function_exists('imap_8bit'))
+		if( function_exists('imap_8bit'))
 		{
 			return imap_8bit($str);
 		}
@@ -344,7 +344,7 @@ if ( ! function_exists('quoted_printable_encode'))
 
 		while ($length--)
 		{
-			if ((($c = $str[$i++]) === "\015") && isset($str[$i]) && ($str[$i] === "\012") && $length > 0)
+			if( (($c = $str[$i++]) === "\015") && isset($str[$i]) && ($str[$i] === "\012") && $length > 0)
 			{
 				$output .= "\015".$str[$i++];
 				$length--;
@@ -352,7 +352,7 @@ if ( ! function_exists('quoted_printable_encode'))
 				continue;
 			}
 
-			if (
+			if( 
 				ctype_cntrl($c)
 				OR (ord($c) === 0x7f)
 				OR (ord($c) & 0x80)
@@ -360,7 +360,7 @@ if ( ! function_exists('quoted_printable_encode'))
 				OR ($c === ' ' && isset($str[$i]) && $str[$i] === "\015")
 			)
 			{
-				if (
+				if( 
 					(($lp += 3) > 75 && ord($c) <= 0x7f)
 					OR (ord($c) > 0x7f && ord($c) <= 0xdf && ($lp + 3) > 75)
 					OR (ord($c) > 0xdf && ord($c) <= 0xef && ($lp + 6) > 75)
@@ -375,7 +375,7 @@ if ( ! function_exists('quoted_printable_encode'))
 				continue;
 			}
 
-			if ((++$lp) > 75)
+			if( (++$lp) > 75)
 			{
 				$output .= "=\015\012";
 				$lp = 1;

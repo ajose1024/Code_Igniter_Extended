@@ -94,17 +94,17 @@ class CI_Benchmark {
 	 */
 	public function elapsed_time($point1 = '', $point2 = '', $decimals = 4)
 	{
-		if ($point1 === '')
+		if( $point1 === '')
 		{
 			return '{elapsed_time}';
 		}
 
-		if ( ! isset($this->marker[$point1]))
+		if(  ! isset($this->marker[$point1]))
 		{
 			return '';
 		}
 
-		if ( ! isset($this->marker[$point2]))
+		if(  ! isset($this->marker[$point2]))
 		{
 			$this->marker[$point2] = microtime(TRUE);
 		}

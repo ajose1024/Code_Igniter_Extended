@@ -104,7 +104,7 @@ class CI_DB_pdo_cubrid_forge extends CI_DB_pdo_forge {
 	 */
 	protected function _alter_table($alter_type, $table, $field)
 	{
-		if (in_array($alter_type, array('DROP', 'ADD'), TRUE))
+		if( in_array($alter_type, array('DROP', 'ADD'), TRUE))
 		{
 			return parent::_alter_table($alter_type, $table, $field);
 		}
@@ -113,7 +113,7 @@ class CI_DB_pdo_cubrid_forge extends CI_DB_pdo_forge {
 		$sqls = array();
 		for ($i = 0, $c = count($field); $i < $c; $i++)
 		{
-			if ($field[$i]['_literal'] !== FALSE)
+			if( $field[$i]['_literal'] !== FALSE)
 			{
 				$sqls[] = $sql.' CHANGE '.$field[$i]['_literal'];
 			}
@@ -140,7 +140,7 @@ class CI_DB_pdo_cubrid_forge extends CI_DB_pdo_forge {
 		$extra_clause = isset($field['after'])
 			? ' AFTER '.$this->db->escape_identifiers($field['after']) : '';
 
-		if (empty($extra_clause) && isset($field['first']) && $field['first'] === TRUE)
+		if( empty($extra_clause) && isset($field['first']) && $field['first'] === TRUE)
 		{
 			$extra_clause = ' FIRST';
 		}
@@ -168,7 +168,7 @@ class CI_DB_pdo_cubrid_forge extends CI_DB_pdo_forge {
 	 */
 	protected function _attr_type(&$attributes)
 	{
-		switch (strtoupper($attributes['TYPE']))
+		switch( strtoupper($attributes['TYPE']))
 		{
 			case 'TINYINT':
 				$attributes['TYPE'] = 'SMALLINT';
@@ -196,18 +196,18 @@ class CI_DB_pdo_cubrid_forge extends CI_DB_pdo_forge {
 
 		for ($i = 0, $c = count($this->keys); $i < $c; $i++)
 		{
-			if (is_array($this->keys[$i]))
+			if( is_array($this->keys[$i]))
 			{
 				for ($i2 = 0, $c2 = count($this->keys[$i]); $i2 < $c2; $i2++)
 				{
-					if ( ! isset($this->fields[$this->keys[$i][$i2]]))
+					if(  ! isset($this->fields[$this->keys[$i][$i2]]))
 					{
 						unset($this->keys[$i][$i2]);
 						continue;
 					}
 				}
 			}
-			elseif ( ! isset($this->fields[$this->keys[$i]]))
+			elseif(  ! isset($this->fields[$this->keys[$i]]))
 			{
 				unset($this->keys[$i]);
 				continue;

@@ -25,7 +25,7 @@ class Escape_test extends CI_TestCase {
 		// Escape the like string
 		$string = $this->db->escape_like_str('\%foo');
 
-		if (strpos(DB_DRIVER, 'mysql') !== FALSE)
+		if( strpos(DB_DRIVER, 'mysql') !== FALSE)
 		{
 			$sql = "SELECT `value` FROM `misc` WHERE `key` LIKE '$string%' ESCAPE '!';";
 		}
@@ -50,7 +50,7 @@ class Escape_test extends CI_TestCase {
 		// Escape the like string
 		$string = $this->db->escape_like_str('\\');
 
-		if (strpos(DB_DRIVER, 'mysql') !== FALSE)
+		if( strpos(DB_DRIVER, 'mysql') !== FALSE)
 		{
 			$sql = "SELECT `value` FROM `misc` WHERE `key` LIKE '$string%' ESCAPE '!';";
 		}

@@ -348,7 +348,7 @@ Available Functions
 	engine purposes. The default Response Code is 302. The third parameter is
 	*only* available with **location** redirects, and not *refresh*. Examples::
 
-		if ($logged_in == FALSE)
+		if( $logged_in == FALSE)
 		{      
 			redirect('/login/form/');
 		}

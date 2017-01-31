@@ -163,18 +163,18 @@ class CI_DB_oci8_result extends CI_DB_result {
 	 */
 	public function free_result()
 	{
-		if (is_resource($this->result_id))
+		if( is_resource($this->result_id))
 		{
 			oci_free_statement($this->result_id);
 			$this->result_id = FALSE;
 		}
 
-		if (is_resource($this->stmt_id))
+		if( is_resource($this->stmt_id))
 		{
 			oci_free_statement($this->stmt_id);
 		}
 
-		if (is_resource($this->curs_id))
+		if( is_resource($this->curs_id))
 		{
 			oci_cancel($this->curs_id);
 			$this->curs_id = NULL;
@@ -212,7 +212,7 @@ class CI_DB_oci8_result extends CI_DB_result {
 			? oci_fetch_object($this->curs_id)
 			: oci_fetch_object($this->stmt_id);
 
-		if ($class_name === 'stdClass' OR ! $row)
+		if( $class_name === 'stdClass' OR ! $row)
 		{
 			return $row;
 		}

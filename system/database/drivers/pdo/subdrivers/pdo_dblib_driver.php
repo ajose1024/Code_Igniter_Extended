@@ -92,11 +92,11 @@ class CI_DB_pdo_dblib_driver extends CI_DB_pdo_driver {
 	{
 		parent::__construct($params);
 
-		if (empty($this->dsn))
+		if( empty($this->dsn))
 		{
 			$this->dsn = $params['subdriver'].':host='.(empty($this->hostname) ? '127.0.0.1' : $this->hostname);
 
-			if ( ! empty($this->port))
+			if(  ! empty($this->port))
 			{
 				$this->dsn .= (DIRECTORY_SEPARATOR === '\\' ? ',' : ':').$this->port;
 			}
@@ -107,7 +107,7 @@ class CI_DB_pdo_dblib_driver extends CI_DB_pdo_driver {
 		}
 		else
 		{
-			if ( ! empty($this->char_set) && strpos($this->dsn, 'charset=', 6) === FALSE)
+			if(  ! empty($this->char_set) && strpos($this->dsn, 'charset=', 6) === FALSE)
 			{
 				$this->dsn .= ';charset='.$this->char_set;
 			}
@@ -128,7 +128,7 @@ class CI_DB_pdo_dblib_driver extends CI_DB_pdo_driver {
 	{
 		$this->conn_id = parent::db_connect($persistent);
 
-		if ( ! is_object($this->conn_id))
+		if(  ! is_object($this->conn_id))
 		{
 			return $this->conn_id;
 		}
@@ -158,7 +158,7 @@ class CI_DB_pdo_dblib_driver extends CI_DB_pdo_driver {
 			.' FROM '.$this->escape_identifiers('sysobjects')
 			.' WHERE '.$this->escape_identifiers('type')." = 'U'";
 
-		if ($prefix_limit === TRUE && $this->dbprefix !== '')
+		if( $prefix_limit === TRUE && $this->dbprefix !== '')
 		{
 			$sql .= ' AND '.$this->escape_identifiers('name')." LIKE '".$this->escape_like_str($this->dbprefix)."%' "
 				.sprintf($this->_like_escape_str, $this->_like_escape_chr);
@@ -198,7 +198,7 @@ class CI_DB_pdo_dblib_driver extends CI_DB_pdo_driver {
 			FROM INFORMATION_SCHEMA.Columns
 			WHERE UPPER(TABLE_NAME) = '.$this->escape(strtoupper($table));
 
-		if (($query = $this->query($sql)) === FALSE)
+		if( ($query = $this->query($sql)) === FALSE)
 		{
 			return FALSE;
 		}
@@ -247,7 +247,7 @@ class CI_DB_pdo_dblib_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _delete($table)
 	{
-		if ($this->qb_limit)
+		if( $this->qb_limit)
 		{
 			return 'WITH ci_delete AS (SELECT TOP '.$this->qb_limit.' * FROM '.$table.$this->_compile_wh('qb_where').') DELETE FROM ci_delete';
 		}
@@ -271,7 +271,7 @@ class CI_DB_pdo_dblib_driver extends CI_DB_pdo_driver {
 
 		// As of SQL Server 2005 (9.0.*) ROW_NUMBER() is supported,
 		// however an ORDER BY clause is required for it to work
-		if (version_compare($this->version(), '9', '>=') && $this->qb_offset && ! empty($this->qb_orderby))
+		if( version_compare($this->version(), '9', '>=') && $this->qb_offset && ! empty($this->qb_orderby))
 		{
 			$orderby = $this->_compile_order_by();
 
@@ -279,7 +279,7 @@ class CI_DB_pdo_dblib_driver extends CI_DB_pdo_driver {
 			$sql = trim(substr($sql, 0, strrpos($sql, $orderby)));
 
 			// Get the fields to select from our subquery, so that we can avoid CI_rownum appearing in the actual results
-			if (count($this->qb_select) === 0)
+			if( count($this->qb_select) === 0)
 			{
 				$select = '*'; // Inevitable
 			}
@@ -321,7 +321,7 @@ class CI_DB_pdo_dblib_driver extends CI_DB_pdo_driver {
 	protected function _insert_batch($table, $keys, $values)
 	{
 		// Multiple-value inserts are only supported as of SQL Server 2008
-		if (version_compare($this->version(), '10', '>='))
+		if( version_compare($this->version(), '10', '>='))
 		{
 			return parent::_insert_batch($table, $keys, $values);
 		}

@@ -77,7 +77,7 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 	 */
 	protected function _backup($params = array())
 	{
-		if (count($params) === 0)
+		if( count($params) === 0)
 		{
 			return FALSE;
 		}
@@ -89,7 +89,7 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 		$output = '';
 
 		// Do we need to include a statement to disable foreign key checks?
-		if ($foreign_key_checks === FALSE)
+		if( $foreign_key_checks === FALSE)
 		{
 			$output .= 'SET foreign_key_checks = 0;'.$newline;
 		}
@@ -97,7 +97,7 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 		foreach ( (array) $tables as $table)
 		{
 			// Is the table in the "ignore" list?
-			if (in_array($table, (array) $ignore, TRUE))
+			if( in_array($table, (array) $ignore, TRUE))
 			{
 				continue;
 			}
@@ -106,7 +106,7 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 			$query = $this->db->query('SHOW CREATE TABLE '.$this->db->escape_identifiers($this->db->database.'.'.$table));
 
 			// No result means the table name was invalid
-			if ($query === FALSE)
+			if( $query === FALSE)
 			{
 				continue;
 			}
@@ -114,7 +114,7 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 			// Write out the table schema
 			$output .= '#'.$newline.'# TABLE STRUCTURE FOR: '.$table.$newline.'#'.$newline.$newline;
 
-			if ($add_drop === TRUE)
+			if( $add_drop === TRUE)
 			{
 				$output .= 'DROP TABLE IF EXISTS '.$this->db->protect_identifiers($table).';'.$newline.$newline;
 			}
@@ -123,14 +123,14 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 			$result = $query->result_array();
 			foreach ($result[0] as $val)
 			{
-				if ($i++ % 2)
+				if( $i++ % 2)
 				{
 					$output .= $val.';'.$newline.$newline;
 				}
 			}
 
 			// If inserts are not needed we're done...
-			if ($add_insert === FALSE)
+			if( $add_insert === FALSE)
 			{
 				continue;
 			}
@@ -138,7 +138,7 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 			// Grab all the data from the current table
 			$query = $this->db->query('SELECT * FROM '.$this->db->protect_identifiers($table));
 
-			if ($query->num_rows() === 0)
+			if( $query->num_rows() === 0)
 			{
 				continue;
 			}
@@ -174,7 +174,7 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 				foreach ($row as $v)
 				{
 					// Is the value NULL?
-					if ($v === NULL)
+					if( $v === NULL)
 					{
 						$val_str .= 'NULL';
 					}
@@ -200,7 +200,7 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 		}
 
 		// Do we need to include a statement to re-enable foreign key checks?
-		if ($foreign_key_checks === FALSE)
+		if( $foreign_key_checks === FALSE)
 		{
 			$output .= 'SET foreign_key_checks = 1;'.$newline;
 		}

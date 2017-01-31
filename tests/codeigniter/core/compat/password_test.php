@@ -4,22 +4,22 @@ class password_test extends CI_TestCase {
 
 	public function test_bootstrap()
 	{
-		if (is_php('5.5'))
+		if( is_php('5.5'))
 		{
 			return $this->markTestSkipped('ext/standard/password is available on PHP 5.5');
 		}
-		elseif ( ! is_php('5.3.7'))
+		elseif(  ! is_php('5.3.7'))
 		{
 			$this->assertFalse(defined('PASSWORD_BCRYPT'));
 			return $this->markTestSkipped("PHP versions prior to 5.3.7 don't have the '2y' Blowfish version");
 		}
 		// defined as of HHVM 2.3.0, which is also when they introduce password_*() as well
 		// Note: Do NOT move this after the CRYPT_BLOWFISH check
-		elseif (defined('HHVM_VERSION'))
+		elseif( defined('HHVM_VERSION'))
 		{
 			$this->markTestSkipped('HHVM 2.3.0+ already has it');
 		}
-		elseif ( ! defined('CRYPT_BLOWFISH') OR CRYPT_BLOWFISH !== 1)
+		elseif(  ! defined('CRYPT_BLOWFISH') OR CRYPT_BLOWFISH !== 1)
 		{
 			$this->assertFalse(defined('PASSWORD_BCRYPT'));
 			return $this->markTestSkipped('CRYPT_BLOWFISH is not available');
@@ -85,7 +85,7 @@ class password_test extends CI_TestCase {
 	public function test_password_hash()
 	{
 		// FALSE is returned if no CSPRNG source is available
-		if ( ! defined('MCRYPT_DEV_URANDOM') && ! function_exists('openssl_random_pseudo_bytes')
+		if(  ! defined('MCRYPT_DEV_URANDOM') && ! function_exists('openssl_random_pseudo_bytes')
 			&& (DIRECTORY_SEPARATOR !== '/' OR ! is_readable('/dev/arandom') OR ! is_readable('/dev/urandom'))
 			)
 		{

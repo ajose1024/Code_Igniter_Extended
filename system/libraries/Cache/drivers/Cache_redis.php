@@ -94,7 +94,7 @@ class CI_Cache_redis extends CI_Driver
 		$config = array();
 		$CI =& get_instance();
 
-		if ($CI->config->load('redis', TRUE, TRUE))
+		if( $CI->config->load('redis', TRUE, TRUE))
 		{
 			$config = $CI->config->item('redis');
 		}
@@ -104,7 +104,7 @@ class CI_Cache_redis extends CI_Driver
 
 		try
 		{
-			if ($config['socket_type'] === 'unix')
+			if( $config['socket_type'] === 'unix')
 			{
 				$success = $this->_redis->connect($config['socket']);
 			}
@@ -113,12 +113,12 @@ class CI_Cache_redis extends CI_Driver
 				$success = $this->_redis->connect($config['host'], $config['port'], $config['timeout']);
 			}
 
-			if ( ! $success)
+			if(  ! $success)
 			{
 				log_message('error', 'Cache: Redis connection failed. Check your configuration.');
 			}
 
-			if (isset($config['password']) && ! $this->_redis->auth($config['password']))
+			if( isset($config['password']) && ! $this->_redis->auth($config['password']))
 			{
 				log_message('error', 'Cache: Redis authentication failed.');
 			}
@@ -145,7 +145,7 @@ class CI_Cache_redis extends CI_Driver
 	{
 		$value = $this->_redis->get($key);
 
-		if ($value !== FALSE && isset($this->_serialized[$key]))
+		if( $value !== FALSE && isset($this->_serialized[$key]))
 		{
 			return unserialize($value);
 		}
@@ -166,9 +166,9 @@ class CI_Cache_redis extends CI_Driver
 	 */
 	public function save($id, $data, $ttl = 60, $raw = FALSE)
 	{
-		if (is_array($data) OR is_object($data))
+		if( is_array($data) OR is_object($data))
 		{
-			if ( ! $this->_redis->sIsMember('_ci_redis_serialized', $id) && ! $this->_redis->sAdd('_ci_redis_serialized', $id))
+			if(  ! $this->_redis->sIsMember('_ci_redis_serialized', $id) && ! $this->_redis->sAdd('_ci_redis_serialized', $id))
 			{
 				return FALSE;
 			}
@@ -176,7 +176,7 @@ class CI_Cache_redis extends CI_Driver
 			isset($this->_serialized[$id]) OR $this->_serialized[$id] = TRUE;
 			$data = serialize($data);
 		}
-		elseif (isset($this->_serialized[$id]))
+		elseif( isset($this->_serialized[$id]))
 		{
 			$this->_serialized[$id] = NULL;
 			$this->_redis->sRemove('_ci_redis_serialized', $id);
@@ -195,12 +195,12 @@ class CI_Cache_redis extends CI_Driver
 	 */
 	public function delete($key)
 	{
-		if ($this->_redis->delete($key) !== 1)
+		if( $this->_redis->delete($key) !== 1)
 		{
 			return FALSE;
 		}
 
-		if (isset($this->_serialized[$key]))
+		if( isset($this->_serialized[$key]))
 		{
 			$this->_serialized[$key] = NULL;
 			$this->_redis->sRemove('_ci_redis_serialized', $key);
@@ -278,7 +278,7 @@ class CI_Cache_redis extends CI_Driver
 	{
 		$value = $this->get($key);
 
-		if ($value !== FALSE)
+		if( $value !== FALSE)
 		{
 			return array(
 				'expire' => time() + $this->_redis->ttl($key),
@@ -312,7 +312,7 @@ class CI_Cache_redis extends CI_Driver
 	 */
 	public function __destruct()
 	{
-		if ($this->_redis)
+		if( $this->_redis)
 		{
 			$this->_redis->close();
 		}

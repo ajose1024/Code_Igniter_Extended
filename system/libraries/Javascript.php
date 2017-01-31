@@ -70,7 +70,7 @@ class CI_Javascript {
 
 		foreach ($defaults as $key => $val)
 		{
-			if (isset($params[$key]) && $params[$key] !== '')
+			if( isset($params[$key]) && $params[$key] !== '')
 			{
 				$defaults[$key] = $params[$key];
 			}
@@ -641,20 +641,20 @@ class CI_Javascript {
 	 */
 	public function external($external_file = '', $relative = FALSE)
 	{
-		if ($external_file !== '')
+		if( $external_file !== '')
 		{
 			$this->_javascript_location = $external_file;
 		}
-		elseif ($this->CI->config->item('javascript_location') !== '')
+		elseif( $this->CI->config->item('javascript_location') !== '')
 		{
 			$this->_javascript_location = $this->CI->config->item('javascript_location');
 		}
 
-		if ($relative === TRUE OR strpos($external_file, 'http://') === 0 OR strpos($external_file, 'https://') === 0)
+		if( $relative === TRUE OR strpos($external_file, 'http://') === 0 OR strpos($external_file, 'https://') === 0)
 		{
 			$str = $this->_open_script($external_file);
 		}
-		elseif (strpos($this->_javascript_location, 'http://') !== FALSE)
+		elseif( strpos($this->_javascript_location, 'http://') !== FALSE)
 		{
 			$str = $this->_open_script($this->_javascript_location.$external_file);
 		}
@@ -749,13 +749,13 @@ class CI_Javascript {
 	{
 		// JSON data can optionally be passed to this function
 		// either as a database result object or an array, or a user supplied array
-		if ($result !== NULL)
+		if( $result !== NULL)
 		{
-			if (is_object($result))
+			if( is_object($result))
 			{
 				$json_result = is_callable(array($result, 'result_array')) ? $result->result_array() : (array) $result;
 			}
-			elseif (is_array($result))
+			elseif( is_array($result))
 			{
 				$json_result = $result;
 			}
@@ -772,18 +772,18 @@ class CI_Javascript {
 		$json = array();
 		$_is_assoc = TRUE;
 
-		if ( ! is_array($json_result) && empty($json_result))
+		if(  ! is_array($json_result) && empty($json_result))
 		{
 			show_error('Generate JSON Failed - Illegal key, value pair.');
 		}
-		elseif ($match_array_type)
+		elseif( $match_array_type)
 		{
 			$_is_assoc = $this->_is_associative_array($json_result);
 		}
 
 		foreach ($json_result as $k => $v)
 		{
-			if ($_is_assoc)
+			if( $_is_assoc)
 			{
 				$json[] = $this->_prep_args($k, TRUE).':'.$this->generate_json($v, $match_array_type);
 			}
@@ -813,7 +813,7 @@ class CI_Javascript {
 	{
 		foreach (array_keys($arr) as $key => $val)
 		{
-			if ($key !== $val)
+			if( $key !== $val)
 			{
 				return TRUE;
 			}
@@ -835,19 +835,19 @@ class CI_Javascript {
 	 */
 	protected function _prep_args($result, $is_key = FALSE)
 	{
-		if ($result === NULL)
+		if( $result === NULL)
 		{
 			return 'null';
 		}
-		elseif (is_bool($result))
+		elseif( is_bool($result))
 		{
 			return ($result === TRUE) ? 'true' : 'false';
 		}
-		elseif (is_string($result) OR $is_key)
+		elseif( is_string($result) OR $is_key)
 		{
 			return '"'.str_replace(array('\\', "\t", "\n", "\r", '"', '/'), array('\\\\', '\\t', '\\n', "\\r", '\"', '\/'), $result).'"';
 		}
-		elseif (is_scalar($result))
+		elseif( is_scalar($result))
 		{
 			return $result;
 		}

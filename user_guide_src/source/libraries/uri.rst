@@ -50,7 +50,7 @@ Class Reference
 
 		It helps avoid having to write code like this::
 
-			if ($this->uri->segment(3) === FALSE)
+			if( $this->uri->segment(3) === FALSE)
 			{
 				$product_id = 0;
 			}

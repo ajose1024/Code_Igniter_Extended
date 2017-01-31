@@ -304,7 +304,7 @@ Class Reference
 		The e-mail sending method. Returns boolean TRUE or FALSE based on
 		success or failure, enabling it to be used conditionally::
 
-			if ( ! $this->email->send())
+			if(  ! $this->email->send())
 			{
 				// Generate error
 			}
@@ -312,7 +312,7 @@ Class Reference
 		This method will automatically clear all parameters if the request was
 		successful. To stop this behaviour pass FALSE::
 
-		 	if ($this->email->send(FALSE))
+		 	if( $this->email->send(FALSE))
 		 	{
 		 		// Parameters won't be cleared
 		 	}

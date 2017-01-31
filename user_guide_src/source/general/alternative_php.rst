@@ -60,11 +60,11 @@ Also notice that instead of using a semicolon after each structure
 
 Here is another example, using ``if``/``elseif``/``else``. Notice the colons::
 
-	<?php if ($username === 'sally'): ?>
+	<?php if( $username === 'sally'): ?>
 
 		<h3>Hi Sally</h3>
 
-	<?php elseif ($username === 'joe'): ?>
+	<?php elseif( $username === 'joe'): ?>
 
 		<h3>Hi Joe</h3>
 

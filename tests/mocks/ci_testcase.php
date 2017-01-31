@@ -40,7 +40,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 		$this->ci_base_root = vfsStream::newDirectory('system')->at($this->ci_vfs_root);
 		$this->ci_view_root = vfsStream::newDirectory('views')->at($this->ci_app_root);
 
-		if (method_exists($this, 'set_up'))
+		if( method_exists($this, 'set_up'))
 		{
 			$this->set_up();
 		}
@@ -50,7 +50,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 
 	public function tearDown()
 	{
-		if (method_exists($this, 'tear_down'))
+		if( method_exists($this, 'tear_down'))
 		{
 			$this->tear_down();
 		}
@@ -68,18 +68,18 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 	public function ci_set_config($key = '', $val = '')
 	{
 		// Add test config
-		if ( ! isset($this->ci_instance->config))
+		if(  ! isset($this->ci_instance->config))
 		{
 			$this->ci_instance->config = new CI_TestConfig();
 		}
 
 		// Empty key means just do setup above
-		if ($key === '')
+		if( $key === '')
 		{
 			return;
 		}
 
-		if (is_array($key))
+		if( is_array($key))
 		{
 			$this->ci_instance->config->config = $key;
 		}
@@ -100,7 +100,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 
 	public function ci_instance($obj = FALSE)
 	{
-		if ( ! is_object($obj))
+		if(  ! is_object($obj))
 		{
 			return $this->ci_instance;
 		}
@@ -112,7 +112,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 
 	public function ci_instance_var($name, $obj = FALSE)
 	{
-		if ( ! is_object($obj))
+		if(  ! is_object($obj))
 		{
 			return $this->ci_instance->$name;
 		}
@@ -135,12 +135,12 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 	{
 		$name = strtolower($name);
 
-		if (isset($this->global_map[$name]))
+		if( isset($this->global_map[$name]))
 		{
 			$class_name = ucfirst($name);
 			$global_name = $this->global_map[$name];
 		}
-		elseif (in_array($name, $this->global_map))
+		elseif( in_array($name, $this->global_map))
 		{
 			$class_name = ucfirst(array_search($name, $this->global_map));
 			$global_name = $name;
@@ -150,7 +150,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 			throw new Exception('Not a valid core class.');
 		}
 
-		if ( ! class_exists('CI_'.$class_name))
+		if(  ! class_exists('CI_'.$class_name))
 		{
 			require_once SYSTEM_PATH.'core/'.$class_name.'.php';
 		}
@@ -178,7 +178,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 	public function ci_vfs_mkdir($name, $root = NULL)
 	{
 		// Check for root
-		if ( ! $root)
+		if(  ! $root)
 		{
 			$root = $this->ci_vfs_root;
 		}
@@ -201,7 +201,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 	public function ci_vfs_create($file, $content = '', $root = NULL, $path = NULL)
 	{
 		// Check for array
-		if (is_array($file))
+		if( is_array($file))
 		{
 			foreach ($file as $name => $content)
 			{
@@ -211,7 +211,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 		}
 
 		// Assert .php extension if none given
-		if (pathinfo($file, PATHINFO_EXTENSION) == '')
+		if( pathinfo($file, PATHINFO_EXTENSION) == '')
 		{
 			$file .= '.php';
 		}
@@ -221,14 +221,14 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 
 		// Check for path
 		$subs = array();
-		if ($path)
+		if( $path)
 		{
 			// Explode if not array
 			$subs = is_array($path) ? $path : explode('/', trim($path, '/'));
 		}
 
 		// Check for root
-		if ( ! $root)
+		if(  ! $root)
 		{
 			// Use base VFS root
 			$root = $this->ci_vfs_root;
@@ -239,7 +239,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 		{
 			// See if subdir exists under current root
 			$dir_root = $root->getChild($dir);
-			if ($dir_root)
+			if( $dir_root)
 			{
 			   	// Yes - recurse into subdir
 				$root = $dir_root;
@@ -253,7 +253,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 		}
 
 		// Create any remaining subdirectories
-		if ($subs)
+		if( $subs)
 		{
 			foreach (array_reverse($subs) as $dir)
 			{
@@ -277,7 +277,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 	public function ci_vfs_clone($path, $dest='')
 	{
 		// Check for array
-		if (is_array($path))
+		if( is_array($path))
 		{
 			foreach ($path as $file)
 			{
@@ -288,13 +288,13 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 
 		// Get real file contents
 		$content = file_get_contents(PROJECT_BASE.$path);
-		if ($content === FALSE)
+		if( $content === FALSE)
 		{
 			// Couldn't find file to clone
 			return FALSE;
 		}
 
-		if (empty($dest))
+		if( empty($dest))
 		{
 			$dest = dirname($path);
 		}
@@ -315,13 +315,13 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 	public function ci_vfs_path($path, $base = '')
 	{
 		// Check for base path
-		if ($base)
+		if( $base)
 		{
 			// Prepend to path
 			$path = rtrim($base, '/').'/'.ltrim($path, '/');
 
 			// Is it already in URL form?
-			if (strpos($path, '://') !== FALSE)
+			if( strpos($path, '://') !== FALSE)
 			{
 				// Done - return path
 				return $path;
@@ -373,7 +373,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 	 */
 	public function __call($method, $args)
 	{
-		if ($this->{$method} instanceof Closure)
+		if( $this->{$method} instanceof Closure)
 		{
 			return call_user_func_array($this->{$method},$args);
 		}

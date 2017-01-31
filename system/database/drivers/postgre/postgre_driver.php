@@ -89,14 +89,14 @@ class CI_DB_postgre_driver extends CI_DB {
 	{
 		parent::__construct($params);
 
-		if ( ! empty($this->dsn))
+		if(  ! empty($this->dsn))
 		{
 			return;
 		}
 
 		$this->dsn === '' OR $this->dsn = '';
 
-		if (strpos($this->hostname, '/') !== FALSE)
+		if( strpos($this->hostname, '/') !== FALSE)
 		{
 			// If UNIX sockets are used, we shouldn't set a port
 			$this->port = '';
@@ -104,12 +104,12 @@ class CI_DB_postgre_driver extends CI_DB {
 
 		$this->hostname === '' OR $this->dsn = 'host='.$this->hostname.' ';
 
-		if ( ! empty($this->port) && ctype_digit($this->port))
+		if(  ! empty($this->port) && ctype_digit($this->port))
 		{
 			$this->dsn .= 'port='.$this->port.' ';
 		}
 
-		if ($this->username !== '')
+		if( $this->username !== '')
 		{
 			$this->dsn .= 'user='.$this->username.' ';
 
@@ -130,7 +130,7 @@ class CI_DB_postgre_driver extends CI_DB {
 		 */
 		foreach (array('connect_timeout', 'options', 'sslmode', 'service') as $key)
 		{
-			if (isset($this->$key) && is_string($this->key) && $this->key !== '')
+			if( isset($this->$key) && is_string($this->key) && $this->key !== '')
 			{
 				$this->dsn .= $key."='".$this->key."' ";
 			}
@@ -153,9 +153,9 @@ class CI_DB_postgre_driver extends CI_DB {
 			? pg_pconnect($this->dsn)
 			: pg_connect($this->dsn);
 
-		if ($this->conn_id !== FALSE)
+		if( $this->conn_id !== FALSE)
 		{
-			if ($persistent === TRUE
+			if( $persistent === TRUE
 				&& pg_connection_status($this->conn_id) === PGSQL_CONNECTION_BAD
 				&& pg_ping($this->conn_id) === FALSE
 			)
@@ -181,7 +181,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	public function reconnect()
 	{
-		if (pg_ping($this->conn_id) === FALSE)
+		if( pg_ping($this->conn_id) === FALSE)
 		{
 			$this->conn_id = FALSE;
 		}
@@ -209,12 +209,12 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	public function version()
 	{
-		if (isset($this->data_cache['version']))
+		if( isset($this->data_cache['version']))
 		{
 			return $this->data_cache['version'];
 		}
 
-		if ( ! $this->conn_id OR ($pg_version = pg_version($this->conn_id)) === FALSE)
+		if(  ! $this->conn_id OR ($pg_version = pg_version($this->conn_id)) === FALSE)
 		{
 			return FALSE;
 		}
@@ -316,11 +316,11 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	public function escape($str)
 	{
-		if (is_php('5.4.4') && (is_string($str) OR (is_object($str) && method_exists($str, '__toString'))))
+		if( is_php('5.4.4') && (is_string($str) OR (is_object($str) && method_exists($str, '__toString'))))
 		{
 			return pg_escape_literal($this->conn_id, $str);
 		}
-		elseif (is_bool($str))
+		elseif( is_bool($str))
 		{
 			return ($str) ? 'TRUE' : 'FALSE';
 		}
@@ -355,13 +355,13 @@ class CI_DB_postgre_driver extends CI_DB {
 		$table	= (func_num_args() > 0) ? func_get_arg(0) : NULL;
 		$column	= (func_num_args() > 1) ? func_get_arg(1) : NULL;
 
-		if ($table === NULL && $v >= '8.1')
+		if( $table === NULL && $v >= '8.1')
 		{
 			$sql = 'SELECT LASTVAL() AS ins_id';
 		}
-		elseif ($table !== NULL)
+		elseif( $table !== NULL)
 		{
-			if ($column !== NULL && $v >= '8.0')
+			if( $column !== NULL && $v >= '8.0')
 			{
 				$sql = 'SELECT pg_get_serial_sequence(\''.$table."', '".$column."') AS seq";
 				$query = $this->query($sql);
@@ -400,7 +400,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	{
 		$sql = 'SELECT "table_name" FROM "information_schema"."tables" WHERE "table_schema" = \''.$this->schema."'";
 
-		if ($prefix_limit !== FALSE && $this->dbprefix !== '')
+		if( $prefix_limit !== FALSE && $this->dbprefix !== '')
 		{
 			return $sql.' AND "table_name" LIKE \''
 				.$this->escape_like_str($this->dbprefix)."%' "
@@ -441,7 +441,7 @@ class CI_DB_postgre_driver extends CI_DB {
 			FROM "information_schema"."columns"
 			WHERE LOWER("table_name") = '.$this->escape(strtolower($table));
 
-		if (($query = $this->query($sql)) === FALSE)
+		if( ($query = $this->query($sql)) === FALSE)
 		{
 			return FALSE;
 		}
@@ -488,16 +488,16 @@ class CI_DB_postgre_driver extends CI_DB {
 	public function order_by($orderby, $direction = '', $escape = NULL)
 	{
 		$direction = strtoupper(trim($direction));
-		if ($direction === 'RANDOM')
+		if( $direction === 'RANDOM')
 		{
-			if ( ! is_float($orderby) && ctype_digit((string) $orderby))
+			if(  ! is_float($orderby) && ctype_digit((string) $orderby))
 			{
 				$orderby = ($orderby > 1)
 					? (float) '0.'.$orderby
 					: (float) $orderby;
 			}
 
-			if (is_float($orderby))
+			if( is_float($orderby))
 			{
 				$this->simple_query('SET SEED '.$orderby);
 			}
@@ -549,7 +549,7 @@ class CI_DB_postgre_driver extends CI_DB {
 
 			foreach (array_keys($val) as $field)
 			{
-				if ($field !== $index)
+				if( $field !== $index)
 				{
 					$final[$field][] = 'WHEN '.$val[$index].' THEN '.$val[$field];
 				}

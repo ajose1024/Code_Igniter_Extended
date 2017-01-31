@@ -57,21 +57,21 @@ class CI_DB_odbc_result extends CI_DB_result {
 	 */
 	public function num_rows()
 	{
-		if (is_int($this->num_rows))
+		if( is_int($this->num_rows))
 		{
 			return $this->num_rows;
 		}
-		elseif (($this->num_rows = odbc_num_rows($this->result_id)) !== -1)
+		elseif( ($this->num_rows = odbc_num_rows($this->result_id)) !== -1)
 		{
 			return $this->num_rows;
 		}
 
 		// Work-around for ODBC subdrivers that don't support num_rows()
-		if (count($this->result_array) > 0)
+		if( count($this->result_array) > 0)
 		{
 			return $this->num_rows = count($this->result_array);
 		}
-		elseif (count($this->result_object) > 0)
+		elseif( count($this->result_object) > 0)
 		{
 			return $this->num_rows = count($this->result_object);
 		}
@@ -105,7 +105,7 @@ class CI_DB_odbc_result extends CI_DB_result {
 		$field_names = array();
 		$num_fields = $this->num_fields();
 
-		if ($num_fields > 0)
+		if( $num_fields > 0)
 		{
 			for ($i = 1; $i <= $num_fields; $i++)
 			{
@@ -150,7 +150,7 @@ class CI_DB_odbc_result extends CI_DB_result {
 	 */
 	public function free_result()
 	{
-		if (is_resource($this->result_id))
+		if( is_resource($this->result_id))
 		{
 			odbc_free_result($this->result_id);
 			$this->result_id = FALSE;
@@ -185,7 +185,7 @@ class CI_DB_odbc_result extends CI_DB_result {
 	{
 		$row = odbc_fetch_object($this->result_id);
 
-		if ($class_name === 'stdClass' OR ! $row)
+		if( $class_name === 'stdClass' OR ! $row)
 		{
 			return $row;
 		}
@@ -203,7 +203,7 @@ class CI_DB_odbc_result extends CI_DB_result {
 
 // --------------------------------------------------------------------
 
-if ( ! function_exists('odbc_fetch_array'))
+if(  ! function_exists('odbc_fetch_array'))
 {
 	/**
 	 * ODBC Fetch array
@@ -218,7 +218,7 @@ if ( ! function_exists('odbc_fetch_array'))
 	function odbc_fetch_array(&$result, $rownumber = 1)
 	{
 		$rs = array();
-		if ( ! odbc_fetch_into($result, $rs, $rownumber))
+		if(  ! odbc_fetch_into($result, $rs, $rownumber))
 		{
 			return FALSE;
 		}
@@ -236,7 +236,7 @@ if ( ! function_exists('odbc_fetch_array'))
 
 // --------------------------------------------------------------------
 
-if ( ! function_exists('odbc_fetch_object'))
+if(  ! function_exists('odbc_fetch_object'))
 {
 	/**
 	 * ODBC Fetch object
@@ -251,7 +251,7 @@ if ( ! function_exists('odbc_fetch_object'))
 	function odbc_fetch_object(&$result, $rownumber = 1)
 	{
 		$rs = array();
-		if ( ! odbc_fetch_into($result, $rs, $rownumber))
+		if(  ! odbc_fetch_into($result, $rs, $rownumber))
 		{
 			return FALSE;
 		}

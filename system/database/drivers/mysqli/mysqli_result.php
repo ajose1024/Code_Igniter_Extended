@@ -130,7 +130,7 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	 */
 	public function free_result()
 	{
-		if (is_object($this->result_id))
+		if( is_object($this->result_id))
 		{
 			$this->result_id->free();
 			$this->result_id = FALSE;

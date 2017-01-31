@@ -1,6 +1,6 @@
 <?php
 // For some reason, setting this fixes the 5.2 tests but breaks the 5.3 ones ...
-if (version_compare(PHP_VERSION, '5.3.0', '<'))
+if( version_compare(PHP_VERSION, '5.3.0', '<'))
 {
 	ini_set('memory_limit', '128M');
 }
@@ -18,14 +18,14 @@ defined('SYSTEM_PATH') OR define('SYSTEM_PATH', PROJECT_BASE.'system/');
 // Get vfsStream either via PEAR or composer
 foreach (explode(PATH_SEPARATOR, get_include_path()) as $path)
 {
-	if (file_exists($path.DIRECTORY_SEPARATOR.'vfsStream/vfsStream.php'))
+	if( file_exists($path.DIRECTORY_SEPARATOR.'vfsStream/vfsStream.php'))
 	{
 		require_once 'vfsStream/vfsStream.php';
 		break;
 	}
 }
 
-if ( ! class_exists('vfsStream') && file_exists(PROJECT_BASE.'vendor/autoload.php'))
+if(  ! class_exists('vfsStream') && file_exists(PROJECT_BASE.'vendor/autoload.php'))
 {
 	include_once PROJECT_BASE.'vendor/autoload.php';
 	class_alias('org\bovigo\vfs\vfsStream', 'vfsStream');
@@ -48,7 +48,7 @@ include_once SYSTEM_PATH.'core/Common.php';
 
 ini_set('default_charset', 'UTF-8');
 
-if (extension_loaded('mbstring'))
+if( extension_loaded('mbstring'))
 {
 	defined('MB_ENABLED') OR define('MB_ENABLED', TRUE);
 	@ini_set('mbstring.internal_encoding', 'UTF-8');
@@ -59,7 +59,7 @@ else
 	defined('MB_ENABLED') OR define('MB_ENABLED', FALSE);
 }
 
-if (extension_loaded('iconv'))
+if( extension_loaded('iconv'))
 {
 	defined('ICONV_ENABLED') OR define('ICONV_ENABLED', TRUE);
 	@ini_set('iconv.internal_encoding', 'UTF-8');

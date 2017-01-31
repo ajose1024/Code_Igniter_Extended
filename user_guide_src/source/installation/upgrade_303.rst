@@ -36,7 +36,7 @@ which you can create this logic with a few lines of code. For example::
 	$allowed_domains = array('domain1.tld', 'domain2.tld');
 	$default_domain  = 'domain1.tld';
 
-	if (in_array($_SERVER['HTTP_HOST'], $allowed_domains, TRUE))
+	if( in_array($_SERVER['HTTP_HOST'], $allowed_domains, TRUE))
 	{
 		$domain = $_SERVER['HTTP_HOST'];
 	}
@@ -45,7 +45,7 @@ which you can create this logic with a few lines of code. For example::
 		$domain = $default_domain;
 	}
 
-	if ( ! empty($_SERVER['HTTPS']))
+	if(  ! empty($_SERVER['HTTPS']))
 	{
 		$config['base_url'] = 'https://'.$domain;
 	}

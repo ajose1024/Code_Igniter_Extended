@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('trim_slashes'))
+if(  ! function_exists('trim_slashes'))
 {
 	/**
 	 * Trim Slashes
@@ -76,7 +76,7 @@ if ( ! function_exists('trim_slashes'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('strip_slashes'))
+if(  ! function_exists('strip_slashes'))
 {
 	/**
 	 * Strip Slashes
@@ -88,7 +88,7 @@ if ( ! function_exists('strip_slashes'))
 	 */
 	function strip_slashes($str)
 	{
-		if ( ! is_array($str))
+		if(  ! is_array($str))
 		{
 			return stripslashes($str);
 		}
@@ -104,7 +104,7 @@ if ( ! function_exists('strip_slashes'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('strip_quotes'))
+if(  ! function_exists('strip_quotes'))
 {
 	/**
 	 * Strip Quotes
@@ -122,7 +122,7 @@ if ( ! function_exists('strip_quotes'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('quotes_to_entities'))
+if(  ! function_exists('quotes_to_entities'))
 {
 	/**
 	 * Quotes to Entities
@@ -140,7 +140,7 @@ if ( ! function_exists('quotes_to_entities'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('reduce_double_slashes'))
+if(  ! function_exists('reduce_double_slashes'))
 {
 	/**
 	 * Reduce Double Slashes
@@ -165,7 +165,7 @@ if ( ! function_exists('reduce_double_slashes'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('reduce_multiples'))
+if(  ! function_exists('reduce_multiples'))
 {
 	/**
 	 * Reduce Multiples
@@ -192,7 +192,7 @@ if ( ! function_exists('reduce_multiples'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('random_string'))
+if(  ! function_exists('random_string'))
 {
 	/**
 	 * Create a Random String
@@ -205,7 +205,7 @@ if ( ! function_exists('random_string'))
 	 */
 	function random_string($type = 'alnum', $len = 8)
 	{
-		switch ($type)
+		switch( $type)
 		{
 			case 'basic':
 				return mt_rand();
@@ -213,7 +213,7 @@ if ( ! function_exists('random_string'))
 			case 'numeric':
 			case 'nozero':
 			case 'alpha':
-				switch ($type)
+				switch( $type)
 				{
 					case 'alpha':
 						$pool = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -241,7 +241,7 @@ if ( ! function_exists('random_string'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('increment_string'))
+if(  ! function_exists('increment_string'))
 {
 	/**
 	 * Add's _1 to a string or increment the ending number to allow _2, _3, etc
@@ -260,7 +260,7 @@ if ( ! function_exists('increment_string'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('alternator'))
+if(  ! function_exists('alternator'))
 {
 	/**
 	 * Alternator
@@ -274,7 +274,7 @@ if ( ! function_exists('alternator'))
 	{
 		static $i;
 
-		if (func_num_args() === 0)
+		if( func_num_args() === 0)
 		{
 			$i = 0;
 			return '';
@@ -286,7 +286,7 @@ if ( ! function_exists('alternator'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('repeater'))
+if(  ! function_exists('repeater'))
 {
 	/**
 	 * Repeater function

@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // ------------------------------------------------------------------------
 
-if (is_php('5.5') OR ! is_php('5.3.7') OR ! defined('CRYPT_BLOWFISH') OR CRYPT_BLOWFISH !== 1 OR defined('HHVM_VERSION'))
+if( is_php('5.5') OR ! is_php('5.3.7') OR ! defined('CRYPT_BLOWFISH') OR CRYPT_BLOWFISH !== 1 OR defined('HHVM_VERSION'))
 {
 	return;
 }
@@ -62,7 +62,7 @@ defined('PASSWORD_DEFAULT') OR define('PASSWORD_DEFAULT', PASSWORD_BCRYPT);
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('password_get_info'))
+if(  ! function_exists('password_get_info'))
 {
 	/**
 	 * password_get_info()
@@ -81,7 +81,7 @@ if ( ! function_exists('password_get_info'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('password_hash'))
+if(  ! function_exists('password_hash'))
 {
 	/**
 	 * password_hash()
@@ -97,36 +97,36 @@ if ( ! function_exists('password_hash'))
 		static $func_override;
 		isset($func_override) OR $func_override = (extension_loaded('mbstring') && ini_get('mbstring.func_override'));
 
-		if ($algo !== 1)
+		if( $algo !== 1)
 		{
 			trigger_error('password_hash(): Unknown hashing algorithm: '.(int) $algo, E_USER_WARNING);
 			return NULL;
 		}
 
-		if (isset($options['cost']) && ($options['cost'] < 4 OR $options['cost'] > 31))
+		if( isset($options['cost']) && ($options['cost'] < 4 OR $options['cost'] > 31))
 		{
 			trigger_error('password_hash(): Invalid bcrypt cost parameter specified: '.(int) $options['cost'], E_USER_WARNING);
 			return NULL;
 		}
 
-		if (isset($options['salt']) && ($saltlen = ($func_override ? mb_strlen($options['salt'], '8bit') : strlen($options['salt']))) < 22)
+		if( isset($options['salt']) && ($saltlen = ($func_override ? mb_strlen($options['salt'], '8bit') : strlen($options['salt']))) < 22)
 		{
 			trigger_error('password_hash(): Provided salt is too short: '.$saltlen.' expecting 22', E_USER_WARNING);
 			return NULL;
 		}
-		elseif ( ! isset($options['salt']))
+		elseif(  ! isset($options['salt']))
 		{
-			if (defined('MCRYPT_DEV_URANDOM'))
+			if( defined('MCRYPT_DEV_URANDOM'))
 			{
 				$options['salt'] = mcrypt_create_iv(16, MCRYPT_DEV_URANDOM);
 			}
-			elseif (function_exists('openssl_random_pseudo_bytes'))
+			elseif( function_exists('openssl_random_pseudo_bytes'))
 			{
 				$options['salt'] = openssl_random_pseudo_bytes(16);
 			}
-			elseif (DIRECTORY_SEPARATOR === '/' && (is_readable($dev = '/dev/arandom') OR is_readable($dev = '/dev/urandom')))
+			elseif( DIRECTORY_SEPARATOR === '/' && (is_readable($dev = '/dev/arandom') OR is_readable($dev = '/dev/urandom')))
 			{
-				if (($fp = fopen($dev, 'rb')) === FALSE)
+				if( ($fp = fopen($dev, 'rb')) === FALSE)
 				{
 					log_message('error', 'compat/password: Unable to open '.$dev.' for reading.');
 					return FALSE;
@@ -138,7 +138,7 @@ if ( ! function_exists('password_hash'))
 				$options['salt'] = '';
 				for ($read = 0; $read < 16; $read = ($func_override) ? mb_strlen($options['salt'], '8bit') : strlen($options['salt']))
 				{
-					if (($read = fread($fp, 16 - $read)) === FALSE)
+					if( ($read = fread($fp, 16 - $read)) === FALSE)
 					{
 						log_message('error', 'compat/password: Error while reading from '.$dev.'.');
 						return FALSE;
@@ -156,7 +156,7 @@ if ( ! function_exists('password_hash'))
 
 			$options['salt'] = str_replace('+', '.', rtrim(base64_encode($options['salt']), '='));
 		}
-		elseif ( ! preg_match('#^[a-zA-Z0-9./]+$#D', $options['salt']))
+		elseif(  ! preg_match('#^[a-zA-Z0-9./]+$#D', $options['salt']))
 		{
 			$options['salt'] = str_replace('+', '.', rtrim(base64_encode($options['salt']), '='));
 		}
@@ -171,7 +171,7 @@ if ( ! function_exists('password_hash'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('password_needs_rehash'))
+if(  ! function_exists('password_needs_rehash'))
 {
 	/**
 	 * password_needs_rehash()
@@ -186,11 +186,11 @@ if ( ! function_exists('password_needs_rehash'))
 	{
 		$info = password_get_info($hash);
 
-		if ($algo !== $info['algo'])
+		if( $algo !== $info['algo'])
 		{
 			return TRUE;
 		}
-		elseif ($algo === 1)
+		elseif( $algo === 1)
 		{
 			$options['cost'] = isset($options['cost']) ? (int) $options['cost'] : 10;
 			return ($info['options']['cost'] !== $options['cost']);
@@ -205,7 +205,7 @@ if ( ! function_exists('password_needs_rehash'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('password_verify'))
+if(  ! function_exists('password_verify'))
 {
 	/**
 	 * password_verify()
@@ -217,7 +217,7 @@ if ( ! function_exists('password_verify'))
 	 */
 	function password_verify($password, $hash)
 	{
-		if (strlen($hash) !== 60 OR strlen($password = crypt($password, $hash)) !== 60)
+		if( strlen($hash) !== 60 OR strlen($password = crypt($password, $hash)) !== 60)
 		{
 			return FALSE;
 		}

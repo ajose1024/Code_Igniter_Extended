@@ -120,7 +120,7 @@ class CI_DB_cubrid_result extends CI_DB_result {
 	 */
 	public function free_result()
 	{
-		if (is_resource($this->result_id) OR
+		if( is_resource($this->result_id) OR
 			(get_resource_type($this->result_id) === 'Unknown' && preg_match('/Resource id #/', strval($this->result_id))))
 		{
 			cubrid_close_request($this->result_id);

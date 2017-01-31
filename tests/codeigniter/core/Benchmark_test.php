@@ -30,12 +30,12 @@ class Benchmark_test extends CI_TestCase {
 		$this->benchmark->mark('code_end');
 
 		// Override values, because time isn't testable, but make sure the markers were set
-		if (isset($this->benchmark->marker['code_start']) && is_float($this->benchmark->marker['code_start']))
+		if( isset($this->benchmark->marker['code_start']) && is_float($this->benchmark->marker['code_start']))
 		{
 			$this->benchmark->marker['code_start'] = 1389956144.1944;
 		}
 
-		if (isset($this->benchmark->marker['code_end']) && is_float($this->benchmark->marker['code_end']))
+		if( isset($this->benchmark->marker['code_end']) && is_float($this->benchmark->marker['code_end']))
 		{
 			$this->benchmark->marker['code_end'] = 1389956145.1946;
 		}
@@ -49,7 +49,7 @@ class Benchmark_test extends CI_TestCase {
 
 		// Test with non-existing 2nd marker, but again - we need to override the value
 		$this->benchmark->elapsed_time('code_start', 'code_end2');
-		if (isset($this->benchmark->marker['code_end2']) && is_float($this->benchmark->marker['code_end2']))
+		if( isset($this->benchmark->marker['code_end2']) && is_float($this->benchmark->marker['code_end2']))
 		{
 			$this->benchmark->marker['code_end2'] = 1389956146.2046;
 		}

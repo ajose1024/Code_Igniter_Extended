@@ -4,19 +4,19 @@ class standard_test extends CI_TestCase {
 
 	public function test_bootstrap()
 	{
-		if (is_php('5.5'))
+		if( is_php('5.5'))
 		{
 			return $this->markTestSkipped('All array functions are already available on PHP 5.5');
 		}
 
 		$this->assertTrue(function_exists('array_column'));
 
-		if ( ! is_php('5.4'))
+		if(  ! is_php('5.4'))
 		{
 			$this->assertTrue(function_exists('hex2bin'));
 		}
 
-		if ( ! is_php('5.3'))
+		if(  ! is_php('5.3'))
 		{
 			$this->assertTrue(function_exists('array_replace'));
 			$this->assertTrue(function_exists('array_replace_recursive'));
@@ -347,7 +347,7 @@ class standard_test extends CI_TestCase {
 	 */
 	public function test_hex2bin()
 	{
-		if (is_php('5.4'))
+		if( is_php('5.4'))
 		{
 			return $this->markTestSkipped('hex2bin() is already available on PHP 5.4');
 		}
@@ -368,7 +368,7 @@ class standard_test extends CI_TestCase {
 	 */
 	public function test_array_replace_recursive()
 	{
-		if (is_php('5.3'))
+		if( is_php('5.3'))
 		{
 			return $this->markTestSkipped('array_replace() and array_replace_recursive() are already available on PHP 5.3');
 		}
@@ -444,7 +444,7 @@ class standard_test extends CI_TestCase {
 	 */
 	public function test_quoted_printable_encode()
 	{
-		if (is_php('5.3'))
+		if( is_php('5.3'))
 		{
 			return $this->markTestSkipped('quoted_printable_encode() is already available on PHP 5.3');
 		}
@@ -458,7 +458,7 @@ class standard_test extends CI_TestCase {
 		$this->assertEquals("String with tab at end =09", quoted_printable_encode("String with tab at end \t"));
 		$this->assertEquals("=00=01=02=03=04=FE=FF=0A=0D", quoted_printable_encode("\x00\x01\x02\x03\x04\xfe\xff\x0a\x0d"));
 
-		if (function_exists('imap_8bit'))
+		if( function_exists('imap_8bit'))
 		{
 			return $this->markTestIncomplete('imap_8bit() exists and is called as an alias for quoted_printable_encode()');
 		}

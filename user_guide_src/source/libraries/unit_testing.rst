@@ -108,12 +108,12 @@ The test is evaluating an integer, but the expected result is a boolean.
 PHP, however, due to it's loose data-typing will evaluate the above code
 as TRUE using a normal equality test::
 
-	if (1 == TRUE) echo 'This evaluates as true';
+	if( 1 == TRUE) echo 'This evaluates as true';
 
 If you prefer, you can put the unit test class in to strict mode, which
 will compare the data type as well as the value::
 
-	if (1 === TRUE) echo 'This evaluates as FALSE';
+	if( 1 === TRUE) echo 'This evaluates as FALSE';
 
 To enable strict mode use this::
 

@@ -241,13 +241,13 @@ uppercase.
 
 **INCORRECT**::
 
-	if ($foo == true)
+	if( $foo == true)
 	$bar = false;
 	function foo($bar = null)
 
 **CORRECT**::
 
-	if ($foo == TRUE)
+	if( $foo == TRUE)
 	$bar = FALSE;
 	function foo($bar = NULL)
 
@@ -261,17 +261,17 @@ always precede and follow ``!``.
 
 **INCORRECT**::
 
-	if ($foo || $bar)
-	if ($foo AND $bar)  // okay but not recommended for common syntax highlighting applications
-	if (!$foo)
-	if (! is_array($foo))
+	if( $foo || $bar)
+	if( $foo AND $bar)  // okay but not recommended for common syntax highlighting applications
+	if( !$foo)
+	if( ! is_array($foo))
 
 **CORRECT**::
 
-	if ($foo OR $bar)
-	if ($foo && $bar) // recommended
-	if ( ! $foo)
-	if ( ! is_array($foo))
+	if( $foo OR $bar)
+	if( $foo && $bar) // recommended
+	if(  ! $foo)
+	if(  ! is_array($foo))
 	
 
 Comparing Return Values and Typecasting
@@ -291,17 +291,17 @@ Use **===** and **!==** as necessary.
 
 	// If 'foo' is at the beginning of the string, strpos will return a 0,
 	// resulting in this conditional evaluating as TRUE
-	if (strpos($str, 'foo') == FALSE)
+	if( strpos($str, 'foo') == FALSE)
 
 **CORRECT**::
 
-	if (strpos($str, 'foo') === FALSE)
+	if( strpos($str, 'foo') === FALSE)
 
 **INCORRECT**::
 
 	function build_string($str = "")
 	{
-		if ($str == "")	// uh-oh!  What if FALSE or the integer 0 is passed as an argument?
+		if( $str == "")	// uh-oh!  What if FALSE or the integer 0 is passed as an argument?
 		{
 
 		}
@@ -311,7 +311,7 @@ Use **===** and **!==** as necessary.
 
 	function build_string($str = "")
 	{
-		if ($str === "")
+		if( $str === "")
 		{
 
 		}
@@ -395,7 +395,7 @@ same level as the control statement that "owns" them.
 		// ...
 	}
 
-	if ($foo == $bar) {
+	if( $foo == $bar) {
 		// ...
 	} else {
 		// ...
@@ -428,7 +428,7 @@ same level as the control statement that "owns" them.
 		// ...
 	}
 
-	if ($foo == $bar)
+	if( $foo == $bar)
 	{
 		// ...
 	}
@@ -531,7 +531,7 @@ Make sure that your dev environment has error reporting enabled
 for ALL users, and that display_errors is enabled in the PHP
 environment. You can check this setting with::
 
-	if (ini_get('display_errors') == 1)
+	if( ini_get('display_errors') == 1)
 	{
 		exit "Enabled";
 	}

@@ -4,7 +4,7 @@ class hash_test extends CI_TestCase {
 
 	public function test_bootstrap()
 	{
-		if (is_php('5.6'))
+		if( is_php('5.6'))
 		{
 			return $this->markTestSkipped('ext/hash is available on PHP 5.6');
 		}
@@ -44,7 +44,7 @@ class hash_test extends CI_TestCase {
 	 */
 	public function test_hash_pbkdf2()
 	{
-		if (is_php('5.5'))
+		if( is_php('5.5'))
 		{
 			return $this->markTestSkipped('hash_pbkdf2() is available on PHP 5.5');
 		}

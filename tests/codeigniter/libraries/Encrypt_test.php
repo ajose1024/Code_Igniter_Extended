@@ -6,7 +6,7 @@ class Encrypt_test extends CI_TestCase {
 
 	public function set_up()
 	{
-		if ( ! extension_loaded('mcrypt'))
+		if(  ! extension_loaded('mcrypt'))
 		{
 			return;
 		}

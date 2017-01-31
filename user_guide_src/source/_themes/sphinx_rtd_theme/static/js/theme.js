@@ -44,7 +44,7 @@ $(document).ready(function () {
             $('.wy-nav-side').show();
         }
     );
-    if (getCookie('ciNav') == 'yes')
+    if( getCookie('ciNav') == 'yes')
     {
         $('#closeMe').trigger('click');
         //$('#nav').slideToggle();
@@ -71,7 +71,7 @@ function getCookie(cname) {
         var c = ca[i];
         while (c.charAt(0) == ' ')
             c = c.substring(1);
-        if (c.indexOf(name) == 0) {
+        if( c.indexOf(name) == 0) {
             return c.substring(name.length, c.length);
         }
     }
@@ -82,20 +82,20 @@ function getCookie(cname) {
 // resize window
 $(window).on('resize', function(){
     // show side nav on small screens when pulldown is enabled
-    if (getCookie('ciNav') == 'yes' && $(window).width() <= 768) { // 768px is the tablet size defined by the theme
+    if( getCookie('ciNav') == 'yes' && $(window).width() <= 768) { // 768px is the tablet size defined by the theme
         $('.wy-nav-side').show();
     }
     // changing css with jquery seems to override the default css media query
     // change margin
-    else if (getCookie('ciNav') == 'no' && $(window).width() <= 768) {
+    else if( getCookie('ciNav') == 'no' && $(window).width() <= 768) {
         $('.wy-nav-content-wrap').css({'margin-left': 0});
     }
     // hide side nav on large screens when pulldown is enabled
-    else if (getCookie('ciNav') == 'yes' && $(window).width() > 768) {
+    else if( getCookie('ciNav') == 'yes' && $(window).width() > 768) {
         $('.wy-nav-side').hide();
     }
     // change margin
-    else if (getCookie('ciNav') == 'no' && $(window).width() > 768) {
+    else if( getCookie('ciNav') == 'no' && $(window).width() > 768) {
         $('.wy-nav-content-wrap').css({'margin-left': '300px'});
     }
 });
@@ -106,7 +106,7 @@ window.SphinxRtdTheme = (function (jquery) {
                 win,
                 stickyNavCssClass = 'stickynav',
                 applyStickNav = function () {
-                    if (navBar.height() <= win.height()) {
+                    if( navBar.height() <= win.height()) {
                         navBar.addClass(stickyNavCssClass);
                     } else {
                         navBar.removeClass(stickyNavCssClass);

@@ -26,7 +26,7 @@ available in the hosting environment.
 
 	$this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
 
-	if ( ! $foo = $this->cache->get('foo'))
+	if(  ! $foo = $this->cache->get('foo'))
 	{
 		echo 'Saving to the cache!<br />';
 		$foo = 'foobarbaz!';
@@ -66,9 +66,9 @@ Class Reference
 		hosting environment.
 		::
 
-			if ($this->cache->apc->is_supported())
+			if( $this->cache->apc->is_supported())
 			{
-				if ($data = $this->cache->apc->get('my_cache'))
+				if( $data = $this->cache->apc->get('my_cache'))
 				{
 					// do things.
 				}

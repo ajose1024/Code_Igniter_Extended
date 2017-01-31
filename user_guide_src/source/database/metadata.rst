@@ -32,7 +32,7 @@ Determine If a Table Exists
 Sometimes it's helpful to know whether a particular table exists before
 running an operation on it. Returns a boolean TRUE/FALSE. Usage example::
 
-	if ($this->db->table_exists('table_name'))
+	if( $this->db->table_exists('table_name'))
 	{
 		// some code...
 	}
@@ -81,7 +81,7 @@ Determine If a Field is Present in a Table
 Sometimes it's helpful to know whether a particular field exists before
 performing an action. Returns a boolean TRUE/FALSE. Usage example::
 
-	if ($this->db->field_exists('field_name', 'table_name'))
+	if( $this->db->field_exists('field_name', 'table_name'))
 	{
 		// some code...
 	}
