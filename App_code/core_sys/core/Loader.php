@@ -501,7 +501,7 @@ class CI_Loader
 
 		if( is_array($vars) && count($vars) > 0)
 		{
-			foreach ($vars as $key => $val)
+			foreach( $vars as $key => $val)
 			{
 				$this->_ci_cached_vars[$key] = $val;
 			}
@@ -510,22 +510,22 @@ class CI_Loader
 		return $this;
 	}
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Clear Cached Variables
-	 *
-	 * Clears the cached variables.
-	 *
-	 * @return	CI_Loader
-	 */
-	public function clear_vars()
-	{
-		$this->_ci_cached_vars = array();
-		return $this;
-	}
+    /**
+     * Clear Cached Variables
+     *
+     * Clears the cached variables.
+     *
+     * @return  CI_Loader
+     */
+    public function clear_vars()
+    {
+        $this->_ci_cached_vars = array() ;
+        return  $this ;
+    }
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
 	/**
 	 * Get Variable
@@ -564,7 +564,7 @@ class CI_Loader
 	 */
 	public function helper($helpers = array())
 	{
-		foreach ($this->_ci_prep_filename($helpers, '_helper') as $helper)
+		foreach( $this->_ci_prep_filename($helpers, '_helper') as $helper)
 		{
 			if( isset($this->_ci_helpers[$helper]))
 			{
@@ -574,7 +574,7 @@ class CI_Loader
 			// Is this a helper extension request?
 			$ext_helper = config_item('subclass_prefix').$helper;
 			$ext_loaded = FALSE;
-			foreach ($this->_ci_helper_paths as $path)
+			foreach( $this->_ci_helper_paths as $path)
 			{
 				if( file_exists($path.'helpers/'.$ext_helper.'.php'))
 				{
@@ -599,7 +599,7 @@ class CI_Loader
 			}
 
 			// No extensions found ... try loading regular helpers and/or overrides
-			foreach ($this->_ci_helper_paths as $path)
+			foreach( $this->_ci_helper_paths as $path)
 			{
 				if( file_exists($path.'helpers/'.$helper.'.php'))
 				{
@@ -655,25 +655,29 @@ class CI_Loader
 		return $this;
 	}
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Config Loader
-	 *
-	 * Loads a config file (an alias for CI_Config::load()).
-	 *
-	 * @uses	CI_Config::load()
-	 * @param	string	$file			Configuration file name
-	 * @param	bool	$use_sections		Whether configuration values should be loaded into their own section
-	 * @param	bool	$fail_gracefully	Whether to just return FALSE or display an error message
-	 * @return	bool	TRUE if the file was loaded correctly or FALSE on failure
-	 */
-	public function config($file, $use_sections = FALSE, $fail_gracefully = FALSE)
-	{
-		return get_instance()->config->load($file, $use_sections, $fail_gracefully);
-	}
+    /**
+     * Config Loader
+     *
+     * Loads a config file (an alias for CI_Config::load()).
+     *
+     * @uses    CI_Config::load()
+     * 
+     * @param   string  $file               Configuration file name
+     * @param   bool    $use_sections       Whether configuration values should
+     *                                      be loaded into their own section
+     * @param   bool    $fail_gracefully    Whether to just return FALSE or
+     *                                      display an error message
+     * 
+     * @return  bool    TRUE if the file was loaded correctly or FALSE on failure
+     */
+    public function config( $file, $use_sections = FALSE, $fail_gracefully = FALSE )
+    {
+        return  get_instance()->config->load( $file, $use_sections, $fail_gracefully ) ;
+    }
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
 	/**
 	 * Driver Loader
@@ -691,7 +695,7 @@ class CI_Loader
 	{
 		if( is_array($library))
 		{
-			foreach ($library as $driver)
+			foreach( $library as $driver)
 			{
 				$this->driver($driver);
 			}
@@ -795,7 +799,7 @@ class CI_Loader
 		else
 		{
 			$path = rtrim($path, '/').'/';
-			foreach (array('_ci_library_paths', '_ci_model_paths', '_ci_helper_paths') as $var)
+			foreach( array('_ci_library_paths', '_ci_model_paths', '_ci_helper_paths') as $var)
 			{
 				if( ($key = array_search($path, $this->{$var})) !== FALSE)
 				{
@@ -824,146 +828,150 @@ class CI_Loader
 		return $this;
 	}
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Internal CI Data Loader
-	 *
-	 * Used to load views and files.
-	 *
-	 * Variables are prefixed with _ci_ to avoid symbol collision with
-	 * variables made available to view files.
-	 *
-	 * @used-by	CI_Loader::view()
-	 * @used-by	CI_Loader::file()
-	 * @param	array	$_ci_data	Data to load
-	 * @return	object
-	 */
-	protected function _ci_load($_ci_data)
-	{
-		// Set the default data variables
-		foreach (array('_ci_view', '_ci_vars', '_ci_path', '_ci_return') as $_ci_val)
-		{
-			$$_ci_val = isset($_ci_data[$_ci_val]) ? $_ci_data[$_ci_val] : FALSE;
-		}
+    /**
+     * Internal CI Data Loader
+     *
+     * Used to load views and files.
+     *
+     * Variables are prefixed with _ci_ to avoid symbol collision with
+     * variables made available to view files.
+     *
+     * @used-by CI_Loader::view()
+     * @used-by CI_Loader::file()
+     * 
+     * @param   array   $_ci_data       Data to load
+     * 
+     * @return  object
+     */
+    protected function _ci_load( $_ci_data )
+    {
+        // Set the default data variables
+        foreach( array( '_ci_view', '_ci_vars', '_ci_path', '_ci_return' ) as $_ci_val )
+        {
+            $$_ci_val = isset( $_ci_data[ $_ci_val ] ) ? $_ci_data[ $_ci_val ] : FALSE ;
+        }
 
-		$file_exists = FALSE;
+        $file_exists = FALSE ;
 
-		// Set the path to the requested file
-		if( is_string($_ci_path) && $_ci_path !== '')
-		{
-			$_ci_x = explode('/', $_ci_path);
-			$_ci_file = end($_ci_x);
-		}
-		else
-		{
-			$_ci_ext = pathinfo($_ci_view, PATHINFO_EXTENSION);
-			$_ci_file = ($_ci_ext === '') ? $_ci_view.'.php' : $_ci_view;
+        // Set the path to the requested file
+        if( is_string( $_ci_path ) && $_ci_path !== '' )
+        {
+            $_ci_x = explode( '/', $_ci_path ) ;
+            $_ci_file = end( $_ci_x ) ;
+        }
+        else
+        {
+            $_ci_ext = pathinfo( $_ci_view, PATHINFO_EXTENSION ) ;
+            $_ci_file = ( $_ci_ext === '' ) ? $_ci_view . '.php' : $_ci_view ;
 
-			foreach ($this->_ci_view_paths as $_ci_view_file => $cascade)
-			{
-				if( file_exists($_ci_view_file.$_ci_file))
-				{
-					$_ci_path = $_ci_view_file.$_ci_file;
-					$file_exists = TRUE;
-					break;
-				}
+            foreach( $this->_ci_view_paths as $_ci_view_file => $cascade )
+            {
+                if( file_exists( $_ci_view_file . $_ci_file ) )
+                {
+                    $_ci_path = $_ci_view_file . $_ci_file ;
+                    $file_exists = TRUE ;
+                    break ;
+                }
 
-				if(  ! $cascade)
-				{
-					break;
-				}
-			}
-		}
+                if( ! $cascade )
+                {
+                    break ;
+                }
+            }
+        }
 
-		if(  ! $file_exists && ! file_exists($_ci_path))
-		{
-			show_error('Unable to load the requested file: '.$_ci_file);
-		}
+        if( ! $file_exists && ! file_exists( $_ci_path ) )
+        {
+            show_error( 'Unable to load the requested file: ' . $_ci_file ) ;
+        }
 
-		// This allows anything loaded using $this->load (views, files, etc.)
-		// to become accessible from within the Controller and Model functions.
-		$_ci_CI =& get_instance();
-		foreach (get_object_vars($_ci_CI) as $_ci_key => $_ci_var)
-		{
-			if(  ! isset($this->$_ci_key))
-			{
-				$this->$_ci_key =& $_ci_CI->$_ci_key;
-			}
-		}
+        // This allows anything loaded using $this->load (views, files, etc.)
+        // to become accessible from within the Controller and Model functions.
+        $_ci_CI =& get_instance() ;
+        foreach( get_object_vars( $_ci_CI ) as $_ci_key => $_ci_var )
+        {
+            if( ! isset( $this->$_ci_key ) )
+            {
+                $this->$_ci_key =& $_ci_CI->$_ci_key ;
+            }
+        }
 
-		/*
-		 * Extract and cache variables
-		 *
-		 * You can either set variables using the dedicated $this->load->vars()
-		 * function or via the second parameter of this function. We'll merge
-		 * the two types and cache them so that views that are embedded within
-		 * other views can have access to these variables.
-		 */
-		if( is_array($_ci_vars))
-		{
-			$this->_ci_cached_vars = array_merge($this->_ci_cached_vars, $_ci_vars);
-		}
-		extract($this->_ci_cached_vars);
+        /*
+         * Extract and cache variables
+         *
+         * You can either set variables using the dedicated $this->load->vars()
+         * function or via the second parameter of this function. We'll merge
+         * the two types and cache them so that views that are embedded within
+         * other views can have access to these variables.
+         */
+        if( is_array( $_ci_vars ) )
+        {
+            $this->_ci_cached_vars = array_merge( $this->_ci_cached_vars, $_ci_vars ) ;
+        }
+        extract( $this->_ci_cached_vars ) ;
 
-		/*
-		 * Buffer the output
-		 *
-		 * We buffer the output for two reasons:
-		 * 1. Speed. You get a significant speed boost.
-		 * 2. So that the final rendered template can be post-processed by
-		 *	the output class. Why do we need post processing? For one thing,
-		 *	in order to show the elapsed page load time. Unless we can
-		 *	intercept the content right before it's sent to the browser and
-		 *	then stop the timer it won't be accurate.
-		 */
-		ob_start();
+        /*
+         * Buffer the output
+         *
+         * We buffer the output for two reasons:
+         * 1. Speed. You get a significant speed boost.
+         * 2. So that the final rendered template can be post-processed by
+         *      the output class.
+         *      Why do we need post processing?
+         *      For one thing, in order to show the elapsed page load time.
+         *      Unless we can intercept the content right before it's sent
+         *      to the browser and then stop the timer it won't be accurate.
+        */
+        ob_start() ;
 
-		// If the PHP installation does not support short tags we'll
-		// do a little string replacement, changing the short tags
-		// to standard PHP echo statements.
-		if(  ! is_php('5.4') && ! ini_get('short_open_tag') && config_item('rewrite_short_tags') === TRUE)
-		{
-			echo eval('?>'.preg_replace('/;*\s*\?>/', '; ?>', str_replace('<?=', '<?php echo ', file_get_contents($_ci_path))));
-		}
-		else
-		{
-			include($_ci_path); // include() vs include_once() allows for multiple views with the same name
-		}
+        // If the PHP installation does not support short tags we'll
+        // do a little string replacement, changing the short tags
+        // to standard PHP echo statements.
+        if( ! is_php( '5.4' ) && ! ini_get( 'short_open_tag' ) && config_item( 'rewrite_short_tags' ) === TRUE )
+        {
+            echo eval( '?>' . preg_replace( '/;*\s*\?>/', '; ?>', str_replace( '<?=', '<?php echo ', file_get_contents( $_ci_path ) ) ) ) ;
+        }
+        else
+        {
+            // include( ) vs include_once() allows for multiple views with the same name
+            include( $_ci_path) ;
+        }
 
-		log_message('info', 'File loaded: '.$_ci_path);
+        log_message( 'info', 'File loaded: ' . $_ci_path ) ;
 
-		// Return the file data if requested
-		if( $_ci_return === TRUE)
-		{
-			$buffer = ob_get_contents();
-			@ob_end_clean();
-			return $buffer;
-		}
+        // Return the file data if requested
+        if( $_ci_return === TRUE )
+        {
+            $buffer = ob_get_contents() ;
+            @ob_end_clean() ;
+            return  $buffer ;
+        }
 
-		/*
-		 * Flush the buffer... or buff the flusher?
-		 *
-		 * In order to permit views to be nested within
-		 * other views, we need to flush the content back out whenever
-		 * we are beyond the first level of output buffering so that
-		 * it can be seen and included properly by the first included
-		 * template and any subsequent ones. Oy!
-		 */
-		if( ob_get_level() > $this->_ci_ob_level + 1)
-		{
-			ob_end_flush();
-		}
-		else
-		{
-			$_ci_CI->output->append_output(ob_get_contents());
-			@ob_end_clean();
-		}
+        /*
+         * Flush the buffer... or buff the flusher?
+         *
+         * In order to permit views to be nested within
+         * other views, we need to flush the content back out whenever
+         * we are beyond the first level of output buffering so that
+         * it can be seen and included properly by the first included
+         * template and any subsequent ones. Oy!
+         */
+        if( ob_get_level() > $this->_ci_ob_level + 1 )
+        {
+            ob_end_flush() ;
+        }
+        else
+        {
+            $_ci_CI->output->append_output( ob_get_contents() ) ;
+            @ob_end_clean( );
+        }
 
-		return $this;
-	}
+        return  $this ;
+    }
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
 	/**
 	 * Internal CI Library Loader
@@ -1007,7 +1015,7 @@ class CI_Loader
 		}
 
 		// Let's search for the requested library file and load it.
-		foreach ($this->_ci_library_paths as $path)
+		foreach( $this->_ci_library_paths as $path)
 		{
 			// BASEPATH has already been checked for
 			if( $path === BASEPATH)
@@ -1102,7 +1110,7 @@ class CI_Loader
 		array_pop($paths); // APPPATH (needs to be the first path checked)
 		array_unshift($paths, APPPATH);
 
-		foreach ($paths as $path)
+		foreach( $paths as $path)
 		{
 			if( file_exists($path = $path.'libraries/'.$file_path.$library_name.'.php'))
 			{
@@ -1123,7 +1131,7 @@ class CI_Loader
 
 		// Check for extensions
 		$subclass = config_item('subclass_prefix').$library_name;
-		foreach ($paths as $path)
+		foreach( $paths as $path)
 		{
 			if( file_exists($path = $path.'libraries/'.$file_path.$subclass.'.php'))
 			{
@@ -1143,198 +1151,205 @@ class CI_Loader
 		return $this->_ci_init_library($library_name, $prefix, $params, $object_name);
 	}
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Internal CI Library Instantiator
-	 *
-	 * @used-by	CI_Loader::_ci_load_stock_library()
-	 * @used-by	CI_Loader::_ci_load_library()
-	 *
-	 * @param	string		$class		Class name
-	 * @param	string		$prefix		Class name prefix
-	 * @param	array|null|bool	$config		Optional configuration to pass to the class constructor:
-	 *						FALSE to skip;
-	 *						NULL to search in config paths;
-	 *						array containing configuration data
-	 * @param	string		$object_name	Optional object name to assign to
-	 * @return	void
-	 */
-	protected function _ci_init_library($class, $prefix, $config = FALSE, $object_name = NULL)
-	{
-		// Is there an associated config file for this class? Note: these should always be lowercase
-		if( $config === NULL)
-		{
-			// Fetch the config paths containing any package paths
-			$config_component = $this->_ci_get_component('config');
+    /**
+     * Internal CI Library Instantiator
+     *
+     * @used-by	CI_Loader::_ci_load_stock_library()
+     * @used-by	CI_Loader::_ci_load_library()
+     *
+     * @param	string		$class		Class name
+     * @param	string		$prefix		Class name prefix
+     * @param	array|null|bool	$config		Optional configuration to pass to the class constructor:
+     *						FALSE to skip;
+     *						NULL to search in config paths;
+     *						array containing configuration data
+     * @param	string		$object_name	Optional object name to assign to
+     * @return	void
+     */
+    protected function _ci_init_library( $class, $prefix, $config = FALSE, $object_name = NULL )
+    {
+        // Is there an associated config file for this class?
+        // NOTE: these should always be lowercase
+        if( $config === NULL )
+        {
+            // Fetch the config paths containing any package paths
+            $config_component = $this->_ci_get_component( 'config' ) ;
 
-			if( is_array($config_component->_config_paths))
-			{
-				$found = FALSE;
-				foreach ($config_component->_config_paths as $path)
-				{
-					// We test for both uppercase and lowercase, for servers that
-					// are case-sensitive with regard to file names. Load global first,
-					// override with environment next
-					if( file_exists($path.'config/'.strtolower($class).'.php'))
-					{
-						include($path.'config/'.strtolower($class).'.php');
-						$found = TRUE;
-					}
-					elseif( file_exists($path.'config/'.ucfirst(strtolower($class)).'.php'))
-					{
-						include($path.'config/'.ucfirst(strtolower($class)).'.php');
-						$found = TRUE;
-					}
+            if( is_array( $config_component->_config_paths ) )
+            {
+                $found = FALSE ;
+                foreach( $config_component->_config_paths as $path )
+                {
+                    // We test for both uppercase and lowercase, for servers that
+                    // are case-sensitive with regard to file names. Load global first,
+                    // override with environment next
+                    if( file_exists( $path . 'config/' . strtolower( $class ) . '.php' ) )
+                    {
+                        include( $path . 'config/' . strtolower( $class ) . '.php' ) ;
+                        $found = TRUE ;
+                    }
+                    elseif( file_exists( $path . 'config/' . ucfirst( strtolower( $class ) ) . '.php' ) )
+                    {
+                        include( $path . 'config/' . ucfirst( strtolower( $class ) ) . '.php' ) ;
+                        $found = TRUE ;
+                    }
 
-					if( file_exists($path.'config/'.ENVIRONMENT.'/'.strtolower($class).'.php'))
-					{
-						include($path.'config/'.ENVIRONMENT.'/'.strtolower($class).'.php');
-						$found = TRUE;
-					}
-					elseif( file_exists($path.'config/'.ENVIRONMENT.'/'.ucfirst(strtolower($class)).'.php'))
-					{
-						include($path.'config/'.ENVIRONMENT.'/'.ucfirst(strtolower($class)).'.php');
-						$found = TRUE;
-					}
+                    if( file_exists( $path . 'config/' . ENVIRONMENT . '/' . strtolower( $class ) . '.php' ) )
+                    {
+                        include( $path . 'config/' . ENVIRONMENT . '/' . strtolower( $class ) . '.php' ) ;
+                        $found = TRUE ;
+                    }
+                    elseif( file_exists( $path . 'config/' . ENVIRONMENT . '/' . ucfirst( strtolower( $class ) ) . '.php' ) )
+                    {
+                        include( $path . 'config/' . ENVIRONMENT . '/' . ucfirst( strtolower( $class) ) . '.php' ) ;
+                        $found = TRUE ;
+                    }
 
-					// Break on the first found configuration, thus package
-					// files are not overridden by default paths
-					if( $found === TRUE)
-					{
-						break;
-					}
-				}
-			}
-		}
+                    // Break on the first found configuration, thus package
+                    // files are not overridden by default paths
+                    if( $found === TRUE )
+                    {
+                        break ;
+                    }
+                }
+            }
+        }
 
-		$class_name = $prefix.$class;
+        $class_name = $prefix . $class ;
 
-		// Is the class name valid?
-		if(  ! class_exists($class_name, FALSE))
-		{
-			log_message('error', 'Non-existent class: '.$class_name);
-			show_error('Non-existent class: '.$class_name);
-		}
+        // Is the class name valid?
+        if(  ! class_exists( $class_name, FALSE ) )
+        {
+            log_message( 'error', 'Non-existent class: ' . $class_name ) ;
+            show_error( 'Non-existent class: ' . $class_name ) ;
+        }
 
-		// Set the variable name we will assign the class to
-		// Was a custom class name supplied? If so we'll use it
-		if( empty($object_name))
-		{
-			$object_name = strtolower($class);
-			if( isset($this->_ci_varmap[$object_name]))
-			{
-				$object_name = $this->_ci_varmap[$object_name];
-			}
-		}
+        // Set the variable name we will assign the class to
+        // Was a custom class name supplied? If so we'll use it
+        if( empty( $object_name ) )
+        {
+            $object_name = strtolower( $class ) ;
+            if( isset( $this->_ci_varmap[ $object_name ] ) )
+            {
+                $object_name = $this->_ci_varmap[ $object_name ] ;
+            }
+        }
 
-		// Don't overwrite existing properties
-		$CI =& get_instance();
-		if( isset($CI->$object_name))
-		{
-			if( $CI->$object_name instanceof $class_name)
-			{
-				log_message('debug', $class_name." has already been instantiated as '".$object_name."'. Second attempt aborted.");
-				return;
-			}
+        // Don't overwrite existing properties
+        $CI =& get_instance() ;
+        if( isset( $CI->$object_name ) )
+        {
+            if( $CI->$object_name instanceof $class_name )
+            {
+                log_message( 'debug', $class_name . " has already been instantiated as '" . $object_name . "'. Second attempt aborted." ) ;
+                return ;
+            }
 
-			show_error("Resource '".$object_name."' already exists and is not a ".$class_name." instance.");
-		}
+            show_error( "Resource '" . $object_name . "' already exists and is not a " . $class_name . " instance." ) ;
+        }
 
-		// Save the class name and object name
-		$this->_ci_classes[$object_name] = $class;
+        // Save the class name and object name
+        $this->_ci_classes[$object_name] = $class ;
 
-		// Instantiate the class
-		$CI->$object_name = isset($config)
-			? new $class_name($config)
-			: new $class_name();
-	}
+        // Instantiate the class
+        if( $CI->$object_name = isset( $config ) )
+        {
+            new $class_name( $config ) ;
+        }
+        else
+        {
+            new $class_name() ;
+        }
+    }
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * CI Autoloader
-	 *
-	 * Loads component listed in the config/autoload.php file.
-	 *
-	 * @used-by	CI_Loader::initialize()
-	 * @return	void
-	 */
-	protected function _ci_autoloader()
-	{
-		if( file_exists(APPPATH.'config/autoload.php'))
-		{
-			include(APPPATH.'config/autoload.php');
-		}
+    /**
+     * CI Autoloader
+     *
+     * Loads component listed in the config/autoload.php file.
+     *
+     * @used-by CI_Loader::initialize()
+     * 
+     * @return  void
+     */
+    protected function _ci_autoloader()
+    {
+        if( file_exists( APPPATH . 'config/autoload.php' ) )
+        {
+            include( APPPATH . 'config/autoload.php' ) ;
+        }
 
-		if( file_exists(APPPATH.'config/'.ENVIRONMENT.'/autoload.php'))
-		{
-			include(APPPATH.'config/'.ENVIRONMENT.'/autoload.php');
-		}
+        if( file_exists( APPPATH . 'config/' . ENVIRONMENT . '/autoload.php'))
+        {
+            include( APPPATH.'config/' . ENVIRONMENT . '/autoload.php' ) ;
+        }
 
-		if(  ! isset($autoload))
-		{
-			return;
-		}
+        if( ! isset( $autoload ) )
+        {
+            return ;
+        }
 
-		// Autoload packages
-		if( isset($autoload['packages']))
-		{
-			foreach ($autoload['packages'] as $package_path)
-			{
-				$this->add_package_path($package_path);
-			}
-		}
+        // Autoload packages
+        if( isset( $autoload[ 'packages' ] ) )
+        {
+            foreach( $autoload[ 'packages' ] as $package_path )
+            {
+                $this->add_package_path( $package_path ) ;
+            }
+        }
 
-		// Load any custom config file
-		if( count($autoload['config']) > 0)
-		{
-			foreach ($autoload['config'] as $val)
-			{
-				$this->config($val);
-			}
-		}
+        // Load any custom config file
+        if( count( $autoload[ 'config' ] ) > 0 )
+        {
+            foreach( $autoload[ 'config' ] as $val )
+            {
+                $this->config( $val ) ;
+            }
+        }
 
-		// Autoload helpers and languages
-		foreach (array('helper', 'language') as $type)
-		{
-			if( isset($autoload[$type]) && count($autoload[$type]) > 0)
-			{
-				$this->$type($autoload[$type]);
-			}
-		}
+        // Autoload helpers and languages
+        foreach( array( 'helper', 'language' ) as $type )
+        {
+            if( isset( $autoload[ $type ] ) && count( $autoload[ $type ] ) > 0 )
+            {
+                $this->$type( $autoload[ $type ] ) ;
+            }
+        }
 
-		// Autoload drivers
-		if( isset($autoload['drivers']))
-		{
-			foreach ($autoload['drivers'] as $item)
-			{
-				$this->driver($item);
-			}
-		}
+        // Autoload drivers
+        if( isset( $autoload[ 'drivers' ] ) )
+        {
+            foreach( $autoload[ 'drivers' ] as $item )
+            {
+                $this->driver( $item ) ;
+            }
+        }
 
-		// Load libraries
-		if( isset($autoload['libraries']) && count($autoload['libraries']) > 0)
-		{
-			// Load the database driver.
-			if( in_array('database', $autoload['libraries']))
-			{
-				$this->database();
-				$autoload['libraries'] = array_diff($autoload['libraries'], array('database'));
-			}
+        // Load libraries
+        if( isset( $autoload[ 'libraries' ] ) && count( $autoload[ 'libraries' ] ) > 0 )
+        {
+            // Load the database driver.
+            if( in_array( 'database', $autoload[ 'libraries' ] ) )
+            {
+                $this->database() ;
+                $autoload[ 'libraries' ] = array_diff( $autoload[ 'libraries' ], array( 'database' ) ) ;
+            }
 
-			// Load all other libraries
-			$this->library($autoload['libraries']);
-		}
+            // Load all other libraries
+            $this->library( $autoload[ 'libraries' ] ) ;
+        }
 
-		// Autoload models
-		if( isset($autoload['model']))
-		{
-			$this->model($autoload['model']);
-		}
-	}
+        // Autoload models
+        if( isset( $autoload[ 'model' ] ) )
+        {
+            $this->model( $autoload[ 'model' ] ) ;
+        }
+    }
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
 	/**
 	 * CI Object to Array translator
@@ -1350,49 +1365,51 @@ class CI_Loader
 		return is_object($object) ? get_object_vars($object) : $object;
 	}
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * CI Component getter
-	 *
-	 * Get a reference to a specific library or model.
-	 *
-	 * @param 	string	$component	Component name
-	 * @return	bool
-	 */
-	protected function &_ci_get_component($component)
-	{
-		$CI =& get_instance();
-		return $CI->$component;
-	}
+    /**
+     * CI Component getter
+     *
+     * Get a reference to a specific library or model.
+     *
+     * @param   string  $component      Component name
+     * 
+     * @return  bool
+     */
+    protected function &_ci_get_component( $component )
+    {
+        $CI =& get_instance() ;
+        return  $CI->$component ;
+    }
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Prep filename
-	 *
-	 * This function prepares filenames of various items to
-	 * make their loading more reliable.
-	 *
-	 * @param	string|string[]	$filename	Filename(s)
-	 * @param 	string		$extension	Filename extension
-	 * @return	array
-	 */
-	protected function _ci_prep_filename($filename, $extension)
-	{
-		if(  ! is_array($filename))
-		{
-			return array(strtolower(str_replace(array($extension, '.php'), '', $filename).$extension));
-		}
-		else
-		{
-			foreach ($filename as $key => $val)
-			{
-				$filename[$key] = strtolower(str_replace(array($extension, '.php'), '', $val).$extension);
-			}
+    /**
+     * Prep filename
+     *
+     * This function prepares filenames of various items to
+     * make their loading more reliable.
+     *
+     * @param	string|string[] $filename       Filename(s)
+     * @param   string          $extension      Filename extension
+     * 
+     * @return  array
+     */
+    protected function _ci_prep_filename( $filename, $extension )
+    {
+        if( ! is_array( $filename ) )
+        {
+            return  array( strtolower( str_replace( array( $extension, '.php' ), '', $filename ) . $extension ) ) ;
+        }
+        else
+        {
+            foreach( $filename as $key => $val )
+            {
+                $filename[ $key ] = strtolower( str_replace( array( $extension, '.php' ), '', $val ) . $extension ) ;
+            }
 
-			return $filename;
-		}
-	}
+            return  $filename ;
+        }
+    }
 
 }
