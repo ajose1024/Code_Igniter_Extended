@@ -329,45 +329,46 @@ class CI_Loader
 
     // --------------------------------------------------------------------
 
-	/**
-	 * Database Loader
-	 *
-	 * @param	mixed	$params		Database configuration options
-	 * @param	bool	$return 	Whether to return the database object
-	 * @param	bool	$query_builder	Whether to enable Query Builder
-	 *					(overrides the configuration setting)
-	 *
-	 * @return	object|bool	Database object if $return is set to TRUE,
-	 *					FALSE on failure, CI_Loader instance in any other case
-	 */
-	public function database($params = '', $return = FALSE, $query_builder = NULL)
-	{
-		// Grab the super object
-		$CI =& get_instance();
+    /**
+     * Database Loader
+     *
+     * @param   mixed   $params         Database configuration options
+     * @param   bool    $return         Whether to return the database object
+     * @param   bool	$query_builder  Whether to enable Query Builder
+     *                                  (overrides the configuration setting)
+     *
+     * @return  object|bool     Database object if $return is set to TRUE,
+     *                              FALSE on failure,
+     *                              CI_Loader instance in any other case
+     */
+    public function database( $params = '', $return = FALSE, $query_builder = NULL )
+    {
+        // Grab the super object
+        $CI =& get_instance() ;
 
-		// Do we even need to load the database class?
-		if( $return === FALSE && $query_builder === NULL && isset($CI->db) && is_object($CI->db) && ! empty($CI->db->conn_id))
-		{
-			return FALSE;
-		}
+        // Do we even need to load the database class?
+        if( $return === FALSE && $query_builder === NULL && isset( $CI->db ) && is_object( $CI->db ) && ! empty($CI->db->conn_id))
+        {
+            return  FALSE ;
+        }
 
-		require_once(BASEPATH . 'database/DB.php');
+        require_once( BASEPATH . 'database/DB.php' ) ;
 
-		if( $return === TRUE)
-		{
-			return DB($params, $query_builder);
-		}
+        if( $return === TRUE )
+        {
+            return  DB( $params, $query_builder ) ;
+        }
 
-		// Initialize the db variable. Needed to prevent
-		// reference errors with some configurations
-		$CI->db = '';
+        // Initialize the db variable.
+        // Needed to prevent reference errors with some configurations
+        $CI->db = '' ;
 
-		// Load the DB class
-		$CI->db =& DB($params, $query_builder);
-		return $this;
-	}
+        // Load the DB class
+        $CI->db =& DB( $params, $query_builder ) ;
+        return  $this   ;
+    }
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
 	/**
 	 * Load the Database Utilities Class
@@ -399,51 +400,52 @@ class CI_Loader
 		return $this;
 	}
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Load the Database Forge Class
-	 *
-	 * @param	object	$db	Database object
-	 * @param	bool	$return	Whether to return the DB Forge class object or not
-	 * @return	object
-	 */
-	public function dbforge($db = NULL, $return = FALSE)
-	{
-		$CI =& get_instance();
-		if(  ! is_object($db) OR ! ($db instanceof CI_DB))
-		{
-			class_exists('CI_DB', FALSE) OR $this->database();
-			$db =& $CI->db;
-		}
+    /**
+     * Load the Database Forge Class
+     *
+     * @param	object  $db     Database object
+     * @param   bool    $return Whether to return the DB Forge class object or not
+     * 
+     * @return  object
+     */
+    public function dbforge( $db = NULL, $return = FALSE )
+    {
+        $CI =& get_instance() ;
+        if( ! is_object( $db ) OR ! ( $db instanceof CI_DB ) )
+        {
+            class_exists( 'CI_DB', FALSE ) OR $this->database() ;
+            $db =& $CI->db ;
+        }
 
-		require_once(BASEPATH . 'database/DB_forge.php');
-		require_once(BASEPATH . 'database/drivers/'.$db->dbdriver.'/'.$db->dbdriver.'_forge.php');
+        require_once( BASEPATH . 'database/DB_forge.php' ) ;
+        require_once( BASEPATH . 'database/drivers/' . $db->dbdriver . '/' . $db->dbdriver . '_forge.php' ) ;
 
-		if(  ! empty($db->subdriver))
-		{
-			$driver_path = BASEPATH . 'database/drivers/'.$db->dbdriver.'/subdrivers/'.$db->dbdriver.'_'.$db->subdriver.'_forge.php';
-			if( file_exists($driver_path))
-			{
-				require_once($driver_path);
-				$class = 'CI_DB_'.$db->dbdriver.'_'.$db->subdriver.'_forge';
-			}
-		}
-		else
-		{
-			$class = 'CI_DB_'.$db->dbdriver.'_forge';
-		}
+        if( ! empty( $db->subdriver ) )
+        {
+            $driver_path = BASEPATH . 'database/drivers/' . $db->dbdriver . '/subdrivers/' . $db->dbdriver . '_' . $db->subdriver . '_forge.php' ;
+            if( file_exists( $driver_path ) )
+            {
+                require_once( $driver_path ) ;
+                $class = 'CI_DB_' . $db->dbdriver . '_' . $db->subdriver . '_forge' ;
+            }
+        }
+        else
+        {
+            $class = 'CI_DB_' . $db->dbdriver . '_forge' ;
+        }
 
-		if( $return === TRUE)
-		{
-			return new $class($db);
-		}
+        if( $return === TRUE )
+        {
+            return  new $class( $db ) ;
+        }
 
-		$CI->dbforge = new $class($db);
-		return $this;
-	}
+        $CI->dbforge = new $class( $db ) ;
+        return  $this ;
+    }
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
 	/**
 	 * View Loader
@@ -723,41 +725,42 @@ class CI_Loader
 		return $this->library($library, $params, $object_name);
 	}
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Add Package Path
-	 *
-	 * Prepends a parent path to the library, model, helper and config
-	 * path arrays.
-	 *
-	 * @see	CI_Loader::$_ci_library_paths
-	 * @see	CI_Loader::$_ci_model_paths
-	 * @see CI_Loader::$_ci_helper_paths
-	 * @see CI_Config::$_config_paths
-	 *
-	 * @param	string	$path		Path to add
-	 * @param 	bool	$view_cascade	(default: TRUE)
-	 * @return	object
-	 */
-	public function add_package_path($path, $view_cascade = TRUE)
-	{
-		$path = rtrim($path, '/').'/';
+    /**
+     * Add Package Path
+     *
+     * Prepends a parent path to the library, model, helper and config
+     * path arrays.
+     *
+     * @see     CI_Loader::$_ci_library_paths
+     * @see     CI_Loader::$_ci_model_paths
+     * @see     CI_Loader::$_ci_helper_paths
+     * @see     CI_Config::$_config_paths
+     *
+     * @param   string  $path           Path to add
+     * @param   bool    $view_cascade   (default: TRUE)
+     * 
+     * @return  object
+     */
+    public function add_package_path( $path, $view_cascade = TRUE )
+    {
+        $path = rtrim( $path, '/' ) . '/' ;
 
-		array_unshift($this->_ci_library_paths, $path);
-		array_unshift($this->_ci_model_paths, $path);
-		array_unshift($this->_ci_helper_paths, $path);
+        array_unshift( $this->_ci_library_paths, $path ) ;
+        array_unshift( $this->_ci_model_paths, $path ) ;
+        array_unshift( $this->_ci_helper_paths, $path ) ;
 
-		$this->_ci_view_paths = array($path.'views/' => $view_cascade) + $this->_ci_view_paths;
+        $this->_ci_view_paths = array( $path . 'views/' => $view_cascade ) + $this->_ci_view_paths ;
 
-		// Add config file path
-		$config =& $this->_ci_get_component('config');
-		$config->_config_paths[] = $path;
+        // Add config file path
+        $config =& $this->_ci_get_component( 'config' ) ;
+        $config->_config_paths[] = $path ;
 
-		return $this;
-	}
+        return  $this ;
+    }
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
 	/**
 	 * Get Package Paths
@@ -973,183 +976,187 @@ class CI_Loader
 
     // --------------------------------------------------------------------
 
-	/**
-	 * Internal CI Library Loader
-	 *
-	 * @used-by	CI_Loader::library()
-	 * @uses	CI_Loader::_ci_init_library()
-	 *
-	 * @param	string	$class		Class name to load
-	 * @param	mixed	$params		Optional parameters to pass to the class constructor
-	 * @param	string	$object_name	Optional object name to assign to
-	 * @return	void
-	 */
-	protected function _ci_load_library($class, $params = NULL, $object_name = NULL)
-	{
-		// Get the class name, and while we're at it trim any slashes.
-		// The directory path can be included as part of the class name,
-		// but we don't want a leading slash
-		$class = str_replace('.php', '', trim($class, '/'));
+    /**
+     * Internal CI Library Loader
+     *
+     * @used-by CI_Loader::library()
+     * @uses    CI_Loader::_ci_init_library()
+     *
+     * @param   string  $class          Class name to load
+     * @param   mixed   $params         Optional parameters to pass to the class constructor
+     * @param   string  $object_name    Optional object name to assign to
+     * 
+     * @return  void
+     */
+    protected function _ci_load_library( $class, $params = NULL, $object_name = NULL )
+    {
+        // Get the class name, and while we're at it trim any slashes.
+        // The directory path can be included as part of the class name,
+        // but we don't want a leading slash
+        $class = str_replace( '.php', '', trim( $class, '/' ) ) ;
 
-		// Was the path included with the class name?
-		// We look for a slash to determine this
-		if( ($last_slash = strrpos($class, '/')) !== FALSE)
-		{
-			// Extract the path
-			$subdir = substr($class, 0, ++$last_slash);
+        // Was the path included with the class name?
+        // We look for a slash to determine this
+        if( ( $last_slash = strrpos( $class, '/' ) ) !== FALSE )
+        {
+            // Extract the path
+            $subdir = substr( $class, 0, ++$last_slash ) ;
 
-			// Get the filename from the path
-			$class = substr($class, $last_slash);
-		}
-		else
-		{
-			$subdir = '';
-		}
+            // Get the filename from the path
+            $class = substr( $class, $last_slash ) ;
+        }
+        else
+        {
+            $subdir = '' ;
+        }
 
-		$class = ucfirst($class);
+        $class = ucfirst( $class ) ;
 
-		// Is this a stock library? There are a few special conditions if so ...
-		if( file_exists(BASEPATH . 'libraries/'.$subdir.$class.'.php'))
-		{
-			return $this->_ci_load_stock_library($class, $subdir, $params, $object_name);
-		}
+        // Is this a stock library? 
+        // here are a few special conditions if so ...
+        if( file_exists( BASEPATH . 'libraries/' . $subdir . $class . '.php' ) )
+        {
+            return  $this->_ci_load_stock_library( $class, $subdir, $params, $object_name ) ;
+        }
 
-		// Let's search for the requested library file and load it.
-		foreach( $this->_ci_library_paths as $path)
-		{
-			// BASEPATH has already been checked for
-			if( $path === BASEPATH)
-			{
-				continue;
-			}
+        // Let's search for the requested library file and load it.
+        foreach( $this->_ci_library_paths as $path )
+        {
+            // BASEPATH has already been checked for
+            if( $path === BASEPATH )
+            {
+                continue ;
+            }
 
-			$filepath = $path.'libraries/'.$subdir.$class.'.php';
+            $filepath = $path . 'libraries/' . $subdir . $class . '.php' ;
 
-			// Safety: Was the class already loaded by a previous call?
-			if( class_exists($class, FALSE))
-			{
-				// Before we deem this to be a duplicate request, let's see
-				// if a custom object name is being supplied. If so, we'll
-				// return a new instance of the object
-				if( $object_name !== NULL)
-				{
-					$CI =& get_instance();
-					if(  ! isset($CI->$object_name))
-					{
-						return $this->_ci_init_library($class, '', $params, $object_name);
-					}
-				}
+            // Safety: Was the class already loaded by a previous call?
+            if( class_exists( $class, FALSE ) )
+            {
+                // Before we deem this to be a duplicate request, let's see
+                // if a custom object name is being supplied. If so, we'll
+                // return a new instance of the object
+                if( $object_name !== NULL )
+                {
+                    $CI =& get_instance() ;
+                    if( ! isset( $CI->$object_name ) )
+                    {
+                        return  $this->_ci_init_library( $class, '', $params, $object_name ) ;
+                    }
+                }
 
-				log_message('debug', $class.' class already loaded. Second attempt ignored.');
-				return;
-			}
-			// Does the file exist? No? Bummer...
-			elseif(  ! file_exists($filepath))
-			{
-				continue;
-			}
+                log_message( 'debug', $class . ' class already loaded. Second attempt ignored.' ) ;
+                return ;
+            }
+            // Does the file exist? No? Bummer...
+            elseif( ! file_exists( $filepath ) )
+            {
+                continue ;
+            }
 
-			include_once($filepath);
-			return $this->_ci_init_library($class, '', $params, $object_name);
-		}
+            include_once( $filepath ) ;
+            return  $this->_ci_init_library( $class, '', $params, $object_name ) ;
+        }
 
-		// One last attempt. Maybe the library is in a subdirectory, but it wasn't specified?
-		if( $subdir === '')
-		{
-			return $this->_ci_load_library($class.'/'.$class, $params, $object_name);
-		}
+        // One last attempt.
+        // Maybe the library is in a subdirectory, but it wasn't specified?
+        if( $subdir === '' )
+        {
+            return  $this->_ci_load_library( $class . '/' . $class, $params, $object_name ) ;
+        }
 
-		// If we got this far we were unable to find the requested class.
-		log_message('error', 'Unable to load the requested class: '.$class);
-		show_error('Unable to load the requested class: '.$class);
-	}
+        // If we got this far we were unable to find the requested class.
+        log_message( 'error', 'Unable to load the requested class: ' . $class ) ;
+        show_error( 'Unable to load the requested class: ' . $class ) ;
+    }
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Internal CI Stock Library Loader
-	 *
-	 * @used-by	CI_Loader::_ci_load_library()
-	 * @uses	CI_Loader::_ci_init_library()
-	 *
-	 * @param	string	$library	Library name to load
-	 * @param	string	$file_path	Path to the library filename, relative to libraries/
-	 * @param	mixed	$params		Optional parameters to pass to the class constructor
-	 * @param	string	$object_name	Optional object name to assign to
-	 * @return	void
-	 */
-	protected function _ci_load_stock_library($library_name, $file_path, $params, $object_name)
-	{
-		$prefix = 'CI_';
+    /**
+     * Internal CI Stock Library Loader
+     *
+     * @used-by CI_Loader::_ci_load_library()
+     * @uses    CI_Loader::_ci_init_library()
+     *
+     * @param   string  $library        Library name to load
+     * @param   string  $file_path      Path to the library filename, relative to libraries/
+     * @param   mixed   $params         Optional parameters to pass to the class constructor
+     * @param   string  $object_name    Optional object name to assign to
+     * 
+     * @return  void
+     */
+    protected function _ci_load_stock_library( $library_name, $file_path, $params, $object_name )
+    {
+        $prefix = 'CI_' ;
 
-		if( class_exists($prefix.$library_name, FALSE))
-		{
-			if( class_exists(config_item('subclass_prefix').$library_name, FALSE))
-			{
-				$prefix = config_item('subclass_prefix');
-			}
+        if( class_exists( $prefix . $library_name, FALSE ) )
+        {
+            if( class_exists( config_item( 'subclass_prefix' ) . $library_name, FALSE ) )
+            {
+                $prefix = config_item( 'subclass_prefix' );
+            }
 
-			// Before we deem this to be a duplicate request, let's see
-			// if a custom object name is being supplied. If so, we'll
-			// return a new instance of the object
-			if( $object_name !== NULL)
-			{
-				$CI =& get_instance();
-				if(  ! isset($CI->$object_name))
-				{
-					return $this->_ci_init_library($library_name, $prefix, $params, $object_name);
-				}
-			}
+            // Before we deem this to be a duplicate request, let's see
+            // if a custom object name is being supplied. If so, we'll
+            // return a new instance of the object
+            if( $object_name !== NULL )
+            {
+                $CI =& get_instance() ;
+                if( ! isset( $CI->$object_name ) )
+                {
+                    return  $this->_ci_init_library( $library_name, $prefix, $params, $object_name ) ;
+                }
+            }
 
-			log_message('debug', $library_name.' class already loaded. Second attempt ignored.');
-			return;
-		}
+            log_message( 'debug', $library_name . ' class already loaded. Second attempt ignored.' ) ;
+            return ;
+        }
 
-		$paths = $this->_ci_library_paths;
-		array_pop($paths); // BASEPATH
-		array_pop($paths); // APPPATH (needs to be the first path checked)
-		array_unshift($paths, APPPATH);
+        $paths = $this->_ci_library_paths ;
+        array_pop( $paths ) ;   // BASEPATH
+        array_pop( $paths ) ;   // APPPATH (needs to be the first path checked)
+        array_unshift( $paths, APPPATH ) ;
 
-		foreach( $paths as $path)
-		{
-			if( file_exists($path = $path.'libraries/'.$file_path.$library_name.'.php'))
-			{
-				// Override
-				include_once($path);
-				if( class_exists($prefix.$library_name, FALSE))
-				{
-					return $this->_ci_init_library($library_name, $prefix, $params, $object_name);
-				}
-				else
-				{
-					log_message('debug', $path.' exists, but does not declare '.$prefix.$library_name);
-				}
-			}
-		}
+        foreach( $paths as $path )
+        {
+            if( file_exists( $path = $path . 'libraries/' . $file_path . $library_name . '.php' ) )
+            {
+                // Override
+                include_once( $path ) ;
+                if( class_exists( $prefix . $library_name, FALSE ) )
+                {
+                    return  $this->_ci_init_library( $library_name, $prefix, $params, $object_name ) ;
+                }
+                else
+                {
+                    log_message( 'debug', $path . ' exists, but does not declare ' . $prefix . $library_name ) ;
+                }
+            }
+        }
 
-		include_once(BASEPATH . 'libraries/'.$file_path.$library_name.'.php');
+        include_once( BASEPATH . 'libraries/' . $file_path . $library_name . '.php' ) ;
 
-		// Check for extensions
-		$subclass = config_item('subclass_prefix').$library_name;
-		foreach( $paths as $path)
-		{
-			if( file_exists($path = $path.'libraries/'.$file_path.$subclass.'.php'))
-			{
-				include_once($path);
-				if( class_exists($subclass, FALSE))
-				{
-					$prefix = config_item('subclass_prefix');
-					break;
-				}
-				else
-				{
-					log_message('debug', $path.' exists, but does not declare '.$subclass);
-				}
-			}
-		}
+        // Check for extensions
+        $subclass = config_item( 'subclass_prefix' ) . $library_name ;
+        foreach( $paths as $path )
+        {
+            if( file_exists( $path = $path . 'libraries/' . $file_path . $subclass . '.php' ) )
+            {
+                include_once( $path ) ;
+                if( class_exists( $subclass, FALSE ) )
+                {
+                    $prefix = config_item( 'subclass_prefix' ) ;
+                    break ;
+                }
+                else
+                {
+                    log_message( 'debug', $path . ' exists, but does not declare ' . $subclass ) ;
+                }
+            }
+        }
 
-		return $this->_ci_init_library($library_name, $prefix, $params, $object_name);
-	}
+        return  $this->_ci_init_library( $library_name, $prefix, $params, $object_name ) ;
+    }
 
     // --------------------------------------------------------------------
 
@@ -1351,19 +1358,20 @@ class CI_Loader
 
     // --------------------------------------------------------------------
 
-	/**
-	 * CI Object to Array translator
-	 *
-	 * Takes an object as input and converts the class variables to
-	 * an associative array with key/value pairs.
-	 *
-	 * @param	object	$object	Object data to translate
-	 * @return	array
-	 */
-	protected function _ci_object_to_array($object)
-	{
-		return is_object($object) ? get_object_vars($object) : $object;
-	}
+    /**
+     * CI Object to Array translator
+     *
+     * Takes an object as input and converts the class variables to
+     * an associative array with key/value pairs.
+     *
+     * @param   object  $object     Object data to translate
+     * 
+     * @return  array
+     */
+    protected function _ci_object_to_array( $object )
+    {
+        return  is_object( $object ) ? get_object_vars( $object ) : $object ;
+    }
 
     // --------------------------------------------------------------------
 
