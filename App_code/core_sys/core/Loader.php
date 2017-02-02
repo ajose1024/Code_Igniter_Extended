@@ -370,35 +370,36 @@ class CI_Loader
 
     // --------------------------------------------------------------------
 
-	/**
-	 * Load the Database Utilities Class
-	 *
-	 * @param	object	$db	Database object
-	 * @param	bool	$return	Whether to return the DB Utilities class object or not
-	 * @return	object
-	 */
-	public function dbutil($db = NULL, $return = FALSE)
-	{
-		$CI =& get_instance();
+    /**
+     * Load the Database Utilities Class
+     *
+     * @param   object  $db     Database object
+     * @param   bool    $return Whether to return the DB Utilities class object or not
+     * 
+     * @return  object
+     */
+    public function dbutil( $db = NULL, $return = FALSE )
+    {
+        $CI =& get_instance() ;
 
-		if(  ! is_object($db) OR ! ($db instanceof CI_DB))
-		{
-			class_exists('CI_DB', FALSE) OR $this->database();
-			$db =& $CI->db;
-		}
+        if( ! is_object( $db ) OR ! ( $db instanceof CI_DB ) )
+        {
+            class_exists( 'CI_DB', FALSE ) OR $this->database() ;
+            $db =& $CI->db ;
+        }
 
-		require_once(BASEPATH . 'database/DB_utility.php');
-		require_once(BASEPATH . 'database/drivers/'.$db->dbdriver.'/'.$db->dbdriver.'_utility.php');
-		$class = 'CI_DB_'.$db->dbdriver.'_utility';
+        require_once( BASEPATH . 'database/DB_utility.php' ) ;
+        require_once( BASEPATH . 'database/drivers/' . $db->dbdriver . '/' . $db->dbdriver . '_utility.php' ) ;
+        $class = 'CI_DB_' . $db->dbdriver . '_utility' ;
 
-		if( $return === TRUE)
-		{
-			return new $class($db);
-		}
+        if( $return === TRUE )
+        {
+            return  new $class( $db ) ;
+        }
 
-		$CI->dbutil = new $class($db);
-		return $this;
-	}
+        $CI->dbutil = new $class( $db ) ;
+        return  $this ;
+    }
 
     // --------------------------------------------------------------------
 
@@ -447,70 +448,71 @@ class CI_Loader
 
     // --------------------------------------------------------------------
 
-	/**
-	 * View Loader
-	 *
-	 * Loads "view" files.
-	 *
-	 * @param	string	$view	View name
-	 * @param	array	$vars	An associative array of data
-	 *				to be extracted for use in the view
-	 * @param	bool	$return	Whether to return the view output
-	 *				or leave it to the Output class
-	 * @return	object|string
-	 */
-	public function view($view, $vars = array(), $return = FALSE)
-	{
-		return $this->_ci_load(array('_ci_view' => $view, '_ci_vars' => $this->_ci_object_to_array($vars), '_ci_return' => $return));
-	}
+    /**
+     * View Loader
+     *
+     * Loads "view" files.
+     *
+     * @param   string  $view   View name
+     * @param   array   $vars   An associative array of data
+     *                          to be extracted for use in the view
+     * @param   bool    $return Whether to return the view output
+     *                          or leave it to the Output class
+     * @return  object|string
+     */
+    public function view( $view, $vars = array(), $return = FALSE )
+    {
+        return  $this->_ci_load( array( '_ci_view' => $view, '_ci_vars' => $this->_ci_object_to_array($vars), '_ci_return' => $return ) ) ;
+    }
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Generic File Loader
-	 *
-	 * @param	string	$path	File path
-	 * @param	bool	$return	Whether to return the file output
-	 * @return	object|string
-	 */
-	public function file($path, $return = FALSE)
-	{
-		return $this->_ci_load(array('_ci_path' => $path, '_ci_return' => $return));
-	}
+    /**
+     * Generic File Loader
+     *
+     * @param   string  $path   File path
+     * @param   bool    $return Whether to return the file output
+     * @return  object|string
+     */
+    public function file( $path, $return = FALSE )
+    {
+        return  $this->_ci_load( array( '_ci_path' => $path, '_ci_return' => $return ) ) ;
+    }
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Set Variables
-	 *
-	 * Once variables are set they become available within
-	 * the controller class and its "view" files.
-	 *
-	 * @param	array|object|string	$vars
-	 *					An associative array or object containing values
-	 *					to be set, or a value's name if string
-	 * @param 	string	$val	Value to set, only used if $vars is a string
-	 * @return	object
-	 */
-	public function vars($vars, $val = '')
-	{
-		if( is_string($vars))
-		{
-			$vars = array($vars => $val);
-		}
+    /**
+     * Set Variables
+     *
+     * Once variables are set they become available within the controller class
+     * and its "view" files.
+     *
+     * @param   array|object|string     $vars
+     *                                  An associative array or object containing values
+     *                                  to be set, or a value's name if string
+     * @param   string  $val    Value to set, only used if $vars is a string
+     * 
+     * @return  object
+     */
+    public function vars( $vars, $val = '' )
+    {
+        if( is_string( $vars ) )
+        {
+            $vars = array( $vars => $val ) ;
+        }
 
-		$vars = $this->_ci_object_to_array($vars);
+        $vars = $this->_ci_object_to_array( $vars ) ;
 
-		if( is_array($vars) && count($vars) > 0)
-		{
-			foreach( $vars as $key => $val)
-			{
-				$this->_ci_cached_vars[$key] = $val;
-			}
-		}
+        if( is_array( $vars ) && count( $vars ) > 0 )
+        {
+            foreach( $vars as $key => $val )
+            {
+                $this->_ci_cached_vars[ $key ] = $val ;
+            }
+        }
 
-		return $this;
-	}
+        return  $this ;
+    }
 
     // --------------------------------------------------------------------
 
@@ -529,133 +531,138 @@ class CI_Loader
 
     // --------------------------------------------------------------------
 
-	/**
-	 * Get Variable
-	 *
-	 * Check if a variable is set and retrieve it.
-	 *
-	 * @param	string	$key	Variable name
-	 * @return	mixed	The variable or NULL if not found
-	 */
-	public function get_var($key)
-	{
-		return isset($this->_ci_cached_vars[$key]) ? $this->_ci_cached_vars[$key] : NULL;
-	}
+    /**
+     * Get Variable
+     *
+     * Check if a variable is set and retrieve it.
+     *
+     * @param   string  $key    Variable name
+     * 
+     * @return  mixed   The variable or NULL if not found
+     */
+    public function get_var( $key )
+    {
+        return  isset( $this->_ci_cached_vars[ $key ] ) ? $this->_ci_cached_vars[ $key ] : NULL ;
+    }
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Get Variables
-	 *
-	 * Retrieves all loaded variables.
-	 *
-	 * @return	array
-	 */
-	public function get_vars()
-	{
-		return $this->_ci_cached_vars;
-	}
+    /**
+     * Get Variables
+     *
+     * Retrieves all loaded variables.
+     *
+     * @return  array
+     */
+    public function get_vars()
+    {
+        return  $this->_ci_cached_vars ;
+    }
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Helper Loader
-	 *
-	 * @param	string|string[]	$helpers	Helper name(s)
-	 * @return	object
-	 */
-	public function helper($helpers = array())
-	{
-		foreach( $this->_ci_prep_filename($helpers, '_helper') as $helper)
-		{
-			if( isset($this->_ci_helpers[$helper]))
-			{
-				continue;
-			}
+    /**
+     * Helper Loader
+     *
+     * @param   string|string[] $helpers    Helper name(s)
+     * 
+     * @return  object
+     */
+    public function helper( $helpers = array() )
+    {
+        foreach( $this->_ci_prep_filename( $helpers, '_helper' ) as $helper )
+        {
+            if( isset( $this->_ci_helpers[ $helper ] ) )
+            {
+                continue ;
+            }
 
-			// Is this a helper extension request?
-			$ext_helper = config_item('subclass_prefix').$helper;
-			$ext_loaded = FALSE;
-			foreach( $this->_ci_helper_paths as $path)
-			{
-				if( file_exists($path.'helpers/'.$ext_helper.'.php'))
-				{
-					include_once($path.'helpers/'.$ext_helper.'.php');
-					$ext_loaded = TRUE;
-				}
-			}
+            // Is this a helper extension request?
+            $ext_helper = config_item( 'subclass_prefix' ) . $helper ;
+            $ext_loaded = FALSE ;
+            foreach( $this->_ci_helper_paths as $path )
+            {
+                if( file_exists( $path . 'helpers/' . $ext_helper . '.php' ) )
+                {
+                    include_once( $path.'helpers/' . $ext_helper . '.php' ) ;
+                    $ext_loaded = TRUE ;
+                }
+            }
 
-			// If we have loaded extensions - check if the base one is here
-			if( $ext_loaded === TRUE)
-			{
-				$base_helper = BASEPATH . 'helpers/'.$helper.'.php';
-				if(  ! file_exists($base_helper))
-				{
-					show_error('Unable to load the requested file: helpers/'.$helper.'.php');
-				}
+            // If we have loaded extensions - check if the base one is here
+            if( $ext_loaded === TRUE )
+            {
+                $base_helper = BASEPATH . 'helpers/' . $helper . '.php' ;
+                if( ! file_exists( $base_helper ) )
+                {
+                    show_error( 'Unable to load the requested file: helpers/' . $helper . '.php' ) ;
+                }
 
-				include_once($base_helper);
-				$this->_ci_helpers[$helper] = TRUE;
-				log_message('info', 'Helper loaded: '.$helper);
-				continue;
-			}
+                include_once( $base_helper ) ;
+                $this->_ci_helpers[ $helper ] = TRUE ;
+                log_message( 'info', 'Helper loaded: ' . $helper ) ;
+                continue ;
+            }
 
-			// No extensions found ... try loading regular helpers and/or overrides
-			foreach( $this->_ci_helper_paths as $path)
-			{
-				if( file_exists($path.'helpers/'.$helper.'.php'))
-				{
-					include_once($path.'helpers/'.$helper.'.php');
+            // No extensions found ...
+            // try loading regular helpers and/or overrides
+            foreach( $this->_ci_helper_paths as $path )
+            {
+                if( file_exists( $path . 'helpers/' . $helper . '.php' ) )
+                {
+                    include_once( $path . 'helpers/' . $helper . '.php' ) ;
 
-					$this->_ci_helpers[$helper] = TRUE;
-					log_message('info', 'Helper loaded: '.$helper);
-					break;
-				}
-			}
+                    $this->_ci_helpers[ $helper ] = TRUE ;
+                    log_message( 'info', 'Helper loaded: ' . $helper ) ;
+                    break ;
+                }
+            }
 
-			// unable to load the helper
-			if(  ! isset($this->_ci_helpers[$helper]))
-			{
-				show_error('Unable to load the requested file: helpers/'.$helper.'.php');
-			}
-		}
+            // unable to load the helper
+            if( ! isset( $this->_ci_helpers[ $helper ] ) )
+            {
+                show_error( 'Unable to load the requested file: helpers/' . $helper . '.php' ) ;
+            }
+        }
 
-		return $this;
-	}
+        return  $this ;
+    }
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Load Helpers
-	 *
-	 * An alias for the helper() method in case the developer has
-	 * written the plural form of it.
-	 *
-	 * @uses	CI_Loader::helper()
-	 * @param	string|string[]	$helpers	Helper name(s)
-	 * @return	object
-	 */
-	public function helpers($helpers = array())
-	{
-		return $this->helper($helpers);
-	}
+    /**
+     * Load Helpers
+     *
+     * An alias for the helper() method in case the developer has
+     * written the plural form of it.
+     *
+     * @uses    CI_Loader::helper()
+     * @param   string|string[]     $helpers    Helper name(s)
+     * 
+     * @return  object
+     */
+    public function helpers( $helpers = array() )
+    {
+        return  $this->helper( $helpers ) ;
+    }
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Language Loader
-	 *
-	 * Loads language files.
-	 *
-	 * @param	string|string[]	$files	List of language file names to load
-	 * @param	string		Language name
-	 * @return	object
-	 */
-	public function language($files, $lang = '')
-	{
-		get_instance()->lang->load($files, $lang);
-		return $this;
-	}
+    /**
+     * Language Loader
+     *
+     * Loads language files.
+     *
+     * @param   string|string[] $files      List of language file names to load
+     * @param   string          Language name
+     * 
+     * @return  object
+     */
+    public function language( $files, $lang = '' )
+    {
+        get_instance()->lang->load( $files, $lang ) ;
+        return  $this ;
+    }
 
     // --------------------------------------------------------------------
 
@@ -681,49 +688,49 @@ class CI_Loader
 
     // --------------------------------------------------------------------
 
-	/**
-	 * Driver Loader
-	 *
-	 * Loads a driver library.
-	 *
-	 * @param	string|string[]	$library	Driver name(s)
-	 * @param	array		$params		Optional parameters to pass to the driver
-	 * @param	string		$object_name	An optional object name to assign to
-	 *
-	 * @return	object|bool	Object or FALSE on failure if $library is a string
-	 *				and $object_name is set. CI_Loader instance otherwise.
-	 */
-	public function driver($library, $params = NULL, $object_name = NULL)
-	{
-		if( is_array($library))
-		{
-			foreach( $library as $driver)
-			{
-				$this->driver($driver);
-			}
+    /**
+     * Driver Loader
+     *
+     * Loads a driver library.
+     *
+     * @param   string|string[] $library        Driver name(s)
+     * @param   array           $params         Optional parameters to pass to the driver
+     * @param   string          $object_name    An optional object name to assign to
+     *
+     * @return  object|bool     Object or FALSE on failure if $library is a string
+     *                          and $object_name is set. CI_Loader instance otherwise.
+     */
+    public function driver( $library, $params = NULL, $object_name = NULL )
+    {
+        if( is_array( $library ) )
+        {
+            foreach( $library as $driver )
+            {
+                $this->driver( $driver ) ;
+            }
 
-			return $this;
-		}
-		elseif( empty($library))
-		{
-			return FALSE;
-		}
+            return $this ;
+        }
+        elseif( empty( $library ) )
+        {
+            return FALSE ;
+        }
 
-		if(  ! class_exists('CI_Driver_Library', FALSE))
-		{
-			// We aren't instantiating an object here, just making the base class available
-			require BASEPATH . 'libraries/Driver.php';
-		}
+        if( ! class_exists( 'CI_Driver_Library', FALSE ) )
+        {
+            // We aren't instantiating an object here, just making the base class available
+            require BASEPATH . 'libraries/Driver.php' ;
+        }
 
-		// We can save the loader some time since Drivers will *always* be in a subfolder,
-		// and typically identically named to the library
-		if(  ! strpos($library, '/'))
-		{
-			$library = ucfirst($library).'/'.$library;
-		}
+        // We can save the loader some time since Drivers will *always* be in a subfolder,
+        // and typically identically named to the library
+        if( ! strpos( $library, '/' ) )
+        {
+            $library = ucfirst( $library ) . '/' . $library ;
+        }
 
-		return $this->library($library, $params, $object_name);
-	}
+        return  $this->library( $library, $params, $object_name ) ;
+    }
 
     // --------------------------------------------------------------------
 
@@ -762,74 +769,76 @@ class CI_Loader
 
     // --------------------------------------------------------------------
 
-	/**
-	 * Get Package Paths
-	 *
-	 * Return a list of all package paths.
-	 *
-	 * @param	bool	$include_base	Whether to include BASEPATH (default: FALSE)
-	 * @return	array
-	 */
-	public function get_package_paths($include_base = FALSE)
-	{
-		return ($include_base === TRUE) ? $this->_ci_library_paths : $this->_ci_model_paths;
-	}
+    /**
+     * Get Package Paths
+     *
+     * Return a list of all package paths.
+     *
+     * @param   bool    $include_base   Whether to include BASEPATH (default: FALSE)
+     * 
+     * @return  array
+     */
+    public function get_package_paths( $include_base = FALSE )
+    {
+        return  ( $include_base === TRUE ) ? $this->_ci_library_paths : $this->_ci_model_paths ;
+    }
 
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Remove Package Path
-	 *
-	 * Remove a path from the library, model, helper and/or config
-	 * path arrays if it exists. If no path is provided, the most recently
-	 * added path will be removed removed.
-	 *
-	 * @param	string	$path	Path to remove
-	 * @return	object
-	 */
-	public function remove_package_path($path = '')
-	{
-		$config =& $this->_ci_get_component('config');
+    /**
+     * Remove Package Path
+     *
+     * Remove a path from the library, model, helper and/or config
+     * path arrays if it exists. If no path is provided, the most recently
+     * added path will be removed
+     *
+     * @param   string  $path   Path to remove
+     * 
+     * @return  object
+     */
+    public function remove_package_path( $path = '' )
+    {
+        $config =& $this->_ci_get_component( 'config' ) ;
 
-		if( $path === '')
-		{
-			array_shift($this->_ci_library_paths);
-			array_shift($this->_ci_model_paths);
-			array_shift($this->_ci_helper_paths);
-			array_shift($this->_ci_view_paths);
-			array_pop($config->_config_paths);
-		}
-		else
-		{
-			$path = rtrim($path, '/').'/';
-			foreach( array('_ci_library_paths', '_ci_model_paths', '_ci_helper_paths') as $var)
-			{
-				if( ($key = array_search($path, $this->{$var})) !== FALSE)
-				{
-					unset($this->{$var}[$key]);
-				}
-			}
+        if( $path === '' )
+        {
+            array_shift( $this->_ci_library_paths ) ;
+            array_shift( $this->_ci_model_paths ) ;
+            array_shift( $this->_ci_helper_paths ) ;
+            array_shift( $this->_ci_view_paths ) ;
+            array_pop( $config->_config_paths ) ;
+        }
+        else
+        {
+            $path = rtrim( $path, '/' ) . '/' ;
+            foreach( array( '_ci_library_paths', '_ci_model_paths', '_ci_helper_paths' ) as $var )
+            {
+                if( ( $key = array_search( $path, $this->{ $var } ) ) !== FALSE )
+                {
+                    unset( $this->{ $var }[ $key ] ) ;
+                }
+            }
 
-			if( isset($this->_ci_view_paths[$path.'views/']))
-			{
-				unset($this->_ci_view_paths[$path.'views/']);
-			}
+            if( isset( $this->_ci_view_paths[ $path . 'views/ ' ] ) )
+            {
+                unset( $this->_ci_view_paths[ $path.'views/' ] ) ;
+            }
 
-			if( ($key = array_search($path, $config->_config_paths)) !== FALSE)
-			{
-				unset($config->_config_paths[$key]);
-			}
-		}
+            if( ( $key = array_search( $path, $config->_config_paths ) ) !== FALSE )
+            {
+                unset( $config->_config_paths[ $key ] ) ;
+            }
+        }
 
-		// make sure the application default paths are still in the array
-		$this->_ci_library_paths = array_unique(array_merge($this->_ci_library_paths, array(APPPATH, BASEPATH)));
-		$this->_ci_helper_paths = array_unique(array_merge($this->_ci_helper_paths, array(APPPATH, BASEPATH)));
-		$this->_ci_model_paths = array_unique(array_merge($this->_ci_model_paths, array(APPPATH)));
-		$this->_ci_view_paths = array_merge($this->_ci_view_paths, array(APPPATH.'views/' => TRUE));
-		$config->_config_paths = array_unique(array_merge($config->_config_paths, array(APPPATH)));
+        // make sure the application default paths are still in the array
+        $this->_ci_library_paths = array_unique( array_merge( $this->_ci_library_paths, array( APPPATH, BASEPATH ) ) ) ;
+        $this->_ci_helper_paths = array_unique( array_merge( $this->_ci_helper_paths, array( APPPATH, BASEPATH ) ) ) ;
+        $this->_ci_model_paths = array_unique( array_merge( $this->_ci_model_paths, array( APPPATH ) ) ) ;
+        $this->_ci_view_paths = array_merge( $this->_ci_view_paths, array( APPPATH . 'views/' => TRUE ) ) ;
+        $config->_config_paths = array_unique( array_merge( $config->_config_paths, array( APPPATH ) ) ) ;
 
-		return $this;
-	}
+        return  $this ;
+    }
 
     // --------------------------------------------------------------------
 
