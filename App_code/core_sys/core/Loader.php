@@ -26,305 +26,308 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (http://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	http://codeigniter.com
- * @since	Version 1.0.0
+ * @package     CodeIgniter
+ * @author      EllisLab Dev Team
+ * @copyright   Copyright (c) 2008 - 2014, EllisLab, Inc. (http://ellislab.com/)
+ * @copyright   Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license     http://opensource.org/licenses/MIT	MIT License
+ * @link        http://codeigniter.com
+ * @since       Version 1.0.0
  * @filesource
  */
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+
 
 /**
  * Loader Class
  *
  * Loads framework components.
  *
- * @package		CodeIgniter
- * @subpackage	Libraries
- * @category	Loader
- * @author		EllisLab Dev Team
- * @link		http://codeigniter.com/user_guide/libraries/loader.html
+ * @package     CodeIgniter
+ * @subpackage  Libraries
+ * @category    Loader
+ * @author      EllisLab Dev Team
+ * @link        http://codeigniter.com/user_guide/libraries/loader.html
  */
-class CI_Loader {
+class CI_Loader
+{
+    // All these are set automatically. Don't mess with them.
+    /**
+    * Nesting level of the output buffering mechanism
+    *
+    * @var      int
+    */
+    protected $_ci_ob_level ;
 
-	// All these are set automatically. Don't mess with them.
-	/**
-	 * Nesting level of the output buffering mechanism
-	 *
-	 * @var	int
-	 */
-	protected $_ci_ob_level;
+    /**
+    * List of paths to load views from
+    *
+    * @var      array
+    */
+    protected $_ci_view_paths =	array( VIEWPATH => TRUE ) ;
 
-	/**
-	 * List of paths to load views from
-	 *
-	 * @var	array
-	 */
-	protected $_ci_view_paths =	array(VIEWPATH	=> TRUE);
+    /**
+    * List of paths to load libraries from
+    *
+    * @var      array
+    */
+    protected $_ci_library_paths = array( APPPATH, BASEPATH ) ;
 
-	/**
-	 * List of paths to load libraries from
-	 *
-	 * @var	array
-	 */
-	protected $_ci_library_paths =	array(APPPATH, BASEPATH);
+    /**
+    * List of paths to load models from
+    *
+    * @var      array
+    */
+    protected $_ci_model_paths = array( APPPATH ) ;
 
-	/**
-	 * List of paths to load models from
-	 *
-	 * @var	array
-	 */
-	protected $_ci_model_paths =	array(APPPATH);
+    /**
+    * List of paths to load helpers from
+    *
+    * @var      array
+    */
+    protected $_ci_helper_paths = array( APPPATH, BASEPATH ) ;
 
-	/**
-	 * List of paths to load helpers from
-	 *
-	 * @var	array
-	 */
-	protected $_ci_helper_paths =	array(APPPATH, BASEPATH);
+    /**
+    * List of cached variables
+    *
+    * @var      array
+    */
+    protected $_ci_cached_vars = array() ;
 
-	/**
-	 * List of cached variables
-	 *
-	 * @var	array
-	 */
-	protected $_ci_cached_vars =	array();
+    /**
+     * List of loaded classes
+     *
+     * @var     array
+     */
+    protected $_ci_classes = array() ;
 
-	/**
-	 * List of loaded classes
-	 *
-	 * @var	array
-	 */
-	protected $_ci_classes =	array();
+    /**
+     * List of loaded models
+     *
+     * @var     array
+     */
+    protected $_ci_models = array() ;
 
-	/**
-	 * List of loaded models
-	 *
-	 * @var	array
-	 */
-	protected $_ci_models =	array();
+    /**
+     * List of loaded helpers
+     *
+     * @var     array
+     */
+    protected $_ci_helpers = array() ;
 
-	/**
-	 * List of loaded helpers
-	 *
-	 * @var	array
-	 */
-	protected $_ci_helpers =	array();
+    /**
+     * List of class name mappings
+     *
+     * @var     array
+     */
+    protected $_ci_varmap = array(
+                                    'unit_test' => 'unit',
+                                    'user_agent' => 'agent'
+                                 ) ;
 
-	/**
-	 * List of class name mappings
-	 *
-	 * @var	array
-	 */
-	protected $_ci_varmap =	array(
-		'unit_test' => 'unit',
-		'user_agent' => 'agent'
-	);
+    // --------------------------------------------------------------------
 
-	// --------------------------------------------------------------------
+    /**
+     * Class constructor
+     *
+     * Sets component load paths, gets the initial output buffering level.
+     *
+     * @return      void
+     */
+    public function __construct()
+    {
+        $this->_ci_ob_level = ob_get_level() ;
+        $this->_ci_classes =& is_loaded() ;
 
-	/**
-	 * Class constructor
-	 *
-	 * Sets component load paths, gets the initial output buffering level.
-	 *
-	 * @return	void
-	 */
-	public function __construct()
-	{
-		$this->_ci_ob_level = ob_get_level();
-		$this->_ci_classes =& is_loaded();
+        log_message( 'info', 'Loader Class Initialized' ) ;
+    }
 
-		log_message('info', 'Loader Class Initialized');
-	}
+    // --------------------------------------------------------------------
 
-	// --------------------------------------------------------------------
+    /**
+    * Initializer
+    *
+    * @todo     Figure out a way to move this to the constructor
+    *           without breaking *package_path*() methods.
+    * @uses     CI_Loader::_ci_autoloader()
+    * @used-by  CI_Controller::__construct()
+    * @return   void
+    */
+    public function initialize()
+    {
+        $this->_ci_autoloader() ;
+    }
 
-	/**
-	 * Initializer
-	 *
-	 * @todo	Figure out a way to move this to the constructor
-	 *		without breaking *package_path*() methods.
-	 * @uses	CI_Loader::_ci_autoloader()
-	 * @used-by	CI_Controller::__construct()
-	 * @return	void
-	 */
-	public function initialize()
-	{
-		$this->_ci_autoloader();
-	}
+    // --------------------------------------------------------------------
 
-	// --------------------------------------------------------------------
+    /**
+    * Is Loaded
+    *
+    * A utility method to test if a class is in the self::$_ci_classes array.
+    *
+    * @used-by  Mainly used by Form Helper function _get_validation_object().
+    *
+    * @param    string          $class  Class name to check for
+    * @return   string|bool     Class object name if loaded or FALSE
+    */
+    public function is_loaded( $class )
+    {
+        return  array_search( ucfirst( $class ), $this->_ci_classes, TRUE ) ;
+    }
 
-	/**
-	 * Is Loaded
-	 *
-	 * A utility method to test if a class is in the self::$_ci_classes array.
-	 *
-	 * @used-by	Mainly used by Form Helper function _get_validation_object().
-	 *
-	 * @param 	string		$class	Class name to check for
-	 * @return 	string|bool	Class object name if loaded or FALSE
-	 */
-	public function is_loaded($class)
-	{
-		return array_search(ucfirst($class), $this->_ci_classes, TRUE);
-	}
+    // --------------------------------------------------------------------
 
-	// --------------------------------------------------------------------
+    /**
+    * Library Loader
+    *
+    * Loads and instantiates libraries.
+    * Designed to be called from application controllers.
+    *
+    * @param    string  $library        Library name
+    * @param    array   $params         Optional parameters to pass to the library class constructor
+    * @param    string  $object_name    An optional object name to assign to
+    * @return   object
+    */
+    public function library( $library, $params = NULL, $object_name = NULL )
+    {
+        if( empty( $library ) )
+        {
+            return  $this ;
+        }
+        elseif( is_array( $library ) )
+        {
+            foreach( $library as $key => $value )
+            {
+                if( is_int( $key ) )
+                {
+                    $this->library( $value, $params ) ;
+                }
+                else
+                {
+                    $this->library( $key, $params, $value ) ;
+                }
+            }
 
-	/**
-	 * Library Loader
-	 *
-	 * Loads and instantiates libraries.
-	 * Designed to be called from application controllers.
-	 *
-	 * @param	string	$library	Library name
-	 * @param	array	$params		Optional parameters to pass to the library class constructor
-	 * @param	string	$object_name	An optional object name to assign to
-	 * @return	object
-	 */
-	public function library($library, $params = NULL, $object_name = NULL)
-	{
-		if( empty($library))
-		{
-			return $this;
-		}
-		elseif( is_array($library))
-		{
-			foreach ($library as $key => $value)
-			{
-				if( is_int($key))
-				{
-					$this->library($value, $params);
-				}
-				else
-				{
-					$this->library($key, $params, $value);
-				}
-			}
+            return  $this ;
+        }
 
-			return $this;
-		}
+        if( $params !== NULL && ! is_array( $params ) )
+        {
+            $params = NULL ;
+        }
 
-		if( $params !== NULL && ! is_array($params))
-		{
-			$params = NULL;
-		}
+        $this->_ci_load_library( $library, $params, $object_name ) ;
+        return  $this ;
+    }
 
-		$this->_ci_load_library($library, $params, $object_name);
-		return $this;
-	}
+    // --------------------------------------------------------------------
 
-	// --------------------------------------------------------------------
+    /**
+    * Model Loader
+    *
+    * Loads and instantiates models.
+    *
+    * @param	string	$model		Model name
+    * @param	string	$name		An optional object name to assign to
+    * @param	bool	$db_conn	An optional database connection configuration to initialize
+    * @return	object
+    */
+    public function model( $model, $name = '', $db_conn = FALSE )
+    {
+        if( empty( $model ) )
+        {
+            return  $this ;
+        }
+        elseif( is_array( $model ) )
+        {
+            foreach( $model as $key => $value )
+            {
+                is_int( $key )
+                    ?   $this->model( $value, '', $db_conn )
+                    :   $this->model( $key, $value, $db_conn ) ;
+            }
 
-	/**
-	 * Model Loader
-	 *
-	 * Loads and instantiates models.
-	 *
-	 * @param	string	$model		Model name
-	 * @param	string	$name		An optional object name to assign to
-	 * @param	bool	$db_conn	An optional database connection configuration to initialize
-	 * @return	object
-	 */
-	public function model($model, $name = '', $db_conn = FALSE)
-	{
-		if( empty($model))
-		{
-			return $this;
-		}
-		elseif( is_array($model))
-		{
-			foreach ($model as $key => $value)
-			{
-				is_int($key) ? $this->model($value, '', $db_conn) : $this->model($key, $value, $db_conn);
-			}
+            return  $this ;
+        }
 
-			return $this;
-		}
+        $path = '' ;
 
-		$path = '';
+        // Is the model in a sub-folder? If so, parse out the filename and path.
+        if( ($last_slash = strrpos( $model, '/' ) ) !== FALSE )
+        {
+            // The path is in front of the last slash
+            $path = substr( $model, 0, ++$last_slash ) ;
 
-		// Is the model in a sub-folder? If so, parse out the filename and path.
-		if( ($last_slash = strrpos($model, '/')) !== FALSE)
-		{
-			// The path is in front of the last slash
-			$path = substr($model, 0, ++$last_slash);
+            // And the model name behind it
+            $model = substr( $model, $last_slash ) ;
+        }
 
-			// And the model name behind it
-			$model = substr($model, $last_slash);
-		}
+        if( empty( $name ) )
+        {
+            $name = $model ;
+        }
 
-		if( empty($name))
-		{
-			$name = $model;
-		}
+        if( in_array( $name, $this->_ci_models, TRUE ) )
+        {
+            return  $this ;
+        }
 
-		if( in_array($name, $this->_ci_models, TRUE))
-		{
-			return $this;
-		}
+        $CI =& get_instance() ;
+        if( isset( $CI->$name ) )
+        {
+            throw   new RuntimeException( 'The model name you are loading is the name of a resource that is already being used: ' . $name ) ;
+        }
 
-		$CI =& get_instance();
-		if( isset($CI->$name))
-		{
-			throw new RuntimeException('The model name you are loading is the name of a resource that is already being used: '.$name);
-		}
+        if( $db_conn !== FALSE && ! class_exists( 'CI_DB', FALSE ) )
+        {
+            if( $db_conn === TRUE )
+            {
+                $db_conn = '' ;
+            }
 
-		if( $db_conn !== FALSE && ! class_exists('CI_DB', FALSE))
-		{
-			if( $db_conn === TRUE)
-			{
-				$db_conn = '';
-			}
+            $this->database( $db_conn, FALSE, TRUE ) ;
+        }
 
-			$this->database($db_conn, FALSE, TRUE);
-		}
+        if( ! class_exists( 'CI_Model', FALSE ) )
+        {
+            load_class( 'Model', 'core' ) ;
+        }
 
-		if(  ! class_exists('CI_Model', FALSE))
-		{
-			load_class('Model', 'core');
-		}
+        $model = ucfirst( $model ) ;
+        if( ! class_exists( $model ) )
+        {
+            foreach( $this->_ci_model_paths as $mod_path )
+            {
+                if( ! file_exists( $mod_path . 'models/' . $path . $model . '.php' ) )
+                {
+                    continue ;
+                }
 
-		$model = ucfirst($model);
-		if(  ! class_exists($model))
-		{
-			foreach ($this->_ci_model_paths as $mod_path)
-			{
-				if(  ! file_exists($mod_path.'models/'.$path.$model.'.php'))
-				{
-					continue;
-				}
+                require_once( $mod_path . 'models/' . $path . $model . '.php' ) ;
+                if( ! class_exists( $model, FALSE ) )
+                {
+                    throw   new RuntimeException( $mod_path . "models/" . $path . $model . ".php exists, but doesn't declare class " . $model ) ;
+                }
 
-				require_once($mod_path.'models/'.$path.$model.'.php');
-				if(  ! class_exists($model, FALSE))
-				{
-					throw new RuntimeException($mod_path."models/".$path.$model.".php exists, but doesn't declare class ".$model);
-				}
+                break ;
+            }
 
-				break;
-			}
+            if( ! class_exists( $model, FALSE ) )
+            {
+                throw   new RuntimeException( 'Unable to locate the model you have specified: ' . $model ) ;
+            }
+        }
+        elseif( ! is_subclass_of( $model, 'CI_Model' ) )
+        {
+            throw   new RuntimeException( "Class " . $model . " already exists and doesn't extend CI_Model" ) ;
+        }
 
-			if(  ! class_exists($model, FALSE))
-			{
-				throw new RuntimeException('Unable to locate the model you have specified: '.$model);
-			}
-		}
-		elseif(  ! is_subclass_of($model, 'CI_Model'))
-		{
-			throw new RuntimeException("Class ".$model." already exists and doesn't extend CI_Model");
-		}
+        $this->_ci_models[] = $name ;
+        $CI->$name = new $model() ;
+        return  $this ;
+    }
 
-		$this->_ci_models[] = $name;
-		$CI->$name = new $model();
-		return $this;
-	}
-
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
 	/**
 	 * Database Loader

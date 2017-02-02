@@ -86,7 +86,7 @@ constructor::
 If you use this feature you must set up your class constructor to expect
 data::
 
-	<?php defined('BASEPATH') OR exit('No direct script access allowed');
+	<?php  defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
 
 	class Someclass {
 

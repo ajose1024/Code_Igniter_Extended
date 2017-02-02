@@ -115,7 +115,8 @@ switch( ENVIRONMENT )
  *
  * NO TRAILING SLASH!
  */
-    $application_folder = 'App/default' ;
+    $application_folder = 'App/default'
+    . '' ;
 
 
 /*
