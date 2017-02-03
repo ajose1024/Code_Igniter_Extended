@@ -56,7 +56,7 @@ as *20121031100537_add_blog.php*.
 
 	<?php
 
-	defined('BASEPATH') OR exit('No direct script access allowed');
+	defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
 
 	class Migration_Add_blog extends CI_Migration {
 

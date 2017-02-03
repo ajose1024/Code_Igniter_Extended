@@ -35,7 +35,7 @@
  * @since	Version 2.0
  * @filesource
  */
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * CodeIgniter File Caching Class

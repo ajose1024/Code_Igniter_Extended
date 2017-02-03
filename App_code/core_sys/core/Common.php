@@ -35,7 +35,7 @@
  * @since    Version 1.0.0
  * @filesource
  */
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Common Functions
@@ -51,31 +51,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // ------------------------------------------------------------------------
 
-if(  ! function_exists('is_php'))
+if( ! function_exists( 'is_php' ) )
 {
     /**
-     * Determines if the current version of PHP is equal to or greater than the supplied value
+     * Determines if the current version of PHP is equal to or greater than the
+     * supplied value
      *
      * @param    string
+     * 
      * @return    bool    TRUE if the current version is $version or higher
      */
-    function is_php($version)
+    function is_php( $version )
     {
-        static $_is_php;
-        $version = (string) $version;
+        static $_is_php ;
+        $version = ( string ) $version ;
 
-        if(  ! isset($_is_php[$version]))
+        if( ! isset( $_is_php[ $version ]  ) )
         {
-            $_is_php[$version] = version_compare(PHP_VERSION, $version, '>=');
+            $_is_php[ $version ] = version_compare( PHP_VERSION, $version, '>=' ) ;
         }
 
-        return $_is_php[$version];
+        return  $_is_php[ $version ] ;
     }
 }
 
 // ------------------------------------------------------------------------
 
-if(  ! function_exists('is_really_writable'))
+if( ! function_exists( 'is_really_writable' ) )
 {
     /**
      * Tests for file writability
@@ -85,140 +87,147 @@ if(  ! function_exists('is_really_writable'))
      * on Unix servers if safe_mode is on.
      *
      * @link    https://bugs.php.net/bug.php?id=54709
+     * 
      * @param    string
+     * 
      * @return    bool
      */
-    function is_really_writable($file)
+    function is_really_writable( $file )
     {
         // If we're on a Unix server with safe_mode off we call is_writable
-        if( DIRECTORY_SEPARATOR === '/' && (is_php('5.4') OR ! ini_get('safe_mode')))
+        if( DIRECTORY_SEPARATOR === '/' && ( is_php( '5.4' ) OR ! ini_get( 'safe_mode' ) ) )
         {
-            return is_writable($file);
+            return  is_writable( $file ) ;
         }
 
         /* For Windows servers and safe_mode "on" installations we'll actually
-         * write a file then read it. Bah...
+         * write a file then read it.
+         * Bah...
          */
-        if( is_dir($file))
+        if( is_dir( $file ) )
         {
-            $file = rtrim($file, '/').'/'.md5(mt_rand());
-            if( ($fp = @fopen($file, 'ab')) === FALSE)
+            $file = rtrim( $file, '/' ) . '/' . md5( mt_rand() ) ;
+            if( ( $fp = @fopen( $file, 'ab' ) ) === FALSE )
             {
-                return FALSE;
+                return  FALSE ;
             }
 
-            fclose($fp);
-            @chmod($file, 0777);
-            @unlink($file);
-            return TRUE;
+            fclose( $fp ) ;
+            @chmod( $file, 0777 ) ;
+            @unlink( $file ) ;
+            return  TRUE ;
         }
-        elseif(  ! is_file($file) OR ($fp = @fopen($file, 'ab')) === FALSE)
+        elseif( ! is_file( $file ) OR ( $fp = @fopen( $file, 'ab' ) ) === FALSE )
         {
-            return FALSE;
+            return  FALSE ;
         }
 
-        fclose($fp);
-        return TRUE;
+        fclose( $fp ) ;
+        return  TRUE ;
     }
 }
 
 // ------------------------------------------------------------------------
 
-if(  ! function_exists('load_class'))
+if( ! function_exists( 'load_class ' ) )
 {
     /**
      * Class registry
      *
-     * This function acts as a singleton. If the requested class does not
-     * exist it is instantiated and set to a static variable. If it has
-     * previously been instantiated the variable is returned.
+     * This function acts as a singleton.
+     * If the requested class does not exist it is instantiated and set to a
+     * static variable. If it has previously been instantiated the variable is
+     * returned.
      *
      * @param    string    the class name being requested
      * @param    string    the directory where the class should be found
      * @param    string    an optional argument to pass to the class constructor
+     * 
      * @return    object
      */
-    function &load_class($class, $directory = 'libraries', $param = NULL)
+    function &load_class( $class, $directory = 'libraries', $param = NULL )
     {
-        static $_classes = array();
+        static $_classes = array() ;
 
         // Does the class exist? If so, we're done...
-        if( isset($_classes[$class]))
+        if( isset( $_classes[ $class ] ) )
         {
-            return $_classes[$class];
+            return  $_classes[ $class ] ;
         }
 
-        $name = FALSE;
+        $name = FALSE ;
 
         // Look for the class first in the local application/libraries folder
         // then in the native system/libraries folder
-        foreach (array(APPPATH, BASEPATH) as $path)
+        foreach( array( APPPATH, BASEPATH ) as $path )
         {
-            if( file_exists($path.$directory.'/'.$class.'.php'))
+            if( file_exists( $path . $directory . '/' . $class . '.php' ) )
             {
-                $name = 'CI_'.$class;
+                $name = 'CI_' . $class ;
 
-                if( class_exists($name, FALSE) === FALSE)
+                if( class_exists( $name, FALSE ) === FALSE )
                 {
-                    require_once($path.$directory.'/'.$class.'.php');
+                    require_once( $path . $directory . '/' . $class . '.php' ) ;
                 }
 
-                break;
+                break ;
             }
         }
 
         // Is the request a class extension? If so we load it too
-        if( file_exists(APPPATH.$directory.'/'.config_item('subclass_prefix').$class.'.php'))
+        if( file_exists( APPPATH . $directory . '/' . config_item( 'subclass_prefix' ) . $class . '.php' ) )
         {
-            $name = config_item('subclass_prefix').$class;
+            $name = config_item( 'subclass_prefix' ) . $class ;
 
-            if( class_exists($name, FALSE) === FALSE)
+            if( class_exists( $name, FALSE ) === FALSE )
             {
-                require_once(APPPATH.$directory.'/'.$name.'.php');
+                require_once( APPPATH . $directory . '/' . $name . '.php' ) ;
             }
         }
 
         // Did we find the class?
-        if( $name === FALSE)
+        if( $name === FALSE )
         {
-            // Note: We use exit() rather than show_error() in order to avoid a
+            // NOTE: We use exit() rather than show_error() in order to avoid a
             // self-referencing loop with the Exceptions class
-            set_status_header(503);
-            echo 'Unable to locate the specified class: '.$class.'.php';
-            exit(5); // EXIT_UNK_CLASS
+            set_status_header( 503 ) ;
+            echo 'Unable to locate the specified class: ' . $class . '.php' ;
+            exit( 5 );  // EXIT_UNK_CLASS
         }
 
         // Keep track of what we just loaded
-        is_loaded($class);
+        is_loaded( $class ) ;
 
-        $_classes[$class] = isset($param)
-            ? new $name($param)
-            : new $name();
-        return $_classes[$class];
+        $_classes[ $class ] = isset( $param )
+            ?   new $name( $param )
+            :   new $name() ;
+        
+        return  $_classes[ $class ] ;
     }
 }
 
 // --------------------------------------------------------------------
 
-if(  ! function_exists('is_loaded'))
+if( ! function_exists( 'is_loaded' ) )
 {
     /**
-     * Keeps track of which libraries have been loaded. This function is
-     * called by the load_class() function above
+     * Keeps track of which libraries have been loaded.
+     * This function is called by the load_class() function above
      *
      * @param    string
+     * 
      * @return    array
      */
-    function &is_loaded($class = '')
+    function &is_loaded( $class = '' )
     {
-        static $_is_loaded = array();
+        static $_is_loaded = array() ;
 
-        if( $class !== '')
+        if( $class !== '' )
         {
-            $_is_loaded[strtolower($class)] = $class;
+            $_is_loaded[ strtolower( $class ) ] = $class ;
         }
 
-        return $_is_loaded;
+        return  $_is_loaded ;
     }
 }
 
