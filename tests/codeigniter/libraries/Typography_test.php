@@ -31,7 +31,7 @@ class Typography_test extends CI_TestCase {
 			'test.  new'					=> 'test.&nbsp; new',
 		);
 
-		foreach ($strs as $str => $expected)
+		foreach( $strs as $str => $expected)
 		{
 			$this->assertEquals($expected, $this->type->format_characters($str));
 		}
@@ -114,7 +114,7 @@ EOH;
 			'This one does not!' 				=> '<p>This one does not!</p>'
 		);
 
-		foreach ($strs as $str => $expect)
+		foreach( $strs as $str => $expect)
 		{
 			$this->assertEquals($expect, $this->type->auto_typography($str));
 		}

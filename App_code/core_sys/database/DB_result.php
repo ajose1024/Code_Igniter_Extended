@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Database Result Class
@@ -205,7 +205,7 @@ class CI_DB_result {
 			{
 				$this->custom_result_object[$class_name][$i] = new $class_name();
 
-				foreach ($this->{$_data}[$i] as $key => $value)
+				foreach( $this->{$_data}[$i] as $key => $value)
 				{
 					$this->custom_result_object[$class_name][$i]->$key = $value;
 				}
@@ -358,7 +358,7 @@ class CI_DB_result {
 
 		if( is_array($key))
 		{
-			foreach ($key as $k => $v)
+			foreach( $key as $k => $v)
 			{
 				$this->row_data[$k] = $v;
 			}

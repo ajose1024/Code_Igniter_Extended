@@ -29,7 +29,7 @@ class String_helper_test extends CI_TestCase {
 			'/var/www/html/'	=> 'var/www/html'
 		);
 
-		foreach ($strs as $str => $expect)
+		foreach( $strs as $str => $expect)
 		{
 			$this->assertEquals($expect, trim_slashes($str));
 		}
@@ -44,7 +44,7 @@ class String_helper_test extends CI_TestCase {
 			"it's a winner!"	=> 'its a winner!',
 		);
 
-		foreach ($strs as $str => $expect)
+		foreach( $strs as $str => $expect)
 		{
 			$this->assertEquals($expect, strip_quotes($str));
 		}
@@ -59,7 +59,7 @@ class String_helper_test extends CI_TestCase {
 			"it's a winner!"	=> 'it&#39;s a winner!',
 		);
 
-		foreach ($strs as $str => $expect)
+		foreach( $strs as $str => $expect)
 		{
 			$this->assertEquals($expect, quotes_to_entities($str));
 		}
@@ -75,7 +75,7 @@ class String_helper_test extends CI_TestCase {
 			'/var/www/html//index.php'		=> '/var/www/html/index.php'
 		);
 
-		foreach ($strs as $str => $expect)
+		foreach( $strs as $str => $expect)
 		{
 			$this->assertEquals($expect, reduce_double_slashes($str));
 		}
@@ -90,7 +90,7 @@ class String_helper_test extends CI_TestCase {
 			'Ringo, John, Paul,,'		=> 'Ringo, John, Paul,'
 		);
 
-		foreach ($strs as $str => $expect)
+		foreach( $strs as $str => $expect)
 		{
 			$this->assertEquals($expect, reduce_multiples($str));
 		}
@@ -100,7 +100,7 @@ class String_helper_test extends CI_TestCase {
 			'Ringo, John, Paul,,'		=> 'Ringo, John, Paul'
 		);
 
-		foreach ($strs as $str => $expect)
+		foreach( $strs as $str => $expect)
 		{
 			$this->assertEquals($expect, reduce_multiples($str, ',', TRUE));
 		}
@@ -117,7 +117,7 @@ class String_helper_test extends CI_TestCase {
 
 		);
 
-		foreach ($strs as $str => $expect)
+		foreach( $strs as $str => $expect)
 		{
 			$this->assertEquals($expect, repeater($str, 10));
 		}

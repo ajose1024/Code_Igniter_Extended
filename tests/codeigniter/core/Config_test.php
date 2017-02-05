@@ -200,7 +200,7 @@ class Config_test extends CI_TestCase {
 			$this->ci_app_root,
 			array($pkg_dir, 'config')
 		);
-		array_unshift($this->config->_config_paths, $this->ci_vfs_path($pkg_dir.'/', APPPATH));
+		array_unshift($this->config->_config_paths, $this->ci_vfs_path($pkg_dir.'/', APP_DIR_PATH));
 		$this->assertTrue($this->config->load($file, TRUE));
 		$this->assertEquals(array_merge($cfg, $cfg2), $this->config->item($file));
 		array_shift($this->config->_config_paths);
@@ -213,7 +213,7 @@ class Config_test extends CI_TestCase {
 		// Test regular fail of invalid file
 		$this->setExpectedException(
 			'RuntimeException',
-			'CI Error: Your '.$this->ci_vfs_path('config/'.$file.'.php', APPPATH).
+			'CI Error: Your '.$this->ci_vfs_path('config/'.$file.'.php', APP_DIR_PATH).
 				' file does not appear to contain a valid configuration array.'
 		);
 		$this->assertNull($this->config->load($file));

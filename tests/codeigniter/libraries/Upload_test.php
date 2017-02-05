@@ -79,7 +79,7 @@ class Upload_test extends CI_TestCase {
 
 		$this->upload->set_upload_path('/tmp/');
 
-		foreach ($data as $k => $v)
+		foreach( $data as $k => $v)
 		{
 			$this->upload->{$k}	= $v;
 		}
@@ -103,7 +103,7 @@ class Upload_test extends CI_TestCase {
 		$isnew = 'helloworld.txt';
 		$exists = 'hello-world.txt';
 		$this->ci_vfs_create($exists, 'Hello world.', $this->ci_app_root, $dir);
-		$path = $this->ci_vfs_path($dir.'/', APPPATH);
+		$path = $this->ci_vfs_path($dir.'/', APP_DIR_PATH);
 		$this->upload->file_ext = '.txt';
 
 		$this->assertEquals($isnew, $this->upload->set_filename($path, $isnew));

@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * CodeIgniter Array Helpers
@@ -105,7 +105,7 @@ if(  ! function_exists('elements'))
 
 		is_array($items) OR $items = array($items);
 
-		foreach ($items as $item)
+		foreach( $items as $item)
 		{
 			$return[$item] = array_key_exists($item, $array) ? $array[$item] : $default;
 		}

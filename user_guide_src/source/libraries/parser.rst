@@ -254,7 +254,7 @@ using a view fragment::
 		array('title' => 'Second Link', 'link' => '/second'),
 	);
 
-	foreach ($data1 as $menuitem)
+	foreach( $data1 as $menuitem)
 	{
 		$temp .= $this->parser->parse_string($template1, $menuitem, TRUE);
 	}

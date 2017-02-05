@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Database Utility Class
@@ -178,7 +178,7 @@ abstract class CI_DB_utility {
 		}
 
 		$result = array();
-		foreach ($this->db->list_tables() as $table_name)
+		foreach( $this->db->list_tables() as $table_name)
 		{
 			$res = $this->db->query(sprintf($this->_optimize_table, $this->db->escape_identifiers($table_name)));
 			if( is_bool($res))
@@ -244,7 +244,7 @@ abstract class CI_DB_utility {
 
 		$out = '';
 		// First generate the headings from the table column names
-		foreach ($query->list_fields() as $name)
+		foreach( $query->list_fields() as $name)
 		{
 			$out .= $enclosure.str_replace($enclosure, $enclosure.$enclosure, $name).$enclosure.$delim;
 		}
@@ -255,7 +255,7 @@ abstract class CI_DB_utility {
 		while ($row = $query->unbuffered_row('array'))
 		{
 			$line = array();
-			foreach ($row as $item)
+			foreach( $row as $item)
 			{
 				$line[] = $enclosure.str_replace($enclosure, $enclosure.$enclosure, $item).$enclosure;
 			}
@@ -282,7 +282,7 @@ abstract class CI_DB_utility {
 		}
 
 		// Set our default values
-		foreach (array('root' => 'root', 'element' => 'element', 'newline' => "\n", 'tab' => "\t") as $key => $val)
+		foreach( array('root' => 'root', 'element' => 'element', 'newline' => "\n", 'tab' => "\t") as $key => $val)
 		{
 			if(  ! isset($params[$key]))
 			{
@@ -301,7 +301,7 @@ abstract class CI_DB_utility {
 		while ($row = $query->unbuffered_row())
 		{
 			$xml .= $tab.'<'.$element.'>'.$newline;
-			foreach ($row as $key => $val)
+			foreach( $row as $key => $val)
 			{
 				$xml .= $tab.$tab.'<'.$key.'>'.xml_convert($val).'</'.$key.'>'.$newline;
 			}
@@ -344,7 +344,7 @@ abstract class CI_DB_utility {
 		// Did the user submit any preferences? If so set them....
 		if( count($params) > 0)
 		{
-			foreach ($prefs as $key => $val)
+			foreach( $prefs as $key => $val)
 			{
 				if( isset($params[$key]))
 				{

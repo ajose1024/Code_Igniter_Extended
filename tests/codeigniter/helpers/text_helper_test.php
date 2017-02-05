@@ -39,7 +39,7 @@ class Text_helper_test extends CI_TestCase {
 			'†¥¨ˆøåß∂ƒ©˙∆˚¬'	=> '&#8224;&#165;&#168;&#710;&#248;&#229;&#223;&#8706;&#402;&#169;&#729;&#8710;&#730;&#172;'
 		);
 
-		foreach ($strs as $str => $expect)
+		foreach( $strs as $str => $expect)
 		{
 			$this->assertEquals($expect, ascii_to_entities($str));
 		}
@@ -54,7 +54,7 @@ class Text_helper_test extends CI_TestCase {
 			'&#8224;&#165;&#168;&#710;&#248;&#229;&#223;&#8706;&#402;&#169;&#729;&#8710;&#730;&#172;' => '†¥¨ˆøåß∂ƒ©˙∆˚¬'
 		);
 
-		foreach ($strs as $str => $expect)
+		foreach( $strs as $str => $expect)
 		{
 			$this->assertEquals($expect, entities_to_ascii($str));
 		}
@@ -83,7 +83,7 @@ class Text_helper_test extends CI_TestCase {
 			'Jake is really a boob'			=> 'Jake is really a $*#'
 		);
 
-		foreach ($strs as $str => $expect)
+		foreach( $strs as $str => $expect)
 		{
 			$this->assertEquals($expect, word_censor($str, $censored, '$*#'));
 		}
@@ -113,7 +113,7 @@ class Text_helper_test extends CI_TestCase {
 			''                          => ''
 		);
 
-		foreach ($strs as $str => $expect)
+		foreach( $strs as $str => $expect)
 		{
 			$this->assertEquals($expect, highlight_phrase($str, 'this is'));
 		}
@@ -146,9 +146,9 @@ class Text_helper_test extends CI_TestCase {
 			),
 		);
 
-		foreach ($strs as $pos => $s)
+		foreach( $strs as $pos => $s)
 		{
-			foreach ($s as $str => $expect)
+			foreach( $s as $str => $expect)
 			{
 				$this->assertEquals($expect, ellipsize($str, 10, $pos));
 			}

@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Trackback Class
@@ -123,7 +123,7 @@ class CI_Trackback {
 		}
 
 		// Pre-process the Trackback Data
-		foreach (array('url', 'title', 'excerpt', 'blog_name', 'ping_url') as $item)
+		foreach( array('url', 'title', 'excerpt', 'blog_name', 'ping_url') as $item)
 		{
 			if(  ! isset($tb_data[$item]))
 			{
@@ -164,7 +164,7 @@ class CI_Trackback {
 		$return = TRUE;
 		if( count($ping_url) > 0)
 		{
-			foreach ($ping_url as $url)
+			foreach( $ping_url as $url)
 			{
 				if( $this->process($url, $data) === FALSE)
 				{
@@ -190,7 +190,7 @@ class CI_Trackback {
 	 */
 	public function receive()
 	{
-		foreach (array('url', 'title', 'blog_name', 'excerpt') as $val)
+		foreach( array('url', 'title', 'blog_name', 'excerpt') as $val)
 		{
 			if( empty($_POST[$val]))
 			{
@@ -465,7 +465,7 @@ class CI_Trackback {
 		}
 
 		$out = '';
-		foreach (explode(' ', trim($str)) as $val)
+		foreach( explode(' ', trim($str)) as $val)
 		{
 			$out .= $val.' ';
 			if( strlen($out) >= $n)

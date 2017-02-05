@@ -117,7 +117,7 @@ class Table_test extends CI_TestCase {
 			'table_close'
 		);
 
-		foreach ($keys as $key)
+		foreach( $keys as $key)
 		{
 			$this->assertArrayHasKey($key, $this->table->default_template());
 		}
@@ -182,7 +182,7 @@ class Table_test extends CI_TestCase {
 			'Katie', 'Blue'
 		), 3);
 
-		foreach ($rows as $row)
+		foreach( $rows as $row)
 		{
 			$this->table->add_row($row);
 		}

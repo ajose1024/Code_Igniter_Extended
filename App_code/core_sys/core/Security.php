@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Security Class
@@ -172,7 +172,7 @@ class CI_Security {
 		if( config_item('csrf_protection'))
 		{
 			// CSRF config
-			foreach (array('csrf_expire', 'csrf_token_name', 'csrf_cookie_name') as $key)
+			foreach( array('csrf_expire', 'csrf_token_name', 'csrf_cookie_name') as $key)
 			{
 				if( NULL !== ($val = config_item($key)))
 				{
@@ -214,7 +214,7 @@ class CI_Security {
 		if( $exclude_uris = config_item('csrf_exclude_uris'))
 		{
 			$uri = load_class('URI', 'core');
-			foreach ($exclude_uris as $excluded)
+			foreach( $exclude_uris as $excluded)
 			{
 				if( preg_match('#^'.$excluded.'$#i'.(UTF8_ENABLED ? 'u' : ''), $uri->uri_string()))
 				{
@@ -439,7 +439,7 @@ class CI_Security {
 			'write', 'cookie', 'window', 'confirm', 'prompt', 'eval'
 		);
 
-		foreach ($words as $word)
+		foreach( $words as $word)
 		{
 			$word = implode('\s*', str_split($word)).'\s*';
 
@@ -683,7 +683,7 @@ class CI_Security {
 
 				$replace = array();
 				$matches = array_unique(array_map('strtolower', $matches[0]));
-				foreach ($matches as &$match)
+				foreach( $matches as &$match)
 				{
 					if( ($char = array_search($match.';', $_entities, TRUE)) !== FALSE)
 					{
@@ -944,7 +944,7 @@ class CI_Security {
 		$out = '';
 		if( preg_match_all('#\s*[a-z\-]+\s*=\s*(\042|\047)([^\\1]*?)\\1#is', $str, $matches))
 		{
-			foreach ($matches[0] as $match)
+			foreach( $matches[0] as $match)
 			{
 				$out .= preg_replace('#/\*.*?\*/#s', '', $match);
 			}
@@ -989,7 +989,7 @@ class CI_Security {
 	{
 		$str = str_replace(array_keys($this->_never_allowed_str), $this->_never_allowed_str, $str);
 
-		foreach ($this->_never_allowed_regex as $regex)
+		foreach( $this->_never_allowed_regex as $regex)
 		{
 			$str = preg_replace('#'.$regex.'#is', '[removed]', $str);
 		}

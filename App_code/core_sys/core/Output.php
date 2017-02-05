@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Output Class
@@ -364,7 +364,7 @@ class CI_Output {
 			unset($sections['query_toggle_count']);
 		}
 
-		foreach ($sections as $section => $enable)
+		foreach( $sections as $section => $enable)
 		{
 			$this->_profiler_sections[$section] = ($enable !== FALSE);
 		}
@@ -462,7 +462,7 @@ class CI_Output {
 		// Are there any server headers to send?
 		if( count($this->headers) > 0)
 		{
-			foreach ($this->headers as $header)
+			foreach( $this->headers as $header)
 			{
 				@header($header[0], $header[1]);
 			}
@@ -544,7 +544,7 @@ class CI_Output {
 	{
 		$CI =& get_instance();
 		$path = $CI->config->item('cache_path');
-		$cache_path = ($path === '') ? APPPATH.'cache/' : $path;
+		$cache_path = ($path === '') ? APP_DIR_PATH.'cache/' : $path;
 
 		if(  ! is_dir($cache_path) OR ! is_really_writable($cache_path))
 		{
@@ -648,7 +648,7 @@ class CI_Output {
 	 */
 	public function _display_cache(&$CFG, &$URI)
 	{
-		$cache_path = ($CFG->item('cache_path') === '') ? APPPATH.'cache/' : $CFG->item('cache_path');
+		$cache_path = ($CFG->item('cache_path') === '') ? APP_DIR_PATH.'cache/' : $CFG->item('cache_path');
 
 		// Build the file path. The file name is an MD5 hash of the full URI
 		$uri = $CFG->item('base_url').$CFG->item('index_page').$URI->uri_string;
@@ -705,7 +705,7 @@ class CI_Output {
 		}
 
 		// Add headers from cache file.
-		foreach ($cache_info['headers'] as $header)
+		foreach( $cache_info['headers'] as $header)
 		{
 			$this->set_header($header[0], $header[1]);
 		}
@@ -730,7 +730,7 @@ class CI_Output {
 		$cache_path = $CI->config->item('cache_path');
 		if( $cache_path === '')
 		{
-			$cache_path = APPPATH.'cache/';
+			$cache_path = APP_DIR_PATH.'cache/';
 		}
 
 		if(  ! is_dir($cache_path))

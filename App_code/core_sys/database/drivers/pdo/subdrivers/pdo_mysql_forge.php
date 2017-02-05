@@ -35,7 +35,7 @@
  * @since	Version 3.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * PDO MySQL Forge Class
@@ -116,7 +116,7 @@ class CI_DB_pdo_mysql_forge extends CI_DB_pdo_forge {
 	{
 		$sql = '';
 
-		foreach (array_keys($attributes) as $key)
+		foreach( array_keys($attributes) as $key)
 		{
 			if( is_string($key))
 			{

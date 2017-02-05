@@ -391,7 +391,7 @@ same level as the control statement that "owns" them.
 		// ...
 	}
 
-	foreach ($arr as $key => $val) {
+	foreach( $arr as $key => $val) {
 		// ...
 	}
 
@@ -423,7 +423,7 @@ same level as the control statement that "owns" them.
 		// ...
 	}
 
-	foreach ($arr as $key => $val)
+	foreach( $arr as $key => $val)
 	{
 		// ...
 	}
@@ -491,7 +491,7 @@ functions and increase readability.
 
 **CORRECT**::
 
-	foreach ($query->result() as $row) // single space following PHP control structures, but not in interior parenthesis
+	foreach( $query->result() as $row) // single space following PHP control structures, but not in interior parenthesis
 
 Localized Text
 ==============

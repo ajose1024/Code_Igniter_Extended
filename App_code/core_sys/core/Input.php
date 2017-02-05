@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Input Class
@@ -185,7 +185,7 @@ class CI_Input {
 		if( is_array($index))
 		{
 			$output = array();
-			foreach ($index as $key)
+			foreach( $index as $key)
 			{
 				$output[$key] = $this->_fetch_from_array($array, $key, $xss_clean);
 			}
@@ -364,7 +364,7 @@ class CI_Input {
 		if( is_array($name))
 		{
 			// always leave 'name' in last place, as the loop will break otherwise, due to $$item
-			foreach (array('value', 'expire', 'domain', 'path', 'prefix', 'secure', 'httponly', 'name') as $item)
+			foreach( array('value', 'expire', 'domain', 'path', 'prefix', 'secure', 'httponly', 'name') as $item)
 			{
 				if( isset($name[$item]))
 				{
@@ -436,7 +436,7 @@ class CI_Input {
 
 		if( $proxy_ips)
 		{
-			foreach (array('HTTP_X_FORWARDED_FOR', 'HTTP_CLIENT_IP', 'HTTP_X_CLIENT_IP', 'HTTP_X_CLUSTER_CLIENT_IP') as $header)
+			foreach( array('HTTP_X_FORWARDED_FOR', 'HTTP_CLIENT_IP', 'HTTP_X_CLIENT_IP', 'HTTP_X_CLUSTER_CLIENT_IP') as $header)
 			{
 				if( ($spoof = $this->server($header)) !== NULL)
 				{
@@ -608,7 +608,7 @@ class CI_Input {
 		}
 		elseif( is_array($_GET))
 		{
-			foreach ($_GET as $key => $val)
+			foreach( $_GET as $key => $val)
 			{
 				$_GET[$this->_clean_input_keys($key)] = $this->_clean_input_data($val);
 			}
@@ -617,7 +617,7 @@ class CI_Input {
 		// Clean $_POST Data
 		if( is_array($_POST))
 		{
-			foreach ($_POST as $key => $val)
+			foreach( $_POST as $key => $val)
 			{
 				$_POST[$this->_clean_input_keys($key)] = $this->_clean_input_data($val);
 			}
@@ -637,7 +637,7 @@ class CI_Input {
 				$_COOKIE['$Domain']
 			);
 
-			foreach ($_COOKIE as $key => $val)
+			foreach( $_COOKIE as $key => $val)
 			{
 				if( ($cookie_key = $this->_clean_input_keys($key)) !== FALSE)
 				{
@@ -672,7 +672,7 @@ class CI_Input {
 		if( is_array($str))
 		{
 			$new_array = array();
-			foreach (array_keys($str) as $key)
+			foreach( array_keys($str) as $key)
 			{
 				$new_array[$this->_clean_input_keys($key)] = $this->_clean_input_data($str[$key]);
 			}
@@ -771,7 +771,7 @@ class CI_Input {
 
 		$this->headers['Content-Type'] = isset($_SERVER['CONTENT_TYPE']) ? $_SERVER['CONTENT_TYPE'] : @getenv('CONTENT_TYPE');
 
-		foreach ($_SERVER as $key => $val)
+		foreach( $_SERVER as $key => $val)
 		{
 			if( sscanf($key, 'HTTP_%s', $header) === 1)
 			{
@@ -804,7 +804,7 @@ class CI_Input {
 		if(  ! isset($headers))
 		{
 			empty($this->headers) && $this->request_headers();
-			foreach ($this->headers as $key => $value)
+			foreach( $this->headers as $key => $value)
 			{
 				$headers[strtolower($key)] = $value;
 			}

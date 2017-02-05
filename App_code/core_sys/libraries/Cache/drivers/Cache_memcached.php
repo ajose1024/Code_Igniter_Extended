@@ -35,7 +35,7 @@
  * @since	Version 2.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * CodeIgniter Memcached Caching Class
@@ -89,7 +89,7 @@ class CI_Cache_memcached extends CI_Driver {
 			{
 				$this->_memcache_conf = array();
 
-				foreach ($CI->config->config['memcached'] as $name => $conf)
+				foreach( $CI->config->config['memcached'] as $name => $conf)
 				{
 					$this->_memcache_conf[$name] = $conf;
 				}
@@ -109,7 +109,7 @@ class CI_Cache_memcached extends CI_Driver {
 			log_message('error', 'Cache: Failed to create Memcache(d) object; extension not loaded?');
 		}
 
-		foreach ($this->_memcache_conf as $cache_server)
+		foreach( $this->_memcache_conf as $cache_server)
 		{
 			isset($cache_server['hostname']) OR $cache_server['hostname'] = $defaults['host'];
 			isset($cache_server['port']) OR $cache_server['port'] = $defaults['port'];

@@ -35,7 +35,7 @@
  * @since	Version 1.4.1
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * oci8 Database Adapter Class
@@ -161,7 +161,7 @@ class CI_DB_oci8_driver extends CI_DB {
 
 		if( $this->dsn !== '')
 		{
-			foreach ($valid_dsns as $regexp)
+			foreach( $valid_dsns as $regexp)
 			{
 				if( preg_match($regexp, $this->dsn))
 				{
@@ -207,7 +207,7 @@ class CI_DB_oci8_driver extends CI_DB {
 		}
 
 		$this->database = str_replace(array("\n", "\r", "\t", ' '), '', $this->database);
-		foreach ($valid_dsns as $regexp)
+		foreach( $valid_dsns as $regexp)
 		{
 			if( preg_match($regexp, $this->database))
 			{
@@ -325,7 +325,7 @@ class CI_DB_oci8_driver extends CI_DB {
 		$sql = 'BEGIN '.$package.'.'.$procedure.'(';
 
 		$have_cursor = FALSE;
-		foreach ($params as $param)
+		foreach( $params as $param)
 		{
 			$sql .= $param['name'].',';
 
@@ -359,9 +359,9 @@ class CI_DB_oci8_driver extends CI_DB {
 			return;
 		}
 
-		foreach ($params as $param)
+		foreach( $params as $param)
 		{
-			foreach (array('name', 'value', 'type', 'length') as $val)
+			foreach( array('name', 'value', 'type', 'length') as $val)
 			{
 				if(  ! isset($param[$val]))
 				{

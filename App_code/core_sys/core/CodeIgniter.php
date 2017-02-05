@@ -35,7 +35,7 @@
  * @since    Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * System Initialization File
@@ -62,19 +62,19 @@ defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
  *  Load the framework constants
  * ------------------------------------------------------
  */
-    if( file_exists(APPPATH.'config/'.ENVIRONMENT.'/constants.php'))
+    if( file_exists(APP_DIR_PATH.'config/'.ENVIRONMENT.'/constants.php'))
     {
-        require_once(APPPATH.'config/'.ENVIRONMENT.'/constants.php');
+        require_once(APP_DIR_PATH.'config/'.ENVIRONMENT.'/constants.php');
     }
 
-    require_once(APPPATH.'config/constants.php');
+    require_once(APP_DIR_PATH.'config/constants.php');
 
 /*
  * ------------------------------------------------------
  *  Load the global functions
  * ------------------------------------------------------
  */
-    require_once(BASEPATH . 'core/Common.php');
+    require_once(SYS_CORE_PATH . 'core/Common.php');
 
 
 /*
@@ -108,14 +108,14 @@ if(  ! is_php('5.4'))
         );
 
         $_registered = ini_get('variables_order');
-        foreach (array('E' => '_ENV', 'G' => '_GET', 'P' => '_POST', 'C' => '_COOKIE', 'S' => '_SERVER') as $key => $superglobal)
+        foreach( array('E' => '_ENV', 'G' => '_GET', 'P' => '_POST', 'C' => '_COOKIE', 'S' => '_SERVER') as $key => $superglobal)
         {
             if( strpos($_registered, $key) === FALSE)
             {
                 continue;
             }
 
-            foreach (array_keys($$superglobal) as $var)
+            foreach( array_keys($$superglobal) as $var)
             {
                 if( isset($GLOBALS[$var]) && ! in_array($var, $_protected, TRUE))
                 {
@@ -166,9 +166,9 @@ if(  ! is_php('5.4'))
     {
         if( $composer_autoload === TRUE)
         {
-            file_exists(APPPATH.'vendor/autoload.php')
-                ? require_once(APPPATH.'vendor/autoload.php')
-                : log_message('error', '$config[\'composer_autoload\'] is set to TRUE but '.APPPATH.'vendor/autoload.php was not found.');
+            file_exists(APP_DIR_PATH.'vendor/autoload.php')
+                ? require_once(APP_DIR_PATH.'vendor/autoload.php')
+                : log_message('error', '$config[\'composer_autoload\'] is set to TRUE but '.APP_DIR_PATH.'vendor/autoload.php was not found.');
         }
         elseif( file_exists($composer_autoload))
         {
@@ -218,7 +218,7 @@ if(  ! is_php('5.4'))
     // Do we have any manually set config items in the index.php file?
     if( isset($assign_to_config) && is_array($assign_to_config))
     {
-        foreach ($assign_to_config as $key => $value)
+        foreach( $assign_to_config as $key => $value)
         {
             $CFG->set_item($key, $value);
         }
@@ -281,10 +281,10 @@ if(  ! is_php('5.4'))
  * ------------------------------------------------------
  */
 
-    require_once(BASEPATH . 'core/compat/mbstring.php');
-    require_once(BASEPATH . 'core/compat/hash.php');
-    require_once(BASEPATH . 'core/compat/password.php');
-    require_once(BASEPATH . 'core/compat/standard.php');
+    require_once(SYS_CORE_PATH . 'core/compat/mbstring.php');
+    require_once(SYS_CORE_PATH . 'core/compat/hash.php');
+    require_once(SYS_CORE_PATH . 'core/compat/password.php');
+    require_once(SYS_CORE_PATH . 'core/compat/standard.php');
 
 /*
  * ------------------------------------------------------
@@ -352,7 +352,7 @@ if(  ! is_php('5.4'))
  *
  */
     // Load the base controller class
-    require_once BASEPATH . 'core/Controller.php';
+    require_once SYS_CORE_PATH . 'core/Controller.php';
 
     /**
      * Reference to the CI_Controller method.
@@ -366,9 +366,9 @@ if(  ! is_php('5.4'))
         return CI_Controller::get_instance();
     }
 
-    if( file_exists(APPPATH.'core/'.$CFG->config['subclass_prefix'].'Controller.php'))
+    if( file_exists(APP_DIR_PATH.'core/'.$CFG->config['subclass_prefix'].'Controller.php'))
     {
-        require_once APPPATH.'core/'.$CFG->config['subclass_prefix'].'Controller.php';
+        require_once APP_DIR_PATH.'core/'.$CFG->config['subclass_prefix'].'Controller.php';
     }
 
     // Set a mark point for benchmarking
@@ -399,13 +399,13 @@ if(  ! is_php('5.4'))
     $class = ucfirst($RTR->class);
     $method = $RTR->method;
 
-    if( empty($class) OR ! file_exists(APPPATH.'controllers/'.$RTR->directory.$class.'.php'))
+    if( empty($class) OR ! file_exists(APP_DIR_PATH.'controllers/'.$RTR->directory.$class.'.php'))
     {
         $e404 = TRUE;
     }
     else
     {
-        require_once(APPPATH.'controllers/'.$RTR->directory.$class.'.php');
+        require_once(APP_DIR_PATH.'controllers/'.$RTR->directory.$class.'.php');
 
         if(  ! class_exists($class, FALSE) OR $method[0] === '_' OR method_exists('CI_Controller', $method))
         {
@@ -439,15 +439,15 @@ if(  ! is_php('5.4'))
 
             if(  ! class_exists($error_class, FALSE))
             {
-                if( file_exists(APPPATH.'controllers/'.$RTR->directory.$error_class.'.php'))
+                if( file_exists(APP_DIR_PATH.'controllers/'.$RTR->directory.$error_class.'.php'))
                 {
-                    require_once(APPPATH.'controllers/'.$RTR->directory.$error_class.'.php');
+                    require_once(APP_DIR_PATH.'controllers/'.$RTR->directory.$error_class.'.php');
                     $e404 = ! class_exists($error_class, FALSE);
                 }
                 // Were we in a directory? If so, check for a global override
-                elseif(  ! empty($RTR->directory) && file_exists(APPPATH.'controllers/'.$error_class.'.php'))
+                elseif(  ! empty($RTR->directory) && file_exists(APP_DIR_PATH.'controllers/'.$error_class.'.php'))
                 {
-                    require_once(APPPATH.'controllers/'.$error_class.'.php');
+                    require_once(APP_DIR_PATH.'controllers/'.$error_class.'.php');
                     if( ($e404 = ! class_exists($error_class, FALSE)) === FALSE)
                     {
                         $RTR->directory = '';

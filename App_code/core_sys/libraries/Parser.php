@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Parser Class
@@ -141,7 +141,7 @@ class CI_Parser {
 		}
 
 		$replace = array();
-		foreach ($data as $key => $val)
+		foreach( $data as $key => $val)
 		{
 			$replace = array_merge(
 				$replace,
@@ -214,13 +214,13 @@ class CI_Parser {
 			PREG_SET_ORDER
 		);
 
-		foreach ($matches as $match)
+		foreach( $matches as $match)
 		{
 			$str = '';
-			foreach ($data as $row)
+			foreach( $data as $row)
 			{
 				$temp = array();
-				foreach ($row as $key => $val)
+				foreach( $row as $key => $val)
 				{
 					if( is_array($val))
 					{

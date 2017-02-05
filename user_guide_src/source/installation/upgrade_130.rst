@@ -52,11 +52,11 @@ Step 3: Update your index.php file
 Please open your main index.php file (located at your root). At the very
 bottom of the file, change this::
 
-	require_once BASEPATH . 'libraries/Front_controller'.EXT;
+	require_once SYS_CORE_PATH . 'libraries/Front_controller'.EXT;
 
 To this::
 
-	require_once BASEPATH . 'codeigniter/CodeIgniter'.EXT;
+	require_once SYS_CORE_PATH . 'codeigniter/CodeIgniter'.EXT;
 
 Step 4: Update your config.php file
 ===================================

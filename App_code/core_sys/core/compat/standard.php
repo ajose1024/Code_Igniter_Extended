@@ -35,7 +35,7 @@
  * @since	Version 3.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * PHP ext/standard compatibility package
@@ -104,7 +104,7 @@ if(  ! function_exists('array_column'))
 		}
 
 		$result = array();
-		foreach ($array as &$a)
+		foreach( $array as &$a)
 		{
 			if( $column_key === NULL)
 			{
@@ -233,7 +233,7 @@ if(  ! function_exists('array_replace'))
 				continue;
 			}
 
-			foreach (array_keys($arrays[$i]) as $key)
+			foreach( array_keys($arrays[$i]) as $key)
 			{
 				$array[$key] = $arrays[$i][$key];
 			}
@@ -288,7 +288,7 @@ if(  ! function_exists('array_replace_recursive'))
 				continue;
 			}
 
-			foreach (array_keys($arrays[$i]) as $key)
+			foreach( array_keys($arrays[$i]) as $key)
 			{
 				$array[$key] = (is_array($arrays[$i][$key]) && isset($array[$key]) && is_array($array[$key]))
 					? array_replace_recursive($array[$key], $arrays[$i][$key])

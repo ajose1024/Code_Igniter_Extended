@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Zip Compression Class
@@ -128,7 +128,7 @@ class CI_Zip {
 	 */
 	public function add_dir($directory)
 	{
-		foreach ((array) $directory as $dir)
+		foreach( (array) $directory as $dir)
 		{
 			if(  ! preg_match('|.+/$|', $dir))
 			{
@@ -227,7 +227,7 @@ class CI_Zip {
 	{
 		if( is_array($filepath))
 		{
-			foreach ($filepath as $path => $data)
+			foreach( $filepath as $path => $data)
 			{
 				$file_data = $this->_get_mod_time($path);
 				$this->_add_data($path, $data, $file_data['file_mtime'], $file_data['file_mdate']);

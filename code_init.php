@@ -225,13 +225,13 @@ switch( ENVIRONMENT )
     define( 'SELF', pathinfo( __FILE__, PATHINFO_BASENAME ) ) ;
 
     // Path to the system folder
-    define( 'BASEPATH', str_replace( '\\', '/', $system_path ) ) ;
+    define( 'SYS_CORE_PATH', str_replace( '\\', '/', $system_path ) ) ;
 
     // Path to the front controller (this file)
     define( 'FCPATH', dirname( __FILE__ ) . '/' ) ;
 
     // Name of the "system folder"
-    define( 'SYSDIR', trim( strrchr( trim( BASEPATH, '/' ), '/' ), '/' ) ) ;
+    define( 'SYSDIR', trim( strrchr( trim( SYS_CORE_PATH, '/' ), '/' ), '/' ) ) ;
 
     // The path to the "application" folder
     if( is_dir( $application_folder ) )
@@ -241,28 +241,28 @@ switch( ENVIRONMENT )
             $application_folder = $_temp ;
         }
 
-        define( 'APPPATH', $application_folder . DIRECTORY_SEPARATOR ) ;
+        define( 'APP_DIR_PATH', $application_folder . DIRECTORY_SEPARATOR ) ;
     }
     else
     {
-        if( ! is_dir( BASEPATH . $application_folder . DIRECTORY_SEPARATOR ) )
+        if( ! is_dir( SYS_CORE_PATH . $application_folder . DIRECTORY_SEPARATOR ) )
         {
             header( 'HTTP/1.1 503 Service Unavailable.', TRUE, 503 ) ;
             echo 'Your application folder path does not appear to be set correctly. Please open the following file and correct this: ' . SELF ;
             exit( 3 ) ;     // EXIT_CONFIG
         }
 
-        define( 'APPPATH', BASEPATH . $application_folder . DIRECTORY_SEPARATOR ) ;
+        define( 'APP_DIR_PATH', SYS_CORE_PATH . $application_folder . DIRECTORY_SEPARATOR ) ;
     }
 
     // The path to the "views" folder
     if( ! is_dir( $view_folder ) )
     {
-        if( ! empty( $view_folder ) && is_dir( APPPATH . $view_folder . DIRECTORY_SEPARATOR ) )
+        if( ! empty( $view_folder ) && is_dir( APP_DIR_PATH . $view_folder . DIRECTORY_SEPARATOR ) )
         {
-            $view_folder = APPPATH . $view_folder ;
+            $view_folder = APP_DIR_PATH . $view_folder ;
         }
-        elseif( ! is_dir( APPPATH . 'views' . DIRECTORY_SEPARATOR ) )
+        elseif( ! is_dir( APP_DIR_PATH . 'views' . DIRECTORY_SEPARATOR ) )
         {
             header( 'HTTP/1.1 503 Service Unavailable.', TRUE, 503 ) ;
             echo 'Your view folder path does not appear to be set correctly. Please open the following file and correct this: ' . SELF ;
@@ -270,7 +270,7 @@ switch( ENVIRONMENT )
         }
         else
         {
-            $view_folder = APPPATH . 'views' ;
+            $view_folder = APP_DIR_PATH . 'views' ;
         }
     }
 
@@ -292,4 +292,4 @@ switch( ENVIRONMENT )
  *
  * And away we go...
  */
-require_once BASEPATH . 'core/CodeIgniter.php' ;
+require_once SYS_CORE_PATH . 'core/CodeIgniter.php' ;

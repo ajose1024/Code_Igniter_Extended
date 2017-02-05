@@ -282,7 +282,7 @@ class Date_helper_test extends CI_TestCase {
 			'UP14'		=> +14
 		);
 
-		foreach ($zones AS $test => $expected)
+		foreach( $zones AS $test => $expected)
 		{
 			$this->assertEquals($expected, timezones($test));
 		}

@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * CodeIgniter Text Helpers
@@ -110,7 +110,7 @@ if(  ! function_exists('character_limiter'))
 		}
 
 		$out = '';
-		foreach (explode(' ', trim($str)) as $val)
+		foreach( explode(' ', trim($str)) as $val)
 		{
 			$out .= $val.' ';
 
@@ -273,7 +273,7 @@ if(  ! function_exists('word_censor'))
 		// a bad word will be bookeneded by any of these characters.
 		$delim = '[-_\'\"`(){}<>\[\]|!?@#%&,.:;^~*+=\/ 0-9\n\r\t]';
 
-		foreach ($censored as $badword)
+		foreach( $censored as $badword)
 		{
 			if( $replacement !== '')
 			{
@@ -383,14 +383,14 @@ if(  ! function_exists('convert_accented_characters'))
 
 		if(  ! is_array($array_from))
 		{
-			if( file_exists(APPPATH.'config/foreign_chars.php'))
+			if( file_exists(APP_DIR_PATH.'config/foreign_chars.php'))
 			{
-				include(APPPATH.'config/foreign_chars.php');
+				include(APP_DIR_PATH.'config/foreign_chars.php');
 			}
 
-			if( file_exists(APPPATH.'config/'.ENVIRONMENT.'/foreign_chars.php'))
+			if( file_exists(APP_DIR_PATH.'config/'.ENVIRONMENT.'/foreign_chars.php'))
 			{
-				include(APPPATH.'config/'.ENVIRONMENT.'/foreign_chars.php');
+				include(APP_DIR_PATH.'config/'.ENVIRONMENT.'/foreign_chars.php');
 			}
 
 			if( empty($foreign_characters) OR ! is_array($foreign_characters))
@@ -457,7 +457,7 @@ if(  ! function_exists('word_wrap'))
 
 		// Split the string into individual lines of text and cycle through them
 		$output = '';
-		foreach (explode("\n", $str) as $line)
+		foreach( explode("\n", $str) as $line)
 		{
 			// Is the line within the allowed character count?
 			// If so we'll join it to the output and continue
@@ -496,7 +496,7 @@ if(  ! function_exists('word_wrap'))
 		// Put our markers back
 		if( count($unwrap) > 0)
 		{
-			foreach ($unwrap as $key => $val)
+			foreach( $unwrap as $key => $val)
 			{
 				$output = str_replace('{{unwrapped'.$key.'}}', $val, $output);
 			}

@@ -217,7 +217,7 @@ Class Reference
 
 			$segs = $this->uri->segment_array();
 
-			foreach ($segs as $segment)
+			foreach( $segs as $segment)
 			{
 				echo $segment;
 				echo '<br />';

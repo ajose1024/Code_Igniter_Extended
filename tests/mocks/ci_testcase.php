@@ -203,7 +203,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 		// Check for array
 		if( is_array($file))
 		{
-			foreach ($file as $name => $content)
+			foreach( $file as $name => $content)
 			{
 				$this->ci_vfs_create($name, $content, $root, $path);
 			}
@@ -255,7 +255,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 		// Create any remaining subdirectories
 		if( $subs)
 		{
-			foreach (array_reverse($subs) as $dir)
+			foreach( array_reverse($subs) as $dir)
 			{
 				// Wrap content in subdirectory for creation
 				$tree = array($dir => $tree);
@@ -279,7 +279,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 		// Check for array
 		if( is_array($path))
 		{
-			foreach ($path as $file)
+			foreach( $path as $file)
 			{
 				$this->ci_vfs_clone($file, $dest);
 			}

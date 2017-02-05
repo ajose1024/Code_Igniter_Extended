@@ -79,7 +79,7 @@ class Encryption_test extends CI_TestCase {
 			)
 		);
 
-		foreach ($vectors as $test)
+		foreach( $vectors as $test)
 		{
 			$this->assertEquals(
 				$test['okm'],
@@ -340,7 +340,7 @@ class Encryption_test extends CI_TestCase {
 		);
 		$driver_index = array('mcrypt', 'openssl');
 
-		foreach ($portable as &$test)
+		foreach( $portable as &$test)
 		{
 			// Add some randomness to the selected driver
 			$driver = mt_rand(0,1);

@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * CodeIgniter Profiler Class
@@ -101,7 +101,7 @@ class CI_Profiler {
 		$this->CI->load->language('profiler');
 
 		// default all sections to display
-		foreach ($this->_available_sections as $section)
+		foreach( $this->_available_sections as $section)
 		{
 			if(  ! isset($config[$section]))
 			{
@@ -131,7 +131,7 @@ class CI_Profiler {
 			unset($config['query_toggle_count']);
 		}
 
-		foreach ($config as $method => $enable)
+		foreach( $config as $method => $enable)
 		{
 			if( in_array($method, $this->_available_sections))
 			{
@@ -155,7 +155,7 @@ class CI_Profiler {
 	protected function _compile_benchmarks()
 	{
 		$profile = array();
-		foreach ($this->CI->benchmark->marker as $key => $val)
+		foreach( $this->CI->benchmark->marker as $key => $val)
 		{
 			// We match the "end" marker so that the list ends
 			// up in the order that it was defined
@@ -176,7 +176,7 @@ class CI_Profiler {
 			.'<legend style="color:#900;">&nbsp;&nbsp;'.$this->CI->lang->line('profiler_benchmarks')."&nbsp;&nbsp;</legend>"
 			."\n\n\n<table style=\"width:100%;\">\n";
 
-		foreach ($profile as $key => $val)
+		foreach( $profile as $key => $val)
 		{
 			$key = ucwords(str_replace(array('_', '-'), ' ', $key));
 			$output .= '<tr><td style="padding:5px;width:50%;color:#000;font-weight:bold;background-color:#ddd;">'
@@ -199,7 +199,7 @@ class CI_Profiler {
 		$dbs = array();
 
 		// Let's determine which databases are currently connected to
-		foreach (get_object_vars($this->CI) as $name => $cobject)
+		foreach( get_object_vars($this->CI) as $name => $cobject)
 		{
 			if( is_object($cobject))
 			{
@@ -209,7 +209,7 @@ class CI_Profiler {
 				}
 				elseif( $cobject instanceof CI_Model)
 				{
-					foreach (get_object_vars($cobject) as $mname => $mobject)
+					foreach( get_object_vars($cobject) as $mname => $mobject)
 					{
 						if( $mobject instanceof CI_DB)
 						{
@@ -241,7 +241,7 @@ class CI_Profiler {
 		$output  = "\n\n";
 		$count = 0;
 
-		foreach ($dbs as $name => $db)
+		foreach( $dbs as $name => $db)
 		{
 			$hide_queries = (count($db->queries) > $this->_query_toggle_count) ? ' display:none' : '';
 			$total_time = number_format(array_sum($db->query_times), 4).' '.$this->CI->lang->line('profiler_seconds');
@@ -267,12 +267,12 @@ class CI_Profiler {
 			}
 			else
 			{
-				foreach ($db->queries as $key => $val)
+				foreach( $db->queries as $key => $val)
 				{
 					$time = number_format($db->query_times[$key], 4);
 					$val = highlight_code($val);
 
-					foreach ($highlight as $bold)
+					foreach( $highlight as $bold)
 					{
 						$val = str_replace($bold, '<strong>'.$bold.'</strong>', $val);
 					}
@@ -312,7 +312,7 @@ class CI_Profiler {
 		{
 			$output .= "\n\n<table style=\"width:100%;border:none;\">\n";
 
-			foreach ($_GET as $key => $val)
+			foreach( $_GET as $key => $val)
 			{
 				is_int($key) OR $key = "'".$key."'";
 
@@ -350,7 +350,7 @@ class CI_Profiler {
 		{
 			$output .= "\n\n<table style=\"width:100%;\">\n";
 
-			foreach ($_POST as $key => $val)
+			foreach( $_POST as $key => $val)
 			{
 				is_int($key) OR $key = "'".$key."'";
 
@@ -369,7 +369,7 @@ class CI_Profiler {
 				$output .= "</td></tr>\n";
 			}
 
-			foreach ($_FILES as $key => $val)
+			foreach( $_FILES as $key => $val)
 			{
 				is_int($key) OR $key = "'".$key."'";
 
@@ -463,7 +463,7 @@ class CI_Profiler {
 			.'&nbsp;&nbsp;(<span style="cursor: pointer;" onclick="var s=document.getElementById(\'ci_profiler_httpheaders_table\').style;s.display=s.display==\'none\'?\'\':\'none\';this.innerHTML=this.innerHTML==\''.$this->CI->lang->line('profiler_section_show').'\'?\''.$this->CI->lang->line('profiler_section_hide').'\':\''.$this->CI->lang->line('profiler_section_show').'\';">'.$this->CI->lang->line('profiler_section_show')."</span>)</legend>\n\n\n"
 			.'<table style="width:100%;display:none;" id="ci_profiler_httpheaders_table">'."\n";
 
-		foreach (array('HTTP_ACCEPT', 'HTTP_USER_AGENT', 'HTTP_CONNECTION', 'SERVER_PORT', 'SERVER_NAME', 'REMOTE_ADDR', 'SERVER_SOFTWARE', 'HTTP_ACCEPT_LANGUAGE', 'SCRIPT_NAME', 'REQUEST_METHOD',' HTTP_HOST', 'REMOTE_HOST', 'CONTENT_TYPE', 'SERVER_PROTOCOL', 'QUERY_STRING', 'HTTP_ACCEPT_ENCODING', 'HTTP_X_FORWARDED_FOR', 'HTTP_DNT') as $header)
+		foreach( array('HTTP_ACCEPT', 'HTTP_USER_AGENT', 'HTTP_CONNECTION', 'SERVER_PORT', 'SERVER_NAME', 'REMOTE_ADDR', 'SERVER_SOFTWARE', 'HTTP_ACCEPT_LANGUAGE', 'SCRIPT_NAME', 'REQUEST_METHOD',' HTTP_HOST', 'REMOTE_HOST', 'CONTENT_TYPE', 'SERVER_PROTOCOL', 'QUERY_STRING', 'HTTP_ACCEPT_ENCODING', 'HTTP_X_FORWARDED_FOR', 'HTTP_DNT') as $header)
 		{
 			$val = isset($_SERVER[$header]) ? $_SERVER[$header] : '';
 			$output .= '<tr><td style="vertical-align:top;width:50%;padding:5px;color:#900;background-color:#ddd;">'
@@ -490,7 +490,7 @@ class CI_Profiler {
 			.'<legend style="color:#000;">&nbsp;&nbsp;'.$this->CI->lang->line('profiler_config').'&nbsp;&nbsp;(<span style="cursor: pointer;" onclick="var s=document.getElementById(\'ci_profiler_config_table\').style;s.display=s.display==\'none\'?\'\':\'none\';this.innerHTML=this.innerHTML==\''.$this->CI->lang->line('profiler_section_show').'\'?\''.$this->CI->lang->line('profiler_section_hide').'\':\''.$this->CI->lang->line('profiler_section_show').'\';">'.$this->CI->lang->line('profiler_section_show')."</span>)</legend>\n\n\n"
 			.'<table style="width:100%;display:none;" id="ci_profiler_config_table">'."\n";
 
-		foreach ($this->CI->config->config as $config => $val)
+		foreach( $this->CI->config->config as $config => $val)
 		{
 			if( is_array($val) OR is_object($val))
 			{
@@ -522,7 +522,7 @@ class CI_Profiler {
 			.'<legend style="color:#000;">&nbsp;&nbsp;'.$this->CI->lang->line('profiler_session_data').'&nbsp;&nbsp;(<span style="cursor: pointer;" onclick="var s=document.getElementById(\'ci_profiler_session_data\').style;s.display=s.display==\'none\'?\'\':\'none\';this.innerHTML=this.innerHTML==\''.$this->CI->lang->line('profiler_section_show').'\'?\''.$this->CI->lang->line('profiler_section_hide').'\':\''.$this->CI->lang->line('profiler_section_show').'\';">'.$this->CI->lang->line('profiler_section_show').'</span>)</legend>'
 			.'<table style="width:100%;display:none;" id="ci_profiler_session_data">';
 
-		foreach ($this->CI->session->userdata() as $key => $val)
+		foreach( $this->CI->session->userdata() as $key => $val)
 		{
 			if( is_array($val) OR is_object($val))
 			{
@@ -548,7 +548,7 @@ class CI_Profiler {
 		$output = '<div id="codeigniter_profiler" style="clear:both;background-color:#fff;padding:10px;">';
 		$fields_displayed = 0;
 
-		foreach ($this->_available_sections as $section)
+		foreach( $this->_available_sections as $section)
 		{
 			if( $this->_compile_{$section} !== FALSE)
 			{

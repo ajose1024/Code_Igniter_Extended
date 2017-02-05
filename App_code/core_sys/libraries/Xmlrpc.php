@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 if(  ! function_exists('xml_parser_create'))
 {
@@ -329,7 +329,7 @@ class CI_Xmlrpc {
 	{
 		if( count($config) > 0)
 		{
-			foreach ($config as $key => $val)
+			foreach( $config as $key => $val)
 			{
 				if( isset($this->$key))
 				{
@@ -421,7 +421,7 @@ class CI_Xmlrpc {
 
 		$this->data = array();
 
-		foreach ($incoming as $key => $value)
+		foreach( $incoming as $key => $value)
 		{
 			$this->data[$key] = $this->values_parsing($value);
 		}
@@ -1216,7 +1216,7 @@ class XML_RPC_Message extends CI_Xmlrpc
 			if( count($this->xh[$pname]['headers'] > 0))
 			{
 				echo "---HEADERS---\n";
-				foreach ($this->xh[$pname]['headers'] as $header)
+				foreach( $this->xh[$pname]['headers'] as $header)
 				{
 					echo $header."\n";
 				}

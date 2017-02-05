@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * CodeIgniter URL Helpers
@@ -54,7 +54,7 @@ if(  ! function_exists('site_url'))
 	/**
 	 * Site URL
 	 *
-	 * Create a local URL based on your BASEPATH .  Segments can be passed via the
+	 * Create a local URL based on your SYS_CORE_PATH .  Segments can be passed via the
 	 * first parameter either as a string or an array.
 	 *
 	 * @param	string	$uri
@@ -74,7 +74,7 @@ if(  ! function_exists('base_url'))
 	/**
 	 * Base URL
 	 *
-	 * Create a local URL based on your BASEPATH . 
+	 * Create a local URL based on your SYS_CORE_PATH . 
 	 * Segments can be passed in as a string or an array, same as site_url
 	 * or a URL to a file can be passed in, e.g. to an image file.
 	 *
@@ -224,7 +224,7 @@ if(  ! function_exists('anchor_popup'))
 			$window_name = '_blank';
 		}
 
-		foreach (array('width' => '800', 'height' => '600', 'scrollbars' => 'yes', 'menubar' => 'no', 'status' => 'yes', 'resizable' => 'yes', 'screenx' => '0', 'screeny' => '0') as $key => $val)
+		foreach( array('width' => '800', 'height' => '600', 'scrollbars' => 'yes', 'menubar' => 'no', 'status' => 'yes', 'resizable' => 'yes', 'screenx' => '0', 'screeny' => '0') as $key => $val)
 		{
 			$atts[$key] = isset($attributes[$key]) ? $attributes[$key] : $val;
 			unset($attributes[$key]);
@@ -299,7 +299,7 @@ if(  ! function_exists('safe_mailto'))
 		{
 			if( is_array($attributes))
 			{
-				foreach ($attributes as $key => $val)
+				foreach( $attributes as $key => $val)
 				{
 					$x[] = ' '.$key.'="';
 					for ($i = 0, $l = strlen($val); $i < $l; $i++)
@@ -401,7 +401,7 @@ if(  ! function_exists('auto_link'))
 			// We process the links in reverse order (last -> first) so that
 			// the returned string offsets from preg_match_all() are not
 			// moved as we add more HTML.
-			foreach (array_reverse($matches) as $match)
+			foreach( array_reverse($matches) as $match)
 			{
 				// $match[0] is the matched string/link
 				// $match[1] is either a protocol prefix or 'www.'
@@ -416,7 +416,7 @@ if(  ! function_exists('auto_link'))
 		// Find and replace any emails.
 		if( $type !== 'url' && preg_match_all('#([\w\.\-\+]+@[a-z0-9\-]+\.[a-z0-9\-\.]+[^[:punct:]\s])#i', $str, $matches, PREG_OFFSET_CAPTURE))
 		{
-			foreach (array_reverse($matches[0]) as $match)
+			foreach( array_reverse($matches[0]) as $match)
 			{
 				if( filter_var($match[0], FILTER_VALIDATE_EMAIL) !== FALSE)
 				{
@@ -498,7 +498,7 @@ if(  ! function_exists('url_title'))
 		);
 
 		$str = strip_tags($str);
-		foreach ($trans as $key => $val)
+		foreach( $trans as $key => $val)
 		{
 			$str = preg_replace('#'.$key.'#i'.(UTF8_ENABLED ? 'u' : ''), $val, $str);
 		}

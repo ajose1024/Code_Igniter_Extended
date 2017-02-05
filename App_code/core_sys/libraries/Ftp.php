@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * FTP Class
@@ -125,7 +125,7 @@ class CI_FTP {
 	 */
 	public function initialize($config = array())
 	{
-		foreach ($config as $key => $val)
+		foreach( $config as $key => $val)
 		{
 			if( isset($this->$key))
 			{

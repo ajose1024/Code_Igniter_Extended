@@ -49,7 +49,7 @@ $query, which can be used to show the results::
 
 	$query = $this->db->get('mytable');
 
-	foreach ($query->result() as $row)
+	foreach( $query->result() as $row)
 	{
 		echo $row->title;
 	}

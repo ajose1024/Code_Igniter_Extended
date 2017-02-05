@@ -35,7 +35,34 @@
  * @since    Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+
+/**
+ * Config Class Interface
+ *
+ * This class contains functions that enable config files to be managed
+ *
+ * @package        CodeIgniter
+ * @subpackage    Libraries
+ * @category    Libraries
+ * @author        EllisLab Dev Team
+ * @link        http://codeigniter.com/user_guide/libraries/config.html
+ */
+interface CI_Config_Interface
+{
+    /**
+     * Load Config File
+     *
+     * @param   string  $file               Configuration file name
+     * @param   bool    $use_sections       Whether configuration values should be loaded into their own section
+     * @param   bool    $fail_gracefully    Whether to just return FALSE or display an error message
+     * 
+     * @return  bool    TRUE if the file was loaded correctly or FALSE on failure
+     */
+    public function load( $file = '', $use_sections = FALSE, $fail_gracefully = FALSE ) ;
+}
+
+
 
 /**
  * Config Class
@@ -48,7 +75,8 @@ defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
  * @author        EllisLab Dev Team
  * @link        http://codeigniter.com/user_guide/libraries/config.html
  */
-class CI_Config {
+class CI_Config implements CI_Config_Interface
+{
 
     /**
      * List of all loaded config values
@@ -70,7 +98,7 @@ class CI_Config {
      * @used-by    CI_Loader
      * @var        array
      */
-    public $_config_paths =    array(APPPATH);
+    public $_config_paths =    array(APP_DIR_PATH);
 
     // --------------------------------------------------------------------
 
@@ -109,19 +137,22 @@ class CI_Config {
     /**
      * Load Config File
      *
-     * @param    string    $file            Configuration file name
-     * @param    bool    $use_sections        Whether configuration values should be loaded into their own section
-     * @param    bool    $fail_gracefully    Whether to just return FALSE or display an error message
-     * @return    bool    TRUE if the file was loaded correctly or FALSE on failure
+     * @param   string  $file               Configuration file name
+     * @param   bool    $use_sections       Whether configuration values should be loaded into their own section
+     * @param   bool    $fail_gracefully    Whether to just return FALSE or display an error message
+     * 
+     * @return  bool    TRUE if the file was loaded correctly or FALSE on failure
      */
-    public function load($file = '', $use_sections = FALSE, $fail_gracefully = FALSE)
+    public function load( $file = '', $use_sections = FALSE, $fail_gracefully = FALSE )
     {
-        $file = ($file === '') ? 'config' : str_replace('.php', '', $file);
-        $loaded = FALSE;
+        $file = ($file === '')
+            ?   'config'
+            :   str_replace( '.php', '', $file ) ;
+        $loaded = FALSE ;
 
-        foreach ($this->_config_paths as $path)
+        foreach( $this->_config_paths as $path)
         {
-            foreach (array($file, ENVIRONMENT.DIRECTORY_SEPARATOR.$file) as $location)
+            foreach( array($file, ENVIRONMENT.DIRECTORY_SEPARATOR.$file) as $location)
             {
                 $file_path = $path.'config/'.$location.'.php';
                 if( in_array($file_path, $this->is_loaded, TRUE))
@@ -348,11 +379,12 @@ class CI_Config {
      * System URL
      *
      * @deprecated    3.0.0    Encourages insecure practices
+     * 
      * @return    string
      */
     public function system_url()
     {
-        $x = explode('/', preg_replace('|/*(.+?)/*$|', '\\1', BASEPATH));
+        $x = explode('/', preg_replace('|/*(.+?)/*$|', '\\1', SYS_CORE_PATH));
         return $this->slash_item('base_url').end($x).'/';
     }
 
@@ -361,13 +393,14 @@ class CI_Config {
     /**
      * Set a config file item
      *
-     * @param    string    $item    Config item key
-     * @param    string    $value    Config item value
-     * @return    void
+     * @param   string  $item       Config item key
+     * @param   string  $value      Config item value
+     * 
+     * @return  void
      */
-    public function set_item($item, $value)
+    public function set_item( $item, $value )
     {
-        $this->config[$item] = $value;
+        $this->config[ $item ] = $value ;
     }
 
 }

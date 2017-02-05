@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * CodeIgniter File Helpers
@@ -236,7 +236,7 @@ if(  ! function_exists('get_dir_file_info'))
 				$source_dir = rtrim(realpath($source_dir), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
 			}
 
-			// Used to be foreach (scandir($source_dir, 1) as $file), but scandir() is simply not as fast
+			// Used to be foreach( scandir($source_dir, 1) as $file), but scandir() is simply not as fast
 			while (FALSE !== ($file = readdir($fp)))
 			{
 				if( is_dir($source_dir.$file) && $file[0] !== '.' && $top_level_only === FALSE)
@@ -286,7 +286,7 @@ if(  ! function_exists('get_file_info'))
 			$returned_values = explode(',', $returned_values);
 		}
 
-		foreach ($returned_values as $key)
+		foreach( $returned_values as $key)
 		{
 			switch( $key)
 			{

@@ -35,7 +35,7 @@
  * @since	Version 3.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * SQLite3 Database Adapter Class
@@ -242,7 +242,7 @@ class CI_DB_sqlite3_driver extends CI_DB {
 		}
 
 		$this->data_cache['field_names'][$table] = array();
-		foreach ($result->result_array() as $row)
+		foreach( $result->result_array() as $row)
 		{
 			$this->data_cache['field_names'][$table][] = $row['name'];
 		}

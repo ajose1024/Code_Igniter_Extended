@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Query Builder Class
@@ -277,7 +277,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		// If the escape value was not set, we will base it on the global setting
 		is_bool($escape) OR $escape = $this->_protect_identifiers;
 
-		foreach ($select as $val)
+		foreach( $select as $val)
 		{
 			$val = trim($val);
 
@@ -457,11 +457,11 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 	 */
 	public function from($from)
 	{
-		foreach ((array) $from as $val)
+		foreach( (array) $from as $val)
 		{
 			if( strpos($val, ',') !== FALSE)
 			{
-				foreach (explode(',', $val) as $v)
+				foreach( explode(',', $val) as $v)
 				{
 					$v = trim($v);
 					$this->_track_aliases($v);
@@ -649,7 +649,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		// If the escape value was not set will base it on the global setting
 		is_bool($escape) OR $escape = $this->_protect_identifiers;
 
-		foreach ($key as $k => $v)
+		foreach( $key as $k => $v)
 		{
 			$prefix = (count($this->$qb_key) === 0 && count($this->$qb_cache_key) === 0)
 				? $this->_group_get_type('')
@@ -797,7 +797,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		if( $escape === TRUE)
 		{
 			$where_in = array();
-			foreach ($values as $value)
+			foreach( $values as $value)
 			{
 				$where_in[] = $this->escape($value);
 			}
@@ -931,7 +931,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		// lowercase $side in case somebody writes e.g. 'BEFORE' instead of 'before' (doh)
 		$side = strtolower($side);
 
-		foreach ($field as $k => $v)
+		foreach( $field as $k => $v)
 		{
 			$prefix = (count($this->qb_where) === 0 && count($this->qb_cache_where) === 0)
 				? $this->_group_get_type('') : $this->_group_get_type($type);
@@ -1108,7 +1108,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 				: array($by);
 		}
 
-		foreach ($by as $val)
+		foreach( $by as $val)
 		{
 			$val = trim($val);
 
@@ -1203,7 +1203,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		else
 		{
 			$qb_orderby = array();
-			foreach (explode(',', $orderby) as $field)
+			foreach( explode(',', $orderby) as $field)
 			{
 				$qb_orderby[] = ($direction === '' && preg_match('/\s+(ASC|DESC)$/i', rtrim($field), $match, PREG_OFFSET_CAPTURE))
 					? array('field' => ltrim(substr($field, 0, $match[0][1])), 'direction' => ' '.$match[1][0], 'escape' => TRUE)
@@ -1290,7 +1290,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 
 		is_bool($escape) OR $escape = $this->_protect_identifiers;
 
-		foreach ($key as $k => $v)
+		foreach( $key as $k => $v)
 		{
 			$this->qb_set[$this->protect_identifiers($k, FALSE, $escape)] = ($escape)
 				? $this->escape($v) : $v;
@@ -1520,7 +1520,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		$keys = array_keys($this->_object_to_array(current($key)));
 		sort($keys);
 
-		foreach ($key as $row)
+		foreach( $key as $row)
 		{
 			$row = $this->_object_to_array($row);
 			if( count(array_diff($keys, array_keys($row))) > 0 OR count(array_diff(array_keys($row), $keys)) > 0)
@@ -1535,7 +1535,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 			if( $escape !== FALSE)
 			{
 				$clean = array();
-				foreach ($row as $value)
+				foreach( $row as $value)
 				{
 					$clean[] = $this->escape($value);
 				}
@@ -1546,7 +1546,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 			$this->qb_set[] = '('.implode(',', $row).')';
 		}
 
-		foreach ($keys as $k)
+		foreach( $keys as $k)
 		{
 			$this->qb_keys[] = $this->protect_identifiers($k, FALSE, $escape);
 		}
@@ -1903,11 +1903,11 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 	protected function _update_batch($table, $values, $index)
 	{
 		$ids = array();
-		foreach ($values as $key => $val)
+		foreach( $values as $key => $val)
 		{
 			$ids[] = $val[$index];
 
-			foreach (array_keys($val) as $field)
+			foreach( array_keys($val) as $field)
 			{
 				if( $field !== $index)
 				{
@@ -1917,7 +1917,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		}
 
 		$cases = '';
-		foreach ($final as $k => $v)
+		foreach( $final as $k => $v)
 		{
 			$cases .= $k." = CASE \n"
 				.implode("\n", $v)."\n"
@@ -1950,11 +1950,11 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 
 		is_bool($escape) OR $escape = $this->_protect_identifiers;
 
-		foreach ($key as $k => $v)
+		foreach( $key as $k => $v)
 		{
 			$index_set = FALSE;
 			$clean = array();
-			foreach ($v as $k2 => $v2)
+			foreach( $v as $k2 => $v2)
 			{
 				if( $k2 === $index)
 				{
@@ -2107,7 +2107,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		{
 			empty($where) && $reset_data = FALSE;
 
-			foreach ($table as $single_table)
+			foreach( $table as $single_table)
 			{
 				$this->delete($single_table, $where, $limit, $reset_data);
 			}
@@ -2208,7 +2208,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 	{
 		if( is_array($table))
 		{
-			foreach ($table as $t)
+			foreach( $table as $t)
 			{
 				$this->_track_aliases($t);
 			}
@@ -2273,7 +2273,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 				// Cycle through the "select" portion of the query and prep each column name.
 				// The reason we protect identifiers here rather than in the select() function
 				// is because until the user calls the from() function we don't know if there are aliases
-				foreach ($this->qb_select as $key => $val)
+				foreach( $this->qb_select as $key => $val)
 				{
 					$no_escape = isset($this->qb_no_escape[$key]) ? $this->qb_no_escape[$key] : NULL;
 					$this->qb_select[$key] = $this->protect_identifiers($val, FALSE, $no_escape);
@@ -2476,7 +2476,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		}
 
 		$array = array();
-		foreach (get_object_vars($object) as $key => $val)
+		foreach( get_object_vars($object) as $key => $val)
 		{
 			// There are some built in keys we need to ignore for this conversion
 			if(  ! is_object($val) && ! is_array($val) && $key !== '_parent_name')
@@ -2509,13 +2509,13 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		$out = get_object_vars($object);
 		$fields = array_keys($out);
 
-		foreach ($fields as $val)
+		foreach( $fields as $val)
 		{
 			// There are some built in keys we need to ignore for this conversion
 			if( $val !== '_parent_name')
 			{
 				$i = 0;
-				foreach ($out[$val] as $data)
+				foreach( $out[$val] as $data)
 				{
 					$array[$i++][$val] = $data;
 				}
@@ -2603,7 +2603,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 			$qb_no_escape = $this->qb_cache_no_escape;
 		}
 
-		foreach (array_unique($this->qb_cache_exists) as $val) // select, from, etc.
+		foreach( array_unique($this->qb_cache_exists) as $val) // select, from, etc.
 		{
 			$qb_variable	= 'qb_'.$val;
 			$qb_cache_var	= 'qb_cache_'.$val;
@@ -2692,7 +2692,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 	 */
 	protected function _reset_run($qb_reset_items)
 	{
-		foreach ($qb_reset_items as $item => $default_value)
+		foreach( $qb_reset_items as $item => $default_value)
 		{
 			$this->$item = $default_value;
 		}

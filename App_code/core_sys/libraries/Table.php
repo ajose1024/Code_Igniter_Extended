@@ -35,7 +35,7 @@
  * @since	Version 1.3.1
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * HTML Table Generating Class
@@ -115,7 +115,7 @@ class CI_Table {
 	public function __construct($config = array())
 	{
 		// initialize config
-		foreach ($config as $key => $val)
+		foreach( $config as $key => $val)
 		{
 			$this->template[$key] = $val;
 		}
@@ -258,7 +258,7 @@ class CI_Table {
 			$args = $args[0];
 		}
 
-		foreach ($args as $key => $val)
+		foreach( $args as $key => $val)
 		{
 			is_array($val) OR $args[$key] = array('data' => $val);
 		}
@@ -333,11 +333,11 @@ class CI_Table {
 		{
 			$out .= $this->template['thead_open'].$this->newline.$this->template['heading_row_start'].$this->newline;
 
-			foreach ($this->heading as $heading)
+			foreach( $this->heading as $heading)
 			{
 				$temp = $this->template['heading_cell_start'];
 
-				foreach ($heading as $key => $val)
+				foreach( $heading as $key => $val)
 				{
 					if( $key !== 'data')
 					{
@@ -357,7 +357,7 @@ class CI_Table {
 			$out .= $this->template['tbody_open'].$this->newline;
 
 			$i = 1;
-			foreach ($this->rows as $row)
+			foreach( $this->rows as $row)
 			{
 				if(  ! is_array($row))
 				{
@@ -369,11 +369,11 @@ class CI_Table {
 
 				$out .= $this->template['row_'.$name.'start'].$this->newline;
 
-				foreach ($row as $cell)
+				foreach( $row as $cell)
 				{
 					$temp = $this->template['cell_'.$name.'start'];
 
-					foreach ($cell as $key => $val)
+					foreach( $cell as $key => $val)
 					{
 						if( $key !== 'data')
 						{
@@ -445,7 +445,7 @@ class CI_Table {
 			$this->heading = $this->_prep_args($object->list_fields());
 		}
 
-		foreach ($object->result_array() as $row)
+		foreach( $object->result_array() as $row)
 		{
 			$this->rows[] = $this->_prep_args($row);
 		}
@@ -466,7 +466,7 @@ class CI_Table {
 			$this->heading = $this->_prep_args(array_shift($data));
 		}
 
-		foreach ($data as &$row)
+		foreach( $data as &$row)
 		{
 			$this->rows[] = $this->_prep_args($row);
 		}
@@ -488,7 +488,7 @@ class CI_Table {
 		}
 
 		$this->temp = $this->_default_template();
-		foreach (array('table_open', 'thead_open', 'thead_close', 'heading_row_start', 'heading_row_end', 'heading_cell_start', 'heading_cell_end', 'tbody_open', 'tbody_close', 'row_start', 'row_end', 'cell_start', 'cell_end', 'row_alt_start', 'row_alt_end', 'cell_alt_start', 'cell_alt_end', 'table_close') as $val)
+		foreach( array('table_open', 'thead_open', 'thead_close', 'heading_row_start', 'heading_row_end', 'heading_cell_start', 'heading_cell_end', 'tbody_open', 'tbody_close', 'row_start', 'row_end', 'cell_start', 'cell_end', 'row_alt_start', 'row_alt_end', 'cell_alt_start', 'cell_alt_end', 'table_close') as $val)
 		{
 			if(  ! isset($this->template[$val]))
 			{

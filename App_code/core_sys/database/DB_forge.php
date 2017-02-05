@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Database Forge Class
@@ -247,7 +247,7 @@ abstract class CI_DB_forge {
 		// It's not the same for regular indexes.
 		if( $primary === TRUE && is_array($key))
 		{
-			foreach ($key as $one)
+			foreach( $key as $one)
 			{
 				$this->add_key($one, $primary);
 			}
@@ -432,7 +432,7 @@ abstract class CI_DB_forge {
 	{
 		$sql = '';
 
-		foreach (array_keys($attributes) as $key)
+		foreach( array_keys($attributes) as $key)
 		{
 			if( is_string($key))
 			{
@@ -566,7 +566,7 @@ abstract class CI_DB_forge {
 		// Work-around for literal column definitions
 		is_array($field) OR $field = array($field);
 
-		foreach (array_keys($field) as $k)
+		foreach( array_keys($field) as $k)
 		{
 			// Backwards-compatibility work-around for MySQL/CUBRID AFTER clause (remove in 3.1+)
 			if( $_after !== NULL && is_array($field[$k]) && ! isset($field[$k]['after']))
@@ -629,7 +629,7 @@ abstract class CI_DB_forge {
 		// Work-around for literal column definitions
 		is_array($field) OR $field = array($field);
 
-		foreach (array_keys($field) as $k)
+		foreach( array_keys($field) as $k)
 		{
 			$this->add_field(array($k => $field[$k]));
 		}
@@ -703,7 +703,7 @@ abstract class CI_DB_forge {
 	{
 		$fields = array();
 
-		foreach ($this->fields as $key => $attributes)
+		foreach( $this->fields as $key => $attributes)
 		{
 			if( is_int($key) && ! is_array($attributes))
 			{
@@ -862,7 +862,7 @@ abstract class CI_DB_forge {
 
 		if( is_array($this->_unsigned))
 		{
-			foreach (array_keys($this->_unsigned) as $key)
+			foreach( array_keys($this->_unsigned) as $key)
 			{
 				if( is_int($key) && strcasecmp($attributes['TYPE'], $this->_unsigned[$key]) === 0)
 				{

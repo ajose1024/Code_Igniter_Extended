@@ -1,5 +1,5 @@
 <?php
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /*
 | -------------------------------------------------------------------
@@ -36,7 +36,7 @@ defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
 | -------------------------------------------------------------------
 | Prototype:
 |
-|  $autoload['packages'] = array(APPPATH.'third_party', '/usr/local/shared');
+|  $autoload['packages'] = array(APP_DIR_PATH.'third_party', '/usr/local/shared');
 |
 */
 $autoload['packages'] = array();

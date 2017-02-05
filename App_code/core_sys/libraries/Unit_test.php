@@ -35,7 +35,7 @@
  * @since	Version 1.3.1
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Unit Testing Class
@@ -204,11 +204,11 @@ class CI_Unit_test {
 		$this->_parse_template();
 
 		$r = '';
-		foreach ($result as $res)
+		foreach( $result as $res)
 		{
 			$table = '';
 
-			foreach ($res as $key => $val)
+			foreach( $res as $key => $val)
 			{
 				if( $key === $CI->lang->line('ut_result'))
 				{
@@ -282,10 +282,10 @@ class CI_Unit_test {
 		}
 
 		$retval = array();
-		foreach ($results as $result)
+		foreach( $results as $result)
 		{
 			$temp = array();
-			foreach ($result as $key => $val)
+			foreach( $result as $key => $val)
 			{
 				if(  ! in_array($key, $this->_test_items_visible))
 				{

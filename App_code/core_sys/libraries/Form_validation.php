@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Form Validation Class
@@ -177,7 +177,7 @@ class CI_Form_validation {
 		// values we cycle through it and recursively call this function.
 		if( is_array($field))
 		{
-			foreach ($field as $row)
+			foreach( $field as $row)
 			{
 				// Houston, we have a problem...
 				if(  ! isset($row['field'], $row['rules']))
@@ -392,7 +392,7 @@ class CI_Form_validation {
 
 		// Generate the error string
 		$str = '';
-		foreach ($this->_error_array as $val)
+		foreach( $this->_error_array as $val)
 		{
 			if( $val !== '')
 			{
@@ -453,7 +453,7 @@ class CI_Form_validation {
 		$this->CI->lang->load('form_validation');
 
 		// Cycle through the rules for each field and match the corresponding $validation_data item
-		foreach ($this->_field_data as $field => $row)
+		foreach( $this->_field_data as $field => $row)
 		{
 			// Fetch the data from the validation_data array item and cache it in the _field_data array.
 			// Depending on whether the field name is an array or a string will determine where we get it from.
@@ -468,9 +468,9 @@ class CI_Form_validation {
 		}
 
 		// Execute validation rules
-		// Note: A second foreach (for now) is required in order to avoid false-positives
+		// Note: A second foreach( for now) is required in order to avoid false-positives
 		//	 for rules like 'matches', which correlate to other validation fields.
-		foreach ($this->_field_data as $field => $row)
+		foreach( $this->_field_data as $field => $row)
 		{
 			// Don't try to validate if we have no rules set
 			if( empty($row['rules']))
@@ -524,7 +524,7 @@ class CI_Form_validation {
 	 */
 	protected function _reset_post_array()
 	{
-		foreach ($this->_field_data as $field => $row)
+		foreach( $this->_field_data as $field => $row)
 		{
 			if( $row['postdata'] !== NULL)
 			{
@@ -547,7 +547,7 @@ class CI_Form_validation {
 					}
 					else
 					{
-						foreach ($row['keys'] as $val)
+						foreach( $row['keys'] as $val)
 						{
 							$post_ref =& $post_ref[$val];
 						}
@@ -556,7 +556,7 @@ class CI_Form_validation {
 					if( is_array($row['postdata']))
 					{
 						$array = array();
-						foreach ($row['postdata'] as $k => $v)
+						foreach( $row['postdata'] as $k => $v)
 						{
 							$array[$k] = $v;
 						}
@@ -588,7 +588,7 @@ class CI_Form_validation {
 		// If the $_POST data is an array we will run a recursive call
 		if( is_array($postdata))
 		{
-			foreach ($postdata as $key => $val)
+			foreach( $postdata as $key => $val)
 			{
 				$this->_execute($row, $rules, $val, $key);
 			}
@@ -601,7 +601,7 @@ class CI_Form_validation {
 		if(  ! in_array('required', $rules) && ($postdata === NULL OR $postdata === ''))
 		{
 			// Before we bail out, does the rule contain a callback?
-			foreach ($rules as &$rule)
+			foreach( $rules as &$rule)
 			{
 				if( is_string($rule))
 				{
@@ -674,7 +674,7 @@ class CI_Form_validation {
 		// --------------------------------------------------------------------
 
 		// Cycle through each rule and run it
-		foreach ($rules as $rule)
+		foreach( $rules as $rule)
 		{
 			$_in_array = FALSE;
 
@@ -975,7 +975,7 @@ class CI_Form_validation {
 		if( is_array($field))
 		{
 			// Note: in_array('', array(0)) returns TRUE, do not use it
-			foreach ($field as &$v)
+			foreach( $field as &$v)
 			{
 				if( $value === $v)
 				{
@@ -1018,7 +1018,7 @@ class CI_Form_validation {
 		if( is_array($field))
 		{
 			// Note: in_array('', array(0)) returns TRUE, do not use it
-			foreach ($field as &$v)
+			foreach( $field as &$v)
 			{
 				if( $value === $v)
 				{
@@ -1264,7 +1264,7 @@ class CI_Form_validation {
 			return $this->valid_email(trim($str));
 		}
 
-		foreach (explode(',', $str) as $email)
+		foreach( explode(',', $str) as $email)
 		{
 			if( trim($email) !== '' && $this->valid_email(trim($email)) === FALSE)
 			{
@@ -1513,7 +1513,7 @@ class CI_Form_validation {
 
 		if( is_array($data))
 		{
-			foreach ($data as $key => $val)
+			foreach( $data as $key => $val)
 			{
 				$data[$key] = $this->prep_for_form($val);
 			}

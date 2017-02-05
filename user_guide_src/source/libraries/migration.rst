@@ -56,7 +56,7 @@ as *20121031100537_add_blog.php*.
 
 	<?php
 
-	defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+	defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 	class Migration_Add_blog extends CI_Migration {
 
@@ -124,7 +124,7 @@ The following is a table of all the config options for migrations.
 Preference                 Default                Options                    Description
 ========================== ====================== ========================== =============================================
 **migration_enabled**      FALSE                  TRUE / FALSE               Enable or disable migrations.
-**migration_path**         APPPATH.'migrations/'  None                       The path to your migrations folder.
+**migration_path**         APP_DIR_PATH.'migrations/'  None                       The path to your migrations folder.
 **migration_version**      0                      None                       The current version your database should use.
 **migration_table**        migrations             None                       The table name for storing the schema
                                                                              version number.

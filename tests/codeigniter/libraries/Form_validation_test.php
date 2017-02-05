@@ -583,7 +583,7 @@ class Form_validation_test extends CI_TestCase {
 		$_POST = array();
 
 		$this->form_validation->set_rules($rules);
-		foreach ($values as $field => $value)
+		foreach( $values as $field => $value)
 		{
 			$_POST[$field] = $value;
 		}

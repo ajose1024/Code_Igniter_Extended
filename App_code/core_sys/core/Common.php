@@ -35,7 +35,7 @@
  * @since    Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Common Functions
@@ -159,7 +159,7 @@ if( ! function_exists( 'load_class' ) )
 
         // Look for the class first in the local application/libraries folder
         // then in the native system/libraries folder
-        foreach( array( APPPATH, BASEPATH ) as $path )
+        foreach( array( APP_DIR_PATH, SYS_CORE_PATH ) as $path )
         {
             if( file_exists( $path . $directory . '/' . $class . '.php' ) )
             {
@@ -175,13 +175,13 @@ if( ! function_exists( 'load_class' ) )
         }
 
         // Is the request a class extension? If so we load it too
-        if( file_exists( APPPATH . $directory . '/' . config_item( 'subclass_prefix' ) . $class . '.php' ) )
+        if( file_exists( APP_DIR_PATH . $directory . '/' . config_item( 'subclass_prefix' ) . $class . '.php' ) )
         {
             $name = config_item( 'subclass_prefix' ) . $class ;
 
             if( class_exists( $name, FALSE ) === FALSE )
             {
-                require_once( APPPATH . $directory . '/' . $name . '.php' ) ;
+                require_once( APP_DIR_PATH . $directory . '/' . $name . '.php' ) ;
             }
         }
 
@@ -250,7 +250,7 @@ if(  ! function_exists('get_config'))
 
         if( empty($config))
         {
-            $file_path = APPPATH.'config/config.php';
+            $file_path = APP_DIR_PATH.'config/config.php';
             $found = FALSE;
             if( file_exists($file_path))
             {
@@ -259,7 +259,7 @@ if(  ! function_exists('get_config'))
             }
 
             // Is the config file in the environment folder?
-            if( file_exists($file_path = APPPATH.'config/'.ENVIRONMENT.'/config.php'))
+            if( file_exists($file_path = APP_DIR_PATH.'config/'.ENVIRONMENT.'/config.php'))
             {
                 require($file_path);
             }
@@ -280,7 +280,7 @@ if(  ! function_exists('get_config'))
         }
 
         // Are any values being dynamically added or replaced?
-        foreach ($replace as $key => $val)
+        foreach( $replace as $key => $val)
         {
             $config[$key] = $val;
         }
@@ -328,13 +328,13 @@ if(  ! function_exists('get_mimes'))
 
         if( empty($_mimes))
         {
-            if( file_exists(APPPATH.'config/'.ENVIRONMENT.'/mimes.php'))
+            if( file_exists(APP_DIR_PATH.'config/'.ENVIRONMENT.'/mimes.php'))
             {
-                $_mimes = include(APPPATH.'config/'.ENVIRONMENT.'/mimes.php');
+                $_mimes = include(APP_DIR_PATH.'config/'.ENVIRONMENT.'/mimes.php');
             }
-            elseif( file_exists(APPPATH.'config/mimes.php'))
+            elseif( file_exists(APP_DIR_PATH.'config/mimes.php'))
             {
-                $_mimes = include(APPPATH.'config/mimes.php');
+                $_mimes = include(APP_DIR_PATH.'config/mimes.php');
             }
             else
             {
@@ -761,7 +761,7 @@ if(  ! function_exists('html_escape'))
 
         if( is_array($var))
         {
-            foreach (array_keys($var) as $key)
+            foreach( array_keys($var) as $key)
             {
                 $var[$key] = html_escape($var[$key], $double_encode);
             }
@@ -803,7 +803,7 @@ if(  ! function_exists('_stringify_attributes'))
 
         $attributes = (array) $attributes;
 
-        foreach ($attributes as $key => $val)
+        foreach( $attributes as $key => $val)
         {
             $atts .= ($js) ? $key.'='.$val.',' : ' '.$key.'="'.$val.'"';
         }

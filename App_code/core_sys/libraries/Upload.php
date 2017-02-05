@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * File Uploading Class
@@ -315,7 +315,7 @@ class CI_Upload {
 		if( $reset === TRUE)
 		{
 			$defaults = $reflection->getDefaultProperties();
-			foreach (array_keys($defaults) as $key)
+			foreach( array_keys($defaults) as $key)
 			{
 				if( $key[0] === '_')
 				{
@@ -341,7 +341,7 @@ class CI_Upload {
 		}
 		else
 		{
-			foreach ($config as $key => &$value)
+			foreach( $config as $key => &$value)
 			{
 				if( $key[0] !== '_' && $reflection->hasProperty($key))
 				{
@@ -1136,7 +1136,7 @@ class CI_Upload {
 		$this->_CI->lang->load('upload');
 
 		is_array($msg) OR $msg = array($msg);
-		foreach ($msg as $val)
+		foreach( $msg as $val)
 		{
 			$msg = ($this->_CI->lang->line($val) === FALSE) ? $val : $this->_CI->lang->line($val);
 			$this->error_msg[] = $msg;

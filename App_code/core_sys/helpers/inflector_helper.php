@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * CodeIgniter Inflector Helpers
@@ -98,7 +98,7 @@ if(  ! function_exists('singular'))
 			'/([^us])s$/'		=> '\1'
 		);
 
-		foreach ($singular_rules as $rule => $replacement)
+		foreach( $singular_rules as $rule => $replacement)
 		{
 			if( preg_match($rule, $result))
 			{
@@ -155,7 +155,7 @@ if(  ! function_exists('plural'))
 			'/$/'                      => 's',
 		);
 
-		foreach ($plural_rules as $rule => $replacement)
+		foreach( $plural_rules as $rule => $replacement)
 		{
 			if( preg_match($rule, $result))
 			{

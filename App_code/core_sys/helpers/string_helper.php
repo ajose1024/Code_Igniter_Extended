@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * CodeIgniter String Helpers
@@ -93,7 +93,7 @@ if(  ! function_exists('strip_slashes'))
 			return stripslashes($str);
 		}
 
-		foreach ($str as $key => $val)
+		foreach( $str as $key => $val)
 		{
 			$str[$key] = strip_slashes($val);
 		}

@@ -35,7 +35,7 @@
  * @since	Version 3.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Migration Class
@@ -121,7 +121,7 @@ class CI_Migration {
 			return;
 		}
 
-		foreach ($config as $key => $val)
+		foreach( $config as $key => $val)
 		{
 			$this->{'_'.$key} = $val;
 		}
@@ -135,7 +135,7 @@ class CI_Migration {
 		}
 
 		// If not set, set it
-		$this->_migration_path !== '' OR $this->_migration_path = APPPATH.'migrations/';
+		$this->_migration_path !== '' OR $this->_migration_path = APP_DIR_PATH.'migrations/';
 
 		// Add trailing slash if not set
 		$this->_migration_path = rtrim($this->_migration_path, '/').'/';
@@ -235,7 +235,7 @@ class CI_Migration {
 		$previous = FALSE;
 
 		// Validate all available migrations, and run the ones within our target range
-		foreach ($migrations as $number => $file)
+		foreach( $migrations as $number => $file)
 		{
 			// Check for sequence gaps
 			if( $this->_migration_type === 'sequential' && $previous !== FALSE && abs($number - $previous) > 1)
@@ -349,7 +349,7 @@ class CI_Migration {
 		$migrations = array();
 
 		// Load all *_*.php files in the migrations path
-		foreach (glob($this->_migration_path.'*_*.php') as $file)
+		foreach( glob($this->_migration_path.'*_*.php') as $file)
 		{
 			$name = basename($file, '.php');
 

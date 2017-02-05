@@ -26,7 +26,7 @@ Standard Query With Multiple Results (Object Version)
 
 	$query = $this->db->query('SELECT name, title, email FROM my_table');
 	
-	foreach ($query->result() as $row)
+	foreach( $query->result() as $row)
 	{
 		echo $row->title;
 		echo $row->name;
@@ -45,7 +45,7 @@ Standard Query With Multiple Results (Array Version)
 
 	$query = $this->db->query('SELECT name, title, email FROM my_table');
 	
-	foreach ($query->result_array() as $row)
+	foreach( $query->result_array() as $row)
 	{
 		echo $row['title'];
 		echo $row['name'];
@@ -95,7 +95,7 @@ means of retrieving data::
 
 	$query = $this->db->get('table_name');
 	
-	foreach ($query->result() as $row)
+	foreach( $query->result() as $row)
 	{
 		echo $row->title;
 	}

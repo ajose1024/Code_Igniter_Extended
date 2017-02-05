@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * CodeIgniter CAPTCHA Helper
@@ -82,7 +82,7 @@ if(  ! function_exists('create_captcha'))
 			)
 		);
 
-		foreach ($defaults as $key => $val)
+		foreach( $defaults as $key => $val)
 		{
 			if(  ! is_array($data) && empty($$key))
 			{
@@ -240,7 +240,7 @@ if(  ! function_exists('create_captcha'))
 
 		is_array($colors) OR $colors = $defaults['colors'];
 
-		foreach (array_keys($defaults['colors']) as $key)
+		foreach( array_keys($defaults['colors']) as $key)
 		{
 			// Check for a possible missing value
 			is_array($colors[$key]) OR $colors[$key] = $defaults['colors'][$key];

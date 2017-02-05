@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Pagination Class
@@ -331,7 +331,7 @@ class CI_Pagination {
 	{
 		$this->CI =& get_instance();
 		$this->CI->load->language('pagination');
-		foreach (array('first_link', 'next_link', 'prev_link', 'last_link') as $key)
+		foreach( array('first_link', 'next_link', 'prev_link', 'last_link') as $key)
 		{
 			if( ($val = $this->CI->lang->line('pagination_'.$key)) !== FALSE)
 			{
@@ -368,7 +368,7 @@ class CI_Pagination {
 			unset($params['anchor_class']);
 		}
 
-		foreach ($params as $key => $val)
+		foreach( $params as $key => $val)
 		{
 			if( property_exists($this, $key))
 			{
@@ -668,7 +668,7 @@ class CI_Pagination {
 		unset($attributes['rel']);
 
 		$this->_attributes = '';
-		foreach ($attributes as $key => $value)
+		foreach( $attributes as $key => $value)
 		{
 			$this->_attributes .= ' '.$key.'="'.$value.'"';
 		}

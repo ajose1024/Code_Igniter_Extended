@@ -17,7 +17,7 @@ class Inflector_helper_test extends CI_TestCase {
 			'equipment'    => 'equipment'
 		);
 
-		foreach ($strs as $str => $expect)
+		foreach( $strs as $str => $expect)
 		{
 			$this->assertEquals($expect, singular($str));
 		}
@@ -36,7 +36,7 @@ class Inflector_helper_test extends CI_TestCase {
 			'equipment'  => 'equipment'
 		);
 
-		foreach ($strs as $str => $expect)
+		foreach( $strs as $str => $expect)
 		{
 			$this->assertEquals($expect, plural($str));
 		}
@@ -53,7 +53,7 @@ class Inflector_helper_test extends CI_TestCase {
 			'what_do_you_think-yo?' => 'whatDoYouThink-yo?',
 		);
 
-		foreach ($strs as $str => $expect)
+		foreach( $strs as $str => $expect)
 		{
 			$this->assertEquals($expect, camelize($str));
 		}
@@ -70,7 +70,7 @@ class Inflector_helper_test extends CI_TestCase {
 			'what_do_you_think-yo?' => 'what_do_you_think-yo?',
 		);
 
-		foreach ($strs as $str => $expect)
+		foreach( $strs as $str => $expect)
 		{
 			$this->assertEquals($expect, underscore($str));
 		}
@@ -87,7 +87,7 @@ class Inflector_helper_test extends CI_TestCase {
 			'what_do_you_think-yo?' => 'What Do You Think-yo?',
 		);
 
-		foreach ($strs as $str => $expect)
+		foreach( $strs as $str => $expect)
 		{
 			$this->assertEquals($expect, humanize($str));
 		}

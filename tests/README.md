@@ -67,8 +67,8 @@ with a base for application and package tests. That gives us:
 
 ### Test Environment:
 
-The test/Bootstrap.php file establishes global constants such as BASEPATH,
-APPPATH, and VIEWPATH, initializing them to point to VFS locations. The
+The test/Bootstrap.php file establishes global constants such as SYS_CORE_PATH,
+APP_DIR_PATH, and VIEWPATH, initializing them to point to VFS locations. The
 test case class employs vfsStream to make a clean virtual filesystem with
 the necessary paths for every individual test.
 
@@ -164,7 +164,7 @@ the VFS. Path must be relative to the project root (i.e. - starting with
 
 Creates a VFS file path string suitable for use with PHP file operations. Path
 may be absolute from the VFS root, or relative to a base path. It is often
-useful to use APPPATH or BASEPATH as the base.
+useful to use APP_DIR_PATH or SYS_CORE_PATH as the base.
 
 	$this->helper($name)
 

@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * CodeIgniter Date Helpers
@@ -584,7 +584,7 @@ if(  ! function_exists('timezone_menu'))
 
 		$menu .= _stringify_attributes($attributes).">\n";
 
-		foreach (timezones() as $key => $val)
+		foreach( timezones() as $key => $val)
 		{
 			$selected = ($default === $key) ? ' selected="selected"' : '';
 			$menu .= '<option value="'.$key.'"'.$selected.'>'.$CI->lang->line($key)."</option>\n";
@@ -739,7 +739,7 @@ if(  ! function_exists('date_range'))
 			}
 
 			$period = new DatePeriod($from, new DateInterval('P1D'), $arg);
-			foreach ($period as $date)
+			foreach( $period as $date)
 			{
 				$range[] = $date->format($format);
 			}

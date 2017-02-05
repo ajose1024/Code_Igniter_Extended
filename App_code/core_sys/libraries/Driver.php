@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * CodeIgniter Driver Library Class
@@ -121,15 +121,15 @@ class CI_Driver_Library {
 		if(  ! $found)
 		{
 			// Check for subclass file
-			foreach ($paths as $path)
+			foreach( $paths as $path)
 			{
 				// Does the file exist?
 				$file = $path.'libraries/'.$this->lib_name.'/drivers/'.$prefix.$child_name.'.php';
 				if( file_exists($file))
 				{
-					// Yes - require base class from BASEPATH
-					$basepath = BASEPATH . 'libraries/'.$this->lib_name.'/drivers/'.$child_name.'.php';
-					if(  ! file_exists($basepath))
+					// Yes - require base class from SYS_CORE_PATH
+					$sys_core_path = SYS_CORE_PATH . 'libraries/'.$this->lib_name.'/drivers/'.$child_name.'.php';
+					if(  ! file_exists($sys_core_path))
 					{
 						$msg = 'Unable to load the requested class: CI_'.$child_name;
 						log_message('error', $msg);
@@ -137,7 +137,7 @@ class CI_Driver_Library {
 					}
 
 					// Include both sources and mark found
-					include_once($basepath);
+					include_once($sys_core_path);
 					include_once($file);
 					$found = TRUE;
 					break;
@@ -153,7 +153,7 @@ class CI_Driver_Library {
 			if(  ! class_exists($class_name, FALSE))
 			{
 				// Check package paths
-				foreach ($paths as $path)
+				foreach( $paths as $path)
 				{
 					// Does the file exist?
 					$file = $path.'libraries/'.$this->lib_name.'/drivers/'.$child_name.'.php';
@@ -257,7 +257,7 @@ class CI_Driver {
 		{
 			$r = new ReflectionObject($parent);
 
-			foreach ($r->getMethods() as $method)
+			foreach( $r->getMethods() as $method)
 			{
 				if( $method->isPublic())
 				{
@@ -265,7 +265,7 @@ class CI_Driver {
 				}
 			}
 
-			foreach ($r->getProperties() as $prop)
+			foreach( $r->getProperties() as $prop)
 			{
 				if( $prop->isPublic())
 				{

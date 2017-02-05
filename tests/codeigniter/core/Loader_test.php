@@ -301,7 +301,7 @@ class Loader_test extends CI_TestCase {
 		$this->ci_vfs_create($file, $content, $this->ci_app_root, $dir);
 
 		// Just like load->view(), take the output class out of the mix here.
-		$out = $this->load->file(APPPATH.$dir.'/'.$file.'.php', TRUE);
+		$out = $this->load->file(APP_DIR_PATH.$dir.'/'.$file.'.php', TRUE);
 		$this->assertEquals($content, $out);
 
 		// Test non-existent file
@@ -409,7 +409,7 @@ class Loader_test extends CI_TestCase {
 		$this->assertInstanceOf('CI_Loader', $this->load->helpers($helpers));
 
 		// Verify helper existence
-		foreach ($funcs as $func) {
+		foreach( $funcs as $func) {
 			$this->assertTrue(function_exists($func), $func.' does not exist');
 		}
 	}
@@ -447,7 +447,7 @@ class Loader_test extends CI_TestCase {
 		$this->load->library($lib);
 
 		// Add path and verify
-		$path = APPPATH.$dir.'/';
+		$path = APP_DIR_PATH.$dir.'/';
 		$this->assertInstanceOf('CI_Loader', $this->load->add_package_path($path));
 		$this->assertContains($path, $this->load->get_package_paths(TRUE));
 
@@ -456,7 +456,7 @@ class Loader_test extends CI_TestCase {
 		$this->assertTrue(class_exists($class), $class.' does not exist');
 
 		// Add another path
-		$path2 = APPPATH.'another/';
+		$path2 = APP_DIR_PATH.'another/';
 		$this->assertInstanceOf('CI_Loader', $this->load->add_package_path($path2));
 		$this->assertContains($path2, $this->load->get_package_paths(TRUE));
 
@@ -474,8 +474,8 @@ class Loader_test extends CI_TestCase {
 	public function test_remove_package_path()
 	{
 		$dir = 'third-party';
-		$path = APPPATH.$dir.'/';
-		$path2 = APPPATH.'another/';
+		$path = APP_DIR_PATH.$dir.'/';
+		$path2 = APP_DIR_PATH.'another/';
 		$paths = $this->load->get_package_paths(TRUE);
 
 		$this->assertInstanceOf('CI_Loader', $this->load->add_package_path($path));
@@ -519,7 +519,7 @@ class Loader_test extends CI_TestCase {
 
 		// Create model in VFS package path
 		$dir = 'testdir';
-		$path = APPPATH.$dir.'/';
+		$path = APP_DIR_PATH.$dir.'/';
 		$model = 'Automod';
 		$this->ci_vfs_create($model, '<?php class '.$model.' { }', $this->ci_app_root, array($dir, 'models'));
 

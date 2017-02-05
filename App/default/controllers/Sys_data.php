@@ -1,4 +1,4 @@
-<?php  defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+<?php  defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 class Sys_data extends CI_Controller
 {

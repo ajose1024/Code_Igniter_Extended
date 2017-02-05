@@ -108,7 +108,7 @@ functions::
 	{
 		$needle = is_array($needle) ? $needle : array($needle);
 
-		foreach ($needle as $item)
+		foreach( $needle as $item)
 		{
 			if( in_array($item, $haystack))
 			{

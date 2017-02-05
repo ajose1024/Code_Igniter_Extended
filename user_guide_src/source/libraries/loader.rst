@@ -61,15 +61,15 @@ calling ``add_package_path()``.
 
 ::
 
-	$this->load->add_package_path(APPPATH.'my_app', FALSE);
+	$this->load->add_package_path(APP_DIR_PATH.'my_app', FALSE);
 	$this->load->view('my_app_index'); // Loads
 	$this->load->view('welcome_message'); // Will not load the default welcome_message b/c the second param to add_package_path is FALSE
 
 	// Reset things
-	$this->load->remove_package_path(APPPATH.'my_app');
+	$this->load->remove_package_path(APP_DIR_PATH.'my_app');
 
 	// Again without the second parameter:
-	$this->load->add_package_path(APPPATH.'my_app');
+	$this->load->add_package_path(APP_DIR_PATH.'my_app');
 	$this->load->view('my_app_index'); // Loads
 	$this->load->view('welcome_message'); // Loads
 
@@ -432,7 +432,7 @@ Class Reference
 		application package above has a library named Foo_bar.php. In our
 		controller, we'd do the following::
 
-			$this->load->add_package_path(APPPATH.'third_party/foo_bar/')
+			$this->load->add_package_path(APP_DIR_PATH.'third_party/foo_bar/')
 				->library('foo_bar');
 
 	.. php:method:: remove_package_path([$path = ''])
@@ -450,11 +450,11 @@ Class Reference
 		Or to remove a specific package path, specify the same path previously
 		given to ``add_package_path()`` for a package.::
 
-			$this->load->remove_package_path(APPPATH.'third_party/foo_bar/');
+			$this->load->remove_package_path(APP_DIR_PATH.'third_party/foo_bar/');
 
 	.. php:method:: get_package_paths([$include_base = TRUE])
 
-		:param	bool	$include_base: Whether to include BASEPATH
+		:param	bool	$include_base: Whether to include SYS_CORE_PATH
 		:returns:	An array of package paths
 		:rtype:	array
 

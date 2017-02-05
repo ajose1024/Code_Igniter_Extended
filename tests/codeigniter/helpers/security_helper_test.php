@@ -32,7 +32,7 @@ class Security_helper_tests extends CI_TestCase {
 
 		$algos = hash_algos();
 		$algo_results = array();
-		foreach ($algos as $k => $v)
+		foreach( $algos as $k => $v)
 		{
 			$algo_results[$v] = hash($v, 'foo');
 		}
@@ -43,7 +43,7 @@ class Security_helper_tests extends CI_TestCase {
 		$this->assertEquals($md5, do_hash('foo', 'foobar'));
 
 		// Test each algorithm available to PHP
-		foreach ($algo_results as $algo => $result)
+		foreach( $algo_results as $algo => $result)
 		{
 			$this->assertEquals($result, do_hash('foo', $algo));
 		}

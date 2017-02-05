@@ -35,7 +35,7 @@
  * @since	Version 1.3.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * MSSQL Result Class
@@ -187,7 +187,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 		}
 
 		$class_name = new $class_name();
-		foreach ($row as $key => $value)
+		foreach( $row as $key => $value)
 		{
 			$class_name->$key = $value;
 		}

@@ -17,7 +17,7 @@ class Driver_test extends CI_TestCase {
 		// Mock Loader->get_package_paths
 		$paths = 'get_package_paths';
 		$ldr = $this->getMock('CI_Loader', array($paths));
-		$ldr->expects($this->any())->method($paths)->will($this->returnValue(array(APPPATH, BASEPATH)));
+		$ldr->expects($this->any())->method($paths)->will($this->returnValue(array(APP_DIR_PATH, SYS_CORE_PATH)));
 		$this->ci_instance_var('load', $ldr);
 
 		// Create mock driver library

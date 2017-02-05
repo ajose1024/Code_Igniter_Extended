@@ -45,7 +45,7 @@ The Class File
 Classes should have this basic prototype::
 
 	<?php
-	defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ; 
+	defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ; 
 
 	class Someclass {
 
@@ -86,7 +86,7 @@ constructor::
 If you use this feature you must set up your class constructor to expect
 data::
 
-	<?php  defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+	<?php  defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 	class Someclass {
 

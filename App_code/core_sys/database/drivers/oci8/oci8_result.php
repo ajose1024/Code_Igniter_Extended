@@ -35,7 +35,7 @@
  * @since	Version 1.4.1
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * oci8 Result Class
@@ -218,7 +218,7 @@ class CI_DB_oci8_result extends CI_DB_result {
 		}
 
 		$class_name = new $class_name();
-		foreach ($row as $key => $value)
+		foreach( $row as $key => $value)
 		{
 			$class_name->$key = $value;
 		}

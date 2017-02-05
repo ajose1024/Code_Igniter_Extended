@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Javascript Class
@@ -68,7 +68,7 @@ class CI_Javascript {
 	{
 		$defaults = array('js_library_driver' => 'jquery', 'autoload' => TRUE);
 
-		foreach ($defaults as $key => $val)
+		foreach( $defaults as $key => $val)
 		{
 			if( isset($params[$key]) && $params[$key] !== '')
 			{
@@ -781,7 +781,7 @@ class CI_Javascript {
 			$_is_assoc = $this->_is_associative_array($json_result);
 		}
 
-		foreach ($json_result as $k => $v)
+		foreach( $json_result as $k => $v)
 		{
 			if( $_is_assoc)
 			{
@@ -811,7 +811,7 @@ class CI_Javascript {
 	 */
 	protected function _is_associative_array($arr)
 	{
-		foreach (array_keys($arr) as $key => $val)
+		foreach( array_keys($arr) as $key => $val)
 		{
 			if( $key !== $val)
 			{

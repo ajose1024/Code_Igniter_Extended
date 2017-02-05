@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 if(  ! function_exists('xml_parser_create'))
 {
@@ -426,12 +426,12 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 		$v = new XML_RPC_Values();
 		$output = array();
 
-		foreach ($this->methods as $key => $value)
+		foreach( $this->methods as $key => $value)
 		{
 			$output[] = new XML_RPC_Values($key, 'string');
 		}
 
-		foreach ($this->system_methods as $key => $value)
+		foreach( $this->system_methods as $key => $value)
 		{
 			$output[] = new XML_RPC_Values($key, 'string');
 		}
@@ -523,7 +523,7 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 
 		$result = array();
 
-		foreach ($calls as $value)
+		foreach( $calls as $value)
 		{
 			$m = new XML_RPC_Message($value[0]);
 			$plist = '';

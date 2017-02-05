@@ -43,7 +43,7 @@ a simplified format as well. Here is an example using ``foreach``::
 
 	<ul>
 
-	<?php foreach ($todo as $item): ?>
+	<?php foreach( $todo as $item): ?>
 
 		<li><?=$item?></li>
 

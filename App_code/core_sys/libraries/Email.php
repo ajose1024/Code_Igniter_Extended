@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * CodeIgniter Email Class
@@ -449,7 +449,7 @@ class CI_Email {
 	 */
 	public function initialize($config = array())
 	{
-		foreach ($config as $key => $val)
+		foreach( $config as $key => $val)
 		{
 			if( isset($this->$key))
 			{
@@ -987,7 +987,7 @@ class CI_Email {
 	{
 		in_array($this->_encoding, $this->_bit_depths) OR $this->_encoding = '8bit';
 
-		foreach ($this->_base_charsets as $charset)
+		foreach( $this->_base_charsets as $charset)
 		{
 			if( strpos($charset, $this->charset) === 0)
 			{
@@ -1069,7 +1069,7 @@ class CI_Email {
 			return FALSE;
 		}
 
-		foreach ($email as $val)
+		foreach( $email as $val)
 		{
 			if(  ! $this->valid_email($val))
 			{
@@ -1116,7 +1116,7 @@ class CI_Email {
 
 		$clean_email = array();
 
-		foreach ($email as $addy)
+		foreach( $email as $addy)
 		{
 			$clean_email[] = preg_match('/\<(.*)\>/', $addy, $match) ? $match[1] : $addy;
 		}
@@ -1206,7 +1206,7 @@ class CI_Email {
 
 		// Split the string into individual lines of text and cycle through them
 		$output = '';
-		foreach (explode("\n", $str) as $line)
+		foreach( explode("\n", $str) as $line)
 		{
 			// Is the line within the allowed character count?
 			// If so we'll join it to the output and continue
@@ -1244,7 +1244,7 @@ class CI_Email {
 		// Put our markers back
 		if( count($unwrap) > 0)
 		{
-			foreach ($unwrap as $key => $val)
+			foreach( $unwrap as $key => $val)
 			{
 				$output = str_replace('{{unwrapped'.$key.'}}', $val, $output);
 			}
@@ -1290,7 +1290,7 @@ class CI_Email {
 		reset($this->_headers);
 		$this->_header_str = '';
 
-		foreach ($this->_headers as $key => $val)
+		foreach( $this->_headers as $key => $val)
 		{
 			$val = trim($val);
 
@@ -1501,7 +1501,7 @@ class CI_Email {
 		$escape = '=';
 		$output = '';
 
-		foreach (explode("\n", $str) as $line)
+		foreach( explode("\n", $str) as $line)
 		{
 			$length = strlen($line);
 			$temp = '';
@@ -1877,7 +1877,7 @@ class CI_Email {
 			return FALSE;
 		}
 
-		foreach ($this->_recipients as $val)
+		foreach( $this->_recipients as $val)
 		{
 			if(  ! $this->_send_command('to', $val))
 			{
@@ -1887,7 +1887,7 @@ class CI_Email {
 
 		if( count($this->_cc_array) > 0)
 		{
-			foreach ($this->_cc_array as $val)
+			foreach( $this->_cc_array as $val)
 			{
 				if( $val !== '' && ! $this->_send_command('to', $val))
 				{
@@ -1898,7 +1898,7 @@ class CI_Email {
 
 		if( count($this->_bcc_array) > 0)
 		{
-			foreach ($this->_bcc_array as $val)
+			foreach( $this->_bcc_array as $val)
 			{
 				if( $val !== '' && ! $this->_send_command('to', $val))
 				{
@@ -2238,7 +2238,7 @@ class CI_Email {
 
 		if( count($this->_debug_msg) > 0)
 		{
-			foreach ($this->_debug_msg as $val)
+			foreach( $this->_debug_msg as $val)
 			{
 				$msg .= $val;
 			}

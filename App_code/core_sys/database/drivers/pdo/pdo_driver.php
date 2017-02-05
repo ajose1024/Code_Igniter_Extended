@@ -35,7 +35,7 @@
  * @since	Version 2.1.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * PDO Database Adapter Class
@@ -320,11 +320,11 @@ class CI_DB_pdo_driver extends CI_DB {
 	protected function _update_batch($table, $values, $index)
 	{
 		$ids = array();
-		foreach ($values as $key => $val)
+		foreach( $values as $key => $val)
 		{
 			$ids[] = $val[$index];
 
-			foreach (array_keys($val) as $field)
+			foreach( array_keys($val) as $field)
 			{
 				if( $field !== $index)
 				{
@@ -334,11 +334,11 @@ class CI_DB_pdo_driver extends CI_DB {
 		}
 
 		$cases = '';
-		foreach ($final as $k => $v)
+		foreach( $final as $k => $v)
 		{
 			$cases .= $k.' = CASE '."\n";
 
-			foreach ($v as $row)
+			foreach( $v as $row)
 			{
 				$cases .= $row."\n";
 			}

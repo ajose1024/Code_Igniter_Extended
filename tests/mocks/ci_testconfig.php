@@ -3,7 +3,7 @@
 class CI_TestConfig {
 
 	public $config = array();
-	public $_config_paths = array(APPPATH);
+	public $_config_paths = array(APP_DIR_PATH);
 	public $loaded = array();
 
 	public function item($key)

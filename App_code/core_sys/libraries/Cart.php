@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Shopping Cart Class
@@ -150,7 +150,7 @@ class CI_Cart {
 		}
 		else
 		{
-			foreach ($items as $val)
+			foreach( $items as $val)
 			{
 				if( is_array($val) && isset($val['id']))
 				{
@@ -306,7 +306,7 @@ class CI_Cart {
 		}
 		else
 		{
-			foreach ($items as $val)
+			foreach( $items as $val)
 			{
 				if( is_array($val) && isset($val['rowid']))
 				{
@@ -371,7 +371,7 @@ class CI_Cart {
 		}
 
 		// product id & name shouldn't be changed
-		foreach (array_diff($keys, array('id', 'name')) as $key)
+		foreach( array_diff($keys, array('id', 'name')) as $key)
 		{
 			$this->_cart_contents[$items['rowid']][$key] = $items[$key];
 		}
@@ -390,7 +390,7 @@ class CI_Cart {
 	{
 		// Let's add up the individual prices and set the cart sub-total
 		$this->_cart_contents['total_items'] = $this->_cart_contents['cart_total'] = 0;
-		foreach ($this->_cart_contents as $key => $val)
+		foreach( $this->_cart_contents as $key => $val)
 		{
 			// We make sure the array contains the proper indexes
 			if(  ! is_array($val) OR ! isset($val['price'], $val['qty']))

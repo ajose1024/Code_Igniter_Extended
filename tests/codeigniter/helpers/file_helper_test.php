@@ -124,7 +124,7 @@ class File_helper_Test extends CI_TestCase {
 
 		$info = get_file_info(vfsStream::url('my_file.txt'), $vals);
 
-		foreach ($info as $k => $v)
+		foreach( $info as $k => $v)
 		{
 			$this->assertEquals($ret_values[$k], $v);
 		}

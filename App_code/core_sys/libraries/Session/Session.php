@@ -35,7 +35,7 @@
  * @since	Version 2.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * CodeIgniter Session Class
@@ -188,19 +188,19 @@ class CI_Session {
 	protected function _ci_load_classes($driver)
 	{
 		// PHP 5.4 compatibility
-		interface_exists('SessionHandlerInterface', FALSE) OR require_once(BASEPATH . 'libraries/Session/SessionHandlerInterface.php');
+		interface_exists('SessionHandlerInterface', FALSE) OR require_once(SYS_CORE_PATH . 'libraries/Session/SessionHandlerInterface.php');
 
 		$prefix = config_item('subclass_prefix');
 
 		if(  ! class_exists('CI_Session_driver', FALSE))
 		{
 			require_once(
-				file_exists(APPPATH.'libraries/Session/Session_driver.php')
-					? APPPATH.'libraries/Session/Session_driver.php'
-					: BASEPATH . 'libraries/Session/Session_driver.php'
+				file_exists(APP_DIR_PATH.'libraries/Session/Session_driver.php')
+					? APP_DIR_PATH.'libraries/Session/Session_driver.php'
+					: SYS_CORE_PATH . 'libraries/Session/Session_driver.php'
 			);
 
-			if( file_exists($file_path = APPPATH.'libraries/Session/'.$prefix.'Session_driver.php'))
+			if( file_exists($file_path = APP_DIR_PATH.'libraries/Session/'.$prefix.'Session_driver.php'))
 			{
 				require_once($file_path);
 			}
@@ -209,7 +209,7 @@ class CI_Session {
 		$class = 'Session_'.$driver.'_driver';
 
 		// Allow custom drivers without the CI_ or MY_ prefix
-		if(  ! class_exists($class, FALSE) && file_exists($file_path = APPPATH.'libraries/Session/drivers/'.$class.'.php'))
+		if(  ! class_exists($class, FALSE) && file_exists($file_path = APP_DIR_PATH.'libraries/Session/drivers/'.$class.'.php'))
 		{
 			require_once($file_path);
 			if( class_exists($class, FALSE))
@@ -220,7 +220,7 @@ class CI_Session {
 
 		if(  ! class_exists('CI_'.$class, FALSE))
 		{
-			if( file_exists($file_path = APPPATH.'libraries/Session/drivers/'.$class.'.php') OR file_exists($file_path = BASEPATH . 'libraries/Session/drivers/'.$class.'.php'))
+			if( file_exists($file_path = APP_DIR_PATH.'libraries/Session/drivers/'.$class.'.php') OR file_exists($file_path = SYS_CORE_PATH . 'libraries/Session/drivers/'.$class.'.php'))
 			{
 				require_once($file_path);
 			}
@@ -231,7 +231,7 @@ class CI_Session {
 			}
 		}
 
-		if(  ! class_exists($prefix.$class) && file_exists($file_path = APPPATH.'libraries/Session/drivers/'.$prefix.$class.'.php'))
+		if(  ! class_exists($prefix.$class) && file_exists($file_path = APP_DIR_PATH.'libraries/Session/drivers/'.$prefix.$class.'.php'))
 		{
 			require_once($file_path);
 			if( class_exists($prefix.$class, FALSE))
@@ -334,7 +334,7 @@ class CI_Session {
 		{
 			$current_time = time();
 
-			foreach ($_SESSION['__ci_vars'] as $key => &$value)
+			foreach( $_SESSION['__ci_vars'] as $key => &$value)
 			{
 				if( $value === 'new')
 				{
@@ -410,7 +410,7 @@ class CI_Session {
 		}
 
 		$keys = array();
-		foreach (array_keys($_SESSION['__ci_vars']) as $key)
+		foreach( array_keys($_SESSION['__ci_vars']) as $key)
 		{
 			is_int($_SESSION['__ci_vars'][$key]) OR $keys[] = $key;
 		}
@@ -435,7 +435,7 @@ class CI_Session {
 
 		is_array($key) OR $key = array($key);
 
-		foreach ($key as $k)
+		foreach( $key as $k)
 		{
 			if( isset($_SESSION['__ci_vars'][$k]) && ! is_int($_SESSION['__ci_vars'][$k]))
 			{
@@ -466,7 +466,7 @@ class CI_Session {
 		{
 			$temp = array();
 
-			foreach ($key as $k => $v)
+			foreach( $key as $k => $v)
 			{
 				// Do we have a key => ttl pair, or just a key?
 				if( is_int($k))
@@ -518,7 +518,7 @@ class CI_Session {
 		}
 
 		$keys = array();
-		foreach (array_keys($_SESSION['__ci_vars']) as $key)
+		foreach( array_keys($_SESSION['__ci_vars']) as $key)
 		{
 			is_int($_SESSION['__ci_vars'][$key]) && $keys[] = $key;
 		}
@@ -543,7 +543,7 @@ class CI_Session {
 
 		is_array($key) OR $key = array($key);
 
-		foreach ($key as $k)
+		foreach( $key as $k)
 		{
 			if( isset($_SESSION['__ci_vars'][$k]) && is_int($_SESSION['__ci_vars'][$k]))
 			{
@@ -667,7 +667,7 @@ class CI_Session {
 			$this->get_temp_keys()
 		);
 
-		foreach (array_keys($_SESSION) as $key)
+		foreach( array_keys($_SESSION) as $key)
 		{
 			if(  ! in_array($key, $_exclude, TRUE))
 			{
@@ -693,7 +693,7 @@ class CI_Session {
 	{
 		if( is_array($data))
 		{
-			foreach ($data as $key => &$value)
+			foreach( $data as $key => &$value)
 			{
 				$_SESSION[$key] = $value;
 			}
@@ -718,7 +718,7 @@ class CI_Session {
 	{
 		if( is_array($key))
 		{
-			foreach ($key as $k)
+			foreach( $key as $k)
 			{
 				unset($_SESSION[$k]);
 			}
@@ -781,7 +781,7 @@ class CI_Session {
 
 		if(  ! empty($_SESSION['__ci_vars']))
 		{
-			foreach ($_SESSION['__ci_vars'] as $key => &$value)
+			foreach( $_SESSION['__ci_vars'] as $key => &$value)
 			{
 				is_int($value) OR $flashdata[$key] = $_SESSION[$key];
 			}
@@ -845,7 +845,7 @@ class CI_Session {
 
 		if(  ! empty($_SESSION['__ci_vars']))
 		{
-			foreach ($_SESSION['__ci_vars'] as $key => &$value)
+			foreach( $_SESSION['__ci_vars'] as $key => &$value)
 			{
 				is_int($value) && $tempdata[$key] = $_SESSION[$key];
 			}

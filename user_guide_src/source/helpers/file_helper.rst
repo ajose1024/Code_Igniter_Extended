@@ -125,7 +125,7 @@ The following functions are available:
 
 	Example::
 
-		$controllers = get_filenames(APPPATH.'controllers/');
+		$controllers = get_filenames(APP_DIR_PATH.'controllers/');
 
 .. php:function:: get_dir_file_info($source_dir, $top_level_only)
 
@@ -141,7 +141,7 @@ The following functions are available:
 
 	Example::
 
-		$models_info = get_dir_file_info(APPPATH.'models/');
+		$models_info = get_dir_file_info(APP_DIR_PATH.'models/');
 
 .. php:function:: get_file_info($file[, $returned_values = array('name', 'server_path', 'size', 'date')])
 

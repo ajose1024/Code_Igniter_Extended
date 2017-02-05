@@ -21,7 +21,7 @@ class Session_test extends CI_TestCase {
 	{
 return;
 		// Override settings
-		foreach ($this->settings as $name => $value) {
+		foreach( $this->settings as $name => $value) {
 			$this->setting_vals[$name] = ini_get('session.'.$name);
 			ini_set('session.'.$name, $value);
 		}
@@ -76,7 +76,7 @@ return;
 		$_COOKIE = $this->cookie_vals;
 
 		// Restore settings
-		foreach ($this->settings as $name => $value) {
+		foreach( $this->settings as $name => $value) {
 			ini_set('session.'.$name, $this->setting_vals[$name]);
 		}
 	}
@@ -162,11 +162,11 @@ return;
 
 		// Make sure all values are present
 		$call = $this->session->cookie->userdata();
-		foreach ($cdata as $key => $value) {
+		foreach( $cdata as $key => $value) {
 			$this->assertEquals($value, $call[$key]);
 		}
 		$nall = $this->session->native->userdata();
-		foreach ($ndata as $key => $value) {
+		foreach( $ndata as $key => $value) {
 			$this->assertEquals($value, $nall[$key]);
 		}
 	}

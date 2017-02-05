@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * CodeIgniter Form Helpers
@@ -98,7 +98,7 @@ if(  ! function_exists('form_open'))
 
 		if( is_array($hidden))
 		{
-			foreach ($hidden as $name => $value)
+			foreach( $hidden as $name => $value)
 			{
 				$form .= '<input type="hidden" name="'.$name.'" value="'.html_escape($value).'" style="display:none;" />'."\n";
 			}
@@ -163,7 +163,7 @@ if(  ! function_exists('form_hidden'))
 
 		if( is_array($name))
 		{
-			foreach ($name as $key => $val)
+			foreach( $name as $key => $val)
 			{
 				form_hidden($key, $val, TRUE);
 			}
@@ -177,7 +177,7 @@ if(  ! function_exists('form_hidden'))
 		}
 		else
 		{
-			foreach ($value as $k => $v)
+			foreach( $value as $k => $v)
 			{
 				$k = is_int($k) ? '' : $k;
 				form_hidden($name.'['.$k.']', $v, TRUE);
@@ -380,7 +380,7 @@ if(  ! function_exists('form_dropdown'))
 
 		$form = '<select '.rtrim(_parse_form_attributes($data, $defaults)).$extra.$multiple.">\n";
 
-		foreach ($options as $key => $val)
+		foreach( $options as $key => $val)
 		{
 			$key = (string) $key;
 
@@ -393,7 +393,7 @@ if(  ! function_exists('form_dropdown'))
 
 				$form .= '<optgroup label="'.$key."\">\n";
 
-				foreach ($val as $optgroup_key => $optgroup_val)
+				foreach( $val as $optgroup_key => $optgroup_val)
 				{
 					$sel = in_array($optgroup_key, $selected) ? ' selected="selected"' : '';
 					$form .= '<option value="'.html_escape($optgroup_key).'"'.$sel.'>'
@@ -583,7 +583,7 @@ if(  ! function_exists('form_label'))
 
 		if( is_array($attributes) && count($attributes) > 0)
 		{
-			foreach ($attributes as $key => $val)
+			foreach( $attributes as $key => $val)
 			{
 				$label .= ' '.$key.'="'.$val.'"';
 			}
@@ -731,7 +731,7 @@ if(  ! function_exists('set_select'))
 		if( is_array($input))
 		{
 			// Note: in_array('', array(0)) returns TRUE, do not use it
-			foreach ($input as &$v)
+			foreach( $input as &$v)
 			{
 				if( $value === $v)
 				{
@@ -778,7 +778,7 @@ if(  ! function_exists('set_checkbox'))
 		if( is_array($input))
 		{
 			// Note: in_array('', array(0)) returns TRUE, do not use it
-			foreach ($input as &$v)
+			foreach( $input as &$v)
 			{
 				if( $value === $v)
 				{
@@ -893,7 +893,7 @@ if(  ! function_exists('_parse_form_attributes'))
 	{
 		if( is_array($attributes))
 		{
-			foreach ($default as $key => $val)
+			foreach( $default as $key => $val)
 			{
 				if( isset($attributes[$key]))
 				{
@@ -910,7 +910,7 @@ if(  ! function_exists('_parse_form_attributes'))
 
 		$att = '';
 
-		foreach ($default as $key => $val)
+		foreach( $default as $key => $val)
 		{
 			if( $key === 'value')
 			{
@@ -956,7 +956,7 @@ if(  ! function_exists('_attributes_to_string'))
 		{
 			$atts = '';
 
-			foreach ($attributes as $key => $val)
+			foreach( $attributes as $key => $val)
 			{
 				$atts .= ' '.$key.'="'.$val.'"';
 			}

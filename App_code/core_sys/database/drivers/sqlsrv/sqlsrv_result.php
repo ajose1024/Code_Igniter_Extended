@@ -35,7 +35,7 @@
  * @since	Version 2.0.3
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * SQLSRV Result Class
@@ -114,7 +114,7 @@ class CI_DB_sqlsrv_result extends CI_DB_result {
 	public function list_fields()
 	{
 		$field_names = array();
-		foreach (sqlsrv_field_metadata($this->result_id) as $offset => $field)
+		foreach( sqlsrv_field_metadata($this->result_id) as $offset => $field)
 		{
 			$field_names[] = $field['Name'];
 		}
@@ -134,7 +134,7 @@ class CI_DB_sqlsrv_result extends CI_DB_result {
 	public function field_data()
 	{
 		$retval = array();
-		foreach (sqlsrv_field_metadata($this->result_id) as $i => $field)
+		foreach( sqlsrv_field_metadata($this->result_id) as $i => $field)
 		{
 			$retval[$i]		= new stdClass();
 			$retval[$i]->name	= $field['Name'];

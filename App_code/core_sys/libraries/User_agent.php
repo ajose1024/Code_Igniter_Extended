@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * User Agent Class
@@ -195,14 +195,14 @@ class CI_User_agent {
 	 */
 	protected function _load_agent_file()
 	{
-		if( ($found = file_exists(APPPATH.'config/user_agents.php')))
+		if( ($found = file_exists(APP_DIR_PATH.'config/user_agents.php')))
 		{
-			include(APPPATH.'config/user_agents.php');
+			include(APP_DIR_PATH.'config/user_agents.php');
 		}
 
-		if( file_exists(APPPATH.'config/'.ENVIRONMENT.'/user_agents.php'))
+		if( file_exists(APP_DIR_PATH.'config/'.ENVIRONMENT.'/user_agents.php'))
 		{
-			include(APPPATH.'config/'.ENVIRONMENT.'/user_agents.php');
+			include(APP_DIR_PATH.'config/'.ENVIRONMENT.'/user_agents.php');
 			$found = TRUE;
 		}
 
@@ -255,7 +255,7 @@ class CI_User_agent {
 	{
 		$this->_set_platform();
 
-		foreach (array('_set_robot', '_set_browser', '_set_mobile') as $function)
+		foreach( array('_set_robot', '_set_browser', '_set_mobile') as $function)
 		{
 			if( $this->$function() === TRUE)
 			{
@@ -275,7 +275,7 @@ class CI_User_agent {
 	{
 		if( is_array($this->platforms) && count($this->platforms) > 0)
 		{
-			foreach ($this->platforms as $key => $val)
+			foreach( $this->platforms as $key => $val)
 			{
 				if( preg_match('|'.preg_quote($key).'|i', $this->agent))
 				{
@@ -300,7 +300,7 @@ class CI_User_agent {
 	{
 		if( is_array($this->browsers) && count($this->browsers) > 0)
 		{
-			foreach ($this->browsers as $key => $val)
+			foreach( $this->browsers as $key => $val)
 			{
 				if( preg_match('|'.$key.'.*?([0-9\.]+)|i', $this->agent, $match))
 				{
@@ -327,7 +327,7 @@ class CI_User_agent {
 	{
 		if( is_array($this->robots) && count($this->robots) > 0)
 		{
-			foreach ($this->robots as $key => $val)
+			foreach( $this->robots as $key => $val)
 			{
 				if( preg_match('|'.preg_quote($key).'|i', $this->agent))
 				{
@@ -353,7 +353,7 @@ class CI_User_agent {
 	{
 		if( is_array($this->mobiles) && count($this->mobiles) > 0)
 		{
-			foreach ($this->mobiles as $key => $val)
+			foreach( $this->mobiles as $key => $val)
 			{
 				if( FALSE !== (stripos($this->agent, $key)))
 				{

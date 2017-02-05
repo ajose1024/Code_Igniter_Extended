@@ -44,7 +44,7 @@ class URI_test extends CI_TestCase {
 			'/index.php?/controller/method/?var=foo' => 'controller/method'
 		);
 
-		foreach ($requests as $request => $expected)
+		foreach( $requests as $request => $expected)
 		{
 			$_SERVER['SCRIPT_NAME'] = '/index.php';
 			$_SERVER['REQUEST_URI'] = $request;
@@ -107,7 +107,7 @@ class URI_test extends CI_TestCase {
 			'//test3/test3///' => array('test3', 'test3')
 		);
 
-		foreach ($uris as $uri => $a)
+		foreach( $uris as $uri => $a)
 		{
 			$this->uri->segments = array();
 			$this->uri->uri_string = $uri;

@@ -279,7 +279,7 @@ Class Reference
 
 		::
 
-			foreach ($list as $name => $address)
+			foreach( $list as $name => $address)
 			{
 				$this->email->clear();
 
@@ -370,7 +370,7 @@ Class Reference
  
 			$filename = '/img/photo1.jpg';
 			$this->email->attach($filename);
-			foreach ($list as $address)
+			foreach( $list as $address)
 			{
 				$this->email->to($address);
 				$cid = $this->email->attachment_cid($filename);

@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Image Manipulation class
@@ -408,7 +408,7 @@ class CI_Image_lib {
 	{
 		$props = array('thumb_marker', 'library_path', 'source_image', 'new_image', 'width', 'height', 'rotation_angle', 'x_axis', 'y_axis', 'wm_text', 'wm_overlay_path', 'wm_font_path', 'wm_shadow_color', 'source_folder', 'dest_folder', 'mime_type', 'orig_width', 'orig_height', 'image_type', 'size_str', 'full_src_path', 'full_dst_path');
 
-		foreach ($props as $val)
+		foreach( $props as $val)
 		{
 			$this->$val = '';
 		}
@@ -452,7 +452,7 @@ class CI_Image_lib {
 		// Convert array elements into class variables
 		if( count($props) > 0)
 		{
-			foreach ($props as $key => $val)
+			foreach( $props as $key => $val)
 			{
 				if( property_exists($this, $key))
 				{
@@ -1692,7 +1692,7 @@ class CI_Image_lib {
 
 		$allowed = array('new_width', 'new_height', 'width', 'height');
 
-		foreach ($allowed as $item)
+		foreach( $allowed as $item)
 		{
 			if( empty($vals[$item]))
 			{
@@ -1793,7 +1793,7 @@ class CI_Image_lib {
 
 		if( is_array($msg))
 		{
-			foreach ($msg as $val)
+			foreach( $msg as $val)
 			{
 				$msg = ($CI->lang->line($val) === FALSE) ? $val : $CI->lang->line($val);
 				$this->error_msg[] = $msg;

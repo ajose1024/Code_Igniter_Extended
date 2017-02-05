@@ -14,7 +14,7 @@ class Url_helper_test extends CI_TestCase {
 			'\  testing 12' => 'testing-12'
 		);
 
-		foreach ($words as $in => $out)
+		foreach( $words as $in => $out)
 		{
 			$this->assertEquals($out, url_title($in, 'dash', TRUE));
 		}
@@ -29,7 +29,7 @@ class Url_helper_test extends CI_TestCase {
 			'_What\'s wrong with CSS?_' => 'Whats_wrong_with_CSS'
 		);
 
-		foreach ($words as $in => $out)
+		foreach( $words as $in => $out)
 		{
 			$this->assertEquals($out, url_title($in, 'underscore'));
 		}
@@ -56,7 +56,7 @@ class Url_helper_test extends CI_TestCase {
 			'This one: ://codeigniter.com must not break this one: http://codeigniter.com' => 'This one: <a href="://codeigniter.com">://codeigniter.com</a> must not break this one: <a href="http://codeigniter.com">http://codeigniter.com</a>'
 		);
 
-		foreach ($strings as $in => $out)
+		foreach( $strings as $in => $out)
 		{
 			$this->assertEquals($out, auto_link($in, 'url'));
 		}
@@ -70,7 +70,7 @@ class Url_helper_test extends CI_TestCase {
 			'<br />www.google.com' => '<br /><a href="http://www.google.com">www.google.com</a>',
 		);
 
-		foreach ($strings as $in => $out)
+		foreach( $strings as $in => $out)
 		{
 			$this->assertEquals($out, auto_link($in, 'url'));
 		}

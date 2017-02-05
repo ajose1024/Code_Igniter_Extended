@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Database Driver Class
@@ -366,7 +366,7 @@ abstract class CI_DB_driver {
 	{
 		if( is_array($params))
 		{
-			foreach ($params as $key => $val)
+			foreach( $params as $key => $val)
 			{
 				$this->$key = $val;
 			}
@@ -407,10 +407,10 @@ abstract class CI_DB_driver {
 			if(  ! empty($this->failover) && is_array($this->failover))
 			{
 				// Go over all the failovers
-				foreach ($this->failover as $failover)
+				foreach( $this->failover as $failover)
 				{
 					// Replace the current settings with those of the failover
-					foreach ($failover as $key => $val)
+					foreach( $failover as $key => $val)
 					{
 						$this->$key = $val;
 					}
@@ -752,8 +752,8 @@ abstract class CI_DB_driver {
 
 		if(  ! class_exists($driver, FALSE))
 		{
-			require_once(BASEPATH . 'database/DB_result.php');
-			require_once(BASEPATH . 'database/drivers/'.$this->dbdriver.'/'.$this->dbdriver.'_result.php');
+			require_once(SYS_CORE_PATH . 'database/DB_result.php');
+			require_once(SYS_CORE_PATH . 'database/drivers/'.$this->dbdriver.'/'.$this->dbdriver.'_result.php');
 		}
 
 		return $driver;
@@ -1120,7 +1120,7 @@ abstract class CI_DB_driver {
 	{
 		if( is_array($str))
 		{
-			foreach ($str as $key => $val)
+			foreach( $str as $key => $val)
 			{
 				$str[$key] = $this->escape_str($val, $like);
 			}
@@ -1242,7 +1242,7 @@ abstract class CI_DB_driver {
 		$this->data_cache['table_names'] = array();
 		$query = $this->query($sql);
 
-		foreach ($query->result_array() as $row)
+		foreach( $query->result_array() as $row)
 		{
 			// Do we know from which column to get the table name?
 			if(  ! isset($key))
@@ -1310,7 +1310,7 @@ abstract class CI_DB_driver {
 		$query = $this->query($sql);
 		$this->data_cache['field_names'][$table] = array();
 
-		foreach ($query->result_array() as $row)
+		foreach( $query->result_array() as $row)
 		{
 			// Do we know from where to get the column's name?
 			if(  ! isset($key))
@@ -1382,7 +1382,7 @@ abstract class CI_DB_driver {
 		}
 		elseif( is_array($item))
 		{
-			foreach ($item as $key => $value)
+			foreach( $item as $key => $value)
 			{
 				$item[$key] = $this->escape_identifiers($value);
 			}
@@ -1415,7 +1415,7 @@ abstract class CI_DB_driver {
 			}
 		}
 
-		foreach ($this->_reserved_identifiers as $id)
+		foreach( $this->_reserved_identifiers as $id)
 		{
 			if( strpos($item, '.'.$id) !== FALSE)
 			{
@@ -1439,7 +1439,7 @@ abstract class CI_DB_driver {
 	{
 		$fields = $values = array();
 
-		foreach ($data as $key => $val)
+		foreach( $data as $key => $val)
 		{
 			$fields[] = $this->escape_identifiers($key);
 			$values[] = $this->escape($val);
@@ -1485,7 +1485,7 @@ abstract class CI_DB_driver {
 		$this->where($where);
 
 		$fields = array();
-		foreach ($data as $key => $val)
+		foreach( $data as $key => $val)
 		{
 			$fields[$this->protect_identifiers($key)] = $this->escape($val);
 		}
@@ -1508,7 +1508,7 @@ abstract class CI_DB_driver {
 	 */
 	protected function _update($table, $values)
 	{
-		foreach ($values as $key => $val)
+		foreach( $values as $key => $val)
 		{
 			$valstr[] = $key.' = '.$val;
 		}
@@ -1675,7 +1675,7 @@ abstract class CI_DB_driver {
 	{
 		if(  ! class_exists('CI_DB_Cache', FALSE))
 		{
-			require_once(BASEPATH . 'database/DB_cache.php');
+			require_once(SYS_CORE_PATH . 'database/DB_cache.php');
 		}
 		elseif( is_object($this->CACHE))
 		{
@@ -1746,20 +1746,20 @@ abstract class CI_DB_driver {
 		// the backtrace until the source file is no longer in the
 		// database folder.
 		$trace = debug_backtrace();
-		foreach ($trace as $call)
+		foreach( $trace as $call)
 		{
 			if( isset($call['file'], $call['class']))
 			{
-				// We'll need this on Windows, as APPPATH and BASEPATH will always use forward slashes
+				// We'll need this on Windows, as APP_DIR_PATH and SYS_CORE_PATH will always use forward slashes
 				if( DIRECTORY_SEPARATOR !== '/')
 				{
 					$call['file'] = str_replace('\\', '/', $call['file']);
 				}
 
-				if( strpos($call['file'], BASEPATH . 'database') === FALSE && strpos($call['class'], 'Loader') === FALSE)
+				if( strpos($call['file'], SYS_CORE_PATH . 'database') === FALSE && strpos($call['class'], 'Loader') === FALSE)
 				{
 					// Found it - use a relative path for safety
-					$message[] = 'Filename: '.str_replace(array(APPPATH, BASEPATH), '', $call['file']);
+					$message[] = 'Filename: '.str_replace(array(APP_DIR_PATH, SYS_CORE_PATH), '', $call['file']);
 					$message[] = 'Line Number: '.$call['line'];
 					break;
 				}
@@ -1809,7 +1809,7 @@ abstract class CI_DB_driver {
 		if( is_array($item))
 		{
 			$escaped_array = array();
-			foreach ($item as $k => $v)
+			foreach( $item as $k => $v)
 			{
 				$escaped_array[$this->protect_identifiers($k)] = $this->protect_identifiers($v, $prefix_single, $protect_identifiers, $field_exists);
 			}
@@ -1870,7 +1870,7 @@ abstract class CI_DB_driver {
 			{
 				if( $protect_identifiers === TRUE)
 				{
-					foreach ($parts as $key => $val)
+					foreach( $parts as $key => $val)
 					{
 						if(  ! in_array($val, $this->_reserved_identifiers))
 						{

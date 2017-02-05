@@ -110,7 +110,7 @@ Preference              Default            Options                              
 											   the column headers. long = Sunday, short = Sun, abr = Su.
 **show_next_prev**      FALSE              TRUE/FALSE (boolean)                          Determines whether to display links allowing you to toggle
 											   to next/previous months. See information on this feature below.
-**next_prev_url**       controller/method  A URL                                         Sets the basepath used in the next/previous calendar links.
+**next_prev_url**       controller/method  A URL                                         Sets the sys_core_path used in the next/previous calendar links.
 **show_other_days**     FALSE              TRUE/FALSE (boolean)                          Determines whether to display days of other months that share the
 											   first or last week of the calendar month.
 ======================  =================  ============================================  ===================================================================

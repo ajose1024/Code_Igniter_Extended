@@ -286,7 +286,7 @@ The following functions are available:
 
 		$range = date_range('2012-01-01', '2012-01-15');
 		echo "First 15 days of 2012:";
-		foreach ($range as $date)
+		foreach( $range as $date)
 		{
 			echo $date."\n";
 		}

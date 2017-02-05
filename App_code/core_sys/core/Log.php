@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Logging Class
@@ -115,7 +115,7 @@ class CI_Log {
 	{
 		$config =& get_config();
 
-		$this->_log_path = ($config['log_path'] !== '') ? $config['log_path'] : APPPATH.'logs/';
+		$this->_log_path = ($config['log_path'] !== '') ? $config['log_path'] : APP_DIR_PATH.'logs/';
 		$this->_file_ext = (isset($config['log_file_extension']) && $config['log_file_extension'] !== '')
 			? ltrim($config['log_file_extension'], '.') : 'php';
 
@@ -182,7 +182,7 @@ class CI_Log {
 			// Only add protection to php files
 			if( $this->_file_ext === 'php')
 			{
-				$message .= "<?php  defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ; ?>\n\n";
+				$message .= "<?php  defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ; ?>\n\n";
 			}
 		}
 

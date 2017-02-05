@@ -35,7 +35,7 @@
  * @since	Version 1.3.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Postgre Database Adapter Class
@@ -128,7 +128,7 @@ class CI_DB_postgre_driver extends CI_DB {
 		 *
 		 * postgre://username:password@localhost:5432/database?connect_timeout=5&sslmode=1
 		 */
-		foreach (array('connect_timeout', 'options', 'sslmode', 'service') as $key)
+		foreach( array('connect_timeout', 'options', 'sslmode', 'service') as $key)
 		{
 			if( isset($this->$key) && is_string($this->key) && $this->key !== '')
 			{
@@ -543,11 +543,11 @@ class CI_DB_postgre_driver extends CI_DB {
 	protected function _update_batch($table, $values, $index)
 	{
 		$ids = array();
-		foreach ($values as $key => $val)
+		foreach( $values as $key => $val)
 		{
 			$ids[] = $val[$index];
 
-			foreach (array_keys($val) as $field)
+			foreach( array_keys($val) as $field)
 			{
 				if( $field !== $index)
 				{
@@ -557,7 +557,7 @@ class CI_DB_postgre_driver extends CI_DB {
 		}
 
 		$cases = '';
-		foreach ($final as $k => $v)
+		foreach( $final as $k => $v)
 		{
 			$cases .= $k.' = (CASE '.$index."\n"
 				.implode("\n", $v)."\n"

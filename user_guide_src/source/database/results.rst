@@ -20,7 +20,7 @@ loop, like this::
 
 	$query = $this->db->query("YOUR QUERY");
 
-	foreach ($query->result() as $row)
+	foreach( $query->result() as $row)
 	{
 		echo $row->title;
 		echo $row->name;
@@ -36,7 +36,7 @@ instantiate for each result object (note: this class must be loaded)
 
 	$query = $this->db->query("SELECT * FROM users;");
 
-	foreach ($query->result('User') as $user)
+	foreach( $query->result('User') as $user)
 	{
 		echo $user->name; // access attributes
 		echo $user->reverse_name(); // or methods defined on the 'User' class
@@ -50,7 +50,7 @@ loop, like this::
 
 	$query = $this->db->query("YOUR QUERY");
 
-	foreach ($query->result_array() as $row)
+	foreach( $query->result_array() as $row)
 	{
 		echo $row['title'];
 		echo $row['name'];
@@ -215,7 +215,7 @@ Example::
 
 	$rows = $query->custom_result_object('User');
 
-	foreach ($rows as $row)
+	foreach( $rows as $row)
 	{
 		echo $row->id;
 		echo $row->email;
@@ -284,7 +284,7 @@ Example::
 
 	$query = $this->db->query('SELECT title FROM my_table');
 
-	foreach ($query->result() as $row)
+	foreach( $query->result() as $row)
 	{
 		echo $row->title;
 	}

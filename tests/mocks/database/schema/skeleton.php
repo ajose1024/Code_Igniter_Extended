@@ -141,11 +141,11 @@ class Mock_Database_Schema_Skeleton {
 			)
 		);
 
-		foreach ($data as $table => $dummy_data)
+		foreach( $data as $table => $dummy_data)
 		{
 			self::$db->truncate($table);
 
-			foreach ($dummy_data as $single_dummy_data)
+			foreach( $dummy_data as $single_dummy_data)
 			{
 				self::$db->insert($table, $single_dummy_data);
 			}

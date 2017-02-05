@@ -35,7 +35,7 @@
  * @since	Version 3.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * CodeIgniter Session Memcached Driver
@@ -108,7 +108,7 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 		$this->_memcached = new Memcached();
 		$this->_memcached->setOption(Memcached::OPT_BINARY_PROTOCOL, TRUE); // required for touch() usage
 		$server_list = array();
-		foreach ($this->_memcached->getServerList() as $server)
+		foreach( $this->_memcached->getServerList() as $server)
 		{
 			$server_list[] = $server['host'].':'.$server['port'];
 		}
@@ -120,7 +120,7 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 			return FALSE;
 		}
 
-		foreach ($matches as $match)
+		foreach( $matches as $match)
 		{
 			// If Memcached already has this server (or if the port is invalid), skip it
 			if( in_array($match[1].':'.$match[2], $server_list, TRUE))

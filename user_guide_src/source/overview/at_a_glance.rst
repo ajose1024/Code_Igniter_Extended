@@ -81,7 +81,7 @@ must be learned to use a template engine is usually only marginally
 easier than learning the basics of PHP. Consider this block of PHP code::
 
 	<ul>
-	<?php foreach ($addressbook as $name):?>
+	<?php foreach( $addressbook as $name):?>
 		<li><?=$name?></li>
 	<?php endforeach; ?>
 	</ul>

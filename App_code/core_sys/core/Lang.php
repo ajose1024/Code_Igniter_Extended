@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Language Class
@@ -89,7 +89,7 @@ class CI_Lang {
 	{
 		if( is_array($langfile))
 		{
-			foreach ($langfile as $value)
+			foreach( $langfile as $value)
 			{
 				$this->load($value, $idiom, $return, $add_suffix, $alt_path);
 			}
@@ -118,10 +118,10 @@ class CI_Lang {
 		}
 
 		// Load the base file, so any others found can override it
-		$basepath = BASEPATH . 'language/'.$idiom.'/'.$langfile;
-		if( ($found = file_exists($basepath)) === TRUE)
+		$sys_core_path = SYS_CORE_PATH . 'language/'.$idiom.'/'.$langfile;
+		if( ($found = file_exists($sys_core_path)) === TRUE)
 		{
-			include($basepath);
+			include($sys_core_path);
 		}
 
 		// Do we have an alternative path to look in?
@@ -136,10 +136,10 @@ class CI_Lang {
 		}
 		else
 		{
-			foreach (get_instance()->load->get_package_paths(TRUE) as $package_path)
+			foreach( get_instance()->load->get_package_paths(TRUE) as $package_path)
 			{
 				$package_path .= 'language/'.$idiom.'/'.$langfile;
-				if( $basepath !== $package_path && file_exists($package_path))
+				if( $sys_core_path !== $package_path && file_exists($package_path))
 				{
 					include($package_path);
 					$found = TRUE;

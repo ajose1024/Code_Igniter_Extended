@@ -35,7 +35,7 @@
  * @since	Version 1.3.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * MySQLi Utility Class
@@ -96,7 +96,7 @@ class CI_DB_mysqli_utility extends CI_DB_utility {
 			$output .= 'SET foreign_key_checks = 0;'.$newline;
 		}
 
-		foreach ( (array) $tables as $table)
+		foreach(  (array) $tables as $table)
 		{
 			// Is the table in the "ignore" list?
 			if( in_array($table, (array) $ignore, TRUE))
@@ -123,7 +123,7 @@ class CI_DB_mysqli_utility extends CI_DB_utility {
 
 			$i = 0;
 			$result = $query->result_array();
-			foreach ($result[0] as $val)
+			foreach( $result[0] as $val)
 			{
 				if( $i++ % 2)
 				{
@@ -168,12 +168,12 @@ class CI_DB_mysqli_utility extends CI_DB_utility {
 			$field_str = preg_replace('/, $/' , '', $field_str);
 
 			// Build the insert string
-			foreach ($query->result_array() as $row)
+			foreach( $query->result_array() as $row)
 			{
 				$val_str = '';
 
 				$i = 0;
-				foreach ($row as $v)
+				foreach( $row as $v)
 				{
 					// Is the value NULL?
 					if( $v === NULL)

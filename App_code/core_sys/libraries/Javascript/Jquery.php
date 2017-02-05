@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * Jquery Class
@@ -374,7 +374,7 @@ class CI_Jquery extends CI_Javascript {
 			$array_js = array($array_js);
 		}
 
-		foreach ($array_js as $js)
+		foreach( $array_js as $js)
 		{
 			$this->jquery_code_for_compile[] = "\t".$js."\n";
 		}
@@ -467,7 +467,7 @@ class CI_Jquery extends CI_Javascript {
 
 		$animations = "\t\t\t";
 
-		foreach ($params as $param => $value)
+		foreach( $params as $param => $value)
 		{
 			$animations .= $param.": '".$value."', ";
 		}
@@ -887,7 +887,7 @@ class CI_Jquery extends CI_Javascript {
 		if( count($options) > 0)
 		{
 			$sort_options = array();
-			foreach ($options as $k=>$v)
+			foreach( $options as $k=>$v)
 			{
 				$sort_options[] = "\n\t\t".$k.': '.$v;
 			}
@@ -1003,7 +1003,7 @@ class CI_Jquery extends CI_Javascript {
 	{
 		is_array($js) OR $js = array($js);
 
-		foreach ($js as $script)
+		foreach( $js as $script)
 		{
 			$this->jquery_code_for_compile[] = $script;
 		}

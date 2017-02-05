@@ -164,7 +164,7 @@ helper </helpers/form_helper>`.
 
 	<?php $i = 1; ?>
 
-	<?php foreach ($this->cart->contents() as $items): ?>
+	<?php foreach( $this->cart->contents() as $items): ?>
 
 		<?php echo form_hidden($i.'[rowid]', $items['rowid']); ?>
 
@@ -176,7 +176,7 @@ helper </helpers/form_helper>`.
 				<?php if( $this->cart->has_options($items['rowid']) == TRUE): ?>
 
 					<p>
-						<?php foreach ($this->cart->product_options($items['rowid']) as $option_name => $option_value): ?>
+						<?php foreach( $this->cart->product_options($items['rowid']) as $option_name => $option_value): ?>
 
 							<strong><?php echo $option_name; ?>:</strong> <?php echo $option_value; ?><br />
 

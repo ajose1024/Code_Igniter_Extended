@@ -192,7 +192,7 @@ Release Date: March 30, 2015
    -  Moved the Log class to *application/core/*
    -  Global config files are loaded first, then environment ones. Environment config keys overwrite base ones, allowing to only set the keys we want changed per environment.
    -  Changed detection of ``$view_folder`` so that if it's not found in the current path, it will now also be searched for under the application folder.
-   -  Path constants BASEPATH, APPPATH and VIEWPATH are now (internally) defined as absolute paths.
+   -  Path constants SYS_CORE_PATH, APP_DIR_PATH and VIEWPATH are now (internally) defined as absolute paths.
    -  Updated email validation methods to use ``filter_var()`` instead of PCRE.
    -  Changed environment defaults to report all errors in *development* and only fatal ones in *testing*, *production* but only display them in *development*.
    -  Updated *ip_address* database field lengths from 16 to 45 for supporting IPv6 address on :doc:`Trackback Library <libraries/trackback>` and :doc:`Captcha Helper <helpers/captcha_helper>`.
@@ -1147,7 +1147,7 @@ Bug fixes for 2.1.0
 -  Fixed a bug (#150) - field_data() now correctly returns column
    length.
 -  Fixed a bug (#8) - load_class() now looks for core classes in
-   APPPATH first, allowing them to be replaced.
+   APP_DIR_PATH first, allowing them to be replaced.
 -  Fixed a bug (#24) - ODBC database driver called incorrect parent in __construct().
 -  Fixed a bug (#85) - OCI8 (Oracle) database escape_str() function did not escape correct.
 -  Fixed a bug (#344) - Using schema found in :doc:`Saving Session Data to a Database <libraries/sessions>`, system would throw error "user_data does not have a default value" when deleting then creating a session.
@@ -1232,7 +1232,7 @@ Bug fixes for 2.0.3
 
 -  Added ENVIRONMENT to reserved constants. (Reactor #196)
 -  Changed server check to ensure SCRIPT_NAME is defined. (Reactor #57)
--  Removed APPPATH.'third_party' from the packages autoloader to negate
+-  Removed APP_DIR_PATH.'third_party' from the packages autoloader to negate
    needless file stats if no packages exist or if the developer does not
    load any other packages by default.
 -  Fixed a bug (Reactor #231) where Sessions Library database table

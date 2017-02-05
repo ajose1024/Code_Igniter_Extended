@@ -48,7 +48,7 @@ Returns an array of database names::
 
 	$dbs = $this->dbutil->list_databases();
 
-	foreach ($dbs as $db)
+	foreach( $dbs as $db)
 	{
  		echo $db;
 	}

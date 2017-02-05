@@ -162,7 +162,7 @@ class Input_test extends CI_TestCase {
 			'2001:db8:0:85a3::ac1f:8001'
 		);
 
-		foreach ($ip_v6 as $ip)
+		foreach( $ip_v6 as $ip)
 		{
 			$this->assertTrue($this->input->valid_ip($ip));
 			$this->assertTrue($this->input->valid_ip($ip, 'ipv6'));

@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * CodeIgniter Smiley Helpers
@@ -80,7 +80,7 @@ if(  ! function_exists('smiley_js'))
 
 			if( is_array($alias))
 			{
-				foreach ($alias as $name => $id)
+				foreach( $alias as $name => $id)
 				{
 					$m[] = '"'.$name.'" : "'.$id.'"';
 				}
@@ -120,7 +120,7 @@ EOF;
 		}
 		elseif( is_array($alias))
 		{
-			foreach ($alias as $name => $id)
+			foreach( $alias as $name => $id)
 			{
 				$r .= 'smiley_map["'.$name.'"] = "'.$id."\";\n";
 			}
@@ -162,7 +162,7 @@ if(  ! function_exists('get_clickable_smileys'))
 		$image_url = rtrim($image_url, '/').'/';
 
 		$used = array();
-		foreach ($smileys as $key => $val)
+		foreach( $smileys as $key => $val)
 		{
 			// Keep duplicates from being used, which can happen if the
 			// mapping array contains multiple identical replacements. For example:
@@ -205,7 +205,7 @@ if(  ! function_exists('parse_smileys'))
 		// Add a trailing slash to the file path if needed
 		$image_url = rtrim($image_url, '/').'/';
 
-		foreach ($smileys as $key => $val)
+		foreach( $smileys as $key => $val)
 		{
 			$str = str_replace($key, '<img src="'.$image_url.$smileys[$key][0].'" alt="'.$smileys[$key][3].'" style="width: '.$smileys[$key][1].'; height: '.$smileys[$key][2].'; border: 0;" />', $str);
 		}
@@ -231,14 +231,14 @@ if(  ! function_exists('_get_smiley_array'))
 
 		if(  ! is_array($_smileys))
 		{
-			if( file_exists(APPPATH.'config/smileys.php'))
+			if( file_exists(APP_DIR_PATH.'config/smileys.php'))
 			{
-				include(APPPATH.'config/smileys.php');
+				include(APP_DIR_PATH.'config/smileys.php');
 			}
 
-			if( file_exists(APPPATH.'config/'.ENVIRONMENT.'/smileys.php'))
+			if( file_exists(APP_DIR_PATH.'config/'.ENVIRONMENT.'/smileys.php'))
 			{
-				include(APPPATH.'config/'.ENVIRONMENT.'/smileys.php');
+				include(APP_DIR_PATH.'config/'.ENVIRONMENT.'/smileys.php');
 			}
 
 			if( empty($smileys) OR ! is_array($smileys))

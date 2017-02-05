@@ -35,7 +35,7 @@
  * @since	Version 1.3.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * MySQLi Forge Class
@@ -104,7 +104,7 @@ class CI_DB_mysqli_forge extends CI_DB_forge {
 	{
 		$sql = '';
 
-		foreach (array_keys($attributes) as $key)
+		foreach( array_keys($attributes) as $key)
 		{
 			if( is_string($key))
 			{

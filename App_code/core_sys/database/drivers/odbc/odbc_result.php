@@ -35,7 +35,7 @@
  * @since	Version 1.3.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * ODBC Result Class
@@ -191,7 +191,7 @@ class CI_DB_odbc_result extends CI_DB_result {
 		}
 
 		$class_name = new $class_name();
-		foreach ($row as $key => $value)
+		foreach( $row as $key => $value)
 		{
 			$class_name->$key = $value;
 		}
@@ -224,7 +224,7 @@ if(  ! function_exists('odbc_fetch_array'))
 		}
 
 		$rs_assoc = array();
-		foreach ($rs as $k => $v)
+		foreach( $rs as $k => $v)
 		{
 			$field_name = odbc_field_name($result, $k+1);
 			$rs_assoc[$field_name] = $v;
@@ -257,7 +257,7 @@ if(  ! function_exists('odbc_fetch_object'))
 		}
 
 		$rs_object = new stdClass();
-		foreach ($rs as $k => $v)
+		foreach( $rs as $k => $v)
 		{
 			$field_name = odbc_field_name($result, $k+1);
 			$rs_object->$field_name = $v;

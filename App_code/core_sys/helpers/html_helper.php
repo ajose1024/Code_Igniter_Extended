@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 /**
  * CodeIgniter HTML Helpers
@@ -138,7 +138,7 @@ if(  ! function_exists('_list'))
 		// encountered we will recursively call _list()
 
 		static $_last_list_item = '';
-		foreach ($list as $key => $val)
+		foreach( $list as $key => $val)
 		{
 			$_last_list_item = $key;
 
@@ -190,7 +190,7 @@ if(  ! function_exists('img'))
 
 		$img = '<img';
 
-		foreach ($src as $k => $v)
+		foreach( $src as $k => $v)
 		{
 			if( $k === 'src' && ! preg_match('#^([a-z]+:)?//#i', $v))
 			{
@@ -235,14 +235,14 @@ if(  ! function_exists('doctype'))
 
 		if(  ! is_array($doctypes))
 		{
-			if( file_exists(APPPATH.'config/doctypes.php'))
+			if( file_exists(APP_DIR_PATH.'config/doctypes.php'))
 			{
-				include(APPPATH.'config/doctypes.php');
+				include(APP_DIR_PATH.'config/doctypes.php');
 			}
 
-			if( file_exists(APPPATH.'config/'.ENVIRONMENT.'/doctypes.php'))
+			if( file_exists(APP_DIR_PATH.'config/'.ENVIRONMENT.'/doctypes.php'))
 			{
-				include(APPPATH.'config/'.ENVIRONMENT.'/doctypes.php');
+				include(APP_DIR_PATH.'config/'.ENVIRONMENT.'/doctypes.php');
 			}
 
 			if( empty($_doctypes) OR ! is_array($_doctypes))
@@ -282,7 +282,7 @@ if(  ! function_exists('link_tag'))
 
 		if( is_array($href))
 		{
-			foreach ($href as $k => $v)
+			foreach( $href as $k => $v)
 			{
 				if( $k === 'href' && ! preg_match('#^([a-z]+:)?//#i', $v))
 				{
@@ -361,7 +361,7 @@ if(  ! function_exists('meta'))
 		}
 
 		$str = '';
-		foreach ($name as $meta)
+		foreach( $name as $meta)
 		{
 			$type		= (isset($meta['type']) && $meta['type'] !== 'name')	? 'http-equiv' : 'name';
 			$name		= isset($meta['name'])					? $meta['name'] : '';
