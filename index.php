@@ -6,6 +6,8 @@
  * 
  */
 
+date_default_timezone_set('Europe/Lisbon') ;
+
 $home_dir = realpath( dirname( __FILE__ ) ) ;
 define( 'HOME_DIR', $home_dir ) ;
 unset( $home_dir ) ;

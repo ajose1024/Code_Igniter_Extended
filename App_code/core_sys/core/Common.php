@@ -129,7 +129,7 @@ if( ! function_exists( 'is_really_writable' ) )
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'load_class ' ) )
+if( ! function_exists( 'load_class' ) )
 {
     /**
      * Class registry
