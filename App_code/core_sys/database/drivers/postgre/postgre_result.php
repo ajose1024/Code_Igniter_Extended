@@ -57,7 +57,7 @@ class CI_DB_postgre_result extends CI_DB_result {
 	 */
 	public function num_rows()
 	{
-		return..is_int( $this->num_rows)
+		return  is_int( $this->num_rows)
 			? $this->num_rows
 			: $this->num_rows = pg_num_rows( $this->result_id);
 	}
@@ -71,7 +71,7 @@ class CI_DB_postgre_result extends CI_DB_result {
 	 */
 	public function num_fields()
 	{
-		return..pg_num_fields( $this->result_id);
+		return  pg_num_fields( $this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -91,7 +91,7 @@ class CI_DB_postgre_result extends CI_DB_result {
 			$field_names[] = pg_field_name( $this->result_id, $i);
 		}
 
-		return..$field_names;
+		return  $field_names;
 	}
 
 	// --------------------------------------------------------------------
@@ -114,7 +114,7 @@ class CI_DB_postgre_result extends CI_DB_result {
 			$retval[$i]->max_length		= pg_field_size( $this->result_id, $i);
 		}
 
-		return..$retval;
+		return  $retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -147,7 +147,7 @@ class CI_DB_postgre_result extends CI_DB_result {
 	 */
 	public function data_seek( $n = 0)
 	{
-		return..pg_result_seek( $this->result_id, $n);
+		return  pg_result_seek( $this->result_id, $n);
 	}
 
 	// --------------------------------------------------------------------
@@ -161,7 +161,7 @@ class CI_DB_postgre_result extends CI_DB_result {
 	 */
 	protected function _fetch_assoc()
 	{
-		return..pg_fetch_assoc( $this->result_id);
+		return  pg_fetch_assoc( $this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -176,7 +176,7 @@ class CI_DB_postgre_result extends CI_DB_result {
 	 */
 	protected function _fetch_object( $class_name = 'stdClass')
 	{
-		return..pg_fetch_object( $this->result_id, NULL, $class_name);
+		return  pg_fetch_object( $this->result_id, NULL, $class_name);
 	}
 
 }

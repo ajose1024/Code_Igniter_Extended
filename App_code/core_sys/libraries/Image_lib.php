@@ -488,7 +488,7 @@ class CI_Image_lib {
 		if( $this->source_image === '')
 		{
 			$this->set_error( 'imglib_source_image_required');
-			return..FALSE;
+			return  FALSE;
 		}
 
 		/* Is getimagesize() available?
@@ -500,7 +500,7 @@ class CI_Image_lib {
 		if( ! function_exists( 'getimagesize'))
 		{
 			$this->set_error( 'imglib_gd_required_for_props');
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$this->image_library = strtolower( $this->image_library);
@@ -527,7 +527,7 @@ class CI_Image_lib {
 		// Set the Image Properties
 		if( ! $this->get_image_properties( $this->source_folder.$this->source_image))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		/*
@@ -652,7 +652,7 @@ class CI_Image_lib {
 			$this->wm_use_truetype = TRUE;
 		}
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -668,7 +668,7 @@ class CI_Image_lib {
 	public function resize()
 	{
 		$protocol = ( $this->image_library === 'gd2') ? 'image_process_gd' : 'image_process_' . $this->image_library;
-		return..$this->$protocol( 'resize');
+		return  $this->$protocol( 'resize');
 	}
 
 	// --------------------------------------------------------------------
@@ -684,7 +684,7 @@ class CI_Image_lib {
 	public function crop()
 	{
 		$protocol = ( $this->image_library === 'gd2') ? 'image_process_gd' : 'image_process_' . $this->image_library;
-		return..$this->$protocol( 'crop');
+		return  $this->$protocol( 'crop');
 	}
 
 	// --------------------------------------------------------------------
@@ -705,7 +705,7 @@ class CI_Image_lib {
 		if( $this->rotation_angle === '' OR ! in_array( $this->rotation_angle, $degs))
 		{
 			$this->set_error( 'imglib_rotation_angle_required');
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// Reassign the width and height
@@ -724,10 +724,10 @@ class CI_Image_lib {
 		if( $this->image_library === 'imagemagick' OR $this->image_library === 'netpbm')
 		{
 			$protocol = 'image_process_' . $this->image_library;
-			return..$this->$protocol( 'rotate');
+			return  $this->$protocol( 'rotate');
 		}
 
-		return..( $this->rotation_angle === 'hor' OR $this->rotation_angle === 'vrt')
+		return  ( $this->rotation_angle === 'hor' OR $this->rotation_angle === 'vrt')
 			? $this->image_mirror_gd()
 			: $this->image_rotate_gd();
 	}
@@ -755,7 +755,7 @@ class CI_Image_lib {
 				chmod( $this->full_dst_path, $this->file_permissions);
 			}
 
-			return..TRUE;
+			return  TRUE;
 		}
 
 		// Let's set up our values based on the action
@@ -782,7 +782,7 @@ class CI_Image_lib {
 		// Create the image handle
 		if( ! ( $src_img = $this->image_create_gd()))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		/* Create the image
@@ -821,7 +821,7 @@ class CI_Image_lib {
 		}
 		elseif( ! $this->image_save_gd( $dst_img)) // Or save it
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// Kill the file handles
@@ -830,7 +830,7 @@ class CI_Image_lib {
 
 		chmod( $this->full_dst_path, $this->file_permissions);
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -849,7 +849,7 @@ class CI_Image_lib {
 		if( $this->library_path === '')
 		{
 			$this->set_error( 'imglib_libpath_invalid');
-			return..FALSE;
+			return  FALSE;
 		}
 
 		if( ! preg_match( '/convert$/i', $this->library_path))
@@ -894,12 +894,12 @@ class CI_Image_lib {
 		if( $retval > 0)
 		{
 			$this->set_error( 'imglib_image_process_failed');
-			return..FALSE;
+			return  FALSE;
 		}
 
 		chmod( $this->full_dst_path, $this->file_permissions);
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -917,7 +917,7 @@ class CI_Image_lib {
 		if( $this->library_path === '')
 		{
 			$this->set_error( 'imglib_libpath_invalid');
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// Build the resizing command
@@ -977,7 +977,7 @@ class CI_Image_lib {
 		if( $retval > 0)
 		{
 			$this->set_error( 'imglib_image_process_failed');
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// With NetPBM we have to create a temporary image.
@@ -987,7 +987,7 @@ class CI_Image_lib {
 		unlink( $this->dest_folder . 'netpbm.tmp');
 		chmod( $this->full_dst_path, $this->file_permissions);
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -1002,7 +1002,7 @@ class CI_Image_lib {
 		// Create the image handle
 		if( ! ( $src_img = $this->image_create_gd()))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// Set the background color
@@ -1022,7 +1022,7 @@ class CI_Image_lib {
 		}
 		elseif( ! $this->image_save_gd( $dst_img)) // ... or save it
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// Kill the file handles
@@ -1031,7 +1031,7 @@ class CI_Image_lib {
 
 		chmod( $this->full_dst_path, $this->file_permissions);
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -1047,7 +1047,7 @@ class CI_Image_lib {
 	{
 		if( ! $src_img = $this->image_create_gd())
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$width  = $this->orig_width;
@@ -1101,7 +1101,7 @@ class CI_Image_lib {
 		}
 		elseif( ! $this->image_save_gd( $src_img)) // ... or save it
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// Kill the file handles
@@ -1109,7 +1109,7 @@ class CI_Image_lib {
 
 		chmod( $this->full_dst_path, $this->file_permissions);
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -1124,7 +1124,7 @@ class CI_Image_lib {
 	 */
 	public function watermark()
 	{
-		return..( $this->wm_type === 'overlay') ? $this->overlay_watermark() : $this->text_watermark();
+		return  ( $this->wm_type === 'overlay') ? $this->overlay_watermark() : $this->text_watermark();
 	}
 
 	// --------------------------------------------------------------------
@@ -1139,7 +1139,7 @@ class CI_Image_lib {
 		if( ! function_exists( 'imagecolortransparent'))
 		{
 			$this->set_error( 'imglib_gd_required');
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// Fetch source image properties
@@ -1232,13 +1232,13 @@ class CI_Image_lib {
 		}
 		elseif( ! $this->image_save_gd( $src_img)) // ... or save it
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		imagedestroy( $src_img);
 		imagedestroy( $wm_img);
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -1252,13 +1252,13 @@ class CI_Image_lib {
 	{
 		if( ! ( $src_img = $this->image_create_gd()))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		if( $this->wm_use_truetype === TRUE && ! file_exists( $this->wm_font_path))
 		{
 			$this->set_error( 'imglib_missing_font');
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// Fetch source image properties
@@ -1408,7 +1408,7 @@ class CI_Image_lib {
 
 		imagedestroy( $src_img);
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -1441,29 +1441,29 @@ class CI_Image_lib {
 				if( ! function_exists( 'imagecreatefromgif'))
 				{
 					$this->set_error(array( 'imglib_unsupported_imagecreate', 'imglib_gif_not_supported'));
-					return..FALSE;
+					return  FALSE;
 				}
 
-				return..imagecreatefromgif( $path);
+				return  imagecreatefromgif( $path);
 			case 2:
 				if( ! function_exists( 'imagecreatefromjpeg'))
 				{
 					$this->set_error(array( 'imglib_unsupported_imagecreate', 'imglib_jpg_not_supported'));
-					return..FALSE;
+					return  FALSE;
 				}
 
-				return..imagecreatefromjpeg( $path);
+				return  imagecreatefromjpeg( $path);
 			case 3:
 				if( ! function_exists( 'imagecreatefrompng'))
 				{
 					$this->set_error(array( 'imglib_unsupported_imagecreate', 'imglib_png_not_supported'));
-					return..FALSE;
+					return  FALSE;
 				}
 
-				return..imagecreatefrompng( $path);
+				return  imagecreatefrompng( $path);
 			default:
 				$this->set_error(array( 'imglib_unsupported_imagecreate'));
-				return..FALSE;
+				return  FALSE;
 		}
 	}
 
@@ -1486,48 +1486,48 @@ class CI_Image_lib {
 				if( ! function_exists( 'imagegif'))
 				{
 					$this->set_error(array( 'imglib_unsupported_imagecreate', 'imglib_gif_not_supported'));
-					return..FALSE;
+					return  FALSE;
 				}
 
 				if( ! @imagegif( $resource, $this->full_dst_path))
 				{
 					$this->set_error( 'imglib_save_failed');
-					return..FALSE;
+					return  FALSE;
 				}
 			break;
 			case 2:
 				if( ! function_exists( 'imagejpeg'))
 				{
 					$this->set_error(array( 'imglib_unsupported_imagecreate', 'imglib_jpg_not_supported'));
-					return..FALSE;
+					return  FALSE;
 				}
 
 				if( ! @imagejpeg( $resource, $this->full_dst_path, $this->quality))
 				{
 					$this->set_error( 'imglib_save_failed');
-					return..FALSE;
+					return  FALSE;
 				}
 			break;
 			case 3:
 				if( ! function_exists( 'imagepng'))
 				{
 					$this->set_error(array( 'imglib_unsupported_imagecreate', 'imglib_png_not_supported'));
-					return..FALSE;
+					return  FALSE;
 				}
 
 				if( ! @imagepng( $resource, $this->full_dst_path))
 				{
 					$this->set_error( 'imglib_save_failed');
-					return..FALSE;
+					return  FALSE;
 				}
 			break;
 			default:
 				$this->set_error(array( 'imglib_unsupported_imagecreate'));
-				return..FALSE;
+				return  FALSE;
 			break;
 		}
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -1624,7 +1624,7 @@ class CI_Image_lib {
 	 * @param	bool
 	 * @return	mixed
 	 */
-	public function get_image_properties( $path = '', $return..= FALSE)
+	public function get_image_properties( $path = '', $return  = FALSE)
 	{
 		// For now we require GD but we should
 		// find a way to determine this using IM or NetPBM
@@ -1637,16 +1637,16 @@ class CI_Image_lib {
 		if( ! file_exists( $path))
 		{
 			$this->set_error( 'imglib_invalid_path');
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$vals = getimagesize( $path);
 		$types = array(1 => 'gif', 2 => 'jpeg', 3 => 'png');
 		$mime = (isset( $types[$vals[2]])) ? 'image/' . $types[$vals[2]] : 'image/jpg';
 
-		if( $return..=== TRUE)
+		if( $return  === TRUE)
 		{
-			return..array(
+			return  array(
 					'width' =>	$vals[0],
 					'height' =>	$vals[1],
 					'image_type' =>	$vals[2],
@@ -1661,7 +1661,7 @@ class CI_Image_lib {
 		$this->size_str		= $vals[3];
 		$this->mime_type	= $mime;
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -1702,7 +1702,7 @@ class CI_Image_lib {
 
 		if( $vals[ 'width' ] === 0 OR $vals[ 'height' ] === 0)
 		{
-			return..$vals;
+			return  $vals;
 		}
 
 		if( $vals[ 'new_width' ] === 0)
@@ -1714,7 +1714,7 @@ class CI_Image_lib {
 			$vals[ 'new_height' ] = ceil( $vals[ 'new_width' ]*$vals[ 'height' ]/$vals[ 'width' ]);
 		}
 
-		return..$vals;
+		return  $vals;
 	}
 
 	// --------------------------------------------------------------------
@@ -1737,7 +1737,7 @@ class CI_Image_lib {
 		$ext = strrchr( $source_image, ' . ');
 		$name = ( $ext === FALSE) ? $source_image : substr( $source_image, 0, -strlen( $ext));
 
-		return..array( 'ext' => $ext, 'name' => $name);
+		return  array( 'ext' => $ext, 'name' => $name);
 	}
 
 	// --------------------------------------------------------------------
@@ -1754,10 +1754,10 @@ class CI_Image_lib {
 			/* As it is stated in the PHP manual, dl() is not always available
 			 * and even if so - it could generate an E_WARNING message on failure
 			 */
-			return..(function_exists( 'dl') && @dl( 'gd.so'));
+			return  (function_exists( 'dl') && @dl( 'gd.so'));
 		}
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -1772,10 +1772,10 @@ class CI_Image_lib {
 		if( function_exists( 'gd_info'))
 		{
 			$gd_version = @gd_info();
-			return..preg_replace( '/\D/', '', $gd_version[ 'GD Version' ]);
+			return  preg_replace( '/\D/', '', $gd_version[ 'GD Version' ]);
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -1819,7 +1819,7 @@ class CI_Image_lib {
 	 */
 	public function display_errors( $open = '<p>', $close = '</p>')
 	{
-		return..(count( $this->error_msg) > 0) ? $open.implode( $close.$open, $this->error_msg).$close : '';
+		return  (count( $this->error_msg) > 0) ? $open.implode( $close.$open, $this->error_msg).$close : '';
 	}
 
 }

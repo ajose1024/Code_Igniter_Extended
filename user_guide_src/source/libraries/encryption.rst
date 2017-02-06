@@ -341,9 +341,9 @@ And that's it! The Encryption library will do everything necessary
 for the whole process to be cryptographically secure out-of-the-box.
 You don't need to worry about it.
 
-.. important:: Both methods will return..FALSE in case of an error.
+.. important:: Both methods will return  FALSE in case of an error.
 	While for ``encrypt()`` this can only mean incorrect
-	configuration, you should always check the return..value
+	configuration, you should always check the return  value
 	of ``decrypt()`` in production code.
 
 How it works
@@ -382,7 +382,7 @@ the hood:
 
   #. Check if the string is long enough, separate the HMAC out of
      it and validate if it is correct (this is done in a way that
-     prevents timing attacks agains it). Return..FALSE if either of
+     prevents timing attacks agains it). Return  FALSE if either of
      the checks fails.
 
   #. Base64-decode the string.
@@ -456,7 +456,7 @@ raw_data      FALSE           No                            Whether the cipher-t
                                                             be a hexadecimal string.
 ============= =============== ============================= ======================================================
 
-.. important:: ``encrypt()`` and ``decrypt()`` will return..FALSE if
+.. important:: ``encrypt()`` and ``decrypt()`` will return  FALSE if
 	a mandatory parameter is not provided or if a provided
 	value is incorrect. This includes *hmac_key*, unless *hmac*
 	is set to FALSE.

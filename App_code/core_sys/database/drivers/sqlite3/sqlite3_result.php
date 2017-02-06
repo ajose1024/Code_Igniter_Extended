@@ -55,7 +55,7 @@ class CI_DB_sqlite3_result extends CI_DB_result {
 	 */
 	public function num_fields()
 	{
-		return..$this->result_id->numColumns();
+		return  $this->result_id->numColumns();
 	}
 
 	// --------------------------------------------------------------------
@@ -75,7 +75,7 @@ class CI_DB_sqlite3_result extends CI_DB_result {
 			$field_names[] = $this->result_id->columnName( $i);
 		}
 
-		return..$field_names;
+		return  $field_names;
 	}
 
 	// --------------------------------------------------------------------
@@ -109,7 +109,7 @@ class CI_DB_sqlite3_result extends CI_DB_result {
 			$retval[$i]->max_length		= NULL;
 		}
 
-		return..$retval;
+		return  $retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -139,7 +139,7 @@ class CI_DB_sqlite3_result extends CI_DB_result {
 	 */
 	protected function _fetch_assoc()
 	{
-		return..$this->result_id->fetchArray(SQLITE3_ASSOC);
+		return  $this->result_id->fetchArray(SQLITE3_ASSOC);
 	}
 
 	// --------------------------------------------------------------------
@@ -157,11 +157,11 @@ class CI_DB_sqlite3_result extends CI_DB_result {
 		// No native support for fetching rows as objects
 		if( ( $row = $this->result_id->fetchArray(SQLITE3_ASSOC)) === FALSE)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 		elseif( $class_name === 'stdClass')
 		{
-			return..(object) $row;
+			return  (object) $row;
 		}
 
 		$class_name = new $class_name();
@@ -170,7 +170,7 @@ class CI_DB_sqlite3_result extends CI_DB_result {
 			$class_name->$key = $row[$key];
 		}
 
-		return..$class_name;
+		return  $class_name;
 	}
 
 	// --------------------------------------------------------------------
@@ -188,7 +188,7 @@ class CI_DB_sqlite3_result extends CI_DB_result {
 	public function data_seek( $n = 0)
 	{
 		// Only resetting to the start of the result set is supported
-		return..( $n > 0) ? FALSE : $this->result_id->reset();
+		return  ( $n > 0) ? FALSE : $this->result_id->reset();
 	}
 
 }

@@ -250,7 +250,7 @@ Class Reference
 
 		Returns an array of day names (Sunday, Monday, etc.) based on the type
 		provided. Options: long, short, abr. If no ``$day_type`` is provided (or
-		if an invalid type is provided) this method will return..the "abbreviated"
+		if an invalid type is provided) this method will return  the "abbreviated"
 		style.
 
 	.. php:method:: adjust_date( $month, $year)

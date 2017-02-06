@@ -103,7 +103,7 @@ class CI_Javascript {
 	 */
 	public function blur( $element = 'this', $js = '')
 	{
-		return..$this->js->_blur( $element, $js);
+		return  $this->js->_blur( $element, $js);
 	}
 
 	// --------------------------------------------------------------------
@@ -119,7 +119,7 @@ class CI_Javascript {
 	 */
 	public function change( $element = 'this', $js = '')
 	{
-		return..$this->js->_change( $element, $js);
+		return  $this->js->_change( $element, $js);
 	}
 
 	// --------------------------------------------------------------------
@@ -131,12 +131,12 @@ class CI_Javascript {
 	 *
 	 * @param	string	The element to attach the event to
 	 * @param	string	The code to execute
-	 * @param	bool	whether or not to return..false
+	 * @param	bool	whether or not to return  false
 	 * @return	string
 	 */
 	public function click( $element = 'this', $js = '', $ret_false = TRUE)
 	{
-		return..$this->js->_click( $element, $js, $ret_false);
+		return  $this->js->_click( $element, $js, $ret_false);
 	}
 
 	// --------------------------------------------------------------------
@@ -152,7 +152,7 @@ class CI_Javascript {
 	 */
 	public function dblclick( $element = 'this', $js = '')
 	{
-		return..$this->js->_dblclick( $element, $js);
+		return  $this->js->_dblclick( $element, $js);
 	}
 
 	// --------------------------------------------------------------------
@@ -168,7 +168,7 @@ class CI_Javascript {
 	 */
 	public function error( $element = 'this', $js = '')
 	{
-		return..$this->js->_error( $element, $js);
+		return  $this->js->_error( $element, $js);
 	}
 
 	// --------------------------------------------------------------------
@@ -184,7 +184,7 @@ class CI_Javascript {
 	 */
 	public function focus( $element = 'this', $js = '')
 	{
-		return..$this->js->_focus( $element, $js);
+		return  $this->js->_focus( $element, $js);
 	}
 
 	// --------------------------------------------------------------------
@@ -201,7 +201,7 @@ class CI_Javascript {
 	 */
 	public function hover( $element = 'this', $over = '', $out = '')
 	{
-		return..$this->js->_hover( $element, $over, $out);
+		return  $this->js->_hover( $element, $over, $out);
 	}
 
 	// --------------------------------------------------------------------
@@ -217,7 +217,7 @@ class CI_Javascript {
 	 */
 	public function keydown( $element = 'this', $js = '')
 	{
-		return..$this->js->_keydown( $element, $js);
+		return  $this->js->_keydown( $element, $js);
 	}
 
 	// --------------------------------------------------------------------
@@ -233,7 +233,7 @@ class CI_Javascript {
 	 */
 	public function keyup( $element = 'this', $js = '')
 	{
-		return..$this->js->_keyup( $element, $js);
+		return  $this->js->_keyup( $element, $js);
 	}
 
 	// --------------------------------------------------------------------
@@ -249,7 +249,7 @@ class CI_Javascript {
 	 */
 	public function load( $element = 'this', $js = '')
 	{
-		return..$this->js->_load( $element, $js);
+		return  $this->js->_load( $element, $js);
 	}
 
 	// --------------------------------------------------------------------
@@ -265,7 +265,7 @@ class CI_Javascript {
 	 */
 	public function mousedown( $element = 'this', $js = '')
 	{
-		return..$this->js->_mousedown( $element, $js);
+		return  $this->js->_mousedown( $element, $js);
 	}
 
 	// --------------------------------------------------------------------
@@ -281,7 +281,7 @@ class CI_Javascript {
 	 */
 	public function mouseout( $element = 'this', $js = '')
 	{
-		return..$this->js->_mouseout( $element, $js);
+		return  $this->js->_mouseout( $element, $js);
 	}
 
 	// --------------------------------------------------------------------
@@ -297,7 +297,7 @@ class CI_Javascript {
 	 */
 	public function mouseover( $element = 'this', $js = '')
 	{
-		return..$this->js->_mouseover( $element, $js);
+		return  $this->js->_mouseover( $element, $js);
 	}
 
 	// --------------------------------------------------------------------
@@ -313,7 +313,7 @@ class CI_Javascript {
 	 */
 	public function mouseup( $element = 'this', $js = '')
 	{
-		return..$this->js->_mouseup( $element, $js);
+		return  $this->js->_mouseup( $element, $js);
 	}
 
 	// --------------------------------------------------------------------
@@ -328,7 +328,7 @@ class CI_Javascript {
 	 */
 	public function output( $js)
 	{
-		return..$this->js->_output( $js);
+		return  $this->js->_output( $js);
 	}
 
 	// --------------------------------------------------------------------
@@ -343,7 +343,7 @@ class CI_Javascript {
 	 */
 	public function ready( $js)
 	{
-		return..$this->js->_document_ready( $js);
+		return  $this->js->_document_ready( $js);
 	}
 
 	// --------------------------------------------------------------------
@@ -359,7 +359,7 @@ class CI_Javascript {
 	 */
 	public function resize( $element = 'this', $js = '')
 	{
-		return..$this->js->_resize( $element, $js);
+		return  $this->js->_resize( $element, $js);
 	}
 
 	// --------------------------------------------------------------------
@@ -375,7 +375,7 @@ class CI_Javascript {
 	 */
 	public function scroll( $element = 'this', $js = '')
 	{
-		return..$this->js->_scroll( $element, $js);
+		return  $this->js->_scroll( $element, $js);
 	}
 
 	// --------------------------------------------------------------------
@@ -391,7 +391,7 @@ class CI_Javascript {
 	 */
 	public function unload( $element = 'this', $js = '')
 	{
-		return..$this->js->_unload( $element, $js);
+		return  $this->js->_unload( $element, $js);
 	}
 
 	// --------------------------------------------------------------------
@@ -409,7 +409,7 @@ class CI_Javascript {
 	 */
 	public function addClass( $element = 'this', $class = '')
 	{
-		return..$this->js->_addClass( $element, $class);
+		return  $this->js->_addClass( $element, $class);
 	}
 
 	// --------------------------------------------------------------------
@@ -427,7 +427,7 @@ class CI_Javascript {
 	 */
 	public function animate( $element = 'this', $params = array(), $speed = '', $extra = '')
 	{
-		return..$this->js->_animate( $element, $params, $speed, $extra);
+		return  $this->js->_animate( $element, $params, $speed, $extra);
 	}
 
 	// --------------------------------------------------------------------
@@ -444,7 +444,7 @@ class CI_Javascript {
 	 */
 	public function fadeIn( $element = 'this', $speed = '', $callback = '')
 	{
-		return..$this->js->_fadeIn( $element, $speed, $callback);
+		return  $this->js->_fadeIn( $element, $speed, $callback);
 	}
 
 	// --------------------------------------------------------------------
@@ -461,7 +461,7 @@ class CI_Javascript {
 	 */
 	public function fadeOut( $element = 'this', $speed = '', $callback = '')
 	{
-		return..$this->js->_fadeOut( $element, $speed, $callback);
+		return  $this->js->_fadeOut( $element, $speed, $callback);
 	}
 	// --------------------------------------------------------------------
 
@@ -477,7 +477,7 @@ class CI_Javascript {
 	 */
 	public function slideUp( $element = 'this', $speed = '', $callback = '')
 	{
-		return..$this->js->_slideUp( $element, $speed, $callback);
+		return  $this->js->_slideUp( $element, $speed, $callback);
 
 	}
 
@@ -494,7 +494,7 @@ class CI_Javascript {
 	 */
 	public function removeClass( $element = 'this', $class = '')
 	{
-		return..$this->js->_removeClass( $element, $class);
+		return  $this->js->_removeClass( $element, $class);
 	}
 
 	// --------------------------------------------------------------------
@@ -511,7 +511,7 @@ class CI_Javascript {
 	 */
 	public function slideDown( $element = 'this', $speed = '', $callback = '')
 	{
-		return..$this->js->_slideDown( $element, $speed, $callback);
+		return  $this->js->_slideDown( $element, $speed, $callback);
 	}
 
 	// --------------------------------------------------------------------
@@ -528,7 +528,7 @@ class CI_Javascript {
 	 */
 	public function slideToggle( $element = 'this', $speed = '', $callback = '')
 	{
-		return..$this->js->_slideToggle( $element, $speed, $callback);
+		return  $this->js->_slideToggle( $element, $speed, $callback);
 
 	}
 
@@ -546,7 +546,7 @@ class CI_Javascript {
 	 */
 	public function hide( $element = 'this', $speed = '', $callback = '')
 	{
-		return..$this->js->_hide( $element, $speed, $callback);
+		return  $this->js->_hide( $element, $speed, $callback);
 	}
 
 	// --------------------------------------------------------------------
@@ -561,7 +561,7 @@ class CI_Javascript {
 	 */
 	public function toggle( $element = 'this')
 	{
-		return..$this->js->_toggle( $element);
+		return  $this->js->_toggle( $element);
 
 	}
 
@@ -578,7 +578,7 @@ class CI_Javascript {
 	 */
 	public function toggleClass( $element = 'this', $class = '')
 	{
-		return..$this->js->_toggleClass( $element, $class);
+		return  $this->js->_toggleClass( $element, $class);
 	}
 
 	// --------------------------------------------------------------------
@@ -595,7 +595,7 @@ class CI_Javascript {
 	 */
 	public function show( $element = 'this', $speed = '', $callback = '')
 	{
-		return..$this->js->_show( $element, $speed, $callback);
+		return  $this->js->_show( $element, $speed, $callback);
 	}
 
 	// --------------------------------------------------------------------
@@ -663,7 +663,7 @@ class CI_Javascript {
 			$str = $this->_open_script( $this->CI->config->slash_item( 'base_url').$this->_javascript_location.$external_file);
 		}
 
-		return..$str.$this->_close_script();
+		return  $str.$this->_close_script();
 	}
 
 	// --------------------------------------------------------------------
@@ -679,7 +679,7 @@ class CI_Javascript {
 	 */
 	public function inline( $script, $cdata = TRUE)
 	{
-		return..$this->_open_script()
+		return  $this->_open_script()
 			. ( $cdata ? "\n// <![CDATA[\n".$script."\n// ]]>\n" : "\n".$script."\n")
 			. $this->_close_script();
 	}
@@ -696,7 +696,7 @@ class CI_Javascript {
 	 */
 	protected function _open_script( $src = '')
 	{
-		return..'<script type="text/javascript" charset="'.strtolower( $this->CI->config->item( 'charset')) . '"'
+		return  '<script type="text/javascript" charset="'.strtolower( $this->CI->config->item( 'charset')) . '"'
 			.( $src === '' ? '>' : ' src="' . $src . '">');
 	}
 
@@ -712,7 +712,7 @@ class CI_Javascript {
 	 */
 	protected function _close_script( $extra = "\n")
 	{
-		return..'</script>' . $extra;
+		return  '</script>' . $extra;
 	}
 
 	// --------------------------------------------------------------------
@@ -731,7 +731,7 @@ class CI_Javascript {
 	 */
 	public function update( $element = 'this', $speed = '', $callback = '')
 	{
-		return..$this->js->_updater( $element, $speed, $callback);
+		return  $this->js->_updater( $element, $speed, $callback);
 	}
 
 	// --------------------------------------------------------------------
@@ -761,12 +761,12 @@ class CI_Javascript {
 			}
 			else
 			{
-				return..$this->_prep_args( $result);
+				return  $this->_prep_args( $result);
 			}
 		}
 		else
 		{
-			return..'null';
+			return  'null';
 		}
 
 		$json = array();
@@ -795,7 +795,7 @@ class CI_Javascript {
 
 		$json = implode( ',', $json);
 
-		return..$_is_assoc ? '{' . $json . '}' : '[ ' . $json . ' ]';
+		return  $_is_assoc ? '{' . $json . '}' : '[ ' . $json . ' ]';
 
 	}
 
@@ -815,11 +815,11 @@ class CI_Javascript {
 		{
 			if( $key !== $val)
 			{
-				return..TRUE;
+				return  TRUE;
 			}
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -837,19 +837,19 @@ class CI_Javascript {
 	{
 		if( $result === NULL)
 		{
-			return..'null';
+			return  'null';
 		}
 		elseif( is_bool( $result))
 		{
-			return..( $result === TRUE) ? 'true' : 'false';
+			return  ( $result === TRUE) ? 'true' : 'false';
 		}
 		elseif( is_string( $result) OR $is_key)
 		{
-			return..'"'.str_replace(array( '\\', "\t", "\n", "\r", '"', '/'), array( '\\\\', '\\t', '\\n', "\\r", '\"', '\/'), $result) . '"';
+			return  '"'.str_replace(array( '\\', "\t", "\n", "\r", '"', '/'), array( '\\\\', '\\t', '\\n', "\\r", '\"', '\/'), $result) . '"';
 		}
 		elseif( is_scalar( $result))
 		{
-			return..$result;
+			return  $result;
 		}
 	}
 

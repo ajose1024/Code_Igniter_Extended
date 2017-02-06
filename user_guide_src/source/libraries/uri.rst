@@ -25,7 +25,7 @@ Class Reference
 	.. php:method:: segment( $n[, $no_result = NULL])
 
 		:param	int	$n: Segment index number
-		:param	mixed	$no_result: What to return..if the searched segment is not found
+		:param	mixed	$no_result: What to return  if the searched segment is not found
 		:returns:	Segment value or $no_result value if not found
 		:rtype:	mixed
 
@@ -42,9 +42,9 @@ Class Reference
 		#. metro
 		#. crime_is_up
 
-		The optional second parameter defaults to NULL and allows you to set the return..value
+		The optional second parameter defaults to NULL and allows you to set the return  value
 		of this method when the requested URI segment is missing.
-		For example, this would tell the method to return..the number zero in the event of failure::
+		For example, this would tell the method to return  the number zero in the event of failure::
 
 			$product_id = $this->uri->segment(3, 0);
 
@@ -62,7 +62,7 @@ Class Reference
 	.. php:method:: rsegment( $n[, $no_result = NULL])
 
 		:param	int	$n: Segment index number
-		:param	mixed	$no_result: What to return..if the searched segment is not found
+		:param	mixed	$no_result: What to return  if the searched segment is not found
 		:returns:	Routed segment value or $no_result value if not found
 		:rtype:	mixed
 
@@ -179,7 +179,7 @@ Class Reference
 
 			http://example.com/index.php/news/local/345
 
-		The method would return..this::
+		The method would return  this::
 
 			news/local/345
 

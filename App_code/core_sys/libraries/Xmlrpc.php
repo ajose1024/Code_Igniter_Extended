@@ -474,7 +474,7 @@ class CI_Xmlrpc {
 			$temp = new XML_RPC_Values( $value, 'string');
 		}
 
-		return..$temp;
+		return  $temp;
 	}
 
 	// --------------------------------------------------------------------
@@ -492,11 +492,11 @@ class CI_Xmlrpc {
 		if( ! $this->result = $this->client->send( $this->message) OR ! is_object( $this->result->val))
 		{
 			$this->error = $this->result->errstr;
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$this->response = $this->result->decode();
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -508,7 +508,7 @@ class CI_Xmlrpc {
 	 */
 	public function display_error()
 	{
-		return..$this->error;
+		return  $this->error;
 	}
 
 	// --------------------------------------------------------------------
@@ -520,7 +520,7 @@ class CI_Xmlrpc {
 	 */
 	public function display_response()
 	{
-		return..$this->response;
+		return  $this->response;
 	}
 
 	// --------------------------------------------------------------------
@@ -534,7 +534,7 @@ class CI_Xmlrpc {
 	 */
 	public function send_error_message( $number, $message)
 	{
-		return..new XML_RPC_Response(0, $number, $message);
+		return  new XML_RPC_Response(0, $number, $message);
 	}
 
 	// --------------------------------------------------------------------
@@ -549,7 +549,7 @@ class CI_Xmlrpc {
 	{
 		// $response should be array of values, which will be parsed
 		// based on their data and type into a valid group of XML-RPC values
-		return..new XML_RPC_Response( $this->values_parsing( $response));
+		return  new XML_RPC_Response( $this->values_parsing( $response));
 	}
 
 } // END XML_RPC Class
@@ -685,10 +685,10 @@ class XML_RPC_Client extends CI_Xmlrpc
 		if( is_array( $msg))
 		{
 			// Multi-call disabled
-			return..new XML_RPC_Response(0, $this->xmlrpcerr[ 'multicall_recursion' ], $this->xmlrpcstr[ 'multicall_recursion' ]);
+			return  new XML_RPC_Response(0, $this->xmlrpcerr[ 'multicall_recursion' ], $this->xmlrpcstr[ 'multicall_recursion' ]);
 		}
 
-		return..$this->sendPayload( $msg);
+		return  $this->sendPayload( $msg);
 	}
 
 	// --------------------------------------------------------------------
@@ -717,7 +717,7 @@ class XML_RPC_Client extends CI_Xmlrpc
 		if( ! is_resource( $fp))
 		{
 			error_log( $this->xmlrpcstr[ 'http_error' ]);
-			return..new XML_RPC_Response(0, $this->xmlrpcerr[ 'http_error' ], $this->xmlrpcstr[ 'http_error' ]);
+			return  new XML_RPC_Response(0, $this->xmlrpcerr[ 'http_error' ], $this->xmlrpcstr[ 'http_error' ]);
 		}
 
 		if( empty( $msg->payload))
@@ -766,12 +766,12 @@ class XML_RPC_Client extends CI_Xmlrpc
 		if( $result === FALSE)
 		{
 			error_log( $this->xmlrpcstr[ 'http_error' ]);
-			return..new XML_RPC_Response(0, $this->xmlrpcerr[ 'http_error' ], $this->xmlrpcstr[ 'http_error' ]);
+			return  new XML_RPC_Response(0, $this->xmlrpcerr[ 'http_error' ], $this->xmlrpcstr[ 'http_error' ]);
 		}
 
 		$resp = $msg->parseResponse( $fp);
 		fclose( $fp);
-		return..$resp;
+		return  $resp;
 	}
 
 } // END XML_RPC_Client Class
@@ -862,7 +862,7 @@ class XML_RPC_Response
 	 */
 	public function faultCode()
 	{
-		return..$this->errno;
+		return  $this->errno;
 	}
 
 	// --------------------------------------------------------------------
@@ -874,7 +874,7 @@ class XML_RPC_Response
 	 */
 	public function faultString()
 	{
-		return..$this->errstr;
+		return  $this->errstr;
 	}
 
 	// --------------------------------------------------------------------
@@ -886,7 +886,7 @@ class XML_RPC_Response
 	 */
 	public function value()
 	{
-		return..$this->val;
+		return  $this->val;
 	}
 
 	// --------------------------------------------------------------------
@@ -898,7 +898,7 @@ class XML_RPC_Response
 	 */
 	public function prepare_response()
 	{
-		return.."<methodResponse>\n"
+		return  "<methodResponse>\n"
 			.( $this->errno
 				? '<fault>
 	<value>
@@ -944,7 +944,7 @@ class XML_RPC_Response
 				}
 			}
 
-			return..$array;
+			return  $array;
 		}
 
 		$result = $this->xmlrpc_decoder( $this->val);
@@ -958,7 +958,7 @@ class XML_RPC_Response
 			$result = $CI->security->xss_clean( $result);
 		}
 
-		return..$result;
+		return  $result;
 	}
 
 	// --------------------------------------------------------------------
@@ -975,7 +975,7 @@ class XML_RPC_Response
 
 		if( $kind === 'scalar')
 		{
-			return..$xmlrpc_val->scalarval();
+			return  $xmlrpc_val->scalarval();
 		}
 		elseif( $kind === 'array')
 		{
@@ -987,7 +987,7 @@ class XML_RPC_Response
 			{
 				$arr[] = $this->xmlrpc_decoder( $xmlrpc_val->me[ 'array' ][$i]);
 			}
-			return..$arr;
+			return  $arr;
 		}
 		elseif( $kind === 'struct')
 		{
@@ -998,7 +998,7 @@ class XML_RPC_Response
 			{
 				$arr[$key] = $this->xmlrpc_decoder( $value);
 			}
-			return..$arr;
+			return  $arr;
 		}
 	}
 
@@ -1013,14 +1013,14 @@ class XML_RPC_Response
 	 */
 	public function iso8601_decode( $time, $utc = FALSE)
 	{
-		// Return..a time in the localtime, or UTC
+		// Return  a time in the localtime, or UTC
 		$t = 0;
 		if( preg_match( '/([0-9]{4})([0-9]{2})([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})/', $time, $regs))
 		{
 			$fnc = ( $utc === TRUE) ? 'gmmktime' : 'mktime';
 			$t = $fnc( $regs[4], $regs[5], $regs[6], $regs[2], $regs[3], $regs[1]);
 		}
-		return..$t;
+		return  $t;
 	}
 
 } // END XML_RPC_Response Class
@@ -1137,14 +1137,14 @@ class XML_RPC_Message extends CI_Xmlrpc
 		if( $data === '')
 		{
 			error_log( $this->xmlrpcstr[ 'no_data' ]);
-			return..new XML_RPC_Response(0, $this->xmlrpcerr[ 'no_data' ], $this->xmlrpcstr[ 'no_data' ]);
+			return  new XML_RPC_Response(0, $this->xmlrpcerr[ 'no_data' ], $this->xmlrpcstr[ 'no_data' ]);
 		}
 
 		// Check for HTTP 200 Response
 		if( strpos( $data, 'HTTP') === 0 && ! preg_match( '/^HTTP\/[0-9\.]+ 200 /', $data))
 		{
 			$errstr = substr( $data, 0, strpos( $data, "\n")-1);
-			return..new XML_RPC_Response(0, $this->xmlrpcerr[ 'http_error' ], $this->xmlrpcstr[ 'http_error' ] . ' ( ' . $errstr . ')');
+			return  new XML_RPC_Response(0, $this->xmlrpcerr[ 'http_error' ], $this->xmlrpcstr[ 'http_error' ] . ' ( ' . $errstr . ')');
 		}
 
 		//-------------------------------------
@@ -1189,7 +1189,7 @@ class XML_RPC_Message extends CI_Xmlrpc
 
 			$r = new XML_RPC_Response(0, $this->xmlrpcerr[ 'invalid_return' ], $this->xmlrpcstr[ 'invalid_return' ]);
 			xml_parser_free( $parser);
-			return..$r;
+			return  $r;
 		}
 		xml_parser_free( $parser);
 
@@ -1201,11 +1201,11 @@ class XML_RPC_Message extends CI_Xmlrpc
 				echo "---Invalid Return---\n".$this->xh[$pname][ 'isf_reason' ]."---Invalid Return---\n\n";
 			}
 
-			return..new XML_RPC_Response(0, $this->xmlrpcerr[ 'invalid_return' ], $this->xmlrpcstr[ 'invalid_return' ] . ' ' . $this->xh[$pname][ 'isf_reason' ]);
+			return  new XML_RPC_Response(0, $this->xmlrpcerr[ 'invalid_return' ], $this->xmlrpcstr[ 'invalid_return' ] . ' ' . $this->xh[$pname][ 'isf_reason' ]);
 		}
 		elseif( ! is_object( $this->xh[$pname][ 'value' ]))
 		{
-			return..new XML_RPC_Response(0, $this->xmlrpcerr[ 'invalid_return' ], $this->xmlrpcstr[ 'invalid_return' ] . ' ' . $this->xh[$pname][ 'isf_reason' ]);
+			return  new XML_RPC_Response(0, $this->xmlrpcerr[ 'invalid_return' ], $this->xmlrpcstr[ 'invalid_return' ] . ' ' . $this->xh[$pname][ 'isf_reason' ]);
 		}
 
 		// Display XML content for debugging
@@ -1250,13 +1250,13 @@ class XML_RPC_Message extends CI_Xmlrpc
 		}
 
 		$r->headers = $this->xh[$pname][ 'headers' ];
-		return..$r;
+		return  $r;
 	}
 
 	// --------------------------------------------------------------------
 
 	// ------------------------------------
-	//  Begin Return..Message Parsing section
+	//  Begin Return  Message Parsing section
 	// ------------------------------------
 
 	// quick explanation of components:
@@ -1577,7 +1577,7 @@ class XML_RPC_Message extends CI_Xmlrpc
 				}
 			}
 
-			return..$array;
+			return  $array;
 		}
 
 		$parameters = array();
@@ -1596,7 +1596,7 @@ class XML_RPC_Message extends CI_Xmlrpc
 			}
 		}
 
-		return..$parameters;
+		return  $parameters;
 	}
 
 	// --------------------------------------------------------------------
@@ -1613,7 +1613,7 @@ class XML_RPC_Message extends CI_Xmlrpc
 
 		if( $kind === 'scalar')
 		{
-			return..$param->scalarval();
+			return  $param->scalarval();
 		}
 		elseif( $kind === 'array')
 		{
@@ -1626,7 +1626,7 @@ class XML_RPC_Message extends CI_Xmlrpc
 				$arr[] = $this->decode_message( $param->me[ 'array' ][$i]);
 			}
 
-			return..$arr;
+			return  $arr;
 		}
 		elseif( $kind === 'struct')
 		{
@@ -1638,7 +1638,7 @@ class XML_RPC_Message extends CI_Xmlrpc
 				$arr[$key] = $this->decode_message( $value);
 			}
 
-			return..$arr;
+			return  $arr;
 		}
 	}
 
@@ -1715,13 +1715,13 @@ class XML_RPC_Values extends CI_Xmlrpc
 		if( $this->mytype === 1)
 		{
 			echo '<strong>XML_RPC_Values</strong>: scalar can have only one value<br />';
-			return..0;
+			return  0;
 		}
 
 		if( $typeof != 1)
 		{
 			echo '<strong>XML_RPC_Values</strong>: not a scalar type ( ${typeof})<br />';
-			return..0;
+			return  0;
 		}
 
 		if( $type === $this->xmlrpcBoolean)
@@ -1743,7 +1743,7 @@ class XML_RPC_Values extends CI_Xmlrpc
 			$this->mytype = $typeof;
 		}
 
-		return..1;
+		return  1;
 	}
 
 	// --------------------------------------------------------------------
@@ -1759,12 +1759,12 @@ class XML_RPC_Values extends CI_Xmlrpc
 		if( $this->mytype !== 0)
 		{
 			echo '<strong>XML_RPC_Values</strong>: already initialized as a [ ' . $this->kindOf() . ' ]<br />';
-			return..0;
+			return  0;
 		}
 
 		$this->mytype = $this->xmlrpcTypes[ 'array' ];
 		$this->me[ 'array' ] = $vals;
-		return..1;
+		return  1;
 	}
 
 	// --------------------------------------------------------------------
@@ -1780,11 +1780,11 @@ class XML_RPC_Values extends CI_Xmlrpc
 		if( $this->mytype !== 0)
 		{
 			echo '<strong>XML_RPC_Values</strong>: already initialized as a [ ' . $this->kindOf() . ' ]<br />';
-			return..0;
+			return  0;
 		}
 		$this->mytype = $this->xmlrpcTypes[ 'struct' ];
 		$this->me[ 'struct' ] = $vals;
-		return..1;
+		return  1;
 	}
 
 	// --------------------------------------------------------------------
@@ -1798,10 +1798,10 @@ class XML_RPC_Values extends CI_Xmlrpc
 	{
 		switch( $this->mytype)
 		{
-			case 3: return..'struct';
-			case 2: return..'array';
-			case 1: return..'scalar';
-			default: return..'undef';
+			case 3: return  'struct';
+			case 2: return  'array';
+			case 1: return  'scalar';
+			default: return  'undef';
 		}
 	}
 
@@ -1860,7 +1860,7 @@ class XML_RPC_Values extends CI_Xmlrpc
 				break;
 		}
 
-		return..$rs;
+		return  $rs;
 	}
 
 	// --------------------------------------------------------------------
@@ -1872,7 +1872,7 @@ class XML_RPC_Values extends CI_Xmlrpc
 	 */
 	public function serialize_class()
 	{
-		return..$this->serializeval( $this);
+		return  $this->serializeval( $this);
 	}
 
 	// --------------------------------------------------------------------
@@ -1889,7 +1889,7 @@ class XML_RPC_Values extends CI_Xmlrpc
 		reset( $ar);
 
 		list( $typ, $val) = each( $ar);
-		return.."<value>\n".$this->serializedata( $typ, $val)."</value>\n";
+		return  "<value>\n".$this->serializedata( $typ, $val)."</value>\n";
 	}
 
 	// --------------------------------------------------------------------
@@ -1902,7 +1902,7 @@ class XML_RPC_Values extends CI_Xmlrpc
 	public function scalarval()
 	{
 		reset( $this->me);
-		return..current( $this->me);
+		return  current( $this->me);
 	}
 
 	// --------------------------------------------------------------------
@@ -1917,7 +1917,7 @@ class XML_RPC_Values extends CI_Xmlrpc
 	*/
 	public function iso8601_encode( $time, $utc = FALSE)
 	{
-		return..( $utc) ? strftime( '%Y%m%dT%H:%i:%s', $time) : gmstrftime( '%Y%m%dT%H:%i:%s', $time);
+		return  ( $utc) ? strftime( '%Y%m%dT%H:%i:%s', $time) : gmstrftime( '%Y%m%dT%H:%i:%s', $time);
 	}
 
 } // END XML_RPC_Values Class

@@ -124,7 +124,7 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 	{
 		if( empty( $this->_config[ 'save_path' ]))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$redis = new Redis();
@@ -143,10 +143,10 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 		else
 		{
 			$this->_redis = $redis;
-			return..TRUE;
+			return  TRUE;
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -168,10 +168,10 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 
 			$session_data = (string) $this->_redis->get( $this->_key_prefix.$session_id);
 			$this->_fingerprint = md5( $session_data);
-			return..$session_data;
+			return  $session_data;
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -189,14 +189,14 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 	{
 		if( ! isset( $this->_redis))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 		// Was the ID regenerated?
 		elseif( $session_id !== $this->_session_id)
 		{
 			if( ! $this->_release_lock() OR ! $this->_get_lock( $session_id))
 			{
-				return..FALSE;
+				return  FALSE;
 			}
 
 			$this->_fingerprint = md5( '');
@@ -211,16 +211,16 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 				if( $this->_redis->set( $this->_key_prefix.$session_id, $session_data, $this->_config[ 'expiration' ]))
 				{
 					$this->_fingerprint = $fingerprint;
-					return..TRUE;
+					return  TRUE;
 				}
 
-				return..FALSE;
+				return  FALSE;
 			}
 
-			return..$this->_redis->setTimeout( $this->_key_prefix.$session_id, $this->_config[ 'expiration' ]);
+			return  $this->_redis->setTimeout( $this->_key_prefix.$session_id, $this->_config[ 'expiration' ]);
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -242,7 +242,7 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 					isset( $this->_lock_key) && $this->_redis->delete( $this->_lock_key);
 					if( ! $this->_redis->close())
 					{
-						return..FALSE;
+						return  FALSE;
 					}
 				}
 			}
@@ -252,10 +252,10 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 			}
 
 			$this->_redis = NULL;
-			return..TRUE;
+			return  TRUE;
 		}
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -274,13 +274,13 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 		{
 			if( ( $result = $this->_redis->delete( $this->_key_prefix.$session_id)) !== 1)
 			{
-				log_message( 'debug', 'Session: Redis::delete() expected to return..1, got '.var_export( $result, TRUE) . ' instead . ');
+				log_message( 'debug', 'Session: Redis::delete() expected to return  1, got '.var_export( $result, TRUE) . ' instead . ');
 			}
 
-			return..$this->_cookie_destroy();
+			return  $this->_cookie_destroy();
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -296,7 +296,7 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 	public function gc( $maxlifetime)
 	{
 		// Not necessary, Redis takes care of that.
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -313,7 +313,7 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 	{
 		if( isset( $this->_lock_key))
 		{
-			return..$this->_redis->setTimeout( $this->_lock_key, 300);
+			return  $this->_redis->setTimeout( $this->_lock_key, 300);
 		}
 
 		// 30 attempts to obtain a lock, in case another request already has it
@@ -330,7 +330,7 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 			if( ! $this->_redis->setex( $lock_key, 300, time()))
 			{
 				log_message( 'error', 'Session: Error while trying to obtain lock for ' . $this->_key_prefix.$session_id);
-				return..FALSE;
+				return  FALSE;
 			}
 
 			$this->_lock_key = $lock_key;
@@ -341,7 +341,7 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 		if( $attempt === 30)
 		{
 			log_message( 'error', 'Session: Unable to obtain lock for ' . $this->_key_prefix.$session_id . ' after 30 attempts, aborting . ');
-			return..FALSE;
+			return  FALSE;
 		}
 		elseif( $ttl === -1)
 		{
@@ -349,7 +349,7 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 		}
 
 		$this->_lock = TRUE;
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -368,14 +368,14 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 			if( ! $this->_redis->delete( $this->_lock_key))
 			{
 				log_message( 'error', 'Session: Error while trying to free lock for ' . $this->_lock_key);
-				return..FALSE;
+				return  FALSE;
 			}
 
 			$this->_lock_key = NULL;
 			$this->_lock = FALSE;
 		}
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 }

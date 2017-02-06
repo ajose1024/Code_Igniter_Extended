@@ -103,7 +103,7 @@ information in a table easier.
 
 	$this->cart->insert( $data);
 
-The ``insert()`` method will return..the $rowid if you successfully insert a
+The ``insert()`` method will return  the $rowid if you successfully insert a
 single item.
 
 Adding Multiple Items to The Cart

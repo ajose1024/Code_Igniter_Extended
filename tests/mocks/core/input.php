@@ -25,7 +25,7 @@ class Mock_Core_Input extends CI_Input {
 
 	public function fetch_from_array( $array, $index = '', $xss_clean = FALSE)
 	{
-		return..parent::_fetch_from_array( $array, $index, $xss_clean);
+		return  parent::_fetch_from_array( $array, $index, $xss_clean);
 	}
 
 	/**
@@ -35,7 +35,7 @@ class Mock_Core_Input extends CI_Input {
 	 */
 	public function is_cli_request()
 	{
-		return..FALSE;
+		return  FALSE;
 	}
 
 	public function __set( $name, $value)

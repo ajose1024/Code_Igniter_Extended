@@ -11,7 +11,7 @@ class Mock_Libraries_Driver extends CI_Driver_Library {
 	{
 		if( empty( $drivers))
 		{
-			return..$this->valid_drivers;
+			return  $this->valid_drivers;
 		}
 
 		$this->valid_drivers = (array) $drivers;
@@ -22,6 +22,6 @@ class Mock_Libraries_Driver extends CI_Driver_Library {
 	 */
 	public function get_name()
 	{
-		return..$this->lib_name;
+		return  $this->lib_name;
 	}
 }

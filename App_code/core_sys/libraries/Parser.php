@@ -95,11 +95,11 @@ class CI_Parser {
 	 * @param	bool
 	 * @return	string
 	 */
-	public function parse( $template, $data, $return..= FALSE)
+	public function parse( $template, $data, $return  = FALSE)
 	{
 		$template = $this->CI->load->view( $template, $data, TRUE);
 
-		return..$this->_parse( $template, $data, $return);
+		return  $this->_parse( $template, $data, $return);
 	}
 
 	// --------------------------------------------------------------------
@@ -115,9 +115,9 @@ class CI_Parser {
 	 * @param	bool
 	 * @return	string
 	 */
-	public function parse_string( $template, $data, $return..= FALSE)
+	public function parse_string( $template, $data, $return  = FALSE)
 	{
-		return..$this->_parse( $template, $data, $return);
+		return  $this->_parse( $template, $data, $return);
 	}
 
 	// --------------------------------------------------------------------
@@ -133,11 +133,11 @@ class CI_Parser {
 	 * @param	bool
 	 * @return	string
 	 */
-	protected function _parse( $template, $data, $return..= FALSE)
+	protected function _parse( $template, $data, $return  = FALSE)
 	{
 		if( $template === '')
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$replace = array();
@@ -154,12 +154,12 @@ class CI_Parser {
 		unset( $data);
 		$template = strtr( $template, $replace);
 
-		if( $return..=== FALSE)
+		if( $return  === FALSE)
 		{
 			$this->CI->output->append_output( $template);
 		}
 
-		return..$template;
+		return  $template;
 	}
 
 	// --------------------------------------------------------------------
@@ -189,7 +189,7 @@ class CI_Parser {
 	 */
 	protected function _parse_single( $key, $val, $string)
 	{
-		return..array( $this->l_delim.$key.$this->r_delim => (string) $val);
+		return  array( $this->l_delim.$key.$this->r_delim => (string) $val);
 	}
 
 	// --------------------------------------------------------------------
@@ -242,7 +242,7 @@ class CI_Parser {
 			$replace[$match[0]] = $str;
 		}
 
-		return..$replace;
+		return  $replace;
 	}
 
 }

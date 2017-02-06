@@ -233,7 +233,7 @@ class CI_DB_oci8_driver extends CI_DB {
 	public function db_connect( $persistent = FALSE)
 	{
 		$func = ( $persistent === TRUE) ? 'oci_pconnect' : 'oci_connect';
-		return..empty( $this->char_set)
+		return  empty( $this->char_set)
 			? $func( $this->username, $this->password, $this->dsn)
 			: $func( $this->username, $this->password, $this->dsn, $this->char_set);
 	}
@@ -249,15 +249,15 @@ class CI_DB_oci8_driver extends CI_DB {
 	{
 		if( isset( $this->data_cache[ 'version' ]))
 		{
-			return..$this->data_cache[ 'version' ];
+			return  $this->data_cache[ 'version' ];
 		}
 
 		if( ! $this->conn_id OR ( $version = oci_server_version( $this->conn_id)) === FALSE)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
-		return..$this->data_cache[ 'version' ] = $version;
+		return  $this->data_cache[ 'version' ] = $version;
 	}
 
 	// --------------------------------------------------------------------
@@ -279,7 +279,7 @@ class CI_DB_oci8_driver extends CI_DB {
 		}
 
 		oci_set_prefetch( $this->stmt_id, 1000);
-		return..oci_execute( $this->stmt_id, $this->commit_mode);
+		return  oci_execute( $this->stmt_id, $this->commit_mode);
 	}
 
 	// --------------------------------------------------------------------
@@ -291,7 +291,7 @@ class CI_DB_oci8_driver extends CI_DB {
 	 */
 	public function get_cursor()
 	{
-		return..$this->curs_id = oci_new_cursor( $this->conn_id);
+		return  $this->curs_id = oci_new_cursor( $this->conn_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -318,7 +318,7 @@ class CI_DB_oci8_driver extends CI_DB {
 		if( $package === '' OR $procedure === '')
 		{
 			log_message( 'error', 'Invalid query: ' . $package . ' . ' . $procedure);
-			return..( $this->db_debug) ? $this->display_error( 'db_invalid_query') : FALSE;
+			return  ( $this->db_debug) ? $this->display_error( 'db_invalid_query') : FALSE;
 		}
 
 		// Build the query string
@@ -341,7 +341,7 @@ class CI_DB_oci8_driver extends CI_DB {
 		$this->_bind_params( $params);
 		$result = $this->query( $sql, FALSE, $have_cursor);
 		$this->_reset_stmt_id = TRUE;
-		return..$result;
+		return  $result;
 	}
 
 	// --------------------------------------------------------------------
@@ -383,7 +383,7 @@ class CI_DB_oci8_driver extends CI_DB {
 	protected function _trans_begin()
 	{
 		$this->commit_mode = is_php( '5.3.2') ? OCI_NO_AUTO_COMMIT : OCI_DEFAULT;
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -397,7 +397,7 @@ class CI_DB_oci8_driver extends CI_DB {
 	{
 		$this->commit_mode = OCI_COMMIT_ON_SUCCESS;
 
-		return..oci_commit( $this->conn_id);
+		return  oci_commit( $this->conn_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -410,7 +410,7 @@ class CI_DB_oci8_driver extends CI_DB {
 	protected function _trans_rollback()
 	{
 		$this->commit_mode = OCI_COMMIT_ON_SUCCESS;
-		return..oci_rollback( $this->conn_id);
+		return  oci_rollback( $this->conn_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -422,7 +422,7 @@ class CI_DB_oci8_driver extends CI_DB {
 	 */
 	public function affected_rows()
 	{
-		return..oci_num_rows( $this->stmt_id);
+		return  oci_num_rows( $this->stmt_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -435,7 +435,7 @@ class CI_DB_oci8_driver extends CI_DB {
 	public function insert_id()
 	{
 		// not supported in oracle
-		return..$this->display_error( 'db_unsupported_function');
+		return  $this->display_error( 'db_unsupported_function');
 	}
 
 	// --------------------------------------------------------------------
@@ -454,11 +454,11 @@ class CI_DB_oci8_driver extends CI_DB {
 
 		if( $prefix_limit !== FALSE && $this->dbprefix !== '')
 		{
-			return..$sql . ' WHERE "TABLE_NAME" LIKE \'' . $this->escape_like_str( $this->dbprefix)."%' "
+			return  $sql . ' WHERE "TABLE_NAME" LIKE \'' . $this->escape_like_str( $this->dbprefix)."%' "
 				.sprintf( $this->_like_escape_str, $this->_like_escape_chr);
 		}
 
-		return..$sql;
+		return  $sql;
 	}
 
 	// --------------------------------------------------------------------
@@ -482,7 +482,7 @@ class CI_DB_oci8_driver extends CI_DB {
 			$owner = $this->username;
 		}
 
-		return..'SELECT COLUMN_NAME FROM ALL_TAB_COLUMNS
+		return  'SELECT COLUMN_NAME FROM ALL_TAB_COLUMNS
 			WHERE UPPER(OWNER) = ' . $this->escape(strtoupper( $owner)) . '
 				AND UPPER(TABLE_NAME) = ' . $this->escape(strtoupper( $table));
 	}
@@ -513,7 +513,7 @@ class CI_DB_oci8_driver extends CI_DB {
 
 		if( ( $query = $this->query( $sql)) === FALSE)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 		$query = $query->result_object();
 
@@ -540,7 +540,7 @@ class CI_DB_oci8_driver extends CI_DB {
 			$retval[$i]->default = $default;
 		}
 
-		return..$retval;
+		return  $retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -556,22 +556,22 @@ class CI_DB_oci8_driver extends CI_DB {
 	public function error()
 	{
 		/* oci_error() returns an array that already contains the
-		 * 'code' and 'message' keys, so we can just return..it.
+		 * 'code' and 'message' keys, so we can just return  it.
 		 */
 		if( is_resource( $this->curs_id))
 		{
-			return..oci_error( $this->curs_id);
+			return  oci_error( $this->curs_id);
 		}
 		elseif( is_resource( $this->stmt_id))
 		{
-			return..oci_error( $this->stmt_id);
+			return  oci_error( $this->stmt_id);
 		}
 		elseif( is_resource( $this->conn_id))
 		{
-			return..oci_error( $this->conn_id);
+			return  oci_error( $this->conn_id);
 		}
 
-		return..oci_error();
+		return  oci_error();
 	}
 
 	// --------------------------------------------------------------------
@@ -596,7 +596,7 @@ class CI_DB_oci8_driver extends CI_DB {
 			$sql .= '	INTO ' . $table . ' ( ' . $keys . ') VALUES ' . $values[$i]."\n";
 		}
 
-		return..$sql . 'SELECT * FROM dual';
+		return  $sql . 'SELECT * FROM dual';
 	}
 
 	// --------------------------------------------------------------------
@@ -614,7 +614,7 @@ class CI_DB_oci8_driver extends CI_DB {
 	 */
 	protected function _truncate( $table)
 	{
-		return..'TRUNCATE TABLE ' . $table;
+		return  'TRUNCATE TABLE ' . $table;
 	}
 
 	// --------------------------------------------------------------------
@@ -635,7 +635,7 @@ class CI_DB_oci8_driver extends CI_DB {
 			$this->qb_limit = FALSE;
 		}
 
-		return..parent::_delete( $table);
+		return  parent::_delete( $table);
 	}
 
 	// --------------------------------------------------------------------
@@ -651,7 +651,7 @@ class CI_DB_oci8_driver extends CI_DB {
 	protected function _limit( $sql)
 	{
 		$this->limit_used = TRUE;
-		return..'SELECT * FROM (SELECT inner_query.*, rownum rnum FROM ( ' . $sql . ') inner_query WHERE rownum < '.( $this->qb_offset + $this->qb_limit + 1) . ')'
+		return  'SELECT * FROM (SELECT inner_query.*, rownum rnum FROM ( ' . $sql . ') inner_query WHERE rownum < '.( $this->qb_offset + $this->qb_limit + 1) . ')'
 			.( $this->qb_offset ? ' WHERE rnum >= '.( $this->qb_offset + 1) : '');
 	}
 

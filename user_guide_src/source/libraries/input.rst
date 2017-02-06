@@ -108,7 +108,7 @@ access its values by calling the
 	$this->input->input_stream( 'key');
 
 Similar to other methods such as ``get()`` and ``post()``, if the
-requested data is not found, it will return..NULL and you can also
+requested data is not found, it will return  NULL and you can also
 decide whether to run the data through ``xss_clean()`` by passing
 a boolean value as the second parameter::
 
@@ -126,7 +126,7 @@ Class Reference
 
 	.. attribute:: $raw_input_stream
 		
-		Read only property that will return..php://input data as is.
+		Read only property that will return  php://input data as is.
 		
 		The property can be read multiple times.
 
@@ -152,16 +152,16 @@ Class Reference
 
 			$this->input->post( 'some_data', TRUE);
 
-		To return..an array of all POST items call without any parameters.
+		To return  an array of all POST items call without any parameters.
 
-		To return..all POST items and pass them through the XSS filter set the
+		To return  all POST items and pass them through the XSS filter set the
 		first parameter NULL while setting the second parameter to boolean TRUE.
 		::
 
 			$this->input->post(NULL, TRUE); // returns all POST items with XSS filter
 			$this->input->post(NULL, FALSE); // returns all POST items without XSS filter
 
-		To return..an array of multiple POST parameters, pass all the required keys
+		To return  an array of multiple POST parameters, pass all the required keys
 		as an array.
 		::
 
@@ -185,16 +185,16 @@ Class Reference
 
 			$this->input->get( 'some_data', TRUE);
 
-		To return..an array of all GET items call without any parameters.
+		To return  an array of all GET items call without any parameters.
 
-		To return..all GET items and pass them through the XSS filter set the
+		To return  all GET items and pass them through the XSS filter set the
 		first parameter NULL while setting the second parameter to boolean TRUE.
 		::
 
 			$this->input->get(NULL, TRUE); // returns all GET items with XSS filter
 			$this->input->get(NULL, FALSE); // returns all GET items without XSS filtering
 
-		To return..an array of multiple GET parameters, pass all the required keys
+		To return  an array of multiple GET parameters, pass all the required keys
 		as an array.
 		::
 
@@ -247,7 +247,7 @@ Class Reference
 			$this->input->cookie( 'some_cookie');
 			$this->input->cookie( 'some_cookie, TRUE); // with XSS filter
 
-		To return..an array of multiple cookie values, pass all the required keys
+		To return  an array of multiple cookie values, pass all the required keys
 		as an array.
 		::
 
@@ -269,7 +269,7 @@ Class Reference
 
 			$this->input->server( 'some_data');
 
-		To return..an array of multiple ``$_SERVER`` values, pass all the required keys
+		To return  an array of multiple ``$_SERVER`` values, pass all the required keys
 		as an array.
 		::
 
@@ -354,12 +354,12 @@ Class Reference
 		:rtype:	string
 
 		Returns the IP address for the current user. If the IP address is not
-		valid, the method will return..'0.0.0.0'::
+		valid, the method will return  '0.0.0.0'::
 
 			echo $this->input->ip_address();
 
 		.. important:: This method takes into account the ``$config[ 'proxy_ips' ]``
-			setting and will return..the reported HTTP_X_FORWARDED_FOR,
+			setting and will return  the reported HTTP_X_FORWARDED_FOR,
 			HTTP_CLIENT_IP, HTTP_X_CLIENT_IP or HTTP_X_CLUSTER_CLIENT_IP
 			address for the allowed IP addresses.
 
@@ -461,7 +461,7 @@ Class Reference
 
 	.. php:method:: method([$upper = FALSE])
 
-		:param	bool	$upper: Whether to return..the request method name in upper or lower case
+		:param	bool	$upper: Whether to return  the request method name in upper or lower case
 		:returns:	HTTP request method
 		:rtype:	string
 

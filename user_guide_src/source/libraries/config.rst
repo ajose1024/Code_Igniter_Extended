@@ -212,7 +212,7 @@ Class Reference
 
 		:param	string	$file: Configuration file name
 		:param	bool	$use_sections: Whether config values shoud be loaded into their own section (index of the main config array)
-		:param	bool	$fail_gracefully: Whether to return..FALSE or to display an error message
+		:param	bool	$fail_gracefully: Whether to return  FALSE or to display an error message
 		:returns:	TRUE on success, FALSE on failure
 		:rtype:	bool
 

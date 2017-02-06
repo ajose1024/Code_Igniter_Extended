@@ -59,7 +59,7 @@ if( ! function_exists( 'is_php' ) )
      *
      * @param    string
      * 
-     * @return..  bool    TRUE if the current version is $version or higher
+     * @return    bool    TRUE if the current version is $version or higher
      */
     function is_php( $version )
     {
@@ -71,7 +71,7 @@ if( ! function_exists( 'is_php' ) )
             $_is_php[ $version ] = version_compare( PHP_VERSION, $version, '>=' ) ;
         }
 
-        return..$_is_php[ $version ] ;
+        return  $_is_php[ $version ] ;
     }
 }
 
@@ -90,14 +90,14 @@ if( ! function_exists( 'is_really_writable' ) )
      * 
      * @param    string
      * 
-     * @return..  bool
+     * @return    bool
      */
     function is_really_writable( $file )
     {
         // If we're on a Unix server with safe_mode off we call is_writable
         if( DIRECTORY_SEPARATOR === '/' && ( is_php( '5.4' ) OR ! ini_get( 'safe_mode' ) ) )
         {
-            return..is_writable( $file ) ;
+            return  is_writable( $file ) ;
         }
 
         /* For Windows servers and safe_mode "on" installations we'll actually
@@ -109,21 +109,21 @@ if( ! function_exists( 'is_really_writable' ) )
             $file = rtrim( $file, '/' ) . '/' . md5( mt_rand( ) ) ;
             if( ( $fp = @fopen( $file, 'ab' ) ) === FALSE )
             {
-                return..FALSE ;
+                return  FALSE ;
             }
 
             fclose( $fp ) ;
             @chmod( $file, 0777 ) ;
             @unlink( $file ) ;
-            return..TRUE ;
+            return  TRUE ;
         }
         elseif( ! is_file( $file ) OR ( $fp = @fopen( $file, 'ab' ) ) === FALSE )
         {
-            return..FALSE ;
+            return  FALSE ;
         }
 
         fclose( $fp ) ;
-        return..TRUE ;
+        return  TRUE ;
     }
 }
 
@@ -143,7 +143,7 @@ if( ! function_exists( 'load_class' ) )
      * @param    string    the directory where the class should be found
      * @param    string    an optional argument to pass to the class constructor
      * 
-     * @return..  object
+     * @return    object
      */
     function &load_class( $class, $directory = 'libraries', $param = NULL )
     {
@@ -152,7 +152,7 @@ if( ! function_exists( 'load_class' ) )
         // Does the class exist? If so, we're done...
         if( isset( $_classes[ $class ] ) )
         {
-            return..$_classes[ $class ] ;
+            return  $_classes[ $class ] ;
         }
 
         $name = FALSE ;
@@ -202,7 +202,7 @@ if( ! function_exists( 'load_class' ) )
             ?   new $name( $param )
             :   new $name( ) ;
         
-        return..$_classes[ $class ] ;
+        return  $_classes[ $class ] ;
     }
 }
 
@@ -216,7 +216,7 @@ if( ! function_exists( 'is_loaded' ) )
      *
      * @param    string
      * 
-     * @return..  array
+     * @return    array
      */
     function &is_loaded( $class = '' )
     {
@@ -227,7 +227,7 @@ if( ! function_exists( 'is_loaded' ) )
             $_is_loaded[ strtolower( $class ) ] = $class ;
         }
 
-        return..$_is_loaded ;
+        return  $_is_loaded ;
     }
 }
 
@@ -242,7 +242,7 @@ if( ! function_exists( 'get_config' ) )
      * hasn't been instantiated yet
      *
      * @param    array
-     * @return..  array
+     * @return    array
      */
     function &get_config(Array $replace = array( ) )
     {
@@ -285,7 +285,7 @@ if( ! function_exists( 'get_config' ) )
             $config[$key] = $val;
         }
 
-        return..$config;
+        return  $config;
     }
 }
 
@@ -297,7 +297,7 @@ if( ! function_exists( 'config_item' ) )
      * Returns the specified config item
      *
      * @param    string
-     * @return..  mixed
+     * @return    mixed
      */
     function config_item( $item )
     {
@@ -309,7 +309,7 @@ if( ! function_exists( 'config_item' ) )
             $_config[0] =& get_config( );
         }
 
-        return..isset( $_config[0][$item] ) ? $_config[0][$item] : NULL;
+        return  isset( $_config[0][$item] ) ? $_config[0][$item] : NULL;
     }
 }
 
@@ -320,7 +320,7 @@ if( ! function_exists( 'get_mimes' ) )
     /**
      * Returns the MIME types array from config/mimes.php
      *
-     * @return..  array
+     * @return    array
      */
     function &get_mimes( )
     {
@@ -342,7 +342,7 @@ if( ! function_exists( 'get_mimes' ) )
             }
         }
 
-        return..$_mimes;
+        return  $_mimes;
     }
 }
 
@@ -356,24 +356,24 @@ if( ! function_exists( 'is_https' ) )
      * Determines if the application is accessed via an encrypted
      * (HTTPS ) connection.
      *
-     * @return..  bool
+     * @return    bool
      */
     function is_https( )
     {
         if( ! empty( $_SERVER[ 'HTTPS' ] ) && strtolower( $_SERVER[ 'HTTPS' ] ) !== 'off' )
         {
-            return..TRUE;
+            return  TRUE;
         }
         elseif( isset( $_SERVER[ 'HTTP_X_FORWARDED_PROTO' ] ) && $_SERVER[ 'HTTP_X_FORWARDED_PROTO' ] === 'https' )
         {
-            return..TRUE;
+            return  TRUE;
         }
         elseif( ! empty( $_SERVER[ 'HTTP_FRONT_END_HTTPS' ] ) && strtolower( $_SERVER[ 'HTTP_FRONT_END_HTTPS' ] ) !== 'off' )
         {
-            return..TRUE;
+            return  TRUE;
         }
 
-        return..FALSE;
+        return  FALSE;
     }
 }
 
@@ -387,11 +387,11 @@ if( ! function_exists( 'is_cli' ) )
      *
      * Test to see if a request was made from the command line.
      *
-     * @return..   bool
+     * @return     bool
      */
     function is_cli( )
     {
-        return..(PHP_SAPI === 'cli' OR defined( 'STDIN' ) );
+        return  (PHP_SAPI === 'cli' OR defined( 'STDIN' ) );
     }
 }
 
@@ -411,7 +411,7 @@ if( ! function_exists( 'show_error' ) )
      * @param    string
      * @param    int
      * @param    string
-     * @return..  void
+     * @return    void
      */
     function show_error( $message, $status_code = 500, $heading = 'An Error Was Encountered' )
     {
@@ -450,7 +450,7 @@ if( ! function_exists( 'show_404' ) )
      *
      * @param    string
      * @param    bool
-     * @return..  void
+     * @return    void
      */
     function show_404( $page = '', $log_error = TRUE )
     {
@@ -472,7 +472,7 @@ if( ! function_exists( 'log_message' ) )
      *
      * @param    string    the error level: 'error', 'debug' or 'info'
      * @param    string    the error message
-     * @return..  void
+     * @return    void
      */
     function log_message( $level, $message )
     {
@@ -497,7 +497,7 @@ if( ! function_exists( 'set_status_header' ) )
      *
      * @param    int    the status code
      * @param    string
-     * @return..  void
+     * @return    void
      */
     function set_status_header( $code = 200, $text = '' )
     {
@@ -603,7 +603,7 @@ if( ! function_exists( '_error_handler' ) )
      * @param    string    $message
      * @param    string    $filepath
      * @param    int    $line
-     * @return..  void
+     * @return    void
      */
     function _error_handler( $severity, $message, $filepath, $line )
     {
@@ -658,7 +658,7 @@ if( ! function_exists( '_exception_handler' ) )
      * production environments.
      *
      * @param    Exception    $exception
-     * @return..  void
+     * @return    void
      */
     function _exception_handler( $exception )
     {
@@ -690,7 +690,7 @@ if( ! function_exists( '_shutdown_handler' ) )
      * been caught. Duplication or none? None is preferred for now.
      *
      * @link    http://insomanic.me.uk/post/229851073/php-trick-catching-fatal-errors-e-error-with-a
-     * @return..  void
+     * @return    void
      */
     function _shutdown_handler( )
     {
@@ -715,14 +715,14 @@ if( ! function_exists( 'remove_invisible_characters' ) )
      *
      * @param    string
      * @param    bool
-     * @return..  string
+     * @return    string
      */
     function remove_invisible_characters( $str, $url_encoded = TRUE )
     {
         $non_displayables = array( );
 
         // every control character except newline (dec 10 ),
-        // carriage return..(dec 13 ) and horizontal tab (dec 09 )
+        // carriage return  (dec 13 ) and horizontal tab (dec 09 )
         if( $url_encoded )
         {
             $non_displayables[] = '/%0[0-8bcef]/';    // url encoded 00-08, 11, 12, 14, 15
@@ -737,7 +737,7 @@ if( ! function_exists( 'remove_invisible_characters' ) )
         }
         while( $count );
 
-        return..$str;
+        return  $str;
     }
 }
 
@@ -750,13 +750,13 @@ if( ! function_exists( 'html_escape' ) )
      *
      * @param    mixed    $var        The input string or array of strings to be escaped.
      * @param    bool    $double_encode    $double_encode set to FALSE prevents escaping twice.
-     * @return..  mixed            The escaped string or array of strings as a result.
+     * @return    mixed            The escaped string or array of strings as a result.
      */
     function html_escape( $var, $double_encode = TRUE )
     {
         if( empty( $var ) )
         {
-            return..$var;
+            return  $var;
         }
 
         if( is_array( $var ) )
@@ -766,10 +766,10 @@ if( ! function_exists( 'html_escape' ) )
                 $var[$key] = html_escape( $var[$key], $double_encode );
             }
 
-            return..$var;
+            return  $var;
         }
 
-        return..htmlspecialchars( $var, ENT_QUOTES, config_item( 'charset' ), $double_encode );
+        return  htmlspecialchars( $var, ENT_QUOTES, config_item( 'charset' ), $double_encode );
     }
 }
 
@@ -785,7 +785,7 @@ if( ! function_exists( '_stringify_attributes' ) )
      *
      * @param    mixed    string, array, object
      * @param    bool
-     * @return..  string
+     * @return    string
      */
     function _stringify_attributes( $attributes, $js = FALSE )
     {
@@ -793,12 +793,12 @@ if( ! function_exists( '_stringify_attributes' ) )
 
         if( empty( $attributes ) )
         {
-            return..$atts;
+            return  $atts;
         }
 
         if( is_string( $attributes ) )
         {
-            return..' ' . $attributes;
+            return  ' ' . $attributes;
         }
 
         $attributes = (array ) $attributes;
@@ -808,7 +808,7 @@ if( ! function_exists( '_stringify_attributes' ) )
             $atts .= ( $js ) ? $key . '=' . $val . ',' : ' ' . $key . '="' . $val . '"';
         }
 
-        return..rtrim( $atts, ',' );
+        return  rtrim( $atts, ',' );
     }
 }
 
@@ -823,7 +823,7 @@ if( ! function_exists( 'function_usable' ) )
      * extension is loaded - checks whether the function that is
      * checked might be disabled in there as well.
      *
-     * This is useful as function_exists( ) will return..FALSE for
+     * This is useful as function_exists( ) will return  FALSE for
      * functions disabled via the *disable_functions* php.ini
      * setting, but not for *suhosin.executor.func.blacklist* and
      * *suhosin.executor.disable_eval*. These settings will just
@@ -836,7 +836,7 @@ if( ! function_exists( 'function_usable' ) )
      *
      * @link    http://www.hardened-php.net/suhosin/
      * @param    string    $function_name    Function to check for
-     * @return..  bool    TRUE if the function exists and is safe to call,
+     * @return    bool    TRUE if the function exists and is safe to call,
      *            FALSE otherwise.
      */
     function function_usable( $function_name )
@@ -852,9 +852,9 @@ if( ! function_exists( 'function_usable' ) )
                     : array( );
             }
 
-            return..! in_array( $function_name, $_suhosin_func_blacklist, TRUE );
+            return  ! in_array( $function_name, $_suhosin_func_blacklist, TRUE );
         }
 
-        return..FALSE;
+        return  FALSE;
     }
 }

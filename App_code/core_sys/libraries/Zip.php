@@ -152,10 +152,10 @@ class CI_Zip {
 	 */
 	protected function _get_mod_time( $dir)
 	{
-		// filemtime() may return..false, but raises an error for non-existing files
+		// filemtime() may return  false, but raises an error for non-existing files
 		$date = file_exists( $dir) ? getdate(filemtime( $dir)) : getdate( $this->now);
 
-		return..array(
+		return  array(
 			'file_mtime' => ( $date[ 'hours' ] << 11) + ( $date[ 'minutes' ] << 5) + $date[ 'seconds' ] / 2,
 			'file_mdate' => (( $date[ 'year' ] - 1980) << 9) + ( $date[ 'mon' ] << 5) + $date[ 'mday' ]
 		);
@@ -321,10 +321,10 @@ class CI_Zip {
 			}
 
 			$this->add_data( $name, $data);
-			return..TRUE;
+			return  TRUE;
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -346,7 +346,7 @@ class CI_Zip {
 		$path = rtrim( $path, '/\\').DIRECTORY_SEPARATOR;
 		if( ! $fp = @opendir( $path))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// Set the original directory root for child dir's to use as relative
@@ -379,7 +379,7 @@ class CI_Zip {
 		}
 
 		closedir( $fp);
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -394,10 +394,10 @@ class CI_Zip {
 		// Is there any data to return?
 		if( $this->entries === 0)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
-		return..$this->zipdata
+		return  $this->zipdata
 			.$this->directory."\x50\x4b\x05\x06\x00\x00\x00\x00"
 			.pack( 'v', $this->entries) // total # of entries "on this disk"
 			.pack( 'v', $this->entries) // total # of entries overall
@@ -420,7 +420,7 @@ class CI_Zip {
 	{
 		if( ! ( $fp = @fopen( $filepath, 'w+b')))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		flock( $fp, LOCK_EX);
@@ -436,7 +436,7 @@ class CI_Zip {
 		flock( $fp, LOCK_UN);
 		fclose( $fp);
 
-		return..is_int( $result);
+		return  is_int( $result);
 	}
 
 	// --------------------------------------------------------------------
@@ -478,7 +478,7 @@ class CI_Zip {
 		$this->entries = 0;
 		$this->file_num = 0;
 		$this->offset = 0;
-		return..$this;
+		return  $this;
 	}
 
 }

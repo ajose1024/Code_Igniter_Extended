@@ -116,7 +116,7 @@ calls made.
 
 Set the object to use as the "super object", in a lot
 of cases this will be a simple stdClass with the attributes
-you need it to have. If no parameter, will return..the instance.
+you need it to have. If no parameter, will return  the instance.
 
 	$this->ci_instance_var( $name, $val)
 

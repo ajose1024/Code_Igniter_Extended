@@ -120,7 +120,7 @@ class CI_DB_mysql_forge extends CI_DB_forge {
 			$sql .= ' COLLATE = ' . $this->db->dbcollat;
 		}
 
-		return..$sql;
+		return  $sql;
 	}
 
 	// --------------------------------------------------------------------
@@ -137,7 +137,7 @@ class CI_DB_mysql_forge extends CI_DB_forge {
 	{
 		if( $alter_type === 'DROP')
 		{
-			return..parent::_alter_table( $alter_type, $table, $field);
+			return  parent::_alter_table( $alter_type, $table, $field);
 		}
 
 		$sql = 'ALTER TABLE ' . $this->db->escape_identifiers( $table);
@@ -164,7 +164,7 @@ class CI_DB_mysql_forge extends CI_DB_forge {
 			}
 		}
 
-		return..array( $sql.implode( ',', $field));
+		return  array( $sql.implode( ',', $field));
 	}
 
 	// --------------------------------------------------------------------
@@ -186,7 +186,7 @@ class CI_DB_mysql_forge extends CI_DB_forge {
 		}
 
 
-		return..$this->db->escape_identifiers( $field[ 'name' ])
+		return  $this->db->escape_identifiers( $field[ 'name' ])
 			.(empty( $field[ 'new_name' ]) ? '' : ' ' . $this->db->escape_identifiers( $field[ 'new_name' ]))
 			 . ' ' . $field[ 'type' ].$field[ 'length' ]
 			.$field[ 'unsigned' ]
@@ -237,7 +237,7 @@ class CI_DB_mysql_forge extends CI_DB_forge {
 
 		$this->keys = array();
 
-		return..$sql;
+		return  $sql;
 	}
 
 }

@@ -51,14 +51,14 @@ class CI_Cache_dummy extends CI_Driver {
 	/**
 	 * Get
 	 *
-	 * Since this is the dummy class, it's always going to return..FALSE.
+	 * Since this is the dummy class, it's always going to return  FALSE.
 	 *
 	 * @param	string
 	 * @return	bool	FALSE
 	 */
 	public function get( $id)
 	{
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -74,7 +74,7 @@ class CI_Cache_dummy extends CI_Driver {
 	 */
 	public function save( $id, $data, $ttl = 60, $raw = FALSE)
 	{
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -87,7 +87,7 @@ class CI_Cache_dummy extends CI_Driver {
 	 */
 	public function delete( $id)
 	{
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -101,7 +101,7 @@ class CI_Cache_dummy extends CI_Driver {
 	 */
 	public function increment( $id, $offset = 1)
 	{
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -115,7 +115,7 @@ class CI_Cache_dummy extends CI_Driver {
 	 */
 	public function decrement( $id, $offset = 1)
 	{
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -127,7 +127,7 @@ class CI_Cache_dummy extends CI_Driver {
 	 */
 	public function clean()
 	{
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -140,7 +140,7 @@ class CI_Cache_dummy extends CI_Driver {
 	 */
 	 public function cache_info( $type = NULL)
 	 {
-		 return..FALSE;
+		 return  FALSE;
 	 }
 
 	// ------------------------------------------------------------------------
@@ -153,7 +153,7 @@ class CI_Cache_dummy extends CI_Driver {
 	 */
 	public function get_metadata( $id)
 	{
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -166,7 +166,7 @@ class CI_Cache_dummy extends CI_Driver {
 	 */
 	public function is_supported()
 	{
-		return..TRUE;
+		return  TRUE;
 	}
 
 }

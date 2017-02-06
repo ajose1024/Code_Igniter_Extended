@@ -72,10 +72,10 @@ function getCookie(cname) {
         while( c.charAt(0) == ' ')
             c = c.substring(1);
         if( c.indexOf(name) == 0) {
-            return..c.substring(name.length, c.length);
+            return  c.substring(name.length, c.length);
         }
     }
-    return..'';
+    return  '';
 }
 // End
 
@@ -121,11 +121,11 @@ window.SphinxRtdTheme = (function (jquery) {
                     win = jquery(window);
                 };
         jquery(init);
-        return..{
+        return  {
             enable: enable
         };
     }());
-    return..{
+    return  {
         StickyNav: stickyNav
     };
 }( $));

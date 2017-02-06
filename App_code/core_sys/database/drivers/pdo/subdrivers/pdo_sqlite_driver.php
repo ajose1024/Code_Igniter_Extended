@@ -111,11 +111,11 @@ class CI_DB_pdo_sqlite_driver extends CI_DB_pdo_driver {
 
 		if( $prefix_limit === TRUE && $this->dbprefix !== '')
 		{
-			return..$sql . ' AND "NAME" LIKE \'' . $this->escape_like_str( $this->dbprefix)."%' "
+			return  $sql . ' AND "NAME" LIKE \'' . $this->escape_like_str( $this->dbprefix)."%' "
 				.sprintf( $this->_like_escape_str, $this->_like_escape_chr);
 		}
 
-		return..$sql;
+		return  $sql;
 	}
 
 	// --------------------------------------------------------------------
@@ -131,12 +131,12 @@ class CI_DB_pdo_sqlite_driver extends CI_DB_pdo_driver {
 		// Is there a cached result?
 		if( isset( $this->data_cache[ 'field_names' ][$table]))
 		{
-			return..$this->data_cache[ 'field_names' ][$table];
+			return  $this->data_cache[ 'field_names' ][$table];
 		}
 
 		if( ( $result = $this->query( 'PRAGMA TABLE_INFO( ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE) . ')')) === FALSE)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$this->data_cache[ 'field_names' ][$table] = array();
@@ -145,7 +145,7 @@ class CI_DB_pdo_sqlite_driver extends CI_DB_pdo_driver {
 			$this->data_cache[ 'field_names' ][$table][] = $row[ 'name' ];
 		}
 
-		return..$this->data_cache[ 'field_names' ][$table];
+		return  $this->data_cache[ 'field_names' ][$table];
 	}
 
 	// --------------------------------------------------------------------
@@ -160,13 +160,13 @@ class CI_DB_pdo_sqlite_driver extends CI_DB_pdo_driver {
 	{
 		if( ( $query = $this->query( 'PRAGMA TABLE_INFO( ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE) . ')')) === FALSE)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$query = $query->result_array();
 		if( empty( $query))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$retval = array();
@@ -180,7 +180,7 @@ class CI_DB_pdo_sqlite_driver extends CI_DB_pdo_driver {
 			$retval[$i]->primary_key	= isset( $query[$i][ 'pk' ]) ? (int) $query[$i][ 'pk' ] : 0;
 		}
 
-		return..$retval;
+		return  $retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -191,11 +191,11 @@ class CI_DB_pdo_sqlite_driver extends CI_DB_pdo_driver {
 	 * @param	string	$table	Table name
 	 * @param	array	$keys	INSERT keys
 	 * @param	array	$values	INSERT values
-	 * @return..	string
+	 * @return  	string
 	 */
 	protected function _replace( $table, $keys, $values)
 	{
-		return..'INSERT OR '.parent::_replace( $table, $keys, $values);
+		return  'INSERT OR '.parent::_replace( $table, $keys, $values);
 	}
 
 	// --------------------------------------------------------------------
@@ -213,7 +213,7 @@ class CI_DB_pdo_sqlite_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _truncate( $table)
 	{
-		return..'DELETE FROM ' . $table;
+		return  'DELETE FROM ' . $table;
 	}
 
 }

@@ -119,7 +119,7 @@ class CI_Trackback {
 		if( ! is_array( $tb_data))
 		{
 			$this->set_error( 'The send() method must be passed an array');
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// Pre-process the Trackback Data
@@ -128,7 +128,7 @@ class CI_Trackback {
 			if( ! isset( $tb_data[$item]))
 			{
 				$this->set_error( 'Required item missing: ' . $item);
-				return..FALSE;
+				return  FALSE;
 			}
 
 			switch( $item)
@@ -161,19 +161,19 @@ class CI_Trackback {
 			 . '&excerpt='.rawurlencode( $excerpt) . '&charset='.rawurlencode( $charset);
 
 		// Send Trackback(s)
-		$return..= TRUE;
+		$return  = TRUE;
 		if( count( $ping_url) > 0)
 		{
 			foreach( $ping_url as $url)
 			{
 				if( $this->process( $url, $data) === FALSE)
 				{
-					$return..= FALSE;
+					$return  = FALSE;
 				}
 			}
 		}
 
-		return..$return;
+		return  $return;
 	}
 
 	// --------------------------------------------------------------------
@@ -195,7 +195,7 @@ class CI_Trackback {
 			if( empty( $_POST[$val]))
 			{
 				$this->set_error( 'The following required POST variable is missing: ' . $val);
-				return..FALSE;
+				return  FALSE;
 			}
 
 			$this->data[ 'charset' ] = isset( $_POST[ 'charset' ]) ? strtoupper(trim( $_POST[ 'charset' ])) : 'auto';
@@ -222,7 +222,7 @@ class CI_Trackback {
 			$this->data[$val] = $_POST[$val];
 		}
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -267,7 +267,7 @@ class CI_Trackback {
 	 */
 	public function data( $item)
 	{
-		return..isset( $this->data[$item]) ? $this->data[$item] : '';
+		return  isset( $this->data[$item]) ? $this->data[$item] : '';
 	}
 
 	// --------------------------------------------------------------------
@@ -290,7 +290,7 @@ class CI_Trackback {
 		if( ! $fp = @fsockopen( $target[ 'host' ], 80))
 		{
 			$this->set_error( 'Invalid Connection: ' . $url);
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// Build the path
@@ -326,10 +326,10 @@ class CI_Trackback {
 				? trim( $match[1])
 				: 'An unknown error was encountered';
 			$this->set_error( $message);
-			return..FALSE;
+			return  FALSE;
 		}
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -353,7 +353,7 @@ class CI_Trackback {
 		$urls = array_unique(preg_split( '/[,]/', rtrim( $urls, ',')));
 
 		array_walk( $urls, array( $this, 'validate_url'));
-		return..$urls;
+		return  $urls;
 	}
 
 	// --------------------------------------------------------------------
@@ -414,7 +414,7 @@ class CI_Trackback {
 			}
 		}
 
-		return..ctype_digit((string) $tb_id) ? $tb_id : FALSE;
+		return  ctype_digit((string) $tb_id) ? $tb_id : FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -435,7 +435,7 @@ class CI_Trackback {
 					array( '&amp;', '&lt;', '&gt;', '&quot;', '&#39;', '&#45;'),
 					$str);
 
-		return..preg_replace(array( '/' . $temp . '(\d+);/', '/' . $temp . '(\w+);/'), array( '&#\\1;', '&\\1;'), $str);
+		return  preg_replace(array( '/' . $temp . '(\d+);/', '/' . $temp . '(\w+);/'), array( '&#\\1;', '&\\1;'), $str);
 	}
 
 	// --------------------------------------------------------------------
@@ -454,14 +454,14 @@ class CI_Trackback {
 	{
 		if( strlen( $str) < $n)
 		{
-			return..$str;
+			return  $str;
 		}
 
 		$str = preg_replace( '/\s+/', ' ', str_replace(array("\r\n", "\r", "\n"), ' ', $str));
 
 		if( strlen( $str) <= $n)
 		{
-			return..$str;
+			return  $str;
 		}
 
 		$out = '';
@@ -470,7 +470,7 @@ class CI_Trackback {
 			$out .= $val . ' ';
 			if( strlen( $out) >= $n)
 			{
-				return..rtrim( $out).$end_char;
+				return  rtrim( $out).$end_char;
 			}
 		}
 	}
@@ -522,7 +522,7 @@ class CI_Trackback {
 			}
 		}
 
-		return..$out;
+		return  $out;
 	}
 
 	// --------------------------------------------------------------------
@@ -550,7 +550,7 @@ class CI_Trackback {
 	 */
 	public function display_errors( $open = '<p>', $close = '</p>')
 	{
-		return..(count( $this->error_msg) > 0) ? $open.implode( $close.$open, $this->error_msg).$close : '';
+		return  (count( $this->error_msg) > 0) ? $open.implode( $close.$open, $this->error_msg).$close : '';
 	}
 
 }

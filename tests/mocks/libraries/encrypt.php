@@ -7,7 +7,7 @@ class Mock_Libraries_Encrypt extends CI_Encrypt {
 	{
 		if( is_callable(array( $this, '_' . $method)))
 		{
-			return..call_user_func_array(array( $this, '_' . $method), $params);
+			return  call_user_func_array(array( $this, '_' . $method), $params);
 		}
 
 		throw new BadMethodCallException( 'Method ' . $method . ' was not found');

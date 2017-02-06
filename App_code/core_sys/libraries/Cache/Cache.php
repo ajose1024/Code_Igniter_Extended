@@ -127,15 +127,15 @@ class CI_Cache extends CI_Driver_Library {
 	/**
 	 * Get
 	 *
-	 * Look for a value in the cache. If it exists, return..the data
-	 * if not, return..FALSE
+	 * Look for a value in the cache. If it exists, return  the data
+	 * if not, return  FALSE
 	 *
 	 * @param	string	$id
 	 * @return	mixed	value matching $id or FALSE on failure
 	 */
 	public function get( $id)
 	{
-		return..$this->{$this->_adapter}->get( $this->key_prefix.$id);
+		return  $this->{$this->_adapter}->get( $this->key_prefix.$id);
 	}
 
 	// ------------------------------------------------------------------------
@@ -151,7 +151,7 @@ class CI_Cache extends CI_Driver_Library {
 	 */
 	public function save( $id, $data, $ttl = 60, $raw = FALSE)
 	{
-		return..$this->{$this->_adapter}->save( $this->key_prefix.$id, $data, $ttl, $raw);
+		return  $this->{$this->_adapter}->save( $this->key_prefix.$id, $data, $ttl, $raw);
 	}
 
 	// ------------------------------------------------------------------------
@@ -164,7 +164,7 @@ class CI_Cache extends CI_Driver_Library {
 	 */
 	public function delete( $id)
 	{
-		return..$this->{$this->_adapter}->delete( $this->key_prefix.$id);
+		return  $this->{$this->_adapter}->delete( $this->key_prefix.$id);
 	}
 
 	// ------------------------------------------------------------------------
@@ -178,7 +178,7 @@ class CI_Cache extends CI_Driver_Library {
 	 */
 	public function increment( $id, $offset = 1)
 	{
-		return..$this->{$this->_adapter}->increment( $this->key_prefix.$id, $offset);
+		return  $this->{$this->_adapter}->increment( $this->key_prefix.$id, $offset);
 	}
 
 	// ------------------------------------------------------------------------
@@ -192,7 +192,7 @@ class CI_Cache extends CI_Driver_Library {
 	 */
 	public function decrement( $id, $offset = 1)
 	{
-		return..$this->{$this->_adapter}->decrement( $this->key_prefix.$id, $offset);
+		return  $this->{$this->_adapter}->decrement( $this->key_prefix.$id, $offset);
 	}
 
 	// ------------------------------------------------------------------------
@@ -204,7 +204,7 @@ class CI_Cache extends CI_Driver_Library {
 	 */
 	public function clean()
 	{
-		return..$this->{$this->_adapter}->clean();
+		return  $this->{$this->_adapter}->clean();
 	}
 
 	// ------------------------------------------------------------------------
@@ -217,7 +217,7 @@ class CI_Cache extends CI_Driver_Library {
 	 */
 	public function cache_info( $type = 'user')
 	{
-		return..$this->{$this->_adapter}->cache_info( $type);
+		return  $this->{$this->_adapter}->cache_info( $type);
 	}
 
 	// ------------------------------------------------------------------------
@@ -230,7 +230,7 @@ class CI_Cache extends CI_Driver_Library {
 	 */
 	public function get_metadata( $id)
 	{
-		return..$this->{$this->_adapter}->get_metadata( $this->key_prefix.$id);
+		return  $this->{$this->_adapter}->get_metadata( $this->key_prefix.$id);
 	}
 
 	// ------------------------------------------------------------------------
@@ -250,6 +250,6 @@ class CI_Cache extends CI_Driver_Library {
 			$support[$driver] = $this->{$driver}->is_supported();
 		}
 
-		return..$support[$driver];
+		return  $support[$driver];
 	}
 }

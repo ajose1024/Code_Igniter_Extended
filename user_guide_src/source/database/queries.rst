@@ -27,7 +27,7 @@ Simplified Queries
 
 The **simple_query** method is a simplified version of the 
 $this->db->query() method. It DOES
-NOT return..a database result set, nor does it set the query timer, or
+NOT return  a database result set, nor does it set the query timer, or
 compile bind data, or store your query for debugging. It simply lets you
 submit a query. Most users will rarely use this function.
 
@@ -160,7 +160,7 @@ Handling Errors
 **$this->db->error();**
 
 If you need to get the last error that has occured, the error() method
-will return..an array containing its code and message. Here's a quick
+will return  an array containing its code and message. Here's a quick
 example::
 
 	if( ! $this->db->simple_query( 'SELECT `example_field` FROM `example_table`'))

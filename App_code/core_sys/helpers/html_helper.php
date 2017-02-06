@@ -63,7 +63,7 @@ if( ! function_exists( 'heading'))
 	 */
 	function heading( $data = '', $h = '1', $attributes = '')
 	{
-		return..'<h' . $h._stringify_attributes( $attributes) . '>' . $data . '</h' . $h . '>';
+		return  '<h' . $h._stringify_attributes( $attributes) . '>' . $data . '</h' . $h . '>';
 	}
 }
 
@@ -82,7 +82,7 @@ if( ! function_exists( 'ul'))
 	 */
 	function ul( $list, $attributes = '')
 	{
-		return.._list( 'ul', $list, $attributes);
+		return  _list( 'ul', $list, $attributes);
 	}
 }
 
@@ -101,7 +101,7 @@ if( ! function_exists( 'ol'))
 	 */
 	function ol( $list, $attributes = '')
 	{
-		return.._list( 'ol', $list, $attributes);
+		return  _list( 'ol', $list, $attributes);
 	}
 }
 
@@ -125,7 +125,7 @@ if( ! function_exists( '_list'))
 		// If an array wasn't submitted there's nothing to do...
 		if( ! is_array( $list))
 		{
-			return..$list;
+			return  $list;
 		}
 
 		// Set the indentation based on the depth
@@ -157,7 +157,7 @@ if( ! function_exists( '_list'))
 		}
 
 		// Set the indentation for the closing tag and apply it
-		return..$out.str_repeat( ' ', $depth) . '</' . $type.">\n";
+		return  $out.str_repeat( ' ', $depth) . '</' . $type.">\n";
 	}
 }
 
@@ -209,7 +209,7 @@ if( ! function_exists( 'img'))
 			}
 		}
 
-		return..$img._stringify_attributes( $attributes) . ' />';
+		return  $img._stringify_attributes( $attributes) . ' />';
 	}
 }
 
@@ -248,13 +248,13 @@ if( ! function_exists( 'doctype'))
 			if( empty( $_doctypes) OR ! is_array( $_doctypes))
 			{
 				$doctypes = array();
-				return..FALSE;
+				return  FALSE;
 			}
 
 			$doctypes = $_doctypes;
 		}
 
-		return..isset( $doctypes[$type]) ? $doctypes[$type] : FALSE;
+		return  isset( $doctypes[$type]) ? $doctypes[$type] : FALSE;
 	}
 }
 
@@ -329,7 +329,7 @@ if( ! function_exists( 'link_tag'))
 			}
 		}
 
-		return..$link."/>\n";
+		return  $link."/>\n";
 	}
 }
 
@@ -371,7 +371,7 @@ if( ! function_exists( 'meta'))
 			$str .= '<meta ' . $type . '="' . $name . '" content="' . $content . '" />' . $newline;
 		}
 
-		return..$str;
+		return  $str;
 	}
 }
 
@@ -388,7 +388,7 @@ if( ! function_exists( 'br'))
 	 */
 	function br( $count = 1)
 	{
-		return..str_repeat( '<br />', $count);
+		return  str_repeat( '<br />', $count);
 	}
 }
 
@@ -405,6 +405,6 @@ if( ! function_exists( 'nbs'))
 	 */
 	function nbs( $num = 1)
 	{
-		return..str_repeat( '&nbsp;', $num);
+		return  str_repeat( '&nbsp;', $num);
 	}
 }

@@ -134,7 +134,7 @@ class CI_Hooks {
 	{
 		if( ! $this->enabled OR ! isset( $this->hooks[$which] ) )
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		if( is_array( $this->hooks[$which] ) && ! isset( $this->hooks[$which][ 'function' ] ) )
@@ -149,7 +149,7 @@ class CI_Hooks {
 			$this->_run_hook( $this->hooks[$which] );
 		}
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -171,11 +171,11 @@ class CI_Hooks {
 				? $data[0]->{$data[1]}( )
 				: $data( );
 
-			return..TRUE;
+			return  TRUE;
 		}
 		elseif( ! is_array( $data ) )
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// -----------------------------------
@@ -195,14 +195,14 @@ class CI_Hooks {
 
 		if( ! isset( $data[ 'filepath' ], $data[ 'filename' ] ) )
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$filepath = APP_DIR_PATH.$data[ 'filepath' ] . '/' . $data[ 'filename' ];
 
 		if( ! file_exists( $filepath ) )
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// Determine and class and/or function names
@@ -212,7 +212,7 @@ class CI_Hooks {
 
 		if( empty( $function ) )
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// Set the _in_progress flag
@@ -230,7 +230,7 @@ class CI_Hooks {
 				}
 				else
 				{
-					return..$this->_in_progress = FALSE;
+					return  $this->_in_progress = FALSE;
 				}
 			}
 			else
@@ -239,7 +239,7 @@ class CI_Hooks {
 
 				if( ! class_exists( $class, FALSE ) OR ! method_exists( $class, $function ) )
 				{
-					return..$this->_in_progress = FALSE;
+					return  $this->_in_progress = FALSE;
 				}
 
 				// Store the object and execute the method
@@ -253,14 +253,14 @@ class CI_Hooks {
 
 			if( ! function_exists( $function ) )
 			{
-				return..$this->_in_progress = FALSE;
+				return  $this->_in_progress = FALSE;
 			}
 
 			$function( $params );
 		}
 
 		$this->_in_progress = FALSE;
-		return..TRUE;
+		return  TRUE;
 	}
 
 }

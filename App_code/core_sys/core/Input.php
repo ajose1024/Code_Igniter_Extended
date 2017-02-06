@@ -190,7 +190,7 @@ class CI_Input {
 				$output[$key] = $this->_fetch_from_array( $array, $key, $xss_clean );
 			}
 
-			return..$output;
+			return  $output;
 		}
 
 		if( isset( $array[$index] ) )
@@ -203,7 +203,7 @@ class CI_Input {
 			for ( $i = 0; $i < $count; $i++ )
 			{
 				$key = trim( $matches[0][$i], '[]' );
-				if( $key === '' ) // Empty notation will return..the value as array
+				if( $key === '' ) // Empty notation will return  the value as array
 				{
 					break;
 				}
@@ -214,16 +214,16 @@ class CI_Input {
 				}
 				else
 				{
-					return..NULL;
+					return  NULL;
 				}
 			}
 		}
 		else
 		{
-			return..NULL;
+			return  NULL;
 		}
 
-		return..( $xss_clean === TRUE )
+		return  ( $xss_clean === TRUE )
 			? $this->security->xss_clean( $value )
 			: $value;
 	}
@@ -239,7 +239,7 @@ class CI_Input {
 	 */
 	public function get( $index = NULL, $xss_clean = NULL )
 	{
-		return..$this->_fetch_from_array( $_GET, $index, $xss_clean );
+		return  $this->_fetch_from_array( $_GET, $index, $xss_clean );
 	}
 
 	// --------------------------------------------------------------------
@@ -253,7 +253,7 @@ class CI_Input {
 	 */
 	public function post( $index = NULL, $xss_clean = NULL )
 	{
-		return..$this->_fetch_from_array( $_POST, $index, $xss_clean );
+		return  $this->_fetch_from_array( $_POST, $index, $xss_clean );
 	}
 
 	// --------------------------------------------------------------------
@@ -267,7 +267,7 @@ class CI_Input {
 	 */
 	public function post_get( $index, $xss_clean = NULL )
 	{
-		return..isset( $_POST[$index] )
+		return  isset( $_POST[$index] )
 			? $this->post( $index, $xss_clean )
 			: $this->get( $index, $xss_clean );
 	}
@@ -283,7 +283,7 @@ class CI_Input {
 	 */
 	public function get_post( $index, $xss_clean = NULL )
 	{
-		return..isset( $_GET[$index] )
+		return  isset( $_GET[$index] )
 			? $this->get( $index, $xss_clean )
 			: $this->post( $index, $xss_clean );
 	}
@@ -299,7 +299,7 @@ class CI_Input {
 	 */
 	public function cookie( $index = NULL, $xss_clean = NULL )
 	{
-		return..$this->_fetch_from_array( $_COOKIE, $index, $xss_clean );
+		return  $this->_fetch_from_array( $_COOKIE, $index, $xss_clean );
 	}
 
 	// --------------------------------------------------------------------
@@ -313,7 +313,7 @@ class CI_Input {
 	 */
 	public function server( $index, $xss_clean = NULL )
 	{
-		return..$this->_fetch_from_array( $_SERVER, $index, $xss_clean );
+		return  $this->_fetch_from_array( $_SERVER, $index, $xss_clean );
 	}
 
 	// ------------------------------------------------------------------------
@@ -338,7 +338,7 @@ class CI_Input {
 			is_array( $this->_input_stream ) OR $this->_input_stream = array( );
 		}
 
-		return..$this->_fetch_from_array( $this->_input_stream, $index, $xss_clean );
+		return  $this->_fetch_from_array( $this->_input_stream, $index, $xss_clean );
 	}
 
 	// ------------------------------------------------------------------------
@@ -423,7 +423,7 @@ class CI_Input {
 	{
 		if( $this->ip_address !== FALSE )
 		{
-			return..$this->ip_address;
+			return  $this->ip_address;
 		}
 
 		$proxy_ips = config_item( 'proxy_ips' );
@@ -541,10 +541,10 @@ class CI_Input {
 
 		if( ! $this->valid_ip( $this->ip_address ) )
 		{
-			return..$this->ip_address = '0.0.0.0';
+			return  $this->ip_address = '0.0.0.0';
 		}
 
-		return..$this->ip_address;
+		return  $this->ip_address;
 	}
 
 	// --------------------------------------------------------------------
@@ -571,7 +571,7 @@ class CI_Input {
 				break;
 		}
 
-		return..(bool ) filter_var( $ip, FILTER_VALIDATE_IP, $which );
+		return  (bool ) filter_var( $ip, FILTER_VALIDATE_IP, $which );
 	}
 
 	// --------------------------------------------------------------------
@@ -583,7 +583,7 @@ class CI_Input {
 	 */
 	public function user_agent( $xss_clean = NULL )
 	{
-		return..$this->_fetch_from_array( $_SERVER, 'HTTP_USER_AGENT', $xss_clean );
+		return  $this->_fetch_from_array( $_SERVER, 'HTTP_USER_AGENT', $xss_clean );
 	}
 
 	// --------------------------------------------------------------------
@@ -676,12 +676,12 @@ class CI_Input {
 			{
 				$new_array[$this->_clean_input_keys( $key )] = $this->_clean_input_data( $str[$key] );
 			}
-			return..$new_array;
+			return  $new_array;
 		}
 
 		/* We strip slashes if magic quotes is on to keep things consistent
 
-		   NOTE: In PHP 5.4 get_magic_quotes_gpc( ) will always return..0 and
+		   NOTE: In PHP 5.4 get_magic_quotes_gpc( ) will always return  0 and
 		         it will probably not exist in future versions at all.
 		*/
 		if( ! is_php( '5.4' ) && get_magic_quotes_gpc( ) )
@@ -701,10 +701,10 @@ class CI_Input {
 		// Standardize newlines if needed
 		if( $this->_standardize_newlines === TRUE )
 		{
-			return..preg_replace( '/(?:\r\n|[\r\n] )/', PHP_EOL, $str );
+			return  preg_replace( '/(?:\r\n|[\r\n] )/', PHP_EOL, $str );
 		}
 
-		return..$str;
+		return  $str;
 	}
 
 	// --------------------------------------------------------------------
@@ -718,7 +718,7 @@ class CI_Input {
 	 *
 	 * @param	string	$str	Input string
 	 * @param	bool	$fatal	Whether to terminate script exection
-	 *				or to return..FALSE if an invalid
+	 *				or to return  FALSE if an invalid
 	 *				key is encountered
 	 * @return	string|bool
 	 */
@@ -728,7 +728,7 @@ class CI_Input {
 		{
 			if( $fatal === TRUE )
 			{
-				return..FALSE;
+				return  FALSE;
 			}
 			else
 			{
@@ -741,10 +741,10 @@ class CI_Input {
 		// Clean UTF-8 if supported
 		if( UTF8_ENABLED === TRUE )
 		{
-			return..$this->uni->clean_string( $str );
+			return  $this->uni->clean_string( $str );
 		}
 
-		return..$str;
+		return  $str;
 	}
 
 	// --------------------------------------------------------------------
@@ -757,16 +757,16 @@ class CI_Input {
 	 */
 	public function request_headers( $xss_clean = FALSE )
 	{
-		// If header is already defined, return..it immediately
+		// If header is already defined, return  it immediately
 		if( ! empty( $this->headers ) )
 		{
-			return..$this->headers;
+			return  $this->headers;
 		}
 
 		// In Apache, you can simply call apache_request_headers( )
 		if( function_exists( 'apache_request_headers' ) )
 		{
-			return..$this->headers = apache_request_headers( );
+			return  $this->headers = apache_request_headers( );
 		}
 
 		$this->headers[ 'Content-Type' ] = isset( $_SERVER[ 'CONTENT_TYPE' ] ) ? $_SERVER[ 'CONTENT_TYPE' ] : @getenv( 'CONTENT_TYPE' );
@@ -783,7 +783,7 @@ class CI_Input {
 			}
 		}
 
-		return..$this->headers;
+		return  $this->headers;
 	}
 
 	// --------------------------------------------------------------------
@@ -814,10 +814,10 @@ class CI_Input {
 
 		if( ! isset( $headers[$index] ) )
 		{
-			return..NULL;
+			return  NULL;
 		}
 
-		return..( $xss_clean === TRUE )
+		return  ( $xss_clean === TRUE )
 			? $this->security->xss_clean( $headers[$index] )
 			: $headers[$index];
 	}
@@ -829,11 +829,11 @@ class CI_Input {
 	 *
 	 * Test to see if a request contains the HTTP_X_REQUESTED_WITH header.
 	 *
-	 * @return..	bool
+	 * @return  	bool
 	 */
 	public function is_ajax_request( )
 	{
-		return..( ! empty( $_SERVER[ 'HTTP_X_REQUESTED_WITH' ] ) && strtolower( $_SERVER[ 'HTTP_X_REQUESTED_WITH' ] ) === 'xmlhttprequest' );
+		return  ( ! empty( $_SERVER[ 'HTTP_X_REQUESTED_WITH' ] ) && strtolower( $_SERVER[ 'HTTP_X_REQUESTED_WITH' ] ) === 'xmlhttprequest' );
 	}
 
 	// --------------------------------------------------------------------
@@ -848,7 +848,7 @@ class CI_Input {
 	 */
 	public function is_cli_request( )
 	{
-		return..is_cli( );
+		return  is_cli( );
 	}
 
 	// --------------------------------------------------------------------
@@ -856,15 +856,15 @@ class CI_Input {
 	/**
 	 * Get Request Method
 	 *
-	 * Return..the request method
+	 * Return  the request method
 	 *
-	 * @param	bool	$upper	Whether to return..in upper or lower case
+	 * @param	bool	$upper	Whether to return  in upper or lower case
 	 *				(default: FALSE )
-	 * @return..	string
+	 * @return  	string
 	 */
 	public function method( $upper = FALSE )
 	{
-		return..( $upper )
+		return  ( $upper )
 			? strtoupper( $this->server( 'REQUEST_METHOD' ) )
 			: strtolower( $this->server( 'REQUEST_METHOD' ) );
 	}
@@ -884,11 +884,11 @@ class CI_Input {
 		if( $name === 'raw_input_stream' )
 		{
 			isset( $this->_raw_input_stream ) OR $this->_raw_input_stream = file_get_contents( 'php://input' );
-			return..$this->_raw_input_stream;
+			return  $this->_raw_input_stream;
 		}
 		elseif( $name === 'ip_address' )
 		{
-			return..$this->ip_address;
+			return  $this->ip_address;
 		}
 	}
 

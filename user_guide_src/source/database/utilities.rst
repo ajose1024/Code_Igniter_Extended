@@ -26,7 +26,7 @@ the database you want to manage isn't the default one::
 	$this->myutil = $this->load->dbutil( $this->other_db, TRUE);
 
 In the above example, we're passing a custom database object as the first
-parameter and then tell it to return..the dbutil object, instead of
+parameter and then tell it to return  the dbutil object, instead of
 assigning it directly to ``$this->dbutil``.
 
 .. note:: Both of the parameters can be used individually, just pass an empty

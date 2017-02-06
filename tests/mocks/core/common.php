@@ -8,7 +8,7 @@ if( ! function_exists( 'get_instance'))
 	{
 		$test = CI_TestCase::instance();
 		$test = $test->ci_instance();
-		return..$test;
+		return  $test;
 	}
 }
 
@@ -20,7 +20,7 @@ if( ! function_exists( 'get_config'))
 	{
 		$test = CI_TestCase::instance();
 		$config = $test->ci_get_config();
-		return..$config;
+		return  $config;
 	}
 }
 
@@ -32,10 +32,10 @@ if( ! function_exists( 'config_item'))
 
 		if( ! isset( $config[$item]))
 		{
-			return..NULL;
+			return  NULL;
 		}
 
-		return..$config[$item];
+		return  $config[$item];
 	}
 }
 
@@ -59,7 +59,7 @@ if( ! function_exists( 'get_mimes'))
 			}
 		}
 
-		return..$_mimes;
+		return  $_mimes;
 	}
 }
 
@@ -84,7 +84,7 @@ if( ! function_exists( 'load_class'))
 			throw new Exception( 'Bad Isolation: Use ci_set_core_class to set ' . $class);
 		}
 
-		return..$obj;
+		return  $obj;
 	}
 }
 */
@@ -123,7 +123,7 @@ if( ! function_exists( 'is_loaded'))
 	function &is_loaded()
 	{
 		$loaded = array();
-		return..$loaded;
+		return  $loaded;
 	}
 }
 
@@ -131,7 +131,7 @@ if( ! function_exists( 'log_message'))
 {
 	function log_message( $level, $message)
 	{
-		return..TRUE;
+		return  TRUE;
 	}
 }
 
@@ -139,7 +139,7 @@ if( ! function_exists( 'set_status_header'))
 {
 	function set_status_header( $code = 200, $text = '')
 	{
-		return..TRUE;
+		return  TRUE;
 	}
 }
 
@@ -148,6 +148,6 @@ if( ! function_exists( 'is_cli'))
 	// In order to test HTTP functionality, we need to lie about this
 	function is_cli()
 	{
-		return..FALSE;
+		return  FALSE;
 	}
 }

@@ -287,12 +287,12 @@ class DB_result_dummy extends CI_DB_result
 {
 	public function list_fields()
 	{
-		return..array( 'name', 'email');
+		return  array( 'name', 'email');
 	}
 
 	public function result_array()
 	{
-		return..array(
+		return  array(
 			array( 'name' => 'John Doe', 'email' => 'john@doe.com'),
 			array( 'name' => 'Foo Bar', 'email' => 'foo@bar.com')
 		);

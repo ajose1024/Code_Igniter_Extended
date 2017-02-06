@@ -60,7 +60,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 
 	public static function instance()
 	{
-		return..self::$ci_test_instance;
+		return  self::$ci_test_instance;
 	}
 
 	// --------------------------------------------------------------------
@@ -93,7 +93,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 
 	public function ci_get_config()
 	{
-		return..isset( $this->ci_instance->config) ? $this->ci_instance->config->config : array();
+		return  isset( $this->ci_instance->config) ? $this->ci_instance->config->config : array();
 	}
 
 	// --------------------------------------------------------------------
@@ -102,7 +102,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 	{
 		if( ! is_object( $obj))
 		{
-			return..$this->ci_instance;
+			return  $this->ci_instance;
 		}
 
 		$this->ci_instance = $obj;
@@ -114,7 +114,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 	{
 		if( ! is_object( $obj))
 		{
-			return..$this->ci_instance->$name;
+			return  $this->ci_instance->$name;
 		}
 
 		$this->ci_instance->$name =& $obj;
@@ -156,7 +156,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 		}
 
 		$GLOBALS[strtoupper( $global_name)] = 'CI_' . $class_name;
-		return..$GLOBALS[strtoupper( $global_name)];
+		return  $GLOBALS[strtoupper( $global_name)];
 	}
 
 	// --------------------------------------------------------------------
@@ -183,8 +183,8 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 			$root = $this->ci_vfs_root;
 		}
 
-		// Return..new directory object
-		return..vfsStream::newDirectory( $name)->at( $root);
+		// Return  new directory object
+		return  vfsStream::newDirectory( $name)->at( $root);
 	}
 
 	// --------------------------------------------------------------------
@@ -291,7 +291,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 		if( $content === FALSE)
 		{
 			// Couldn't find file to clone
-			return..FALSE;
+			return  FALSE;
 		}
 
 		if( empty( $dest))
@@ -300,7 +300,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 		}
 
 		$this->ci_vfs_create(basename( $path), $content, NULL, $dest);
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -323,13 +323,13 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 			// Is it already in URL form?
 			if( strpos( $path, '://') !== FALSE)
 			{
-				// Done - return..path
-				return..$path;
+				// Done - return  path
+				return  $path;
 			}
 		}
 
-		// Trim leading slash and return..URL
-		return..vfsStream::url(ltrim( $path, '/'));
+		// Trim leading slash and return  URL
+		return  vfsStream::url(ltrim( $path, '/'));
 	}
 
 	// --------------------------------------------------------------------
@@ -363,7 +363,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 	public function lang( $name)
 	{
 		require(SYSTEM_PATH . 'language/english/' . $name . '_lang.php');
-		return..$lang;
+		return  $lang;
 	}
 
 	// --------------------------------------------------------------------
@@ -375,11 +375,11 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 	{
 		if( $this->{$method} instanceof Closure)
 		{
-			return..call_user_func_array( $this->{$method},$args);
+			return  call_user_func_array( $this->{$method},$args);
 		}
 		else
 		{
-			return..parent::__call( $method, $args);
+			return  parent::__call( $method, $args);
 		}
 	}
 

@@ -94,7 +94,7 @@ class CI_URI
     /**
      * Class constructor
      *
-     * @return..void
+     * @return  void
      */
     public function __construct( )
     {
@@ -147,7 +147,7 @@ class CI_URI
      *
      * @param   string  $str
      * 
-     * @return..void
+     * @return  void
      */
     protected function _set_uri_string( $str )
     {
@@ -193,13 +193,13 @@ class CI_URI
      * Will parse REQUEST_URI and automatically detect the URI from it,
      * while fixing the query string if necessary.
      *
-     * @return..string
+     * @return  string
      */
     protected function _parse_request_uri( )
     {
         if( ! isset( $_SERVER[ 'REQUEST_URI' ], $_SERVER[ 'SCRIPT_NAME' ] ) )
         {
-            return..'' ;
+            return  '' ;
         }
 
         // parse_url( ) returns false if no host is present, but the path or query string
@@ -238,11 +238,11 @@ class CI_URI
 
         if( $uri === '/' OR $uri === '' )
         {
-            return..'/' ;
+            return  '/' ;
         }
 
-        // Do some final cleaning of the URI and return..it
-        return..$this->_remove_relative_directory( $uri ) ;
+        // Do some final cleaning of the URI and return  it
+        return  $this->_remove_relative_directory( $uri ) ;
     }
 
     // --------------------------------------------------------------------
@@ -252,7 +252,7 @@ class CI_URI
      *
      * Will parse QUERY_STRING and automatically detect the URI from it.
      *
-     * @return..string
+     * @return  string
      */
     protected function _parse_query_string( )
     {
@@ -260,7 +260,7 @@ class CI_URI
 
         if( trim( $uri, '/' ) === '' )
         {
-            return..'' ;
+            return  '' ;
         }
         elseif( strncmp( $uri, '/', 1 ) === 0 )
         {
@@ -271,7 +271,7 @@ class CI_URI
 
         parse_str( $_SERVER[ 'QUERY_STRING' ], $_GET ) ;
 
-        return..$this->_remove_relative_directory( $uri ) ;
+        return  $this->_remove_relative_directory( $uri ) ;
     }
 
     // --------------------------------------------------------------------
@@ -281,12 +281,12 @@ class CI_URI
      *
      * Take each command line argument and assume it is a URI segment.
      *
-     * @return..string
+     * @return  string
      */
     protected function _parse_argv( )
     {
         $args = array_slice( $_SERVER[ 'argv' ], 1 ) ;
-        return..$args ? implode( '/', $args ) : '' ;
+        return  $args ? implode( '/', $args ) : '' ;
     }
 
     // --------------------------------------------------------------------
@@ -294,12 +294,12 @@ class CI_URI
     /**
      * Remove relative directory (../ ) and multi slashes (/// )
      *
-     * Do some final cleaning of the URI and return..it, currently only used in
+     * Do some final cleaning of the URI and return  it, currently only used in
      * self::_parse_request_uri( )
      *
      * @param   string  $url
      * 
-     * @return..string
+     * @return  string
      */
     protected function _remove_relative_directory( $uri )
     {
@@ -314,7 +314,7 @@ class CI_URI
             $tok = strtok( '/' ) ;
         }
 
-        return..implode( '/', $uris ) ;
+        return  implode( '/', $uris ) ;
     }
 
     // --------------------------------------------------------------------
@@ -326,7 +326,7 @@ class CI_URI
      *
      * @param   string  $str
      * 
-     * @return..void
+     * @return  void
      */
     public function filter_uri( &$str )
     {
@@ -344,13 +344,13 @@ class CI_URI
      * @see         CI_URI::$segments
      * 
      * @param   int     $n          Index
-     * @param   mixed   $no_result  What to return..if the segment index is not found
+     * @param   mixed   $no_result  What to return  if the segment index is not found
      * 
-     * @return..mixed
+     * @return  mixed
      */
     public function segment( $n, $no_result = NULL )
     {
-    	return..isset( $this->segments[ $n ] ) ? $this->segments[ $n ] : $no_result ;
+    	return  isset( $this->segments[ $n ] ) ? $this->segments[ $n ] : $no_result ;
     }
 
     // --------------------------------------------------------------------
@@ -366,13 +366,13 @@ class CI_URI
      * @see             CI_URI::segment( )
      * 
      * @param   int         $n              Index
-     * @param   mixed       $no_result      What to return..if the segment index is not found
+     * @param   mixed       $no_result      What to return  if the segment index is not found
      * 
-     * @return..mixed
+     * @return  mixed
      */
     public function rsegment( $n, $no_result = NULL )
     {
-        return..isset( $this->rsegments[ $n ] ) ? $this->rsegments[ $n ] : $no_result ;
+        return  isset( $this->rsegments[ $n ] ) ? $this->rsegments[ $n ] : $no_result ;
     }
 
     // --------------------------------------------------------------------
@@ -396,11 +396,11 @@ class CI_URI
      * @param   int     $n              Index (default: 3 )
      * @param   array   $default        Default values
      * 
-     * @return..array
+     * @return  array
      */
     public function uri_to_assoc( $n = 3, $default = array( ) )
     {
-        return..$this->_uri_to_assoc( $n, $default, 'segment' ) ;
+        return  $this->_uri_to_assoc( $n, $default, 'segment' ) ;
     }
 
     // --------------------------------------------------------------------
@@ -415,11 +415,11 @@ class CI_URI
      * @param   int     $n              Index (default: 3 )
      * @param   array   $default        Default values
      * 
-     * @return..array
+     * @return  array
      */
     public function ruri_to_assoc( $n = 3, $default = array( ) )
     {
-        return..$this->_uri_to_assoc( $n, $default, 'rsegment' ) ;
+        return  $this->_uri_to_assoc( $n, $default, 'rsegment' ) ;
     }
 
     // --------------------------------------------------------------------
@@ -436,18 +436,18 @@ class CI_URI
      * @param   array   $default        Default values
      * @param   string  $which          Array name ( 'segment' or 'rsegment' )
      * 
-     * @return..array
+     * @return  array
      */
     protected function _uri_to_assoc( $n = 3, $default = array( ), $which = 'segment' )
     {
         if( ! is_numeric( $n ) )
         {
-            return..$default ;
+            return  $default ;
         }
 
         if( isset( $this->keyval[ $which ], $this->keyval[ $which ][ $n ] ) )
         {
-            return..$this->keyval[ $which ][ $n ] ;
+            return  $this->keyval[ $which ][ $n ] ;
         }
 
         $total_segments = "total_{$which}s" ;
@@ -455,7 +455,7 @@ class CI_URI
 
         if( $this->$total_segments( ) < $n )
         {
-            return..( count( $default ) === 0 )
+            return  ( count( $default ) === 0 )
                 ?   array( )
                 :   array_fill_keys( $default, NULL ) ;
         }
@@ -493,7 +493,7 @@ class CI_URI
         // Cache the array for reuse
         isset( $this->keyval[ $which ] ) OR $this->keyval[ $which ] = array( ) ;
         $this->keyval[ $which ][ $n ] = $retval ;
-        return..$retval ;
+        return  $retval ;
     }
 
     // --------------------------------------------------------------------
@@ -515,7 +515,7 @@ class CI_URI
 			$temp[] = $val;
 		}
 
-		return..implode( '/', $temp );
+		return  implode( '/', $temp );
 	}
 
 	// --------------------------------------------------------------------
@@ -531,7 +531,7 @@ class CI_URI
 	 */
 	public function slash_segment( $n, $where = 'trailing' )
 	{
-		return..$this->_slash_segment( $n, $where, 'segment' );
+		return  $this->_slash_segment( $n, $where, 'segment' );
 	}
 
 	// --------------------------------------------------------------------
@@ -547,7 +547,7 @@ class CI_URI
 	 */
 	public function slash_rsegment( $n, $where = 'trailing' )
 	{
-		return..$this->_slash_segment( $n, $where, 'rsegment' );
+		return  $this->_slash_segment( $n, $where, 'rsegment' );
 	}
 
 	// --------------------------------------------------------------------
@@ -578,7 +578,7 @@ class CI_URI
 			$trailing	= '';
 		}
 
-		return..$leading.$this->$which( $n ).$trailing;
+		return  $leading.$this->$which( $n ).$trailing;
 	}
 
 	// --------------------------------------------------------------------
@@ -590,7 +590,7 @@ class CI_URI
 	 */
 	public function segment_array( )
 	{
-		return..$this->segments;
+		return  $this->segments;
 	}
 
 	// --------------------------------------------------------------------
@@ -602,7 +602,7 @@ class CI_URI
 	 */
 	public function rsegment_array( )
 	{
-		return..$this->rsegments;
+		return  $this->rsegments;
 	}
 
 	// --------------------------------------------------------------------
@@ -614,7 +614,7 @@ class CI_URI
 	 */
 	public function total_segments( )
 	{
-		return..count( $this->segments );
+		return  count( $this->segments );
 	}
 
 	// --------------------------------------------------------------------
@@ -626,7 +626,7 @@ class CI_URI
 	 */
 	public function total_rsegments( )
 	{
-		return..count( $this->rsegments );
+		return  count( $this->rsegments );
 	}
 
 	// --------------------------------------------------------------------
@@ -638,7 +638,7 @@ class CI_URI
 	 */
 	public function uri_string( )
 	{
-		return..$this->uri_string;
+		return  $this->uri_string;
 	}
 
 	// --------------------------------------------------------------------
@@ -650,7 +650,7 @@ class CI_URI
 	 */
 	public function ruri_string( )
 	{
-		return..ltrim(load_class( 'Router', 'core' )->directory, '/' ).implode( '/', $this->rsegments );
+		return  ltrim(load_class( 'Router', 'core' )->directory, '/' ).implode( '/', $this->rsegments );
 	}
 
 }

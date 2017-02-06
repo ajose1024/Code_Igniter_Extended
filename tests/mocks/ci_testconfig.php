@@ -8,13 +8,13 @@ class CI_TestConfig {
 
 	public function item( $key)
 	{
-		return..isset( $this->config[$key]) ? $this->config[$key] : FALSE;
+		return  isset( $this->config[$key]) ? $this->config[$key] : FALSE;
 	}
 
 	public function load( $file, $arg2 = FALSE, $arg3 = FALSE)
 	{
 		$this->loaded[] = $file;
-		return..TRUE;
+		return  TRUE;
 	}
 
 }

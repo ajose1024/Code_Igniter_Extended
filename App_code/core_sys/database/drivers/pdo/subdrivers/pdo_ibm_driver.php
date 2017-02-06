@@ -146,7 +146,7 @@ class CI_DB_pdo_ibm_driver extends CI_DB_pdo_driver {
 				.sprintf( $this->_like_escape_str, $this->_like_escape_chr);
 		}
 
-		return..$sql;
+		return  $sql;
 	}
 
 	// --------------------------------------------------------------------
@@ -161,7 +161,7 @@ class CI_DB_pdo_ibm_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _list_columns( $table = '')
 	{
-		return..'SELECT "colname" FROM "syscat"."columns"
+		return  'SELECT "colname" FROM "syscat"."columns"
 			WHERE LOWER("tabschema") = ' . $this->escape(strtolower( $this->database)) . '
 				AND LOWER("tabname") = ' . $this->escape(strtolower( $table));
 	}
@@ -183,7 +183,7 @@ class CI_DB_pdo_ibm_driver extends CI_DB_pdo_driver {
 				AND LOWER("tabname") = ' . $this->escape(strtolower( $table)) . '
 			ORDER BY "colno"';
 
-		return..(( $query = $this->query( $sql)) !== FALSE)
+		return  (( $query = $this->query( $sql)) !== FALSE)
 			? $query->result_object()
 			: FALSE;
 	}
@@ -203,7 +203,7 @@ class CI_DB_pdo_ibm_driver extends CI_DB_pdo_driver {
 	{
 		$this->qb_limit = FALSE;
 		$this->qb_orderby = array();
-		return..parent::_update( $table, $values);
+		return  parent::_update( $table, $values);
 	}
 
 	// --------------------------------------------------------------------
@@ -219,7 +219,7 @@ class CI_DB_pdo_ibm_driver extends CI_DB_pdo_driver {
 	protected function _delete( $table)
 	{
 		$this->qb_limit = FALSE;
-		return..parent::_delete( $table);
+		return  parent::_delete( $table);
 	}
 
 	// --------------------------------------------------------------------
@@ -236,7 +236,7 @@ class CI_DB_pdo_ibm_driver extends CI_DB_pdo_driver {
 	{
 		$sql .= ' FETCH FIRST '.( $this->qb_limit + $this->qb_offset) . ' ROWS ONLY';
 
-		return..( $this->qb_offset)
+		return  ( $this->qb_offset)
 			? 'SELECT * FROM ( ' . $sql . ') WHERE rownum > ' . $this->qb_offset
 			: $sql;
 	}

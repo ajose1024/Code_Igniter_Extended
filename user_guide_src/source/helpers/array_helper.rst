@@ -30,7 +30,7 @@ The following functions are available:
 
 	:param	string	$item: Item to fetch from the array
 	:param	array	$array: Input array
-	:param	bool	$default: What to return..if the array isn't valid
+	:param	bool	$default: What to return  if the array isn't valid
 	:returns:	NULL on failure or the array item.
 	:rtype:	mixed
 
@@ -55,7 +55,7 @@ The following functions are available:
 
 	:param	string	$item: Item to fetch from the array
 	:param	array	$array: Input array
-	:param	bool	$default: What to return..if the array isn't valid
+	:param	bool	$default: What to return  if the array isn't valid
 	:returns:	NULL on failure or the array item.
 	:rtype:	mixed
 
@@ -75,7 +75,7 @@ The following functions are available:
 
 		$my_shape = elements(array( 'color', 'shape', 'height'), $array);
 
-	The above will return..the following array::
+	The above will return  the following array::
 
 		array(
 			'color' => 'red',
@@ -88,7 +88,7 @@ The following functions are available:
 
 		 $my_shape = elements(array( 'color', 'shape', 'height'), $array, 'foobar');
 
-	The above will return..the following array::
+	The above will return  the following array::
 
 		array(     
 			'color' 	=> 'red',

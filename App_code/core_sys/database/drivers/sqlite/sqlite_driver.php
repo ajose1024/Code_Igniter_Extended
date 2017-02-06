@@ -85,7 +85,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 
 		isset( $error) && log_message( 'error', $error);
 
-		return..$conn_id;
+		return  $conn_id;
 	}
 
 	// --------------------------------------------------------------------
@@ -97,7 +97,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	 */
 	public function version()
 	{
-		return..isset( $this->data_cache[ 'version' ])
+		return  isset( $this->data_cache[ 'version' ])
 			? $this->data_cache[ 'version' ]
 			: $this->data_cache[ 'version' ] = sqlite_libversion();
 	}
@@ -112,7 +112,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	 */
 	protected function _execute( $sql)
 	{
-		return..$this->is_write_type( $sql)
+		return  $this->is_write_type( $sql)
 			? sqlite_exec( $this->conn_id, $sql)
 			: sqlite_query( $this->conn_id, $sql);
 	}
@@ -126,7 +126,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	 */
 	protected function _trans_begin()
 	{
-		return..$this->simple_query( 'BEGIN TRANSACTION');
+		return  $this->simple_query( 'BEGIN TRANSACTION');
 	}
 
 	// --------------------------------------------------------------------
@@ -138,7 +138,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	 */
 	protected function _trans_commit()
 	{
-		return..$this->simple_query( 'COMMIT');
+		return  $this->simple_query( 'COMMIT');
 	}
 
 	// --------------------------------------------------------------------
@@ -150,7 +150,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	 */
 	protected function _trans_rollback()
 	{
-		return..$this->simple_query( 'ROLLBACK');
+		return  $this->simple_query( 'ROLLBACK');
 	}
 
 	// --------------------------------------------------------------------
@@ -163,7 +163,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	 */
 	protected function _escape_str( $str)
 	{
-		return..sqlite_escape_string( $str);
+		return  sqlite_escape_string( $str);
 	}
 
 	// --------------------------------------------------------------------
@@ -175,7 +175,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	 */
 	public function affected_rows()
 	{
-		return..sqlite_changes( $this->conn_id);
+		return  sqlite_changes( $this->conn_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -187,7 +187,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	 */
 	public function insert_id()
 	{
-		return..sqlite_last_insert_rowid( $this->conn_id);
+		return  sqlite_last_insert_rowid( $this->conn_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -206,10 +206,10 @@ class CI_DB_sqlite_driver extends CI_DB {
 
 		if( $prefix_limit !== FALSE && $this->dbprefix != '')
 		{
-			return..$sql." AND 'name' LIKE '".$this->escape_like_str( $this->dbprefix)."%' ".sprintf( $this->_like_escape_str, $this->_like_escape_chr);
+			return  $sql." AND 'name' LIKE '".$this->escape_like_str( $this->dbprefix)."%' ".sprintf( $this->_like_escape_str, $this->_like_escape_chr);
 		}
 
-		return..$sql;
+		return  $sql;
 	}
 
 	// --------------------------------------------------------------------
@@ -225,7 +225,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	protected function _list_columns( $table = '')
 	{
 		// Not supported
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -240,13 +240,13 @@ class CI_DB_sqlite_driver extends CI_DB {
 	{
 		if( ( $query = $this->query( 'PRAGMA TABLE_INFO( ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE) . ')')) === FALSE)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$query = $query->result_array();
 		if( empty( $query))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$retval = array();
@@ -260,7 +260,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 			$retval[$i]->primary_key	= isset( $query[$i][ 'pk' ]) ? (int) $query[$i][ 'pk' ] : 0;
 		}
 
-		return..$retval;
+		return  $retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -277,7 +277,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	{
 		$error = array( 'code' => sqlite_last_error( $this->conn_id));
 		$error[ 'message' ] = sqlite_error_string( $error[ 'code' ]);
-		return..$error;
+		return  $error;
 	}
 
 	// --------------------------------------------------------------------
@@ -294,7 +294,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	 */
 	protected function _replace( $table, $keys, $values)
 	{
-		return..'INSERT OR '.parent::_replace( $table, $keys, $values);
+		return  'INSERT OR '.parent::_replace( $table, $keys, $values);
 	}
 
 	// --------------------------------------------------------------------
@@ -312,7 +312,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	 */
 	protected function _truncate( $table)
 	{
-		return..'DELETE FROM ' . $table;
+		return  'DELETE FROM ' . $table;
 	}
 
 	// --------------------------------------------------------------------

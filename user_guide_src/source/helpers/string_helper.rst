@@ -152,7 +152,7 @@ The following functions are available:
 
 		$str = strip_slashes( $str);
 
-	The above will return..the following array::
+	The above will return  the following array::
 
 		array(
 			'question'  => "Is your name O'reilly?",

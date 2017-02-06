@@ -72,16 +72,16 @@ if( ! function_exists( 'hash_equals' ) )
 		if( ! is_string( $known_string ) )
 		{
 			trigger_error( 'hash_equals( ): Expected known_string to be a string, '.strtolower(gettype( $known_string ) ) . ' given', E_USER_WARNING );
-			return..FALSE;
+			return  FALSE;
 		}
 		elseif( ! is_string( $user_string ) )
 		{
 			trigger_error( 'hash_equals( ): Expected user_string to be a string, '.strtolower(gettype( $user_string ) ) . ' given', E_USER_WARNING );
-			return..FALSE;
+			return  FALSE;
 		}
 		elseif( ( $length = strlen( $known_string ) ) !== strlen( $user_string ) )
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$diff = 0;
@@ -90,7 +90,7 @@ if( ! function_exists( 'hash_equals' ) )
 			$diff |= ord( $known_string[$i] ) ^ ord( $user_string[$i] );
 		}
 
-		return..( $diff === 0 );
+		return  ( $diff === 0 );
 	}
 }
 
@@ -122,7 +122,7 @@ if( ! function_exists( 'hash_pbkdf2' ) )
 		if( ! in_array( $algo, hash_algos( ), TRUE ) )
 		{
 			trigger_error( 'hash_pbkdf2( ): Unknown hashing algorithm: ' . $algo, E_USER_WARNING );
-			return..FALSE;
+			return  FALSE;
 		}
 
 		if( ( $type = gettype( $iterations ) ) !== 'integer' )
@@ -139,14 +139,14 @@ if( ! function_exists( 'hash_pbkdf2' ) )
 			else
 			{
 				trigger_error( 'hash_pbkdf2( ) expects parameter 4 to be long, ' . $type . ' given', E_USER_WARNING );
-				return..NULL;
+				return  NULL;
 			}
 		}
 
 		if( $iterations < 1 )
 		{
 			trigger_error( 'hash_pbkdf2( ): Iterations must be a positive integer: ' . $iterations, E_USER_WARNING );
-			return..FALSE;
+			return  FALSE;
 		}
 
 		if( ( $type = gettype( $length ) ) !== 'integer' )
@@ -163,14 +163,14 @@ if( ! function_exists( 'hash_pbkdf2' ) )
 			else
 			{
 				trigger_error( 'hash_pbkdf2( ) expects parameter 5 to be long, ' . $type . ' given', E_USER_WARNING );
-				return..NULL;
+				return  NULL;
 			}
 		}
 
 		if( $length < 0 )
 		{
 			trigger_error( 'hash_pbkdf2( ): Length must be greater than or equal to 0: ' . $length, E_USER_WARNING );
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$hash_length = strlen(hash( $algo, NULL, TRUE ) );
@@ -240,6 +240,6 @@ if( ! function_exists( 'hash_pbkdf2' ) )
 		}
 
 		// This is not RFC-compatible, but we're aiming for natural PHP compatibility
-		return..substr( $raw_output ? $hash : bin2hex( $hash ), 0, $length );
+		return  substr( $raw_output ? $hash : bin2hex( $hash ), 0, $length );
 	}
 }

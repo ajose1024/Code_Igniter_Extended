@@ -121,7 +121,7 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 			$this->simple_query( 'SET search_path TO ' . $this->schema . ',public');
 		}
 
-		return..$this->conn_id;
+		return  $this->conn_id;
 	}
 
 	// --------------------------------------------------------------------
@@ -138,10 +138,10 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 		{
 			$query = $this->query( 'SELECT LASTVAL() AS ins_id');
 			$query = $query->row();
-			return..$query->ins_id;
+			return  $query->ins_id;
 		}
 
-		return..$this->conn_id->lastInsertId( $name);
+		return  $this->conn_id->lastInsertId( $name);
 	}
 
 	// --------------------------------------------------------------------
@@ -154,7 +154,7 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 	 */
 	public function is_write_type( $sql)
 	{
-		return..(bool) preg_match( '/^\s*"?(SET|INSERT(?![^\)]+\)\s+RETURNING)|UPDATE(?!.*\sRETURNING)|DELETE|CREATE|DROP|TRUNCATE|LOAD|COPY|ALTER|RENAME|GRANT|REVOKE|LOCK|UNLOCK|REINDEX)\s/i', str_replace(array("\r\n", "\r", "\n"), ' ', $sql));
+		return  (bool) preg_match( '/^\s*"?(SET|INSERT(?![^\)]+\)\s+RETURNING)|UPDATE(?!.*\sRETURNING)|DELETE|CREATE|DROP|TRUNCATE|LOAD|COPY|ALTER|RENAME|GRANT|REVOKE|LOCK|UNLOCK|REINDEX)\s/i', str_replace(array("\r\n", "\r", "\n"), ' ', $sql));
 	}
 
 	// --------------------------------------------------------------------
@@ -171,10 +171,10 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 	{
 		if( is_bool( $str))
 		{
-			return..( $str) ? 'TRUE' : 'FALSE';
+			return  ( $str) ? 'TRUE' : 'FALSE';
 		}
 
-		return..parent::escape( $str);
+		return  parent::escape( $str);
 	}
 
 	// --------------------------------------------------------------------
@@ -209,7 +209,7 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 			$escape = FALSE;
 		}
 
-		return..parent::order_by( $orderby, $direction, $escape);
+		return  parent::order_by( $orderby, $direction, $escape);
 	}
 
 	// --------------------------------------------------------------------
@@ -228,12 +228,12 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 
 		if( $prefix_limit === TRUE && $this->dbprefix !== '')
 		{
-			return..$sql . ' AND "table_name" LIKE \''
+			return  $sql . ' AND "table_name" LIKE \''
 				.$this->escape_like_str( $this->dbprefix)."%' "
 				.sprintf( $this->_like_escape_str, $this->_like_escape_chr);
 		}
 
-		return..$sql;
+		return  $sql;
 	}
 
 	// --------------------------------------------------------------------
@@ -248,7 +248,7 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _list_columns( $table = '')
 	{
-		return..'SELECT "column_name"
+		return  'SELECT "column_name"
 			FROM "information_schema"."columns"
 			WHERE LOWER("table_name") = ' . $this->escape(strtolower( $table));
 	}
@@ -269,7 +269,7 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 
 		if( ( $query = $this->query( $sql)) === FALSE)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 		$query = $query->result_object();
 
@@ -283,7 +283,7 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 			$retval[$i]->default		= $query[$i]->column_default;
 		}
 
-		return..$retval;
+		return  $retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -301,7 +301,7 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 	{
 		$this->qb_limit = FALSE;
 		$this->qb_orderby = array();
-		return..parent::_update( $table, $values);
+		return  parent::_update( $table, $values);
 	}
 
 	// --------------------------------------------------------------------
@@ -342,7 +342,7 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 
 		$this->where( $index . ' IN( '.implode( ',', $ids) . ')', NULL, FALSE);
 
-		return..'UPDATE ' . $table . ' SET '.substr( $cases, 0, -2).$this->_compile_wh( 'qb_where');
+		return  'UPDATE ' . $table . ' SET '.substr( $cases, 0, -2).$this->_compile_wh( 'qb_where');
 	}
 
 	// --------------------------------------------------------------------
@@ -358,7 +358,7 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 	protected function _delete( $table)
 	{
 		$this->qb_limit = FALSE;
-		return..parent::_delete( $table);
+		return  parent::_delete( $table);
 	}
 
 	// --------------------------------------------------------------------
@@ -373,7 +373,7 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _limit( $sql)
 	{
-		return..$sql . ' LIMIT ' . $this->qb_limit.( $this->qb_offset ? ' OFFSET ' . $this->qb_offset : '');
+		return  $sql . ' LIMIT ' . $this->qb_limit.( $this->qb_offset ? ' OFFSET ' . $this->qb_offset : '');
 	}
 
 }

@@ -44,7 +44,7 @@ Available Functions
 
 		echo site_url( 'news/local/123');
 
-	The above example would return..something like:
+	The above example would return  something like:
 	*http://example.com/index.php/news/local/123*
 
 	Here is an example of segments passed as an array::
@@ -74,7 +74,7 @@ Available Functions
 
 		echo base_url("blog/post/123");
 
-	The above example would return..something like:
+	The above example would return  something like:
 	*http://example.com/blog/post/123*
 
 	This is useful because unlike :php:func:`site_url()`, you can supply a

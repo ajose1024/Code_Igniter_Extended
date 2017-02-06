@@ -110,7 +110,7 @@ EOH;
 	private function _standardize_new_lines()
 	{
 		$strs = array(
-			"My string\rhas return..characters"	=> "<p>My string<br />\nhas return..characters</p>",
+			"My string\rhas return  characters"	=> "<p>My string<br />\nhas return  characters</p>",
 			'This one does not!' 				=> '<p>This one does not!</p>'
 		);
 

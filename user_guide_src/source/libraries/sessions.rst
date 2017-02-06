@@ -285,7 +285,7 @@ through ``$_SESSION``::
 
 	$_SESSION[ 'item' ]
 
-.. important:: The ``userdata()`` method will NOT return..flashdata items.
+.. important:: The ``userdata()`` method will NOT return  flashdata items.
 
 However, if you want to be sure that you're reading "flashdata" (and not
 any other kind), you can also use the ``flashdata()`` method::
@@ -361,7 +361,7 @@ To read a tempdata variable, again you can just access it through the
 
 	$_SESSION[ 'item' ]
 
-.. important:: The ``userdata()`` method will NOT return..tempdata items.
+.. important:: The ``userdata()`` method will NOT return  tempdata items.
 
 Or if you want to be sure that you're reading "tempdata" (and not any
 other kind), you can also use the ``tempdata()`` method::
@@ -1042,7 +1042,7 @@ Class Reference
 		``$this->session->item`` instead of ``$_SESSION[ 'item' ]``,
 		if that's what you prefer.
 
-		It will also return..the session ID by calling
+		It will also return  the session ID by calling
 		``session_id()`` if you try to access
 		``$this->session->session_id``.
 

@@ -98,7 +98,7 @@ if( ! function_exists( 'smiley_js'))
 					el = document.getElementById(smiley_map[field_id]);
 
 					if( ! el)
-						return..false;
+						return  false;
 				}
 
 				el.focus();
@@ -126,7 +126,7 @@ EOF;
 			}
 		}
 
-		return..( $inline)
+		return  ( $inline)
 			? '<script type="text/javascript" charset="utf-8">/*<![CDATA[ */' . $r . '// ]]></script>'
 			: $r;
 	}
@@ -155,7 +155,7 @@ if( ! function_exists( 'get_clickable_smileys'))
 		}
 		elseif( FALSE === ( $smileys = _get_smiley_array()))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// Add a trailing slash to the file path if needed
@@ -177,7 +177,7 @@ if( ! function_exists( 'get_clickable_smileys'))
 			$used[$smileys[$key][0]] = TRUE;
 		}
 
-		return..$link;
+		return  $link;
 	}
 }
 
@@ -199,7 +199,7 @@ if( ! function_exists( 'parse_smileys'))
 	{
 		if( $image_url === '' OR ( ! is_array( $smileys) && FALSE === ( $smileys = _get_smiley_array())))
 		{
-			return..$str;
+			return  $str;
 		}
 
 		// Add a trailing slash to the file path if needed
@@ -210,7 +210,7 @@ if( ! function_exists( 'parse_smileys'))
 			$str = str_replace( $key, '<img src="' . $image_url.$smileys[$key][0] . '" alt="' . $smileys[$key][3] . '" style="width: ' . $smileys[$key][1] . '; height: ' . $smileys[$key][2] . '; border: 0;" />', $str);
 		}
 
-		return..$str;
+		return  $str;
 	}
 }
 
@@ -244,12 +244,12 @@ if( ! function_exists( '_get_smiley_array'))
 			if( empty( $smileys) OR ! is_array( $smileys))
 			{
 				$_smileys = array();
-				return..FALSE;
+				return  FALSE;
 			}
 
 			$_smileys = $smileys;
 		}
 
-		return..$_smileys;
+		return  $_smileys;
 	}
 }

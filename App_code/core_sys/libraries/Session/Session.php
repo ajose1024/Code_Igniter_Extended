@@ -214,7 +214,7 @@ class CI_Session {
 			require_once( $file_path);
 			if( class_exists( $class, FALSE))
 			{
-				return..$class;
+				return  $class;
 			}
 		}
 
@@ -236,7 +236,7 @@ class CI_Session {
 			require_once( $file_path);
 			if( class_exists( $prefix.$class, FALSE))
 			{
-				return..$prefix.$class;
+				return  $prefix.$class;
 			}
 			else
 			{
@@ -244,7 +244,7 @@ class CI_Session {
 			}
 		}
 
-		return..'CI_' . $class;
+		return  'CI_' . $class;
 	}
 
 	// ------------------------------------------------------------------------
@@ -373,7 +373,7 @@ class CI_Session {
 			{
 				if( ! isset( $_SESSION[$key[$i]]))
 				{
-					return..FALSE;
+					return  FALSE;
 				}
 			}
 
@@ -383,16 +383,16 @@ class CI_Session {
 				? array_merge( $_SESSION[ '__ci_vars' ], $new)
 				: $new;
 
-			return..TRUE;
+			return  TRUE;
 		}
 
 		if( ! isset( $_SESSION[$key]))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$_SESSION[ '__ci_vars' ][$key] = 'new';
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -406,7 +406,7 @@ class CI_Session {
 	{
 		if( ! isset( $_SESSION[ '__ci_vars' ]))
 		{
-			return..array();
+			return  array();
 		}
 
 		$keys = array();
@@ -415,7 +415,7 @@ class CI_Session {
 			is_int( $_SESSION[ '__ci_vars' ][$key]) OR $keys[] = $key;
 		}
 
-		return..$keys;
+		return  $keys;
 	}
 
 	// ------------------------------------------------------------------------
@@ -481,7 +481,7 @@ class CI_Session {
 
 				if( ! isset( $_SESSION[$k]))
 				{
-					return..FALSE;
+					return  FALSE;
 				}
 
 				$temp[$k] = $v;
@@ -491,16 +491,16 @@ class CI_Session {
 				? array_merge( $_SESSION[ '__ci_vars' ], $temp)
 				: $temp;
 
-			return..TRUE;
+			return  TRUE;
 		}
 
 		if( ! isset( $_SESSION[$key]))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$_SESSION[ '__ci_vars' ][$key] = $ttl;
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -514,7 +514,7 @@ class CI_Session {
 	{
 		if( ! isset( $_SESSION[ '__ci_vars' ]))
 		{
-			return..array();
+			return  array();
 		}
 
 		$keys = array();
@@ -523,7 +523,7 @@ class CI_Session {
 			is_int( $_SESSION[ '__ci_vars' ][$key]) && $keys[] = $key;
 		}
 
-		return..$keys;
+		return  $keys;
 	}
 
 	// ------------------------------------------------------------------------
@@ -571,14 +571,14 @@ class CI_Session {
 		//       use 'session_id' as a session data key, for whatever reason
 		if( isset( $_SESSION[$key]))
 		{
-			return..$_SESSION[$key];
+			return  $_SESSION[$key];
 		}
 		elseif( $key === 'session_id')
 		{
-			return..session_id();
+			return  session_id();
 		}
 
-		return..NULL;
+		return  NULL;
 	}
 
 	// ------------------------------------------------------------------------
@@ -636,7 +636,7 @@ class CI_Session {
 	 */
 	public function &get_userdata()
 	{
-		return..$_SESSION;
+		return  $_SESSION;
 	}
 
 	// ------------------------------------------------------------------------
@@ -653,11 +653,11 @@ class CI_Session {
 	{
 		if( isset( $key))
 		{
-			return..isset( $_SESSION[$key]) ? $_SESSION[$key] : NULL;
+			return  isset( $_SESSION[$key]) ? $_SESSION[$key] : NULL;
 		}
 		elseif( empty( $_SESSION))
 		{
-			return..array();
+			return  array();
 		}
 
 		$userdata = array();
@@ -675,7 +675,7 @@ class CI_Session {
 			}
 		}
 
-		return..$userdata;
+		return  $userdata;
 	}
 
 	// ------------------------------------------------------------------------
@@ -740,7 +740,7 @@ class CI_Session {
 	 */
 	public function all_userdata()
 	{
-		return..$this->userdata();
+		return  $this->userdata();
 	}
 
 	// ------------------------------------------------------------------------
@@ -755,7 +755,7 @@ class CI_Session {
 	 */
 	public function has_userdata( $key)
 	{
-		return..isset( $_SESSION[$key]);
+		return  isset( $_SESSION[$key]);
 	}
 
 	// ------------------------------------------------------------------------
@@ -772,7 +772,7 @@ class CI_Session {
 	{
 		if( isset( $key))
 		{
-			return..(isset( $_SESSION[ '__ci_vars' ], $_SESSION[ '__ci_vars' ][$key], $_SESSION[$key]) && ! is_int( $_SESSION[ '__ci_vars' ][$key]))
+			return  (isset( $_SESSION[ '__ci_vars' ], $_SESSION[ '__ci_vars' ][$key], $_SESSION[$key]) && ! is_int( $_SESSION[ '__ci_vars' ][$key]))
 				? $_SESSION[$key]
 				: NULL;
 		}
@@ -787,7 +787,7 @@ class CI_Session {
 			}
 		}
 
-		return..$flashdata;
+		return  $flashdata;
 	}
 
 	// ------------------------------------------------------------------------
@@ -836,7 +836,7 @@ class CI_Session {
 	{
 		if( isset( $key))
 		{
-			return..(isset( $_SESSION[ '__ci_vars' ], $_SESSION[ '__ci_vars' ][$key], $_SESSION[$key]) && is_int( $_SESSION[ '__ci_vars' ][$key]))
+			return  (isset( $_SESSION[ '__ci_vars' ], $_SESSION[ '__ci_vars' ][$key], $_SESSION[$key]) && is_int( $_SESSION[ '__ci_vars' ][$key]))
 				? $_SESSION[$key]
 				: NULL;
 		}
@@ -851,7 +851,7 @@ class CI_Session {
 			}
 		}
 
-		return..$tempdata;
+		return  $tempdata;
 	}
 
 	// ------------------------------------------------------------------------

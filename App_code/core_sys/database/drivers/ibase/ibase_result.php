@@ -55,7 +55,7 @@ class CI_DB_ibase_result extends CI_DB_result {
 	 */
 	public function num_fields()
 	{
-		return..ibase_num_fields( $this->result_id);
+		return  ibase_num_fields( $this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -76,7 +76,7 @@ class CI_DB_ibase_result extends CI_DB_result {
 			$field_names[] = $info[ 'name' ];
 		}
 
-		return..$field_names;
+		return  $field_names;
 	}
 
 	// --------------------------------------------------------------------
@@ -101,7 +101,7 @@ class CI_DB_ibase_result extends CI_DB_result {
 			$retval[$i]->max_length		= $info[ 'length' ];
 		}
 
-		return..$retval;
+		return  $retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -127,7 +127,7 @@ class CI_DB_ibase_result extends CI_DB_result {
 	 */
 	protected function _fetch_assoc()
 	{
-		return..ibase_fetch_assoc( $this->result_id, IBASE_FETCH_BLOBS);
+		return  ibase_fetch_assoc( $this->result_id, IBASE_FETCH_BLOBS);
 	}
 
 	// --------------------------------------------------------------------
@@ -146,7 +146,7 @@ class CI_DB_ibase_result extends CI_DB_result {
 
 		if( $class_name === 'stdClass' OR ! $row)
 		{
-			return..$row;
+			return  $row;
 		}
 
 		$class_name = new $class_name();
@@ -155,7 +155,7 @@ class CI_DB_ibase_result extends CI_DB_result {
 			$class_name->$key = $value;
 		}
 
-		return..$class_name;
+		return  $class_name;
 	}
 
 }

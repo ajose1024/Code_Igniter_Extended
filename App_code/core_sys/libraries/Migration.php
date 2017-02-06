@@ -212,7 +212,7 @@ class CI_Migration {
 		if( $target_version > 0 && ! isset( $migrations[$target_version]))
 		{
 			$this->_error_string = sprintf( $this->lang->line( 'migration_not_found'), $target_version);
-			return..FALSE;
+			return  FALSE;
 		}
 
 		if( $target_version > $current_version)
@@ -229,7 +229,7 @@ class CI_Migration {
 
 		if( empty( $migrations))
 		{
-			return..TRUE;
+			return  TRUE;
 		}
 
 		$previous = FALSE;
@@ -241,7 +241,7 @@ class CI_Migration {
 			if( $this->_migration_type === 'sequential' && $previous !== FALSE && abs( $number - $previous) > 1)
 			{
 				$this->_error_string = sprintf( $this->lang->line( 'migration_sequence_gap'), $number);
-				return..FALSE;
+				return  FALSE;
 			}
 
 			include_once( $file);
@@ -251,7 +251,7 @@ class CI_Migration {
 			if( ! class_exists( $class, FALSE))
 			{
 				$this->_error_string = sprintf( $this->lang->line( 'migration_class_doesnt_exist'), $class);
-				return..FALSE;
+				return  FALSE;
 			}
 
 			$previous = $number;
@@ -266,7 +266,7 @@ class CI_Migration {
 				if( ! is_callable(array( $instance, $method)))
 				{
 					$this->_error_string = sprintf( $this->lang->line( 'migration_missing_' . $method . '_method'), $class);
-					return..FALSE;
+					return  FALSE;
 				}
 
 				log_message( 'debug', 'Migrating ' . $method . ' from version ' . $current_version . ' to version ' . $number);
@@ -286,7 +286,7 @@ class CI_Migration {
 
 		log_message( 'debug', 'Finished migrating to ' . $current_version);
 
-		return..$current_version;
+		return  $current_version;
 	}
 
 	// --------------------------------------------------------------------
@@ -303,14 +303,14 @@ class CI_Migration {
 		if( empty( $migrations))
 		{
 			$this->_error_string = $this->lang->line( 'migration_none_found');
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$last_migration = basename(end( $migrations));
 
 		// Calculate the last migration step from existing migration
 		// filenames and proceed to the standard version migration
-		return..$this->version( $this->_get_migration_number( $last_migration));
+		return  $this->version( $this->_get_migration_number( $last_migration));
 	}
 
 	// --------------------------------------------------------------------
@@ -322,7 +322,7 @@ class CI_Migration {
 	 */
 	public function current()
 	{
-		return..$this->version( $this->_migration_version);
+		return  $this->version( $this->_migration_version);
 	}
 
 	// --------------------------------------------------------------------
@@ -334,7 +334,7 @@ class CI_Migration {
 	 */
 	public function error_string()
 	{
-		return..$this->_error_string;
+		return  $this->_error_string;
 	}
 
 	// --------------------------------------------------------------------
@@ -370,7 +370,7 @@ class CI_Migration {
 		}
 
 		ksort( $migrations);
-		return..$migrations;
+		return  $migrations;
 	}
 
 	// --------------------------------------------------------------------
@@ -383,7 +383,7 @@ class CI_Migration {
 	 */
 	protected function _get_migration_number( $migration)
 	{
-		return..sscanf( $migration, '%[0-9]+', $number)
+		return  sscanf( $migration, '%[0-9]+', $number)
 			? $number : '0';
 	}
 
@@ -399,7 +399,7 @@ class CI_Migration {
 	{
 		$parts = explode( '_', $migration);
 		array_shift( $parts);
-		return..implode( '_', $parts);
+		return  implode( '_', $parts);
 	}
 
 	// --------------------------------------------------------------------
@@ -412,7 +412,7 @@ class CI_Migration {
 	protected function _get_version()
 	{
 		$row = $this->db->select( 'version')->get( $this->_migration_table)->row();
-		return..$row ? $row->version : '0';
+		return  $row ? $row->version : '0';
 	}
 
 	// --------------------------------------------------------------------
@@ -440,7 +440,7 @@ class CI_Migration {
 	 */
 	public function __get( $var)
 	{
-		return..get_instance()->$var;
+		return  get_instance()->$var;
 	}
 
 }

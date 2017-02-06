@@ -61,7 +61,7 @@ class CI_Controller {
     /**
      * Class constructor
      *
-     * @return..  void
+     * @return    void
      */
     public function __construct( )
     {
@@ -86,11 +86,11 @@ class CI_Controller {
      * Get the CI singleton
      *
      * @static
-     * @return..  object
+     * @return    object
      */
     public static function &get_instance( )
     {
-        return..self::$instance;
+        return  self::$instance;
     }
 
 }

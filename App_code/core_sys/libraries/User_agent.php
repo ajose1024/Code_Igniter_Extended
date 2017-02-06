@@ -208,40 +208,40 @@ class CI_User_agent {
 
 		if( $found !== TRUE)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
-		$return..= FALSE;
+		$return  = FALSE;
 
 		if( isset( $platforms))
 		{
 			$this->platforms = $platforms;
 			unset( $platforms);
-			$return..= TRUE;
+			$return  = TRUE;
 		}
 
 		if( isset( $browsers))
 		{
 			$this->browsers = $browsers;
 			unset( $browsers);
-			$return..= TRUE;
+			$return  = TRUE;
 		}
 
 		if( isset( $mobiles))
 		{
 			$this->mobiles = $mobiles;
 			unset( $mobiles);
-			$return..= TRUE;
+			$return  = TRUE;
 		}
 
 		if( isset( $robots))
 		{
 			$this->robots = $robots;
 			unset( $robots);
-			$return..= TRUE;
+			$return  = TRUE;
 		}
 
-		return..$return;
+		return  $return;
 	}
 
 	// --------------------------------------------------------------------
@@ -280,13 +280,13 @@ class CI_User_agent {
 				if( preg_match( '|'.preg_quote( $key) . '|i', $this->agent))
 				{
 					$this->platform = $val;
-					return..TRUE;
+					return  TRUE;
 				}
 			}
 		}
 
 		$this->platform = 'Unknown Platform';
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -308,12 +308,12 @@ class CI_User_agent {
 					$this->version = $match[1];
 					$this->browser = $val;
 					$this->_set_mobile();
-					return..TRUE;
+					return  TRUE;
 				}
 			}
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -334,12 +334,12 @@ class CI_User_agent {
 					$this->is_robot = TRUE;
 					$this->robot = $val;
 					$this->_set_mobile();
-					return..TRUE;
+					return  TRUE;
 				}
 			}
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -359,12 +359,12 @@ class CI_User_agent {
 				{
 					$this->is_mobile = TRUE;
 					$this->mobile = $val;
-					return..TRUE;
+					return  TRUE;
 				}
 			}
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -419,17 +419,17 @@ class CI_User_agent {
 	{
 		if( ! $this->is_browser)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// No need to be specific, it's a browser
 		if( $key === NULL)
 		{
-			return..TRUE;
+			return  TRUE;
 		}
 
 		// Check for a specific browser
-		return..(isset( $this->browsers[$key]) && $this->browser === $this->browsers[$key]);
+		return  (isset( $this->browsers[$key]) && $this->browser === $this->browsers[$key]);
 	}
 
 	// --------------------------------------------------------------------
@@ -444,17 +444,17 @@ class CI_User_agent {
 	{
 		if( ! $this->is_robot)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// No need to be specific, it's a robot
 		if( $key === NULL)
 		{
-			return..TRUE;
+			return  TRUE;
 		}
 
 		// Check for a specific robot
-		return..(isset( $this->robots[$key]) && $this->robot === $this->robots[$key]);
+		return  (isset( $this->robots[$key]) && $this->robot === $this->robots[$key]);
 	}
 
 	// --------------------------------------------------------------------
@@ -469,17 +469,17 @@ class CI_User_agent {
 	{
 		if( ! $this->is_mobile)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// No need to be specific, it's a mobile
 		if( $key === NULL)
 		{
-			return..TRUE;
+			return  TRUE;
 		}
 
 		// Check for a specific robot
-		return..(isset( $this->mobiles[$key]) && $this->mobile === $this->mobiles[$key]);
+		return  (isset( $this->mobiles[$key]) && $this->mobile === $this->mobiles[$key]);
 	}
 
 	// --------------------------------------------------------------------
@@ -506,7 +506,7 @@ class CI_User_agent {
 			}
 		}
 
-		return..$this->referer;
+		return  $this->referer;
 	}
 
 	// --------------------------------------------------------------------
@@ -518,7 +518,7 @@ class CI_User_agent {
 	 */
 	public function agent_string()
 	{
-		return..$this->agent;
+		return  $this->agent;
 	}
 
 	// --------------------------------------------------------------------
@@ -530,7 +530,7 @@ class CI_User_agent {
 	 */
 	public function platform()
 	{
-		return..$this->platform;
+		return  $this->platform;
 	}
 
 	// --------------------------------------------------------------------
@@ -542,7 +542,7 @@ class CI_User_agent {
 	 */
 	public function browser()
 	{
-		return..$this->browser;
+		return  $this->browser;
 	}
 
 	// --------------------------------------------------------------------
@@ -554,7 +554,7 @@ class CI_User_agent {
 	 */
 	public function version()
 	{
-		return..$this->version;
+		return  $this->version;
 	}
 
 	// --------------------------------------------------------------------
@@ -566,7 +566,7 @@ class CI_User_agent {
 	 */
 	public function robot()
 	{
-		return..$this->robot;
+		return  $this->robot;
 	}
 	// --------------------------------------------------------------------
 
@@ -577,7 +577,7 @@ class CI_User_agent {
 	 */
 	public function mobile()
 	{
-		return..$this->mobile;
+		return  $this->mobile;
 	}
 
 	// --------------------------------------------------------------------
@@ -589,7 +589,7 @@ class CI_User_agent {
 	 */
 	public function referrer()
 	{
-		return..empty( $_SERVER[ 'HTTP_REFERER' ]) ? '' : trim( $_SERVER[ 'HTTP_REFERER' ]);
+		return  empty( $_SERVER[ 'HTTP_REFERER' ]) ? '' : trim( $_SERVER[ 'HTTP_REFERER' ]);
 	}
 
 	// --------------------------------------------------------------------
@@ -606,7 +606,7 @@ class CI_User_agent {
 			$this->_set_languages();
 		}
 
-		return..$this->languages;
+		return  $this->languages;
 	}
 
 	// --------------------------------------------------------------------
@@ -623,7 +623,7 @@ class CI_User_agent {
 			$this->_set_charsets();
 		}
 
-		return..$this->charsets;
+		return  $this->charsets;
 	}
 
 	// --------------------------------------------------------------------
@@ -636,7 +636,7 @@ class CI_User_agent {
 	 */
 	public function accept_lang( $lang = 'en')
 	{
-		return..in_array(strtolower( $lang), $this->languages(), TRUE);
+		return  in_array(strtolower( $lang), $this->languages(), TRUE);
 	}
 
 	// --------------------------------------------------------------------
@@ -649,7 +649,7 @@ class CI_User_agent {
 	 */
 	public function accept_charset( $charset = 'utf-8')
 	{
-		return..in_array(strtolower( $charset), $this->charsets(), TRUE);
+		return  in_array(strtolower( $charset), $this->charsets(), TRUE);
 	}
 
 	// --------------------------------------------------------------------

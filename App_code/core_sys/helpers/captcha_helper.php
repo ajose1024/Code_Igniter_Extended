@@ -98,7 +98,7 @@ if( ! function_exists( 'create_captcha'))
 			OR ! is_dir( $img_path) OR ! is_really_writable( $img_path)
 			OR ! extension_loaded( 'gd'))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// -----------------------------------
@@ -157,7 +157,7 @@ if( ! function_exists( 'create_captcha'))
 			// trying to break it. -- Narf
 			if( $pool_length > 256)
 			{
-				return..FALSE;
+				return  FALSE;
 			}
 
 			// We'll try using the operating system's PRNG first,
@@ -179,7 +179,7 @@ if( ! function_exists( 'create_captcha'))
 						{
 							// No failures should be possible if
 							// the first get_random_bytes() call
-							// didn't return..FALSE, but still ...
+							// didn't return  FALSE, but still ...
 							for ( $i = 0; $i < 5; $i++)
 							{
 								if( ( $bytes = $security->get_random_bytes( $pool_length)) === FALSE)
@@ -327,12 +327,12 @@ if( ! function_exists( 'create_captcha'))
 		}
 		else
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$img = '<img '.( $img_id === '' ? '' : 'id="' . $img_id . '"') . ' src="' . $img_url.$img_filename . '" style="width: ' . $img_width . '; height: ' . $img_height  . '; border: 0;" alt=" " />';
 		ImageDestroy( $im);
 
-		return..array( 'word' => $word, 'time' => $now, 'image' => $img, 'filename' => $img_filename);
+		return  array( 'word' => $word, 'time' => $now, 'image' => $img, 'filename' => $img_filename);
 	}
 }

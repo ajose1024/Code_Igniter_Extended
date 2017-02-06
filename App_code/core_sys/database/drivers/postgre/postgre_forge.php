@@ -104,7 +104,7 @@ class CI_DB_postgre_forge extends CI_DB_forge {
  	{
 		if( in_array( $alter_type, array( 'DROP', 'ADD'), TRUE))
 		{
-			return..parent::_alter_table( $alter_type, $table, $field);
+			return  parent::_alter_table( $alter_type, $table, $field);
 		}
 
 		$sql = 'ALTER TABLE ' . $this->db->escape_identifiers( $table);
@@ -113,7 +113,7 @@ class CI_DB_postgre_forge extends CI_DB_forge {
 		{
 			if( $field[$i][ '_literal' ] !== FALSE)
 			{
-				return..FALSE;
+				return  FALSE;
 			}
 
 			if( version_compare( $this->db->version(), '8', '>=') && isset( $field[$i][ 'type' ]))
@@ -148,7 +148,7 @@ class CI_DB_postgre_forge extends CI_DB_forge {
 			}
 		}
 
-		return..$sqls;
+		return  $sqls;
  	}
 
 	// --------------------------------------------------------------------

@@ -55,7 +55,7 @@ class CI_DB_cubrid_result extends CI_DB_result {
 	 */
 	public function num_rows()
 	{
-		return..is_int( $this->num_rows)
+		return  is_int( $this->num_rows)
 			? $this->num_rows
 			: $this->num_rows = cubrid_num_rows( $this->result_id);
 	}
@@ -69,7 +69,7 @@ class CI_DB_cubrid_result extends CI_DB_result {
 	 */
 	public function num_fields()
 	{
-		return..cubrid_num_fields( $this->result_id);
+		return  cubrid_num_fields( $this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -83,7 +83,7 @@ class CI_DB_cubrid_result extends CI_DB_result {
 	 */
 	public function list_fields()
 	{
-		return..cubrid_column_names( $this->result_id);
+		return  cubrid_column_names( $this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -108,7 +108,7 @@ class CI_DB_cubrid_result extends CI_DB_result {
 			$retval[$i]->primary_key	= (int) (strpos(cubrid_field_flags( $this->result_id, $i), 'primary_key') !== FALSE);
 		}
 
-		return..$retval;
+		return  $retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -142,7 +142,7 @@ class CI_DB_cubrid_result extends CI_DB_result {
 	 */
 	public function data_seek( $n = 0)
 	{
-		return..cubrid_data_seek( $this->result_id, $n);
+		return  cubrid_data_seek( $this->result_id, $n);
 	}
 
 	// --------------------------------------------------------------------
@@ -156,7 +156,7 @@ class CI_DB_cubrid_result extends CI_DB_result {
 	 */
 	protected function _fetch_assoc()
 	{
-		return..cubrid_fetch_assoc( $this->result_id);
+		return  cubrid_fetch_assoc( $this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -171,7 +171,7 @@ class CI_DB_cubrid_result extends CI_DB_result {
 	 */
 	protected function _fetch_object( $class_name = 'stdClass')
 	{
-		return..cubrid_fetch_object( $this->result_id, $class_name);
+		return  cubrid_fetch_object( $this->result_id, $class_name);
 	}
 
 }

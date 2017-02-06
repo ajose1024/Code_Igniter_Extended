@@ -420,7 +420,7 @@ class Form_validation_test extends CI_TestCase {
 		$this->form_validation->set_rules( 'foo', 'label', 'required');
 		$this->form_validation->set_rules( 'bar[]', 'label', 'required');
 
-		// No post data yet: should return..the default value provided
+		// No post data yet: should return  the default value provided
 		$this->assertEquals( $default, $this->form_validation->set_value( 'foo', $default));
 		$_POST = array( 'foo' => 'foo', 'bar' => array( 'bar1', 'bar2'));
 		$this->form_validation->run();
@@ -588,6 +588,6 @@ class Form_validation_test extends CI_TestCase {
 			$_POST[$field] = $value;
 		}
 
-		return..$this->form_validation->run();
+		return  $this->form_validation->run();
 	}
 }

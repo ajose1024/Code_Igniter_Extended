@@ -148,7 +148,7 @@ class CI_DB_pdo_informix_driver extends CI_DB_pdo_driver {
 				.sprintf( $this->_like_escape_str, $this->_like_escape_chr);
 		}
 
-		return..$sql;
+		return  $sql;
 	}
 
 	// --------------------------------------------------------------------
@@ -172,7 +172,7 @@ class CI_DB_pdo_informix_driver extends CI_DB_pdo_driver {
 			$owner = $this->username;
 		}
 
-		return..'SELECT "colname" FROM "systables", "syscolumns"
+		return  'SELECT "colname" FROM "systables", "syscolumns"
 			WHERE "systables"."tabid" = "syscolumns"."tabid"
 				AND "systables"."tabtype" = \'T\'
 				AND LOWER("systables"."owner") = ' . $this->escape(strtolower( $owner)) . '
@@ -233,7 +233,7 @@ class CI_DB_pdo_informix_driver extends CI_DB_pdo_driver {
 				AND LOWER("systables"."tabname") = ' . $this->escape(strtolower( $table)) . '
 			ORDER BY "syscolumns"."colno"';
 
-		return..(( $query = $this->query( $sql)) !== FALSE)
+		return  (( $query = $this->query( $sql)) !== FALSE)
 			? $query->result_object()
 			: FALSE;
 	}
@@ -253,7 +253,7 @@ class CI_DB_pdo_informix_driver extends CI_DB_pdo_driver {
 	{
 		$this->qb_limit = FALSE;
 		$this->qb_orderby = array();
-		return..parent::_update( $table, $values);
+		return  parent::_update( $table, $values);
 	}
 
 	// --------------------------------------------------------------------
@@ -271,7 +271,7 @@ class CI_DB_pdo_informix_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _truncate( $table)
 	{
-		return..'TRUNCATE TABLE ONLY ' . $table;
+		return  'TRUNCATE TABLE ONLY ' . $table;
 	}
 
 	// --------------------------------------------------------------------
@@ -287,7 +287,7 @@ class CI_DB_pdo_informix_driver extends CI_DB_pdo_driver {
 	protected function _delete( $table)
 	{
 		$this->qb_limit = FALSE;
-		return..parent::_delete( $table);
+		return  parent::_delete( $table);
 	}
 
 	// --------------------------------------------------------------------
@@ -303,7 +303,7 @@ class CI_DB_pdo_informix_driver extends CI_DB_pdo_driver {
 	protected function _limit( $sql)
 	{
 		$select = 'SELECT '.( $this->qb_offset ? 'SKIP ' . $this->qb_offset : '') . 'FIRST ' . $this->qb_limit . ' ';
-		return..preg_replace( '/^(SELECT\s)/i', $select, $sql, 1);
+		return  preg_replace( '/^(SELECT\s)/i', $select, $sql, 1);
 	}
 
 }

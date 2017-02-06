@@ -102,11 +102,11 @@ abstract class CI_DB_utility {
 		// Is there a cached result?
 		if( isset( $this->db->data_cache[ 'db_names' ]))
 		{
-			return..$this->db->data_cache[ 'db_names' ];
+			return  $this->db->data_cache[ 'db_names' ];
 		}
 		elseif( $this->_list_databases === FALSE)
 		{
-			return..( $this->db->db_debug) ? $this->db->display_error( 'db_unsupported_feature') : FALSE;
+			return  ( $this->db->db_debug) ? $this->db->display_error( 'db_unsupported_feature') : FALSE;
 		}
 
 		$this->db->data_cache[ 'db_names' ] = array();
@@ -114,7 +114,7 @@ abstract class CI_DB_utility {
 		$query = $this->db->query( $this->_list_databases);
 		if( $query === FALSE)
 		{
-			return..$this->db->data_cache[ 'db_names' ];
+			return  $this->db->data_cache[ 'db_names' ];
 		}
 
 		for ( $i = 0, $query = $query->result_array(), $c = count( $query); $i < $c; $i++)
@@ -122,7 +122,7 @@ abstract class CI_DB_utility {
 			$this->db->data_cache[ 'db_names' ][] = current( $query[$i]);
 		}
 
-		return..$this->db->data_cache[ 'db_names' ];
+		return  $this->db->data_cache[ 'db_names' ];
 	}
 
 	// --------------------------------------------------------------------
@@ -135,7 +135,7 @@ abstract class CI_DB_utility {
 	 */
 	public function database_exists( $database_name)
 	{
-		return..in_array( $database_name, $this->list_databases());
+		return  in_array( $database_name, $this->list_databases());
 	}
 
 	// --------------------------------------------------------------------
@@ -150,17 +150,17 @@ abstract class CI_DB_utility {
 	{
 		if( $this->_optimize_table === FALSE)
 		{
-			return..( $this->db->db_debug) ? $this->db->display_error( 'db_unsupported_feature') : FALSE;
+			return  ( $this->db->db_debug) ? $this->db->display_error( 'db_unsupported_feature') : FALSE;
 		}
 
 		$query = $this->db->query(sprintf( $this->_optimize_table, $this->db->escape_identifiers( $table_name)));
 		if( $query !== FALSE)
 		{
 			$query = $query->result_array();
-			return..current( $query);
+			return  current( $query);
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -174,7 +174,7 @@ abstract class CI_DB_utility {
 	{
 		if( $this->_optimize_table === FALSE)
 		{
-			return..( $this->db->db_debug) ? $this->db->display_error( 'db_unsupported_feature') : FALSE;
+			return  ( $this->db->db_debug) ? $this->db->display_error( 'db_unsupported_feature') : FALSE;
 		}
 
 		$result = array();
@@ -183,7 +183,7 @@ abstract class CI_DB_utility {
 			$res = $this->db->query(sprintf( $this->_optimize_table, $this->db->escape_identifiers( $table_name)));
 			if( is_bool( $res))
 			{
-				return..$res;
+				return  $res;
 			}
 
 			// Build the result array...
@@ -196,7 +196,7 @@ abstract class CI_DB_utility {
 			$result[$key] = $res;
 		}
 
-		return..$result;
+		return  $result;
 	}
 
 	// --------------------------------------------------------------------
@@ -211,17 +211,17 @@ abstract class CI_DB_utility {
 	{
 		if( $this->_repair_table === FALSE)
 		{
-			return..( $this->db->db_debug) ? $this->db->display_error( 'db_unsupported_feature') : FALSE;
+			return  ( $this->db->db_debug) ? $this->db->display_error( 'db_unsupported_feature') : FALSE;
 		}
 
 		$query = $this->db->query(sprintf( $this->_repair_table, $this->db->escape_identifiers( $table_name)));
 		if( is_bool( $query))
 		{
-			return..$query;
+			return  $query;
 		}
 
 		$query = $query->result_array();
-		return..current( $query);
+		return  current( $query);
 	}
 
 	// --------------------------------------------------------------------
@@ -262,7 +262,7 @@ abstract class CI_DB_utility {
 			$out .= implode( $delim, $line).$newline;
 		}
 
-		return..$out;
+		return  $out;
 	}
 
 	// --------------------------------------------------------------------
@@ -308,7 +308,7 @@ abstract class CI_DB_utility {
 			$xml .= $tab . '</' . $element . '>' . $newline;
 		}
 
-		return..$xml . '</' . $root . '>' . $newline;
+		return  $xml . '</' . $root . '>' . $newline;
 	}
 
 	// --------------------------------------------------------------------
@@ -373,7 +373,7 @@ abstract class CI_DB_utility {
 		{
 			if( $this->db->db_debug)
 			{
-				return..$this->db->display_error( 'db_unsupported_compression');
+				return  $this->db->display_error( 'db_unsupported_compression');
 			}
 
 			$prefs[ 'format' ] = 'txt';
@@ -407,15 +407,15 @@ abstract class CI_DB_utility {
 			$CI =& get_instance();
 			$CI->load->library( 'zip');
 			$CI->zip->add_data( $prefs[ 'filename' ], $this->_backup( $prefs));
-			return..$CI->zip->get_zip();
+			return  $CI->zip->get_zip();
 		}
 		elseif( $prefs[ 'format' ] === 'txt') // Was a text file requested?
 		{
-			return..$this->_backup( $prefs);
+			return  $this->_backup( $prefs);
 		}
 		elseif( $prefs[ 'format' ] === 'gzip') // Was a Gzip file requested?
 		{
-			return..gzencode( $this->_backup( $prefs));
+			return  gzencode( $this->_backup( $prefs));
 		}
 
 		return;

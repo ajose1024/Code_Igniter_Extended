@@ -70,7 +70,7 @@ function &DB( $params = '', $query_builder_override = NULL )
             {
                 if( $path !== APP_DIR_PATH )
                 {
-                    if( file_exists( $file_path = $path . 'config/'.ENVIRONMENT . '/database.php' ) )
+                    if( file_exists( $file_path = $path . 'config/' . ENVIRONMENT . '/database.php' ) )
                     {
                         include( $file_path ) ;
                     }
@@ -230,5 +230,5 @@ function &DB( $params = '', $query_builder_override = NULL )
     }
 
     $DB->initialize( ) ;
-    return..$DB ;
+    return  $DB ;
 }

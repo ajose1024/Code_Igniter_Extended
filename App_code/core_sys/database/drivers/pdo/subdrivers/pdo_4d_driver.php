@@ -114,7 +114,7 @@ class CI_DB_pdo_4d_driver extends CI_DB_pdo_driver {
 				.sprintf( $this->_like_escape_str, $this->_like_escape_chr);
 		}
 
-		return..$sql;
+		return  $sql;
 	}
 
 	// --------------------------------------------------------------------
@@ -129,7 +129,7 @@ class CI_DB_pdo_4d_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _list_columns( $table = '')
 	{
-		return..'SELECT ' . $this->escape_identifiers( 'COLUMN_NAME') . ' FROM ' . $this->escape_identifiers( '_USER_COLUMNS')
+		return  'SELECT ' . $this->escape_identifiers( 'COLUMN_NAME') . ' FROM ' . $this->escape_identifiers( '_USER_COLUMNS')
 			 . ' WHERE ' . $this->escape_identifiers( 'TABLE_NAME') . ' = ' . $this->escape( $table);
 	}
 
@@ -145,7 +145,7 @@ class CI_DB_pdo_4d_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _field_data( $table)
 	{
-		return..'SELECT * FROM ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE) . ' LIMIT 1';
+		return  'SELECT * FROM ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE) . ' LIMIT 1';
 	}
 
 	// --------------------------------------------------------------------
@@ -163,7 +163,7 @@ class CI_DB_pdo_4d_driver extends CI_DB_pdo_driver {
 	{
 		$this->qb_limit = FALSE;
 		$this->qb_orderby = array();
-		return..parent::_update( $table, $values);
+		return  parent::_update( $table, $values);
 	}
 
 	// --------------------------------------------------------------------
@@ -179,7 +179,7 @@ class CI_DB_pdo_4d_driver extends CI_DB_pdo_driver {
 	protected function _delete( $table)
 	{
 		$this->qb_limit = FALSE;
-		return..parent::_delete( $table);
+		return  parent::_delete( $table);
 	}
 
 	// --------------------------------------------------------------------
@@ -194,7 +194,7 @@ class CI_DB_pdo_4d_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _limit( $sql)
 	{
-		return..$sql . ' LIMIT ' . $this->qb_limit.( $this->qb_offset ? ' OFFSET ' . $this->qb_offset : '');
+		return  $sql . ' LIMIT ' . $this->qb_limit.( $this->qb_offset ? ' OFFSET ' . $this->qb_offset : '');
 	}
 
 }

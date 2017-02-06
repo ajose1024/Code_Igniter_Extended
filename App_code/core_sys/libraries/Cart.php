@@ -132,7 +132,7 @@ class CI_Cart {
 		if( ! is_array( $items) OR count( $items) === 0)
 		{
 			log_message( 'error', 'The insert method must be passed an array containing data . ');
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// You can either insert a single product using a one-dimensional array,
@@ -166,10 +166,10 @@ class CI_Cart {
 		if( $save_cart === TRUE)
 		{
 			$this->_save_cart();
-			return..isset( $rowid) ? $rowid : TRUE;
+			return  isset( $rowid) ? $rowid : TRUE;
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -186,7 +186,7 @@ class CI_Cart {
 		if( ! is_array( $items) OR count( $items) === 0)
 		{
 			log_message( 'error', 'The insert method must be passed an array containing data . ');
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// --------------------------------------------------------------------
@@ -195,7 +195,7 @@ class CI_Cart {
 		if( ! isset( $items[ 'id' ], $items[ 'qty' ], $items[ 'price' ], $items[ 'name' ]))
 		{
 			log_message( 'error', 'The cart array must contain a product ID, quantity, price, and name . ');
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// --------------------------------------------------------------------
@@ -206,7 +206,7 @@ class CI_Cart {
 		// If the quantity is zero or blank there's nothing for us to do
 		if( $items[ 'qty' ] == 0)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// --------------------------------------------------------------------
@@ -217,7 +217,7 @@ class CI_Cart {
 		if( ! preg_match( '/^[ ' . $this->product_id_rules . ' ]+$/i', $items[ 'id' ]))
 		{
 			log_message( 'error', 'Invalid product ID.  The product ID can only contain alpha-numeric characters, dashes, and underscores');
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// --------------------------------------------------------------------
@@ -227,7 +227,7 @@ class CI_Cart {
 		if( $this->product_name_safe && ! preg_match( '/^[ ' . $this->product_name_rules . ' ]+$/i'.(UTF8_ENABLED ? 'u' : ''), $items[ 'name' ]))
 		{
 			log_message( 'error', 'An invalid name was submitted as the product name: ' . $items[ 'name' ] . ' The name can only contain alpha-numeric characters, dashes, underscores, colons, and spaces');
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// --------------------------------------------------------------------
@@ -268,7 +268,7 @@ class CI_Cart {
 		$items[ 'qty' ] += $old_quantity;
 		$this->_cart_contents[$rowid] = $items;
 
-		return..$rowid;
+		return  $rowid;
 	}
 
 	// --------------------------------------------------------------------
@@ -289,7 +289,7 @@ class CI_Cart {
 		// Was any cart data passed?
 		if( ! is_array( $items) OR count( $items) === 0)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// You can either update a single product using a one-dimensional array,
@@ -322,10 +322,10 @@ class CI_Cart {
 		if( $save_cart === TRUE)
 		{
 			$this->_save_cart();
-			return..TRUE;
+			return  TRUE;
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -346,7 +346,7 @@ class CI_Cart {
 		// Without these array indexes there is nothing we can do
 		if( ! isset( $items[ 'rowid' ], $this->_cart_contents[$items[ 'rowid' ]]))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// Prep the quantity
@@ -358,7 +358,7 @@ class CI_Cart {
 			if( $items[ 'qty' ] == 0)
 			{
 				unset( $this->_cart_contents[$items[ 'rowid' ]]);
-				return..TRUE;
+				return  TRUE;
 			}
 		}
 
@@ -376,7 +376,7 @@ class CI_Cart {
 			$this->_cart_contents[$items[ 'rowid' ]][$key] = $items[$key];
 		}
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -409,7 +409,7 @@ class CI_Cart {
 			$this->CI->session->unset_userdata( 'cart_contents');
 
 			// Nothing more to do... coffee time!
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// If we made it this far it means that our cart has data.
@@ -417,7 +417,7 @@ class CI_Cart {
 		$this->CI->session->set_userdata(array( 'cart_contents' => $this->_cart_contents));
 
 		// Woot!
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -429,7 +429,7 @@ class CI_Cart {
 	 */
 	public function total()
 	{
-		return..$this->_cart_contents[ 'cart_total' ];
+		return  $this->_cart_contents[ 'cart_total' ];
 	}
 
 	// --------------------------------------------------------------------
@@ -447,7 +447,7 @@ class CI_Cart {
 		// unset & save
 		unset( $this->_cart_contents[$rowid]);
 		$this->_save_cart();
-		return..TRUE;
+		return  TRUE;
 	 }
 
 	// --------------------------------------------------------------------
@@ -461,7 +461,7 @@ class CI_Cart {
 	 */
 	public function total_items()
 	{
-		return..$this->_cart_contents[ 'total_items' ];
+		return  $this->_cart_contents[ 'total_items' ];
 	}
 
 	// --------------------------------------------------------------------
@@ -483,7 +483,7 @@ class CI_Cart {
 		unset( $cart[ 'total_items' ]);
 		unset( $cart[ 'cart_total' ]);
 
-		return..$cart;
+		return  $cart;
 	}
 
 	// --------------------------------------------------------------------
@@ -498,7 +498,7 @@ class CI_Cart {
 	 */
 	public function get_item( $row_id)
 	{
-		return..(in_array( $row_id, array( 'total_items', 'cart_total'), TRUE) OR ! isset( $this->_cart_contents[$row_id]))
+		return  (in_array( $row_id, array( 'total_items', 'cart_total'), TRUE) OR ! isset( $this->_cart_contents[$row_id]))
 			? FALSE
 			: $this->_cart_contents[$row_id];
 	}
@@ -516,7 +516,7 @@ class CI_Cart {
 	 */
 	public function has_options( $row_id = '')
 	{
-		return..(isset( $this->_cart_contents[$row_id][ 'options' ]) && count( $this->_cart_contents[$row_id][ 'options' ]) !== 0);
+		return  (isset( $this->_cart_contents[$row_id][ 'options' ]) && count( $this->_cart_contents[$row_id][ 'options' ]) !== 0);
 	}
 
 	// --------------------------------------------------------------------
@@ -531,7 +531,7 @@ class CI_Cart {
 	 */
 	public function product_options( $row_id = '')
 	{
-		return..isset( $this->_cart_contents[$row_id][ 'options' ]) ? $this->_cart_contents[$row_id][ 'options' ] : array();
+		return  isset( $this->_cart_contents[$row_id][ 'options' ]) ? $this->_cart_contents[$row_id][ 'options' ] : array();
 	}
 
 	// --------------------------------------------------------------------
@@ -546,7 +546,7 @@ class CI_Cart {
 	 */
 	public function format_number( $n = '')
 	{
-		return..( $n === '') ? '' : number_format( (float) $n, 2, ' . ', ',');
+		return  ( $n === '') ? '' : number_format( (float) $n, 2, ' . ', ',');
 	}
 
 	// --------------------------------------------------------------------

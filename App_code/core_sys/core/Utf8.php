@@ -101,7 +101,7 @@ class CI_Utf8 {
 			}
 		}
 
-		return..$str;
+		return  $str;
 	}
 
 	// --------------------------------------------------------------------
@@ -118,7 +118,7 @@ class CI_Utf8 {
 	 */
 	public function safe_ascii_for_xml( $str )
 	{
-		return..remove_invisible_characters( $str, FALSE );
+		return  remove_invisible_characters( $str, FALSE );
 	}
 
 	// --------------------------------------------------------------------
@@ -136,14 +136,14 @@ class CI_Utf8 {
 	{
 		if( MB_ENABLED )
 		{
-			return..mb_convert_encoding( $str, 'UTF-8', $encoding );
+			return  mb_convert_encoding( $str, 'UTF-8', $encoding );
 		}
 		elseif( ICONV_ENABLED )
 		{
-			return..@iconv( $encoding, 'UTF-8', $str );
+			return  @iconv( $encoding, 'UTF-8', $str );
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -158,7 +158,7 @@ class CI_Utf8 {
 	 */
 	public function is_ascii( $str )
 	{
-		return..(preg_match( '/[^\x00-\x7F]/S', $str ) === 0 );
+		return  (preg_match( '/[^\x00-\x7F]/S', $str ) === 0 );
 	}
 
 }

@@ -174,11 +174,11 @@ class CI_DB_pdo_odbc_driver extends CI_DB_pdo_driver {
 
 		if( $prefix_limit !== FALSE && $this->dbprefix !== '')
 		{
-			return..$sql." AND table_name LIKE '".$this->escape_like_str( $this->dbprefix)."%' "
+			return  $sql." AND table_name LIKE '".$this->escape_like_str( $this->dbprefix)."%' "
 				.sprintf( $this->_like_escape_str, $this->_like_escape_chr);
 		}
 
-		return..$sql;
+		return  $sql;
 	}
 
 	// --------------------------------------------------------------------
@@ -193,7 +193,7 @@ class CI_DB_pdo_odbc_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _list_columns( $table = '')
 	{
-		return..'SELECT column_name FROM information_schema.columns WHERE table_name = ' . $this->escape( $table);
+		return  'SELECT column_name FROM information_schema.columns WHERE table_name = ' . $this->escape( $table);
 	}
 
 	// --------------------------------------------------------------------
@@ -211,7 +211,7 @@ class CI_DB_pdo_odbc_driver extends CI_DB_pdo_driver {
 	{
 		$this->qb_limit = FALSE;
 		$this->qb_orderby = array();
-		return..parent::_update( $table, $values);
+		return  parent::_update( $table, $values);
 	}
 
 	// --------------------------------------------------------------------
@@ -229,7 +229,7 @@ class CI_DB_pdo_odbc_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _truncate( $table)
 	{
-		return..'DELETE FROM ' . $table;
+		return  'DELETE FROM ' . $table;
 	}
 
 	// --------------------------------------------------------------------
@@ -245,7 +245,7 @@ class CI_DB_pdo_odbc_driver extends CI_DB_pdo_driver {
 	protected function _delete( $table)
 	{
 		$this->qb_limit = FALSE;
-		return..parent::_delete( $table);
+		return  parent::_delete( $table);
 	}
 
 	// --------------------------------------------------------------------
@@ -260,7 +260,7 @@ class CI_DB_pdo_odbc_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _limit( $sql)
 	{
-		return..preg_replace( '/(^\SELECT (DISTINCT)?)/i','\\1 TOP ' . $this->qb_limit . ' ', $sql);
+		return  preg_replace( '/(^\SELECT (DISTINCT)?)/i','\\1 TOP ' . $this->qb_limit . ' ', $sql);
 	}
 
 }

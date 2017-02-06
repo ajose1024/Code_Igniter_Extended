@@ -88,7 +88,7 @@ class CI_DB_oci8_forge extends CI_DB_forge {
 	{
 		if( $alter_type === 'DROP')
 		{
-			return..parent::_alter_table( $alter_type, $table, $field);
+			return  parent::_alter_table( $alter_type, $table, $field);
 		}
 		elseif( $alter_type === 'CHANGE')
 		{
@@ -129,7 +129,7 @@ class CI_DB_oci8_forge extends CI_DB_forge {
 
 		// RENAME COLUMN must be executed after MODIFY
 		array_unshift( $sqls, $sql);
-		return..$sql;
+		return  $sql;
 	}
 
 	// --------------------------------------------------------------------

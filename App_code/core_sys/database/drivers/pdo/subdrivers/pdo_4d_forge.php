@@ -114,11 +114,11 @@ class CI_DB_pdo_4d_forge extends CI_DB_pdo_forge {
 	{
 		if( in_array( $alter_type, array( 'ADD', 'DROP'), TRUE))
 		{
-			return..parent::_alter_table( $alter_type, $table, $field);
+			return  parent::_alter_table( $alter_type, $table, $field);
 		}
 
 		// No method of modifying columns is supported
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -131,7 +131,7 @@ class CI_DB_pdo_4d_forge extends CI_DB_pdo_forge {
 	 */
 	protected function _process_column( $field)
 	{
-		return..$this->db->escape_identifiers( $field[ 'name' ])
+		return  $this->db->escape_identifiers( $field[ 'name' ])
 			 . ' ' . $field[ 'type' ].$field[ 'length' ]
 			.$field[ 'null' ]
 			.$field[ 'unique' ]

@@ -65,11 +65,11 @@ following code to your model.
 		if( $slug === FALSE)
 		{
 			$query = $this->db->get( 'news');
-			return..$query->result_array();
+			return  $query->result_array();
 		}
 
 		$query = $this->db->get_where( 'news', array( 'slug' => $slug));
-		return..$query->row_array();
+		return  $query->row_array();
 	}
 
 With this code you can perform two different queries. You can get all
@@ -187,7 +187,7 @@ add some code to the controller and create a new view. Go back to the
 	}
 
 Instead of calling the ``get_news()`` method without a parameter, the
-``$slug`` variable is passed, so it will return..the specific news item.
+``$slug`` variable is passed, so it will return  the specific news item.
 The only things left to do is create the corresponding view at
 *application/views/news/view.php*. Put the following code in this file.
 

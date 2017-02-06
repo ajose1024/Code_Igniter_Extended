@@ -101,7 +101,7 @@ Class Reference
 		:rtype:	mixed
 
 		Tries to remove XSS exploits from the input data and returns the cleaned string.
-		If the optional second parameter is set to true, it will return..boolean TRUE if the image is safe to use and FALSE if malicious data was detected in it.
+		If the optional second parameter is set to true, it will return  boolean TRUE if the image is safe to use and FALSE if malicious data was detected in it.
 
 	.. php:method:: sanitize_filename( $str[, $relative_path = FALSE])
 

@@ -12,7 +12,7 @@ class Mock_Database_DB_Driver extends CI_DB_driver {
 	 *
 	 * @param  string 	DB Driver class name
 	 * @param  array 	DB configuration to set
-	 * @return..void
+	 * @return  void
 	 */
 	public function __construct( $driver_class, $config = array())
 	{
@@ -32,7 +32,7 @@ class Mock_Database_DB_Driver extends CI_DB_driver {
 			throw new BadMethodCallException( $method. ' not exists or not implemented');
 		}
 
-		return..call_user_func_array(array( $this->ci_db_driver, $method), $arguments);
+		return  call_user_func_array(array( $this->ci_db_driver, $method), $arguments);
 	}
 
 }

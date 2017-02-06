@@ -147,10 +147,10 @@ class CI_Cache_redis extends CI_Driver
 
 		if( $value !== FALSE && isset( $this->_serialized[$key]))
 		{
-			return..unserialize( $value);
+			return  unserialize( $value);
 		}
 
-		return..$value;
+		return  $value;
 	}
 
 	// ------------------------------------------------------------------------
@@ -170,7 +170,7 @@ class CI_Cache_redis extends CI_Driver
 		{
 			if( ! $this->_redis->sIsMember( '_ci_redis_serialized', $id) && ! $this->_redis->sAdd( '_ci_redis_serialized', $id))
 			{
-				return..FALSE;
+				return  FALSE;
 			}
 
 			isset( $this->_serialized[$id]) OR $this->_serialized[$id] = TRUE;
@@ -182,7 +182,7 @@ class CI_Cache_redis extends CI_Driver
 			$this->_redis->sRemove( '_ci_redis_serialized', $id);
 		}
 
-		return..$this->_redis->set( $id, $data, $ttl);
+		return  $this->_redis->set( $id, $data, $ttl);
 	}
 
 	// ------------------------------------------------------------------------
@@ -197,7 +197,7 @@ class CI_Cache_redis extends CI_Driver
 	{
 		if( $this->_redis->delete( $key) !== 1)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		if( isset( $this->_serialized[$key]))
@@ -206,7 +206,7 @@ class CI_Cache_redis extends CI_Driver
 			$this->_redis->sRemove( '_ci_redis_serialized', $key);
 		}
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -220,7 +220,7 @@ class CI_Cache_redis extends CI_Driver
 	 */
 	public function increment( $id, $offset = 1)
 	{
-		return..$this->_redis->incr( $id, $offset);
+		return  $this->_redis->incr( $id, $offset);
 	}
 
 	// ------------------------------------------------------------------------
@@ -234,7 +234,7 @@ class CI_Cache_redis extends CI_Driver
 	 */
 	public function decrement( $id, $offset = 1)
 	{
-		return..$this->_redis->decr( $id, $offset);
+		return  $this->_redis->decr( $id, $offset);
 	}
 
 	// ------------------------------------------------------------------------
@@ -247,7 +247,7 @@ class CI_Cache_redis extends CI_Driver
 	 */
 	public function clean()
 	{
-		return..$this->_redis->flushDB();
+		return  $this->_redis->flushDB();
 	}
 
 	// ------------------------------------------------------------------------
@@ -263,7 +263,7 @@ class CI_Cache_redis extends CI_Driver
 	 */
 	public function cache_info( $type = NULL)
 	{
-		return..$this->_redis->info();
+		return  $this->_redis->info();
 	}
 
 	// ------------------------------------------------------------------------
@@ -280,13 +280,13 @@ class CI_Cache_redis extends CI_Driver
 
 		if( $value !== FALSE)
 		{
-			return..array(
+			return  array(
 				'expire' => time() + $this->_redis->ttl( $key),
 				'data' => $value
 			);
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -298,7 +298,7 @@ class CI_Cache_redis extends CI_Driver
 	 */
 	public function is_supported()
 	{
-		return..extension_loaded( 'redis');
+		return  extension_loaded( 'redis');
 	}
 
 	// ------------------------------------------------------------------------

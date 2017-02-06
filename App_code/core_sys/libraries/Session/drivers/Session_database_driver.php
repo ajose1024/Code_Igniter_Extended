@@ -125,7 +125,7 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 	 */
 	public function open( $save_path, $name)
 	{
-		return..empty( $this->_db->conn_id)
+		return  empty( $this->_db->conn_id)
 			? (bool) $this->_db->db_connect()
 			: TRUE;
 	}
@@ -164,7 +164,7 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 				// FALSE instead of relying on the default ...
 				$this->_row_exists = FALSE;
 				$this->_fingerprint = md5( '');
-				return..'';
+				return  '';
 			}
 
 			// PostgreSQL's variant of a BLOB datatype is Bytea, which is a
@@ -176,11 +176,11 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 
 			$this->_fingerprint = md5( $result);
 			$this->_row_exists = TRUE;
-			return..$result;
+			return  $result;
 		}
 
 		$this->_fingerprint = md5( '');
-		return..'';
+		return  '';
 	}
 
 	// ------------------------------------------------------------------------
@@ -201,7 +201,7 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 		{
 			if( ! $this->_release_lock() OR ! $this->_get_lock( $session_id))
 			{
-				return..FALSE;
+				return  FALSE;
 			}
 
 			$this->_row_exists = FALSE;
@@ -209,7 +209,7 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 		}
 		elseif( $this->_lock === FALSE)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		if( $this->_row_exists === FALSE)
@@ -224,10 +224,10 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 			if( $this->_db->insert( $this->_config[ 'save_path' ], $insert_data))
 			{
 				$this->_fingerprint = md5( $session_data);
-				return..$this->_row_exists = TRUE;
+				return  $this->_row_exists = TRUE;
 			}
 
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$this->_db->where( 'id', $session_id);
@@ -247,10 +247,10 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 		if( $this->_db->update( $this->_config[ 'save_path' ], $update_data))
 		{
 			$this->_fingerprint = md5( $session_data);
-			return..TRUE;
+			return  TRUE;
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -264,7 +264,7 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 	 */
 	public function close()
 	{
-		return..( $this->_lock)
+		return  ( $this->_lock)
 			? $this->_release_lock()
 			: TRUE;
 	}
@@ -289,12 +289,12 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 				$this->_db->where( 'ip_address', $_SERVER[ 'REMOTE_ADDR' ]);
 			}
 
-			return..$this->_db->delete( $this->_config[ 'save_path' ])
+			return  $this->_db->delete( $this->_config[ 'save_path' ])
 				? ( $this->close() && $this->_cookie_destroy())
 				: FALSE;
 		}
 
-		return..( $this->close() && $this->_cookie_destroy());
+		return  ( $this->close() && $this->_cookie_destroy());
 	}
 
 	// ------------------------------------------------------------------------
@@ -309,7 +309,7 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 	 */
 	public function gc( $maxlifetime)
 	{
-		return..$this->_db->delete( $this->_config[ 'save_path' ], 'timestamp < '.(time() - $maxlifetime));
+		return  $this->_db->delete( $this->_config[ 'save_path' ], 'timestamp < '.(time() - $maxlifetime));
 	}
 
 	// ------------------------------------------------------------------------
@@ -330,10 +330,10 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 			if( $this->_db->query("SELECT GET_LOCK( '".$arg."', 300) AS ci_session_lock")->row()->ci_session_lock)
 			{
 				$this->_lock = $arg;
-				return..TRUE;
+				return  TRUE;
 			}
 
-			return..FALSE;
+			return  FALSE;
 		}
 		elseif( $this->_platform === 'postgre')
 		{
@@ -341,13 +341,13 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 			if( $this->_db->simple_query( 'SELECT pg_advisory_lock( ' . $arg . ')'))
 			{
 				$this->_lock = $arg;
-				return..TRUE;
+				return  TRUE;
 			}
 
-			return..FALSE;
+			return  FALSE;
 		}
 
-		return..parent::_get_lock( $session_id);
+		return  parent::_get_lock( $session_id);
 	}
 
 	// ------------------------------------------------------------------------
@@ -363,7 +363,7 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 	{
 		if( ! $this->_lock)
 		{
-			return..TRUE;
+			return  TRUE;
 		}
 
 		if( $this->_platform === 'mysql')
@@ -371,23 +371,23 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 			if( $this->_db->query("SELECT RELEASE_LOCK( '".$this->_lock."') AS ci_session_lock")->row()->ci_session_lock)
 			{
 				$this->_lock = FALSE;
-				return..TRUE;
+				return  TRUE;
 			}
 
-			return..FALSE;
+			return  FALSE;
 		}
 		elseif( $this->_platform === 'postgre')
 		{
 			if( $this->_db->simple_query( 'SELECT pg_advisory_unlock( ' . $this->_lock . ')'))
 			{
 				$this->_lock = FALSE;
-				return..TRUE;
+				return  TRUE;
 			}
 
-			return..FALSE;
+			return  FALSE;
 		}
 
-		return..parent::_release_lock();
+		return  parent::_release_lock();
 	}
 
 }

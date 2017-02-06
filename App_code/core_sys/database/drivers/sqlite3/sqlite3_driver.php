@@ -85,13 +85,13 @@ class CI_DB_sqlite3_driver extends CI_DB {
 
 		try
 		{
-			return..( ! $this->password)
+			return  ( ! $this->password)
 				? new SQLite3( $this->database)
 				: new SQLite3( $this->database, SQLITE3_OPEN_READWRITE | SQLITE3_OPEN_CREATE, $this->password);
 		}
 		catch (Exception $e)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 	}
 
@@ -106,11 +106,11 @@ class CI_DB_sqlite3_driver extends CI_DB {
 	{
 		if( isset( $this->data_cache[ 'version' ]))
 		{
-			return..$this->data_cache[ 'version' ];
+			return  $this->data_cache[ 'version' ];
 		}
 
 		$version = SQLite3::version();
-		return..$this->data_cache[ 'version' ] = $version[ 'versionString' ];
+		return  $this->data_cache[ 'version' ] = $version[ 'versionString' ];
 	}
 
 	// --------------------------------------------------------------------
@@ -124,7 +124,7 @@ class CI_DB_sqlite3_driver extends CI_DB {
 	 */
 	protected function _execute( $sql)
 	{
-		return..$this->is_write_type( $sql)
+		return  $this->is_write_type( $sql)
 			? $this->conn_id->exec( $sql)
 			: $this->conn_id->query( $sql);
 	}
@@ -138,7 +138,7 @@ class CI_DB_sqlite3_driver extends CI_DB {
 	 */
 	protected function _trans_begin()
 	{
-		return..$this->conn_id->exec( 'BEGIN TRANSACTION');
+		return  $this->conn_id->exec( 'BEGIN TRANSACTION');
 	}
 
 	// --------------------------------------------------------------------
@@ -150,7 +150,7 @@ class CI_DB_sqlite3_driver extends CI_DB {
 	 */
 	protected function _trans_commit()
 	{
-		return..$this->conn_id->exec( 'END TRANSACTION');
+		return  $this->conn_id->exec( 'END TRANSACTION');
 	}
 
 	// --------------------------------------------------------------------
@@ -162,7 +162,7 @@ class CI_DB_sqlite3_driver extends CI_DB {
 	 */
 	protected function _trans_rollback()
 	{
-		return..$this->conn_id->exec( 'ROLLBACK');
+		return  $this->conn_id->exec( 'ROLLBACK');
 	}
 
 	// --------------------------------------------------------------------
@@ -175,7 +175,7 @@ class CI_DB_sqlite3_driver extends CI_DB {
 	 */
 	protected function _escape_str( $str)
 	{
-		return..$this->conn_id->escapeString( $str);
+		return  $this->conn_id->escapeString( $str);
 	}
 
 	// --------------------------------------------------------------------
@@ -187,7 +187,7 @@ class CI_DB_sqlite3_driver extends CI_DB {
 	 */
 	public function affected_rows()
 	{
-		return..$this->conn_id->changes();
+		return  $this->conn_id->changes();
 	}
 
 	// --------------------------------------------------------------------
@@ -199,7 +199,7 @@ class CI_DB_sqlite3_driver extends CI_DB {
 	 */
 	public function insert_id()
 	{
-		return..$this->conn_id->lastInsertRowID();
+		return  $this->conn_id->lastInsertRowID();
 	}
 
 	// --------------------------------------------------------------------
@@ -214,7 +214,7 @@ class CI_DB_sqlite3_driver extends CI_DB {
 	 */
 	protected function _list_tables( $prefix_limit = FALSE)
 	{
-		return..'SELECT "NAME" FROM "SQLITE_MASTER" WHERE "TYPE" = \'table\''
+		return  'SELECT "NAME" FROM "SQLITE_MASTER" WHERE "TYPE" = \'table\''
 			.(( $prefix_limit !== FALSE && $this->dbprefix != '')
 				? ' AND "NAME" LIKE \'' . $this->escape_like_str( $this->dbprefix) . '%\' '.sprintf( $this->_like_escape_str, $this->_like_escape_chr)
 				: '');
@@ -233,12 +233,12 @@ class CI_DB_sqlite3_driver extends CI_DB {
 		// Is there a cached result?
 		if( isset( $this->data_cache[ 'field_names' ][$table]))
 		{
-			return..$this->data_cache[ 'field_names' ][$table];
+			return  $this->data_cache[ 'field_names' ][$table];
 		}
 
 		if( ( $result = $this->query( 'PRAGMA TABLE_INFO( ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE) . ')')) === FALSE)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$this->data_cache[ 'field_names' ][$table] = array();
@@ -247,7 +247,7 @@ class CI_DB_sqlite3_driver extends CI_DB {
 			$this->data_cache[ 'field_names' ][$table][] = $row[ 'name' ];
 		}
 
-		return..$this->data_cache[ 'field_names' ][$table];
+		return  $this->data_cache[ 'field_names' ][$table];
 	}
 
 	// --------------------------------------------------------------------
@@ -262,13 +262,13 @@ class CI_DB_sqlite3_driver extends CI_DB {
 	{
 		if( ( $query = $this->query( 'PRAGMA TABLE_INFO( ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE) . ')')) === FALSE)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$query = $query->result_array();
 		if( empty( $query))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$retval = array();
@@ -282,7 +282,7 @@ class CI_DB_sqlite3_driver extends CI_DB {
 			$retval[$i]->primary_key	= isset( $query[$i][ 'pk' ]) ? (int) $query[$i][ 'pk' ] : 0;
 		}
 
-		return..$retval;
+		return  $retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -297,7 +297,7 @@ class CI_DB_sqlite3_driver extends CI_DB {
 	 */
 	public function error()
 	{
-		return..array( 'code' => $this->conn_id->lastErrorCode(), 'message' => $this->conn_id->lastErrorMsg());
+		return  array( 'code' => $this->conn_id->lastErrorCode(), 'message' => $this->conn_id->lastErrorMsg());
 	}
 
 	// --------------------------------------------------------------------
@@ -314,7 +314,7 @@ class CI_DB_sqlite3_driver extends CI_DB {
 	 */
 	protected function _replace( $table, $keys, $values)
 	{
-		return..'INSERT OR '.parent::_replace( $table, $keys, $values);
+		return  'INSERT OR '.parent::_replace( $table, $keys, $values);
 	}
 
 	// --------------------------------------------------------------------
@@ -332,7 +332,7 @@ class CI_DB_sqlite3_driver extends CI_DB {
 	 */
 	protected function _truncate( $table)
 	{
-		return..'DELETE FROM ' . $table;
+		return  'DELETE FROM ' . $table;
 	}
 
 	// --------------------------------------------------------------------

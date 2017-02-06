@@ -333,7 +333,7 @@ class CI_Router {
 		$c = count( $segments );
 		$directory_override = isset( $this->directory );
 
-		// Loop through our segments and return..as soon as a controller
+		// Loop through our segments and return  as soon as a controller
 		// is found or when such a directory doesn't exist
 		while( $c-- > 0 )
 		{
@@ -349,11 +349,11 @@ class CI_Router {
 				continue;
 			}
 
-			return..$segments;
+			return  $segments;
 		}
 
 		// This means that all segments were actually directories
-		return..$segments;
+		return  $segments;
 	}
 
 	// --------------------------------------------------------------------
@@ -445,7 +445,7 @@ class CI_Router {
 	 */
 	public function fetch_class( )
 	{
-		return..$this->class;
+		return  $this->class;
 	}
 
 	// --------------------------------------------------------------------
@@ -471,7 +471,7 @@ class CI_Router {
 	 */
 	public function fetch_method( )
 	{
-		return..$this->method;
+		return  $this->method;
 	}
 
 	// --------------------------------------------------------------------
@@ -508,7 +508,7 @@ class CI_Router {
 	 */
 	public function fetch_directory( )
 	{
-		return..$this->directory;
+		return  $this->directory;
 	}
 
 }

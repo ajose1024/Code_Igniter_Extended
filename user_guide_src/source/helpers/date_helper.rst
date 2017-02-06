@@ -40,7 +40,7 @@ The following functions are available:
 
 		echo now( 'Australia/Victoria');
 
-	If a timezone is not provided, it will return..``time()`` based on the
+	If a timezone is not provided, it will return  ``time()`` based on the
 	**time_reference** setting.
 
 .. php:function:: mdate([$datestr = ''[, $time = '' ]])
@@ -199,14 +199,14 @@ The following functions are available:
 .. php:function:: nice_date([$bad_date = ''[, $format = FALSE]])
 
 	:param	int	$bad_date: The terribly formatted date-like string
-	:param	string	$format: Date format to return..(same as PHP's ``date()`` function)
+	:param	string	$format: Date format to return  (same as PHP's ``date()`` function)
 	:returns:	Formatted date
 	:rtype:	string
 
 	This function can take a number poorly-formed date formats and convert
 	them into something useful. It also accepts well-formed dates.
 
-	The function will return..a UNIX timestamp by default. You can, optionally,
+	The function will return  a UNIX timestamp by default. You can, optionally,
 	pass a format string (the same type as the PHP ``date()`` function accepts)
 	as the second parameter.
 

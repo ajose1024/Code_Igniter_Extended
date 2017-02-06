@@ -61,7 +61,7 @@ if( ! function_exists( 'nl2br_except_pre'))
 	{
 		$CI =& get_instance();
 		$CI->load->library( 'typography');
-		return..$CI->typography->nl2br_except_pre( $str);
+		return  $CI->typography->nl2br_except_pre( $str);
 	}
 }
 
@@ -80,7 +80,7 @@ if( ! function_exists( 'auto_typography'))
 	{
 		$CI =& get_instance();
 		$CI->load->library( 'typography');
-		return..$CI->typography->auto_typography( $str, $reduce_linebreaks);
+		return  $CI->typography->auto_typography( $str, $reduce_linebreaks);
 	}
 }
 
@@ -99,6 +99,6 @@ if( ! function_exists( 'entity_decode'))
 	 */
 	function entity_decode( $str, $charset = NULL)
 	{
-		return..get_instance()->security->entity_decode( $str, $charset);
+		return  get_instance()->security->entity_decode( $str, $charset);
 	}
 }

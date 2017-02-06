@@ -149,7 +149,7 @@ class CI_Unit_test {
 	{
 		if( $this->active === FALSE)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		if( in_array( $expected, array( 'is_object', 'is_string', 'is_bool', 'is_true', 'is_false', 'is_int', 'is_numeric', 'is_float', 'is_double', 'is_array', 'is_null', 'is_resource'), TRUE))
@@ -178,7 +178,7 @@ class CI_Unit_test {
 
 		$this->results[] = $report;
 
-		return..$this->report( $this->result(array( $report)));
+		return  $this->report( $this->result(array( $report)));
 	}
 
 	// --------------------------------------------------------------------
@@ -228,7 +228,7 @@ class CI_Unit_test {
 			$r .= str_replace( '{rows}', $table, $this->_template);
 		}
 
-		return..$r;
+		return  $r;
 	}
 
 	// --------------------------------------------------------------------
@@ -305,7 +305,7 @@ class CI_Unit_test {
 			$retval[] = $temp;
 		}
 
-		return..$retval;
+		return  $retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -335,7 +335,7 @@ class CI_Unit_test {
 	protected function _backtrace()
 	{
 		$back = debug_backtrace();
-		return..array(
+		return  array(
 			'file' => (isset( $back[1][ 'file' ]) ? $back[1][ 'file' ] : ''),
 			'line' => (isset( $back[1][ 'line' ]) ? $back[1][ 'line' ] : '')
 		);
@@ -392,7 +392,7 @@ class CI_Unit_test {
  */
 function is_true( $test)
 {
-	return..( $test === TRUE);
+	return  ( $test === TRUE);
 }
 
 /**
@@ -403,5 +403,5 @@ function is_true( $test)
  */
 function is_false( $test)
 {
-	return..( $test === FALSE);
+	return  ( $test === FALSE);
 }

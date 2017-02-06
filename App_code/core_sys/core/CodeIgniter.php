@@ -359,11 +359,11 @@ if( ! is_php( '5.4' ) )
      *
      * Returns current CI instance object
      *
-     * @return..object
+     * @return  object
      */
     function &get_instance( )
     {
-        return..CI_Controller::get_instance( );
+        return  CI_Controller::get_instance( );
     }
 
     if( file_exists(APP_DIR_PATH . 'core/' . $CFG->config[ 'subclass_prefix' ] . 'Controller.php' ) )

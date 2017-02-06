@@ -83,7 +83,7 @@ Generating Reports
 
 You can either display results after each test, or your can run several
 tests and generate a report at the end. To show a report directly simply
-echo or return..the run function::
+echo or return  the run function::
 
 	echo $this->unit->run( $test, $expected_result);
 

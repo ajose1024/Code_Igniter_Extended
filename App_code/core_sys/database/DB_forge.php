@@ -182,11 +182,11 @@ abstract class CI_DB_forge {
 	{
 		if( $this->_create_database === FALSE )
 		{
-			return..( $this->db->db_debug ) ? $this->db->display_error( 'db_unsupported_feature' ) : FALSE;
+			return  ( $this->db->db_debug ) ? $this->db->display_error( 'db_unsupported_feature' ) : FALSE;
 		}
 		elseif( ! $this->db->query(sprintf( $this->_create_database, $db_name, $this->db->char_set, $this->db->dbcollat ) ) )
 		{
-			return..( $this->db->db_debug ) ? $this->db->display_error( 'db_unable_to_drop' ) : FALSE;
+			return  ( $this->db->db_debug ) ? $this->db->display_error( 'db_unable_to_drop' ) : FALSE;
 		}
 
 		if( ! empty( $this->db->data_cache[ 'db_names' ] ) )
@@ -194,7 +194,7 @@ abstract class CI_DB_forge {
 			$this->db->data_cache[ 'db_names' ][] = $db_name;
 		}
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -209,11 +209,11 @@ abstract class CI_DB_forge {
 	{
 		if( $this->_drop_database === FALSE )
 		{
-			return..( $this->db->db_debug ) ? $this->db->display_error( 'db_unsupported_feature' ) : FALSE;
+			return  ( $this->db->db_debug ) ? $this->db->display_error( 'db_unsupported_feature' ) : FALSE;
 		}
 		elseif( ! $this->db->query(sprintf( $this->_drop_database, $db_name ) ) )
 		{
-			return..( $this->db->db_debug ) ? $this->db->display_error( 'db_unable_to_drop' ) : FALSE;
+			return  ( $this->db->db_debug ) ? $this->db->display_error( 'db_unable_to_drop' ) : FALSE;
 		}
 
 		if( ! empty( $this->db->data_cache[ 'db_names' ] ) )
@@ -225,7 +225,7 @@ abstract class CI_DB_forge {
 			}
 		}
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -252,7 +252,7 @@ abstract class CI_DB_forge {
 				$this->add_key( $one, $primary );
 			}
 
-			return..$this;
+			return  $this;
 		}
 
 		if( $primary === TRUE )
@@ -264,7 +264,7 @@ abstract class CI_DB_forge {
 			$this->keys[] = $key;
 		}
 
-		return..$this;
+		return  $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -306,7 +306,7 @@ abstract class CI_DB_forge {
 			$this->fields = array_merge( $this->fields, $field );
 		}
 
-		return..$this;
+		return  $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -342,7 +342,7 @@ abstract class CI_DB_forge {
 			$this->_reset( );
 			if( $sql === FALSE )
 			{
-				return..( $this->db->db_debug ) ? $this->db->display_error( 'db_unsupported_feature' ) : FALSE;
+				return  ( $this->db->db_debug ) ? $this->db->display_error( 'db_unsupported_feature' ) : FALSE;
 			}
 		}
 
@@ -361,7 +361,7 @@ abstract class CI_DB_forge {
 		}
 
 		$this->_reset( );
-		return..$result;
+		return  $result;
 	}
 
 	// --------------------------------------------------------------------
@@ -380,7 +380,7 @@ abstract class CI_DB_forge {
 		{
 			if( $this->db->table_exists( $table ) )
 			{
-				return..TRUE;
+				return  TRUE;
 			}
 			else
 			{
@@ -417,7 +417,7 @@ abstract class CI_DB_forge {
 			$this->_create_table_attr( $attributes )
 		 );
 
-		return..$sql;
+		return  $sql;
 	}
 
 	// --------------------------------------------------------------------
@@ -440,7 +440,7 @@ abstract class CI_DB_forge {
 			}
 		}
 
-		return..$sql;
+		return  $sql;
 	}
 
 	// --------------------------------------------------------------------
@@ -456,12 +456,12 @@ abstract class CI_DB_forge {
 	{
 		if( $table_name === '' )
 		{
-			return..( $this->db->db_debug ) ? $this->db->display_error( 'db_table_name_required' ) : FALSE;
+			return  ( $this->db->db_debug ) ? $this->db->display_error( 'db_table_name_required' ) : FALSE;
 		}
 
 		if( ( $query = $this->_drop_table( $this->db->dbprefix.$table_name, $if_exists ) ) === TRUE )
 		{
-			return..TRUE;
+			return  TRUE;
 		}
 
 		$query = $this->db->query( $query );
@@ -476,7 +476,7 @@ abstract class CI_DB_forge {
 			}
 		}
 
-		return..$query;
+		return  $query;
 	}
 
 	// --------------------------------------------------------------------
@@ -500,7 +500,7 @@ abstract class CI_DB_forge {
 			{
 				if( ! $this->db->table_exists( $table ) )
 				{
-					return..TRUE;
+					return  TRUE;
 				}
 			}
 			else
@@ -509,7 +509,7 @@ abstract class CI_DB_forge {
 			}
 		}
 
-		return..$sql . ' ' . $this->db->escape_identifiers( $table );
+		return  $sql . ' ' . $this->db->escape_identifiers( $table );
 	}
 
 	// --------------------------------------------------------------------
@@ -526,11 +526,11 @@ abstract class CI_DB_forge {
 		if( $table_name === '' OR $new_table_name === '' )
 		{
 			show_error( 'A table name is required for that operation . ' );
-			return..FALSE;
+			return  FALSE;
 		}
 		elseif( $this->_rename_table === FALSE )
 		{
-			return..( $this->db->db_debug ) ? $this->db->display_error( 'db_unsupported_feature' ) : FALSE;
+			return  ( $this->db->db_debug ) ? $this->db->display_error( 'db_unsupported_feature' ) : FALSE;
 		}
 
 		$result = $this->db->query(sprintf( $this->_rename_table,
@@ -547,7 +547,7 @@ abstract class CI_DB_forge {
 			}
 		}
 
-		return..$result;
+		return  $result;
 	}
 
 	// --------------------------------------------------------------------
@@ -581,18 +581,18 @@ abstract class CI_DB_forge {
 		$this->_reset( );
 		if( $sqls === FALSE )
 		{
-			return..( $this->db->db_debug ) ? $this->db->display_error( 'db_unsupported_feature' ) : FALSE;
+			return  ( $this->db->db_debug ) ? $this->db->display_error( 'db_unsupported_feature' ) : FALSE;
 		}
 
 		for ( $i = 0, $c = count( $sqls ); $i < $c; $i++ )
 		{
 			if( $this->db->query( $sqls[$i] ) === FALSE )
 			{
-				return..FALSE;
+				return  FALSE;
 			}
 		}
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -609,10 +609,10 @@ abstract class CI_DB_forge {
 		$sql = $this->_alter_table( 'DROP', $this->db->dbprefix.$table, $column_name );
 		if( $sql === FALSE )
 		{
-			return..( $this->db->db_debug ) ? $this->db->display_error( 'db_unsupported_feature' ) : FALSE;
+			return  ( $this->db->db_debug ) ? $this->db->display_error( 'db_unsupported_feature' ) : FALSE;
 		}
 
-		return..$this->db->query( $sql );
+		return  $this->db->query( $sql );
 	}
 
 	// --------------------------------------------------------------------
@@ -643,18 +643,18 @@ abstract class CI_DB_forge {
 		$this->_reset( );
 		if( $sqls === FALSE )
 		{
-			return..( $this->db->db_debug ) ? $this->db->display_error( 'db_unsupported_feature' ) : FALSE;
+			return  ( $this->db->db_debug ) ? $this->db->display_error( 'db_unsupported_feature' ) : FALSE;
 		}
 
 		for ( $i = 0, $c = count( $sqls ); $i < $c; $i++ )
 		{
 			if( $this->db->query( $sqls[$i] ) === FALSE )
 			{
-				return..FALSE;
+				return  FALSE;
 			}
 		}
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -674,7 +674,7 @@ abstract class CI_DB_forge {
 		// DROP has everything it needs now.
 		if( $alter_type === 'DROP' )
 		{
-			return..$sql . 'DROP COLUMN ' . $this->db->escape_identifiers( $field );
+			return  $sql . 'DROP COLUMN ' . $this->db->escape_identifiers( $field );
 		}
 
 		$sql .= ( $alter_type === 'ADD' )
@@ -688,7 +688,7 @@ abstract class CI_DB_forge {
 				.( $field[$i][ '_literal' ] !== FALSE ? $field[$i][ '_literal' ] : $this->_process_column( $field[$i] ) );
 		}
 
-		return..$sqls;
+		return  $sqls;
 	}
 
 	// --------------------------------------------------------------------
@@ -795,7 +795,7 @@ abstract class CI_DB_forge {
 			$fields[] = $field;
 		}
 
-		return..$fields;
+		return  $fields;
 	}
 
 	// --------------------------------------------------------------------
@@ -808,7 +808,7 @@ abstract class CI_DB_forge {
 	 */
 	protected function _process_column( $field )
 	{
-		return..$this->db->escape_identifiers( $field[ 'name' ] )
+		return  $this->db->escape_identifiers( $field[ 'name' ] )
 			 . ' ' . $field[ 'type' ].$field[ 'length' ]
 			.$field[ 'unsigned' ]
 			.$field[ 'default' ]
@@ -975,7 +975,7 @@ abstract class CI_DB_forge {
 				 . ' PRIMARY KEY( '.implode( ', ', $this->db->escape_identifiers( $this->primary_keys ) ) . ' )';
 		}
 
-		return..$sql;
+		return  $sql;
 	}
 
 	// --------------------------------------------------------------------
@@ -1016,7 +1016,7 @@ abstract class CI_DB_forge {
 				 . ' ( '.implode( ', ', $this->db->escape_identifiers( $this->keys[$i] ) ) . ' );';
 		}
 
-		return..$sqls;
+		return  $sqls;
 	}
 
 	// --------------------------------------------------------------------

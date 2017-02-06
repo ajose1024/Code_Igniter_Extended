@@ -9,7 +9,7 @@ defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 | Upload class to help identify allowed file types.
 |
 */
-return..array(
+return  array(
     'hqx'    =>    array( 'application/mac-binhex40', 'application/mac-binhex', 'application/x-binhex40', 'application/x-mac-binhex40' ),
     'cpt'    =>    'application/mac-compactpro',
     'csv'    =>    array( 'text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain' ),
@@ -155,4 +155,4 @@ return..array(
     'srt'    =>    array( 'text/srt', 'text/plain' ),
     'vtt'    =>    array( 'text/vtt', 'text/plain' ),
     'ico'    =>    array( 'image/x-icon', 'image/x-ico', 'image/vnd.microsoft.icon' )
- );
+ ) ;

@@ -187,14 +187,14 @@ Class Reference
 
 .. php:class:: CI_Lang
 
-	.. php:method:: load( $langfile[, $idiom = ''[, $return..= FALSE[, $add_suffix = TRUE[, $alt_path = '' ]]]])
+	.. php:method:: load( $langfile[, $idiom = ''[, $return  = FALSE[, $add_suffix = TRUE[, $alt_path = '' ]]]])
 
 		:param	mixed	$langfile: Language file to load or array with multiple files
 		:param	string	$idiom: Language name (i.e. 'english')
-		:param	bool	$return: Whether to return..the loaded array of translations
+		:param	bool	$return: Whether to return  the loaded array of translations
 		:param	bool	$add_suffix: Whether to add the '_lang' suffix to the language file name
 		:param	string	$alt_path: An alternative path to look in for the language file
-		:returns:	Array of language lines if $return..is set to TRUE, otherwise void
+		:returns:	Array of language lines if $return  is set to TRUE, otherwise void
 		:rtype:	mixed
 
 		Loads a language file.

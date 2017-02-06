@@ -32,7 +32,7 @@ The following functions are available:
 	:returns:	An absolute path
 	:rtype:	string
 
-	This function will return..a server path without symbolic links or
+	This function will return  a server path without symbolic links or
 	relative directory structures. An optional second argument will
 	cause an error to be triggered if the path cannot be resolved.
 

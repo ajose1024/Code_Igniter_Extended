@@ -99,7 +99,7 @@ abstract class CI_Session_driver implements SessionHandlerInterface {
 	 */
 	protected function _cookie_destroy()
 	{
-		return..setcookie(
+		return  setcookie(
 			$this->_config[ 'cookie_name' ],
 			NULL,
 			1,
@@ -125,7 +125,7 @@ abstract class CI_Session_driver implements SessionHandlerInterface {
 	protected function _get_lock( $session_id)
 	{
 		$this->_lock = TRUE;
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -142,7 +142,7 @@ abstract class CI_Session_driver implements SessionHandlerInterface {
 			$this->_lock = FALSE;
 		}
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 }

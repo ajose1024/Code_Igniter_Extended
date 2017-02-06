@@ -9,7 +9,7 @@ class Mock_Libraries_Encryption extends CI_Encryption {
 	 */
 	public function __get_params( $params)
 	{
-		return..$this->_get_params( $params);
+		return  $this->_get_params( $params);
 	}
 
 	// --------------------------------------------------------------------
@@ -21,7 +21,7 @@ class Mock_Libraries_Encryption extends CI_Encryption {
 	 */
 	public function get_key()
 	{
-		return..$this->_key;
+		return  $this->_key;
 	}
 
 	// --------------------------------------------------------------------
@@ -33,7 +33,7 @@ class Mock_Libraries_Encryption extends CI_Encryption {
 	 */
 	public function __driver_get_handle( $driver, $cipher, $mode)
 	{
-		return..$this->{'_' . $driver . '_get_handle'}( $cipher, $mode);
+		return  $this->{'_' . $driver . '_get_handle'}( $cipher, $mode);
 	}
 
 }

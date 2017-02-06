@@ -113,10 +113,10 @@ class CI_DB_pdo_cubrid_driver extends CI_DB_pdo_driver {
 
 		if( $prefix_limit === TRUE && $this->dbprefix !== '')
 		{
-			return..$sql." LIKE '".$this->escape_like_str( $this->dbprefix)."%'";
+			return  $sql." LIKE '".$this->escape_like_str( $this->dbprefix)."%'";
 		}
 
-		return..$sql;
+		return  $sql;
 	}
 
 	// --------------------------------------------------------------------
@@ -131,7 +131,7 @@ class CI_DB_pdo_cubrid_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _list_columns( $table = '')
 	{
-		return..'SHOW COLUMNS FROM ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE);
+		return  'SHOW COLUMNS FROM ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE);
 	}
 
 	// --------------------------------------------------------------------
@@ -146,7 +146,7 @@ class CI_DB_pdo_cubrid_driver extends CI_DB_pdo_driver {
 	{
 		if( ( $query = $this->query( 'SHOW COLUMNS FROM ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE))) === FALSE)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 		$query = $query->result_object();
 
@@ -165,7 +165,7 @@ class CI_DB_pdo_cubrid_driver extends CI_DB_pdo_driver {
 			$retval[$i]->primary_key	= (int) ( $query[$i]->Key === 'PRI');
 		}
 
-		return..$retval;
+		return  $retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -206,7 +206,7 @@ class CI_DB_pdo_cubrid_driver extends CI_DB_pdo_driver {
 
 		$this->where( $index . ' IN( '.implode( ',', $ids) . ')', NULL, FALSE);
 
-		return..'UPDATE ' . $table . ' SET '.substr( $cases, 0, -2).$this->_compile_wh( 'qb_where');
+		return  'UPDATE ' . $table . ' SET '.substr( $cases, 0, -2).$this->_compile_wh( 'qb_where');
 	}
 
 	// --------------------------------------------------------------------
@@ -224,7 +224,7 @@ class CI_DB_pdo_cubrid_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _truncate( $table)
 	{
-		return..'TRUNCATE ' . $table;
+		return  'TRUNCATE ' . $table;
 	}
 
 	// --------------------------------------------------------------------
@@ -241,10 +241,10 @@ class CI_DB_pdo_cubrid_driver extends CI_DB_pdo_driver {
 	{
 		if( ! empty( $this->qb_join) && count( $this->qb_from) > 1)
 		{
-			return..'( '.implode( ', ', $this->qb_from) . ')';
+			return  '( '.implode( ', ', $this->qb_from) . ')';
 		}
 
-		return..implode( ', ', $this->qb_from);
+		return  implode( ', ', $this->qb_from);
 	}
 
 }

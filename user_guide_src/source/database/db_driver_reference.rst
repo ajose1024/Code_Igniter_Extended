@@ -10,7 +10,7 @@ The how-to material for this has been split over several articles.
 This article is intended to be a reference for them.
 
 .. important:: Not all methods are supported by all database drivers,
-	some of them may fail (and return..FALSE) if the underlying
+	some of them may fail (and return  FALSE) if the underlying
 	driver does not support them.
 
 .. php:class:: CI_DB_driver
@@ -87,7 +87,7 @@ This article is intended to be a reference for them.
 
 		:param	string	$sql: The SQL statement to execute
 		:param	array	$binds: An array of binding data
-		:param	bool	$return_object: Whether to return..a result object or not
+		:param	bool	$return_object: Whether to return  a result object or not
 		:returns:	TRUE for successful "write-type" queries, CI_DB_result instance (method chaining) on "query" success, FALSE on failure
 		:rtype:	mixed
 

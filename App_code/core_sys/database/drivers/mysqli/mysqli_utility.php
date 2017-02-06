@@ -81,7 +81,7 @@ class CI_DB_mysqli_utility extends CI_DB_utility {
 	{
 		if( count( $params) === 0)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// Extract the prefs for simplicity
@@ -207,7 +207,7 @@ class CI_DB_mysqli_utility extends CI_DB_utility {
 			$output .= 'SET foreign_key_checks = 1;' . $newline;
 		}
 
-		return..$output;
+		return  $output;
 	}
 
 }

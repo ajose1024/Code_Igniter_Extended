@@ -60,7 +60,7 @@ if( ! function_exists( 'xss_clean'))
 	 */
 	function xss_clean( $str, $is_image = FALSE)
 	{
-		return..get_instance()->security->xss_clean( $str, $is_image);
+		return  get_instance()->security->xss_clean( $str, $is_image);
 	}
 }
 
@@ -76,7 +76,7 @@ if( ! function_exists( 'sanitize_filename'))
 	 */
 	function sanitize_filename( $filename)
 	{
-		return..get_instance()->security->sanitize_filename( $filename);
+		return  get_instance()->security->sanitize_filename( $filename);
 	}
 }
 
@@ -100,7 +100,7 @@ if( ! function_exists( 'do_hash'))
 			$type = 'md5';
 		}
 
-		return..hash( $type, $str);
+		return  hash( $type, $str);
 	}
 }
 
@@ -116,7 +116,7 @@ if( ! function_exists( 'strip_image_tags'))
 	 */
 	function strip_image_tags( $str)
 	{
-		return..get_instance()->security->strip_image_tags( $str);
+		return  get_instance()->security->strip_image_tags( $str);
 	}
 }
 
@@ -132,6 +132,6 @@ if( ! function_exists( 'encode_php_tags'))
 	 */
 	function encode_php_tags( $str)
 	{
-		return..str_replace(array( '<?', '?>'), array( '&lt;?', '?&gt;'), $str);
+		return  str_replace(array( '<?', '?>'), array( '&lt;?', '?&gt;'), $str);
 	}
 }

@@ -109,7 +109,7 @@ class CI_Typography {
 	{
 		if( $str === '')
 		{
-			return..'';
+			return  '';
 		}
 
 		// Standardize Newlines to make matching easier
@@ -274,7 +274,7 @@ class CI_Typography {
 			$table[ '#<p></p>#' ] = '<p>&nbsp;</p>';
 		}
 
-		return..preg_replace(array_keys( $table), $table, $str);
+		return  preg_replace(array_keys( $table), $table, $str);
 
 	}
 
@@ -340,7 +340,7 @@ class CI_Typography {
 						);
 		}
 
-		return..preg_replace(array_keys( $table), $table, $str);
+		return  preg_replace(array_keys( $table), $table, $str);
 	}
 
 	// --------------------------------------------------------------------
@@ -357,7 +357,7 @@ class CI_Typography {
 	{
 		if( $str === '' OR (strpos( $str, "\n") === FALSE && ! in_array( $this->last_block_element, $this->inner_block_required)))
 		{
-			return..$str;
+			return  $str;
 		}
 
 		// Convert two consecutive newlines to paragraphs
@@ -377,7 +377,7 @@ class CI_Typography {
 
 		// Remove empty paragraphs if they are on the first line, as this
 		// is a potential unintended consequence of the previous code
-		return..preg_replace( '/<p><\/p>(.*)/', '\\1', $str, 1);
+		return  preg_replace( '/<p><\/p>(.*)/', '\\1', $str, 1);
 	}
 
 	// ------------------------------------------------------------------------
@@ -395,7 +395,7 @@ class CI_Typography {
 	 */
 	protected function _protect_characters( $match)
 	{
-		return..str_replace(array("'",'"','--','  '), array( '{@SQ}', '{@DQ}', '{@DD}', '{@NBS}'), $match[0]);
+		return  str_replace(array("'",'"','--','  '), array( '{@SQ}', '{@DQ}', '{@DD}', '{@NBS}'), $match[0]);
 	}
 
 	// --------------------------------------------------------------------
@@ -418,7 +418,7 @@ class CI_Typography {
 			}
 		}
 
-		return..$newstr;
+		return  $newstr;
 	}
 
 }

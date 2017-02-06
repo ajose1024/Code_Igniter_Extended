@@ -107,7 +107,7 @@ class CI_DB_oci8_result extends CI_DB_result {
 		$count = oci_num_fields( $this->stmt_id);
 
 		// if we used a limit we subtract it
-		return..( $this->limit_used) ? $count - 1 : $count;
+		return  ( $this->limit_used) ? $count - 1 : $count;
 	}
 
 	// --------------------------------------------------------------------
@@ -126,7 +126,7 @@ class CI_DB_oci8_result extends CI_DB_result {
 		{
 			$field_names[] = oci_field_name( $this->stmt_id, $c);
 		}
-		return..$field_names;
+		return  $field_names;
 	}
 
 	// --------------------------------------------------------------------
@@ -151,7 +151,7 @@ class CI_DB_oci8_result extends CI_DB_result {
 			$retval[] = $F;
 		}
 
-		return..$retval;
+		return  $retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -193,7 +193,7 @@ class CI_DB_oci8_result extends CI_DB_result {
 	protected function _fetch_assoc()
 	{
 		$id = ( $this->curs_id) ? $this->curs_id : $this->stmt_id;
-		return..oci_fetch_assoc( $id);
+		return  oci_fetch_assoc( $id);
 	}
 
 	// --------------------------------------------------------------------
@@ -214,7 +214,7 @@ class CI_DB_oci8_result extends CI_DB_result {
 
 		if( $class_name === 'stdClass' OR ! $row)
 		{
-			return..$row;
+			return  $row;
 		}
 
 		$class_name = new $class_name();
@@ -223,7 +223,7 @@ class CI_DB_oci8_result extends CI_DB_result {
 			$class_name->$key = $value;
 		}
 
-		return..$class_name;
+		return  $class_name;
 	}
 
 }

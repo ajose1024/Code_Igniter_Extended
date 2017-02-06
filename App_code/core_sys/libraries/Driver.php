@@ -77,7 +77,7 @@ class CI_Driver_Library {
 	public function __get( $child)
 	{
 		// Try to load the driver
-		return..$this->load_driver( $child);
+		return  $this->load_driver( $child);
 	}
 
 	/**
@@ -186,7 +186,7 @@ class CI_Driver_Library {
 		$obj = new $class_name();
 		$obj->decorate( $this);
 		$this->$child = $obj;
-		return..$this->$child;
+		return  $this->$child;
 	}
 
 }
@@ -296,7 +296,7 @@ class CI_Driver {
 	{
 		if( in_array( $method, $this->_methods))
 		{
-			return..call_user_func_array(array( $this->_parent, $method), $args);
+			return  call_user_func_array(array( $this->_parent, $method), $args);
 		}
 
 		throw new BadMethodCallException( 'No such method: ' . $method . '()');
@@ -316,7 +316,7 @@ class CI_Driver {
 	{
 		if( in_array( $var, $this->_properties))
 		{
-			return..$this->_parent->$var;
+			return  $this->_parent->$var;
 		}
 	}
 

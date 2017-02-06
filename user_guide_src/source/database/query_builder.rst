@@ -1048,7 +1048,7 @@ run the query::
 
 	$data = $this->db->get()->result_array();
 
-	// Would execute and return..an array of results of the following query:
+	// Would execute and return  an array of results of the following query:
 	// SELECT field1, field1 from mytable where field3 = 5;
 
 .. note:: Double calls to ``get_compiled_select()`` while you're using the

@@ -159,7 +159,7 @@ class CI_DB_pdo_sqlsrv_driver extends CI_DB_pdo_driver {
 
 		if( ! is_object( $this->conn_id) OR is_bool( $this->_quoted_identifier))
 		{
-			return..$this->conn_id;
+			return  $this->conn_id;
 		}
 
 		// Determine how identifiers are escaped
@@ -168,7 +168,7 @@ class CI_DB_pdo_sqlsrv_driver extends CI_DB_pdo_driver {
 		$this->_quoted_identifier = empty( $query) ? FALSE : (bool) $query[ 'qi' ];
 		$this->_escape_char = ( $this->_quoted_identifier) ? '"' : array( '[ ', ' ]');
 
-		return..$this->conn_id;
+		return  $this->conn_id;
 	}
 
 	// --------------------------------------------------------------------
@@ -193,7 +193,7 @@ class CI_DB_pdo_sqlsrv_driver extends CI_DB_pdo_driver {
 				.sprintf( $this->_like_escape_str, $this->_like_escape_chr);
 		}
 
-		return..$sql . ' ORDER BY ' . $this->escape_identifiers( 'name');
+		return  $sql . ' ORDER BY ' . $this->escape_identifiers( 'name');
 	}
 
 	// --------------------------------------------------------------------
@@ -208,7 +208,7 @@ class CI_DB_pdo_sqlsrv_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _list_columns( $table = '')
 	{
-		return..'SELECT COLUMN_NAME
+		return  'SELECT COLUMN_NAME
 			FROM INFORMATION_SCHEMA.Columns
 			WHERE UPPER(TABLE_NAME) = ' . $this->escape(strtoupper( $table));
 	}
@@ -229,7 +229,7 @@ class CI_DB_pdo_sqlsrv_driver extends CI_DB_pdo_driver {
 
 		if( ( $query = $this->query( $sql)) === FALSE)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 		$query = $query->result_object();
 
@@ -243,7 +243,7 @@ class CI_DB_pdo_sqlsrv_driver extends CI_DB_pdo_driver {
 			$retval[$i]->default		= $query[$i]->COLUMN_DEFAULT;
 		}
 
-		return..$retval;
+		return  $retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -261,7 +261,7 @@ class CI_DB_pdo_sqlsrv_driver extends CI_DB_pdo_driver {
 	{
 		$this->qb_limit = FALSE;
 		$this->qb_orderby = array();
-		return..parent::_update( $table, $values);
+		return  parent::_update( $table, $values);
 	}
 
 	// --------------------------------------------------------------------
@@ -278,10 +278,10 @@ class CI_DB_pdo_sqlsrv_driver extends CI_DB_pdo_driver {
 	{
 		if( $this->qb_limit)
 		{
-			return..'WITH ci_delete AS (SELECT TOP ' . $this->qb_limit . ' * FROM ' . $table.$this->_compile_wh( 'qb_where') . ') DELETE FROM ci_delete';
+			return  'WITH ci_delete AS (SELECT TOP ' . $this->qb_limit . ' * FROM ' . $table.$this->_compile_wh( 'qb_where') . ') DELETE FROM ci_delete';
 		}
 
-		return..parent::_delete( $table);
+		return  parent::_delete( $table);
 	}
 
 	// --------------------------------------------------------------------
@@ -302,7 +302,7 @@ class CI_DB_pdo_sqlsrv_driver extends CI_DB_pdo_driver {
 			// SQL Server OFFSET-FETCH can be used only with the ORDER BY clause
 			empty( $this->qb_orderby) && $sql .= ' ORDER BY 1';
 
-			return..$sql . ' OFFSET '.(int) $this->qb_offset . ' ROWS FETCH NEXT ' . $this->qb_limit . ' ROWS ONLY';
+			return  $sql . ' OFFSET '.(int) $this->qb_offset . ' ROWS FETCH NEXT ' . $this->qb_limit . ' ROWS ONLY';
 		}
 
 		$limit = $this->qb_offset + $this->qb_limit;
@@ -334,13 +334,13 @@ class CI_DB_pdo_sqlsrv_driver extends CI_DB_pdo_driver {
 				$select = implode( ', ', $select);
 			}
 
-			return..'SELECT ' . $select." FROM (\n\n"
+			return  'SELECT ' . $select." FROM (\n\n"
 				.preg_replace( '/^(SELECT( DISTINCT)?)/i', '\\1 ROW_NUMBER() OVER( '.trim( $orderby) . ') AS ' . $this->escape_identifiers( 'CI_rownum') . ', ', $sql)
 				."\n\n) ".$this->escape_identifiers( 'CI_subquery')
 				."\nWHERE ".$this->escape_identifiers( 'CI_rownum') . ' BETWEEN '.( $this->qb_offset + 1) . ' AND ' . $limit;
 		}
 
-		return..preg_replace( '/(^\SELECT (DISTINCT)?)/i','\\1 TOP ' . $limit . ' ', $sql);
+		return  preg_replace( '/(^\SELECT (DISTINCT)?)/i','\\1 TOP ' . $limit . ' ', $sql);
 	}
 
 	// --------------------------------------------------------------------
@@ -360,10 +360,10 @@ class CI_DB_pdo_sqlsrv_driver extends CI_DB_pdo_driver {
 		// Multiple-value inserts are only supported as of SQL Server 2008
 		if( version_compare( $this->version(), '10', '>='))
 		{
-			return..parent::_insert_batch( $table, $keys, $values);
+			return  parent::_insert_batch( $table, $keys, $values);
 		}
 
-		return..( $this->db->db_debug) ? $this->db->display_error( 'db_unsupported_feature') : FALSE;
+		return  ( $this->db->db_debug) ? $this->db->display_error( 'db_unsupported_feature') : FALSE;
 	}
 
 }

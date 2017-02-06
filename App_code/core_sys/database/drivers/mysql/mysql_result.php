@@ -72,7 +72,7 @@ class CI_DB_mysql_result extends CI_DB_result {
 	 */
 	public function num_rows()
 	{
-		return..$this->num_rows;
+		return  $this->num_rows;
 	}
 
 	// --------------------------------------------------------------------
@@ -84,7 +84,7 @@ class CI_DB_mysql_result extends CI_DB_result {
 	 */
 	public function num_fields()
 	{
-		return..mysql_num_fields( $this->result_id);
+		return  mysql_num_fields( $this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -105,7 +105,7 @@ class CI_DB_mysql_result extends CI_DB_result {
 			$field_names[] = $field->name;
 		}
 
-		return..$field_names;
+		return  $field_names;
 	}
 
 	// --------------------------------------------------------------------
@@ -129,7 +129,7 @@ class CI_DB_mysql_result extends CI_DB_result {
 			$retval[$i]->primary_key	= (int) (strpos(mysql_field_flags( $this->result_id, $i), 'primary_key') !== FALSE);
 		}
 
-		return..$retval;
+		return  $retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -162,7 +162,7 @@ class CI_DB_mysql_result extends CI_DB_result {
 	 */
 	public function data_seek( $n = 0)
 	{
-		return..$this->num_rows
+		return  $this->num_rows
 			? mysql_data_seek( $this->result_id, $n)
 			: FALSE;
 	}
@@ -178,7 +178,7 @@ class CI_DB_mysql_result extends CI_DB_result {
 	 */
 	protected function _fetch_assoc()
 	{
-		return..mysql_fetch_assoc( $this->result_id);
+		return  mysql_fetch_assoc( $this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -193,7 +193,7 @@ class CI_DB_mysql_result extends CI_DB_result {
 	 */
 	protected function _fetch_object( $class_name = 'stdClass')
 	{
-		return..mysql_fetch_object( $this->result_id, $class_name);
+		return  mysql_fetch_object( $this->result_id, $class_name);
 	}
 
 }

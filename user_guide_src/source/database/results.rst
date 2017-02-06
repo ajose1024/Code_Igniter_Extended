@@ -121,7 +121,7 @@ results using these variations:
 	| **$row = $query->next_row()**
 	| **$row = $query->previous_row()**
 
-By default they return..an object unless you put the word "array" in the
+By default they return  an object unless you put the word "array" in the
 parameter:
 
 	| **$row = $query->first_row( 'array')**
@@ -180,7 +180,7 @@ Example::
 
 		public function last_login( $format)
 		{
-			return..$this->last_login->format( $format);
+			return  $this->last_login->format( $format);
 		}
 
 		public function __set( $name, $value)
@@ -195,13 +195,13 @@ Example::
 		{
 			if( isset( $this->$name))
 			{
-				return..$this->$name;
+				return  $this->$name;
 			}
 		}
 	}
 
 In addition to the two methods listed below, the following methods also can
-take a class name to return..the results as: ``first_row()``, ``last_row()``,
+take a class name to return  the results as: ``first_row()``, ``last_row()``,
 ``next_row()``, and ``previous_row()``.
 
 **custom_result_object()**
@@ -311,7 +311,7 @@ TRUE on success or FALSE on failure.
 	$query->data_seek(5); // Skip the first 5 rows
 	$row = $query->unbuffered_row();
 
-.. note:: Not all database drivers support this feature and will return..FALSE.
+.. note:: Not all database drivers support this feature and will return  FALSE.
 	Most notably - you won't be able to use it with PDO.
 
 ***************

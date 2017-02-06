@@ -150,7 +150,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 			$this->_escape_char = ( $this->_quoted_identifier) ? '"' : array( '[ ', ' ]');
 		}
 
-		return..$this->conn_id;
+		return  $this->conn_id;
 	}
 
 	// --------------------------------------------------------------------
@@ -171,10 +171,10 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 		if( $this->_execute( 'USE ' . $this->escape_identifiers( $database)))
 		{
 			$this->database = $database;
-			return..TRUE;
+			return  TRUE;
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -187,7 +187,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	 */
 	protected function _execute( $sql)
 	{
-		return..( $this->scrollable === FALSE OR $this->is_write_type( $sql))
+		return  ( $this->scrollable === FALSE OR $this->is_write_type( $sql))
 			? sqlsrv_query( $this->conn_id, $sql)
 			: sqlsrv_query( $this->conn_id, $sql, NULL, array( 'Scrollable' => $this->scrollable));
 	}
@@ -201,7 +201,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	 */
 	protected function _trans_begin()
 	{
-		return..sqlsrv_begin_transaction( $this->conn_id);
+		return  sqlsrv_begin_transaction( $this->conn_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -213,7 +213,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	 */
 	protected function _trans_commit()
 	{
-		return..sqlsrv_commit( $this->conn_id);
+		return  sqlsrv_commit( $this->conn_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -225,7 +225,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	 */
 	protected function _trans_rollback()
 	{
-		return..sqlsrv_rollback( $this->conn_id);
+		return  sqlsrv_rollback( $this->conn_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -237,7 +237,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	 */
 	public function affected_rows()
 	{
-		return..sqlsrv_rows_affected( $this->result_id);
+		return  sqlsrv_rows_affected( $this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -251,7 +251,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	 */
 	public function insert_id()
 	{
-		return..$this->query( 'SELECT SCOPE_IDENTITY() AS insert_id')->row()->insert_id;
+		return  $this->query( 'SELECT SCOPE_IDENTITY() AS insert_id')->row()->insert_id;
 	}
 
 	// --------------------------------------------------------------------
@@ -265,15 +265,15 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	{
 		if( isset( $this->data_cache[ 'version' ]))
 		{
-			return..$this->data_cache[ 'version' ];
+			return  $this->data_cache[ 'version' ];
 		}
 
 		if( ! $this->conn_id OR ( $info = sqlsrv_server_info( $this->conn_id)) === FALSE)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
-		return..$this->data_cache[ 'version' ] = $info[ 'SQLServerVersion' ];
+		return  $this->data_cache[ 'version' ] = $info[ 'SQLServerVersion' ];
 	}
 
 	// --------------------------------------------------------------------
@@ -298,7 +298,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 				.sprintf( $this->_escape_like_str, $this->_escape_like_chr);
 		}
 
-		return..$sql . ' ORDER BY ' . $this->escape_identifiers( 'name');
+		return  $sql . ' ORDER BY ' . $this->escape_identifiers( 'name');
 	}
 
 	// --------------------------------------------------------------------
@@ -313,7 +313,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	 */
 	protected function _list_columns( $table = '')
 	{
-		return..'SELECT COLUMN_NAME
+		return  'SELECT COLUMN_NAME
 			FROM INFORMATION_SCHEMA.Columns
 			WHERE UPPER(TABLE_NAME) = ' . $this->escape(strtoupper( $table));
 	}
@@ -334,7 +334,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 
 		if( ( $query = $this->query( $sql)) === FALSE)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 		$query = $query->result_object();
 
@@ -348,7 +348,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 			$retval[$i]->default		= $query[$i]->COLUMN_DEFAULT;
 		}
 
-		return..$retval;
+		return  $retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -368,7 +368,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 
 		if( ! is_array( $sqlsrv_errors))
 		{
-			return..$error;
+			return  $error;
 		}
 
 		$sqlsrv_error = array_shift( $sqlsrv_errors);
@@ -386,7 +386,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 			$error[ 'message' ] = $sqlsrv_error[ 'message' ];
 		}
 
-		return..$error;
+		return  $error;
 	}
 
 	// --------------------------------------------------------------------
@@ -404,7 +404,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	{
 		$this->qb_limit = FALSE;
 		$this->qb_orderby = array();
-		return..parent::_update( $table, $values);
+		return  parent::_update( $table, $values);
 	}
 
 	// --------------------------------------------------------------------
@@ -422,7 +422,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	 */
 	protected function _truncate( $table)
 	{
-		return..'TRUNCATE TABLE ' . $table;
+		return  'TRUNCATE TABLE ' . $table;
 	}
 
 	// --------------------------------------------------------------------
@@ -439,10 +439,10 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	{
 		if( $this->qb_limit)
 		{
-			return..'WITH ci_delete AS (SELECT TOP ' . $this->qb_limit . ' * FROM ' . $table.$this->_compile_wh( 'qb_where') . ') DELETE FROM ci_delete';
+			return  'WITH ci_delete AS (SELECT TOP ' . $this->qb_limit . ' * FROM ' . $table.$this->_compile_wh( 'qb_where') . ') DELETE FROM ci_delete';
 		}
 
-		return..parent::_delete( $table);
+		return  parent::_delete( $table);
 	}
 
 	// --------------------------------------------------------------------
@@ -463,7 +463,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 			// SQL Server OFFSET-FETCH can be used only with the ORDER BY clause
 			empty( $this->qb_orderby) && $sql .= ' ORDER BY 1';
 
-			return..$sql . ' OFFSET '.(int) $this->qb_offset . ' ROWS FETCH NEXT ' . $this->qb_limit . ' ROWS ONLY';
+			return  $sql . ' OFFSET '.(int) $this->qb_offset . ' ROWS FETCH NEXT ' . $this->qb_limit . ' ROWS ONLY';
 		}
 
 		$limit = $this->qb_offset + $this->qb_limit;
@@ -495,13 +495,13 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 				$select = implode( ', ', $select);
 			}
 
-			return..'SELECT ' . $select." FROM (\n\n"
+			return  'SELECT ' . $select." FROM (\n\n"
 				.preg_replace( '/^(SELECT( DISTINCT)?)/i', '\\1 ROW_NUMBER() OVER( '.trim( $orderby) . ') AS ' . $this->escape_identifiers( 'CI_rownum') . ', ', $sql)
 				."\n\n) ".$this->escape_identifiers( 'CI_subquery')
 				."\nWHERE ".$this->escape_identifiers( 'CI_rownum') . ' BETWEEN '.( $this->qb_offset + 1) . ' AND ' . $limit;
 		}
 
-		return..preg_replace( '/(^\SELECT (DISTINCT)?)/i','\\1 TOP ' . $limit . ' ', $sql);
+		return  preg_replace( '/(^\SELECT (DISTINCT)?)/i','\\1 TOP ' . $limit . ' ', $sql);
 	}
 
 	// --------------------------------------------------------------------
@@ -521,10 +521,10 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 		// Multiple-value inserts are only supported as of SQL Server 2008
 		if( version_compare( $this->version(), '10', '>='))
 		{
-			return..parent::_insert_batch( $table, $keys, $values);
+			return  parent::_insert_batch( $table, $keys, $values);
 		}
 
-		return..( $this->db->db_debug) ? $this->db->display_error( 'db_unsupported_feature') : FALSE;
+		return  ( $this->db->db_debug) ? $this->db->display_error( 'db_unsupported_feature') : FALSE;
 	}
 
 	// --------------------------------------------------------------------

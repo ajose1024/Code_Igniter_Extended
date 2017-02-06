@@ -60,10 +60,10 @@ class CI_DB_ibase_utility extends CI_DB_utility {
 
 			// Close the service connection
 			ibase_service_detach( $service);
-			return..$res;
+			return  $res;
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 
 }

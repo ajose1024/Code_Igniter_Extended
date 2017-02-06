@@ -57,7 +57,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 	 */
 	public function num_rows()
 	{
-		return..is_int( $this->num_rows)
+		return  is_int( $this->num_rows)
 			? $this->num_rows
 			: $this->num_rows = mssql_num_rows( $this->result_id);
 	}
@@ -71,7 +71,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 	 */
 	public function num_fields()
 	{
-		return..mssql_num_fields( $this->result_id);
+		return  mssql_num_fields( $this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -92,7 +92,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 			$field_names[] = $field->name;
 		}
 
-		return..$field_names;
+		return  $field_names;
 	}
 
 	// --------------------------------------------------------------------
@@ -117,7 +117,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 			$retval[$i]->max_length	= $field->max_length;
 		}
 
-		return..$retval;
+		return  $retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -150,7 +150,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 	 */
 	public function data_seek( $n = 0)
 	{
-		return..mssql_data_seek( $this->result_id, $n);
+		return  mssql_data_seek( $this->result_id, $n);
 	}
 
 	// --------------------------------------------------------------------
@@ -164,7 +164,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 	 */
 	protected function _fetch_assoc()
 	{
-		return..mssql_fetch_assoc( $this->result_id);
+		return  mssql_fetch_assoc( $this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -183,7 +183,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 
 		if( $class_name === 'stdClass' OR ! $row)
 		{
-			return..$row;
+			return  $row;
 		}
 
 		$class_name = new $class_name();
@@ -192,7 +192,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 			$class_name->$key = $value;
 		}
 
-		return..$class_name;
+		return  $class_name;
 	}
 
 }

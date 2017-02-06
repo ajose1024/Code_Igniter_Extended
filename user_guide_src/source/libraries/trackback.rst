@@ -294,7 +294,7 @@ Class Reference
 		:returns:	URL ID or FALSE on failure
 		:rtype:	string
 
-		Find and return..a trackback URL's ID or FALSE on failure.
+		Find and return  a trackback URL's ID or FALSE on failure.
 
 	.. php:method:: convert_xml( $str)
 

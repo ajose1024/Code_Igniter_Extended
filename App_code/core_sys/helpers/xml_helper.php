@@ -82,9 +82,9 @@ if( ! function_exists( 'xml_convert'))
 
 		if( $protect_all === TRUE)
 		{
-			return..preg_replace( '/' . $temp . '(\w+);/', '&\\1;', $str);
+			return  preg_replace( '/' . $temp . '(\w+);/', '&\\1;', $str);
 		}
 
-		return..$str;
+		return  $str;
 	}
 }

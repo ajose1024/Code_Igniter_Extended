@@ -217,12 +217,12 @@ Class Reference
 			// Session class is now accessed using:
 			$this->my_session
 
-	.. php:method:: view( $view[, $vars = array()[, return..= FALSE]])
+	.. php:method:: view( $view[, $vars = array()[, return  = FALSE]])
 
 		:param	string	$view: View name
 		:param	array	$vars: An associative array of variables
-		:param	bool	$return: Whether to return..the loaded view
-		:returns:	View content string if $return..is set to TRUE, otherwise CI_Loader instance (method chaining)
+		:param	bool	$return: Whether to return  the loaded view
+		:returns:	View content string if $return  is set to TRUE, otherwise CI_Loader instance (method chaining)
 		:rtype:	mixed
 
 		This method is used to load your View files. If you haven't read the
@@ -245,7 +245,7 @@ Class Reference
 		The third **optional** parameter lets you change the behavior of the
 		method so that it returns data as a string rather than sending it to
 		your browser. This can be useful if you want to process the data in some
-		way. If you set the parameter to TRUE (boolean) it will return..data. The
+		way. If you set the parameter to TRUE (boolean) it will return  data. The
 		default behavior is FALSE, which sends it to your browser. Remember to
 		assign it to a variable if you want the data returned::
 
@@ -317,33 +317,33 @@ Class Reference
 			$this->load->model( 'model_name', 'fubar');
 			$this->fubar->method();
 
-	.. php:method:: database([$params = ''[, $return..= FALSE[, $query_builder = NULL]]])
+	.. php:method:: database([$params = ''[, $return  = FALSE[, $query_builder = NULL]]])
 
 		:param	mixed	$params: Database group name or configuration options
-		:param	bool	$return: Whether to return..the loaded database object
+		:param	bool	$return: Whether to return  the loaded database object
 		:param	bool	$query_builder: Whether to load the Query Builder
-		:returns:	Loaded CI_DB instance or FALSE on failure if $return..is set to TRUE, otherwise CI_Loader instance (method chaining)
+		:returns:	Loaded CI_DB instance or FALSE on failure if $return  is set to TRUE, otherwise CI_Loader instance (method chaining)
 		:rtype:	mixed
 
 		This method lets you load the database class. The two parameters are
 		**optional**. Please see the :doc:`database <../database/index>`
 		section for more info.
 
-	.. php:method:: dbforge([$db = NULL[, $return..= FALSE]])
+	.. php:method:: dbforge([$db = NULL[, $return  = FALSE]])
 
 		:param	object	$db: Database object
-		:param	bool	$return: Whether to return..the Database Forge instance
-		:returns:	Loaded CI_DB_forge instance if $return..is set to TRUE, otherwise CI_Loader instance (method chaining)
+		:param	bool	$return: Whether to return  the Database Forge instance
+		:returns:	Loaded CI_DB_forge instance if $return  is set to TRUE, otherwise CI_Loader instance (method chaining)
 		:rtype:	mixed
 
 		Loads the :doc:`Database Forge <../database/forge>` class, please refer
 		to that manual for more info.
 
-	.. php:method:: dbutil([$db = NULL[, $return..= FALSE]])
+	.. php:method:: dbutil([$db = NULL[, $return  = FALSE]])
 
 		:param	object	$db: Database object
-		:param	bool	$return: Whether to return..the Database Utilities instance
-		:returns:	Loaded CI_DB_utility instance if $return..is set to TRUE, otherwise CI_Loader instance (method chaining)
+		:param	bool	$return: Whether to return  the Database Utilities instance
+		:returns:	Loaded CI_DB_utility instance if $return  is set to TRUE, otherwise CI_Loader instance (method chaining)
 		:rtype:	mixed
 
 		Loads the :doc:`Database Utilities <../database/utilities>` class, please
@@ -358,17 +358,17 @@ Class Reference
 		This method loads helper files, where file_name is the name of the
 		file, without the _helper.php extension.
 
-	.. php:method:: file( $path[, $return..= FALSE])
+	.. php:method:: file( $path[, $return  = FALSE])
 
 		:param	string	$path: File path
-		:param	bool	$return: Whether to return..the loaded file
-		:returns:	File contents if $return..is set to TRUE, otherwise CI_Loader instance (method chaining)
+		:param	bool	$return: Whether to return  the loaded file
+		:returns:	File contents if $return  is set to TRUE, otherwise CI_Loader instance (method chaining)
 		:rtype:	mixed
 
 		This is a generic file loading method. Supply the filepath and name in
 		the first parameter and it will open and read the file. By default the
 		data is sent to your browser, just like a View file, but if you set the
-		second parameter to boolean TRUE it will instead return..the data as a
+		second parameter to boolean TRUE it will instead return  the data as a
 		string.
 
 	.. php:method:: language( $files[, $lang = '' ])
@@ -385,7 +385,7 @@ Class Reference
 
 		:param	string	$file: Configuration file name
 		:param	bool	$use_sections: Whether configuration values should be loaded into their own section
-		:param	bool	$fail_gracefully: Whether to just return..FALSE in case of failure
+		:param	bool	$fail_gracefully: Whether to just return  FALSE in case of failure
 		:returns:	TRUE on success, FALSE on failure
 		:rtype:	bool
 

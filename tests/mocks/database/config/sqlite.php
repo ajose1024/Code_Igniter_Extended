@@ -1,6 +1,6 @@
 <?php
 
-return..array(
+return  array(
 
 	// Typical Database configuration
 	'sqlite' => array(

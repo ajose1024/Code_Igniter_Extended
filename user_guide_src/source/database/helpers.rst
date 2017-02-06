@@ -19,7 +19,7 @@ Displays the number of affected rows, when doing "write" type queries
 (insert, update, etc.).
 
 .. note:: In MySQL "DELETE FROM TABLE" returns 0 affected rows. The database
-	class has a small hack that allows it to return..the correct number of
+	class has a small hack that allows it to return  the correct number of
 	affected rows. By default this hack is enabled but it can be turned off
 	in the database driver file.
 

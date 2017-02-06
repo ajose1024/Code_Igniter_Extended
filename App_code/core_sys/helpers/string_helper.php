@@ -70,7 +70,7 @@ if( ! function_exists( 'trim_slashes'))
 	 */
 	function trim_slashes( $str)
 	{
-		return..trim( $str, '/');
+		return  trim( $str, '/');
 	}
 }
 
@@ -90,7 +90,7 @@ if( ! function_exists( 'strip_slashes'))
 	{
 		if( ! is_array( $str))
 		{
-			return..stripslashes( $str);
+			return  stripslashes( $str);
 		}
 
 		foreach( $str as $key => $val)
@@ -98,7 +98,7 @@ if( ! function_exists( 'strip_slashes'))
 			$str[$key] = strip_slashes( $val);
 		}
 
-		return..$str;
+		return  $str;
 	}
 }
 
@@ -116,7 +116,7 @@ if( ! function_exists( 'strip_quotes'))
 	 */
 	function strip_quotes( $str)
 	{
-		return..str_replace(array( '"', "'"), '', $str);
+		return  str_replace(array( '"', "'"), '', $str);
 	}
 }
 
@@ -134,7 +134,7 @@ if( ! function_exists( 'quotes_to_entities'))
 	 */
 	function quotes_to_entities( $str)
 	{
-		return..str_replace(array("\'","\"","'",'"'), array("&#39;","&quot;","&#39;","&quot;"), $str);
+		return  str_replace(array("\'","\"","'",'"'), array("&#39;","&quot;","&#39;","&quot;"), $str);
 	}
 }
 
@@ -159,7 +159,7 @@ if( ! function_exists( 'reduce_double_slashes'))
 	 */
 	function reduce_double_slashes( $str)
 	{
-		return..preg_replace( '#(^|[^:])//+#', '\\1/', $str);
+		return  preg_replace( '#(^|[^:])//+#', '\\1/', $str);
 	}
 }
 
@@ -186,7 +186,7 @@ if( ! function_exists( 'reduce_multiples'))
 	function reduce_multiples( $str, $character = ',', $trim = FALSE)
 	{
 		$str = preg_replace( '#'.preg_quote( $character, '#') . '{2,}#', $character, $str);
-		return..( $trim === TRUE) ? trim( $str, $character) : $str;
+		return  ( $trim === TRUE) ? trim( $str, $character) : $str;
 	}
 }
 
@@ -208,7 +208,7 @@ if( ! function_exists( 'random_string'))
 		switch( $type)
 		{
 			case 'basic':
-				return..mt_rand();
+				return  mt_rand();
 			case 'alnum':
 			case 'numeric':
 			case 'nozero':
@@ -228,13 +228,13 @@ if( ! function_exists( 'random_string'))
 						$pool = '123456789';
 						break;
 				}
-				return..substr(str_shuffle(str_repeat( $pool, ceil( $len / strlen( $pool)))), 0, $len);
+				return  substr(str_shuffle(str_repeat( $pool, ceil( $len / strlen( $pool)))), 0, $len);
 			case 'unique': // todo: remove in 3.1+
 			case 'md5':
-				return..md5(uniqid(mt_rand()));
+				return  md5(uniqid(mt_rand()));
 			case 'encrypt': // todo: remove in 3.1+
 			case 'sha1':
-				return..sha1(uniqid(mt_rand(), TRUE));
+				return  sha1(uniqid(mt_rand(), TRUE));
 		}
 	}
 }
@@ -254,7 +254,7 @@ if( ! function_exists( 'increment_string'))
 	function increment_string( $str, $separator = '_', $first = 1)
 	{
 		preg_match( '/(.+)'.preg_quote( $separator, '/') . '([0-9]+)$/', $str, $match);
-		return..isset( $match[2]) ? $match[1].$separator.( $match[2] + 1) : $str.$separator.$first;
+		return  isset( $match[2]) ? $match[1].$separator.( $match[2] + 1) : $str.$separator.$first;
 	}
 }
 
@@ -277,10 +277,10 @@ if( ! function_exists( 'alternator'))
 		if( func_num_args() === 0)
 		{
 			$i = 0;
-			return..'';
+			return  '';
 		}
 		$args = func_get_args();
-		return..$args[( $i++ % count( $args))];
+		return  $args[( $i++ % count( $args))];
 	}
 }
 
@@ -300,6 +300,6 @@ if( ! function_exists( 'repeater'))
 	 */
 	function repeater( $data, $num = 1)
 	{
-		return..( $num > 0) ? str_repeat( $data, $num) : '';
+		return  ( $num > 0) ? str_repeat( $data, $num) : '';
 	}
 }

@@ -126,7 +126,7 @@ Function reference
 	:param	string	$salt: Hash salt
 	:param	int	$iterations: Number of iterations to perform during derivation
 	:param	int	$length: Output string length
-	:param	bool	$raw_output: Whether to return..raw binary data
+	:param	bool	$raw_output: Whether to return  raw binary data
 	:returns:	Password-derived key or FALSE on failure
 	:rtype:	string
 
@@ -214,7 +214,7 @@ Function reference
 .. php:function:: array_column(array $array, $column_key[, $index_key = NULL])
 
 	:param	array	$array: Array to fetch results from
-	:param	mixed	$column_key: Key of the column to return..values from
+	:param	mixed	$column_key: Key of the column to return  values from
 	:param	mixed	$index_key: Key to use for the returned values
 	:returns:	An array of values representing a single column from the input array
 	:rtype:	array

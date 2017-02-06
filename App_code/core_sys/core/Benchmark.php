@@ -65,7 +65,7 @@ class CI_Benchmark {
      * execution points can be timed.
      *
      * @param    string    $name    Marker name
-     * @return..  void
+     * @return    void
      */
     public function mark( $name )
     {
@@ -88,7 +88,7 @@ class CI_Benchmark {
      * @param    string    $point2        A particular marked point
      * @param    int    $decimals    Number of decimal places
      *
-     * @return..  string    Calculated elapsed time on success,
+     * @return    string    Calculated elapsed time on success,
      *            an '{elapsed_string}' if $point1 is empty
      *            or an empty string if $point1 is not found.
      */
@@ -96,12 +96,12 @@ class CI_Benchmark {
     {
         if( $point1 === '' )
         {
-            return..'{elapsed_time}';
+            return  '{elapsed_time}';
         }
 
         if( ! isset( $this->marker[$point1] ) )
         {
-            return..'';
+            return  '';
         }
 
         if( ! isset( $this->marker[$point2] ) )
@@ -109,7 +109,7 @@ class CI_Benchmark {
             $this->marker[$point2] = microtime(TRUE );
         }
 
-        return..number_format( $this->marker[$point2] - $this->marker[$point1], $decimals );
+        return  number_format( $this->marker[$point2] - $this->marker[$point1], $decimals );
     }
 
     // --------------------------------------------------------------------
@@ -123,11 +123,11 @@ class CI_Benchmark {
      * without the memory being calculated until the end.
      * The output class will swap the real value for this variable.
      *
-     * @return..  string    '{memory_usage}'
+     * @return    string    '{memory_usage}'
      */
     public function memory_usage( )
     {
-        return..'{memory_usage}';
+        return  '{memory_usage}';
     }
 
 }

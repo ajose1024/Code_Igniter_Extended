@@ -162,7 +162,7 @@ class CI_Log {
 	{
 		if( $this->_enabled === FALSE )
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$level = strtoupper( $level );
@@ -170,7 +170,7 @@ class CI_Log {
 		if( ( ! isset( $this->_levels[$level] ) OR ( $this->_levels[$level] > $this->_threshold ) )
 			&& ! isset( $this->_threshold_array[$this->_levels[$level]] ) )
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$filepath = $this->_log_path . 'log-'.date( 'Y-m-d' ) . ' . ' . $this->_file_ext;
@@ -188,7 +188,7 @@ class CI_Log {
 
 		if( ! $fp = @fopen( $filepath, 'ab' ) )
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// Instantiating DateTime with microseconds appended to initial date is needed for proper support of this format
@@ -224,7 +224,7 @@ class CI_Log {
 			chmod( $filepath, $this->_file_permissions );
 		}
 
-		return..is_int( $result );
+		return  is_int( $result );
 	}
 
 }

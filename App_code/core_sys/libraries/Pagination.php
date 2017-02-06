@@ -386,7 +386,7 @@ class CI_Pagination {
 			$this->suffix = $this->CI->config->item( 'url_suffix');
 		}
 
-		return..$this;
+		return  $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -402,7 +402,7 @@ class CI_Pagination {
 		// Note: DO NOT change the operator to === here!
 		if( $this->total_rows == 0 OR $this->per_page == 0)
 		{
-			return..'';
+			return  '';
 		}
 
 		// Calculate the total number of pages
@@ -411,7 +411,7 @@ class CI_Pagination {
 		// Is there only one page? Hm... nothing more to do here then.
 		if( $num_pages === 1)
 		{
-			return..'';
+			return  '';
 		}
 
 		// Check the user defined number of links.
@@ -648,7 +648,7 @@ class CI_Pagination {
 		$output = preg_replace( '#([^:"])//+#', '\\1/', $output);
 
 		// Add the wrapper HTML if exists
-		return..$this->full_tag_open.$output.$this->full_tag_close;
+		return  $this->full_tag_open.$output.$this->full_tag_close;
 	}
 
 	// --------------------------------------------------------------------
@@ -688,10 +688,10 @@ class CI_Pagination {
 		if( isset( $this->_link_types[$type]))
 		{
 			unset( $this->_link_types[$type]);
-			return..' rel="' . $type . '"';
+			return  ' rel="' . $type . '"';
 		}
 
-		return..'';
+		return  '';
 	}
 
 }

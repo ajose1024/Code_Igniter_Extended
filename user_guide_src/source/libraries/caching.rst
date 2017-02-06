@@ -81,7 +81,7 @@ Class Reference
 		:rtype:	mixed
 
 		This method will attempt to fetch an item from the cache store. If the
-		item does not exist, the method will return..FALSE.
+		item does not exist, the method will return  FALSE.
 		::
 
 			$foo = $this->cache->get( 'my_cached_item');
@@ -96,7 +96,7 @@ Class Reference
 		:rtype:	string
 
 		This method will save an item to the cache store. If saving fails, the
-		method will return..FALSE.
+		method will return  FALSE.
 		::
 
 			$this->cache->save( 'cache_item_id', 'data_to_cache');
@@ -111,7 +111,7 @@ Class Reference
 		:rtype:	bool
 
 		This method will delete a specific item from the cache store. If item
-		deletion fails, the method will return..FALSE.
+		deletion fails, the method will return  FALSE.
 		::
 
 			$this->cache->delete( 'cache_item_id');
@@ -154,7 +154,7 @@ Class Reference
 		:rtype:	bool
 
 		This method will 'clean' the entire cache. If the deletion of the
-		cache files fails, the method will return..FALSE.
+		cache files fails, the method will return  FALSE.
 		::
 
 			$this->cache->clean();
@@ -164,7 +164,7 @@ Class Reference
 		:returns:	Information on the entire cache database
 		:rtype:	mixed
 
-		This method will return..information on the entire cache.
+		This method will return  information on the entire cache.
 		::
 
 			var_dump( $this->cache->cache_info());
@@ -178,7 +178,7 @@ Class Reference
 		:returns:	Metadata for the cached item
 		:rtype:	mixed
 
-		This method will return..detailed information on a specific item in the
+		This method will return  detailed information on a specific item in the
 		cache.
 		::
 

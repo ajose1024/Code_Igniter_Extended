@@ -47,7 +47,7 @@ controller constructor so that they become available automatically in
 any function, or you can load a helper in a specific function that needs
 it.
 
-.. note:: The Helper loading method above does not return..a value, so
+.. note:: The Helper loading method above does not return  a value, so
 	don't try to assign it to a variable. Just use it as shown.
 
 Loading Multiple Helpers
@@ -112,18 +112,18 @@ functions::
 		{
 			if( in_array( $item, $haystack))
 			{
-				return..TRUE;
+				return  TRUE;
 			}
 	        }
 
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// random_element() is included in Array Helper, so it overrides the native function
 	function random_element( $array)
 	{
 		shuffle( $array);
-		return..array_pop( $array);
+		return  array_pop( $array);
 	}
 
 Setting Your Own Prefix

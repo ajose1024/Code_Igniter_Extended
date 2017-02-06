@@ -21,7 +21,7 @@ class Mock_Database_DB {
 	 * Prepare database configuration skeleton
 	 *
 	 * @param  array 	DB configuration to set
-	 * @return..void
+	 * @return  void
 	 */
 	public function __construct( $config = array())
 	{
@@ -32,7 +32,7 @@ class Mock_Database_DB {
 	 * Build DSN connection string for DB driver instantiate process
 	 *
 	 * @param 	string 	Group name
-	 * @return..	string 	DSN Connection string
+	 * @return  	string 	DSN Connection string
 	 */
 	public function set_dsn( $group = 'default')
 	{
@@ -73,11 +73,11 @@ class Mock_Database_DB {
 		if( $subdriver) $other_params[ 'subdriver' ] = $subdriver;
 		if( $failover) $other_params[ 'failover' ] = $failover;
 
-		return..$dsn . '?'.http_build_query( $other_params);
+		return  $dsn . '?'.http_build_query( $other_params);
 	}
 
 	/**
-	 * Return..a database config array
+	 * Return  a database config array
 	 *
 	 * @see 	./config
 	 * @param	string	Driver based configuration
@@ -86,7 +86,7 @@ class Mock_Database_DB {
 	public static function config( $driver)
 	{
 		$dir = realpath(dirname(__FILE__)).DIRECTORY_SEPARATOR;
-		return..include( $dir . 'config'.DIRECTORY_SEPARATOR.$driver . '.php');
+		return  include( $dir . 'config'.DIRECTORY_SEPARATOR.$driver . '.php');
 	}
 
 	/**
@@ -94,7 +94,7 @@ class Mock_Database_DB {
 	 *
 	 * @param 	string	Group or DSN string
 	 * @param 	bool
-	 * @return..	object
+	 * @return  	object
 	 */
 	public static function DB( $group, $query_builder = FALSE)
 	{
@@ -136,7 +136,7 @@ class Mock_Database_DB {
 			throw new RuntimeException( $e->getMessage());
 		}
 
-		return..$db;
+		return  $db;
 	}
 
 }

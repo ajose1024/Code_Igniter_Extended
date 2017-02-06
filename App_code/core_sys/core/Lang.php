@@ -79,13 +79,13 @@ class CI_Lang {
 	 *
 	 * @param	mixed	$langfile	Language file name
 	 * @param	string	$idiom		Language name (english, etc. )
-	 * @param	bool	$return		Whether to return..the loaded array of translations
+	 * @param	bool	$return		Whether to return  the loaded array of translations
 	 * @param 	bool	$add_suffix	Whether to add suffix to $langfile
 	 * @param 	string	$alt_path	Alternative path to look for the language file
 	 *
-	 * @return	void|string[]	Array containing translations, if $return..is set to TRUE
+	 * @return	void|string[]	Array containing translations, if $return  is set to TRUE
 	 */
-	public function load( $langfile, $idiom = '', $return..= FALSE, $add_suffix = TRUE, $alt_path = '' )
+	public function load( $langfile, $idiom = '', $return  = FALSE, $add_suffix = TRUE, $alt_path = '' )
 	{
 		if( is_array( $langfile ) )
 		{
@@ -112,7 +112,7 @@ class CI_Lang {
 			$idiom = empty( $config[ 'language' ] ) ? 'english' : $config[ 'language' ];
 		}
 
-		if( $return..=== FALSE && isset( $this->is_loaded[$langfile] ) && $this->is_loaded[$langfile] === $idiom )
+		if( $return  === FALSE && isset( $this->is_loaded[$langfile] ) && $this->is_loaded[$langfile] === $idiom )
 		{
 			return;
 		}
@@ -157,23 +157,23 @@ class CI_Lang {
 		{
 			log_message( 'error', 'Language file contains no data: language/' . $idiom . '/' . $langfile );
 
-			if( $return..=== TRUE )
+			if( $return  === TRUE )
 			{
-				return..array( );
+				return  array( );
 			}
 			return;
 		}
 
-		if( $return..=== TRUE )
+		if( $return  === TRUE )
 		{
-			return..$lang;
+			return  $lang;
 		}
 
 		$this->is_loaded[$langfile] = $idiom;
 		$this->language = array_merge( $this->language, $lang );
 
 		log_message( 'info', 'Language file loaded: language/' . $idiom . '/' . $langfile );
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -197,7 +197,7 @@ class CI_Lang {
 			log_message( 'error', 'Could not find the language line "' . $line . '"' );
 		}
 
-		return..$value;
+		return  $value;
 	}
 
 }

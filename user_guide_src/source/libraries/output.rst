@@ -90,7 +90,7 @@ Class Reference
 
 			$mime = $this->output->get_content_type();
 
-		.. note:: If not set, the default return..value is 'text/html'.
+		.. note:: If not set, the default return  value is 'text/html'.
 
 	.. php:method:: get_header( $header)
 

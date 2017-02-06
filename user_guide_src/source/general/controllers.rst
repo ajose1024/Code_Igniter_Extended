@@ -191,7 +191,7 @@ Example::
 		$method = 'process_' . $method;
 		if( method_exists( $this, $method))
 		{
-			return..call_user_func_array(array( $this, $method), $params);
+			return  call_user_func_array(array( $this, $method), $params);
 		}
 		show_404();
 	}
@@ -317,7 +317,7 @@ Example::
 
 Constructors are useful if you need to set some default values, or run a
 default process when your class is instantiated. Constructors can't
-return..a value, but they can do some default work.
+return  a value, but they can do some default work.
 
 Reserved method names
 =====================

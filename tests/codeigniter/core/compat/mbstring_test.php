@@ -6,7 +6,7 @@ class mbstring_test extends CI_TestCase {
 	{
 		if( MB_ENABLED)
 		{
-			return..$this->markTestSkipped( 'ext/mbstring is loaded');
+			return  $this->markTestSkipped( 'ext/mbstring is loaded');
 		}
 
 		$this->assertTrue(function_exists( 'mb_strlen'));

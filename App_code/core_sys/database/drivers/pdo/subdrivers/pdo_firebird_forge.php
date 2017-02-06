@@ -86,7 +86,7 @@ class CI_DB_pdo_firebird_forge extends CI_DB_pdo_forge {
 		// Hostname is needed for remote access
 		empty( $this->db->hostname) OR $db_name = $this->hostname . ':' . $db_name;
 
-		return..parent::create_database( '"' . $db_name . '"');
+		return  parent::create_database( '"' . $db_name . '"');
 	}
 
 	// --------------------------------------------------------------------
@@ -101,7 +101,7 @@ class CI_DB_pdo_firebird_forge extends CI_DB_pdo_forge {
 	{
 		if( ! ibase_drop_db( $this->conn_id))
 		{
-			return..( $this->db->db_debug) ? $this->db->display_error( 'db_unable_to_drop') : FALSE;
+			return  ( $this->db->db_debug) ? $this->db->display_error( 'db_unable_to_drop') : FALSE;
 		}
 		elseif( ! empty( $this->db->data_cache[ 'db_names' ]))
 		{
@@ -112,7 +112,7 @@ class CI_DB_pdo_firebird_forge extends CI_DB_pdo_forge {
 			}
 		}
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -129,7 +129,7 @@ class CI_DB_pdo_firebird_forge extends CI_DB_pdo_forge {
  	{
 		if( in_array( $alter_type, array( 'DROP', 'ADD'), TRUE))
 		{
-			return..parent::_alter_table( $alter_type, $table, $field);
+			return  parent::_alter_table( $alter_type, $table, $field);
 		}
 
 		$sql = 'ALTER TABLE ' . $this->db->escape_identifiers( $table);
@@ -138,7 +138,7 @@ class CI_DB_pdo_firebird_forge extends CI_DB_pdo_forge {
 		{
 			if( $field[$i][ '_literal' ] !== FALSE)
 			{
-				return..FALSE;
+				return  FALSE;
 			}
 
 			if( isset( $field[$i][ 'type' ]))
@@ -168,7 +168,7 @@ class CI_DB_pdo_firebird_forge extends CI_DB_pdo_forge {
 			}
 		}
 
-		return..$sqls;
+		return  $sqls;
  	}
 
 	// --------------------------------------------------------------------
@@ -181,7 +181,7 @@ class CI_DB_pdo_firebird_forge extends CI_DB_pdo_forge {
 	 */
 	protected function _process_column( $field)
 	{
-		return..$this->db->escape_identifiers( $field[ 'name' ])
+		return  $this->db->escape_identifiers( $field[ 'name' ])
 			 . ' ' . $field[ 'type' ].$field[ 'length' ]
 			.$field[ 'null' ]
 			.$field[ 'unique' ]

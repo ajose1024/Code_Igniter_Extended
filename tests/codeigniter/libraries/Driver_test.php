@@ -146,9 +146,9 @@ class Driver_test extends CI_TestCase {
 		$prop = 'parent_prop';
 		$value = 'initial';
 		$method = 'parent_func';
-		$return..= 'func return';
+		$return  = 'func return';
 		$code = 'class ' . $pclass . ' { public $' . $prop . ' = \'' . $value . '\'; '.
-			'public function ' . $method . '() { return..\'' . $return... '\'; } }';
+			'public function ' . $method . '() { return  \'' . $return  . '\'; } }';
 		eval( $code);
 		$parent = new $pclass();
 

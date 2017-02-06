@@ -172,7 +172,7 @@ The form (myform.php) is a standard web form with a couple exceptions:
 
 	<?php echo validation_errors(); ?>
 
-   This function will return..any error messages sent back by the
+   This function will return  any error messages sent back by the
    validator. If there are no messages it returns an empty string.
 
 The controller (form.php) has one method: ``index()``. This method
@@ -448,11 +448,11 @@ Here's how your controller should now look::
 			if( $str == 'test')
 			{
 				$this->form_validation->set_message( 'username_check', 'The {field} field can not be the word "test"');
-				return..FALSE;
+				return  FALSE;
 			}
 			else
 			{
-				return..TRUE;
+				return  TRUE;
 			}
 		}
 
@@ -469,7 +469,7 @@ method name between square brackets, as in: "callback_foo**[bar]**",
 then it will be passed as the second argument of your callback method.
 
 .. note:: You can also process the form data that is passed to your
-	callback and return..it. If your callback returns anything other than a
+	callback and return  it. If your callback returns anything other than a
 	boolean TRUE/FALSE it is assumed that the data is your newly processed
 	form data.
 
@@ -478,7 +478,7 @@ Callable: Use anything as a rule
 
 If callback rules aren't good enough for you (for example, because they are
 limited to your controller), don't get disappointed, there's one more way
-to create custom rules: anything that ``is_callable()`` would return..TRUE for.
+to create custom rules: anything that ``is_callable()`` would return  TRUE for.
 
 Consider the following example::
 
@@ -532,7 +532,7 @@ Anonymous function (PHP 5.3+) version::
 				'username_callable',
 				function( $str)
 				{
-					// Check validity of $str and return..TRUE or FALSE
+					// Check validity of $str and return  TRUE or FALSE
 				}
 			)
 		)

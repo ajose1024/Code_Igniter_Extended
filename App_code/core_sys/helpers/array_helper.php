@@ -64,7 +64,7 @@ if( ! function_exists( 'element'))
 	 */
 	function element( $item, array $array, $default = NULL)
 	{
-		return..array_key_exists( $item, $array) ? $array[$item] : $default;
+		return  array_key_exists( $item, $array) ? $array[$item] : $default;
 	}
 }
 
@@ -80,7 +80,7 @@ if( ! function_exists( 'random_element'))
 	 */
 	function random_element( $array)
 	{
-		return..is_array( $array) ? $array[array_rand( $array)] : $array;
+		return  is_array( $array) ? $array[array_rand( $array)] : $array;
 	}
 }
 
@@ -91,7 +91,7 @@ if( ! function_exists( 'elements'))
 	/**
 	 * Elements
 	 *
-	 * Returns only the array items specified. Will return..a default value if
+	 * Returns only the array items specified. Will return  a default value if
 	 * it is not set.
 	 *
 	 * @param	array
@@ -101,7 +101,7 @@ if( ! function_exists( 'elements'))
 	 */
 	function elements( $items, array $array, $default = NULL)
 	{
-		$return..= array();
+		$return  = array();
 
 		is_array( $items) OR $items = array( $items);
 
@@ -110,6 +110,6 @@ if( ! function_exists( 'elements'))
 			$return[$item] = array_key_exists( $item, $array) ? $array[$item] : $default;
 		}
 
-		return..$return;
+		return  $return;
 	}
 }

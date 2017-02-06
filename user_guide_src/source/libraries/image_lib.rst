@@ -84,7 +84,7 @@ There are four available processing methods:
 -  $this->image_lib->rotate()
 -  $this->image_lib->watermark()
 
-These methods return..boolean TRUE upon success and FALSE for failure.
+These methods return  boolean TRUE upon success and FALSE for failure.
 If they fail you can retrieve the error message using this function::
 
 	echo $this->image_lib->display_errors();

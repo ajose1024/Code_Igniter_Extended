@@ -163,7 +163,7 @@ class CI_Calendar {
 			$this->next_prev_url = $this->CI->config->site_url( $this->CI->router->class . '/' . $this->CI->router->method);
 		}
 
-		return..$this;
+		return  $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -336,7 +336,7 @@ class CI_Calendar {
 			$out .= "\n".$this->replacements[ 'cal_row_end' ]."\n";
 		}
 
-		return..$out .= "\n".$this->replacements[ 'table_close' ];
+		return  $out .= "\n".$this->replacements[ 'table_close' ];
 	}
 
 	// --------------------------------------------------------------------
@@ -361,7 +361,7 @@ class CI_Calendar {
 			$month_names = array( '01' => 'cal_january', '02' => 'cal_february', '03' => 'cal_march', '04' => 'cal_april', '05' => 'cal_mayl', '06' => 'cal_june', '07' => 'cal_july', '08' => 'cal_august', '09' => 'cal_september', '10' => 'cal_october', '11' => 'cal_november', '12' => 'cal_december');
 		}
 
-		return..( $this->CI->lang->line( $month_names[$month]) === FALSE)
+		return  ( $this->CI->lang->line( $month_names[$month]) === FALSE)
 			? ucfirst(substr( $month_names[$month], 4))
 			: $this->CI->lang->line( $month_names[$month]);
 	}
@@ -403,7 +403,7 @@ class CI_Calendar {
 			$days[] = ( $this->CI->lang->line( 'cal_' . $day_names[$i]) === FALSE) ? ucfirst( $day_names[$i]) : $this->CI->lang->line( 'cal_' . $day_names[$i]);
 		}
 
-		return..$days;
+		return  $days;
 	}
 
 	// --------------------------------------------------------------------
@@ -443,7 +443,7 @@ class CI_Calendar {
 			$date[ 'month' ] = '0' . $date[ 'month' ];
 		}
 
-		return..$date;
+		return  $date;
 	}
 
 	// --------------------------------------------------------------------
@@ -458,7 +458,7 @@ class CI_Calendar {
 	public function get_total_days( $month, $year)
 	{
 		$this->CI->load->helper( 'date');
-		return..days_in_month( $month, $year);
+		return  days_in_month( $month, $year);
 	}
 
 	// --------------------------------------------------------------------
@@ -472,7 +472,7 @@ class CI_Calendar {
 	 */
 	public function default_template()
 	{
-		return..array(
+		return  array(
 			'table_open'				=> '<table border="0" cellpadding="4" cellspacing="0">',
 			'heading_row_start'			=> '<tr>',
 			'heading_previous_cell'		=> '<th><a href="{previous_url}">&lt;&lt;</a></th>',
@@ -516,7 +516,7 @@ class CI_Calendar {
 
 		if( empty( $this->template))
 		{
-			return..$this;
+			return  $this;
 		}
 
 		if( is_string( $this->template))
@@ -540,7 +540,7 @@ class CI_Calendar {
 			$this->replacements = array_merge( $this->replacements, $this->template);
 		}
 
-		return..$this;
+		return  $this;
 	}
 
 }

@@ -120,11 +120,11 @@ class CI_DB_pdo_firebird_driver extends CI_DB_pdo_driver {
 
 		if( $prefix_limit === TRUE && $this->dbprefix !== '')
 		{
-			return..$sql . ' AND "RDB$RELATION_NAME" LIKE \'' . $this->escape_like_str( $this->dbprefix)."%' "
+			return  $sql . ' AND "RDB$RELATION_NAME" LIKE \'' . $this->escape_like_str( $this->dbprefix)."%' "
 				.sprintf( $this->_like_escape_str, $this->_like_escape_chr);
 		}
 
-		return..$sql;
+		return  $sql;
 	}
 
 	// --------------------------------------------------------------------
@@ -139,7 +139,7 @@ class CI_DB_pdo_firebird_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _list_columns( $table = '')
 	{
-		return..'SELECT "RDB$FIELD_NAME" FROM "RDB$RELATION_FIELDS" WHERE "RDB$RELATION_NAME" = ' . $this->escape( $table);
+		return  'SELECT "RDB$FIELD_NAME" FROM "RDB$RELATION_FIELDS" WHERE "RDB$RELATION_NAME" = ' . $this->escape( $table);
 	}
 
 	// --------------------------------------------------------------------
@@ -177,7 +177,7 @@ class CI_DB_pdo_firebird_driver extends CI_DB_pdo_driver {
 			WHERE "rfields"."RDB$RELATION_NAME" = ' . $this->escape( $table) . '
 			ORDER BY "rfields"."RDB$FIELD_POSITION"';
 
-		return..(( $query = $this->query( $sql)) !== FALSE)
+		return  (( $query = $this->query( $sql)) !== FALSE)
 			? $query->result_object()
 			: FALSE;
 	}
@@ -196,7 +196,7 @@ class CI_DB_pdo_firebird_driver extends CI_DB_pdo_driver {
 	protected function _update( $table, $values)
 	{
 		$this->qb_limit = FALSE;
-		return..parent::_update( $table, $values);
+		return  parent::_update( $table, $values);
 	}
 
 	// --------------------------------------------------------------------
@@ -214,7 +214,7 @@ class CI_DB_pdo_firebird_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _truncate( $table)
 	{
-		return..'DELETE FROM ' . $table;
+		return  'DELETE FROM ' . $table;
 	}
 
 	// --------------------------------------------------------------------
@@ -230,7 +230,7 @@ class CI_DB_pdo_firebird_driver extends CI_DB_pdo_driver {
 	protected function _delete( $table)
 	{
 		$this->qb_limit = FALSE;
-		return..parent::_delete( $table);
+		return  parent::_delete( $table);
 	}
 
 	// --------------------------------------------------------------------
@@ -257,7 +257,7 @@ class CI_DB_pdo_firebird_driver extends CI_DB_pdo_driver {
 				.( $this->qb_offset > 0 ? $this->qb_offset . ' TO '.( $this->qb_limit + $this->qb_offset) : $this->qb_limit);
 		}
 
-		return..preg_replace( '`SELECT`i', 'SELECT ' . $select, $sql);
+		return  preg_replace( '`SELECT`i', 'SELECT ' . $select, $sql);
 	}
 
 }

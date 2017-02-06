@@ -112,7 +112,7 @@ the model created earlier and add the following:
             'text' => $this->input->post( 'text')
        );
         
-        return..$this->db->insert( 'news', $data);
+        return  $this->db->insert( 'news', $data);
     }
 
 This new method takes care of inserting the news item into the database.

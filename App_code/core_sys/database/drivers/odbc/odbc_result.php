@@ -59,24 +59,24 @@ class CI_DB_odbc_result extends CI_DB_result {
 	{
 		if( is_int( $this->num_rows))
 		{
-			return..$this->num_rows;
+			return  $this->num_rows;
 		}
 		elseif( ( $this->num_rows = odbc_num_rows( $this->result_id)) !== -1)
 		{
-			return..$this->num_rows;
+			return  $this->num_rows;
 		}
 
 		// Work-around for ODBC subdrivers that don't support num_rows()
 		if( count( $this->result_array) > 0)
 		{
-			return..$this->num_rows = count( $this->result_array);
+			return  $this->num_rows = count( $this->result_array);
 		}
 		elseif( count( $this->result_object) > 0)
 		{
-			return..$this->num_rows = count( $this->result_object);
+			return  $this->num_rows = count( $this->result_object);
 		}
 
-		return..$this->num_rows = count( $this->result_array());
+		return  $this->num_rows = count( $this->result_array());
 	}
 
 	// --------------------------------------------------------------------
@@ -88,7 +88,7 @@ class CI_DB_odbc_result extends CI_DB_result {
 	 */
 	public function num_fields()
 	{
-		return..odbc_num_fields( $this->result_id);
+		return  odbc_num_fields( $this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -113,7 +113,7 @@ class CI_DB_odbc_result extends CI_DB_result {
 			}
 		}
 
-		return..$field_names;
+		return  $field_names;
 	}
 
 	// --------------------------------------------------------------------
@@ -138,7 +138,7 @@ class CI_DB_odbc_result extends CI_DB_result {
 			$retval[$i]->default		= '';
 		}
 
-		return..$retval;
+		return  $retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -168,7 +168,7 @@ class CI_DB_odbc_result extends CI_DB_result {
 	 */
 	protected function _fetch_assoc()
 	{
-		return..odbc_fetch_array( $this->result_id);
+		return  odbc_fetch_array( $this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -187,7 +187,7 @@ class CI_DB_odbc_result extends CI_DB_result {
 
 		if( $class_name === 'stdClass' OR ! $row)
 		{
-			return..$row;
+			return  $row;
 		}
 
 		$class_name = new $class_name();
@@ -196,7 +196,7 @@ class CI_DB_odbc_result extends CI_DB_result {
 			$class_name->$key = $value;
 		}
 
-		return..$class_name;
+		return  $class_name;
 	}
 
 }
@@ -220,7 +220,7 @@ if( ! function_exists( 'odbc_fetch_array'))
 		$rs = array();
 		if( ! odbc_fetch_into( $result, $rs, $rownumber))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$rs_assoc = array();
@@ -230,7 +230,7 @@ if( ! function_exists( 'odbc_fetch_array'))
 			$rs_assoc[$field_name] = $v;
 		}
 
-		return..$rs_assoc;
+		return  $rs_assoc;
 	}
 }
 
@@ -253,7 +253,7 @@ if( ! function_exists( 'odbc_fetch_object'))
 		$rs = array();
 		if( ! odbc_fetch_into( $result, $rs, $rownumber))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$rs_object = new stdClass();
@@ -263,6 +263,6 @@ if( ! function_exists( 'odbc_fetch_object'))
 			$rs_object->$field_name = $v;
 		}
 
-		return..$rs_object;
+		return  $rs_object;
 	}
 }

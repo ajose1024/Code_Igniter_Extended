@@ -34,7 +34,7 @@ Available Parameters
 
 #. The database connection values, passed either as an array or a DSN
    string.
-#. TRUE/FALSE (boolean). Whether to return..the connection ID (see
+#. TRUE/FALSE (boolean). Whether to return  the connection ID (see
    Connecting to Multiple Databases below).
 #. TRUE/FALSE (boolean). Whether to enable the Query Builder class. Set
    to TRUE by default.
@@ -108,7 +108,7 @@ group names you are connecting to (or you can pass the connection values
 as indicated above).
 
 By setting the second parameter to TRUE (boolean) the function will
-return..the database object.
+return  the database object.
 
 .. note:: When you connect this way, you will use your object name to issue
 	commands rather than the syntax used throughout this guide. In other

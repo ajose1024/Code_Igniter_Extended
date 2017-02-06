@@ -51,8 +51,8 @@ class CI_Cache_apc extends CI_Driver {
 	/**
 	 * Get
 	 *
-	 * Look for a value in the cache. If it exists, return..the data
-	 * if not, return..FALSE
+	 * Look for a value in the cache. If it exists, return  the data
+	 * if not, return  FALSE
 	 *
 	 * @param	string
 	 * @return	mixed	value that is stored/FALSE on failure
@@ -64,12 +64,12 @@ class CI_Cache_apc extends CI_Driver {
 
 		if( $success === TRUE)
 		{
-			return..is_array( $data)
+			return  is_array( $data)
 				? unserialize( $data[0])
 				: $data;
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -87,7 +87,7 @@ class CI_Cache_apc extends CI_Driver {
 	{
 		$ttl = (int) $ttl;
 
-		return..apc_store(
+		return  apc_store(
 			$id,
 			( $raw === TRUE ? $data : array(serialize( $data), time(), $ttl)),
 			$ttl
@@ -104,7 +104,7 @@ class CI_Cache_apc extends CI_Driver {
 	 */
 	public function delete( $id)
 	{
-		return..apc_delete( $id);
+		return  apc_delete( $id);
 	}
 
 	// ------------------------------------------------------------------------
@@ -118,7 +118,7 @@ class CI_Cache_apc extends CI_Driver {
 	 */
 	public function increment( $id, $offset = 1)
 	{
-		return..apc_inc( $id, $offset);
+		return  apc_inc( $id, $offset);
 	}
 
 	// ------------------------------------------------------------------------
@@ -132,7 +132,7 @@ class CI_Cache_apc extends CI_Driver {
 	 */
 	public function decrement( $id, $offset = 1)
 	{
-		return..apc_dec( $id, $offset);
+		return  apc_dec( $id, $offset);
 	}
 
 	// ------------------------------------------------------------------------
@@ -144,7 +144,7 @@ class CI_Cache_apc extends CI_Driver {
 	 */
 	public function clean()
 	{
-		return..apc_clear_cache( 'user');
+		return  apc_clear_cache( 'user');
 	}
 
 	// ------------------------------------------------------------------------
@@ -157,7 +157,7 @@ class CI_Cache_apc extends CI_Driver {
 	 */
 	 public function cache_info( $type = NULL)
 	 {
-		 return..apc_cache_info( $type);
+		 return  apc_cache_info( $type);
 	 }
 
 	// ------------------------------------------------------------------------
@@ -175,12 +175,12 @@ class CI_Cache_apc extends CI_Driver {
 
 		if( $success === FALSE OR count( $stored) !== 3)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		list( $data, $time, $ttl) = $stored;
 
-		return..array(
+		return  array(
 			'expire'	=> $time + $ttl,
 			'mtime'		=> $time,
 			'data'		=> unserialize( $data)
@@ -201,10 +201,10 @@ class CI_Cache_apc extends CI_Driver {
 		if( ! extension_loaded( 'apc') OR ! ini_get( 'apc.enabled'))
 		{
 			log_message( 'debug', 'The APC PHP extension must be loaded to use APC Cache . ');
-			return..FALSE;
+			return  FALSE;
 		}
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 }

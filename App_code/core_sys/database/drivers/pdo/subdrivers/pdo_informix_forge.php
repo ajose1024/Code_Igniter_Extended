@@ -90,7 +90,7 @@ class CI_DB_pdo_informix_forge extends CI_DB_pdo_forge {
 			$alter_type = 'MODIFY';
 		}
 
-		return..parent::_alter_table( $alter_type, $table, $field);
+		return  parent::_alter_table( $alter_type, $table, $field);
 	}
 
 	// --------------------------------------------------------------------

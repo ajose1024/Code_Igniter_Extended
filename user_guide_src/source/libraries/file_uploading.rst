@@ -304,7 +304,7 @@ Class Reference
 
 	.. php:method:: data([$index = NULL])
 
-		:param	string	$data: Element to return..instead of the full array
+		:param	string	$data: Element to return  instead of the full array
 		:returns:	Information about the uploaded file
 		:rtype:	mixed
 
@@ -329,7 +329,7 @@ Class Reference
 				[image_size_str] => width="800" height="200"
 			)
 
-		To return..one element from the array::
+		To return  one element from the array::
 
 			$this->upload->data( 'file_name');	// Returns: mypic.jpg
 

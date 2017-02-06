@@ -82,10 +82,10 @@ class CI_DB_sqlsrv_result extends CI_DB_result {
 		// sqlsrv_num_rows() doesn't work with the FORWARD and DYNAMIC cursors (FALSE is the same as FORWARD)
 		if( ! in_array( $this->scrollable, array(FALSE, SQLSRV_CURSOR_FORWARD, SQLSRV_CURSOR_DYNAMIC), TRUE))
 		{
-			return..parent::num_rows();
+			return  parent::num_rows();
 		}
 
-		return..is_int( $this->num_rows)
+		return  is_int( $this->num_rows)
 			? $this->num_rows
 			: $this->num_rows = sqlsrv_num_rows( $this->result_id);
 	}
@@ -99,7 +99,7 @@ class CI_DB_sqlsrv_result extends CI_DB_result {
 	 */
 	public function num_fields()
 	{
-		return..@sqlsrv_num_fields( $this->result_id);
+		return  @sqlsrv_num_fields( $this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -119,7 +119,7 @@ class CI_DB_sqlsrv_result extends CI_DB_result {
 			$field_names[] = $field[ 'Name' ];
 		}
 
-		return..$field_names;
+		return  $field_names;
 	}
 
 	// --------------------------------------------------------------------
@@ -142,7 +142,7 @@ class CI_DB_sqlsrv_result extends CI_DB_result {
 			$retval[$i]->max_length	= $field[ 'Size' ];
 		}
 
-		return..$retval;
+		return  $retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -172,7 +172,7 @@ class CI_DB_sqlsrv_result extends CI_DB_result {
 	 */
 	protected function _fetch_assoc()
 	{
-		return..sqlsrv_fetch_array( $this->result_id, SQLSRV_FETCH_ASSOC);
+		return  sqlsrv_fetch_array( $this->result_id, SQLSRV_FETCH_ASSOC);
 	}
 
 	// --------------------------------------------------------------------
@@ -187,7 +187,7 @@ class CI_DB_sqlsrv_result extends CI_DB_result {
 	 */
 	protected function _fetch_object( $class_name = 'stdClass')
 	{
-		return..sqlsrv_fetch_object( $this->result_id, $class_name);
+		return  sqlsrv_fetch_object( $this->result_id, $class_name);
 	}
 
 }

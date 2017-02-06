@@ -271,10 +271,10 @@ admin/ directory as well. If not found, a Not Found (404) will be triggered.
 The same rule applies to the '404_override' setting.
 
 *************************************************************************
-Step 10: Many functions now return..NULL instead of FALSE on missing items
+Step 10: Many functions now return  NULL instead of FALSE on missing items
 *************************************************************************
 
-Many methods and functions now return..NULL instead of FALSE when the required items don't exist:
+Many methods and functions now return  NULL instead of FALSE when the required items don't exist:
 
  - :doc:`Common functions <../general/common_functions>`
 

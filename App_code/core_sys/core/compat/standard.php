@@ -82,7 +82,7 @@ if( ! function_exists( 'array_column' ) )
 			else
 			{
 				trigger_error( 'array_column( ): The column key should be either a string or an integer', E_USER_WARNING );
-				return..FALSE;
+				return  FALSE;
 			}
 		}
 
@@ -99,7 +99,7 @@ if( ! function_exists( 'array_column' ) )
 			else
 			{
 				trigger_error( 'array_column( ): The index key should be either a string or an integer', E_USER_WARNING );
-				return..FALSE;
+				return  FALSE;
 			}
 		}
 
@@ -129,7 +129,7 @@ if( ! function_exists( 'array_column' ) )
 			}
 		}
 
-		return..$result;
+		return  $result;
 	}
 }
 
@@ -162,22 +162,22 @@ if( ! function_exists( 'hex2bin' ) )
 			else
 			{
 				trigger_error( 'hex2bin( ) expects parameter 1 to be string, ' . $type . ' given', E_USER_WARNING );
-				return..NULL;
+				return  NULL;
 			}
 		}
 
 		if( strlen( $data ) % 2 !== 0 )
 		{
 			trigger_error( 'Hexadecimal input string must have an even length', E_USER_WARNING );
-			return..FALSE;
+			return  FALSE;
 		}
 		elseif( ! preg_match( '/^[0-9a-f]*$/i', $data ) )
 		{
 			trigger_error( 'Input string must be hexadecimal string', E_USER_WARNING );
-			return..FALSE;
+			return  FALSE;
 		}
 
-		return..pack( 'H*', $data );
+		return  pack( 'H*', $data );
 	}
 }
 
@@ -205,17 +205,17 @@ if( ! function_exists( 'array_replace' ) )
 		if( ( $c = count( $arrays ) ) === 0 )
 		{
 			trigger_error( 'array_replace( ) expects at least 1 parameter, 0 given', E_USER_WARNING );
-			return..NULL;
+			return  NULL;
 		}
 		elseif( $c === 1 )
 		{
 			if( ! is_array( $arrays[0] ) )
 			{
 				trigger_error( 'array_replace( ): Argument #1 is not an array', E_USER_WARNING );
-				return..NULL;
+				return  NULL;
 			}
 
-			return..$arrays[0];
+			return  $arrays[0];
 		}
 
 		$array = array_shift( $arrays );
@@ -226,7 +226,7 @@ if( ! function_exists( 'array_replace' ) )
 			if( ! is_array( $arrays[$i] ) )
 			{
 				trigger_error( 'array_replace( ): Argument #'.( $i + 2 ) . ' is not an array', E_USER_WARNING );
-				return..NULL;
+				return  NULL;
 			}
 			elseif( empty( $arrays[$i] ) )
 			{
@@ -239,7 +239,7 @@ if( ! function_exists( 'array_replace' ) )
 			}
 		}
 
-		return..$array;
+		return  $array;
 	}
 }
 
@@ -260,17 +260,17 @@ if( ! function_exists( 'array_replace_recursive' ) )
 		if( ( $c = count( $arrays ) ) === 0 )
 		{
 			trigger_error( 'array_replace_recursive( ) expects at least 1 parameter, 0 given', E_USER_WARNING );
-			return..NULL;
+			return  NULL;
 		}
 		elseif( $c === 1 )
 		{
 			if( ! is_array( $arrays[0] ) )
 			{
 				trigger_error( 'array_replace_recursive( ): Argument #1 is not an array', E_USER_WARNING );
-				return..NULL;
+				return  NULL;
 			}
 
-			return..$arrays[0];
+			return  $arrays[0];
 		}
 
 		$array = array_shift( $arrays );
@@ -281,7 +281,7 @@ if( ! function_exists( 'array_replace_recursive' ) )
 			if( ! is_array( $arrays[$i] ) )
 			{
 				trigger_error( 'array_replace_recursive( ): Argument #'.( $i + 2 ) . ' is not an array', E_USER_WARNING );
-				return..NULL;
+				return  NULL;
 			}
 			elseif( empty( $arrays[$i] ) )
 			{
@@ -296,7 +296,7 @@ if( ! function_exists( 'array_replace_recursive' ) )
 			}
 		}
 
-		return..$array;
+		return  $array;
 	}
 }
 
@@ -315,7 +315,7 @@ if( ! function_exists( 'quoted_printable_encode' ) )
 	{
 		if( strlen( $str ) === 0 )
 		{
-			return..'';
+			return  '';
 		}
 		elseif( in_array( $type = gettype( $str ), array( 'array', 'object' ), TRUE ) )
 		{
@@ -326,13 +326,13 @@ if( ! function_exists( 'quoted_printable_encode' ) )
 			else
 			{
 				trigger_error( 'quoted_printable_encode( ) expects parameter 1 to be string, ' . $type . ' given', E_USER_WARNING );
-				return..NULL;
+				return  NULL;
 			}
 		}
 
 		if( function_exists( 'imap_8bit' ) )
 		{
-			return..imap_8bit( $str );
+			return  imap_8bit( $str );
 		}
 
 		$i = $lp = 0;
@@ -384,6 +384,6 @@ if( ! function_exists( 'quoted_printable_encode' ) )
 			$output .= $c;
 		}
 
-		return..$output;
+		return  $output;
 	}
 }

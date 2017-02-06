@@ -74,11 +74,11 @@ if( ! function_exists( 'mb_strlen' ) )
 	{
 		if( ICONV_ENABLED === TRUE )
 		{
-			return..iconv_strlen( $str, isset( $encoding ) ? $encoding : config_item( 'charset' ) );
+			return  iconv_strlen( $str, isset( $encoding ) ? $encoding : config_item( 'charset' ) );
 		}
 
 		log_message( 'debug', 'Compatibility (mbstring ): iconv_strlen( ) is not available, falling back to strlen( ) . ' );
-		return..strlen( $str );
+		return  strlen( $str );
 	}
 }
 
@@ -103,11 +103,11 @@ if( ! function_exists( 'mb_strpos' ) )
 	{
 		if( ICONV_ENABLED === TRUE )
 		{
-			return..iconv_strpos( $haystack, $needle, $offset, isset( $encoding ) ? $encoding : config_item( 'charset' ) );
+			return  iconv_strpos( $haystack, $needle, $offset, isset( $encoding ) ? $encoding : config_item( 'charset' ) );
 		}
 
 		log_message( 'debug', 'Compatibility (mbstring ): iconv_strpos( ) is not available, falling back to strpos( ) . ' );
-		return..strpos( $haystack, $needle, $offset );
+		return  strpos( $haystack, $needle, $offset );
 	}
 }
 
@@ -133,7 +133,7 @@ if( ! function_exists( 'mb_substr' ) )
 		if( ICONV_ENABLED === TRUE )
 		{
 			isset( $encoding ) OR $encoding = config_item( 'charset' );
-			return..iconv_substr(
+			return  iconv_substr(
 				$str,
 				$start,
 				isset( $length ) ? $length : iconv_strlen( $str, $encoding ), // NULL doesn't work
@@ -142,7 +142,7 @@ if( ! function_exists( 'mb_substr' ) )
 		}
 
 		log_message( 'debug', 'Compatibility (mbstring ): iconv_substr( ) is not available, falling back to substr( ) . ' );
-		return..isset( $length )
+		return  isset( $length )
 			? substr( $str, $start, $length )
 			: substr( $str, $start );
 	}

@@ -59,22 +59,22 @@ class CI_DB_pdo_result extends CI_DB_result {
 	{
 		if( is_int( $this->num_rows))
 		{
-			return..$this->num_rows;
+			return  $this->num_rows;
 		}
 		elseif( count( $this->result_array) > 0)
 		{
-			return..$this->num_rows = count( $this->result_array);
+			return  $this->num_rows = count( $this->result_array);
 		}
 		elseif( count( $this->result_object) > 0)
 		{
-			return..$this->num_rows = count( $this->result_object);
+			return  $this->num_rows = count( $this->result_object);
 		}
 		elseif( ( $num_rows = $this->result_id->rowCount()) > 0)
 		{
-			return..$this->num_rows = $num_rows;
+			return  $this->num_rows = $num_rows;
 		}
 
-		return..$this->num_rows = count( $this->result_array());
+		return  $this->num_rows = count( $this->result_array());
 	}
 
 	// --------------------------------------------------------------------
@@ -86,7 +86,7 @@ class CI_DB_pdo_result extends CI_DB_result {
 	 */
 	public function num_fields()
 	{
-		return..$this->result_id->columnCount();
+		return  $this->result_id->columnCount();
 	}
 
 	// --------------------------------------------------------------------
@@ -109,7 +109,7 @@ class CI_DB_pdo_result extends CI_DB_result {
 			$field_names[$i] = $field_names[$i][ 'name' ];
 		}
 
-		return..$field_names;
+		return  $field_names;
 	}
 
 	// --------------------------------------------------------------------
@@ -138,16 +138,16 @@ class CI_DB_pdo_result extends CI_DB_result {
 				$retval[$i]->primary_key	= (int) ( ! empty( $field[ 'flags' ]) && in_array( 'primary_key', $field[ 'flags' ], TRUE));
 			}
 
-			return..$retval;
+			return  $retval;
 		}
 		catch (Exception $e)
 		{
 			if( $this->db->db_debug)
 			{
-				return..$this->db->display_error( 'db_unsupported_feature');
+				return  $this->db->display_error( 'db_unsupported_feature');
 			}
 
-			return..FALSE;
+			return  FALSE;
 		}
 	}
 
@@ -177,7 +177,7 @@ class CI_DB_pdo_result extends CI_DB_result {
 	 */
 	protected function _fetch_assoc()
 	{
-		return..$this->result_id->fetch(PDO::FETCH_ASSOC);
+		return  $this->result_id->fetch(PDO::FETCH_ASSOC);
 	}
 
 	// --------------------------------------------------------------------
@@ -192,7 +192,7 @@ class CI_DB_pdo_result extends CI_DB_result {
 	 */
 	protected function _fetch_object( $class_name = 'stdClass')
 	{
-		return..$this->result_id->fetchObject( $class_name);
+		return  $this->result_id->fetchObject( $class_name);
 	}
 
 }

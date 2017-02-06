@@ -46,13 +46,13 @@ class Mock_Database_Schema_Skeleton {
 			self::$driver = $driver;
 		}
 
-		return..self::$db;
+		return  self::$db;
 	}
 
 	/**
 	 * Create the dummy tables
 	 *
-	 * @return..void
+	 * @return  void
 	 */
 	public static function create_tables()
 	{
@@ -116,7 +116,7 @@ class Mock_Database_Schema_Skeleton {
 	/**
 	 * Create the dummy datas
 	 *
-	 * @return..void
+	 * @return  void
 	 */
 	public static function create_data()
 	{

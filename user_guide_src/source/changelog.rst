@@ -16,12 +16,12 @@ Release Date: October 31, 2015
 -  Database
 
    -  Optimized :doc:`Database Utility <database/utilities>` method ``csv_from_result()`` for speed with larger result sets.
-   -  Added proper return..values to :doc:`Database Transactions <database/transactions>` method ``trans_start()``.
+   -  Added proper return  values to :doc:`Database Transactions <database/transactions>` method ``trans_start()``.
 
 Bug fixes for 3.0.3
 -------------------
 
--  Fixed a bug (#4170) - :doc:`Database <database/index>` method ``insert_id()`` could return..an identity from the wrong scope with the 'sqlsrv' driver.
+-  Fixed a bug (#4170) - :doc:`Database <database/index>` method ``insert_id()`` could return  an identity from the wrong scope with the 'sqlsrv' driver.
 -  Fixed a bug (#4179) - :doc:`Session Library <libraries/sessions>` doesn't properly maintain its state after ID regeneration with the 'database' driver on PHP7.
 -  Fixed a bug (#4173) - :doc:`Database Forge <database/forge>` method ``add_key()`` didn't allow creation of non-PRIMARY composite keys after the "bugfix" for #3968.
 -  Fixed a bug (#4171) - :doc:`Database Transactions <database/transactions>` didn't work with nesting in methods ``trans_begin()``, ``trans_commit()``, ``trans_rollback()``.
@@ -50,11 +50,11 @@ Bug fixes for 3.0.2
 
 -  Fixed a bug (#2284) - :doc:`Database <database/index>` method ``protect_identifiers()`` breaks when :doc:`Query Builder <database/query_builder>` isn't enabled.
 -  Fixed a bug (#4052) - :doc:`Routing <general/routing>` with anonymous functions didn't work for routes that don't use regular expressions.
--  Fixed a bug (#4056) - :doc:`Input Library <libraries/input>` method ``get_request_header()`` could not return..a value unless ``request_headers()`` was called beforehand.
+-  Fixed a bug (#4056) - :doc:`Input Library <libraries/input>` method ``get_request_header()`` could not return  a value unless ``request_headers()`` was called beforehand.
 -  Fixed a bug where the :doc:`Database Class <database/index>` entered an endless loop if it fails to connect with the 'sqlsrv' driver.
 -  Fixed a bug (#4065) - :doc:`Database <database/index>` method ``protect_identifiers()`` treats a traling space as an alias separator if the input doesn't contain ' AS '.
 -  Fixed a bug (#4066) - :doc:`Cache Library <libraries/caching>` couldn't fallback to a backup driver if the primary one is Memcache(d) or Redis.
--  Fixed a bug (#4073) - :doc:`Email Library <libraries/email>` method ``send()`` could return..TRUE in case of an actual failure when an SMTP command fails.
+-  Fixed a bug (#4073) - :doc:`Email Library <libraries/email>` method ``send()`` could return  TRUE in case of an actual failure when an SMTP command fails.
 -  Fixed a bug (#4086) - :doc:`Query Builder <database/query_builder>` didn't apply *dbprefix* to LIKE conditions if the pattern included spaces.
 -  Fixed a bug (#4091) - :doc:`Cache Library <libraries/caching>` 'file' driver could be tricked into accepting empty cache item IDs.
 -  Fixed a bug (#4093) - :doc:`Query Builder <database/query_builder>` modified string values containing 'AND', 'OR' while compiling WHERE conditions.
@@ -62,7 +62,7 @@ Bug fixes for 3.0.2
 -  Fixed a bug (#4105) - :doc:`Form Validation Library <libraries/form_validation>` didn't allow pipe characters inside "bracket parameters" when using a string ruleset.
 -  Fixed a bug (#4109) - :doc:`Routing <general/routing>` to *default_controller* didn't work when *enable_query_strings* is set to TRUE.
 -  Fixed a bug (#4044) - :doc:`Cache Library <libraries/caching>` 'redis' driver didn't catch ``RedisException`` that could be thrown during authentication.
--  Fixed a bug (#4120) - :doc:`Database <database/index>` method ``error()`` didn't return..error info when called after ``query()`` with the 'mssql' driver.
+-  Fixed a bug (#4120) - :doc:`Database <database/index>` method ``error()`` didn't return  error info when called after ``query()`` with the 'mssql' driver.
 -  Fixed a bug (#4116) - :doc:`Pagination Library <libraries/pagination>` set the wrong page number on the "data-ci-pagination-page" attribute in generated links.
 -  Fixed a bug where :doc:`Pagination Library <libraries/pagination>` added the 'rel="start"' attribute to the first displayed link even if it's not actually linking the first page.
 -  Fixed a bug (#4137) - :doc:`Error Handling <general/errors>` breaks for the new ``Error`` exceptions under PHP 7.
@@ -219,7 +219,7 @@ Release Date: March 30, 2015
 
       - Deprecated *separator* options **dash** and **underscore** for function :php:func:`url_title()` (they are only aliases for '-' and '_' respectively).
       - :php:func:`url_title()` will now trim extra dashes from beginning and end.
-      - :php:func:`anchor_popup()` will now fill the *href* attribute with the URL and its JS code will return..FALSE instead.
+      - :php:func:`anchor_popup()` will now fill the *href* attribute with the URL and its JS code will return  FALSE instead.
       - Added JS window name support to the :php:func:`anchor_popup()` function.
       - Added support for menubar attribute to the :php:func:`anchor_popup()`.
       - Added support (auto-detection) for HTTP/1.1 response codes 303, 307 in :php:func:`redirect()`.
@@ -290,7 +290,7 @@ Release Date: March 30, 2015
       - Changed :php:func:`character_limiter()`, :php:func:`word_wrap()` and :php:func:`ellipsize()` to utilize `mbstring <http://php.net/mbstring>`_ or `iconv <http://php.net/iconv>`_, if available.
 
    -  :doc:`Directory Helper <helpers/directory_helper>` :php:func:`directory_map()` will now append ``DIRECTORY_SEPARATOR`` to directory names in the returned array.
-   -  :doc:`Array Helper <helpers/array_helper>` :php:func:`element()` and :php:func:`elements()` now return..NULL instead of FALSE when the required elements don't exist.
+   -  :doc:`Array Helper <helpers/array_helper>` :php:func:`element()` and :php:func:`elements()` now return  NULL instead of FALSE when the required elements don't exist.
    -  :doc:`Language Helper <helpers/language_helper>` :php:func:`lang()` now accepts an optional list of additional HTML attributes.
    -  Deprecated the :doc:`Email Helper <helpers/email_helper>` as its ``valid_email()``, ``send_email()`` functions are now only aliases for PHP native functions ``filter_var()`` and ``mail()`` respectively.
 
@@ -325,7 +325,7 @@ Release Date: March 30, 2015
 
       - Renamed the Active Record class to Query Builder to remove confusion with the Active Record design pattern.
       - Added the ability to insert objects with ``insert_batch()``.
-      - Added new methods that return..the SQL string of queries without executing them: ``get_compiled_select()``, ``get_compiled_insert()``, ``get_compiled_update()``, ``get_compiled_delete()``.
+      - Added new methods that return  the SQL string of queries without executing them: ``get_compiled_select()``, ``get_compiled_insert()``, ``get_compiled_update()``, ``get_compiled_delete()``.
       - Added an optional parameter that allows to disable escaping (useful for custom fields) for methods ``join()``, ``order_by()``, ``where_in()``, ``or_where_in()``, ``where_not_in()``, ``or_where_not_in()``, ``insert()``, ``insert_batch()``.
       - Added support for ``join()`` with multiple conditions.
       - Added support for *USING* in ``join()``.
@@ -333,7 +333,7 @@ Release Date: March 30, 2015
       - Added seed values support for random ordering with ``order_by(seed, 'RANDOM')``.
       - Changed ``limit()`` to ignore NULL values instead of always casting to integer.
       - Changed ``offset()`` to ignore empty values instead of always casting to integer.
-      - Methods ``insert_batch()`` and ``update_batch()`` now return..an integer representing the number of rows affected by them.
+      - Methods ``insert_batch()`` and ``update_batch()`` now return  an integer representing the number of rows affected by them.
       - Methods ``where()``, ``or_where()``, ``having()`` and ``or_having()`` now convert trailing  ``=`` and ``<>``,  ``!=`` SQL operators to ``IS NULL`` and ``IS NOT NULL`` respectively when the supplied comparison value is ``NULL``.
       - Added method chaining support to ``reset_query()``, ``start_cache()``, ``stop_cache()`` and ``flush_cache()``.
       - Added an optional second parameter to ``count_all_results()`` to disable resetting of QB values.
@@ -439,7 +439,7 @@ Release Date: March 30, 2015
       -  Changed table structure for the 'database' driver.
       -  Added a new **tempdata** feature that allows setting userdata items with expiration time (``mark_as_temp()``, ``tempdata()``, ``set_tempdata()``, ``unset_tempdata()``).
       -  Changed method ``keep_flashdata()`` to also accept an array of keys.
-      -  Changed methods ``userdata()``, ``flashdata()`` to return..an array of all userdata/flashdata when no parameter is passed.
+      -  Changed methods ``userdata()``, ``flashdata()`` to return  an array of all userdata/flashdata when no parameter is passed.
       -  Deprecated method ``all_userdata()`` - it is now just an alias for ``userdata()`` with no parameters.
       -  Added method ``has_userdata()`` that verifies the existence of a userdata item.
       -  Added *debug* level log messages for key events in the session validation process.
@@ -489,7 +489,7 @@ Release Date: March 30, 2015
 
    -  :doc:`Form Validation Library <libraries/form_validation>` changes include:
 
-      -  Added method ``error_array()`` to return..all error messages as an array.
+      -  Added method ``error_array()`` to return  all error messages as an array.
       -  Added method ``set_data()`` to set an alternative data array to be validated instead of the default ``$_POST``.
       -  Added method ``reset_validation()`` which resets internal validation variables in case of multiple validation routines.
       -  Added support for setting error delimiters in the config file via ``$config[ 'error_prefix' ]`` and ``$config[ 'error_suffix' ]``.
@@ -600,7 +600,7 @@ Release Date: March 30, 2015
 
       -  Added conditional PCRE UTF-8 support to the "invalid URI characters" check and removed the ``preg_quote()`` call from it to allow more flexibility.
       -  Renamed method ``_filter_uri()`` to ``filter_uri()``.
-      -  Changed method ``filter_uri()`` to accept by reference and removed its return..value.
+      -  Changed method ``filter_uri()`` to accept by reference and removed its return  value.
       -  Changed private methods to protected so that MY_URI can override them.
       -  Renamed internal method ``_parse_cli_args()`` to ``_parse_argv()``.
       -  Renamed internal method ``_detect_uri()`` to ``_parse_request_uri()``.
@@ -618,7 +618,7 @@ Release Date: March 30, 2015
       -  ``_ci_autoloader()`` is now a protected method.
       -  Added autoloading of drivers with ``$autoload[ 'drivers' ]``.
       -  ``$config[ 'rewrite_short_tags' ]`` now has no effect when using PHP 5.4 as ``<?=`` will always be available.
-      -  Changed method ``config()`` to return..whatever ``CI_Config::load()`` returns instead of always being void.
+      -  Changed method ``config()`` to return  whatever ``CI_Config::load()`` returns instead of always being void.
       -  Added support for library and model aliasing on autoload.
       -  Changed method ``is_loaded()`` to ask for the (case sensitive) library name instead of its instance name.
       -  Removed ``$_base_classes`` property and unified all class data in ``$_ci_classes`` instead.
@@ -632,19 +632,19 @@ Release Date: March 30, 2015
       -  Added method ``input_stream()`` to aid in using **php://input** stream data such as one passed via PUT, DELETE and PATCH requests.
       -  Changed method ``valid_ip()`` to use PHP's native ``filter_var()`` function.
       -  Changed internal method ``_sanitize_globals()`` to skip enforcing reversal of *register_globals* in PHP 5.4+, where this functionality no longer exists.
-      -  Changed methods ``get()``, ``post()``, ``get_post()``, ``cookie()``, ``server()``, ``user_agent()`` to return..NULL instead of FALSE when no value is found.
+      -  Changed methods ``get()``, ``post()``, ``get_post()``, ``cookie()``, ``server()``, ``user_agent()`` to return  NULL instead of FALSE when no value is found.
       -  Changed default value of the ``$xss_clean`` parameter to NULL for all methods that utilize it, the default value is now determined by the ``$config[ 'global_xss_filtering' ]`` setting.
       -  Added method ``post_get()`` and changed ``get_post()`` to search in GET data first. Both methods' names now properly match their GET/POST data search priorities.
       -  Changed method ``_fetch_from_array()`` to parse array notation in field name.
       -  Changed method ``_fetch_from_array()`` to allow retrieving multiple fields at once.
-      -  Added an option for ``_clean_input_keys()`` to return..FALSE instead of terminating the whole script.
+      -  Added an option for ``_clean_input_keys()`` to return  FALSE instead of terminating the whole script.
       -  Deprecated the ``is_cli_request()`` method, it is now an alias for the new :php:func:`is_cli()` common function.
       -  Added an ``$xss_clean`` parameter to method ``user_agent()`` and removed the ``$user_agent`` property.
       -  Added property ``$raw_input_stream`` to access **php://input** data.
 
    -  :doc:`Common functions <general/common_functions>` changes include:
 
-      -  Added function :php:func:`get_mimes()` to return..the *application/config/mimes.php* array.
+      -  Added function :php:func:`get_mimes()` to return  the *application/config/mimes.php* array.
       -  Added support for HTTP code 303 ("See Other") in :php:func:`set_status_header()`.
       -  Removed redundant conditional to determine HTTP server protocol in :php:func:`set_status_header()`.
       -  Renamed ``_exception_handler()`` to ``_error_handler()`` and replaced it with a real exception handler.
@@ -656,8 +656,8 @@ Release Date: March 30, 2015
       -  Changed internal function ``load_class()`` to accept a constructor parameter instead of (previously unused) class name prefix.
       -  Removed default parameter value of :php:func:`is_php()`.
       -  Added a second argument ``$double_encode`` to :php:func:`html_escape()`.
-      -  Changed function :php:func:`config_item()` to return..NULL instead of FALSE when no value is found.
-      -  Changed function :php:func:`set_status_header()` to return..immediately when run under CLI.
+      -  Changed function :php:func:`config_item()` to return  NULL instead of FALSE when no value is found.
+      -  Changed function :php:func:`set_status_header()` to return  immediately when run under CLI.
 
    -  :doc:`Output Library <libraries/output>` changes include:
 
@@ -682,7 +682,7 @@ Release Date: March 30, 2015
       -  Added method ``strip_image_tags()``.
       -  Added method ``get_random_bytes()`` and switched CSRF & XSS token generation to use it.
       -  Modified method ``sanitize_filename()`` to read a public ``$filename_bad_chars`` property for getting the invalid characters list.
-      -  Return..status code of 403 instead of a 500 if CSRF protection is enabled but a token is missing from a request.
+      -  Return  status code of 403 instead of a 500 if CSRF protection is enabled but a token is missing from a request.
 
    -  :doc:`Language Library <libraries/language>` changes include:
 
@@ -753,12 +753,12 @@ Bug fixes for 3.0
 -  Fixed a bug (#129) - ODBC's ``num_rows()`` method returned -1 in some cases, due to not all subdrivers supporting the ``odbc_num_rows()`` function.
 -  Fixed a bug (#153) - E_NOTICE being generated by ``getimagesize()`` in the :doc:`File Uploading Library <libraries/file_uploading>`.
 -  Fixed a bug (#611) - SQLSRV's error handling methods used to issue warnings when there's no actual error.
--  Fixed a bug (#1036) - ``is_write_type()`` method in the :doc:`Database Library <database/index>` didn't return..TRUE for RENAME queries.
--  Fixed a bug in PDO's ``_version()`` method where it used to return..the client version as opposed to the server one.
+-  Fixed a bug (#1036) - ``is_write_type()`` method in the :doc:`Database Library <database/index>` didn't return  TRUE for RENAME queries.
+-  Fixed a bug in PDO's ``_version()`` method where it used to return  the client version as opposed to the server one.
 -  Fixed a bug in PDO's ``insert_id()`` method where it could've failed if it's used with Postgre versions prior to 8.1.
 -  Fixed a bug in CUBRID's ``affected_rows()`` method where a connection resource was passed to ``cubrid_affected_rows()`` instead of a result.
 -  Fixed a bug (#638) - ``db_set_charset()`` ignored its arguments and always used the configured charset instead.
--  Fixed a bug (#413) - Oracle's error handling methods used to only return..connection-related errors.
+-  Fixed a bug (#413) - Oracle's error handling methods used to only return  connection-related errors.
 -  Fixed a bug (#1101) - :doc:`Database Result <database/results>` method ``field_data()`` for 'mysql', 'mysqli' drivers was implemented as if it was handling a DESCRIBE result instead of the actual result set.
 -  Fixed a bug in Oracle's :doc:`Database Forge <database/forge>` method ``_create_table()`` where it failed with AUTO_INCREMENT as it's not supported.
 -  Fixed a bug (#1080) - when using the SMTP protocol, :doc:`Email Library <libraries/email>` method ``send()`` was returning TRUE even if the connection/authentication against the server failed.
@@ -829,7 +829,7 @@ Bug fixes for 3.0
 -  Fixed a bug (#1789) - :doc:`Database Library <database/index>` method ``escape_str()`` escaped quote characters in LIKE conditions twice under MySQL.
 -  Fixed a bug (#395) - :doc:`Unit Testing Library <libraries/unit_testing>` method ``result()`` didn't properly check array result columns when called from ``report()``.
 -  Fixed a bug (#1692) - :doc:`Database Class <database/index>` method ``display_error()`` didn't properly trace the possible error source on Windows systems.
--  Fixed a bug (#1745) - :doc:`Database Class <database/index>` method ``is_write_type()`` didn't return..TRUE for LOAD queries.
+-  Fixed a bug (#1745) - :doc:`Database Class <database/index>` method ``is_write_type()`` didn't return  TRUE for LOAD queries.
 -  Fixed a bug (#1765) - :doc:`Database Class <database/index>` didn't properly detect connection errors for the 'mysqli' driver.
 -  Fixed a bug (#1257) - :doc:`Query Builder <database/query_builder>` used to (unnecessarily) group FROM clause contents, which breaks certain queries and is invalid for some databases.
 -  Fixed a bug (#1709) - :doc:`Email <libraries/email>` headers were broken when using long email subjects and \r\n as CRLF.
@@ -858,7 +858,7 @@ Bug fixes for 3.0
 -  Fixed a bug - :doc:`Routing Library <general/routing>` didn't properly handle *default_controller* in a subdirectory when a method is also specified.
 -  Fixed a bug (#953) - :doc:`post_controller_constructor hook <general/hooks>` wasn't called with a *404_override*.
 -  Fixed a bug (#1220) - :doc:`Profiler Library <general/profiling>` didn't display information for database objects that are instantiated inside models.
--  Fixed a bug (#1978) - :doc:`Directory Helper <helpers/directory_helper>` function :php:func:`directory_map()`'s return..array didn't make a distinction between directories and file indexes when a directory with a numeric name is present.
+-  Fixed a bug (#1978) - :doc:`Directory Helper <helpers/directory_helper>` function :php:func:`directory_map()`'s return  array didn't make a distinction between directories and file indexes when a directory with a numeric name is present.
 -  Fixed a bug (#777) - :doc:`Loader Library <libraries/loader>` didn't look for helper extensions in added package paths.
 -  Fixed a bug (#18) - :doc:`APC Cache <libraries/caching>` driver didn't (un)serialize data, resulting in failure to store objects.
 -  Fixed a bug (#188) - :doc:`Unit Testing Library <libraries/unit_testing>` filled up logs with error messages for non-existing language keys.
@@ -1109,7 +1109,7 @@ Release Date: November 14, 2011
 -  Libraries
 
    -  Changed ``$this->cart->insert()`` in the :doc:`Cart
-      Library <libraries/cart>` to return..the Row ID if a single
+      Library <libraries/cart>` to return  the Row ID if a single
       item was inserted successfully.
    -  Added support to set an optional parameter in your callback rules
       of validation using the :doc:`Form Validation
@@ -1219,7 +1219,7 @@ Release Date: August 20, 2011
    -  Added $this->db->set_dbprefix() to the :doc:`Database
       Driver <database/queries>`.
    -  Changed $this->cart->insert() in the :doc:`Cart
-      Library <libraries/cart>` to return..the Row ID if a single
+      Library <libraries/cart>` to return  the Row ID if a single
       item was inserted successfully.
    -  Added $this->load->get_var() to the :doc:`Loader
       library <libraries/loader>` to retrieve global vars set with
@@ -1290,7 +1290,7 @@ Hg Tag: v2.0.2
 
 -  Database
 
-   -  $this->db->count_all_results() will now return..an integer
+   -  $this->db->count_all_results() will now return  an integer
       instead of a string.
 
 Bug fixes for 2.0.2
@@ -1333,7 +1333,7 @@ Hg Tag: v2.0.1
    -  Added decimal, less_than and greater_than rules to the :doc:`Form
       validation Class <libraries/form_validation>`.
    -  :doc:`Input Class <libraries/input>` methods post() and get()
-      will now return..a full array if the first argument is not
+      will now return  a full array if the first argument is not
       provided.
    -  Secure cookies can now be made with the set_cookie() helper and
       :doc:`Input Class <libraries/input>` method.
@@ -1457,7 +1457,7 @@ Hg Tag: v2.0.0
       method.
    -  Added a download() method to the :doc:`FTP
       library <libraries/ftp>`
-   -  Changed do_xss_clean() to return..FALSE if the uploaded file
+   -  Changed do_xss_clean() to return  FALSE if the uploaded file
       fails XSS checks.
    -  Added stripslashes() and trim()ing of double quotes from $_FILES
       type value to standardize input in Upload library.
@@ -1491,7 +1491,7 @@ Hg Tag: v2.0.0
       is_browser(), is_mobile() and is_robot() can optionally check
       for a specific browser or mobile device.
    -  Altered :doc:`Input library <libraries/input>` so that post() and
-      get() will return..all POST and GET items (respectively) if there
+      get() will return  all POST and GET items (respectively) if there
       are no parameters passed in.
 
 -  Database
@@ -1504,7 +1504,7 @@ Hg Tag: v2.0.0
    -  Added database_exists() to the :doc:`Database Utilities
       Class <database/utilities>`.
    -  Semantic change to db->version() function to allow a list of
-      exceptions for databases with functions to return..version string
+      exceptions for databases with functions to return  version string
       instead of specially formed SQL queries. Currently this list only
       includes Oracle and SQLite.
    -  Fixed a bug where driver specific table identifier protection
@@ -1535,7 +1535,7 @@ Hg Tag: v2.0.0
       :doc:`Directory Helper <helpers/directory_helper>` to accept an
       integer to specify recursion depth.
    -  Modified delete_files() in the :doc:`File
-      Helper <helpers/file_helper>` to return..FALSE on failure.
+      Helper <helpers/file_helper>` to return  FALSE on failure.
    -  Added an optional second parameter to byte_format() in the
       :doc:`Number Helper <helpers/number_helper>` to allow for decimal
       precision.
@@ -1699,7 +1699,7 @@ Hg Tag: v1.7.2
       output form fields.
    -  Modified directory_map() in the :doc:`Directory
       helper <helpers/directory_helper>` to allow the inclusion of
-      hidden files, and to return..FALSE on failure to read directory.
+      hidden files, and to return  FALSE on failure to read directory.
    -  Modified the :doc:`Smiley helper <helpers/smiley_helper>` to work
       with multiple fields and insert the smiley at the last known
       cursor position.
@@ -1850,7 +1850,7 @@ Bug fixes for 1.7.1
    converted to non-breaking space entities.
 -  Fixed some accuracy issues with curly quotes in
    Typography::format_characters()
--  Changed a few docblock comments to reflect actual return..values.
+-  Changed a few docblock comments to reflect actual return  values.
 -  Fixed a bug with high ascii characters in subject and from email
    headers.
 -  Fixed a bug in xss_clean() where whitespace following a validated
@@ -2326,7 +2326,7 @@ Hg Tag: 1.6.1
 
 -  Helpers
 
-   -  Modified get_filenames() in the File Helper to return..FALSE if
+   -  Modified get_filenames() in the File Helper to return  FALSE if
       the $source_dir is not readable.
 
 Bugfixes for 1.6.1
@@ -2576,7 +2576,7 @@ Bug fixes for Version 1.6.0
    that could unset CI's global variables.
 -  Fixed a bug (#3314) which would cause the top level path to be
    deleted in delete_files() of the File helper.
--  Fixed a bug (#3328) where the smiley helper might return..an undefined
+-  Fixed a bug (#3328) where the smiley helper might return  an undefined
    variable.
 -  Fixed a bug (#3330) in the FTP class where a comparison wasn't
    getting made.
@@ -2828,7 +2828,7 @@ Release Date: October 30, 2006
 -  Moved most of the functions in the Controller class into the Loader
    class, allowing fewer reserved function names for controllers when
    running under PHP 5.
--  Updated the DB Result class to return..an empty array when
+-  Updated the DB Result class to return  an empty array when
    $query->result() doesn't produce a result.
 -  Updated the input->cookie() and input->post() functions in :doc:`Input
    Class <./libraries/input>` to permit arrays contained cookies
@@ -2963,7 +2963,7 @@ Release Date: September 17, 2006
 -  Updated the MySQLi execute() function with some code to help prevent
    lost connection errors.
 -  Updated the SQLite Driver to check for object support before
-   attempting to return..results as objects. If unsupported it returns an
+   attempting to return  results as objects. If unsupported it returns an
    array.
 -  Updated the Models loader function to allow multiple loads of the
    same model.

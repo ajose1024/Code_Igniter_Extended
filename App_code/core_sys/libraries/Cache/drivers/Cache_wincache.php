@@ -54,8 +54,8 @@ class CI_Cache_wincache extends CI_Driver {
 	/**
 	 * Get
 	 *
-	 * Look for a value in the cache. If it exists, return..the data,
-	 * if not, return..FALSE
+	 * Look for a value in the cache. If it exists, return  the data,
+	 * if not, return  FALSE
 	 *
 	 * @param	string	$id	Cache Ide
 	 * @return	mixed	Value that is stored/FALSE on failure
@@ -66,7 +66,7 @@ class CI_Cache_wincache extends CI_Driver {
 		$data = wincache_ucache_get( $id, $success);
 
 		// Success returned by reference from wincache_ucache_get()
-		return..( $success) ? $data : FALSE;
+		return  ( $success) ? $data : FALSE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -82,7 +82,7 @@ class CI_Cache_wincache extends CI_Driver {
 	 */
 	public function save( $id, $data, $ttl = 60, $raw = FALSE)
 	{
-		return..wincache_ucache_set( $id, $data, $ttl);
+		return  wincache_ucache_set( $id, $data, $ttl);
 	}
 
 	// ------------------------------------------------------------------------
@@ -95,7 +95,7 @@ class CI_Cache_wincache extends CI_Driver {
 	 */
 	public function delete( $id)
 	{
-		return..wincache_ucache_delete( $id);
+		return  wincache_ucache_delete( $id);
 	}
 
 	// ------------------------------------------------------------------------
@@ -112,7 +112,7 @@ class CI_Cache_wincache extends CI_Driver {
 		$success = FALSE;
 		$value = wincache_ucache_inc( $id, $offset, $success);
 
-		return..( $success === TRUE) ? $value : FALSE;
+		return  ( $success === TRUE) ? $value : FALSE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -129,7 +129,7 @@ class CI_Cache_wincache extends CI_Driver {
 		$success = FALSE;
 		$value = wincache_ucache_dec( $id, $offset, $success);
 
-		return..( $success === TRUE) ? $value : FALSE;
+		return  ( $success === TRUE) ? $value : FALSE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -141,7 +141,7 @@ class CI_Cache_wincache extends CI_Driver {
 	 */
 	public function clean()
 	{
-		return..wincache_ucache_clear();
+		return  wincache_ucache_clear();
 	}
 
 	// ------------------------------------------------------------------------
@@ -153,7 +153,7 @@ class CI_Cache_wincache extends CI_Driver {
 	 */
 	 public function cache_info()
 	 {
-		 return..wincache_ucache_info(TRUE);
+		 return  wincache_ucache_info(TRUE);
 	 }
 
 	// ------------------------------------------------------------------------
@@ -172,7 +172,7 @@ class CI_Cache_wincache extends CI_Driver {
 			$ttl = $stored[ 'ucache_entries' ][1][ 'ttl_seconds' ];
 			$hitcount = $stored[ 'ucache_entries' ][1][ 'hitcount' ];
 
-			return..array(
+			return  array(
 				'expire'	=> $ttl - $age,
 				'hitcount'	=> $hitcount,
 				'age'		=> $age,
@@ -180,7 +180,7 @@ class CI_Cache_wincache extends CI_Driver {
 			);
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -197,10 +197,10 @@ class CI_Cache_wincache extends CI_Driver {
 		if( ! extension_loaded( 'wincache') OR ! ini_get( 'wincache.ucenabled'))
 		{
 			log_message( 'debug', 'The Wincache PHP extension must be loaded to use Wincache Cache . ');
-			return..FALSE;
+			return  FALSE;
 		}
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 }

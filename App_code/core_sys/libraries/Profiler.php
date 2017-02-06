@@ -184,7 +184,7 @@ class CI_Profiler {
 					.$val."</td></tr>\n";
 		}
 
-		return..$output."</table>\n</fieldset>";
+		return  $output."</table>\n</fieldset>";
 	}
 
 	// --------------------------------------------------------------------
@@ -222,7 +222,7 @@ class CI_Profiler {
 
 		if( count( $dbs) === 0)
 		{
-			return.."\n\n"
+			return  "\n\n"
 				 . '<fieldset id="ci_profiler_queries" style="border:1px solid #0000FF;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
 				."\n"
 				 . '<legend style="color:#0000FF;">&nbsp;&nbsp;' . $this->CI->lang->line( 'profiler_queries') . '&nbsp;&nbsp;</legend>'
@@ -287,7 +287,7 @@ class CI_Profiler {
 			$count++;
 		}
 
-		return..$output;
+		return  $output;
 	}
 
 	// --------------------------------------------------------------------
@@ -325,7 +325,7 @@ class CI_Profiler {
 			$output .= "</table>\n";
 		}
 
-		return..$output . '</fieldset>';
+		return  $output . '</fieldset>';
 	}
 
 	// --------------------------------------------------------------------
@@ -387,7 +387,7 @@ class CI_Profiler {
 			$output .= "</table>\n";
 		}
 
-		return..$output . '</fieldset>';
+		return  $output . '</fieldset>';
 	}
 
 	// --------------------------------------------------------------------
@@ -399,7 +399,7 @@ class CI_Profiler {
 	 */
 	protected function _compile_uri_string()
 	{
-		return.."\n\n"
+		return  "\n\n"
 			 . '<fieldset id="ci_profiler_uri_string" style="border:1px solid #000;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
 			."\n"
 			 . '<legend style="color:#000;">&nbsp;&nbsp;' . $this->CI->lang->line( 'profiler_uri_string')."&nbsp;&nbsp;</legend>\n"
@@ -417,7 +417,7 @@ class CI_Profiler {
 	 */
 	protected function _compile_controller_info()
 	{
-		return.."\n\n"
+		return  "\n\n"
 			 . '<fieldset id="ci_profiler_controller_info" style="border:1px solid #995300;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
 			."\n"
 			 . '<legend style="color:#995300;">&nbsp;&nbsp;' . $this->CI->lang->line( 'profiler_controller_info')."&nbsp;&nbsp;</legend>\n"
@@ -436,7 +436,7 @@ class CI_Profiler {
 	 */
 	protected function _compile_memory_usage()
 	{
-		return.."\n\n"
+		return  "\n\n"
 			 . '<fieldset id="ci_profiler_memory_usage" style="border:1px solid #5a0099;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
 			."\n"
 			 . '<legend style="color:#5a0099;">&nbsp;&nbsp;' . $this->CI->lang->line( 'profiler_memory_usage')."&nbsp;&nbsp;</legend>\n"
@@ -470,7 +470,7 @@ class CI_Profiler {
 				.$header . '&nbsp;&nbsp;</td><td style="width:50%;padding:5px;color:#000;background-color:#ddd;">' . $val."</td></tr>\n";
 		}
 
-		return..$output."</table>\n</fieldset>";
+		return  $output."</table>\n</fieldset>";
 	}
 
 	// --------------------------------------------------------------------
@@ -501,7 +501,7 @@ class CI_Profiler {
 				.$config . '&nbsp;&nbsp;</td><td style="padding:5px;color:#000;background-color:#ddd;">'.htmlspecialchars( $val)."</td></tr>\n";
 		}
 
-		return..$output."</table>\n</fieldset>";
+		return  $output."</table>\n</fieldset>";
 	}
 
 	// --------------------------------------------------------------------
@@ -509,7 +509,7 @@ class CI_Profiler {
 	/**
 	 * Compile session userdata
 	 *
-	 * @return..	string
+	 * @return  	string
 	 */
 	protected function _compile_session_data()
 	{
@@ -533,7 +533,7 @@ class CI_Profiler {
 				.$key . '&nbsp;&nbsp;</td><td style="padding:5px;color:#000;background-color:#ddd;">'.htmlspecialchars( $val)."</td></tr>\n";
 		}
 
-		return..$output."</table>\n</fieldset>";
+		return  $output."</table>\n</fieldset>";
 	}
 
 	// --------------------------------------------------------------------
@@ -564,7 +564,7 @@ class CI_Profiler {
 				.$this->CI->lang->line( 'profiler_no_profiles') . '</p>';
 		}
 
-		return..$output . '</div>';
+		return  $output . '</div>';
 	}
 
 }

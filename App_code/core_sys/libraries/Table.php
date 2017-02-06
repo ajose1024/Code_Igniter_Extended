@@ -135,11 +135,11 @@ class CI_Table {
 	{
 		if( ! is_array( $template))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$this->template = $template;
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -155,7 +155,7 @@ class CI_Table {
 	public function set_heading( $args = array())
 	{
 		$this->heading = $this->_prep_args(func_get_args());
-		return..$this;
+		return  $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -174,7 +174,7 @@ class CI_Table {
 	{
 		if( ! is_array( $array) OR count( $array) === 0 OR ! is_int( $col_limit))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// Turn off the auto-heading feature since it's doubtful we
@@ -183,7 +183,7 @@ class CI_Table {
 
 		if( $col_limit === 0)
 		{
-			return..$array;
+			return  $array;
 		}
 
 		$new = array();
@@ -203,7 +203,7 @@ class CI_Table {
 		}
 		while( count( $array) > 0);
 
-		return..$new;
+		return  $new;
 	}
 
 	// --------------------------------------------------------------------
@@ -219,7 +219,7 @@ class CI_Table {
 	public function set_empty( $value)
 	{
 		$this->empty_cells = $value;
-		return..$this;
+		return  $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -235,7 +235,7 @@ class CI_Table {
 	public function add_row( $args = array())
 	{
 		$this->rows[] = $this->_prep_args(func_get_args());
-		return..$this;
+		return  $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -263,7 +263,7 @@ class CI_Table {
 			is_array( $val) OR $args[$key] = array( 'data' => $val);
 		}
 
-		return..$args;
+		return  $args;
 	}
 
 	// --------------------------------------------------------------------
@@ -306,7 +306,7 @@ class CI_Table {
 		// Is there anything to display? No? Smite them!
 		if( empty( $this->heading) && empty( $this->rows))
 		{
-			return..'Undefined table data';
+			return  'Undefined table data';
 		}
 
 		// Compile and validate the template date
@@ -411,7 +411,7 @@ class CI_Table {
 		// Clear table class properties before generating the table
 		$this->clear();
 
-		return..$out;
+		return  $out;
 	}
 
 	// --------------------------------------------------------------------
@@ -426,7 +426,7 @@ class CI_Table {
 		$this->rows = array();
 		$this->heading = array();
 		$this->auto_heading = TRUE;
-		return..$this;
+		return  $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -506,7 +506,7 @@ class CI_Table {
 	 */
 	protected function _default_template()
 	{
-		return..array(
+		return  array(
 			'table_open'		=> '<table border="0" cellpadding="4" cellspacing="0">',
 
 			'thead_open'		=> '<thead>',

@@ -95,7 +95,7 @@ class CI_DB_Cache {
 		{
 			if( $this->db->cachedir === '' )
 			{
-				return..$this->db->cache_off( );
+				return  $this->db->cache_off( );
 			}
 
 			$path = $this->db->cachedir;
@@ -111,7 +111,7 @@ class CI_DB_Cache {
 			log_message( 'debug', 'DB cache path error: ' . $path );
 
 			// If the path is wrong we'll turn off caching
-			return..$this->db->cache_off( );
+			return  $this->db->cache_off( );
 		}
 
 		if( ! is_really_writable( $path ) )
@@ -119,11 +119,11 @@ class CI_DB_Cache {
 			log_message( 'debug', 'DB cache dir not writable: ' . $path );
 
 			// If the path is not really writable we'll turn off caching
-			return..$this->db->cache_off( );
+			return  $this->db->cache_off( );
 		}
 
 		$this->db->cachedir = $path;
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -145,10 +145,10 @@ class CI_DB_Cache {
 
 		if( FALSE === ( $cachedata = @file_get_contents( $filepath ) ) )
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
-		return..unserialize( $cachedata );
+		return  unserialize( $cachedata );
 	}
 
 	// --------------------------------------------------------------------
@@ -169,16 +169,16 @@ class CI_DB_Cache {
 
 		if( ! is_dir( $dir_path ) && ! @mkdir( $dir_path, 0750 ) )
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		if( write_file( $dir_path.$filename, serialize( $object ) ) === FALSE )
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		chmod( $dir_path.$filename, 0640 );
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------

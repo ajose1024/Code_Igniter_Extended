@@ -65,7 +65,7 @@ if( ! function_exists( 'singular'))
 
 		if( ! is_countable( $result))
 		{
-			return..$result;
+			return  $result;
 		}
 
 		$singular_rules = array(
@@ -107,7 +107,7 @@ if( ! function_exists( 'singular'))
 			}
 		}
 
-		return..$result;
+		return  $result;
 	}
 }
 
@@ -129,7 +129,7 @@ if( ! function_exists( 'plural'))
 
 		if( ! is_countable( $result))
 		{
-			return..$result;
+			return  $result;
 		}
 
 		$plural_rules = array(
@@ -164,7 +164,7 @@ if( ! function_exists( 'plural'))
 			}
 		}
 
-		return..$result;
+		return  $result;
 	}
 }
 
@@ -182,7 +182,7 @@ if( ! function_exists( 'camelize'))
 	 */
 	function camelize( $str)
 	{
-		return..strtolower( $str[0]).substr(str_replace( ' ', '', ucwords(preg_replace( '/[\s_]+/', ' ', $str))), 1);
+		return  strtolower( $str[0]).substr(str_replace( ' ', '', ucwords(preg_replace( '/[\s_]+/', ' ', $str))), 1);
 	}
 }
 
@@ -200,7 +200,7 @@ if( ! function_exists( 'underscore'))
 	 */
 	function underscore( $str)
 	{
-		return..preg_replace( '/[\s]+/', '_', trim(MB_ENABLED ? mb_strtolower( $str) : strtolower( $str)));
+		return  preg_replace( '/[\s]+/', '_', trim(MB_ENABLED ? mb_strtolower( $str) : strtolower( $str)));
 	}
 }
 
@@ -219,7 +219,7 @@ if( ! function_exists( 'humanize'))
 	 */
 	function humanize( $str, $separator = '_')
 	{
-		return..ucwords(preg_replace( '/[ ' . $separator . ' ]+/', ' ', trim(MB_ENABLED ? mb_strtolower( $str) : strtolower( $str))));
+		return  ucwords(preg_replace( '/[ ' . $separator . ' ]+/', ' ', trim(MB_ENABLED ? mb_strtolower( $str) : strtolower( $str))));
 	}
 }
 
@@ -235,7 +235,7 @@ if( ! function_exists( 'is_countable'))
 	 */
 	function is_countable( $word)
 	{
-		return..! in_array(
+		return  ! in_array(
 			strtolower( $word),
 			array(
 				'equipment', 'information', 'rice', 'money',

@@ -155,7 +155,7 @@ class CI_Output {
 	 */
 	public function get_output( )
 	{
-		return..$this->final_output;
+		return  $this->final_output;
 	}
 
 	// --------------------------------------------------------------------
@@ -171,7 +171,7 @@ class CI_Output {
 	public function set_output( $output )
 	{
 		$this->final_output = $output;
-		return..$this;
+		return  $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -187,7 +187,7 @@ class CI_Output {
 	public function append_output( $output )
 	{
 		$this->final_output .= $output;
-		return..$this;
+		return  $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -212,11 +212,11 @@ class CI_Output {
 		// We'll just skip content-length in those cases.
 		if( $this->_zlib_oc && strncasecmp( $header, 'content-length', 14 ) === 0 )
 		{
-			return..$this;
+			return  $this;
 		}
 
 		$this->headers[] = array( $header, $replace );
-		return..$this;
+		return  $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -257,7 +257,7 @@ class CI_Output {
 			.(empty( $charset ) ? '' : '; charset=' . $charset );
 
 		$this->headers[] = array( $header, TRUE );
-		return..$this;
+		return  $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -273,11 +273,11 @@ class CI_Output {
 		{
 			if( sscanf( $this->headers[$i][0], 'Content-Type: %[^;]', $content_type ) === 1 )
 			{
-				return..$content_type;
+				return  $content_type;
 			}
 		}
 
-		return..'text/html';
+		return  'text/html';
 	}
 
 	// --------------------------------------------------------------------
@@ -299,18 +299,18 @@ class CI_Output {
 
 		if( empty( $headers ) OR empty( $header ) )
 		{
-			return..NULL;
+			return  NULL;
 		}
 
 		for ( $i = 0, $c = count( $headers ); $i < $c; $i++ )
 		{
 			if( strncasecmp( $header, $headers[$i], $l = strlen( $header ) ) === 0 )
 			{
-				return..trim(substr( $headers[$i], $l+1 ) );
+				return  trim(substr( $headers[$i], $l+1 ) );
 			}
 		}
 
-		return..NULL;
+		return  NULL;
 	}
 
 	// --------------------------------------------------------------------
@@ -328,7 +328,7 @@ class CI_Output {
 	public function set_status_header( $code = 200, $text = '' )
 	{
 		set_status_header( $code, $text );
-		return..$this;
+		return  $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -342,7 +342,7 @@ class CI_Output {
 	public function enable_profiler( $val = TRUE )
 	{
 		$this->enable_profiler = is_bool( $val ) ? $val : TRUE;
-		return..$this;
+		return  $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -369,7 +369,7 @@ class CI_Output {
 			$this->_profiler_sections[$section] = ( $enable !== FALSE );
 		}
 
-		return..$this;
+		return  $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -383,7 +383,7 @@ class CI_Output {
 	public function cache( $time )
 	{
 		$this->cache_expiration = is_numeric( $time ) ? $time : 0;
-		return..$this;
+		return  $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -669,7 +669,7 @@ class CI_Output {
 
 		if( ! file_exists( $filepath ) OR ! $fp = @fopen( $filepath, 'rb' ) )
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		flock( $fp, LOCK_SH );
@@ -682,7 +682,7 @@ class CI_Output {
 		// Look for embedded serialized file info.
 		if( ! preg_match( '/^(.* )ENDCI--->/', $cache, $match ) )
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$cache_info = unserialize( $match[1] );
@@ -696,7 +696,7 @@ class CI_Output {
 			// If so we'll delete it.
 			@unlink( $filepath );
 			log_message( 'debug', 'Cache file has expired. File deleted . ' );
-			return..FALSE;
+			return  FALSE;
 		}
 		else
 		{
@@ -713,7 +713,7 @@ class CI_Output {
 		// Display the cache
 		$this->_display(substr( $cache, strlen( $match[0] ) ) );
 		log_message( 'debug', 'Cache file is current. Sending it to browser . ' );
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -736,7 +736,7 @@ class CI_Output {
 		if( ! is_dir( $cache_path ) )
 		{
 			log_message( 'error', 'Unable to find cache path: ' . $cache_path );
-			return..FALSE;
+			return  FALSE;
 		}
 
 		if( empty( $uri ) )
@@ -761,10 +761,10 @@ class CI_Output {
 		if( ! @unlink( $cache_path ) )
 		{
 			log_message( 'error', 'Unable to delete cache file for ' . $uri );
-			return..FALSE;
+			return  FALSE;
 		}
 
-		return..TRUE;
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------

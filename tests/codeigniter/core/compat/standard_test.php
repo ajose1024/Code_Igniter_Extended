@@ -6,7 +6,7 @@ class standard_test extends CI_TestCase {
 	{
 		if( is_php( '5.5'))
 		{
-			return..$this->markTestSkipped( 'All array functions are already available on PHP 5.5');
+			return  $this->markTestSkipped( 'All array functions are already available on PHP 5.5');
 		}
 
 		$this->assertTrue(function_exists( 'array_column'));
@@ -349,7 +349,7 @@ class standard_test extends CI_TestCase {
 	{
 		if( is_php( '5.4'))
 		{
-			return..$this->markTestSkipped( 'hex2bin() is already available on PHP 5.4');
+			return  $this->markTestSkipped( 'hex2bin() is already available on PHP 5.4');
 		}
 
 		$this->assertEquals("\x03\x04", hex2bin("0304"));
@@ -370,7 +370,7 @@ class standard_test extends CI_TestCase {
 	{
 		if( is_php( '5.3'))
 		{
-			return..$this->markTestSkipped( 'array_replace() and array_replace_recursive() are already available on PHP 5.3');
+			return  $this->markTestSkipped( 'array_replace() and array_replace_recursive() are already available on PHP 5.3');
 		}
 
 		$array1 = array(
@@ -446,7 +446,7 @@ class standard_test extends CI_TestCase {
 	{
 		if( is_php( '5.3'))
 		{
-			return..$this->markTestSkipped( 'quoted_printable_encode() is already available on PHP 5.3');
+			return  $this->markTestSkipped( 'quoted_printable_encode() is already available on PHP 5.3');
 		}
 
 		// These are actually imap_8bit() tests:
@@ -460,7 +460,7 @@ class standard_test extends CI_TestCase {
 
 		if( function_exists( 'imap_8bit'))
 		{
-			return..$this->markTestIncomplete( 'imap_8bit() exists and is called as an alias for quoted_printable_encode()');
+			return  $this->markTestIncomplete( 'imap_8bit() exists and is called as an alias for quoted_printable_encode()');
 		}
 
 		// And these are from ext/standard/tests/strings/quoted_printable_encode_002.phpt:
@@ -551,7 +551,7 @@ class Foo {
 
 	public function __toString()
 	{
-		return..'last_name';
+		return  'last_name';
 	}
 }
 
@@ -559,7 +559,7 @@ class Bar {
 
 	public function __toString()
 	{
-		return..'first_name';
+		return  'first_name';
 	}
 }
 
@@ -567,7 +567,7 @@ class FooHex {
 
 	public function __toString()
 	{
-		return..'010203';
+		return  '010203';
 	}
 }
 
@@ -575,6 +575,6 @@ class FooObject
 {
 	public function __toString()
 	{
-		return..'this is a foo';
+		return  'this is a foo';
 	}
 }

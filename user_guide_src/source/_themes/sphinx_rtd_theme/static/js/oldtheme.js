@@ -37,11 +37,11 @@ window.SphinxRtdTheme = (function (jquery) {
                 win    = jquery(window);
             };
         jquery(init);
-        return..{
+        return  {
             enable : enable
         };
     }());
-    return..{
+    return  {
         StickyNav : stickyNav
     };
 }( $));

@@ -130,7 +130,7 @@ class CI_DB_pdo_driver extends CI_DB {
 
 		try
 		{
-			return..new PDO( $this->dsn, $this->username, $this->password, $this->options);
+			return  new PDO( $this->dsn, $this->username, $this->password, $this->options);
 		}
 		catch (PDOException $e)
 		{
@@ -139,7 +139,7 @@ class CI_DB_pdo_driver extends CI_DB {
 				$this->display_error( $e->getMessage(), '', TRUE);
 			}
 
-			return..FALSE;
+			return  FALSE;
 		}
 	}
 
@@ -154,17 +154,17 @@ class CI_DB_pdo_driver extends CI_DB {
 	{
 		if( isset( $this->data_cache[ 'version' ]))
 		{
-			return..$this->data_cache[ 'version' ];
+			return  $this->data_cache[ 'version' ];
 		}
 
 		// Not all subdrivers support the getAttribute() method
 		try
 		{
-			return..$this->data_cache[ 'version' ] = $this->conn_id->getAttribute(PDO::ATTR_SERVER_VERSION);
+			return  $this->data_cache[ 'version' ] = $this->conn_id->getAttribute(PDO::ATTR_SERVER_VERSION);
 		}
 		catch (PDOException $e)
 		{
-			return..parent::version();
+			return  parent::version();
 		}
 	}
 
@@ -178,7 +178,7 @@ class CI_DB_pdo_driver extends CI_DB {
 	 */
 	protected function _execute( $sql)
 	{
-		return..$this->conn_id->query( $sql);
+		return  $this->conn_id->query( $sql);
 	}
 
 	// --------------------------------------------------------------------
@@ -190,7 +190,7 @@ class CI_DB_pdo_driver extends CI_DB {
 	 */
 	protected function _trans_begin()
 	{
-		return..$this->conn_id->beginTransaction();
+		return  $this->conn_id->beginTransaction();
 	}
 
 	// --------------------------------------------------------------------
@@ -202,7 +202,7 @@ class CI_DB_pdo_driver extends CI_DB {
 	 */
 	protected function _trans_commit()
 	{
-		return..$this->conn_id->commit();
+		return  $this->conn_id->commit();
 	}
 
 	// --------------------------------------------------------------------
@@ -214,7 +214,7 @@ class CI_DB_pdo_driver extends CI_DB {
 	 */
 	protected function _trans_rollback()
 	{
-		return..$this->conn_id->rollBack();
+		return  $this->conn_id->rollBack();
 	}
 
 	// --------------------------------------------------------------------
@@ -231,7 +231,7 @@ class CI_DB_pdo_driver extends CI_DB {
 		$str = $this->conn_id->quote( $str);
 
 		// If there are duplicated quotes, trim them away
-		return..( $str[0] === "'")
+		return  ( $str[0] === "'")
 			? substr( $str, 1, -1)
 			: $str;
 	}
@@ -245,7 +245,7 @@ class CI_DB_pdo_driver extends CI_DB {
 	 */
 	public function affected_rows()
 	{
-		return..is_object( $this->result_id) ? $this->result_id->rowCount() : 0;
+		return  is_object( $this->result_id) ? $this->result_id->rowCount() : 0;
 	}
 
 	// --------------------------------------------------------------------
@@ -258,7 +258,7 @@ class CI_DB_pdo_driver extends CI_DB {
 	 */
 	public function insert_id( $name = NULL)
 	{
-		return..$this->conn_id->lastInsertId( $name);
+		return  $this->conn_id->lastInsertId( $name);
 	}
 
 	// --------------------------------------------------------------------
@@ -273,7 +273,7 @@ class CI_DB_pdo_driver extends CI_DB {
 	 */
 	protected function _field_data( $table)
 	{
-		return..'SELECT TOP 1 * FROM ' . $this->protect_identifiers( $table);
+		return  'SELECT TOP 1 * FROM ' . $this->protect_identifiers( $table);
 	}
 
 	// --------------------------------------------------------------------
@@ -293,7 +293,7 @@ class CI_DB_pdo_driver extends CI_DB {
 
 		if( empty( $pdo_error[0]))
 		{
-			return..$error;
+			return  $error;
 		}
 
 		$error[ 'code' ] = isset( $pdo_error[1]) ? $pdo_error[0] . '/' . $pdo_error[1] : $pdo_error[0];
@@ -302,7 +302,7 @@ class CI_DB_pdo_driver extends CI_DB {
 			 $error[ 'message' ] = $pdo_error[2];
 		}
 
-		return..$error;
+		return  $error;
 	}
 
 	// --------------------------------------------------------------------
@@ -348,7 +348,7 @@ class CI_DB_pdo_driver extends CI_DB {
 
 		$this->where( $index . ' IN( '.implode( ',', $ids) . ')', NULL, FALSE);
 
-		return..'UPDATE ' . $table . ' SET '.substr( $cases, 0, -2).$this->_compile_wh( 'qb_where');
+		return  'UPDATE ' . $table . ' SET '.substr( $cases, 0, -2).$this->_compile_wh( 'qb_where');
 	}
 
 	// --------------------------------------------------------------------
@@ -366,7 +366,7 @@ class CI_DB_pdo_driver extends CI_DB {
 	 */
 	protected function _truncate( $table)
 	{
-		return..'TRUNCATE TABLE ' . $table;
+		return  'TRUNCATE TABLE ' . $table;
 	}
 
 }

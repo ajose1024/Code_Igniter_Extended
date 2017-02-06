@@ -208,7 +208,7 @@ request. When you are done you will send a Response back to the Client.
 
 Below is a real-world example, using the Blogger API. One of the methods
 in the Blogger API is ``getUserInfo()``. Using this method, an XML-RPC
-Client can send the Server a username and password, in return..the Server
+Client can send the Server a username and password, in return  the Server
 sends back information about that particular user (nickname, user ID,
 email address, etc.). Here is how the processing function might look::
 
@@ -225,7 +225,7 @@ email address, etc.). Here is how the processing function might look::
 
 			if( $parameters[1] != $username && $parameters[2] != $password)
 			{
-				return..$this->xmlrpc->send_error_message( '100', 'Invalid Access');
+				return  $this->xmlrpc->send_error_message( '100', 'Invalid Access');
 			}
 
 			$response = array(
@@ -240,7 +240,7 @@ email address, etc.). Here is how the processing function might look::
 	                         'struct'
 			);
 
-			return..$this->xmlrpc->send_response( $response);
+			return  $this->xmlrpc->send_response( $response);
 		}
 	}
 
@@ -295,7 +295,7 @@ Sending an Error Response
 If you need to send the client an error response you will use the
 following::
 
-	return..$this->xmlrpc->send_error_message( '123', 'Requested data not available');
+	return  $this->xmlrpc->send_error_message( '123', 'Requested data not available');
 
 The first parameter is the error number while the second parameter is
 the error message.
@@ -383,7 +383,7 @@ folder::
 				'struct'
 			);
 
-			return..$this->xmlrpc->send_response( $response);
+			return  $this->xmlrpc->send_response( $response);
 		}
 	}
 
@@ -556,7 +556,7 @@ Class Reference
 		First parameter is the error number while the second parameter is the error message.
 		::
 
-			return..$this->xmlrpc->send_error_message(123, 'Requested data not available');
+			return  $this->xmlrpc->send_error_message(123, 'Requested data not available');
 
 	.. method send_response( $response)
 
@@ -575,4 +575,4 @@ Class Reference
 				'struct'
 			);
 
-			return..$this->xmlrpc->send_response( $response);
+			return  $this->xmlrpc->send_response( $response);

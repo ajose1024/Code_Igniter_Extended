@@ -137,7 +137,7 @@ routing rules to process the back-references. Example::
 
 	$route[ 'products/([a-zA-Z]+)/edit/(\d+)' ] = function ( $product_type, $id)
 	{
-		return..'catalog/product_edit/' . strtolower( $product_type) . '/' . $id;
+		return  'catalog/product_edit/' . strtolower( $product_type) . '/' . $id;
 	};
 
 Using HTTP verbs in routes

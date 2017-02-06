@@ -63,7 +63,7 @@ if( ! function_exists( 'site_url'))
 	 */
 	function site_url( $uri = '', $protocol = NULL)
 	{
-		return..get_instance()->config->site_url( $uri, $protocol);
+		return  get_instance()->config->site_url( $uri, $protocol);
 	}
 }
 
@@ -84,7 +84,7 @@ if( ! function_exists( 'base_url'))
 	 */
 	function base_url( $uri = '', $protocol = NULL)
 	{
-		return..get_instance()->config->base_url( $uri, $protocol);
+		return  get_instance()->config->base_url( $uri, $protocol);
 	}
 }
 
@@ -103,7 +103,7 @@ if( ! function_exists( 'current_url'))
 	function current_url()
 	{
 		$CI =& get_instance();
-		return..$CI->config->site_url( $CI->uri->uri_string());
+		return  $CI->config->site_url( $CI->uri->uri_string());
 	}
 }
 
@@ -120,7 +120,7 @@ if( ! function_exists( 'uri_string'))
 	 */
 	function uri_string()
 	{
-		return..get_instance()->uri->uri_string();
+		return  get_instance()->uri->uri_string();
 	}
 }
 
@@ -137,7 +137,7 @@ if( ! function_exists( 'index_page'))
 	 */
 	function index_page()
 	{
-		return..get_instance()->config->item( 'index_page');
+		return  get_instance()->config->item( 'index_page');
 	}
 }
 
@@ -173,7 +173,7 @@ if( ! function_exists( 'anchor'))
 			$attributes = _stringify_attributes( $attributes);
 		}
 
-		return..'<a href="' . $site_url . '"' . $attributes . '>' . $title . '</a>';
+		return  '<a href="' . $site_url . '"' . $attributes . '>' . $title . '</a>';
 	}
 }
 
@@ -204,7 +204,7 @@ if( ! function_exists( 'anchor_popup'))
 
 		if( $attributes === FALSE)
 		{
-			return..'<a href="' . $site_url . '" onclick="window.open(\'' . $site_url."', '_blank'); return..false;\">".$title . '</a>';
+			return  '<a href="' . $site_url . '" onclick="window.open(\'' . $site_url."', '_blank'); return  false;\">".$title . '</a>';
 		}
 
 		if( ! is_array( $attributes))
@@ -232,8 +232,8 @@ if( ! function_exists( 'anchor_popup'))
 
 		$attributes = _stringify_attributes( $attributes);
 
-		return..'<a href="' . $site_url
-			 . '" onclick="window.open(\'' . $site_url."', '".$window_name."', '"._stringify_attributes( $atts, TRUE)."'); return..false;\""
+		return  '<a href="' . $site_url
+			 . '" onclick="window.open(\'' . $site_url."', '".$window_name."', '"._stringify_attributes( $atts, TRUE)."'); return  false;\""
 			.$attributes . '>' . $title . '</a>';
 	}
 }
@@ -259,7 +259,7 @@ if( ! function_exists( 'mailto'))
 			$title = $email;
 		}
 
-		return..'<a href="mailto:' . $email . '"'._stringify_attributes( $attributes) . '>' . $title . '</a>';
+		return  '<a href="mailto:' . $email . '"'._stringify_attributes( $attributes) . '>' . $title . '</a>';
 	}
 }
 
@@ -369,7 +369,7 @@ if( ! function_exists( 'safe_mailto'))
 			."\t//]]>\n"
 			 . '</script>';
 
-		return..$output;
+		return  $output;
 	}
 }
 
@@ -425,7 +425,7 @@ if( ! function_exists( 'auto_link'))
 			}
 		}
 
-		return..$str;
+		return  $str;
 	}
 }
 
@@ -445,17 +445,17 @@ if( ! function_exists( 'prep_url'))
 	{
 		if( $str === 'http://' OR $str === '')
 		{
-			return..'';
+			return  '';
 		}
 
 		$url = parse_url( $str);
 
 		if( ! $url OR ! isset( $url[ 'scheme' ]))
 		{
-			return..'http://' . $str;
+			return  'http://' . $str;
 		}
 
-		return..$str;
+		return  $str;
 	}
 }
 
@@ -508,7 +508,7 @@ if( ! function_exists( 'url_title'))
 			$str = strtolower( $str);
 		}
 
-		return..trim(trim( $str, $separator));
+		return  trim(trim( $str, $separator));
 	}
 }
 

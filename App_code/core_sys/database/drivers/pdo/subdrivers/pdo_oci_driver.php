@@ -143,11 +143,11 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 
 		if( $prefix_limit === TRUE && $this->dbprefix !== '')
 		{
-			return..$sql . ' WHERE "TABLE_NAME" LIKE \'' . $this->escape_like_str( $this->dbprefix)."%' "
+			return  $sql . ' WHERE "TABLE_NAME" LIKE \'' . $this->escape_like_str( $this->dbprefix)."%' "
 				.sprintf( $this->_like_escape_str, $this->_like_escape_chr);
 		}
 
-		return..$sql;
+		return  $sql;
 	}
 
 	// --------------------------------------------------------------------
@@ -171,7 +171,7 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 			$owner = $this->username;
 		}
 
-		return..'SELECT COLUMN_NAME FROM ALL_TAB_COLUMNS
+		return  'SELECT COLUMN_NAME FROM ALL_TAB_COLUMNS
 			WHERE UPPER(OWNER) = ' . $this->escape(strtoupper( $owner)) . '
 				AND UPPER(TABLE_NAME) = ' . $this->escape(strtoupper( $table));
 	}
@@ -202,7 +202,7 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 
 		if( ( $query = $this->query( $sql)) === FALSE)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 		$query = $query->result_object();
 
@@ -229,7 +229,7 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 			$retval[$i]->default		= $query[$i]->COLUMN_DEFAULT;
 		}
 
-		return..$retval;
+		return  $retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -240,7 +240,7 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 	 * @param	string	$table	Table name
 	 * @param	array	$keys	INSERT keys
 	 * @param	array	$values	INSERT values
-	 * @return..	string
+	 * @return  	string
 	 */
 	protected function _insert_batch( $table, $keys, $values)
 	{
@@ -252,7 +252,7 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 			$sql .= '	INTO ' . $table . ' ( ' . $keys . ') VALUES ' . $values[$i]."\n";
 		}
 
-		return..$sql . 'SELECT * FROM dual';
+		return  $sql . 'SELECT * FROM dual';
 	}
 
 	// --------------------------------------------------------------------
@@ -273,7 +273,7 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 			$this->qb_limit = FALSE;
 		}
 
-		return..parent::_delete( $table);
+		return  parent::_delete( $table);
 	}
 
 	// --------------------------------------------------------------------
@@ -288,7 +288,7 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _limit( $sql)
 	{
-		return..'SELECT * FROM (SELECT inner_query.*, rownum rnum FROM ( ' . $sql . ') inner_query WHERE rownum < '.( $this->qb_offset + $this->qb_limit + 1) . ')'
+		return  'SELECT * FROM (SELECT inner_query.*, rownum rnum FROM ( ' . $sql . ') inner_query WHERE rownum < '.( $this->qb_offset + $this->qb_limit + 1) . ')'
 			.( $this->qb_offset ? ' WHERE rnum >= '.( $this->qb_offset + 1): '');
 	}
 

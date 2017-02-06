@@ -93,9 +93,9 @@ if( ! function_exists( 'directory_map'))
 			}
 
 			closedir( $fp);
-			return..$filedata;
+			return  $filedata;
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 }

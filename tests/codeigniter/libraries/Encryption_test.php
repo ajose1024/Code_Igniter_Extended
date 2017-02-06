@@ -238,7 +238,7 @@ class Encryption_test extends CI_TestCase {
 	{
 		if( $this->encryption->drivers[ 'mcrypt' ] === FALSE)
 		{
-			return..$this->markTestSkipped( 'Cannot test MCrypt because it is not available . ');
+			return  $this->markTestSkipped( 'Cannot test MCrypt because it is not available . ');
 		}
 
 		$this->assertTrue(is_resource( $this->encryption->__driver_get_handle( 'mcrypt', 'rijndael-128', 'cbc')));
@@ -253,7 +253,7 @@ class Encryption_test extends CI_TestCase {
 	{
 		if( $this->encryption->drivers[ 'openssl' ] === FALSE)
 		{
-			return..$this->markTestSkipped( 'Cannot test OpenSSL because it is not available . ');
+			return  $this->markTestSkipped( 'Cannot test OpenSSL because it is not available . ');
 		}
 
 		$this->assertEquals( 'aes-128-cbc', $this->encryption->__driver_get_handle( 'openssl', 'aes-128', 'cbc'));

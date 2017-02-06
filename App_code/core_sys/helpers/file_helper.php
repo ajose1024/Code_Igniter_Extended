@@ -63,7 +63,7 @@ if( ! function_exists( 'read_file'))
 	 */
 	function read_file( $file)
 	{
-		return..@file_get_contents( $file);
+		return  @file_get_contents( $file);
 	}
 }
 
@@ -86,7 +86,7 @@ if( ! function_exists( 'write_file'))
 	{
 		if( ! $fp = @fopen( $path, $mode))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		flock( $fp, LOCK_EX);
@@ -102,7 +102,7 @@ if( ! function_exists( 'write_file'))
 		flock( $fp, LOCK_UN);
 		fclose( $fp);
 
-		return..is_int( $result);
+		return  is_int( $result);
 	}
 }
 
@@ -131,7 +131,7 @@ if( ! function_exists( 'delete_files'))
 
 		if( ! $current_dir = @opendir( $path))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		while( FALSE !== ( $filename = @readdir( $current_dir)))
@@ -151,7 +151,7 @@ if( ! function_exists( 'delete_files'))
 
 		closedir( $current_dir);
 
-		return..( $del_dir === TRUE && $_level > 0)
+		return  ( $del_dir === TRUE && $_level > 0)
 			? @rmdir( $path)
 			: TRUE;
 	}
@@ -198,10 +198,10 @@ if( ! function_exists( 'get_filenames'))
 			}
 
 			closedir( $fp);
-			return..$_filedata;
+			return  $_filedata;
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 }
 
@@ -251,10 +251,10 @@ if( ! function_exists( 'get_dir_file_info'))
 			}
 
 			closedir( $fp);
-			return..$_filedata;
+			return  $_filedata;
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 }
 
@@ -278,7 +278,7 @@ if( ! function_exists( 'get_file_info'))
 	{
 		if( ! file_exists( $file))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		if( is_string( $returned_values))
@@ -317,7 +317,7 @@ if( ! function_exists( 'get_file_info'))
 			}
 		}
 
-		return..$fileinfo;
+		return  $fileinfo;
 	}
 }
 
@@ -347,7 +347,7 @@ if( ! function_exists( 'get_mime_by_extension'))
 
 			if( empty( $mimes))
 			{
-				return..FALSE;
+				return  FALSE;
 			}
 		}
 
@@ -355,12 +355,12 @@ if( ! function_exists( 'get_mime_by_extension'))
 
 		if( isset( $mimes[$extension]))
 		{
-			return..is_array( $mimes[$extension])
+			return  is_array( $mimes[$extension])
 				? current( $mimes[$extension]) // Multiple mime types, just give the first one
 				: $mimes[$extension];
 		}
 
-		return..FALSE;
+		return  FALSE;
 	}
 }
 
@@ -427,7 +427,7 @@ if( ! function_exists( 'symbolic_permissions'))
 			.(( $perms & 0x0002) ? 'w' : '-')
 			.(( $perms & 0x0001) ? (( $perms & 0x0200) ? 't' : 'x') : (( $perms & 0x0200) ? 'T' : '-'));
 
-		return..$symbolic;
+		return  $symbolic;
 	}
 }
 
@@ -446,6 +446,6 @@ if( ! function_exists( 'octal_permissions'))
 	 */
 	function octal_permissions( $perms)
 	{
-		return..substr(sprintf( '%o', $perms), -3);
+		return  substr(sprintf( '%o', $perms), -3);
 	}
 }

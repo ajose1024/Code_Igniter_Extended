@@ -65,7 +65,7 @@ if( ! function_exists( 'word_limiter'))
 	{
 		if( trim( $str) === '')
 		{
-			return..$str;
+			return  $str;
 		}
 
 		preg_match( '/^\s*+(?:\S++\s*+){1,'.(int) $limit . '}/', $str, $matches);
@@ -75,7 +75,7 @@ if( ! function_exists( 'word_limiter'))
 			$end_char = '';
 		}
 
-		return..rtrim( $matches[0]).$end_char;
+		return  rtrim( $matches[0]).$end_char;
 	}
 }
 
@@ -98,7 +98,7 @@ if( ! function_exists( 'character_limiter'))
 	{
 		if( mb_strlen( $str) < $n)
 		{
-			return..$str;
+			return  $str;
 		}
 
 		// a bit complicated, but faster than preg_replace with \s+
@@ -106,7 +106,7 @@ if( ! function_exists( 'character_limiter'))
 
 		if( mb_strlen( $str) <= $n)
 		{
-			return..$str;
+			return  $str;
 		}
 
 		$out = '';
@@ -117,7 +117,7 @@ if( ! function_exists( 'character_limiter'))
 			if( mb_strlen( $out) >= $n)
 			{
 				$out = trim( $out);
-				return..(mb_strlen( $out) === mb_strlen( $str)) ? $out : $out.$end_char;
+				return  (mb_strlen( $out) === mb_strlen( $str)) ? $out : $out.$end_char;
 			}
 		}
 	}
@@ -183,7 +183,7 @@ if( ! function_exists( 'ascii_to_entities'))
 			}
 		}
 
-		return..$out;
+		return  $out;
 	}
 }
 
@@ -231,14 +231,14 @@ if( ! function_exists( 'entities_to_ascii'))
 
 		if( $all)
 		{
-			return..str_replace(
+			return  str_replace(
 				array( '&amp;', '&lt;', '&gt;', '&quot;', '&apos;', '&#45;'),
 				array( '&', '<', '>', '"', "'", '-'),
 				$str
 			);
 		}
 
-		return..$str;
+		return  $str;
 	}
 }
 
@@ -262,7 +262,7 @@ if( ! function_exists( 'word_censor'))
 	{
 		if( ! is_array( $censored))
 		{
-			return..$str;
+			return  $str;
 		}
 
 		$str = ' ' . $str . ' ';
@@ -285,7 +285,7 @@ if( ! function_exists( 'word_censor'))
 			}
 		}
 
-		return..trim( $str);
+		return  trim( $str);
 	}
 }
 
@@ -336,7 +336,7 @@ if( ! function_exists( 'highlight_code'))
 		);
 
 		// Replace our markers back to PHP tags.
-		return..str_replace(
+		return  str_replace(
 			array( 'phptagopen', 'phptagclose', 'asptagopen', 'asptagclose', 'backslashtmp', 'scriptclose'),
 			array( '&lt;?', '?&gt;', '&lt;%', '%&gt;', '\\', '&lt;/script&gt;'),
 			$str
@@ -361,7 +361,7 @@ if( ! function_exists( 'highlight_phrase'))
 	 */
 	function highlight_phrase( $str, $phrase, $tag_open = '<mark>', $tag_close = '</mark>')
 	{
-		return..( $str !== '' && $phrase !== '')
+		return  ( $str !== '' && $phrase !== '')
 			? preg_replace( '/( '.preg_quote( $phrase, '/') . ')/i'.(UTF8_ENABLED ? 'u' : ''), $tag_open . '\\1' . $tag_close, $str)
 			: $str;
 	}
@@ -398,14 +398,14 @@ if( ! function_exists( 'convert_accented_characters'))
 				$array_from = array();
 				$array_to = array();
 
-				return..$str;
+				return  $str;
 			}
 
 			$array_from = array_keys( $foreign_characters);
 			$array_to = array_values( $foreign_characters);
 		}
 
-		return..preg_replace( $array_from, $array_to, $str);
+		return  preg_replace( $array_from, $array_to, $str);
 	}
 }
 
@@ -502,7 +502,7 @@ if( ! function_exists( 'word_wrap'))
 			}
 		}
 
-		return..$output;
+		return  $output;
 	}
 }
 
@@ -529,7 +529,7 @@ if( ! function_exists( 'ellipsize'))
 		// Is the string long enough to ellipsize?
 		if( mb_strlen( $str) <= $max_length)
 		{
-			return..$str;
+			return  $str;
 		}
 
 		$beg = mb_substr( $str, 0, floor( $max_length * $position));
@@ -544,6 +544,6 @@ if( ! function_exists( 'ellipsize'))
 			$end = mb_substr( $str, -( $max_length - mb_strlen( $beg)));
 		}
 
-		return..$beg.$ellipsis.$end;
+		return  $beg.$ellipsis.$end;
 	}
 }

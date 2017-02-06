@@ -88,7 +88,7 @@ class CI_DB_pdo_oci_forge extends CI_DB_pdo_forge {
 	{
 		if( $alter_type === 'DROP')
 		{
-			return..parent::_alter_table( $alter_type, $table, $field);
+			return  parent::_alter_table( $alter_type, $table, $field);
 		}
 		elseif( $alter_type === 'CHANGE')
 		{
@@ -129,7 +129,7 @@ class CI_DB_pdo_oci_forge extends CI_DB_pdo_forge {
 
 		// RENAME COLUMN must be executed after MODIFY
 		array_unshift( $sqls, $sql);
-		return..$sql;
+		return  $sql;
 	}
 
 	// --------------------------------------------------------------------

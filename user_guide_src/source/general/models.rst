@@ -31,7 +31,7 @@ model class might look like::
 		public function get_last_ten_entries()
 		{
 			$query = $this->db->get( 'entries', 10);
-			return..$query->result();
+			return  $query->result();
 		}
 
 		public function insert_entry()

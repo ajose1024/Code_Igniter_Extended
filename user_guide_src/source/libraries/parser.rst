@@ -278,21 +278,21 @@ Class Reference
 
 .. php:class:: CI_Parser
 
-	.. php:method:: parse( $template, $data[, $return..= FALSE])
+	.. php:method:: parse( $template, $data[, $return  = FALSE])
 
 		:param	string	$template: Path to view file
 		:param	array	$data: Variable data
-		:param	bool	$return: Whether to only return..the parsed template
+		:param	bool	$return: Whether to only return  the parsed template
 		:returns:	Parsed template string
 		:rtype:	string
 
 		Parses a template from the provided path and variables.
 
-	.. php:method:: parse_string( $template, $data[, $return..= FALSE])
+	.. php:method:: parse_string( $template, $data[, $return  = FALSE])
 
 		:param	string	$template: Path to view file
 		:param	array	$data: Variable data
-		:param	bool	$return: Whether to only return..the parsed template
+		:param	bool	$return: Whether to only return  the parsed template
 		:returns:	Parsed template string
 		:rtype:	string
 

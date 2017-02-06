@@ -55,7 +55,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	public function num_rows()
 	{
-		return..is_int( $this->num_rows)
+		return  is_int( $this->num_rows)
 			? $this->num_rows
 			: $this->num_rows = @sqlite_num_rows( $this->result_id);
 	}
@@ -69,7 +69,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	public function num_fields()
 	{
-		return..@sqlite_num_fields( $this->result_id);
+		return  @sqlite_num_fields( $this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -89,7 +89,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 			$field_names[$i] = sqlite_field_name( $this->result_id, $i);
 		}
 
-		return..$field_names;
+		return  $field_names;
 	}
 
 	// --------------------------------------------------------------------
@@ -112,7 +112,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 			$retval[$i]->max_length		= NULL;
 		}
 
-		return..$retval;
+		return  $retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -129,7 +129,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	public function data_seek( $n = 0)
 	{
-		return..sqlite_seek( $this->result_id, $n);
+		return  sqlite_seek( $this->result_id, $n);
 	}
 
 	// --------------------------------------------------------------------
@@ -143,7 +143,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	protected function _fetch_assoc()
 	{
-		return..sqlite_fetch_array( $this->result_id);
+		return  sqlite_fetch_array( $this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -158,7 +158,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	protected function _fetch_object( $class_name = 'stdClass')
 	{
-		return..sqlite_fetch_object( $this->result_id, $class_name);
+		return  sqlite_fetch_object( $this->result_id, $class_name);
 	}
 
 }

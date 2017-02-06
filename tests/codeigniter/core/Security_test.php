@@ -94,7 +94,7 @@ class Security_test extends CI_TestCase {
 	{
 		$harm_string = '<img src="test.png">';
 
-		$xss_clean_return..= $this->security->xss_clean( $harm_string, TRUE);
+		$xss_clean_return  = $this->security->xss_clean( $harm_string, TRUE);
 
 //		$this->assertTrue( $xss_clean_return);
 	}
@@ -105,7 +105,7 @@ class Security_test extends CI_TestCase {
 	{
 		$harm_string = '<img src=javascript:alert(String.fromCharCode(88,83,83))>';
 
-		$xss_clean_return..= $this->security->xss_clean( $harm_string, TRUE);
+		$xss_clean_return  = $this->security->xss_clean( $harm_string, TRUE);
 
 		$this->assertFalse( $xss_clean_return);
 	}

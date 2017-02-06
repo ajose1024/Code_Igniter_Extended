@@ -62,7 +62,7 @@ class CI_DB_oci8_utility extends CI_DB_utility {
 	protected function _backup( $params = array())
 	{
 		// Currently unsupported
-		return..$this->db->display_error( 'db_unsupported_feature');
+		return  $this->db->display_error( 'db_unsupported_feature');
 	}
 
 }

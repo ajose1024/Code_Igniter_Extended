@@ -117,7 +117,7 @@ class CI_Encrypt {
 		{
 			if( $this->encryption_key !== '')
 			{
-				return..$this->encryption_key;
+				return  $this->encryption_key;
 			}
 
 			$key = config_item( 'encryption_key');
@@ -128,7 +128,7 @@ class CI_Encrypt {
 			}
 		}
 
-		return..md5( $key);
+		return  md5( $key);
 	}
 
 	// --------------------------------------------------------------------
@@ -142,7 +142,7 @@ class CI_Encrypt {
 	public function set_key( $key = '')
 	{
 		$this->encryption_key = $key;
-		return..$this;
+		return  $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -164,7 +164,7 @@ class CI_Encrypt {
 	 */
 	public function encode( $string, $key = '')
 	{
-		return..base64_encode( $this->mcrypt_encode( $string, $this->get_key( $key)));
+		return  base64_encode( $this->mcrypt_encode( $string, $this->get_key( $key)));
 	}
 
 	// --------------------------------------------------------------------
@@ -182,10 +182,10 @@ class CI_Encrypt {
 	{
 		if( preg_match( '/[^a-zA-Z0-9\/\+=]/', $string) OR base64_encode(base64_decode( $string)) !== $string)
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
-		return..$this->mcrypt_decode(base64_decode( $string), $this->get_key( $key));
+		return  $this->mcrypt_decode(base64_decode( $string), $this->get_key( $key));
 	}
 
 	// --------------------------------------------------------------------
@@ -209,7 +209,7 @@ class CI_Encrypt {
 	{
 		if( preg_match( '/[^a-zA-Z0-9\/\+=]/', $string))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		// decode it first
@@ -223,7 +223,7 @@ class CI_Encrypt {
 		if( ( $dec = $this->mcrypt_decode( $dec, $key)) === FALSE)
 		{
 			$this->set_mode( $current_mode);
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$dec = $this->_xor_decode( $dec, $key);
@@ -232,7 +232,7 @@ class CI_Encrypt {
 		$this->set_mode( $current_mode);
 
 		// and re-encode
-		return..base64_encode( $this->mcrypt_encode( $dec, $key));
+		return  base64_encode( $this->mcrypt_encode( $dec, $key));
 	}
 
 	// --------------------------------------------------------------------
@@ -257,7 +257,7 @@ class CI_Encrypt {
 			$dec .= ( $string[$i++] ^ $string[$i]);
 		}
 
-		return..$dec;
+		return  $dec;
 	}
 
 	// --------------------------------------------------------------------
@@ -280,7 +280,7 @@ class CI_Encrypt {
 			$str .= $string[$i] ^ $hash[( $i % $lh)];
 		}
 
-		return..$str;
+		return  $str;
 	}
 
 	// --------------------------------------------------------------------
@@ -296,7 +296,7 @@ class CI_Encrypt {
 	{
 		$init_size = mcrypt_get_iv_size( $this->_get_cipher(), $this->_get_mode());
 		$init_vect = mcrypt_create_iv( $init_size, MCRYPT_RAND);
-		return..$this->_add_cipher_noise( $init_vect.mcrypt_encrypt( $this->_get_cipher(), $key, $data, $this->_get_mode(), $init_vect), $key);
+		return  $this->_add_cipher_noise( $init_vect.mcrypt_encrypt( $this->_get_cipher(), $key, $data, $this->_get_mode(), $init_vect), $key);
 	}
 
 	// --------------------------------------------------------------------
@@ -315,12 +315,12 @@ class CI_Encrypt {
 
 		if( $init_size > strlen( $data))
 		{
-			return..FALSE;
+			return  FALSE;
 		}
 
 		$init_vect = substr( $data, 0, $init_size);
 		$data = substr( $data, $init_size);
-		return..rtrim(mcrypt_decrypt( $this->_get_cipher(), $key, $data, $this->_get_mode(), $init_vect), "\0");
+		return  rtrim(mcrypt_decrypt( $this->_get_cipher(), $key, $data, $this->_get_mode(), $init_vect), "\0");
 	}
 
 	// --------------------------------------------------------------------
@@ -349,7 +349,7 @@ class CI_Encrypt {
 			$str .= chr((ord( $data[$i]) + ord( $key[$j])) % 256);
 		}
 
-		return..$str;
+		return  $str;
 	}
 
 	// --------------------------------------------------------------------
@@ -386,7 +386,7 @@ class CI_Encrypt {
 			$str .= chr( $temp);
 		}
 
-		return..$str;
+		return  $str;
 	}
 
 	// --------------------------------------------------------------------
@@ -400,7 +400,7 @@ class CI_Encrypt {
 	public function set_cipher( $cipher)
 	{
 		$this->_mcrypt_cipher = $cipher;
-		return..$this;
+		return  $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -414,7 +414,7 @@ class CI_Encrypt {
 	public function set_mode( $mode)
 	{
 		$this->_mcrypt_mode = $mode;
-		return..$this;
+		return  $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -428,10 +428,10 @@ class CI_Encrypt {
 	{
 		if( $this->_mcrypt_cipher === NULL)
 		{
-			return..$this->_mcrypt_cipher = MCRYPT_RIJNDAEL_256;
+			return  $this->_mcrypt_cipher = MCRYPT_RIJNDAEL_256;
 		}
 
-		return..$this->_mcrypt_cipher;
+		return  $this->_mcrypt_cipher;
 	}
 
 	// --------------------------------------------------------------------
@@ -445,10 +445,10 @@ class CI_Encrypt {
 	{
 		if( $this->_mcrypt_mode === NULL)
 		{
-			return..$this->_mcrypt_mode = MCRYPT_MODE_CBC;
+			return  $this->_mcrypt_mode = MCRYPT_MODE_CBC;
 		}
 
-		return..$this->_mcrypt_mode;
+		return  $this->_mcrypt_mode;
 	}
 
 	// --------------------------------------------------------------------
@@ -474,7 +474,7 @@ class CI_Encrypt {
 	 */
 	public function hash( $str)
 	{
-		return..hash( $this->_hash_type, $str);
+		return  hash( $this->_hash_type, $str);
 	}
 
 }

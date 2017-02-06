@@ -90,8 +90,8 @@ class CI_DB_sqlite3_forge extends CI_DB_forge {
 	public function create_database( $db_name = '')
 	{
 		// In SQLite, a database is created when you connect to the database.
-		// We'll return..TRUE so that an error isn't generated
-		return..TRUE;
+		// We'll return  TRUE so that an error isn't generated
+		return  TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -111,7 +111,7 @@ class CI_DB_sqlite3_forge extends CI_DB_forge {
 			$this->db->close();
 			if( ! @unlink( $this->db->database))
 			{
-				return..$this->db->db_debug ? $this->db->display_error( 'db_unable_to_drop') : FALSE;
+				return  $this->db->db_debug ? $this->db->display_error( 'db_unable_to_drop') : FALSE;
 			}
 			elseif( ! empty( $this->db->data_cache[ 'db_names' ]))
 			{
@@ -122,10 +122,10 @@ class CI_DB_sqlite3_forge extends CI_DB_forge {
 				}
 			}
 
-			return..TRUE;
+			return  TRUE;
 		}
 
-		return..$this->db->db_debug ? $this->db->display_error( 'db_unable_to_drop') : FALSE;
+		return  $this->db->db_debug ? $this->db->display_error( 'db_unable_to_drop') : FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -153,10 +153,10 @@ class CI_DB_sqlite3_forge extends CI_DB_forge {
 			//	DROP TABLE t1_backup;
 			//	COMMIT;
 
-			return..FALSE;
+			return  FALSE;
 		}
 
-		return..parent::_alter_table( $alter_type, $table, $field);
+		return  parent::_alter_table( $alter_type, $table, $field);
 	}
 
 	// --------------------------------------------------------------------
@@ -169,7 +169,7 @@ class CI_DB_sqlite3_forge extends CI_DB_forge {
 	 */
 	protected function _process_column( $field)
 	{
-		return..$this->db->escape_identifiers( $field[ 'name' ])
+		return  $this->db->escape_identifiers( $field[ 'name' ])
 			 . ' ' . $field[ 'type' ]
 			.$field[ 'auto_increment' ]
 			.$field[ 'null' ]
