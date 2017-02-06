@@ -16,7 +16,7 @@ Loading this Helper
 
 This helper is loaded using the following code::
 
-	$this->load->helper('url');
+	$this->load->helper( 'url');
 
 The following functions are available:
 
@@ -42,20 +42,20 @@ Available Functions
 	Segments can be optionally passed to the function as a string or an
 	array. Here is a string example::
 
-		echo site_url('news/local/123');
+		echo site_url( 'news/local/123');
 
-	The above example would return something like:
+	The above example would return..something like:
 	*http://example.com/index.php/news/local/123*
 
 	Here is an example of segments passed as an array::
 
-		$segments = array('news', 'local', '123');
-		echo site_url($segments);
+		$segments = array( 'news', 'local', '123');
+		echo site_url( $segments);
 
 	This function is an alias for ``CI_Config::site_url()``. For more info,
 	please see the :doc:`Config Library <../libraries/config>` documentation.
 
-.. php:function:: base_url($uri = '', $protocol = NULL)
+.. php:function:: base_url( $uri = '', $protocol = NULL)
 
 	:param	string	$uri: URI string
 	:param	string	$protocol: Protocol, e.g. 'http' or 'https'
@@ -74,7 +74,7 @@ Available Functions
 
 		echo base_url("blog/post/123");
 
-	The above example would return something like:
+	The above example would return..something like:
 	*http://example.com/blog/post/123*
 
 	This is useful because unlike :php:func:`site_url()`, you can supply a
@@ -129,7 +129,7 @@ Available Functions
 
 		echo index_page();
 
-.. php:function:: anchor($uri = '', $title = '', $attributes = '')
+.. php:function:: anchor( $uri = '', $title = '', $attributes = '')
 
 	:param	string	$uri: URI string
 	:param	string	$title: Anchor title
@@ -157,17 +157,17 @@ Available Functions
 
 	Here are some examples::
 
-		echo anchor('news/local/123', 'My News', 'title="News title"');
+		echo anchor( 'news/local/123', 'My News', 'title="News title"');
 		// Prints: <a href="http://example.com/index.php/news/local/123" title="News title">My News</a>
 
-		echo anchor('news/local/123', 'My News', array('title' => 'The best news!'));
+		echo anchor( 'news/local/123', 'My News', array( 'title' => 'The best news!'));
 		// Prints: <a href="http://example.com/index.php/news/local/123" title="The best news!">My News</a>
 
-		echo anchor('', 'Click here');
+		echo anchor( '', 'Click here');
 		// Prints: <a href="http://example.com">Click Here</a>
 
 
-.. php:function:: anchor_popup($uri = '', $title = '', $attributes = FALSE)
+.. php:function:: anchor_popup( $uri = '', $title = '', $attributes = FALSE)
 
 	:param	string	$uri: URI string
 	:param	string	$title: Anchor title
@@ -194,14 +194,14 @@ Available Functions
 			'window_name' => '_blank'
 		);
 
-		echo anchor_popup('news/local/123', 'Click Me!', $atts);
+		echo anchor_popup( 'news/local/123', 'Click Me!', $atts);
 
 	.. note:: The above attributes are the function defaults so you only need to
 		set the ones that are different from what you need. If you want the
 		function to use all of its defaults simply pass an empty array in the
 		third parameter:
 		|
-		| echo anchor_popup('news/local/123', 'Click Me!', array());
+		| echo anchor_popup( 'news/local/123', 'Click Me!', array());
 
 	.. note:: The **window_name** is not really an attribute, but an argument to
 		the JavaScript `window.open() <http://www.w3schools.com/jsref/met_win_open.asp>`
@@ -211,7 +211,7 @@ Available Functions
 		HTML attribute to the anchor tag.
 
 
-.. php:function:: mailto($email, $title = '', $attributes = '')
+.. php:function:: mailto( $email, $title = '', $attributes = '')
 
 	:param	string	$email: E-mail address
 	:param	string	$title: Anchor title
@@ -221,15 +221,15 @@ Available Functions
 
 	Creates a standard HTML e-mail link. Usage example::
 
-		echo mailto('me@my-site.com', 'Click Here to Contact Me');
+		echo mailto( 'me@my-site.com', 'Click Here to Contact Me');
 
 	As with the :php:func:`anchor()` tab above, you can set attributes using the
 	third parameter::
 
-		$attributes = array('title' => 'Mail me');
-		echo mailto('me@my-site.com', 'Contact Me', $attributes);
+		$attributes = array( 'title' => 'Mail me');
+		echo mailto( 'me@my-site.com', 'Contact Me', $attributes);
 
-.. php:function:: safe_mailto($email, $title = '', $attributes = '')
+.. php:function:: safe_mailto( $email, $title = '', $attributes = '')
 
 	:param	string	$email: E-mail address
 	:param	string	$title: Anchor title
@@ -241,10 +241,10 @@ Available Functions
 	version of the *mailto* tag using ordinal numbers written with JavaScript to
 	help prevent the e-mail address from being harvested by spam bots.
 
-.. php:function:: auto_link($str, $type = 'both', $popup = FALSE)
+.. php:function:: auto_link( $str, $type = 'both', $popup = FALSE)
 
 	:param	string	$str: Input string
-	:param	string	$type: Link type ('email', 'url' or 'both')
+	:param	string	$type: Link type ( 'email', 'url' or 'both')
 	:param	bool	$popup: Whether to create popup links
 	:returns:	Linkified string
 	:rtype:	string
@@ -252,7 +252,7 @@ Available Functions
 	Automatically turns URLs and e-mail addresses contained in a string into
 	links. Example::
 
-		$string = auto_link($string);
+		$string = auto_link( $string);
 
 	The second parameter determines whether URLs and e-mails are converted or
 	just one or the other. Default behavior is both if the parameter is not
@@ -261,19 +261,19 @@ Available Functions
 
 	Converts only URLs::
 
-		$string = auto_link($string, 'url');
+		$string = auto_link( $string, 'url');
 
 	Converts only e-mail addresses::
 
-		$string = auto_link($string, 'email');
+		$string = auto_link( $string, 'email');
 
 	The third parameter determines whether links are shown in a new window.
 	The value can be TRUE or FALSE (boolean)::
 
-		$string = auto_link($string, 'both', TRUE);
+		$string = auto_link( $string, 'both', TRUE);
 
 
-.. php:function:: url_title($str, $separator = '-', $lowercase = FALSE)
+.. php:function:: url_title( $str, $separator = '-', $lowercase = FALSE)
 
 	:param	string	$str: Input string
 	:param	string	$separator: Word separator
@@ -286,7 +286,7 @@ Available Functions
 	title of your entries in the URL. Example::
 
 		$title = "What's wrong with CSS?";
-		$url_title = url_title($title);
+		$url_title = url_title( $title);
 		// Produces: Whats-wrong-with-CSS
 
 	The second parameter determines the word delimiter. By default dashes
@@ -295,7 +295,7 @@ Available Functions
 	Example::
 
 		$title = "What's wrong with CSS?";
-		$url_title = url_title($title, 'underscore');
+		$url_title = url_title( $title, 'underscore');
 		// Produces: Whats_wrong_with_CSS
 
 	.. note:: Old usage of 'dash' and 'underscore' as the second parameter
@@ -307,11 +307,11 @@ Available Functions
 	Example::
 
 		$title = "What's wrong with CSS?";
-		$url_title = url_title($title, 'underscore', TRUE);
+		$url_title = url_title( $title, 'underscore', TRUE);
 		// Produces: whats_wrong_with_css
 
 
-.. php:function:: prep_url($str = '')
+.. php:function:: prep_url( $str = '')
 
 	:param	string	$str: URL string
 	:returns:	Protocol-prefixed URL string
@@ -322,13 +322,13 @@ Available Functions
 
 	Pass the URL string to the function like this::
 
-		$url = prep_url('example.com');
+		$url = prep_url( 'example.com');
 
 
-.. php:function:: redirect($uri = '', $method = 'auto', $code = NULL)
+.. php:function:: redirect( $uri = '', $method = 'auto', $code = NULL)
 
 	:param	string	$uri: URI string
-	:param	string	$method: Redirect method ('auto', 'location' or 'refresh')
+	:param	string	$method: Redirect method ( 'auto', 'location' or 'refresh')
 	:param	string	$code: HTTP Response code (usually 302 or 303)
 	:rtype:	void
 
@@ -350,11 +350,11 @@ Available Functions
 
 		if( $logged_in == FALSE)
 		{      
-			redirect('/login/form/');
+			redirect( '/login/form/');
 		}
 
 		// with 301 redirect
-		redirect('/article/13', 'location', 301);
+		redirect( '/article/13', 'location', 301);
 
 	.. note:: In order for this function to work it must be used before anything
 		is outputted to the browser since it utilizes server headers.

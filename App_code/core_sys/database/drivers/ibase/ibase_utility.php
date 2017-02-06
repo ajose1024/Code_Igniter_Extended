@@ -35,7 +35,7 @@
  * @since	Version 3.0.0
  * @filesource
  */
-defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 /**
  * Interbase/Firebird Utility Class
@@ -52,18 +52,18 @@ class CI_DB_ibase_utility extends CI_DB_utility {
 	 * @param	string	$filename
 	 * @return	mixed
 	 */
-	protected function _backup($filename)
+	protected function _backup( $filename)
 	{
-		if( $service = ibase_service_attach($this->db->hostname, $this->db->username, $this->db->password))
+		if( $service = ibase_service_attach( $this->db->hostname, $this->db->username, $this->db->password))
 		{
-			$res = ibase_backup($service, $this->db->database, $filename.'.fbk');
+			$res = ibase_backup( $service, $this->db->database, $filename . '.fbk');
 
 			// Close the service connection
-			ibase_service_detach($service);
-			return $res;
+			ibase_service_detach( $service);
+			return..$res;
 		}
 
-		return FALSE;
+		return..FALSE;
 	}
 
 }

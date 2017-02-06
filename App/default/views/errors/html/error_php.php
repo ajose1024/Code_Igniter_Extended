@@ -11,17 +11,17 @@ defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 <p>Filename: <?php echo $filepath; ?></p>
 <p>Line Number: <?php echo $line; ?></p>
 
-<?php if( defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE === TRUE): ?>
+<?php if( defined( 'SHOW_DEBUG_BACKTRACE' ) && SHOW_DEBUG_BACKTRACE === TRUE ): ?>
 
     <p>Backtrace:</p>
-    <?php foreach( debug_backtrace() as $error): ?>
+    <?php foreach( debug_backtrace( ) as $error ): ?>
 
-        <?php if( isset($error['file']) && strpos($error['file'], realpath(SYS_CORE_PATH)) !== 0): ?>
+        <?php if( isset( $error[ 'file' ] ) && strpos( $error[ 'file' ], realpath(SYS_CORE_PATH ) ) !== 0 ): ?>
 
             <p style="margin-left:10px">
-            File: <?php echo $error['file'] ?><br />
-            Line: <?php echo $error['line'] ?><br />
-            Function: <?php echo $error['function'] ?>
+            File: <?php echo $error[ 'file' ] ?><br />
+            Line: <?php echo $error[ 'line' ] ?><br />
+            Function: <?php echo $error[ 'function' ] ?>
             </p>
 
         <?php endif ?>

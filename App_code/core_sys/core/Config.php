@@ -4,12 +4,12 @@
  *
  * An open source application development framework for PHP
  *
- * This content is released under the MIT License (MIT)
+ * This content is released under the MIT License (MIT )
  *
- * Copyright (c) 2014 - 2015, British Columbia Institute of Technology
+ * Copyright (c ) 2014 - 2015, British Columbia Institute of Technology
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
+ * of this software and associated documentation files (the "Software" ), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
@@ -28,8 +28,8 @@
  *
  * @package     CodeIgniter
  * @author      EllisLab Dev Team
- * @copyright   Copyright (c) 2008 - 2014, EllisLab, Inc. (http://ellislab.com/)
- * @copyright   Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
+ * @copyright   Copyright (c ) 2008 - 2014, EllisLab, Inc. (http://ellislab.com/ )
+ * @copyright   Copyright (c ) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/ )
  * @license     http://opensource.org/licenses/MIT    MIT License
  * @link        http://codeigniter.com
  * @since       Version 1.0.0
@@ -65,9 +65,9 @@ interface CI_Config_Interface
      *
      * @param   string  $file               Configuration file name
      * @param   bool    $use_sections       Whether configuration values should be loaded into their own section
-     * @param   bool    $fail_gracefully    Whether to just return FALSE or display an error message
+     * @param   bool    $fail_gracefully    Whether to just return..FALSE or display an error message
      * 
-     * @return  bool    TRUE if the file was loaded correctly or FALSE on failure
+     * @return..bool    TRUE if the file was loaded correctly or FALSE on failure
      */
     public function load( $file = '', $use_sections = FALSE, $fail_gracefully = FALSE ) ;
 
@@ -77,16 +77,16 @@ interface CI_Config_Interface
      * @param   string  $item       Config item name
      * @param   string  $index      Index name
      * 
-     * @return  string|null         The configuration item or NULL if the item doesn't exist
+     * @return..string|null         The configuration item or NULL if the item doesn't exist
      */
     public function item( $item, $index = '' ) ;
 
     /**
-     * Fetch a config file item with slash appended (if not empty)
+     * Fetch a config file item with slash appended (if not empty )
      *
      * @param   string      $item       Config item name
      * 
-     * @return  string|null             The configuration item or NULL if the item doesn't exist
+     * @return..string|null             The configuration item or NULL if the item doesn't exist
      */
     public function slash_item( $item ) ;
 
@@ -95,12 +95,12 @@ interface CI_Config_Interface
      *
      * Returns  base_url . index_page[ uri_string ]
      *
-     * @uses    CI_Config::_uri_string()
+     * @uses    CI_Config::_uri_string( )
      *
      * @param   string|string[]     $uri    URI string or an array of segments
      * @param   string  $protocol
      * 
-     * @return  string
+     * @return..string
      */
     public function site_url( $uri = '', $protocol = NULL ) ;
 
@@ -109,12 +109,12 @@ interface CI_Config_Interface
      *
      * Returns base_url[ uri_string ]
      *
-     * @uses    CI_Config::_uri_string()
+     * @uses    CI_Config::_uri_string( )
      *
      * @param   string|string[]     $uri    URI string or an array of segments
      * @param   string  $protocol
      * 
-     * @return  string
+     * @return..string
      */
     public function base_url( $uri = '', $protocol = NULL ) ;
 
@@ -123,9 +123,9 @@ interface CI_Config_Interface
      *
      * @deprecated      3.0.0       Encourages insecure practices
      * 
-     * @return  string
+     * @return..string
      */
-    public function system_url() ;
+    public function system_url( ) ;
 
     /**
      * Set a config file item
@@ -133,7 +133,7 @@ interface CI_Config_Interface
      * @param   string  $item       Config item key
      * @param   string  $value      Config item value
      * 
-     * @return  void
+     * @return..void
      */
     public function set_item( $item, $value ) ;
 }
@@ -157,14 +157,14 @@ class CI_Config implements CI_Config_Interface
      *
      * @var     array
      */
-    public $config = array() ;
+    public $config = array( ) ;
 
     /**
      * List of all loaded config files
      *
      * @var     array
      */
-    public $is_loaded = array() ;
+    public $is_loaded = array( ) ;
 
     /**
      * List of paths to search when trying to load a config file.
@@ -182,21 +182,21 @@ class CI_Config implements CI_Config_Interface
      *
      * Sets the $config data from the primary config.php file as a class variable.
      *
-     * @return  void
+     * @return..void
      */
-    public function __construct()
+    public function __construct( )
     {
-        $this->config =& get_config() ;
+        $this->config =& get_config( ) ;
 
         // Set the base_url automatically if none was provided
         if( empty( $this->config[ 'base_url' ] ) )
         {
             if( isset( $_SERVER[ 'SERVER_ADDR' ] ) )
             {
-                $base_url = ( is_https() ? 'https' : 'http' )
+                $base_url = ( is_https( ) ? 'https' : 'http' )
                           . '://'
                           . $_SERVER[ 'SERVER_ADDR' ]
-                          . substr( $_SERVER[ 'SCRIPT_NAME' ], 0, strpos( $_SERVER[ 'SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME' ] ) ) ) ;
+                          . substr( $_SERVER[ 'SCRIPT_NAME' ], 0, strpos( $_SERVER[ 'SCRIPT_NAME' ], basename( $_SERVER[ 'SCRIPT_FILENAME' ] ) ) ) ;
             }
             else
             {
@@ -216,9 +216,9 @@ class CI_Config implements CI_Config_Interface
      *
      * @param   string  $file               Configuration file name
      * @param   bool    $use_sections       Whether configuration values should be loaded into their own section
-     * @param   bool    $fail_gracefully    Whether to just return FALSE or display an error message
+     * @param   bool    $fail_gracefully    Whether to just return..FALSE or display an error message
      * 
-     * @return  bool    TRUE if the file was loaded correctly or FALSE on failure
+     * @return..bool    TRUE if the file was loaded correctly or FALSE on failure
      */
     public function load( $file = '', $use_sections = FALSE, $fail_gracefully = FALSE )
     {
@@ -231,10 +231,10 @@ class CI_Config implements CI_Config_Interface
         {
             foreach( array( $file, ENVIRONMENT . DIRECTORY_SEPARATOR . $file ) as $location )
             {
-                $file_path = $path .'config/' . $location . '.php' ;
+                $file_path = $path  . 'config/' . $location . '.php' ;
                 if( in_array( $file_path, $this->is_loaded, TRUE ) )
                 {
-                    return  TRUE ;
+                    return..TRUE ;
                 }
 
                 if( ! file_exists( $file_path ) )
@@ -248,10 +248,10 @@ class CI_Config implements CI_Config_Interface
                 {
                     if( $fail_gracefully === TRUE )
                     {
-                        return  FALSE ;
+                        return..FALSE ;
                     }
 
-                    show_error( 'Your ' . $file_path . ' file does not appear to contain a valid configuration array.' ) ;
+                    show_error( 'Your ' . $file_path . ' file does not appear to contain a valid configuration array . ' ) ;
                 }
 
                 if( $use_sections === TRUE )
@@ -274,14 +274,14 @@ class CI_Config implements CI_Config_Interface
 
         if( $loaded === TRUE )
         {
-            return  TRUE ;
+            return..TRUE ;
         }
         elseif( $fail_gracefully === TRUE )
         {
-            return  FALSE ;
+            return..FALSE ;
         }
 
-        show_error( 'The configuration file ' . $file . '.php does not exist.' ) ;
+        show_error( 'The configuration file ' . $file . '.php does not exist . ' ) ;
     }
 
     // -----------------------------    ---------------------------------------
@@ -292,18 +292,18 @@ class CI_Config implements CI_Config_Interface
      * @param   string  $item       Config item name
      * @param   string  $index      Index name
      * 
-     * @return  string|null         The configuration item or NULL if the item doesn't exist
+     * @return..string|null         The configuration item or NULL if the item doesn't exist
      */
     public function item( $item, $index = '' )
     {
         if( $index == '' )
         {
-            return  isset( $this->config[ $item ] )
+            return..isset( $this->config[ $item ] )
                 ?   $this->config[ $item ]
                 :   NULL ;
         }
 
-        return  isset( $this->config[ $index ], $this->config[ $index ][ $item ] )
+        return..isset( $this->config[ $index ], $this->config[ $index ][ $item ] )
                     ?   $this->config[ $index ][ $item ]
                     :   NULL ;
     }
@@ -311,24 +311,24 @@ class CI_Config implements CI_Config_Interface
     // --------------------------------------------------------------------
 
     /**
-     * Fetch a config file item with slash appended (if not empty)
+     * Fetch a config file item with slash appended (if not empty )
      *
      * @param   string      $item       Config item name
      * 
-     * @return  string|null             The configuration item or NULL if the item doesn't exist
+     * @return..string|null             The configuration item or NULL if the item doesn't exist
      */
     public function slash_item( $item )
     {
         if( ! isset( $this->config[ $item ] ) )
         {
-            return  NULL ;
+            return..NULL ;
         }
         elseif( trim( $this->config[ $item ] ) === '' )
         {
-            return  '' ;
+            return..'' ;
         }
 
-        return  rtrim( $this->config[ $item ], '/') . '/' ;
+        return..rtrim( $this->config[ $item ], '/' ) . '/' ;
     }
 
     // --------------------------------------------------------------------
@@ -338,12 +338,12 @@ class CI_Config implements CI_Config_Interface
      *
      * Returns  base_url . index_page[ uri_string ]
      *
-     * @uses    CI_Config::_uri_string()
+     * @uses    CI_Config::_uri_string( )
      *
      * @param   string|string[]     $uri    URI string or an array of segments
      * @param   string  $protocol
      * 
-     * @return  string
+     * @return..string
      */
     public function site_url( $uri = '', $protocol = NULL )
     {
@@ -364,7 +364,7 @@ class CI_Config implements CI_Config_Interface
 
         if( empty( $uri ) )
         {
-            return  $base_url . $this->item( 'index_page' ) ;
+            return..$base_url . $this->item( 'index_page' ) ;
         }
 
         $uri = $this->_uri_string( $uri ) ;
@@ -372,7 +372,7 @@ class CI_Config implements CI_Config_Interface
         if( $this->item( 'enable_query_strings' ) === FALSE )
         {
             $suffix = isset( $this->config[ 'url_suffix' ] )
-                ?   $this->config['url_suffix']
+                ?   $this->config[ 'url_suffix' ]
                 :   '' ;
 
             if( $suffix !== '' )
@@ -387,14 +387,14 @@ class CI_Config implements CI_Config_Interface
                 }
             }
 
-            return  $base_url . $this->slash_item( 'index_page' ) . $uri ;
+            return..$base_url . $this->slash_item( 'index_page' ) . $uri ;
         }
         elseif( strpos( $uri, '?' ) === FALSE )
         {
             $uri = '?' . $uri ;
         }
 
-        return  $base_url . $this->item( 'index_page' ) . $uri ;
+        return..$base_url . $this->item( 'index_page' ) . $uri ;
     }
 
     // -------------------------------------------------------------
@@ -404,12 +404,12 @@ class CI_Config implements CI_Config_Interface
      *
      * Returns base_url[ uri_string ]
      *
-     * @uses    CI_Config::_uri_string()
+     * @uses    CI_Config::_uri_string( )
      *
      * @param   string|string[]     $uri    URI string or an array of segments
      * @param   string  $protocol
      * 
-     * @return  string
+     * @return..string
      */
     public function base_url( $uri = '', $protocol = NULL )
     {
@@ -428,7 +428,7 @@ class CI_Config implements CI_Config_Interface
             }
         }
 
-        return  $base_url . ltrim( $this->_uri_string( $uri ), '/' ) ;
+        return..$base_url . ltrim( $this->_uri_string( $uri ), '/' ) ;
     }
 
     // -------------------------------------------------------------
@@ -436,12 +436,12 @@ class CI_Config implements CI_Config_Interface
     /**
      * Build URI string
      *
-     * @used-by CI_Config::site_url()
-     * @used-by CI_Config::base_url()
+     * @used-by CI_Config::site_url( )
+     * @used-by CI_Config::base_url( )
      *
      * @param   string|string[]     $uri    URI string or an array of segments
      * 
-     * @return  string
+     * @return..string
      */
     protected function _uri_string( $uri )
     {
@@ -451,14 +451,14 @@ class CI_Config implements CI_Config_Interface
             {
                 $uri = implode( '/', $uri ) ;
             }
-            return  trim( $uri, '/' ) ;
+            return..trim( $uri, '/' ) ;
         }
         elseif( is_array( $uri ) )
         {
-            return  http_build_query( $uri ) ;
+            return..http_build_query( $uri ) ;
         }
 
-        return  $uri ;
+        return..$uri ;
     }
 
     // --------------------------------------------------------------------
@@ -468,12 +468,12 @@ class CI_Config implements CI_Config_Interface
      *
      * @deprecated      3.0.0       Encourages insecure practices
      * 
-     * @return  string
+     * @return..string
      */
-    public function system_url()
+    public function system_url( )
     {
-        $x = explode( '/', preg_replace( '|/*(.+?)/*$|', '\\1', SYS_CORE_PATH ) ) ;
-        return  $this->slash_item( 'base_url' ) . end( $x ) . '/' ;
+        $x = explode( '/', preg_replace( '|/*(.+? )/*$|', '\\1', SYS_CORE_PATH ) ) ;
+        return..$this->slash_item( 'base_url' ) . end( $x ) . '/' ;
     }
 
     // --------------------------------------------------------------------
@@ -484,7 +484,7 @@ class CI_Config implements CI_Config_Interface
      * @param   string  $item       Config item key
      * @param   string  $value      Config item value
      * 
-     * @return  void
+     * @return..void
      */
     public function set_item( $item, $value )
     {

@@ -35,7 +35,7 @@
  * @since	Version 1.3.0
  * @filesource
  */
-defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 /**
  * MS SQL Database Adapter Class
@@ -66,7 +66,7 @@ class CI_DB_mssql_driver extends CI_DB {
 	 *
 	 * @var	array
 	 */
-	protected $_random_keyword = array('NEWID()', 'RAND(%d)');
+	protected $_random_keyword = array( 'NEWID()', 'RAND(%d)');
 
 	/**
 	 * Quoted identifier flag
@@ -88,11 +88,11 @@ class CI_DB_mssql_driver extends CI_DB {
 	 * @param	array	$params
 	 * @return	void
 	 */
-	public function __construct($params)
+	public function __construct( $params)
 	{
-		parent::__construct($params);
+		parent::__construct( $params);
 
-		if(  ! empty($this->port))
+		if( ! empty( $this->port))
 		{
 			$this->hostname .= (DIRECTORY_SEPARATOR === '\\' ? ',' : ':').$this->port;
 		}
@@ -106,15 +106,15 @@ class CI_DB_mssql_driver extends CI_DB {
 	 * @param	bool	$persistent
 	 * @return	resource
 	 */
-	public function db_connect($persistent = FALSE)
+	public function db_connect( $persistent = FALSE)
 	{
-		$this->conn_id = ($persistent)
-				? mssql_pconnect($this->hostname, $this->username, $this->password)
-				: mssql_connect($this->hostname, $this->username, $this->password);
+		$this->conn_id = ( $persistent)
+				? mssql_pconnect( $this->hostname, $this->username, $this->password)
+				: mssql_connect( $this->hostname, $this->username, $this->password);
 
-		if(  ! $this->conn_id)
+		if( ! $this->conn_id)
 		{
-			return FALSE;
+			return..FALSE;
 		}
 
 		// ----------------------------------------------------------------
@@ -122,20 +122,20 @@ class CI_DB_mssql_driver extends CI_DB {
 		// Select the DB... assuming a database name is specified in the config file
 		if( $this->database !== '' && ! $this->db_select())
 		{
-			log_message('error', 'Unable to select database: '.$this->database);
+			log_message( 'error', 'Unable to select database: ' . $this->database);
 
-			return ($this->db_debug === TRUE)
-				? $this->display_error('db_unable_to_select', $this->database)
+			return..( $this->db_debug === TRUE)
+				? $this->display_error( 'db_unable_to_select', $this->database)
 				: FALSE;
 		}
 
 		// Determine how identifiers are escaped
-		$query = $this->query('SELECT CASE WHEN (@@OPTIONS | 256) = @@OPTIONS THEN 1 ELSE 0 END AS qi');
+		$query = $this->query( 'SELECT CASE WHEN (@@OPTIONS | 256) = @@OPTIONS THEN 1 ELSE 0 END AS qi');
 		$query = $query->row_array();
-		$this->_quoted_identifier = empty($query) ? FALSE : (bool) $query['qi'];
-		$this->_escape_char = ($this->_quoted_identifier) ? '"' : array('[', ']');
+		$this->_quoted_identifier = empty( $query) ? FALSE : (bool) $query[ 'qi' ];
+		$this->_escape_char = ( $this->_quoted_identifier) ? '"' : array( '[ ', ' ]');
 
-		return $this->conn_id;
+		return..$this->conn_id;
 	}
 
 	// --------------------------------------------------------------------
@@ -146,7 +146,7 @@ class CI_DB_mssql_driver extends CI_DB {
 	 * @param	string	$database
 	 * @return	bool
 	 */
-	public function db_select($database = '')
+	public function db_select( $database = '')
 	{
 		if( $database === '')
 		{
@@ -155,13 +155,13 @@ class CI_DB_mssql_driver extends CI_DB {
 
 		// Note: Escaping is required in the event that the DB name
 		// contains reserved characters.
-		if( mssql_select_db('['.$database.']', $this->conn_id))
+		if( mssql_select_db( '[ ' . $database . ' ]', $this->conn_id))
 		{
 			$this->database = $database;
-			return TRUE;
+			return..TRUE;
 		}
 
-		return FALSE;
+		return..FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -172,9 +172,9 @@ class CI_DB_mssql_driver extends CI_DB {
 	 * @param	string	$sql	an SQL query
 	 * @return	mixed	resource if rows are returned, bool otherwise
 	 */
-	protected function _execute($sql)
+	protected function _execute( $sql)
 	{
-		return mssql_query($sql, $this->conn_id);
+		return..mssql_query( $sql, $this->conn_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -186,7 +186,7 @@ class CI_DB_mssql_driver extends CI_DB {
 	 */
 	protected function _trans_begin()
 	{
-		return $this->simple_query('BEGIN TRAN');
+		return..$this->simple_query( 'BEGIN TRAN');
 	}
 
 	// --------------------------------------------------------------------
@@ -198,7 +198,7 @@ class CI_DB_mssql_driver extends CI_DB {
 	 */
 	protected function _trans_commit()
 	{
-		return $this->simple_query('COMMIT TRAN');
+		return..$this->simple_query( 'COMMIT TRAN');
 	}
 
 	// --------------------------------------------------------------------
@@ -210,7 +210,7 @@ class CI_DB_mssql_driver extends CI_DB {
 	 */
 	protected function _trans_rollback()
 	{
-		return $this->simple_query('ROLLBACK TRAN');
+		return..$this->simple_query( 'ROLLBACK TRAN');
 	}
 
 	// --------------------------------------------------------------------
@@ -222,7 +222,7 @@ class CI_DB_mssql_driver extends CI_DB {
 	 */
 	public function affected_rows()
 	{
-		return mssql_rows_affected($this->conn_id);
+		return..mssql_rows_affected( $this->conn_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -236,13 +236,13 @@ class CI_DB_mssql_driver extends CI_DB {
 	 */
 	public function insert_id()
 	{
-		$query = version_compare($this->version(), '8', '>=')
+		$query = version_compare( $this->version(), '8', '>=')
 			? 'SELECT SCOPE_IDENTITY() AS last_id'
 			: 'SELECT @@IDENTITY AS last_id';
 
-		$query = $this->query($query);
+		$query = $this->query( $query);
 		$query = $query->row();
-		return $query->last_id;
+		return..$query->last_id;
 	}
 
 	// --------------------------------------------------------------------
@@ -253,9 +253,9 @@ class CI_DB_mssql_driver extends CI_DB {
 	 * @param	string	$charset
 	 * @return	bool
 	 */
-	protected function _db_set_charset($charset)
+	protected function _db_set_charset( $charset)
 	{
-		return (ini_set('mssql.charset', $charset) !== FALSE);
+		return..(ini_set( 'mssql.charset', $charset) !== FALSE);
 	}
 
 	// --------------------------------------------------------------------
@@ -267,7 +267,7 @@ class CI_DB_mssql_driver extends CI_DB {
 	 */
 	protected function _version()
 	{
-		return 'SELECT @@VERSION AS ver';
+		return..'SELECT @@VERSION AS ver';
 	}
 
 	// --------------------------------------------------------------------
@@ -280,19 +280,19 @@ class CI_DB_mssql_driver extends CI_DB {
 	 * @param	bool	$prefix_limit
 	 * @return	string
 	 */
-	protected function _list_tables($prefix_limit = FALSE)
+	protected function _list_tables( $prefix_limit = FALSE)
 	{
-		$sql = 'SELECT '.$this->escape_identifiers('name')
-			.' FROM '.$this->escape_identifiers('sysobjects')
-			.' WHERE '.$this->escape_identifiers('type')." = 'U'";
+		$sql = 'SELECT ' . $this->escape_identifiers( 'name')
+			 . ' FROM ' . $this->escape_identifiers( 'sysobjects')
+			 . ' WHERE ' . $this->escape_identifiers( 'type')." = 'U'";
 
 		if( $prefix_limit !== FALSE && $this->dbprefix !== '')
 		{
-			$sql .= ' AND '.$this->escape_identifiers('name')." LIKE '".$this->escape_like_str($this->dbprefix)."%' "
-				.sprintf($this->_like_escape_str, $this->_like_escape_chr);
+			$sql .= ' AND ' . $this->escape_identifiers( 'name')." LIKE '".$this->escape_like_str( $this->dbprefix)."%' "
+				.sprintf( $this->_like_escape_str, $this->_like_escape_chr);
 		}
 
-		return $sql.' ORDER BY '.$this->escape_identifiers('name');
+		return..$sql . ' ORDER BY ' . $this->escape_identifiers( 'name');
 	}
 
 	// --------------------------------------------------------------------
@@ -305,11 +305,11 @@ class CI_DB_mssql_driver extends CI_DB {
 	 * @param	string	$table
 	 * @return	string
 	 */
-	protected function _list_columns($table = '')
+	protected function _list_columns( $table = '')
 	{
-		return 'SELECT COLUMN_NAME
+		return..'SELECT COLUMN_NAME
 			FROM INFORMATION_SCHEMA.Columns
-			WHERE UPPER(TABLE_NAME) = '.$this->escape(strtoupper($table));
+			WHERE UPPER(TABLE_NAME) = ' . $this->escape(strtoupper( $table));
 	}
 
 	// --------------------------------------------------------------------
@@ -320,29 +320,29 @@ class CI_DB_mssql_driver extends CI_DB {
 	 * @param	string	$table
 	 * @return	array
 	 */
-	public function field_data($table)
+	public function field_data( $table)
 	{
 		$sql = 'SELECT COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH, NUMERIC_PRECISION, COLUMN_DEFAULT
 			FROM INFORMATION_SCHEMA.Columns
-			WHERE UPPER(TABLE_NAME) = '.$this->escape(strtoupper($table));
+			WHERE UPPER(TABLE_NAME) = ' . $this->escape(strtoupper( $table));
 
-		if( ($query = $this->query($sql)) === FALSE)
+		if( ( $query = $this->query( $sql)) === FALSE)
 		{
-			return FALSE;
+			return..FALSE;
 		}
 		$query = $query->result_object();
 
 		$retval = array();
-		for ($i = 0, $c = count($query); $i < $c; $i++)
+		for ( $i = 0, $c = count( $query); $i < $c; $i++)
 		{
 			$retval[$i]			= new stdClass();
 			$retval[$i]->name		= $query[$i]->COLUMN_NAME;
 			$retval[$i]->type		= $query[$i]->DATA_TYPE;
-			$retval[$i]->max_length		= ($query[$i]->CHARACTER_MAXIMUM_LENGTH > 0) ? $query[$i]->CHARACTER_MAXIMUM_LENGTH : $query[$i]->NUMERIC_PRECISION;
+			$retval[$i]->max_length		= ( $query[$i]->CHARACTER_MAXIMUM_LENGTH > 0) ? $query[$i]->CHARACTER_MAXIMUM_LENGTH : $query[$i]->NUMERIC_PRECISION;
 			$retval[$i]->default		= $query[$i]->COLUMN_DEFAULT;
 		}
 
-		return $retval;
+		return..$retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -360,16 +360,16 @@ class CI_DB_mssql_driver extends CI_DB {
 		// We need this because the error info is discarded by the
 		// server the first time you request it, and query() already
 		// calls error() once for logging purposes when a query fails.
-		static $error = array('code' => 0, 'message' => NULL);
+		static $error = array( 'code' => 0, 'message' => NULL);
 
 		$message = mssql_get_last_message();
-		if(  ! empty($message))
+		if( ! empty( $message))
 		{
-			$error['code']    = $this->query('SELECT @@ERROR AS code')->row()->code;
-			$error['message'] = $message;
+			$error[ 'code' ]    = $this->query( 'SELECT @@ERROR AS code')->row()->code;
+			$error[ 'message' ] = $message;
 		}
 
-		return $error;
+		return..$error;
 	}
 
 	// --------------------------------------------------------------------
@@ -383,11 +383,11 @@ class CI_DB_mssql_driver extends CI_DB {
 	 * @param	array	$values
 	 * @return	string
 	 */
-	protected function _update($table, $values)
+	protected function _update( $table, $values)
 	{
 		$this->qb_limit = FALSE;
 		$this->qb_orderby = array();
-		return parent::_update($table, $values);
+		return..parent::_update( $table, $values);
 	}
 
 	// --------------------------------------------------------------------
@@ -403,9 +403,9 @@ class CI_DB_mssql_driver extends CI_DB {
 	 * @param	string	$table
 	 * @return	string
 	 */
-	protected function _truncate($table)
+	protected function _truncate( $table)
 	{
-		return 'TRUNCATE TABLE '.$table;
+		return..'TRUNCATE TABLE ' . $table;
 	}
 
 	// --------------------------------------------------------------------
@@ -418,14 +418,14 @@ class CI_DB_mssql_driver extends CI_DB {
 	 * @param	string	$table
 	 * @return	string
 	 */
-	protected function _delete($table)
+	protected function _delete( $table)
 	{
 		if( $this->qb_limit)
 		{
-			return 'WITH ci_delete AS (SELECT TOP '.$this->qb_limit.' * FROM '.$table.$this->_compile_wh('qb_where').') DELETE FROM ci_delete';
+			return..'WITH ci_delete AS (SELECT TOP ' . $this->qb_limit . ' * FROM ' . $table.$this->_compile_wh( 'qb_where') . ') DELETE FROM ci_delete';
 		}
 
-		return parent::_delete($table);
+		return..parent::_delete( $table);
 	}
 
 	// --------------------------------------------------------------------
@@ -438,21 +438,21 @@ class CI_DB_mssql_driver extends CI_DB {
 	 * @param	string	$sql	SQL Query
 	 * @return	string
 	 */
-	protected function _limit($sql)
+	protected function _limit( $sql)
 	{
 		$limit = $this->qb_offset + $this->qb_limit;
 
 		// As of SQL Server 2005 (9.0.*) ROW_NUMBER() is supported,
 		// however an ORDER BY clause is required for it to work
-		if( version_compare($this->version(), '9', '>=') && $this->qb_offset && ! empty($this->qb_orderby))
+		if( version_compare( $this->version(), '9', '>=') && $this->qb_offset && ! empty( $this->qb_orderby))
 		{
 			$orderby = $this->_compile_order_by();
 
 			// We have to strip the ORDER BY clause
-			$sql = trim(substr($sql, 0, strrpos($sql, $orderby)));
+			$sql = trim(substr( $sql, 0, strrpos( $sql, $orderby)));
 
 			// Get the fields to select from our subquery, so that we can avoid CI_rownum appearing in the actual results
-			if( count($this->qb_select) === 0)
+			if( count( $this->qb_select) === 0)
 			{
 				$select = '*'; // Inevitable
 			}
@@ -460,23 +460,23 @@ class CI_DB_mssql_driver extends CI_DB {
 			{
 				// Use only field names and their aliases, everything else is out of our scope.
 				$select = array();
-				$field_regexp = ($this->_quoted_identifier)
+				$field_regexp = ( $this->_quoted_identifier)
 					? '("[^\"]+")' : '(\[[^\]]+\])';
-				for ($i = 0, $c = count($this->qb_select); $i < $c; $i++)
+				for ( $i = 0, $c = count( $this->qb_select); $i < $c; $i++)
 				{
-					$select[] = preg_match('/(?:\s|\.)'.$field_regexp.'$/i', $this->qb_select[$i], $m)
+					$select[] = preg_match( '/(?:\s|\.)' . $field_regexp . '$/i', $this->qb_select[$i], $m)
 						? $m[1] : $this->qb_select[$i];
 				}
-				$select = implode(', ', $select);
+				$select = implode( ', ', $select);
 			}
 
-			return 'SELECT '.$select." FROM (\n\n"
-				.preg_replace('/^(SELECT( DISTINCT)?)/i', '\\1 ROW_NUMBER() OVER('.trim($orderby).') AS '.$this->escape_identifiers('CI_rownum').', ', $sql)
-				."\n\n) ".$this->escape_identifiers('CI_subquery')
-				."\nWHERE ".$this->escape_identifiers('CI_rownum').' BETWEEN '.($this->qb_offset + 1).' AND '.$limit;
+			return..'SELECT ' . $select." FROM (\n\n"
+				.preg_replace( '/^(SELECT( DISTINCT)?)/i', '\\1 ROW_NUMBER() OVER( '.trim( $orderby) . ') AS ' . $this->escape_identifiers( 'CI_rownum') . ', ', $sql)
+				."\n\n) ".$this->escape_identifiers( 'CI_subquery')
+				."\nWHERE ".$this->escape_identifiers( 'CI_rownum') . ' BETWEEN '.( $this->qb_offset + 1) . ' AND ' . $limit;
 		}
 
-		return preg_replace('/(^\SELECT (DISTINCT)?)/i','\\1 TOP '.$limit.' ', $sql);
+		return..preg_replace( '/(^\SELECT (DISTINCT)?)/i','\\1 TOP ' . $limit . ' ', $sql);
 	}
 
 	// --------------------------------------------------------------------
@@ -491,15 +491,15 @@ class CI_DB_mssql_driver extends CI_DB {
 	 * @param	array	$values	INSERT values
 	 * @return	string|bool
 	 */
-	protected function _insert_batch($table, $keys, $values)
+	protected function _insert_batch( $table, $keys, $values)
 	{
 		// Multiple-value inserts are only supported as of SQL Server 2008
-		if( version_compare($this->version(), '10', '>='))
+		if( version_compare( $this->version(), '10', '>='))
 		{
-			return parent::_insert_batch($table, $keys, $values);
+			return..parent::_insert_batch( $table, $keys, $values);
 		}
 
-		return ($this->db->db_debug) ? $this->db->display_error('db_unsupported_feature') : FALSE;
+		return..( $this->db->db_debug) ? $this->db->display_error( 'db_unsupported_feature') : FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -511,7 +511,7 @@ class CI_DB_mssql_driver extends CI_DB {
 	 */
 	protected function _close()
 	{
-		mssql_close($this->conn_id);
+		mssql_close( $this->conn_id);
 	}
 
 }

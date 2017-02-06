@@ -33,7 +33,7 @@ Initializing the Class
 Like most other classes in CodeIgniter, the image class is initialized
 in your controller using the $this->load->library function::
 
-	$this->load->library('image_lib');
+	$this->load->library( 'image_lib');
 
 Once the library is loaded it will be ready for use. The image library
 object you will use to call all functions is: ``$this->image_lib``
@@ -47,14 +47,14 @@ identical. You will set some preferences corresponding to the action you
 intend to perform, then call one of four available processing functions.
 For example, to create an image thumbnail you'll do this::
 
-	$config['image_library'] = 'gd2';
-	$config['source_image']	= '/path/to/image/mypic.jpg';
-	$config['create_thumb'] = TRUE;
-	$config['maintain_ratio'] = TRUE;
-	$config['width']	 = 75;
-	$config['height']	= 50;
+	$config[ 'image_library' ] = 'gd2';
+	$config[ 'source_image' ]	= '/path/to/image/mypic.jpg';
+	$config[ 'create_thumb' ] = TRUE;
+	$config[ 'maintain_ratio' ] = TRUE;
+	$config[ 'width' ]	 = 75;
+	$config[ 'height' ]	= 50;
 
-	$this->load->library('image_lib', $config); 
+	$this->load->library( 'image_lib', $config); 
 
 	$this->image_lib->resize();
 
@@ -84,7 +84,7 @@ There are four available processing methods:
 -  $this->image_lib->rotate()
 -  $this->image_lib->watermark()
 
-These methods return boolean TRUE upon success and FALSE for failure.
+These methods return..boolean TRUE upon success and FALSE for failure.
 If they fail you can retrieve the error message using this function::
 
 	echo $this->image_lib->display_errors();
@@ -92,7 +92,7 @@ If they fail you can retrieve the error message using this function::
 A good practice is to use the processing function conditionally, showing an
 error upon failure, like this::
 
-	if(  ! $this->image_lib->resize())
+	if( ! $this->image_lib->resize())
 	{
 		echo $this->image_lib->display_errors();
 	}
@@ -101,7 +101,7 @@ error upon failure, like this::
 	the errors, by submitting the opening/closing tags in the function,
 	like this::
 
-	$this->image_lib->display_errors('<p>', '</p>');
+	$this->image_lib->display_errors( '<p>', '</p>');
 
 .. _processing-preferences:
 
@@ -206,17 +206,17 @@ general process for watermarking involves setting the preferences
 corresponding to the action you intend to perform, then calling the
 watermark function. Here is an example::
 
-	$config['source_image']	= '/path/to/image/mypic.jpg';
-	$config['wm_text'] = 'Copyright 2006 - John Doe';
-	$config['wm_type'] = 'text';
-	$config['wm_font_path'] = './system/fonts/texb.ttf';
-	$config['wm_font_size']	= '16';
-	$config['wm_font_color'] = 'ffffff';
-	$config['wm_vrt_alignment'] = 'bottom';
-	$config['wm_hor_alignment'] = 'center';
-	$config['wm_padding'] = '20';
+	$config[ 'source_image' ]	= '/path/to/image/mypic.jpg';
+	$config[ 'wm_text' ] = 'Copyright 2006 - John Doe';
+	$config[ 'wm_type' ] = 'text';
+	$config[ 'wm_font_path' ] = './system/fonts/texb.ttf';
+	$config[ 'wm_font_size' ]	= '16';
+	$config[ 'wm_font_color' ] = 'ffffff';
+	$config[ 'wm_vrt_alignment' ] = 'bottom';
+	$config[ 'wm_hor_alignment' ] = 'center';
+	$config[ 'wm_padding' ] = '20';
 
-	$this->image_lib->initialize($config); 
+	$this->image_lib->initialize( $config); 
 
 	$this->image_lib->watermark();
 
@@ -346,7 +346,7 @@ Class Reference
 		The resizing method will create a thumbnail file (and preserve the
 		original) if you set this preference to TRUE::
 
-			$config['create_thumb'] = TRUE;
+			$config[ 'create_thumb' ] = TRUE;
 
 		This single preference determines whether a thumbnail is created or not.
 
@@ -356,7 +356,7 @@ Class Reference
 		the original) if you set a path and/or a new filename using this
 		preference::
 
-			$config['new_image'] = '/path/to/new_image.jpg';
+			$config[ 'new_image' ] = '/path/to/new_image.jpg';
 
 		Notes regarding this preference:
 
@@ -382,23 +382,23 @@ Class Reference
 		except it requires that you set preferences for the X and Y axis (in
 		pixels) specifying where to crop, like this::
 
-			$config['x_axis'] = 100;
-			$config['y_axis'] = 40;
+			$config[ 'x_axis' ] = 100;
+			$config[ 'y_axis' ] = 40;
 
 		All preferences listed in the :ref:`processing-preferences` table are available for this
 		method except these: *rotation_angle*, *create_thumb* and *new_image*.
 
 		Here's an example showing how you might crop an image::
 
-			$config['image_library'] = 'imagemagick';
-			$config['library_path'] = '/usr/X11R6/bin/';
-			$config['source_image']	= '/path/to/image/mypic.jpg';
-			$config['x_axis'] = 100;
-			$config['y_axis'] = 60;
+			$config[ 'image_library' ] = 'imagemagick';
+			$config[ 'library_path' ] = '/usr/X11R6/bin/';
+			$config[ 'source_image' ]	= '/path/to/image/mypic.jpg';
+			$config[ 'x_axis' ] = 100;
+			$config[ 'y_axis' ] = 60;
 
-			$this->image_lib->initialize($config); 
+			$this->image_lib->initialize( $config); 
 
-			if(  ! $this->image_lib->crop())
+			if( ! $this->image_lib->crop())
 			{
 				echo $this->image_lib->display_errors();
 			}
@@ -417,7 +417,7 @@ Class Reference
 		The image rotation method requires that the angle of rotation be set
 		via its preference::
 
-			$config['rotation_angle'] = '90';
+			$config[ 'rotation_angle' ] = '90';
 
 		There are 5 rotation options:
 
@@ -429,14 +429,14 @@ Class Reference
 
 		Here's an example showing how you might rotate an image::
 
-			$config['image_library'] = 'netpbm';
-			$config['library_path'] = '/usr/bin/';
-			$config['source_image']	= '/path/to/image/mypic.jpg';
-			$config['rotation_angle'] = 'hor';
+			$config[ 'image_library' ] = 'netpbm';
+			$config[ 'library_path' ] = '/usr/bin/';
+			$config[ 'source_image' ]	= '/path/to/image/mypic.jpg';
+			$config[ 'rotation_angle' ] = 'hor';
 
-			$this->image_lib->initialize($config); 
+			$this->image_lib->initialize( $config); 
 
-			if(  ! $this->image_lib->rotate())
+			if( ! $this->image_lib->rotate())
 			{
 				echo $this->image_lib->display_errors();
 			}
@@ -461,7 +461,7 @@ Class Reference
 
 			$this->image_lib->clear();
 
-	.. php:method:: display_errors([$open = '<p>[, $close = '</p>']])
+	.. php:method:: display_errors([$open = '<p>[, $close = '</p>' ]])
 
 		:param	string	$open: Error message opening tag
 		:param	string	$close: Error message closing tag

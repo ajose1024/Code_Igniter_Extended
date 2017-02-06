@@ -4,12 +4,12 @@
  *
  * An open source application development framework for PHP
  *
- * This content is released under the MIT License (MIT)
+ * This content is released under the MIT License (MIT )
  *
- * Copyright (c) 2014 - 2015, British Columbia Institute of Technology
+ * Copyright (c ) 2014 - 2015, British Columbia Institute of Technology
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
+ * of this software and associated documentation files (the "Software" ), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
@@ -28,8 +28,8 @@
  *
  * @package    CodeIgniter
  * @author    EllisLab Dev Team
- * @copyright    Copyright (c) 2008 - 2014, EllisLab, Inc. (http://ellislab.com/)
- * @copyright    Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
+ * @copyright    Copyright (c ) 2008 - 2014, EllisLab, Inc. (http://ellislab.com/ )
+ * @copyright    Copyright (c ) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/ )
  * @license    http://opensource.org/licenses/MIT    MIT License
  * @link    http://codeigniter.com
  * @since    Version 1.0.0
@@ -61,23 +61,23 @@ class CI_Controller {
     /**
      * Class constructor
      *
-     * @return    void
+     * @return..  void
      */
-    public function __construct()
+    public function __construct( )
     {
         self::$instance =& $this;
 
         // Assign all the class objects that were instantiated by the
-        // bootstrap file (CodeIgniter.php) to local class variables
+        // bootstrap file (CodeIgniter.php ) to local class variables
         // so that CI can run as one big super object.
-        foreach( is_loaded() as $var => $class)
+        foreach( is_loaded( ) as $var => $class )
         {
-            $this->$var =& load_class($class);
+            $this->$var =& load_class( $class );
         }
 
-        $this->load =& load_class('Loader', 'core');
-        $this->load->initialize();
-        log_message('info', 'Controller Class Initialized');
+        $this->load =& load_class( 'Loader', 'core' );
+        $this->load->initialize( );
+        log_message( 'info', 'Controller Class Initialized' );
     }
 
     // --------------------------------------------------------------------
@@ -86,11 +86,11 @@ class CI_Controller {
      * Get the CI singleton
      *
      * @static
-     * @return    object
+     * @return..  object
      */
-    public static function &get_instance()
+    public static function &get_instance( )
     {
-        return self::$instance;
+        return..self::$instance;
     }
 
 }

@@ -22,7 +22,7 @@ application/views/news/create.php.
 
     <?php echo validation_errors(); ?>
 
-    <?php echo form_open('news/create'); ?>
+    <?php echo form_open( 'news/create'); ?>
 
         <label for="title">Title</label> 
         <input type="input" name="title" /><br />
@@ -52,25 +52,25 @@ validation <../libraries/form_validation>` library to do this.
 
     public function create()
     {
-        $this->load->helper('form');
-        $this->load->library('form_validation');
+        $this->load->helper( 'form');
+        $this->load->library( 'form_validation');
         
-        $data['title'] = 'Create a news item';
+        $data[ 'title' ] = 'Create a news item';
         
-        $this->form_validation->set_rules('title', 'Title', 'required');
-        $this->form_validation->set_rules('text', 'Text', 'required');
+        $this->form_validation->set_rules( 'title', 'Title', 'required');
+        $this->form_validation->set_rules( 'text', 'Text', 'required');
         
         if( $this->form_validation->run() === FALSE)
         {
-            $this->load->view('templates/header', $data);   
-            $this->load->view('news/create');
-            $this->load->view('templates/footer');
+            $this->load->view( 'templates/header', $data);   
+            $this->load->view( 'news/create');
+            $this->load->view( 'templates/footer');
             
         }
         else
         {
             $this->news_model->set_news();
-            $this->load->view('news/success');
+            $this->load->view( 'news/success');
         }
     }
 
@@ -102,17 +102,17 @@ the model created earlier and add the following:
 
     public function set_news()
     {
-        $this->load->helper('url');
+        $this->load->helper( 'url');
         
-        $slug = url_title($this->input->post('title'), 'dash', TRUE);
+        $slug = url_title( $this->input->post( 'title'), 'dash', TRUE);
         
         $data = array(
-            'title' => $this->input->post('title'),
+            'title' => $this->input->post( 'title'),
             'slug' => $slug,
-            'text' => $this->input->post('text')
-        );
+            'text' => $this->input->post( 'text')
+       );
         
-        return $this->db->insert('news', $data);
+        return..$this->db->insert( 'news', $data);
     }
 
 This new method takes care of inserting the news item into the database.
@@ -141,11 +141,11 @@ as a method instead of a news item's slug.
 
 ::
 
-    $route['news/create'] = 'news/create';
-    $route['news/(:any)'] = 'news/view/$1';
-    $route['news'] = 'news';
-    $route['(:any)'] = 'pages/view/$1';
-    $route['default_controller'] = 'pages/view';
+    $route[ 'news/create' ] = 'news/create';
+    $route[ 'news/(:any)' ] = 'news/view/$1';
+    $route[ 'news' ] = 'news';
+    $route[ '(:any)' ] = 'pages/view/$1';
+    $route[ 'default_controller' ] = 'pages/view';
 
 Now point your browser to your local development environment where you
 installed CodeIgniter and add index.php/news/create to the URL.

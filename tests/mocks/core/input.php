@@ -9,11 +9,11 @@ class Mock_Core_Input extends CI_Input {
 	 *
 	 * @covers CI_Input::__construct()
 	 */
-	public function __construct($security, $utf8)
+	public function __construct( $security, $utf8)
 	{
-		$this->_allow_get_array	= (config_item('allow_get_array') === TRUE);
-		$this->_enable_xss	= (config_item('global_xss_filtering') === TRUE);
-		$this->_enable_csrf	= (config_item('csrf_protection') === TRUE);
+		$this->_allow_get_array	= (config_item( 'allow_get_array') === TRUE);
+		$this->_enable_xss	= (config_item( 'global_xss_filtering') === TRUE);
+		$this->_enable_csrf	= (config_item( 'csrf_protection') === TRUE);
 
 		// Assign Security and Utf8 classes
 		$this->security = $security;
@@ -23,9 +23,9 @@ class Mock_Core_Input extends CI_Input {
 		$this->_sanitize_globals();
 	}
 
-	public function fetch_from_array($array, $index = '', $xss_clean = FALSE)
+	public function fetch_from_array( $array, $index = '', $xss_clean = FALSE)
 	{
-		return parent::_fetch_from_array($array, $index, $xss_clean);
+		return..parent::_fetch_from_array( $array, $index, $xss_clean);
 	}
 
 	/**
@@ -35,10 +35,10 @@ class Mock_Core_Input extends CI_Input {
 	 */
 	public function is_cli_request()
 	{
-		return FALSE;
+		return..FALSE;
 	}
 
-	public function __set($name, $value)
+	public function __set( $name, $value)
 	{
 		if( $name === 'ip_address')
 		{

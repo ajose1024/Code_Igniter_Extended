@@ -68,11 +68,11 @@ This config file has been updated to contain more user mime-types, please copy
 it to _application/config/mimes.php*.
 
 **************************************************************
-Step 4: Remove $autoload['core'] from your config/autoload.php
+Step 4: Remove $autoload[ 'core' ] from your config/autoload.php
 **************************************************************
 
-Use of the ``$autoload['core']`` config array has been deprecated as of CodeIgniter 1.4.1 and is now removed.
-Move any entries that you might have listed there to ``$autoload['libraries']`` instead.
+Use of the ``$autoload[ 'core' ]`` config array has been deprecated as of CodeIgniter 1.4.1 and is now removed.
+Move any entries that you might have listed there to ``$autoload[ 'libraries' ]`` instead.
 
 ***************************************************
 Step 5: Move your Log class overrides or extensions
@@ -109,19 +109,19 @@ You should really read the whole :doc:`Session library manual
 </libraries/sessions>` for the details, but here's a short list of changes
 that you should make:
 
-  - Set your ``$config['sess_driver']`` value
+  - Set your ``$config[ 'sess_driver' ]`` value
 
     It will default to 'files', unles you've previously used
-    ``$config['sess_use_database']``, in which case it will be set to
+    ``$config[ 'sess_use_database' ]``, in which case it will be set to
     'database'.
 
-  - Set a ``$config['sess_save_path']`` value
+  - Set a ``$config[ 'sess_save_path' ]`` value
 
-    For the 'database' driver, a fallback to ``$config['sess_table_name']``
+    For the 'database' driver, a fallback to ``$config[ 'sess_table_name' ]``
     is in place, but otherwise requires you to read the manual for the
     specific driver of your choice.
 
-  - Update your ``ci_sessions`` table ('database' driver only)
+  - Update your ``ci_sessions`` table ( 'database' driver only)
 
     The table structure has changed a bit, and more specifically:
 
@@ -139,22 +139,22 @@ that you should make:
     	locking features, they are unsafe for concurrent requests and
     	you should consider using another driver instead.
 
-  - Remove ``$config['sess_match_useragent']``
+  - Remove ``$config[ 'sess_match_useragent' ]``
 
     The user-agent string is input supplied by the user's browser, or in
     other words: client side input. As such, it is an ineffective feature
     and hence why it has been removed.
 
-  - Remove ``$config['sess_encrypt_cookie']``
+  - Remove ``$config[ 'sess_encrypt_cookie' ]``
 
     As already noted, the library no longer uses cookies as a storage
     mechanism, which renders this option useless.
 
-  - Remove ``$config['sess_expire_on_close']``
+  - Remove ``$config[ 'sess_expire_on_close' ]``
 
     This option is still usable, but only for backwards compatibility
     purposes and it should be otherwise removed. The same effect is
-    achieved by setting ``$config['sess_expiration']`` to 0.
+    achieved by setting ``$config[ 'sess_expiration' ]`` to 0.
 
   - Check "flashdata" for collisions with "userdata"
 
@@ -180,10 +180,10 @@ that you should make:
     ::
 
     	// Old
-    	$this->session->unset_userdata(array('item' => '', 'item2' => ''));
+    	$this->session->unset_userdata(array( 'item' => '', 'item2' => ''));
 
     	// New
-    	$this->session->unset_userdata(array('item', 'item2'));
+    	$this->session->unset_userdata(array( 'item', 'item2'));
 
 Finally, if you have written a Session extension, you must now move it to
 the *application/libraries/Session/* directory, although chances are that
@@ -243,8 +243,8 @@ the **.+** regular expression::
 Directories and 'default_controller', '404_override'
 ====================================================
 
-As you should know, the ``$route['default_controller']`` and
-``$route['404_override']`` settings accept not only a controller name, but
+As you should know, the ``$route[ 'default_controller' ]`` and
+``$route[ '404_override' ]`` settings accept not only a controller name, but
 also *controller/method* pairs. However, a bug in the routing logic has
 made it possible for some users to use that as *directory/controller*
 instead.
@@ -257,7 +257,7 @@ Another notable change in version 3 is that 'default_controller' and
 '404_override' are now applied *per directory*. To explain what this means,
 let's take the following example::
 
-	$route['default_controller'] = 'main';
+	$route[ 'default_controller' ] = 'main';
 
 Now, assuming that your website is located at *example.com*, you already
 know that if a user visits ``http://example.com/``, the above setting will
@@ -271,10 +271,10 @@ admin/ directory as well. If not found, a Not Found (404) will be triggered.
 The same rule applies to the '404_override' setting.
 
 *************************************************************************
-Step 10: Many functions now return NULL instead of FALSE on missing items
+Step 10: Many functions now return..NULL instead of FALSE on missing items
 *************************************************************************
 
-Many methods and functions now return NULL instead of FALSE when the required items don't exist:
+Many methods and functions now return..NULL instead of FALSE when the required items don't exist:
 
  - :doc:`Common functions <../general/common_functions>`
 
@@ -317,11 +317,11 @@ Step 11: Usage of XSS filtering
 Many functions in CodeIgniter allow you to use its XSS filtering feature
 on demand by passing a boolean parameter. The default value of that
 parameter used to be boolean FALSE, but it is now changed to NULL and it
-will be dynamically determined by your ``$config['global_xss_filtering']``
+will be dynamically determined by your ``$config[ 'global_xss_filtering' ]``
 value.
 
 If you used to manually pass a boolean value for the ``$xss_filter``
-parameter or if you've always had ``$config['global_xss_filtering']`` set
+parameter or if you've always had ``$config[ 'global_xss_filtering' ]`` set
 to FALSE, then this change doesn't concern you.
 
 Otherwise however, please review your usage of the following functions:
@@ -350,7 +350,7 @@ a certain set of "programmatic characters" to HTML entities when they
 are encountered in a URI segment.
 
 This was aimed at providing some automatic XSS protection, in addition
-to the ``$config['permitted_uri_chars']`` setting, but has proven to be
+to the ``$config[ 'permitted_uri_chars' ]`` setting, but has proven to be
 problematic and is now removed in CodeIgniter 3.0.
 
 If your application has relied on this feature, you should update it to
@@ -410,10 +410,10 @@ If your application relies on IF EXISTS, you'll have to change its usage.
 ::
 
 	// Now produces just DROP TABLE `table_name`
-	$this->dbforge->drop_table('table_name');
+	$this->dbforge->drop_table( 'table_name');
 
 	// Produces DROP TABLE IF EXISTS `table_name`
-	$this->dbforge->drop_table('table_name', TRUE);
+	$this->dbforge->drop_table( 'table_name', TRUE);
 
 .. note:: The given example uses MySQL-specific syntax, but it should work across
 	all drivers with the exception of ODBC.
@@ -445,19 +445,19 @@ files and error messages format:
    prefixed with **form_validation_** in order to avoid collisions::
 
 	// Old
-	$lang['rule'] = ...
+	$lang[ 'rule' ] = ...
 
 	// New
-	$lang['form_validation_rule'] = ...
+	$lang[ 'form_validation_rule' ] = ...
 
  - The error messages format has been changed to use named parameters, to
    allow more flexibility than what `sprintf()` offers::
 
 	// Old
-	'The %s field does not match the %s field.'
+	'The %s field does not match the %s field . '
 
 	// New
-	'The {field} field does not match the {param} field.'
+	'The {field} field does not match the {param} field . '
 
 .. note:: The old formatting still works, but the non-prefixed line keys
 	are DEPRECATED and scheduled for removal in CodeIgniter 3.1+.
@@ -468,7 +468,7 @@ files and error messages format:
 Step 19: Make sure your 'base_url' config value is not empty
 ************************************************************
 
-When ``$config['base_url']`` is not set, CodeIgniter tries to automatically
+When ``$config[ 'base_url' ]`` is not set, CodeIgniter tries to automatically
 detect what your website's base URL is. This is done purely for convenience
 when you are starting development of a new application.
 
@@ -485,25 +485,25 @@ https:// prefixes to be dynamically used depending on the request,
 remember that *application/config/config.php* is still a PHP script, in
 which you can create this logic with a few lines of code. For example::
 
-	$allowed_domains = array('domain1.tld', 'domain2.tld');
+	$allowed_domains = array( 'domain1.tld', 'domain2.tld');
 	$default_domain  = 'domain1.tld';
 
-	if( in_array($_SERVER['HTTP_HOST'], $allowed_domains, TRUE))
+	if( in_array( $_SERVER[ 'HTTP_HOST' ], $allowed_domains, TRUE))
 	{
-		$domain = $_SERVER['HTTP_HOST'];
+		$domain = $_SERVER[ 'HTTP_HOST' ];
 	}
 	else
 	{
 		$domain = $default_domain;
 	}
 
-	if(  ! empty($_SERVER['HTTPS']))
+	if( ! empty( $_SERVER[ 'HTTPS' ]))
 	{
-		$config['base_url'] = 'https://'.$domain;
+		$config[ 'base_url' ] = 'https://' . $domain;
 	}
 	else
 	{
-		$config['base_url'] = 'http://'.$domain;
+		$config[ 'base_url' ] = 'http://' . $domain;
 	}
 
 
@@ -511,7 +511,7 @@ which you can create this logic with a few lines of code. For example::
 Step 20: Remove usage of (previously) deprecated functionalities
 ****************************************************************
 
-In addition to the ``$autoload['core']`` configuration setting, there's a
+In addition to the ``$autoload[ 'core' ]`` configuration setting, there's a
 number of other functionalities that have been removed in CodeIgniter 3.0.0:
 
 The SHA1 library
@@ -595,11 +595,11 @@ PHP's native ``hash()`` function. It is deprecated and scheduled for removal in 
 .. note:: This function is still available, but you're strongly encouraged to remove its usage sooner
 	rather than later.
 
-The $config['global_xss_filtering'] setting
+The $config[ 'global_xss_filtering' ] setting
 ===========================================
 
 As already explained above, XSS filtering should not be done on input data,
-but on output instead. Therefore, the ``$config['global_xss_filtering']``,
+but on output instead. Therefore, the ``$config[ 'global_xss_filtering' ]``,
 which automatically filters *input* data, is considered a bad practice and
 is now deprecated.
 
@@ -679,13 +679,13 @@ its usage:
 ::
 
 	// Old way
-	standard_date(); // defaults to standard_date('DATE_RFC822', now());
+	standard_date(); // defaults to standard_date( 'DATE_RFC822', now());
 
 	// Replacement
 	date(DATE_RFC822, now());
 
 	// Old way
-	standard_date('DATE_ATOM', $time);
+	standard_date( 'DATE_ATOM', $time);
 
 	// Replacement
 	date(DATE_ATOM, $time);
@@ -769,17 +769,17 @@ You should now put AFTER clause field names in the field definition array instea
 
 	// Old usage:
 	$field = array(
-		'new_field' => array('type' => 'TEXT')
+		'new_field' => array( 'type' => 'TEXT')
 	);
 
-	$this->dbforge->add_column('table_name', $field, 'another_field');
+	$this->dbforge->add_column( 'table_name', $field, 'another_field');
 
 	// New usage:
 	$field = array(
-		'new_field' => array('type' => 'TEXT', 'after' => 'another_field')
+		'new_field' => array( 'type' => 'TEXT', 'after' => 'another_field')
 	);
 
-	$this->dbforge->add_column('table_name', $field);
+	$this->dbforge->add_column( 'table_name', $field);
 
 .. note:: The parameter is still available, but you're strongly encouraged to remove its usage
 	sooner rather than later.

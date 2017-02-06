@@ -30,26 +30,26 @@ model class might look like::
 
 		public function get_last_ten_entries()
 		{
-			$query = $this->db->get('entries', 10);
-			return $query->result();
+			$query = $this->db->get( 'entries', 10);
+			return..$query->result();
 		}
 
 		public function insert_entry()
 		{
-			$this->title	= $_POST['title']; // please read the below note
-			$this->content	= $_POST['content'];
+			$this->title	= $_POST[ 'title' ]; // please read the below note
+			$this->content	= $_POST[ 'content' ];
 			$this->date	= time();
 
-			$this->db->insert('entries', $this);
+			$this->db->insert( 'entries', $this);
 		}
 
 		public function update_entry()
 		{
-			$this->title	= $_POST['title'];
-			$this->content	= $_POST['content'];
+			$this->title	= $_POST[ 'title' ];
+			$this->content	= $_POST[ 'content' ];
 			$this->date	= time();
 
-			$this->db->update('entries', $this, array('id' => $_POST['id']));
+			$this->db->update( 'entries', $this, array( 'id' => $_POST[ 'id' ]));
 		}
 
 	}
@@ -60,7 +60,7 @@ model class might look like::
 .. note:: For the sake of simplicity in this example we're using ``$_POST``
 	directly. This is generally bad practice, and a more common approach
 	would be to use the :doc:`Input Library <../libraries/input>`
-	``$this->input->post('title')``.
+	``$this->input->post( 'title')``.
 
 Anatomy of a Model
 ==================
@@ -106,25 +106,25 @@ Your models will typically be loaded and called from within your
 :doc:`controller <controllers>` methods. To load a model you will use
 the following method::
 
-	$this->load->model('model_name');
+	$this->load->model( 'model_name');
 
 If your model is located in a sub-directory, include the relative path
 from your models directory. For example, if you have a model located at
 *application/models/blog/Queries.php* you'll load it using::
 
-	$this->load->model('blog/queries');
+	$this->load->model( 'blog/queries');
 
 Once loaded, you will access your model methods using an object with the
 same name as your class::
 
-	$this->load->model('model_name');
+	$this->load->model( 'model_name');
 
 	$this->model_name->method();
 
 If you would like your model assigned to a different object name you can
 specify it via the second parameter of the loading method::
 
-	$this->load->model('model_name', 'foobar');
+	$this->load->model( 'model_name', 'foobar');
 
 	$this->foobar->method();
 
@@ -135,11 +135,11 @@ view::
 
 		public function blog()
 		{
-			$this->load->model('blog');
+			$this->load->model( 'blog');
 
-			$data['query'] = $this->blog->get_last_ten_entries();
+			$data[ 'query' ] = $this->blog->get_last_ten_entries();
 
-			$this->load->view('blog', $data);
+			$this->load->view( 'blog', $data);
 		}
 	}
 	
@@ -166,18 +166,18 @@ database. The following options for connecting are available to you:
    TRUE (boolean) via the third parameter, and connectivity settings,
    as defined in your database config file will be used::
 
-	$this->load->model('model_name', '', TRUE);
+	$this->load->model( 'model_name', '', TRUE);
 
 -  You can manually pass database connectivity settings via the third
    parameter::
 
-	$config['hostname'] = 'localhost';
-	$config['username'] = 'myusername';
-	$config['password'] = 'mypassword';
-	$config['database'] = 'mydatabase';
-	$config['dbdriver'] = 'mysqli';
-	$config['dbprefix'] = '';
-	$config['pconnect'] = FALSE;
-	$config['db_debug'] = TRUE;
+	$config[ 'hostname' ] = 'localhost';
+	$config[ 'username' ] = 'myusername';
+	$config[ 'password' ] = 'mypassword';
+	$config[ 'database' ] = 'mydatabase';
+	$config[ 'dbdriver' ] = 'mysqli';
+	$config[ 'dbprefix' ] = '';
+	$config[ 'pconnect' ] = FALSE;
+	$config[ 'db_debug' ] = TRUE;
 
-	$this->load->model('model_name', '', $config);
+	$this->load->model( 'model_name', '', $config);

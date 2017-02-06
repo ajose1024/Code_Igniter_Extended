@@ -17,14 +17,14 @@ Loading this Helper
 
 This helper is loaded using the following code::
 
-	$this->load->helper('text');
+	$this->load->helper( 'text');
 
 Available Functions
 ===================
 
 The following functions are available:
 
-.. php:function:: word_limiter($str[, $limit = 100[, $end_char = '&#8230;']])
+.. php:function:: word_limiter( $str[, $limit = 100[, $end_char = '&#8230;' ]])
 
 	:param	string	$str: Input string
 	:param	int	$limit: Limit
@@ -35,14 +35,14 @@ The following functions are available:
 	Truncates a string to the number of *words* specified. Example::
 
 		$string = "Here is a nice text string consisting of eleven words.";
-		$string = word_limiter($string, 4);
+		$string = word_limiter( $string, 4);
 		// Returns:  Here is a nice
 
 	The third parameter is an optional suffix added to the string. By
 	default it adds an ellipsis.
 
 
-.. php:function:: character_limiter($str[, $n = 500[, $end_char = '&#8230;']])
+.. php:function:: character_limiter( $str[, $n = 500[, $end_char = '&#8230;' ]])
 
 	:param	string	$str: Input string
 	:param	int	$n: Number of characters
@@ -57,7 +57,7 @@ The following functions are available:
 	Example::
 
 		$string = "Here is a nice text string consisting of eleven words.";
-		$string = character_limiter($string, 20);
+		$string = character_limiter( $string, 20);
 		// Returns:  Here is a nice text string
 
 	The third parameter is an optional suffix added to the string, if
@@ -66,7 +66,7 @@ The following functions are available:
 	.. note:: If you need to truncate to an exact number of characters please
 		see the :php:func:`ellipsize()` function below.
 
-.. php:function:: ascii_to_entities($str)
+.. php:function:: ascii_to_entities( $str)
 
 	:param	string	$str: Input string
 	:returns:	A string with ASCII values converted to entities
@@ -82,9 +82,9 @@ The following functions are available:
 
 	Example::
 
-		$string = ascii_to_entities($string);
+		$string = ascii_to_entities( $string);
 
-.. php:function::entities_to_ascii($str[, $all = TRUE])
+.. php:function::entities_to_ascii( $str[, $all = TRUE])
 
 	:param	string	$str: Input string
 	:param	bool	$all: Whether to convert unsafe entities as well
@@ -94,7 +94,7 @@ The following functions are available:
 	This function does the opposite of :php:func:`ascii_to_entities()`.
 	It turns character entities back into ASCII.
 
-.. php:function:: convert_accented_characters($str)
+.. php:function:: convert_accented_characters( $str)
 
 	:param	string	$str: Input string
 	:returns:	A string with accented characters converted
@@ -106,13 +106,13 @@ The following functions are available:
 
 	Example::
 
-		$string = convert_accented_characters($string);
+		$string = convert_accented_characters( $string);
 
 	.. note:: This function uses a companion config file
 		`application/config/foreign_chars.php` to define the to and
 		from array for transliteration.
 
-.. php:function:: word_censor($str, $censored[, $replacement = ''])
+.. php:function:: word_censor( $str, $censored[, $replacement = '' ])
 
 	:param	string	$str: Input string
 	:param	array	$censored: List of bad words to censor
@@ -128,10 +128,10 @@ The following functions are available:
 
 	Example::
 
-		$disallowed = array('darn', 'shucks', 'golly', 'phooey');
-		$string = word_censor($string, $disallowed, 'Beep!');
+		$disallowed = array( 'darn', 'shucks', 'golly', 'phooey');
+		$string = word_censor( $string, $disallowed, 'Beep!');
 
-.. php:function:: highlight_code($str)
+.. php:function:: highlight_code( $str)
 
 	:param	string	$str: Input string
 	:returns:	String with code highlighted via HTML
@@ -139,13 +139,13 @@ The following functions are available:
 
 	Colorizes a string of code (PHP, HTML, etc.). Example::
 
-		$string = highlight_code($string);
+		$string = highlight_code( $string);
 
 	The function uses PHP's ``highlight_string()`` function, so the
 	colors used are the ones specified in your php.ini file.
 
 
-.. php:function:: highlight_phrase($str, $phrase[, $tag_open = '<mark>'[, $tag_close = '</mark>']])
+.. php:function:: highlight_phrase( $str, $phrase[, $tag_open = '<mark>'[, $tag_close = '</mark>' ]])
 
 	:param	string	$str: Input string
 	:param	string	$phrase: Phrase to highlight
@@ -162,7 +162,7 @@ The following functions are available:
 	Example::
 
 		$string = "Here is a nice text string about nothing in particular.";
-		echo highlight_phrase($string, "nice text", '<span style="color:#990000;">', '</span>');
+		echo highlight_phrase( $string, "nice text", '<span style="color:#990000;">', '</span>');
 
 	The above code prints::
 
@@ -178,7 +178,7 @@ The following functions are available:
 				color: #000;
 			};
 
-.. php:function:: word_wrap($str[, $charlim = 76])
+.. php:function:: word_wrap( $str[, $charlim = 76])
 
 	:param	string	$str: Input string
 	:param	int	$charlim: Character limit
@@ -191,7 +191,7 @@ The following functions are available:
 	Example::
 
 		$string = "Here is a simple string of text that will help us demonstrate this function.";
-		echo word_wrap($string, 25);
+		echo word_wrap( $string, 25);
 
 		// Would produce:  
 		// Here is a simple string
@@ -199,7 +199,7 @@ The following functions are available:
 		// demonstrate this
 		// function.
 
-.. php:function:: ellipsize($str, $max_length[, $position = 1[, $ellipsis = '&hellip;']])
+.. php:function:: ellipsize( $str, $max_length[, $position = 1[, $ellipsis = '&hellip;' ]])
 
 	:param	string	$str: Input string
 	:param	int	$max_length: String length limit
@@ -223,7 +223,7 @@ The following functions are available:
 	Example::
 
 		$str = 'this_string_is_entirely_too_long_and_might_break_my_design.jpg';
-		echo ellipsize($str, 32, .5);
+		echo ellipsize( $str, 32, .5);
 
 	Produces::
 

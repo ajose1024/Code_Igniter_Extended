@@ -16,7 +16,7 @@ Loading this Helper
 
 This helper is loaded using the following code::
 
-	$this->load->helper('file');
+	$this->load->helper( 'file');
 
 Available Functions
 ===================
@@ -24,7 +24,7 @@ Available Functions
 The following functions are available:
 
 
-.. php:function:: read_file($file)
+.. php:function:: read_file( $file)
 
 	:param	string	$file: File path
 	:returns:	File contents or FALSE on failure
@@ -34,7 +34,7 @@ The following functions are available:
 
 	Example::
 
-		$string = read_file('./path/to/file.php');
+		$string = read_file( './path/to/file.php');
 
 	The path can be a relative or full server path. Returns FALSE (boolean) on failure.
 
@@ -49,7 +49,7 @@ The following functions are available:
 		function might not work if you are trying to access a file above the
 		calling script.
 
-.. php:function:: write_file($path, $data[, $mode = 'wb'])
+.. php:function:: write_file( $path, $data[, $mode = 'wb' ])
 
 	:param	string	$path: File path
 	:param	string	$data: Data to write to file
@@ -63,7 +63,7 @@ The following functions are available:
 	Example::
 
 		$data = 'Some file data';
-		if(  ! write_file('./path/to/file.php', $data))
+		if( ! write_file( './path/to/file.php', $data))
 		{     
 			echo 'Unable to write the file';
 		}
@@ -74,9 +74,9 @@ The following functions are available:
 
 	You can optionally set the write mode via the third parameter::
 
-		write_file('./path/to/file.php', $data, 'r+');
+		write_file( './path/to/file.php', $data, 'r+');
 
-	The default mode is 'wb'. Please see the `PHP user guide <http://php.net/manual/en/function.fopen.php>`_
+	The default mode is 'wb' . Please see the `PHP user guide <http://php.net/manual/en/function.fopen.php>`_
 	for mode options.
 
 	.. note: In order for this function to write data to a file, its permissions must
@@ -89,7 +89,7 @@ The following functions are available:
 
 	.. note:: This function acquires an exclusive lock on the file while writing to it.
 
-.. php:function:: delete_files($path[, $del_dir = FALSE[, $htdocs = FALSE]])
+.. php:function:: delete_files( $path[, $del_dir = FALSE[, $htdocs = FALSE]])
 
 	:param	string	$path: Directory path
 	:param	bool	$del_dir: Whether to also delete directories
@@ -101,18 +101,18 @@ The following functions are available:
 
 	Example::
 
-		delete_files('./path/to/directory/');
+		delete_files( './path/to/directory/');
 
 	If the second parameter is set to TRUE, any directories contained within the supplied
 	root path will be deleted as well.
 
 	Example::
 
-		delete_files('./path/to/directory/', TRUE);
+		delete_files( './path/to/directory/', TRUE);
 
 	.. note:: The files must be writable or owned by the system in order to be deleted.
 
-.. php:function:: get_filenames($source_dir[, $include_path = FALSE])
+.. php:function:: get_filenames( $source_dir[, $include_path = FALSE])
 
 	:param	string	$source_dir: Directory path
 	:param	bool	$include_path: Whether to include the path as part of the filenames
@@ -125,9 +125,9 @@ The following functions are available:
 
 	Example::
 
-		$controllers = get_filenames(APP_DIR_PATH.'controllers/');
+		$controllers = get_filenames(APP_DIR_PATH . 'controllers/');
 
-.. php:function:: get_dir_file_info($source_dir, $top_level_only)
+.. php:function:: get_dir_file_info( $source_dir, $top_level_only)
 
 	:param	string	$source_dir: Directory path
 	:param	bool	$top_level_only: Whether to look only at the specified directory (excluding sub-directories)
@@ -141,9 +141,9 @@ The following functions are available:
 
 	Example::
 
-		$models_info = get_dir_file_info(APP_DIR_PATH.'models/');
+		$models_info = get_dir_file_info(APP_DIR_PATH . 'models/');
 
-.. php:function:: get_file_info($file[, $returned_values = array('name', 'server_path', 'size', 'date')])
+.. php:function:: get_file_info( $file[, $returned_values = array( 'name', 'server_path', 'size', 'date')])
 
 	:param	string	$file: File path
 	:param	array	$returned_values: What type of info to return
@@ -157,7 +157,7 @@ The following functions are available:
 	Valid ``$returned_values`` options are: `name`, `size`, `date`, `readable`, `writeable`,
 	`executable` and `fileperms`.
 
-.. php:function:: get_mime_by_extension($filename)
+.. php:function:: get_mime_by_extension( $filename)
 
 	:param	string	$filename: File name
 	:returns:	MIME type string or FALSE on failure
@@ -169,13 +169,13 @@ The following functions are available:
 	::
 
 		$file = 'somefile.png';
-		echo $file.' is has a mime type of '.get_mime_by_extension($file);
+		echo $file . ' is has a mime type of '.get_mime_by_extension( $file);
 
 	.. note:: This is not an accurate way of determining file MIME types, and
 		is here strictly for convenience. It should not be used for security
 		purposes.
 
-.. php:function:: symbolic_permissions($perms)
+.. php:function:: symbolic_permissions( $perms)
 
 	:param	int	$perms: Permissions
 	:returns:	Symbolic permissions string
@@ -186,9 +186,9 @@ The following functions are available:
 
 	::
 
-		echo symbolic_permissions(fileperms('./index.php'));  // -rw-r--r--
+		echo symbolic_permissions(fileperms( './index.php'));  // -rw-r--r--
 
-.. php:function:: octal_permissions($perms)
+.. php:function:: octal_permissions( $perms)
 
 	:param	int	$perms: Permissions
 	:returns:	Octal permissions string
@@ -199,4 +199,4 @@ The following functions are available:
 
 	::
 
-		echo octal_permissions(fileperms('./index.php')); // 644
+		echo octal_permissions(fileperms( './index.php')); // 644

@@ -17,7 +17,7 @@ Loading this Helper
 
 This helper is loaded using the following code::
 
-	$this->load->helper('number');
+	$this->load->helper( 'number');
 
 Available Functions
 ===================
@@ -25,7 +25,7 @@ Available Functions
 The following functions are available:
 
 
-.. php:function:: byte_format($num[, $precision = 1])
+.. php:function:: byte_format( $num[, $precision = 1])
 
 	:param	mixed	$num: Number of bytes
 	:param	int	$precision: Floating point precision

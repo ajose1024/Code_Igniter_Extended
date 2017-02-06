@@ -34,12 +34,12 @@ The following functions allow you to build SQL **SELECT** statements.
 Runs the selection query and returns the result. Can be used by itself
 to retrieve all records from a table::
 
-	$query = $this->db->get('mytable');  // Produces: SELECT * FROM mytable
+	$query = $this->db->get( 'mytable');  // Produces: SELECT * FROM mytable
 
 The second and third parameters enable you to set a limit and offset
 clause::
 
-	$query = $this->db->get('mytable', 10, 20);
+	$query = $this->db->get( 'mytable', 10, 20);
 
 	// Executes: SELECT * FROM mytable LIMIT 20, 10
 	// (in MySQL. Other databases have slightly different syntax)
@@ -47,7 +47,7 @@ clause::
 You'll notice that the above function is assigned to a variable named
 $query, which can be used to show the results::
 
-	$query = $this->db->get('mytable');
+	$query = $this->db->get( 'mytable');
 
 	foreach( $query->result() as $row)
 	{
@@ -64,7 +64,7 @@ the query. This method simply returns the SQL query as a string.
 
 Example::
 
-	$sql = $this->db->get_compiled_select('mytable');
+	$sql = $this->db->get_compiled_select( 'mytable');
 	echo $sql;
 
 	// Prints string: SELECT * FROM mytable
@@ -72,12 +72,12 @@ Example::
 The second parameter enables you to set whether or not the query builder query
 will be reset (by default it will be reset, just like when using `$this->db->get()`)::
 
-	echo $this->db->limit(10,20)->get_compiled_select('mytable', FALSE);
+	echo $this->db->limit(10,20)->get_compiled_select( 'mytable', FALSE);
 
 	// Prints string: SELECT * FROM mytable LIMIT 20, 10
 	// (in MySQL. Other databases have slightly different syntax)
 
-	echo $this->db->select('title, content, date')->get_compiled_select();
+	echo $this->db->select( 'title, content, date')->get_compiled_select();
 
 	// Prints string: SELECT title, content, date FROM mytable LIMIT 20, 10
 
@@ -93,7 +93,7 @@ Identical to the above function except that it permits you to add a
 "where" clause in the second parameter, instead of using the db->where()
 function::
 
-	$query = $this->db->get_where('mytable', array('id' => $id), $limit, $offset);
+	$query = $this->db->get_where( 'mytable', array( 'id' => $id), $limit, $offset);
 
 Please read the about the where function below for more information.
 
@@ -103,8 +103,8 @@ Please read the about the where function below for more information.
 
 Permits you to write the SELECT portion of your query::
 
-	$this->db->select('title, content, date');
-	$query = $this->db->get('mytable');
+	$this->db->select( 'title, content, date');
+	$query = $this->db->get( 'mytable');
 
 	// Executes: SELECT title, content, date FROM mytable
 
@@ -119,8 +119,8 @@ escaping of fields may break them.
 
 ::
 
-	$this->db->select('(SELECT SUM(payments.amount) FROM payments WHERE payments.invoice_id=4') AS amount_paid', FALSE);
-	$query = $this->db->get('mytable');
+	$this->db->select( '(SELECT SUM(payments.amount) FROM payments WHERE payments.invoice_id=4') AS amount_paid', FALSE);
+	$query = $this->db->get( 'mytable');
 
 **$this->db->select_max()**
 
@@ -129,11 +129,11 @@ include a second parameter to rename the resulting field.
 
 ::
 
-	$this->db->select_max('age');
-	$query = $this->db->get('members');  // Produces: SELECT MAX(age) as age FROM members
+	$this->db->select_max( 'age');
+	$query = $this->db->get( 'members');  // Produces: SELECT MAX(age) as age FROM members
 
-	$this->db->select_max('age', 'member_age');
-	$query = $this->db->get('members'); // Produces: SELECT MAX(age) as member_age FROM members
+	$this->db->select_max( 'age', 'member_age');
+	$query = $this->db->get( 'members'); // Produces: SELECT MAX(age) as member_age FROM members
 
 
 **$this->db->select_min()**
@@ -144,8 +144,8 @@ the resulting field.
 
 ::
 
-	$this->db->select_min('age');
-	$query = $this->db->get('members'); // Produces: SELECT MIN(age) as age FROM members
+	$this->db->select_min( 'age');
+	$query = $this->db->get( 'members'); // Produces: SELECT MIN(age) as age FROM members
 
 
 **$this->db->select_avg()**
@@ -156,8 +156,8 @@ the resulting field.
 
 ::
 
-	$this->db->select_avg('age');
-	$query = $this->db->get('members'); // Produces: SELECT AVG(age) as age FROM members
+	$this->db->select_avg( 'age');
+	$query = $this->db->get( 'members'); // Produces: SELECT AVG(age) as age FROM members
 
 
 **$this->db->select_sum()**
@@ -168,15 +168,15 @@ the resulting field.
 
 ::
 
-	$this->db->select_sum('age');
-	$query = $this->db->get('members'); // Produces: SELECT SUM(age) as age FROM members
+	$this->db->select_sum( 'age');
+	$query = $this->db->get( 'members'); // Produces: SELECT SUM(age) as age FROM members
 
 **$this->db->from()**
 
 Permits you to write the FROM portion of your query::
 
-	$this->db->select('title, content, date');
-	$this->db->from('mytable');
+	$this->db->select( 'title, content, date');
+	$this->db->from( 'mytable');
 	$query = $this->db->get();  // Produces: SELECT title, content, date FROM mytable
 
 .. note:: As shown earlier, the FROM portion of your query can be specified
@@ -186,9 +186,9 @@ Permits you to write the FROM portion of your query::
 
 Permits you to write the JOIN portion of your query::
 
-	$this->db->select('*');
-	$this->db->from('blogs');
-	$this->db->join('comments', 'comments.id = blogs.id');
+	$this->db->select( '*');
+	$this->db->from( 'blogs');
+	$this->db->join( 'comments', 'comments.id = blogs.id');
 	$query = $this->db->get();
 
 	// Produces:
@@ -203,7 +203,7 @@ outer, and right outer.
 
 ::
 
-	$this->db->join('comments', 'comments.id = blogs.id', 'left');
+	$this->db->join( 'comments', 'comments.id = blogs.id', 'left');
 	// Produces: LEFT JOIN comments ON comments.id = blogs.id
 
 *************************
@@ -222,7 +222,7 @@ methods:
 
 	::
 
-		$this->db->where('name', $name); // Produces: WHERE name = 'Joe'
+		$this->db->where( 'name', $name); // Produces: WHERE name = 'Joe'
 
 	Notice that the equal sign is added for you.
 
@@ -231,9 +231,9 @@ methods:
 
 	::
 
-		$this->db->where('name', $name);
-		$this->db->where('title', $title);
-		$this->db->where('status', $status);
+		$this->db->where( 'name', $name);
+		$this->db->where( 'title', $title);
+		$this->db->where( 'status', $status);
 		// WHERE name = 'Joe' AND title = 'boss' AND status = 'active'
 
 #. **Custom key/value method:**
@@ -243,29 +243,29 @@ methods:
 
 	::
 
-		$this->db->where('name !=', $name);
-		$this->db->where('id <', $id); // Produces: WHERE name != 'Joe' AND id < 45
+		$this->db->where( 'name !=', $name);
+		$this->db->where( 'id <', $id); // Produces: WHERE name != 'Joe' AND id < 45
 
 #. **Associative array method:**
 
 	::
 
-		$array = array('name' => $name, 'title' => $title, 'status' => $status);
-		$this->db->where($array);
+		$array = array( 'name' => $name, 'title' => $title, 'status' => $status);
+		$this->db->where( $array);
 		// Produces: WHERE name = 'Joe' AND title = 'boss' AND status = 'active'
 
 	You can include your own operators using this method as well:
 
 	::
 
-		$array = array('name !=' => $name, 'id <' => $id, 'date >' => $date);
-		$this->db->where($array);
+		$array = array( 'name !=' => $name, 'id <' => $id, 'date >' => $date);
+		$this->db->where( $array);
 
 #. **Custom string:**
 	You can write your own clauses manually::
 
 		$where = "name='Joe' AND status='boss' OR status='active'";
-		$this->db->where($where);
+		$this->db->where( $where);
 
 
 ``$this->db->where()`` accepts an optional third parameter. If you set it to
@@ -273,64 +273,64 @@ FALSE, CodeIgniter will not try to protect your field or table names.
 
 ::
 
-	$this->db->where('MATCH (field) AGAINST ("value")', NULL, FALSE);
+	$this->db->where( 'MATCH (field) AGAINST ("value")', NULL, FALSE);
 
 **$this->db->or_where()**
 
 This function is identical to the one above, except that multiple
 instances are joined by OR::
 
-	$this->db->where('name !=', $name);
-	$this->db->or_where('id >', $id);  // Produces: WHERE name != 'Joe' OR id > 50
+	$this->db->where( 'name !=', $name);
+	$this->db->or_where( 'id >', $id);  // Produces: WHERE name != 'Joe' OR id > 50
 
 .. note:: or_where() was formerly known as orwhere(), which has been
 	removed.
 
 **$this->db->where_in()**
 
-Generates a WHERE field IN ('item', 'item') SQL query joined with AND if
+Generates a WHERE field IN ( 'item', 'item') SQL query joined with AND if
 appropriate
 
 ::
 
-	$names = array('Frank', 'Todd', 'James');
-	$this->db->where_in('username', $names);
-	// Produces: WHERE username IN ('Frank', 'Todd', 'James')
+	$names = array( 'Frank', 'Todd', 'James');
+	$this->db->where_in( 'username', $names);
+	// Produces: WHERE username IN ( 'Frank', 'Todd', 'James')
 
 
 **$this->db->or_where_in()**
 
-Generates a WHERE field IN ('item', 'item') SQL query joined with OR if
+Generates a WHERE field IN ( 'item', 'item') SQL query joined with OR if
 appropriate
 
 ::
 
-	$names = array('Frank', 'Todd', 'James');
-	$this->db->or_where_in('username', $names);
-	// Produces: OR username IN ('Frank', 'Todd', 'James')
+	$names = array( 'Frank', 'Todd', 'James');
+	$this->db->or_where_in( 'username', $names);
+	// Produces: OR username IN ( 'Frank', 'Todd', 'James')
 
 **$this->db->where_not_in()**
 
-Generates a WHERE field NOT IN ('item', 'item') SQL query joined with
+Generates a WHERE field NOT IN ( 'item', 'item') SQL query joined with
 AND if appropriate
 
 ::
 
-	$names = array('Frank', 'Todd', 'James');
-	$this->db->where_not_in('username', $names);
-	// Produces: WHERE username NOT IN ('Frank', 'Todd', 'James')
+	$names = array( 'Frank', 'Todd', 'James');
+	$this->db->where_not_in( 'username', $names);
+	// Produces: WHERE username NOT IN ( 'Frank', 'Todd', 'James')
 
 
 **$this->db->or_where_not_in()**
 
-Generates a WHERE field NOT IN ('item', 'item') SQL query joined with OR
+Generates a WHERE field NOT IN ( 'item', 'item') SQL query joined with OR
 if appropriate
 
 ::
 
-	$names = array('Frank', 'Todd', 'James');
-	$this->db->or_where_not_in('username', $names);
-	// Produces: OR username NOT IN ('Frank', 'Todd', 'James')
+	$names = array( 'Frank', 'Todd', 'James');
+	$this->db->or_where_not_in( 'username', $names);
+	// Produces: OR username NOT IN ( 'Frank', 'Todd', 'James')
 
 ************************
 Looking for Similar Data
@@ -347,14 +347,14 @@ searches.
 
 	::
 
-		$this->db->like('title', 'match');
+		$this->db->like( 'title', 'match');
 		// Produces: WHERE `title` LIKE '%match%' ESCAPE '!'
 
 	If you use multiple method calls they will be chained together with
 	AND between them::
 
-		$this->db->like('title', 'match');
-		$this->db->like('body', 'match');
+		$this->db->like( 'title', 'match');
+		$this->db->like( 'body', 'match');
 		// WHERE `title` LIKE '%match%' ESCAPE '!' AND  `body` LIKE '%match% ESCAPE '!'
 
 	If you want to control where the wildcard (%) is placed, you can use
@@ -363,16 +363,16 @@ searches.
 
 	::
 
-		$this->db->like('title', 'match', 'before');	// Produces: WHERE `title` LIKE '%match' ESCAPE '!'
-		$this->db->like('title', 'match', 'after');	// Produces: WHERE `title` LIKE 'match%' ESCAPE '!'
-		$this->db->like('title', 'match', 'both');	// Produces: WHERE `title` LIKE '%match%' ESCAPE '!'
+		$this->db->like( 'title', 'match', 'before');	// Produces: WHERE `title` LIKE '%match' ESCAPE '!'
+		$this->db->like( 'title', 'match', 'after');	// Produces: WHERE `title` LIKE 'match%' ESCAPE '!'
+		$this->db->like( 'title', 'match', 'both');	// Produces: WHERE `title` LIKE '%match%' ESCAPE '!'
 
 #. **Associative array method:**
 
 	::
 
-		$array = array('title' => $match, 'page1' => $match, 'page2' => $match);
-		$this->db->like($array);
+		$array = array( 'title' => $match, 'page1' => $match, 'page2' => $match);
+		$this->db->like( $array);
 		// WHERE `title` LIKE '%match%' ESCAPE '!' AND  `page1` LIKE '%match%' ESCAPE '!' AND  `page2` LIKE '%match%' ESCAPE '!'
 
 
@@ -381,7 +381,7 @@ searches.
 This method is identical to the one above, except that multiple
 instances are joined by OR::
 
-	$this->db->like('title', 'match'); $this->db->or_like('body', $match);
+	$this->db->like( 'title', 'match'); $this->db->or_like( 'body', $match);
 	// WHERE `title` LIKE '%match%' ESCAPE '!' OR  `body` LIKE '%match%' ESCAPE '!'
 
 .. note:: ``or_like()`` was formerly known as ``orlike()``, which has been removed.
@@ -391,15 +391,15 @@ instances are joined by OR::
 This method is identical to ``like()``, except that it generates
 NOT LIKE statements::
 
-	$this->db->not_like('title', 'match');	// WHERE `title` NOT LIKE '%match% ESCAPE '!'
+	$this->db->not_like( 'title', 'match');	// WHERE `title` NOT LIKE '%match% ESCAPE '!'
 
 **$this->db->or_not_like()**
 
 This method is identical to ``not_like()``, except that multiple
 instances are joined by OR::
 
-	$this->db->like('title', 'match');
-	$this->db->or_not_like('body', 'match');
+	$this->db->like( 'title', 'match');
+	$this->db->or_not_like( 'body', 'match');
 	// WHERE `title` LIKE '%match% OR  `body` NOT LIKE '%match%' ESCAPE '!'
 
 **$this->db->group_by()**
@@ -422,19 +422,19 @@ Adds the "DISTINCT" keyword to a query
 ::
 
 	$this->db->distinct();
-	$this->db->get('table'); // Produces: SELECT DISTINCT * FROM table
+	$this->db->get( 'table'); // Produces: SELECT DISTINCT * FROM table
 
 **$this->db->having()**
 
 Permits you to write the HAVING portion of your query. There are 2
 possible syntaxes, 1 argument or 2::
 
-	$this->db->having('user_id = 45');  // Produces: HAVING user_id = 45
-	$this->db->having('user_id',  45);  // Produces: HAVING user_id = 45
+	$this->db->having( 'user_id = 45');  // Produces: HAVING user_id = 45
+	$this->db->having( 'user_id',  45);  // Produces: HAVING user_id = 45
 
 You can also pass an array of multiple values as well::
 
-	$this->db->having(array('title =' => 'My Title', 'id <' => $id));
+	$this->db->having(array( 'title =' => 'My Title', 'id <' => $id));
 	// Produces: HAVING title = 'My Title', id < 45
 
 
@@ -444,8 +444,8 @@ setting it to FALSE.
 
 ::
 
-	$this->db->having('user_id',  45);  // Produces: HAVING `user_id` = 45 in some databases such as MySQL
-	$this->db->having('user_id',  45, FALSE);  // Produces: HAVING user_id = 45
+	$this->db->having( 'user_id',  45);  // Produces: HAVING `user_id` = 45 in some databases such as MySQL
+	$this->db->having( 'user_id',  45, FALSE);  // Produces: HAVING user_id = 45
 
 
 **$this->db->or_having()**
@@ -467,20 +467,20 @@ Options are **ASC**, **DESC** AND **RANDOM**.
 
 ::
 
-	$this->db->order_by('title', 'DESC');
+	$this->db->order_by( 'title', 'DESC');
 	// Produces: ORDER BY `title` DESC
 
 You can also pass your own string in the first parameter::
 
-	$this->db->order_by('title DESC, name ASC');
+	$this->db->order_by( 'title DESC, name ASC');
 	// Produces: ORDER BY `title` DESC, `name` ASC
 
 Or multiple function calls can be made if you need multiple fields.
 
 ::
 
-	$this->db->order_by('title', 'DESC');
-	$this->db->order_by('name', 'ASC');
+	$this->db->order_by( 'title', 'DESC');
+	$this->db->order_by( 'name', 'ASC');
 	// Produces: ORDER BY `title` DESC, `name` ASC
 
 If you choose the **RANDOM** direction option, then the first parameters will
@@ -488,7 +488,7 @@ be ignored, unless you specify a numeric seed value.
 
 ::
 
-	$this->db->order_by('title', 'RANDOM');
+	$this->db->order_by( 'title', 'RANDOM');
 	// Produces: ORDER BY RAND()
 
 	$this->db->order_by(42, 'RANDOM');
@@ -522,23 +522,23 @@ Permits you to determine the number of rows in a particular Active
 Record query. Queries will accept Query Builder restrictors such as
 ``where()``, ``or_where()``, ``like()``, ``or_like()``, etc. Example::
 
-	echo $this->db->count_all_results('my_table');  // Produces an integer, like 25
-	$this->db->like('title', 'match');
-	$this->db->from('my_table');
+	echo $this->db->count_all_results( 'my_table');  // Produces an integer, like 25
+	$this->db->like( 'title', 'match');
+	$this->db->from( 'my_table');
 	echo $this->db->count_all_results(); // Produces an integer, like 17
 
 However, this method also resets any field values that you may have passed
 to ``select()``. If you need to keep them, you can pass ``FALSE`` as the
 second parameter::
 
-	echo $this->db->count_all_results('my_table', FALSE);
+	echo $this->db->count_all_results( 'my_table', FALSE);
 
 **$this->db->count_all()**
 
 Permits you to determine the number of rows in a particular table.
 Submit the table name in the first parameter. Example::
 
-	echo $this->db->count_all('my_table');  // Produces an integer, like 25
+	echo $this->db->count_all( 'my_table');  // Produces an integer, like 25
 
 **************
 Query grouping
@@ -547,19 +547,19 @@ Query grouping
 Query grouping allows you to create groups of WHERE clauses by enclosing them in parentheses. This will allow
 you to create queries with complex WHERE clauses. Nested groups are supported. Example::
 
-	$this->db->select('*')->from('my_table')
+	$this->db->select( '*')->from( 'my_table')
 		->group_start()
-			->where('a', 'a')
+			->where( 'a', 'a')
 			->or_group_start()
-				->where('b', 'b')
-				->where('c', 'c')
+				->where( 'b', 'b')
+				->where( 'c', 'c')
 			->group_end()
 		->group_end()
-		->where('d', 'd')
+		->where( 'd', 'd')
 	->get();
 
 	// Generates:
-	// SELECT * FROM (`my_table`) WHERE ( `a` = 'a' OR ( `b` = 'b' AND `c` = 'c' ) ) AND `d` = 'd'
+	// SELECT * FROM (`my_table`) WHERE ( `a` = 'a' OR ( `b` = 'b' AND `c` = 'c')) AND `d` = 'd'
 
 .. note:: groups need to be balanced, make sure every group_start() is matched by a group_end().
 
@@ -599,8 +599,8 @@ function. Here is an example using an array::
 		'date' => 'My date'
 	);
 
-	$this->db->insert('mytable', $data);
-	// Produces: INSERT INTO mytable (title, name, date) VALUES ('My title', 'My name', 'My date')
+	$this->db->insert( 'mytable', $data);
+	// Produces: INSERT INTO mytable (title, name, date) VALUES ( 'My title', 'My name', 'My date')
 
 The first parameter will contain the table name, the second is an
 associative array of values.
@@ -616,8 +616,8 @@ Here is an example using an object::
 	*/
 
 	$object = new Myclass;
-	$this->db->insert('mytable', $object);
-	// Produces: INSERT INTO mytable (title, content, date) VALUES ('My Title', 'My Content', 'My Date')
+	$this->db->insert( 'mytable', $object);
+	// Produces: INSERT INTO mytable (title, content, date) VALUES ( 'My Title', 'My Content', 'My Date')
 
 The first parameter will contain the table name, the second is an
 object.
@@ -637,21 +637,21 @@ Example::
 		'date'  => 'My date'
 	);
 
-	$sql = $this->db->set($data)->get_compiled_insert('mytable');
+	$sql = $this->db->set( $data)->get_compiled_insert( 'mytable');
 	echo $sql;
 
-	// Produces string: INSERT INTO mytable (`title`, `name`, `date`) VALUES ('My title', 'My name', 'My date')
+	// Produces string: INSERT INTO mytable (`title`, `name`, `date`) VALUES ( 'My title', 'My name', 'My date')
 
 The second parameter enables you to set whether or not the query builder query
 will be reset (by default it will be--just like $this->db->insert())::
 
-	echo $this->db->set('title', 'My Title')->get_compiled_insert('mytable', FALSE);
+	echo $this->db->set( 'title', 'My Title')->get_compiled_insert( 'mytable', FALSE);
 
-	// Produces string: INSERT INTO mytable (`title`) VALUES ('My Title')
+	// Produces string: INSERT INTO mytable (`title`) VALUES ( 'My Title')
 
-	echo $this->db->set('content', 'My Content')->get_compiled_insert();
+	echo $this->db->set( 'content', 'My Content')->get_compiled_insert();
 
-	// Produces string: INSERT INTO mytable (`title`, `content`) VALUES ('My Title', 'My Content')
+	// Produces string: INSERT INTO mytable (`title`, `content`) VALUES ( 'My Title', 'My Content')
 
 The key thing to notice in the above example is that the second query did not
 utlize `$this->db->from()` nor did it pass a table name into the first
@@ -680,8 +680,8 @@ function. Here is an example using an array::
 		)
 	);
 
-	$this->db->insert_batch('mytable', $data);
-	// Produces: INSERT INTO mytable (title, name, date) VALUES ('My title', 'My name', 'My date'),  ('Another title', 'Another name', 'Another date')
+	$this->db->insert_batch( 'mytable', $data);
+	// Produces: INSERT INTO mytable (title, name, date) VALUES ( 'My title', 'My name', 'My date'),  ( 'Another title', 'Another name', 'Another date')
 
 The first parameter will contain the table name, the second is an
 associative array of values.
@@ -709,9 +709,9 @@ Example::
 		'date'  => 'My date'
 	);
 
-	$this->db->replace('table', $data);
+	$this->db->replace( 'table', $data);
 
-	// Executes: REPLACE INTO mytable (title, name, date) VALUES ('My title', 'My name', 'My date')
+	// Executes: REPLACE INTO mytable (title, name, date) VALUES ( 'My title', 'My name', 'My date')
 
 In the above example, if we assume that the *title* field is our primary
 key, then if a row containing 'My title' as the *title* value, that row
@@ -729,16 +729,16 @@ or update functions:**
 
 ::
 
-	$this->db->set('name', $name);
-	$this->db->insert('mytable');  // Produces: INSERT INTO mytable (`name`) VALUES ('{$name}')
+	$this->db->set( 'name', $name);
+	$this->db->insert( 'mytable');  // Produces: INSERT INTO mytable (`name`) VALUES ( '{$name}')
 
 If you use multiple function called they will be assembled properly
 based on whether you are doing an insert or an update::
 
-	$this->db->set('name', $name);
-	$this->db->set('title', $title);
-	$this->db->set('status', $status);
-	$this->db->insert('mytable');
+	$this->db->set( 'name', $name);
+	$this->db->set( 'title', $title);
+	$this->db->set( 'status', $status);
+	$this->db->insert( 'mytable');
 
 **set()** will also accept an optional third parameter (``$escape``), that
 will prevent data from being escaped if set to FALSE. To illustrate the
@@ -747,13 +747,13 @@ parameter.
 
 ::
 
-	$this->db->set('field', 'field+1', FALSE);
-	$this->db->where('id', 2);
-	$this->db->update('mytable'); // gives UPDATE mytable SET field = field+1 WHERE id = 2
+	$this->db->set( 'field', 'field+1', FALSE);
+	$this->db->where( 'id', 2);
+	$this->db->update( 'mytable'); // gives UPDATE mytable SET field = field+1 WHERE id = 2
 
-	$this->db->set('field', 'field+1');
-	$this->db->where('id', 2);
-	$this->db->update('mytable'); // gives UPDATE `mytable` SET `field` = 'field+1' WHERE `id` = 2
+	$this->db->set( 'field', 'field+1');
+	$this->db->where( 'id', 2);
+	$this->db->update( 'mytable'); // gives UPDATE `mytable` SET `field` = 'field+1' WHERE `id` = 2
 
 You can also pass an associative array to this function::
 
@@ -763,8 +763,8 @@ You can also pass an associative array to this function::
 		'status' => $status
 	);
 
-	$this->db->set($array);
-	$this->db->insert('mytable');
+	$this->db->set( $array);
+	$this->db->insert( 'mytable');
 
 Or an object::
 
@@ -777,8 +777,8 @@ Or an object::
 	*/
 
 	$object = new Myclass;
-	$this->db->set($object);
-	$this->db->insert('mytable');
+	$this->db->set( $object);
+	$this->db->insert( 'mytable');
 
 **$this->db->update()**
 
@@ -792,8 +792,8 @@ is an example using an array::
 		'date' => $date
 	);
 
-	$this->db->where('id', $id);
-	$this->db->update('mytable', $data);
+	$this->db->where( 'id', $id);
+	$this->db->update( 'mytable', $data);
 	// Produces:
 	//
 	//	UPDATE mytable
@@ -811,8 +811,8 @@ Or you can supply an object::
 	*/
 
 	$object = new Myclass;
-	$this->db->where('id', $id);
-	$this->db->update('mytable', $object);
+	$this->db->where( 'id', $id);
+	$this->db->update( 'mytable', $object);
 	// Produces:
 	//
 	// UPDATE `mytable`
@@ -825,11 +825,11 @@ You'll notice the use of the $this->db->where() function, enabling you
 to set the WHERE clause. You can optionally pass this information
 directly into the update function as a string::
 
-	$this->db->update('mytable', $data, "id = 4");
+	$this->db->update( 'mytable', $data, "id = 4");
 
 Or as an array::
 
-	$this->db->update('mytable', $data, array('id' => $id));
+	$this->db->update( 'mytable', $data, array( 'id' => $id));
 
 You may also use the $this->db->set() function described above when
 performing updates.
@@ -845,15 +845,15 @@ Here is an example using an array::
 	      'title' => 'My title' ,
 	      'name' => 'My Name 2' ,
 	      'date' => 'My date 2'
-	   ),
+	 ),
 	   array(
 	      'title' => 'Another title' ,
 	      'name' => 'Another Name 2' ,
 	      'date' => 'Another date 2'
-	   )
+	 )
 	);
 
-	$this->db->update_batch('mytable', $data, 'title');
+	$this->db->update_batch( 'mytable', $data, 'title');
 
 	// Produces:
 	// UPDATE `mytable` SET `name` = CASE
@@ -864,7 +864,7 @@ Here is an example using an array::
 	// WHEN `title` = 'My title' THEN 'My date 2'
 	// WHEN `title` = 'Another title' THEN 'Another date 2'
 	// ELSE `date` END
-	// WHERE `title` IN ('My title','Another title')
+	// WHERE `title` IN ( 'My title','Another title')
 
 The first parameter will contain the table name, the second is an associative
 array of values, the third parameter is the where key.
@@ -894,14 +894,14 @@ Generates a delete SQL string and runs the query.
 
 ::
 
-	$this->db->delete('mytable', array('id' => $id));  // Produces: // DELETE FROM mytable  // WHERE id = $id
+	$this->db->delete( 'mytable', array( 'id' => $id));  // Produces: // DELETE FROM mytable  // WHERE id = $id
 
 The first parameter is the table name, the second is the where clause.
 You can also use the where() or or_where() functions instead of passing
 the data to the second parameter of the function::
 
-	$this->db->where('id', $id);
-	$this->db->delete('mytable');
+	$this->db->where( 'id', $id);
+	$this->db->delete( 'mytable');
 
 	// Produces:
 	// DELETE FROM mytable
@@ -913,9 +913,9 @@ delete data from more than 1 table.
 
 ::
 
-	$tables = array('table1', 'table2', 'table3');
-	$this->db->where('id', '5');
-	$this->db->delete($tables);
+	$tables = array( 'table1', 'table2', 'table3');
+	$this->db->where( 'id', '5');
+	$this->db->delete( $tables);
 
 
 If you want to delete all data from a table, you can use the truncate()
@@ -926,7 +926,7 @@ function, or empty_table().
 Generates a delete SQL string and runs the
 query.::
 
-	  $this->db->empty_table('mytable'); // Produces: DELETE FROM mytable
+	  $this->db->empty_table( 'mytable'); // Produces: DELETE FROM mytable
 
 **$this->db->truncate()**
 
@@ -934,12 +934,12 @@ Generates a truncate SQL string and runs the query.
 
 ::
 
-	$this->db->from('mytable');
+	$this->db->from( 'mytable');
 	$this->db->truncate();
 
 	// or
 
-	$this->db->truncate('mytable');
+	$this->db->truncate( 'mytable');
 
 	// Produce:
 	// TRUNCATE mytable
@@ -961,10 +961,10 @@ Method Chaining
 Method chaining allows you to simplify your syntax by connecting
 multiple functions. Consider this example::
 
-	$query = $this->db->select('title')
-			->where('id', $id)
+	$query = $this->db->select( 'title')
+			->where( 'id', $id)
 			->limit(10, 20)
-			->get('mytable');
+			->get( 'mytable');
 
 .. _ar-caching:
 
@@ -1002,18 +1002,18 @@ An example of caching
 Here's a usage example::
 
 	$this->db->start_cache();
-	$this->db->select('field1');
+	$this->db->select( 'field1');
 	$this->db->stop_cache();
-	$this->db->get('tablename');
+	$this->db->get( 'tablename');
 	//Generates: SELECT `field1` FROM (`tablename`)
 
-	$this->db->select('field2');
-	$this->db->get('tablename');
+	$this->db->select( 'field2');
+	$this->db->get( 'tablename');
 	//Generates:  SELECT `field1`, `field2` FROM (`tablename`)
 
 	$this->db->flush_cache();
-	$this->db->select('field2');
-	$this->db->get('tablename');
+	$this->db->select( 'field2');
+	$this->db->get( 'tablename');
 	//Generates:  SELECT `field2` FROM (`tablename`)
 
 
@@ -1037,9 +1037,9 @@ This is useful in situations where you are using Query Builder to generate SQL
 run the query::
 
 	// Note that the second parameter of the get_compiled_select method is FALSE
-	$sql = $this->db->select(array('field1','field2'))
-					->where('field3',5)
-					->get_compiled_select('mytable', FALSE);
+	$sql = $this->db->select(array( 'field1','field2'))
+					->where( 'field3',5)
+					->get_compiled_select( 'mytable', FALSE);
 
 	// ...
 	// Do something crazy with the SQL code... like add it to a cron script for
@@ -1048,7 +1048,7 @@ run the query::
 
 	$data = $this->db->get()->result_array();
 
-	// Would execute and return an array of results of the following query:
+	// Would execute and return..an array of results of the following query:
 	// SELECT field1, field1 from mytable where field3 = 5;
 
 .. note:: Double calls to ``get_compiled_select()`` while you're using the
@@ -1091,7 +1091,7 @@ Class Reference
 
 		Empties the Query Builder cache.
 
-	.. php:method:: set_dbprefix([$prefix = ''])
+	.. php:method:: set_dbprefix([$prefix = '' ])
 
 		:param	string	$prefix: The new prefix to use
 		:returns:	The DB prefix in use
@@ -1099,7 +1099,7 @@ Class Reference
 
 		Sets the database prefix, without having to reconnect.
 
-	.. php:method:: dbprefix([$table = ''])
+	.. php:method:: dbprefix([$table = '' ])
 
 		:param	string	$table: The table name to prefix
 		:returns:	The prefixed table name
@@ -1148,7 +1148,7 @@ Class Reference
 
 		Adds a SELECT clause to a query.
 
-	.. php:method:: select_avg([$select = ''[, $alias = '']])
+	.. php:method:: select_avg([$select = ''[, $alias = '' ]])
 
 		:param	string	$select: Field to compute the average of
 		:param	string	$alias: Alias for the resulting value name
@@ -1157,7 +1157,7 @@ Class Reference
 
 		Adds a SELECT AVG(field) clause to a query.
 
-	.. php:method:: select_max([$select = ''[, $alias = '']])
+	.. php:method:: select_max([$select = ''[, $alias = '' ]])
 
 		:param	string	$select: Field to compute the maximum of
 		:param	string	$alias: Alias for the resulting value name
@@ -1166,7 +1166,7 @@ Class Reference
 
 		Adds a SELECT MAX(field) clause to a query.
 
-	.. php:method:: select_min([$select = ''[, $alias = '']])
+	.. php:method:: select_min([$select = ''[, $alias = '' ]])
 
 		:param	string	$select: Field to compute the minimum of
 		:param	string	$alias: Alias for the resulting value name
@@ -1175,7 +1175,7 @@ Class Reference
 
 		Adds a SELECT MIN(field) clause to a query.
 
-	.. php:method:: select_sum([$select = ''[, $alias = '']])
+	.. php:method:: select_sum([$select = ''[, $alias = '' ]])
 
 		:param	string	$select: Field to compute the sum of
 		:param	string	$alias: Alias for the resulting value name
@@ -1193,7 +1193,7 @@ Class Reference
 		Sets a flag which tells the query builder to add
 		a DISTINCT clause to the SELECT portion of the query.
 
-	.. php:method:: from($from)
+	.. php:method:: from( $from)
 
 		:param	mixed	$from: Table name(s); string or array
 		:returns:	CI_DB_query_builder instance (method chaining)
@@ -1201,7 +1201,7 @@ Class Reference
 
 		Specifies the FROM clause of a query.
 
-	.. php:method:: join($table, $cond[, $type = ''[, $escape = NULL]])
+	.. php:method:: join( $table, $cond[, $type = ''[, $escape = NULL]])
 
 		:param	string	$table: Table name to join
 		:param	string	$cond: The JOIN ON condition
@@ -1212,7 +1212,7 @@ Class Reference
 
 		Adds a JOIN clause to a query.
 
-	.. php:method:: where($key[, $value = NULL[, $escape = NULL]])
+	.. php:method:: where( $key[, $value = NULL[, $escape = NULL]])
 
 		:param	mixed	$key: Name of field to compare, or associative array
 		:param	mixed	$value: If a single key, compared to this value
@@ -1223,7 +1223,7 @@ Class Reference
 		Generates the WHERE portion of the query.
                 Separates multiple calls with 'AND'.
 
-	.. php:method:: or_where($key[, $value = NULL[, $escape = NULL]])
+	.. php:method:: or_where( $key[, $value = NULL[, $escape = NULL]])
 
 		:param	mixed	$key: Name of field to compare, or associative array
 		:param	mixed	$value: If a single key, compared to this value
@@ -1242,7 +1242,7 @@ Class Reference
 		:returns:	DB_query_builder instance
 		:rtype:	object
 
-		Generates a WHERE field IN('item', 'item') SQL query,
+		Generates a WHERE field IN( 'item', 'item') SQL query,
                 joined with 'OR' if appropriate.
 
 	.. php:method:: or_where_not_in([$key = NULL[, $values = NULL[, $escape = NULL]]])
@@ -1253,7 +1253,7 @@ Class Reference
 		:returns:	DB_query_builder instance
 		:rtype:	object
 
-		Generates a WHERE field NOT IN('item', 'item') SQL query,
+		Generates a WHERE field NOT IN( 'item', 'item') SQL query,
                 joined with 'OR' if appropriate.
 
 	.. php:method:: where_in([$key = NULL[, $values = NULL[, $escape = NULL]]])
@@ -1264,7 +1264,7 @@ Class Reference
 		:returns:	DB_query_builder instance
 		:rtype:	object
 
-		Generates a WHERE field IN('item', 'item') SQL query,
+		Generates a WHERE field IN( 'item', 'item') SQL query,
                 joined with 'AND' if appropriate.
 
 	.. php:method:: where_not_in([$key = NULL[, $values = NULL[, $escape = NULL]]])
@@ -1275,7 +1275,7 @@ Class Reference
 		:returns:	DB_query_builder instance
 		:rtype:	object
 
-		Generates a WHERE field NOT IN('item', 'item') SQL query,
+		Generates a WHERE field NOT IN( 'item', 'item') SQL query,
                 joined with 'AND' if appropriate.
 
 	.. php:method:: group_start()
@@ -1313,7 +1313,7 @@ Class Reference
 
 		Ends a group expression.
 
-	.. php:method:: like($field[, $match = ''[, $side = 'both'[, $escape = NULL]]])
+	.. php:method:: like( $field[, $match = ''[, $side = 'both'[, $escape = NULL]]])
 
 		:param	string	$field: Field name
 		:param	string	$match: Text portion to match
@@ -1324,7 +1324,7 @@ Class Reference
 
 		Adds a LIKE clause to a query, separating multiple calls with AND.
 
-	.. php:method:: or_like($field[, $match = ''[, $side = 'both'[, $escape = NULL]]])
+	.. php:method:: or_like( $field[, $match = ''[, $side = 'both'[, $escape = NULL]]])
 
 		:param	string	$field: Field name
 		:param	string	$match: Text portion to match
@@ -1335,7 +1335,7 @@ Class Reference
 
 		Adds a LIKE clause to a query, separating multiple class with OR.
 
-	.. php:method:: not_like($field[, $match = ''[, $side = 'both'[, $escape = NULL]]])
+	.. php:method:: not_like( $field[, $match = ''[, $side = 'both'[, $escape = NULL]]])
 
 		:param	string	$field: Field name
 		:param	string	$match: Text portion to match
@@ -1346,7 +1346,7 @@ Class Reference
 
 		Adds a NOT LIKE clause to a query, separating multiple calls with AND.
 
-	.. php:method:: or_not_like($field[, $match = ''[, $side = 'both'[, $escape = NULL]]])
+	.. php:method:: or_not_like( $field[, $match = ''[, $side = 'both'[, $escape = NULL]]])
 
 		:param	string	$field: Field name
 		:param	string	$match: Text portion to match
@@ -1357,7 +1357,7 @@ Class Reference
 
 		Adds a NOT LIKE clause to a query, separating multiple calls with OR.
 
-	.. php:method:: having($key[, $value = NULL[, $escape = NULL]])
+	.. php:method:: having( $key[, $value = NULL[, $escape = NULL]])
 
 		:param	mixed	$key: Identifier (string) or associative array of field/value pairs
 		:param	string	$value: Value sought if $key is an identifier
@@ -1367,7 +1367,7 @@ Class Reference
 
 		Adds a HAVING clause to a query, separating multiple calls with AND.
 
-	.. php:method:: or_having($key[, $value = NULL[, $escape = NULL]])
+	.. php:method:: or_having( $key[, $value = NULL[, $escape = NULL]])
 
 		:param	mixed	$key: Identifier (string) or associative array of field/value pairs
 		:param	string	$value: Value sought if $key is an identifier
@@ -1377,7 +1377,7 @@ Class Reference
 
 		Adds a HAVING clause to a query, separating multiple calls with OR.
 
-	.. php:method:: group_by($by[, $escape = NULL])
+	.. php:method:: group_by( $by[, $escape = NULL])
 
 		:param	mixed	$by: Field(s) to group by; string or array
 		:returns:	CI_DB_query_builder instance (method chaining)
@@ -1385,7 +1385,7 @@ Class Reference
 
 		Adds a GROUP BY clause to a query.
 
-	.. php:method:: order_by($orderby[, $direction = ''[, $escape = NULL]])
+	.. php:method:: order_by( $orderby[, $direction = ''[, $escape = NULL]])
 
 		:param	string	$orderby: Field to order by
 		:param	string	$direction: The order requested - ASC, DESC or random
@@ -1395,7 +1395,7 @@ Class Reference
 
 		Adds an ORDER BY clause to a query.
 
-	.. php:method:: limit($value[, $offset = 0])
+	.. php:method:: limit( $value[, $offset = 0])
 
 		:param	int	$value: Number of rows to limit the results to
 		:param	int	$offset: Number of rows to skip
@@ -1404,7 +1404,7 @@ Class Reference
 
 		Adds LIMIT and OFFSET clauses to a query.
 
-	.. php:method:: offset($offset)
+	.. php:method:: offset( $offset)
 
 		:param	int	$offset: Number of rows to skip
 		:returns:	CI_DB_query_builder instance (method chaining)
@@ -1412,7 +1412,7 @@ Class Reference
 
 		Adds an OFFSET clause to a query.
 
-	.. php:method:: set($key[, $value = ''[, $escape = NULL]])
+	.. php:method:: set( $key[, $value = ''[, $escape = NULL]])
 
 		:param	mixed	$key: Field name, or an array of field/value pairs
 		:param	string	$value: Field value, if $key is a single field
@@ -1443,7 +1443,7 @@ Class Reference
 
 		Compiles and executes batch INSERT statements.
 
-	.. php:method:: set_insert_batch($key[, $value = ''[, $escape = NULL]])
+	.. php:method:: set_insert_batch( $key[, $value = ''[, $escape = NULL]])
 
 		:param	mixed	$key: Field name or an array of field/value pairs
 		:param	string	$value: Field value, if $key is a single field
@@ -1474,7 +1474,7 @@ Class Reference
 
 		Compiles and executes batch UPDATE statements.
 
-	.. php:method:: set_update_batch($key[, $value = ''[, $escape = NULL]])
+	.. php:method:: set_update_batch( $key[, $value = ''[, $escape = NULL]])
 
 		:param	mixed	$key: Field name or an array of field/value pairs
 		:param	string	$value: Field value, if $key is a single field
@@ -1504,7 +1504,7 @@ Class Reference
 
 		Compiles and executes a DELETE query.
 
-	.. php:method:: truncate([$table = ''])
+	.. php:method:: truncate([$table = '' ])
 
 		:param	string	$table: Table name
 		:returns:	TRUE on success, FALSE on failure
@@ -1515,7 +1515,7 @@ Class Reference
 		.. note:: If the database platform in use doesn't support TRUNCATE,
 			a DELETE statement will be used instead.
 
-	.. php:method:: empty_table([$table = ''])
+	.. php:method:: empty_table([$table = '' ])
 
 		:param	string	$table: Table name
 		:returns:	TRUE on success, FALSE on failure

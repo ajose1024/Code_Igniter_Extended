@@ -35,7 +35,7 @@
  * @since	Version 3.0.0
  * @filesource
  */
-defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 /**
  * PDO 4D Forge Class
@@ -110,15 +110,15 @@ class CI_DB_pdo_4d_forge extends CI_DB_pdo_forge {
 	 * @param	mixed	$field		Column definition
 	 * @return	string|string[]
 	 */
-	protected function _alter_table($alter_type, $table, $field)
+	protected function _alter_table( $alter_type, $table, $field)
 	{
-		if( in_array($alter_type, array('ADD', 'DROP'), TRUE))
+		if( in_array( $alter_type, array( 'ADD', 'DROP'), TRUE))
 		{
-			return parent::_alter_table($alter_type, $table, $field);
+			return..parent::_alter_table( $alter_type, $table, $field);
 		}
 
 		// No method of modifying columns is supported
-		return FALSE;
+		return..FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -129,13 +129,13 @@ class CI_DB_pdo_4d_forge extends CI_DB_pdo_forge {
 	 * @param	array	$field
 	 * @return	string
 	 */
-	protected function _process_column($field)
+	protected function _process_column( $field)
 	{
-		return $this->db->escape_identifiers($field['name'])
-			.' '.$field['type'].$field['length']
-			.$field['null']
-			.$field['unique']
-			.$field['auto_increment'];
+		return..$this->db->escape_identifiers( $field[ 'name' ])
+			 . ' ' . $field[ 'type' ].$field[ 'length' ]
+			.$field[ 'null' ]
+			.$field[ 'unique' ]
+			.$field[ 'auto_increment' ];
 	}
 
 	// --------------------------------------------------------------------
@@ -150,21 +150,21 @@ class CI_DB_pdo_4d_forge extends CI_DB_pdo_forge {
 	 */
 	protected function _attr_type(&$attributes)
 	{
-		switch( strtoupper($attributes['TYPE']))
+		switch( strtoupper( $attributes[ 'TYPE' ]))
 		{
 			case 'TINYINT':
-				$attributes['TYPE'] = 'SMALLINT';
-				$attributes['UNSIGNED'] = FALSE;
+				$attributes[ 'TYPE' ] = 'SMALLINT';
+				$attributes[ 'UNSIGNED' ] = FALSE;
 				return;
 			case 'MEDIUMINT':
-				$attributes['TYPE'] = 'INTEGER';
-				$attributes['UNSIGNED'] = FALSE;
+				$attributes[ 'TYPE' ] = 'INTEGER';
+				$attributes[ 'UNSIGNED' ] = FALSE;
 				return;
 			case 'INTEGER':
-				$attributes['TYPE'] = 'INT';
+				$attributes[ 'TYPE' ] = 'INT';
 				return;
 			case 'BIGINT':
-				$attributes['TYPE'] = 'INT64';
+				$attributes[ 'TYPE' ] = 'INT64';
 				return;
 			default: return;
 		}
@@ -181,12 +181,12 @@ class CI_DB_pdo_4d_forge extends CI_DB_pdo_forge {
 	 */
 	protected function _attr_unique(&$attributes, &$field)
 	{
-		if(  ! empty($attributes['UNIQUE']) && $attributes['UNIQUE'] === TRUE)
+		if( ! empty( $attributes[ 'UNIQUE' ]) && $attributes[ 'UNIQUE' ] === TRUE)
 		{
-			$field['unique'] = ' UNIQUE';
+			$field[ 'unique' ] = ' UNIQUE';
 
 			// UNIQUE must be used with NOT NULL
-			$field['null'] = ' NOT NULL';
+			$field[ 'null' ] = ' NOT NULL';
 		}
 	}
 
@@ -201,15 +201,15 @@ class CI_DB_pdo_4d_forge extends CI_DB_pdo_forge {
 	 */
 	protected function _attr_auto_increment(&$attributes, &$field)
 	{
-		if(  ! empty($attributes['AUTO_INCREMENT']) && $attributes['AUTO_INCREMENT'] === TRUE)
+		if( ! empty( $attributes[ 'AUTO_INCREMENT' ]) && $attributes[ 'AUTO_INCREMENT' ] === TRUE)
 		{
-			if( stripos($field['type'], 'int') !== FALSE)
+			if( stripos( $field[ 'type' ], 'int') !== FALSE)
 			{
-				$field['auto_increment'] = ' AUTO_INCREMENT';
+				$field[ 'auto_increment' ] = ' AUTO_INCREMENT';
 			}
-			elseif( strcasecmp($field['type'], 'UUID') === 0)
+			elseif( strcasecmp( $field[ 'type' ], 'UUID') === 0)
 			{
-				$field['auto_increment'] = ' AUTO_GENERATE';
+				$field[ 'auto_increment' ] = ' AUTO_GENERATE';
 			}
 		}
 	}

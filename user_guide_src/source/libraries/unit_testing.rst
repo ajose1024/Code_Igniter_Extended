@@ -28,7 +28,7 @@ Initializing the Class
 Like most other classes in CodeIgniter, the Unit Test class is
 initialized in your controller using the $this->load->library function::
 
-	$this->load->library('unit_test');
+	$this->load->library( 'unit_test');
 
 Once loaded, the Unit Test object will be available using ``$this->unit``
 
@@ -38,7 +38,7 @@ Running Tests
 Running a test involves supplying a test and an expected result in the
 following way:
 
-	$this->unit->run('test', 'expected result', 'test name', 'notes');
+	$this->unit->run( 'test', 'expected result', 'test name', 'notes');
 
 Where test is the result of the code you wish to test, expected result
 is the data type you expect, test name is an optional name you can give
@@ -50,16 +50,16 @@ your test, and notes are optional notes. Example::
 
 	$test_name = 'Adds one plus one';
 
-	$this->unit->run($test, $expected_result, $test_name);
+	$this->unit->run( $test, $expected_result, $test_name);
 
 The expected result you supply can either be a literal match, or a data
 type match. Here's an example of a literal::
 
-	$this->unit->run('Foo', 'Foo');
+	$this->unit->run( 'Foo', 'Foo');
 
 Here is an example of a data type match::
 
-	$this->unit->run('Foo', 'is_string');
+	$this->unit->run( 'Foo', 'is_string');
 
 Notice the use of "is_string" in the second parameter? This tells the
 function to evaluate whether your test is producing a string as the
@@ -83,9 +83,9 @@ Generating Reports
 
 You can either display results after each test, or your can run several
 tests and generate a report at the end. To show a report directly simply
-echo or return the run function::
+echo or return..the run function::
 
-	echo $this->unit->run($test, $expected_result);
+	echo $this->unit->run( $test, $expected_result);
 
 To run a full report of all tests, use this::
 
@@ -150,7 +150,7 @@ Customizing displayed tests
 
 ::
 
-	$this->unit->set_test_items(array('test_name', 'result'));
+	$this->unit->set_test_items(array( 'test_name', 'result'));
 
 Creating a Template
 -------------------
@@ -169,7 +169,7 @@ template. Note the required pseudo-variables::
 	{/rows}
 	</table>';
 
-	$this->unit->set_template($str);
+	$this->unit->set_template( $str);
 
 .. note:: Your template must be declared **before** running the unit
 	test process.
@@ -180,7 +180,7 @@ Class Reference
 
 .. php:class:: CI_Unit_test
 
-	.. php:method:: set_test_items($items)
+	.. php:method:: set_test_items( $items)
 
 		:param array $items: List of visible test items
 		:returns: void
@@ -196,7 +196,7 @@ Class Reference
 		  - line
 		  - notes
 
-	.. php:method:: run($test[, $expected = TRUE[, $test_name = 'undefined'[, $notes = '']]])
+	.. php:method:: run( $test[, $expected = TRUE[, $test_name = 'undefined'[, $notes = '' ]]])
 
 		:param	mixed	$test: Test data
 		:param	mixed	$expected: Expected result
@@ -237,7 +237,7 @@ Class Reference
 
 		Returns raw tests results data.
 
-	.. php:method:: set_template($template)
+	.. php:method:: set_template( $template)
 
 		:param	string	$template: Test result template
 		:rtype:	void

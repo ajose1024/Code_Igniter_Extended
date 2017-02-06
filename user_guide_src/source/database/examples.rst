@@ -24,7 +24,7 @@ Standard Query With Multiple Results (Object Version)
 
 ::
 
-	$query = $this->db->query('SELECT name, title, email FROM my_table');
+	$query = $this->db->query( 'SELECT name, title, email FROM my_table');
 	
 	foreach( $query->result() as $row)
 	{
@@ -43,24 +43,24 @@ Standard Query With Multiple Results (Array Version)
 
 ::
 
-	$query = $this->db->query('SELECT name, title, email FROM my_table');
+	$query = $this->db->query( 'SELECT name, title, email FROM my_table');
 	
 	foreach( $query->result_array() as $row)
 	{
-		echo $row['title'];
-		echo $row['name'];
-		echo $row['email'];
+		echo $row[ 'title' ];
+		echo $row[ 'name' ];
+		echo $row[ 'email' ];
 	}
 
 The above result_array() function returns an array of standard array
-indexes. Example: $row['title']
+indexes. Example: $row[ 'title' ]
 
 Standard Query With Single Result
 =================================
 
 ::
 
-	$query = $this->db->query('SELECT name FROM my_table LIMIT 1'); 
+	$query = $this->db->query( 'SELECT name FROM my_table LIMIT 1'); 
 	$row = $query->row();
 	echo $row->name;
 
@@ -71,20 +71,20 @@ Standard Query With Single Result (Array version)
 
 ::
 
-	$query = $this->db->query('SELECT name FROM my_table LIMIT 1');
+	$query = $this->db->query( 'SELECT name FROM my_table LIMIT 1');
 	$row = $query->row_array();
-	echo $row['name'];
+	echo $row[ 'name' ];
 
 The above row_array() function returns an **array**. Example:
-$row['name']
+$row[ 'name' ]
 
 Standard Insert
 ===============
 
 ::
 
-	$sql = "INSERT INTO mytable (title, name) VALUES (".$this->db->escape($title).", ".$this->db->escape($name).")";
-	$this->db->query($sql);
+	$sql = "INSERT INTO mytable (title, name) VALUES (".$this->db->escape( $title).", ".$this->db->escape( $name).")";
+	$this->db->query( $sql);
 	echo $this->db->affected_rows();
 
 Query Builder Query
@@ -93,7 +93,7 @@ Query Builder Query
 The :doc:`Query Builder Pattern <query_builder>` gives you a simplified
 means of retrieving data::
 
-	$query = $this->db->get('table_name');
+	$query = $this->db->get( 'table_name');
 	
 	foreach( $query->result() as $row)
 	{
@@ -115,5 +115,5 @@ Query Builder Insert
 		'date' => $date
 	);
 	
-	$this->db->insert('mytable', $data);  // Produces: INSERT INTO mytable (title, name, date) VALUES ('{$title}', '{$name}', '{$date}')
+	$this->db->insert( 'mytable', $data);  // Produces: INSERT INTO mytable (title, name, date) VALUES ( '{$title}', '{$name}', '{$date}')
 

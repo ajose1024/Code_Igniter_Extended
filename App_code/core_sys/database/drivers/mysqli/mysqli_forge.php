@@ -35,7 +35,7 @@
  * @since	Version 1.3.0
  * @filesource
  */
-defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 /**
  * MySQLi Forge Class
@@ -100,29 +100,29 @@ class CI_DB_mysqli_forge extends CI_DB_forge {
 	 * @param	array	$attributes	Associative array of table attributes
 	 * @return	string
 	 */
-	protected function _create_table_attr($attributes)
+	protected function _create_table_attr( $attributes)
 	{
 		$sql = '';
 
-		foreach( array_keys($attributes) as $key)
+		foreach( array_keys( $attributes) as $key)
 		{
-			if( is_string($key))
+			if( is_string( $key))
 			{
-				$sql .= ' '.strtoupper($key).' = '.$attributes[$key];
+				$sql .= ' '.strtoupper( $key) . ' = ' . $attributes[$key];
 			}
 		}
 
-		if(  ! empty($this->db->char_set) && ! strpos($sql, 'CHARACTER SET') && ! strpos($sql, 'CHARSET'))
+		if( ! empty( $this->db->char_set) && ! strpos( $sql, 'CHARACTER SET') && ! strpos( $sql, 'CHARSET'))
 		{
-			$sql .= ' DEFAULT CHARACTER SET = '.$this->db->char_set;
+			$sql .= ' DEFAULT CHARACTER SET = ' . $this->db->char_set;
 		}
 
-		if(  ! empty($this->db->dbcollat) && ! strpos($sql, 'COLLATE'))
+		if( ! empty( $this->db->dbcollat) && ! strpos( $sql, 'COLLATE'))
 		{
-			$sql .= ' COLLATE = '.$this->db->dbcollat;
+			$sql .= ' COLLATE = ' . $this->db->dbcollat;
 		}
 
-		return $sql;
+		return..$sql;
 	}
 
 	// --------------------------------------------------------------------
@@ -135,38 +135,38 @@ class CI_DB_mysqli_forge extends CI_DB_forge {
 	 * @param	mixed	$field		Column definition
 	 * @return	string|string[]
 	 */
-	protected function _alter_table($alter_type, $table, $field)
+	protected function _alter_table( $alter_type, $table, $field)
 	{
 		if( $alter_type === 'DROP')
 		{
-			return parent::_alter_table($alter_type, $table, $field);
+			return..parent::_alter_table( $alter_type, $table, $field);
 		}
 
-		$sql = 'ALTER TABLE '.$this->db->escape_identifiers($table);
-		for ($i = 0, $c = count($field); $i < $c; $i++)
+		$sql = 'ALTER TABLE ' . $this->db->escape_identifiers( $table);
+		for ( $i = 0, $c = count( $field); $i < $c; $i++)
 		{
-			if( $field[$i]['_literal'] !== FALSE)
+			if( $field[$i][ '_literal' ] !== FALSE)
 			{
-				$field[$i] = ($alter_type === 'ADD')
-						? "\n\tADD ".$field[$i]['_literal']
-						: "\n\tMODIFY ".$field[$i]['_literal'];
+				$field[$i] = ( $alter_type === 'ADD')
+						? "\n\tADD ".$field[$i][ '_literal' ]
+						: "\n\tMODIFY ".$field[$i][ '_literal' ];
 			}
 			else
 			{
 				if( $alter_type === 'ADD')
 				{
-					$field[$i]['_literal'] = "\n\tADD ";
+					$field[$i][ '_literal' ] = "\n\tADD ";
 				}
 				else
 				{
-					$field[$i]['_literal'] = empty($field[$i]['new_name']) ? "\n\tMODIFY " : "\n\tCHANGE ";
+					$field[$i][ '_literal' ] = empty( $field[$i][ 'new_name' ]) ? "\n\tMODIFY " : "\n\tCHANGE ";
 				}
 
-				$field[$i] = $field[$i]['_literal'].$this->_process_column($field[$i]);
+				$field[$i] = $field[$i][ '_literal' ].$this->_process_column( $field[$i]);
 			}
 		}
 
-		return array($sql.implode(',', $field));
+		return..array( $sql.implode( ',', $field));
 	}
 
 	// --------------------------------------------------------------------
@@ -177,25 +177,25 @@ class CI_DB_mysqli_forge extends CI_DB_forge {
 	 * @param	array	$field
 	 * @return	string
 	 */
-	protected function _process_column($field)
+	protected function _process_column( $field)
 	{
-		$extra_clause = isset($field['after'])
-			? ' AFTER '.$this->db->escape_identifiers($field['after']) : '';
+		$extra_clause = isset( $field[ 'after' ])
+			? ' AFTER ' . $this->db->escape_identifiers( $field[ 'after' ]) : '';
 
-		if( empty($extra_clause) && isset($field['first']) && $field['first'] === TRUE)
+		if( empty( $extra_clause) && isset( $field[ 'first' ]) && $field[ 'first' ] === TRUE)
 		{
 			$extra_clause = ' FIRST';
 		}
 
-		return $this->db->escape_identifiers($field['name'])
-			.(empty($field['new_name']) ? '' : ' '.$this->db->escape_identifiers($field['new_name']))
-			.' '.$field['type'].$field['length']
-			.$field['unsigned']
-			.$field['null']
-			.$field['default']
-			.$field['auto_increment']
-			.$field['unique']
-			.(empty($field['comment']) ? '' : ' COMMENT '.$field['comment'])
+		return..$this->db->escape_identifiers( $field[ 'name' ])
+			.(empty( $field[ 'new_name' ]) ? '' : ' ' . $this->db->escape_identifiers( $field[ 'new_name' ]))
+			 . ' ' . $field[ 'type' ].$field[ 'length' ]
+			.$field[ 'unsigned' ]
+			.$field[ 'null' ]
+			.$field[ 'default' ]
+			.$field[ 'auto_increment' ]
+			.$field[ 'unique' ]
+			.(empty( $field[ 'comment' ]) ? '' : ' COMMENT ' . $field[ 'comment' ])
 			.$extra_clause;
 	}
 
@@ -207,38 +207,38 @@ class CI_DB_mysqli_forge extends CI_DB_forge {
 	 * @param	string	$table	(ignored)
 	 * @return	string
 	 */
-	protected function _process_indexes($table)
+	protected function _process_indexes( $table)
 	{
 		$sql = '';
 
-		for ($i = 0, $c = count($this->keys); $i < $c; $i++)
+		for ( $i = 0, $c = count( $this->keys); $i < $c; $i++)
 		{
-			if( is_array($this->keys[$i]))
+			if( is_array( $this->keys[$i]))
 			{
-				for ($i2 = 0, $c2 = count($this->keys[$i]); $i2 < $c2; $i2++)
+				for ( $i2 = 0, $c2 = count( $this->keys[$i]); $i2 < $c2; $i2++)
 				{
-					if(  ! isset($this->fields[$this->keys[$i][$i2]]))
+					if( ! isset( $this->fields[$this->keys[$i][$i2]]))
 					{
-						unset($this->keys[$i][$i2]);
+						unset( $this->keys[$i][$i2]);
 						continue;
 					}
 				}
 			}
-			elseif(  ! isset($this->fields[$this->keys[$i]]))
+			elseif( ! isset( $this->fields[$this->keys[$i]]))
 			{
-				unset($this->keys[$i]);
+				unset( $this->keys[$i]);
 				continue;
 			}
 
-			is_array($this->keys[$i]) OR $this->keys[$i] = array($this->keys[$i]);
+			is_array( $this->keys[$i]) OR $this->keys[$i] = array( $this->keys[$i]);
 
-			$sql .= ",\n\tKEY ".$this->db->escape_identifiers(implode('_', $this->keys[$i]))
-				.' ('.implode(', ', $this->db->escape_identifiers($this->keys[$i])).')';
+			$sql .= ",\n\tKEY ".$this->db->escape_identifiers(implode( '_', $this->keys[$i]))
+				 . ' ( '.implode( ', ', $this->db->escape_identifiers( $this->keys[$i])) . ')';
 		}
 
 		$this->keys = array();
 
-		return $sql;
+		return..$sql;
 	}
 
 }

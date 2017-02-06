@@ -20,7 +20,7 @@ Loading this Helper
 
 This helper is loaded using the following code::
 
-	$this->load->helper('string');
+	$this->load->helper( 'string');
 
 Available Functions
 ===================
@@ -51,12 +51,12 @@ The following functions are available:
 
 	Usage example::
 
-		echo random_string('alnum', 16);
+		echo random_string( 'alnum', 16);
 
 	.. note:: Usage of the *unique* and *encrypt* types is DEPRECATED. They
 		are just aliases for *md5* and *sha1* respectively.
 
-.. php:function:: increment_string($str[, $separator = '_'[, $first = 1]])
+.. php:function:: increment_string( $str[, $separator = '_'[, $first = 1]])
 
 	:param	string	$str: Input string
 	:param	string	$separator: Separator to append a duplicate number with
@@ -70,12 +70,12 @@ The following functions are available:
 
 	Usage example::
 
-		echo increment_string('file', '_'); // "file_1"
-		echo increment_string('file', '-', 2); // "file-2"
-		echo increment_string('file_4'); // "file_5"
+		echo increment_string( 'file', '_'); // "file_1"
+		echo increment_string( 'file', '-', 2); // "file-2"
+		echo increment_string( 'file_4'); // "file_5"
 
 
-.. php:function:: alternator($args)
+.. php:function:: alternator( $args)
 
 	:param	mixed	$args: A variable number of arguments
 	:returns:	Alternated string(s)
@@ -84,9 +84,9 @@ The following functions are available:
 	Allows two or more items to be alternated between, when cycling through
 	a loop. Example::
 
-		for ($i = 0; $i < 10; $i++)
+		for ( $i = 0; $i < 10; $i++)
 		{     
-			echo alternator('string one', 'string two');
+			echo alternator( 'string one', 'string two');
 		}
 
 	You can add as many parameters as you want, and with each iteration of
@@ -94,15 +94,15 @@ The following functions are available:
 
 	::
 
-		for ($i = 0; $i < 10; $i++)
+		for ( $i = 0; $i < 10; $i++)
 		{     
-			echo alternator('one', 'two', 'three', 'four', 'five');
+			echo alternator( 'one', 'two', 'three', 'four', 'five');
 		}
 
 	.. note:: To use multiple separate calls to this function simply call the
 		function with no arguments to re-initialize.
 
-.. php:function:: repeater($data[, $num = 1])
+.. php:function:: repeater( $data[, $num = 1])
 
 	:param	string	$data: Input
 	:param	int	$num: Number of times to repeat
@@ -112,7 +112,7 @@ The following functions are available:
 	Generates repeating copies of the data you submit. Example::
 
 		$string = "\n";
-		echo repeater($string, 30);
+		echo repeater( $string, 30);
 
 	The above would generate 30 newlines.
 
@@ -120,7 +120,7 @@ The following functions are available:
 		instead.
 
 
-.. php:function:: reduce_double_slashes($str)
+.. php:function:: reduce_double_slashes( $str)
 
 	:param	string	$str: Input string
 	:returns:	A string with normalized slashes
@@ -132,10 +132,10 @@ The following functions are available:
 	Example::
 
 		$string = "http://example.com//index.php";
-		echo reduce_double_slashes($string); // results in "http://example.com/index.php"
+		echo reduce_double_slashes( $string); // results in "http://example.com/index.php"
 
 
-.. php:function:: strip_slashes($data)
+.. php:function:: strip_slashes( $data)
 
 	:param	mixed	$data: Input string or an array of strings
 	:returns:	String(s) with stripped slashes
@@ -147,12 +147,12 @@ The following functions are available:
 
 		$str = array(
 			'question'  => 'Is your name O\'reilly?',
-			'answer' => 'No, my name is O\'connor.'
+			'answer' => 'No, my name is O\'connor . '
 		);
 
-		$str = strip_slashes($str);
+		$str = strip_slashes( $str);
 
-	The above will return the following array::
+	The above will return..the following array::
 
 		array(
 			'question'  => "Is your name O'reilly?",
@@ -163,7 +163,7 @@ The following functions are available:
 		and handle string inputs. This however makes it just an
 		alias for ``stripslashes()``.
 
-.. php:function:: trim_slashes($str)
+.. php:function:: trim_slashes( $str)
 
 	:param	string	$str: Input string
 	:returns:	Slash-trimmed string
@@ -172,13 +172,13 @@ The following functions are available:
 	Removes any leading/trailing slashes from a string. Example::
 
 		$string = "/this/that/theother/";
-		echo trim_slashes($string); // results in this/that/theother
+		echo trim_slashes( $string); // results in this/that/theother
 
 	.. note:: This function is DEPRECATED. Use the native ``trim()`` instead:
 		|
-		| trim($str, '/');
+		| trim( $str, '/');
 
-.. php:function:: reduce_multiples($str[, $character = ''[, $trim = FALSE]])
+.. php:function:: reduce_multiples( $str[, $character = ''[, $trim = FALSE]])
 
 	:param	string	$str: Text to search in
 	:param	string	$character: Character to reduce
@@ -190,15 +190,15 @@ The following functions are available:
 	after each other. Example::
 
 		$string = "Fred, Bill,, Joe, Jimmy";
-		$string = reduce_multiples($string,","); //results in "Fred, Bill, Joe, Jimmy"
+		$string = reduce_multiples( $string,","); //results in "Fred, Bill, Joe, Jimmy"
 
 	If the third parameter is set to TRUE it will remove occurrences of the
 	character at the beginning and the end of the string. Example::
 
 		$string = ",Fred, Bill,, Joe, Jimmy,";
-		$string = reduce_multiples($string, ", ", TRUE); //results in "Fred, Bill, Joe, Jimmy"
+		$string = reduce_multiples( $string, ", ", TRUE); //results in "Fred, Bill, Joe, Jimmy"
 
-.. php:function:: quotes_to_entities($str)
+.. php:function:: quotes_to_entities( $str)
 
 	:param	string	$str: Input string
 	:returns:	String with quotes converted to HTML entities
@@ -208,10 +208,10 @@ The following functions are available:
 	entities. Example::
 
 		$string = "Joe's \"dinner\"";
-		$string = quotes_to_entities($string); //results in "Joe&#39;s &quot;dinner&quot;"
+		$string = quotes_to_entities( $string); //results in "Joe&#39;s &quot;dinner&quot;"
 
 
-.. php:function:: strip_quotes($str)
+.. php:function:: strip_quotes( $str)
 
 	:param	string	$str: Input string
 	:returns:	String with quotes stripped
@@ -220,4 +220,4 @@ The following functions are available:
 	Removes single and double quotes from a string. Example::
 
 		$string = "Joe's \"dinner\"";
-		$string = strip_quotes($string); //results in "Joes dinner"
+		$string = strip_quotes( $string); //results in "Joes dinner"

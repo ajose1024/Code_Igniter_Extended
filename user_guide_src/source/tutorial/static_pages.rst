@@ -32,7 +32,7 @@ code.
 	<?php 
 	class Pages extends CI_Controller { 
 
-		public function view($page = 'home') 
+		public function view( $page = 'home') 
 		{
 	        }
 	}
@@ -95,19 +95,19 @@ page actually exists:
 
 ::
 
-	public function view($page = 'home')
+	public function view( $page = 'home')
 	{
-	        if(  ! file_exists(APP_DIR_PATH.'/views/pages/'.$page.'.php'))
+	        if( ! file_exists(APP_DIR_PATH . '/views/pages/' . $page . '.php'))
 		{
 			// Whoops, we don't have a page for that!
 			show_404();
 		}
 
-		$data['title'] = ucfirst($page); // Capitalize the first letter
+		$data[ 'title' ] = ucfirst( $page); // Capitalize the first letter
 
-		$this->load->view('templates/header', $data);
-		$this->load->view('pages/'.$page, $data);
-		$this->load->view('templates/footer', $data);
+		$this->load->view( 'templates/header', $data);
+		$this->load->view( 'pages/' . $page, $data);
+		$this->load->view( 'templates/footer', $data);
 	}
 
 Now, when the page does exist, it is loaded, including the header and
@@ -128,7 +128,7 @@ The last thing that has to be done is loading the views in the order
 they should be displayed. The second parameter in the ``view()`` method is
 used to pass values to the view. Each value in the ``$data`` array is
 assigned to a variable with the name of its key. So the value of
-``$data['title']`` in the controller is equivalent to ``$title`` in the
+``$data[ 'title' ]`` in the controller is equivalent to ``$title`` in the
 view.
 
 Routing
@@ -149,8 +149,8 @@ Remove all other code that sets any element in the ``$route`` array.
 
 ::
 
-	$route['default_controller'] = 'pages/view';
-	$route['(:any)'] = 'pages/view/$1';
+	$route[ 'default_controller' ] = 'pages/view';
+	$route[ '(:any)' ] = 'pages/view/$1';
 
 CodeIgniter reads its routing rules from top to bottom and routes the
 request to the first matching rule. Each rule is a regular expression

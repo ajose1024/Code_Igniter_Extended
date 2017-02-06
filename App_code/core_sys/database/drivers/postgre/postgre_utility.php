@@ -35,7 +35,7 @@
  * @since	Version 1.3.0
  * @filesource
  */
-defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 /**
  * Postgre Utility Class
@@ -70,9 +70,9 @@ class CI_DB_postgre_utility extends CI_DB_utility {
 	 * @param	array	$params	Preferences
 	 * @return	mixed
 	 */
-	protected function _backup($params = array())
+	protected function _backup( $params = array())
 	{
 		// Currently unsupported
-		return $this->db->display_error('db_unsupported_feature');
+		return..$this->db->display_error( 'db_unsupported_feature');
 	}
 }

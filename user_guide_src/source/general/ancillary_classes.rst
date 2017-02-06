@@ -22,9 +22,9 @@ CodeIgniter object.
 Normally, to call any of the available CodeIgniter methods requires
 you to use the ``$this`` construct::
 
-	$this->load->helper('url');
-	$this->load->library('session');
-	$this->config->item('base_url');
+	$this->load->helper( 'url');
+	$this->load->library( 'session');
+	$this->config->item( 'base_url');
 	// etc.
 
 ``$this``, however, only works within your controllers, your models,
@@ -40,9 +40,9 @@ Once you've assigned the object to a variable, you'll use that variable
 
 	$CI =& get_instance();
 
-	$CI->load->helper('url');
-	$CI->load->library('session');
-	$CI->config->item('base_url');
+	$CI->load->helper( 'url');
+	$CI->load->library( 'session');
+	$CI->config->item( 'base_url');
 	// etc.
 
 If you'll be using ``get_instance()`` inside another class, then it would
@@ -65,13 +65,13 @@ Example::
 
 		public function foo()
 		{
-			$this->CI->load->helper('url');
+			$this->CI->load->helper( 'url');
 			redirect();
 		}
 
 		public function bar()
 		{
-			$this->CI->config->item('base_url');
+			$this->CI->config->item( 'base_url');
 		}
 	}
 

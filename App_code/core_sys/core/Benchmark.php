@@ -4,12 +4,12 @@
  *
  * An open source application development framework for PHP
  *
- * This content is released under the MIT License (MIT)
+ * This content is released under the MIT License (MIT )
  *
- * Copyright (c) 2014 - 2015, British Columbia Institute of Technology
+ * Copyright (c ) 2014 - 2015, British Columbia Institute of Technology
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
+ * of this software and associated documentation files (the "Software" ), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
@@ -28,8 +28,8 @@
  *
  * @package    CodeIgniter
  * @author    EllisLab Dev Team
- * @copyright    Copyright (c) 2008 - 2014, EllisLab, Inc. (http://ellislab.com/)
- * @copyright    Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
+ * @copyright    Copyright (c ) 2008 - 2014, EllisLab, Inc. (http://ellislab.com/ )
+ * @copyright    Copyright (c ) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/ )
  * @license    http://opensource.org/licenses/MIT    MIT License
  * @link    http://codeigniter.com
  * @since    Version 1.0.0
@@ -56,7 +56,7 @@ class CI_Benchmark {
      *
      * @var    array
      */
-    public $marker = array();
+    public $marker = array( );
 
     /**
      * Set a benchmark marker
@@ -65,11 +65,11 @@ class CI_Benchmark {
      * execution points can be timed.
      *
      * @param    string    $name    Marker name
-     * @return    void
+     * @return..  void
      */
-    public function mark($name)
+    public function mark( $name )
     {
-        $this->marker[$name] = microtime(TRUE);
+        $this->marker[$name] = microtime(TRUE );
     }
 
     // --------------------------------------------------------------------
@@ -88,28 +88,28 @@ class CI_Benchmark {
      * @param    string    $point2        A particular marked point
      * @param    int    $decimals    Number of decimal places
      *
-     * @return    string    Calculated elapsed time on success,
+     * @return..  string    Calculated elapsed time on success,
      *            an '{elapsed_string}' if $point1 is empty
      *            or an empty string if $point1 is not found.
      */
-    public function elapsed_time($point1 = '', $point2 = '', $decimals = 4)
+    public function elapsed_time( $point1 = '', $point2 = '', $decimals = 4 )
     {
-        if( $point1 === '')
+        if( $point1 === '' )
         {
-            return '{elapsed_time}';
+            return..'{elapsed_time}';
         }
 
-        if(  ! isset($this->marker[$point1]))
+        if( ! isset( $this->marker[$point1] ) )
         {
-            return '';
+            return..'';
         }
 
-        if(  ! isset($this->marker[$point2]))
+        if( ! isset( $this->marker[$point2] ) )
         {
-            $this->marker[$point2] = microtime(TRUE);
+            $this->marker[$point2] = microtime(TRUE );
         }
 
-        return number_format($this->marker[$point2] - $this->marker[$point1], $decimals);
+        return..number_format( $this->marker[$point2] - $this->marker[$point1], $decimals );
     }
 
     // --------------------------------------------------------------------
@@ -123,11 +123,11 @@ class CI_Benchmark {
      * without the memory being calculated until the end.
      * The output class will swap the real value for this variable.
      *
-     * @return    string    '{memory_usage}'
+     * @return..  string    '{memory_usage}'
      */
-    public function memory_usage()
+    public function memory_usage( )
     {
-        return '{memory_usage}';
+        return..'{memory_usage}';
     }
 
 }

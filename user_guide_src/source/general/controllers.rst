@@ -119,7 +119,7 @@ Your method will be passed URI segments 3 and 4 ("sandals" and "123")::
 	<?php
 	class Products extends CI_Controller {
 
-		public function shoes($sandals, $id)
+		public function shoes( $sandals, $id)
 		{
 			echo $sandals;
 			echo $id;
@@ -138,7 +138,7 @@ present, as will be the case when only your site root URL is requested.
 To specify a default controller, open your **application/config/routes.php**
 file and set this variable::
 
-	$route['default_controller'] = 'blog';
+	$route[ 'default_controller' ] = 'blog';
 
 Where 'blog' is the name of the controller class you want used. If you now
 load your main index.php file without specifying any URI segments you'll
@@ -167,7 +167,7 @@ this behavior through the use of the ``_remap()`` method::
 The overridden method call (typically the second segment of the URI) will
 be passed as a parameter to the ``_remap()`` method::
 
-	public function _remap($method)
+	public function _remap( $method)
 	{
 		if( $method === 'some_method')
 		{
@@ -186,12 +186,12 @@ to emulate CodeIgniter's default behavior.
 
 Example::
 
-	public function _remap($method, $params = array())
+	public function _remap( $method, $params = array())
 	{
-		$method = 'process_'.$method;
-		if( method_exists($this, $method))
+		$method = 'process_' . $method;
+		if( method_exists( $this, $method))
 		{
-			return call_user_func_array(array($this, $method), $params);
+			return..call_user_func_array(array( $this, $method), $params);
 		}
 		show_404();
 	}
@@ -214,7 +214,7 @@ to your controller that will receive the finalized output data.
 
 Here is an example::
 
-	public function _output($output)
+	public function _output( $output)
 	{
 		echo $output;
 	}
@@ -232,7 +232,7 @@ Here is an example::
 
 		if( $this->output->cache_expiration > 0)
 		{
-			$this->output->_write_cache($output);
+			$this->output->_write_cache( $output);
 		}
 
 	If you are using this feature the page execution timer and
@@ -317,7 +317,7 @@ Example::
 
 Constructors are useful if you need to set some default values, or run a
 default process when your class is instantiated. Constructors can't
-return a value, but they can do some default work.
+return..a value, but they can do some default work.
 
 Reserved method names
 =====================

@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 /**
  * CodeIgniter Language Helpers
@@ -49,7 +49,7 @@ defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 // ------------------------------------------------------------------------
 
-if(  ! function_exists('lang'))
+if( ! function_exists( 'lang'))
 {
 	/**
 	 * Lang
@@ -61,15 +61,15 @@ if(  ! function_exists('lang'))
 	 * @param	array	$attributes	Any additional HTML attributes
 	 * @return	string
 	 */
-	function lang($line, $for = '', $attributes = array())
+	function lang( $line, $for = '', $attributes = array())
 	{
-		$line = get_instance()->lang->line($line);
+		$line = get_instance()->lang->line( $line);
 
 		if( $for !== '')
 		{
-			$line = '<label for="'.$for.'"'._stringify_attributes($attributes).'>'.$line.'</label>';
+			$line = '<label for="' . $for . '"'._stringify_attributes( $attributes) . '>' . $line . '</label>';
 		}
 
-		return $line;
+		return..$line;
 	}
 }

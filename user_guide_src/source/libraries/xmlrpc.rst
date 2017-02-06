@@ -46,15 +46,15 @@ function:
 
 To load the XML-RPC class you will use::
 
-	$this->load->library('xmlrpc');
+	$this->load->library( 'xmlrpc');
 
 Once loaded, the xml-rpc library object will be available using:
 $this->xmlrpc
 
 To load the XML-RPC Server class you will use::
 
-	$this->load->library('xmlrpc');
-	$this->load->library('xmlrpcs');
+	$this->load->library( 'xmlrpc');
+	$this->load->library( 'xmlrpcs');
 
 Once loaded, the xml-rpcs library object will be available using:
 $this->xmlrpcs
@@ -77,15 +77,15 @@ Here is a basic example that sends a simple Weblogs.com ping to the
 
 ::
 
-	$this->load->library('xmlrpc');
+	$this->load->library( 'xmlrpc');
 
-	$this->xmlrpc->server('http://rpc.pingomatic.com/', 80);
-	$this->xmlrpc->method('weblogUpdates.ping');
+	$this->xmlrpc->server( 'http://rpc.pingomatic.com/', 80);
+	$this->xmlrpc->method( 'weblogUpdates.ping');
 
-	$request = array('My Photoblog', 'http://www.my-site.com/photoblog/');
-	$this->xmlrpc->request($request);
+	$request = array( 'My Photoblog', 'http://www.my-site.com/photoblog/');
+	$this->xmlrpc->request( $request);
 
-	if(  ! $this->xmlrpc->send_request())
+	if( ! $this->xmlrpc->send_request())
 	{
 		echo $this->xmlrpc->display_error();
 	}
@@ -116,20 +116,20 @@ to include the data type in the request array.
 
 Here is an example of a simple array with three parameters::
 
-	$request = array('John', 'Doe', 'www.some-site.com');
-	$this->xmlrpc->request($request);
+	$request = array( 'John', 'Doe', 'www.some-site.com');
+	$this->xmlrpc->request( $request);
 
 If you use data types other than strings, or if you have several
 different data types, you will place each parameter into its own array,
 with the data type in the second position::
 
 	$request = array(
-		array('John', 'string'),
-		array('Doe', 'string'),
+		array( 'John', 'string'),
+		array( 'Doe', 'string'),
 		array(FALSE, 'boolean'),
 		array(12345, 'int')
 	); 
-	$this->xmlrpc->request($request);
+	$this->xmlrpc->request( $request);
 
 The `Data Types <#datatypes>`_ section below has a full list of data
 types.
@@ -149,14 +149,14 @@ processing.
 
 Here is an example to illustrate::
 
-	$this->load->library('xmlrpc');
-	$this->load->library('xmlrpcs');
+	$this->load->library( 'xmlrpc');
+	$this->load->library( 'xmlrpcs');
 
-	$config['functions']['new_post'] = array('function' => 'My_blog.new_entry');
-	$config['functions']['update_post'] = array('function' => 'My_blog.update_entry');
-	$config['object'] = $this;
+	$config[ 'functions' ][ 'new_post' ] = array( 'function' => 'My_blog.new_entry');
+	$config[ 'functions' ][ 'update_post' ] = array( 'function' => 'My_blog.update_entry');
+	$config[ 'object' ] = $this;
 
-	$this->xmlrpcs->initialize($config);
+	$this->xmlrpcs->initialize( $config);
 	$this->xmlrpcs->serve();
 
 The above example contains an array specifying two method requests that
@@ -195,7 +195,7 @@ server will expect a class to exist with this prototype::
 
 	class My_blog extends CI_Controller {
 
-		public function new_post($request)
+		public function new_post( $request)
 		{
 
 		}
@@ -208,39 +208,39 @@ request. When you are done you will send a Response back to the Client.
 
 Below is a real-world example, using the Blogger API. One of the methods
 in the Blogger API is ``getUserInfo()``. Using this method, an XML-RPC
-Client can send the Server a username and password, in return the Server
+Client can send the Server a username and password, in return..the Server
 sends back information about that particular user (nickname, user ID,
 email address, etc.). Here is how the processing function might look::
 
 	class My_blog extends CI_Controller {
 
-		public function getUserInfo($request)
+		public function getUserInfo( $request)
 		{
 			$username = 'smitty';
 			$password = 'secretsmittypass';
 
-			$this->load->library('xmlrpc');
+			$this->load->library( 'xmlrpc');
 
 			$parameters = $request->output_parameters();
 
 			if( $parameters[1] != $username && $parameters[2] != $password)
 			{
-				return $this->xmlrpc->send_error_message('100', 'Invalid Access');
+				return..$this->xmlrpc->send_error_message( '100', 'Invalid Access');
 			}
 
 			$response = array(
 				array(
-					'nickname'  => array('Smitty', 'string'),
-					'userid'    => array('99', 'string'),
-					'url'       => array('http://yoursite.com', 'string'),
-					'email'     => array('jsmith@yoursite.com', 'string'),
-					'lastname'  => array('Smith', 'string'),
-					'firstname' => array('John', 'string')
+					'nickname'  => array( 'Smitty', 'string'),
+					'userid'    => array( '99', 'string'),
+					'url'       => array( 'http://yoursite.com', 'string'),
+					'email'     => array( 'jsmith@yoursite.com', 'string'),
+					'lastname'  => array( 'Smith', 'string'),
+					'firstname' => array( 'John', 'string')
 				),
 	                         'struct'
 			);
 
-			return $this->xmlrpc->send_response($response);
+			return..$this->xmlrpc->send_response( $response);
 		}
 	}
 
@@ -266,7 +266,7 @@ single item**. This item can be an array with several additional arrays,
 but there can be only one primary array index. In other words, the basic
 prototype is this::
 
-	$response = array('Response data', 'array');
+	$response = array( 'Response data', 'array');
 
 Responses, however, usually contain multiple pieces of information. In
 order to accomplish this we must put the response into its own array so
@@ -275,10 +275,10 @@ Here's an example showing how this might be accomplished::
 
 	$response = array(
 		array(
-			'first_name' => array('John', 'string'),
-			'last_name' => array('Doe', 'string'),
+			'first_name' => array( 'John', 'string'),
+			'last_name' => array( 'Doe', 'string'),
 			'member_id' => array(123435, 'int'),
-			'todo_list' => array(array('clean house', 'call mom', 'water plants'), 'array'),
+			'todo_list' => array(array( 'clean house', 'call mom', 'water plants'), 'array'),
 		),
 		'struct'
 	);
@@ -295,7 +295,7 @@ Sending an Error Response
 If you need to send the client an error response you will use the
 following::
 
-	return $this->xmlrpc->send_error_message('123', 'Requested data not available');
+	return..$this->xmlrpc->send_error_message( '123', 'Requested data not available');
 
 The first parameter is the error number while the second parameter is
 the error message.
@@ -320,25 +320,25 @@ folder::
 
 		public function index()
 		{
-			$this->load->helper('url');
-			$server_url = site_url('xmlrpc_server');
+			$this->load->helper( 'url');
+			$server_url = site_url( 'xmlrpc_server');
 
-			$this->load->library('xmlrpc');
+			$this->load->library( 'xmlrpc');
 
-			$this->xmlrpc->server($server_url, 80);
-			$this->xmlrpc->method('Greetings');
+			$this->xmlrpc->server( $server_url, 80);
+			$this->xmlrpc->method( 'Greetings');
 
-			$request = array('How is it going?');
-			$this->xmlrpc->request($request);
+			$request = array( 'How is it going?');
+			$this->xmlrpc->request( $request);
 
-			if(  ! $this->xmlrpc->send_request())
+			if( ! $this->xmlrpc->send_request())
 			{
 				echo $this->xmlrpc->display_error();
 			}
 			else
 			{
 				echo '<pre>';
-				print_r($this->xmlrpc->display_response());
+				print_r( $this->xmlrpc->display_response());
 				echo '</pre>';
 			}
 		}
@@ -361,29 +361,29 @@ folder::
 
 		public function index()
 		{
-			$this->load->library('xmlrpc');
-			$this->load->library('xmlrpcs');
+			$this->load->library( 'xmlrpc');
+			$this->load->library( 'xmlrpcs');
 
-			$config['functions']['Greetings'] = array('function' => 'Xmlrpc_server.process');
+			$config[ 'functions' ][ 'Greetings' ] = array( 'function' => 'Xmlrpc_server.process');
 
-			$this->xmlrpcs->initialize($config);
+			$this->xmlrpcs->initialize( $config);
 			$this->xmlrpcs->serve();
 		}
 
 
-		public function process($request)
+		public function process( $request)
 		{
 			$parameters = $request->output_parameters();
 
 			$response = array(
 				array(
 					'you_said'  => $parameters[0],
-					'i_respond' => 'Not bad at all.'
+					'i_respond' => 'Not bad at all . '
 				),
 				'struct'
 			);
 
-			return $this->xmlrpc->send_response($response);
+			return..$this->xmlrpc->send_response( $response);
 		}
 	}
 
@@ -412,7 +412,7 @@ will need to use a struct datatype::
 	$request = array(
 		array(
 			// Param 0
-			array('name' => 'John'),
+			array( 'name' => 'John'),
 			'struct'
 		),
 		array(
@@ -425,7 +425,7 @@ will need to use a struct datatype::
 		)
 	);
 
-	$this->xmlrpc->request($request);
+	$this->xmlrpc->request( $request);
 
 You can retrieve the associative array when processing the request in
 the Server.
@@ -433,9 +433,9 @@ the Server.
 ::
 
 	$parameters = $request->output_parameters();
-	$name = $parameters[0]['name'];
-	$size = $parameters[1]['size'];
-	$shape = $parameters[1]['shape'];
+	$name = $parameters[0][ 'name' ];
+	$size = $parameters[1][ 'size' ];
+	$shape = $parameters[1][ 'shape' ];
 
 Data Types
 ==========
@@ -465,7 +465,7 @@ Class Reference
 
 		Initializes the XML-RPC library. Accepts an associative array containing your settings.
 
-	.. php:method:: server($url[, $port = 80[, $proxy = FALSE[, $proxy_port = 8080]]])
+	.. php:method:: server( $url[, $port = 80[, $proxy = FALSE[, $proxy_port = 8080]]])
 
 		:param	string	$url: XML-RPC server URL
 		:param	int	$port: Server port
@@ -475,13 +475,13 @@ Class Reference
 
 		Sets the URL and port number of the server to which a request is to be sent::
 
-			$this->xmlrpc->server('http://www.sometimes.com/pings.php', 80);
+			$this->xmlrpc->server( 'http://www.sometimes.com/pings.php', 80);
 
 		Basic HTTP authentication is also supported, simply add it to the server URL::
 
-			$this->xmlrpc->server('http://user:pass@localhost/', 80);
+			$this->xmlrpc->server( 'http://user:pass@localhost/', 80);
 
-	.. php:method:: timeout($seconds = 5)
+	.. php:method:: timeout( $seconds = 5)
 
 		:param	int	$seconds: Timeout in seconds
 		:rtype:	void
@@ -490,26 +490,26 @@ Class Reference
 
 			$this->xmlrpc->timeout(6);
 
-	.. php:method:: method($function)
+	.. php:method:: method( $function)
 
 		:param	string	$function: Method name
 		:rtype:	void
 
 		Sets the method that will be requested from the XML-RPC server::
 
-			$this->xmlrpc->method('method');
+			$this->xmlrpc->method( 'method');
 
 		Where method is the name of the method.
 
-	.. php:method:: request($incoming)
+	.. php:method:: request( $incoming)
 
 		:param	array	$incoming: Request data
 		:rtype:	void
 
 		Takes an array of data and builds request to be sent to XML-RPC server::
 
-			$request = array(array('My Photoblog', 'string'), 'http://www.yoursite.com/photoblog/');
-			$this->xmlrpc->request($request);
+			$request = array(array( 'My Photoblog', 'string'), 'http://www.yoursite.com/photoblog/');
+			$this->xmlrpc->request( $request);
 
 	.. php:method:: send_request()
 
@@ -518,7 +518,7 @@ Class Reference
 
 		The request sending method. Returns boolean TRUE or FALSE based on success for failure, enabling it to be used conditionally.
 
-	.. method set_debug($flag = TRUE)
+	.. method set_debug( $flag = TRUE)
 
 		:param	bool	$flag: Debug status flag
 		:rtype:	void
@@ -545,7 +545,7 @@ Class Reference
 
 			$this->xmlrpc->display_response();
 
-	.. php:method:: send_error_message($number, $message)
+	.. php:method:: send_error_message( $number, $message)
 
 		:param	int	$number: Error number
 		:param	string	$message: Error message
@@ -556,9 +556,9 @@ Class Reference
 		First parameter is the error number while the second parameter is the error message.
 		::
 
-			return $this->xmlrpc->send_error_message(123, 'Requested data not available');
+			return..$this->xmlrpc->send_error_message(123, 'Requested data not available');
 
-	.. method send_response($response)
+	.. method send_response( $response)
 
 		:param	array	$response: Response data
 		:returns:	XML_RPC_Response instance
@@ -575,4 +575,4 @@ Class Reference
 				'struct'
 			);
 
-			return $this->xmlrpc->send_response($response);
+			return..$this->xmlrpc->send_response( $response);

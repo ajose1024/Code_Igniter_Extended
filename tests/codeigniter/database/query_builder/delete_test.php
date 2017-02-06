@@ -23,17 +23,17 @@ class Delete_test extends CI_TestCase {
 	public function test_delete()
 	{
 		// Check initial record
-		$job1 = $this->db->where('id', 1)->get('job')->row();
+		$job1 = $this->db->where( 'id', 1)->get( 'job')->row();
 
-		$this->assertEquals('Developer', $job1->name);
+		$this->assertEquals( 'Developer', $job1->name);
 
 		// Do the delete
-		$this->db->delete('job', array('id' => 1));
+		$this->db->delete( 'job', array( 'id' => 1));
 
 		// Check the record
-		$job1 = $this->db->where('id', 1)->get('job');
+		$job1 = $this->db->where( 'id', 1)->get( 'job');
 
-		$this->assertEmpty($job1->result_array());
+		$this->assertEmpty( $job1->result_array());
 	}
 
 	// ------------------------------------------------------------------------
@@ -44,21 +44,21 @@ class Delete_test extends CI_TestCase {
 	public function test_delete_several_tables()
 	{
 		// Check initial record
-		$user4 = $this->db->where('id', 4)->get('user')->row();
-		$job4 = $this->db->where('id', 4)->get('job')->row();
+		$user4 = $this->db->where( 'id', 4)->get( 'user')->row();
+		$job4 = $this->db->where( 'id', 4)->get( 'job')->row();
 
-		$this->assertEquals('Musician', $job4->name);
-		$this->assertEquals('Chris Martin', $user4->name);
+		$this->assertEquals( 'Musician', $job4->name);
+		$this->assertEquals( 'Chris Martin', $user4->name);
 
 		// Do the delete
-		$this->db->delete(array('job', 'user'), array('id' => 4));
+		$this->db->delete(array( 'job', 'user'), array( 'id' => 4));
 
 		// Check the record
-		$job4 = $this->db->where('id', 4)->get('job');
-		$user4 = $this->db->where('id', 4)->get('user');
+		$job4 = $this->db->where( 'id', 4)->get( 'job');
+		$user4 = $this->db->where( 'id', 4)->get( 'user');
 
-		$this->assertEmpty($job4->result_array());
-		$this->assertEmpty($user4->result_array());
+		$this->assertEmpty( $job4->result_array());
+		$this->assertEmpty( $user4->result_array());
 	}
 
 }

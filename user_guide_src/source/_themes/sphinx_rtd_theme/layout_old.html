@@ -15,7 +15,7 @@
 {%- set reldelim2 = reldelim2 is not defined and ' |' or reldelim2 %}
 {%- set render_sidebar = (not embedded) and (not theme_nosidebar|tobool) and
                          (sidebars != []) %}
-{%- set url_root = pathto('', 1) %}
+{%- set url_root = pathto( '', 1) %}
 {# XXX necessary? #}
 {%- if url_root == '#' %}{% set url_root = '' %}{% endif %}
 {%- if not embedded and docstitle %}
@@ -26,7 +26,7 @@
 
 {%- macro relbar() %}
     <div class="related">
-      <h3>{{ _('Navigation') }}</h3>
+      <h3>{{ _( 'Navigation') }}</h3>
       <ul>
         {%- for rellink in rellinks %}
         <li class="right" {% if loop.first %}style="margin-right: 10px"{% endif %}>
@@ -52,7 +52,7 @@
           {%- block sidebarlogo %}
           {%- if logo %}
             <p class="logo"><a href="{{ pathto(master_doc) }}">
-              <img class="logo" src="{{ pathto('_static/' + logo, 1) }}" alt="Logo"/>
+              <img class="logo" src="{{ pathto( '_static/' + logo, 1) }}" alt="Logo"/>
             </a></p>
           {%- endif %}
           {%- endblock %}
@@ -100,8 +100,8 @@
 {%- endmacro %}
 
 {%- macro css() %}
-    <link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css" />
-    <link rel="stylesheet" href="{{ pathto('_static/pygments.css', 1) }}" type="text/css" />
+    <link rel="stylesheet" href="{{ pathto( '_static/' + style, 1) }}" type="text/css" />
+    <link rel="stylesheet" href="{{ pathto( '_static/pygments.css', 1) }}" type="text/css" />
     {%- for cssfile in css_files %}
     <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css" />
     {%- endfor %}
@@ -120,26 +120,26 @@
     {%- if use_opensearch %}
     <link rel="search" type="application/opensearchdescription+xml"
           title="{% trans docstitle=docstitle|e %}Search within {{ docstitle }}{% endtrans %}"
-          href="{{ pathto('_static/opensearch.xml', 1) }}"/>
+          href="{{ pathto( '_static/opensearch.xml', 1) }}"/>
     {%- endif %}
     {%- if favicon %}
-    <link rel="shortcut icon" href="{{ pathto('_static/' + favicon, 1) }}"/>
+    <link rel="shortcut icon" href="{{ pathto( '_static/' + favicon, 1) }}"/>
     {%- endif %}
     {%- endif %}
 {%- block linktags %}
-    {%- if hasdoc('about') %}
-    <link rel="author" title="{{ _('About these documents') }}" href="{{ pathto('about') }}" />
+    {%- if hasdoc( 'about') %}
+    <link rel="author" title="{{ _( 'About these documents') }}" href="{{ pathto( 'about') }}" />
     {%- endif %}
-    {%- if hasdoc('genindex') %}
-    <link rel="index" title="{{ _('Index') }}" href="{{ pathto('genindex') }}" />
+    {%- if hasdoc( 'genindex') %}
+    <link rel="index" title="{{ _( 'Index') }}" href="{{ pathto( 'genindex') }}" />
     {%- endif %}
-    {%- if hasdoc('search') %}
-    <link rel="search" title="{{ _('Search') }}" href="{{ pathto('search') }}" />
+    {%- if hasdoc( 'search') %}
+    <link rel="search" title="{{ _( 'Search') }}" href="{{ pathto( 'search') }}" />
     {%- endif %}
-    {%- if hasdoc('copyright') %}
-    <link rel="copyright" title="{{ _('Copyright') }}" href="{{ pathto('copyright') }}" />
+    {%- if hasdoc( 'copyright') %}
+    <link rel="copyright" title="{{ _( 'Copyright') }}" href="{{ pathto( 'copyright') }}" />
     {%- endif %}
-    <link rel="top" title="{{ docstitle|e }}" href="{{ pathto('index') }}" />
+    <link rel="top" title="{{ docstitle|e }}" href="{{ pathto( 'index') }}" />
     {%- if parents %}
     <link rel="up" title="{{ parents[-1].title|striptags|e }}" href="{{ parents[-1].link|e }}" />
     {%- endif %}
@@ -185,8 +185,8 @@
 {%- block footer %}
     <div class="footer">
     {%- if show_copyright %}
-      {%- if hasdoc('copyright') %}
-        {% trans path=pathto('copyright'), copyright=copyright|e %}&copy; <a href="{{ path }}">Copyright</a> {{ copyright }}.{% endtrans %}
+      {%- if hasdoc( 'copyright') %}
+        {% trans path=pathto( 'copyright'), copyright=copyright|e %}&copy; <a href="{{ path }}">Copyright</a> {{ copyright }}.{% endtrans %}
       {%- else %}
         {% trans copyright=copyright|e %}&copy; Copyright {{ copyright }}.{% endtrans %}
       {%- endif %}

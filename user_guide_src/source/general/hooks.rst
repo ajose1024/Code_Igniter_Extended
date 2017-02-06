@@ -18,7 +18,7 @@ Enabling Hooks
 The hooks feature can be globally enabled/disabled by setting the
 following item in the **application/config/config.php** file::
 
-	$config['enable_hooks'] = TRUE;
+	$config[ 'enable_hooks' ] = TRUE;
 
 Defining a Hook
 ===============
@@ -26,12 +26,12 @@ Defining a Hook
 Hooks are defined in the **application/config/hooks.php** file.
 Each hook is specified as an array with this prototype::
 
-	$hook['pre_controller'] = array(
+	$hook[ 'pre_controller' ] = array(
 		'class'    => 'MyClass',
 		'function' => 'Myfunction',
 		'filename' => 'Myclass.php',
 		'filepath' => 'hooks',
-		'params'   => array('beer', 'wine', 'snacks')
+		'params'   => array( 'beer', 'wine', 'snacks')
 	);
 
 **Notes:**
@@ -59,7 +59,7 @@ defined in your associative hook array:
 If you're running PHP 5.3+, you can also use lambda/anoymous functions
 (or closures) as hooks, with a simpler syntax::
 
-	$hook['post_controller'] = function()
+	$hook[ 'post_controller' ] = function()
 	{
 		/* do something here */
 	};
@@ -70,25 +70,25 @@ Multiple Calls to the Same Hook
 If want to use the same hook point with more than one script, simply
 make your array declaration multi-dimensional, like this::
 
-	$hook['pre_controller'][] = array(
+	$hook[ 'pre_controller' ][] = array(
 		'class'    => 'MyClass',
 		'function' => 'MyMethod',
 		'filename' => 'Myclass.php',
 		'filepath' => 'hooks',
-		'params'   => array('beer', 'wine', 'snacks')
+		'params'   => array( 'beer', 'wine', 'snacks')
 	);
 
-	$hook['pre_controller'][] = array(
+	$hook[ 'pre_controller' ][] = array(
 		'class'    => 'MyOtherClass',
 		'function' => 'MyOtherMethod',
 		'filename' => 'Myotherclass.php',
 		'filepath' => 'hooks',
-		'params'   => array('red', 'yellow', 'blue')
+		'params'   => array( 'red', 'yellow', 'blue')
 	);
 
 Notice the brackets after each array index::
 
-	$hook['pre_controller'][]
+	$hook[ 'pre_controller' ][]
 
 This permits you to have the same hook point with multiple scripts. The
 order you define your array will be the execution order.

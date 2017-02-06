@@ -16,12 +16,12 @@ contains all of the possible child class files.
 To use a driver you will initialize it within a controller using the
 following initialization method::
 
-	$this->load->driver('class_name');
+	$this->load->driver( 'class_name');
 
 Where class name is the name of the driver class you want to invoke. For
 example, to load a driver named "Some_parent" you would do this::
 
-	$this->load->driver('some_parent');
+	$this->load->driver( 'some_parent');
 
 Methods of that class can then be invoked with::
 

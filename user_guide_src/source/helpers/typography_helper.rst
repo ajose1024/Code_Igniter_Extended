@@ -17,7 +17,7 @@ Loading this Helper
 
 This helper is loaded using the following code::
 
-	$this->load->helper('typography');
+	$this->load->helper( 'typography');
 
 Available Functions
 ===================
@@ -25,7 +25,7 @@ Available Functions
 The following functions are available:
 
 
-.. php:function:: auto_typography($str[, $reduce_linebreaks = FALSE])
+.. php:function:: auto_typography( $str[, $reduce_linebreaks = FALSE])
 
 	:param	string	$str: Input string
 	:param	bool	$reduce_linebreaks: Whether to reduce multiple instances of double newlines to two
@@ -41,7 +41,7 @@ The following functions are available:
 
 	Usage example::
 
-		$string = auto_typography($string);
+		$string = auto_typography( $string);
 
 	.. note:: Typographic formatting can be processor intensive, particularly if
 		you have a lot of content being formatted. If you choose to use this
@@ -49,7 +49,7 @@ The following functions are available:
 		pages.
 
 
-.. php:function:: nl2br_except_pre($str)
+.. php:function:: nl2br_except_pre( $str)
 
 	:param	string	$str: Input string
 	:returns:	String with HTML-formatted line breaks
@@ -61,9 +61,9 @@ The following functions are available:
 
 	Usage example::
 
-		$string = nl2br_except_pre($string);
+		$string = nl2br_except_pre( $string);
 
-.. php:function:: entity_decode($str, $charset = NULL)
+.. php:function:: entity_decode( $str, $charset = NULL)
 
 	:param	string	$str: Input string
 	:param	string	$charset: Character set

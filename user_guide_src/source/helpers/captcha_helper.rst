@@ -17,7 +17,7 @@ Loading this Helper
 
 This helper is loaded using the following code::
 
-	$this->load->helper('captcha');
+	$this->load->helper( 'captcha');
 
 Using the CAPTCHA helper
 ========================
@@ -46,8 +46,8 @@ Once loaded you can generate a CAPTCHA like this::
 		)
 	);
 
-	$cap = create_captcha($vals);
-	echo $cap['image'];
+	$cap = create_captcha( $vals);
+	echo $cap[ 'image' ];
 
 -  The captcha function requires the GD image library.
 -  Only the **img_path** and **img_url** are required.
@@ -88,24 +88,24 @@ Here is a table prototype::
 Here is an example of usage with a database. On the page where the
 CAPTCHA will be shown you'll have something like this::
 
-	$this->load->helper('captcha');
+	$this->load->helper( 'captcha');
 	$vals = array(     
 		'img_path'	=> './captcha/',     
 		'img_url'	=> 'http://example.com/captcha/'     
 	);
 
-	$cap = create_captcha($vals);
+	$cap = create_captcha( $vals);
 	$data = array(     
-		'captcha_time'	=> $cap['time'],     
+		'captcha_time'	=> $cap[ 'time' ],     
 		'ip_address'	=> $this->input->ip_address(),     
-		'word'		=> $cap['word']     
+		'word'		=> $cap[ 'word' ]     
 	);
 
-	$query = $this->db->insert_string('captcha', $data);
-	$this->db->query($query);
+	$query = $this->db->insert_string( 'captcha', $data);
+	$this->db->query( $query);
 
 	echo 'Submit the word you see below:';
-	echo $cap['image'];
+	echo $cap[ 'image' ];
 	echo '<input type="text" name="captcha" value="" />';
 
 Then, on the page that accepts the submission you'll have something like
@@ -113,18 +113,18 @@ this::
 
 	// First, delete old captchas
 	$expiration = time() - 7200; // Two hour limit
-	$this->db->where('captcha_time < ', $expiration)
-		->delete('captcha');
+	$this->db->where( 'captcha_time < ', $expiration)
+		->delete( 'captcha');
 
 	// Then see if a captcha exists:
 	$sql = 'SELECT COUNT(*) AS count FROM captcha WHERE word = ? AND ip_address = ? AND captcha_time > ?';
-	$binds = array($_POST['captcha'], $this->input->ip_address(), $expiration);
-	$query = $this->db->query($sql, $binds);
+	$binds = array( $_POST[ 'captcha' ], $this->input->ip_address(), $expiration);
+	$query = $this->db->query( $sql, $binds);
 	$row = $query->row();
 
 	if( $row->count == 0)
 	{     
-		echo 'You must submit the word that appears in the image.';
+		echo 'You must submit the word that appears in the image . ';
 	}
 
 Available Functions
@@ -132,13 +132,13 @@ Available Functions
 
 The following functions are available:
 
-.. php:function:: create_captcha([$data = ''[, $img_path = ''[, $img_url = ''[, $font_path = '']]]])
+.. php:function:: create_captcha([$data = ''[, $img_path = ''[, $img_url = ''[, $font_path = '' ]]]])
 
 	:param	array	$data: Array of data for the CAPTCHA
 	:param	string	$img_path: Path to create the image in
 	:param	string	$img_url: URL to the CAPTCHA image folder
 	:param	string	$font_path: Server path to font
-	:returns:	array('word' => $word, 'time' => $now, 'image' => $img)
+	:returns:	array( 'word' => $word, 'time' => $now, 'image' => $img)
 	:rtype:	array
 
 	Takes an array of information to generate the CAPTCHA as input and

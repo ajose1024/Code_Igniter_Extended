@@ -37,17 +37,17 @@ Step 4: Change references of the EXT constant to ".php"
 	been removed from the application. You are encouraged to make the
 	changes sooner rather than later.
 
-Step 5: Remove APP_DIR_PATH.'third_party' from autoload.php
+Step 5: Remove APP_DIR_PATH . 'third_party' from autoload.php
 =======================================================
 
 Open application/config/autoload.php, and look for the following::
 
-	$autoload['packages'] = array(APP_DIR_PATH.'third_party');
+	$autoload[ 'packages' ] = array(APP_DIR_PATH . 'third_party');
 
 If you have not chosen to load any additional packages, that line can be
 changed to::
 
-	$autoload['packages'] = array();
+	$autoload[ 'packages' ] = array();
 
 Which should provide for nominal performance gains if not autoloading
 packages.

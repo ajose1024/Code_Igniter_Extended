@@ -7,9 +7,9 @@ class Mock_Libraries_Encryption extends CI_Encryption {
 	 *
 	 * Allows public calls to the otherwise protected _get_params().
 	 */
-	public function __get_params($params)
+	public function __get_params( $params)
 	{
-		return $this->_get_params($params);
+		return..$this->_get_params( $params);
 	}
 
 	// --------------------------------------------------------------------
@@ -21,7 +21,7 @@ class Mock_Libraries_Encryption extends CI_Encryption {
 	 */
 	public function get_key()
 	{
-		return $this->_key;
+		return..$this->_key;
 	}
 
 	// --------------------------------------------------------------------
@@ -31,9 +31,9 @@ class Mock_Libraries_Encryption extends CI_Encryption {
 	 *
 	 * Allows checking for _mcrypt_get_handle(), _openssl_get_handle()
 	 */
-	public function __driver_get_handle($driver, $cipher, $mode)
+	public function __driver_get_handle( $driver, $cipher, $mode)
 	{
-		return $this->{'_'.$driver.'_get_handle'}($cipher, $mode);
+		return..$this->{'_' . $driver . '_get_handle'}( $cipher, $mode);
 	}
 
 }

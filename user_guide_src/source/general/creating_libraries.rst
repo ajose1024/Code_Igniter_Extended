@@ -45,7 +45,7 @@ The Class File
 Classes should have this basic prototype::
 
 	<?php
-	defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ; 
+	defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ; 
 
 	class Someclass {
 
@@ -62,7 +62,7 @@ Using Your Class
 From within any of your :doc:`Controller <controllers>` methods you
 can initialize your class using the standard::
 
-	$this->load->library('someclass');
+	$this->load->library( 'someclass');
 
 Where *someclass* is the file name, without the ".php" file extension.
 You can submit the file name capitalized or lower case. CodeIgniter
@@ -79,18 +79,18 @@ In the library loading method you can dynamically pass data as an
 array via the second parameter and it will be passed to your class
 constructor::
 
-	$params = array('type' => 'large', 'color' => 'red');
+	$params = array( 'type' => 'large', 'color' => 'red');
 
-	$this->load->library('someclass', $params);
+	$this->load->library( 'someclass', $params);
 
 If you use this feature you must set up your class constructor to expect
 data::
 
-	<?php  defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+	<?php  defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 	class Someclass {
 
-		public function __construct($params)
+		public function __construct( $params)
 		{
 			// Do something with $params
 		}
@@ -112,9 +112,9 @@ object.
 Normally from within your controller methods you will call any of the
 available CodeIgniter methods using the ``$this`` construct::
 
-	$this->load->helper('url');
-	$this->load->library('session');
-	$this->config->item('base_url');
+	$this->load->helper( 'url');
+	$this->load->library( 'session');
+	$this->config->item( 'base_url');
 	// etc.
 
 ``$this``, however, only works directly within your controllers, your
@@ -130,9 +130,9 @@ Once you've assigned the object to a variable, you'll use that variable
 
 	$CI =& get_instance();
 
-	$CI->load->helper('url');
-	$CI->load->library('session');
-	$CI->config->item('base_url');
+	$CI->load->helper( 'url');
+	$CI->load->library( 'session');
+	$CI->config->item( 'base_url');
 	// etc.
 
 .. note:: You'll notice that the above ``get_instance()`` function is being
@@ -162,13 +162,13 @@ methods, you're encouraged to assign it to a property instead::
 
 		public function foo()
 		{
-			$this->CI->load->helper('url');
+			$this->CI->load->helper( 'url');
 			redirect();
 		}
 
 		public function bar()
 		{
-			echo $this->CI->config->item('base_url');
+			echo $this->CI->config->item( 'base_url');
 		}
 
 	}
@@ -191,7 +191,7 @@ Note that most native classes are prefixed with CI\_.
 
 To load your library you'll see the standard loading method::
 
-	$this->load->library('email');
+	$this->load->library( 'email');
 
 .. note:: At this time the Database classes can not be replaced with
 	your own versions.
@@ -221,9 +221,9 @@ extend the parent constructor::
 
 	class MY_Email extends CI_Email {
 
-		public function __construct($config = array())
+		public function __construct( $config = array())
 		{
-			parent::__construct($config);
+			parent::__construct( $config);
 		}
 
 	}
@@ -239,7 +239,7 @@ To load your sub-class you'll use the standard syntax normally used. DO
 NOT include your prefix. For example, to load the example above, which
 extends the Email class, you will use::
 
-	$this->load->library('email');
+	$this->load->library( 'email');
 
 Once loaded you will use the class variable as you normally would for
 the class you are extending. In the case of the email class all calls
@@ -253,7 +253,7 @@ Setting Your Own Prefix
 To set your own sub-class prefix, open your
 *application/config/config.php* file and look for this item::
 
-	$config['subclass_prefix'] = 'MY_';
+	$config[ 'subclass_prefix' ] = 'MY_';
 
 Please note that all native CodeIgniter libraries are prefixed with CI\_
 so DO NOT use that as your prefix.

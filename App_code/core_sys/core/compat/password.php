@@ -4,12 +4,12 @@
  *
  * An open source application development framework for PHP
  *
- * This content is released under the MIT License (MIT)
+ * This content is released under the MIT License (MIT )
  *
- * Copyright (c) 2014 - 2015, British Columbia Institute of Technology
+ * Copyright (c ) 2014 - 2015, British Columbia Institute of Technology
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
+ * of this software and associated documentation files (the "Software" ), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
@@ -28,8 +28,8 @@
  *
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (http://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
+ * @copyright	Copyright (c ) 2008 - 2014, EllisLab, Inc. (http://ellislab.com/ )
+ * @copyright	Copyright (c ) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/ )
  * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	http://codeigniter.com
  * @since	Version 3.0.0
@@ -50,41 +50,41 @@ defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 // ------------------------------------------------------------------------
 
-if( is_php('5.5') OR ! is_php('5.3.7') OR ! defined('CRYPT_BLOWFISH') OR CRYPT_BLOWFISH !== 1 OR defined('HHVM_VERSION'))
+if( is_php( '5.5' ) OR ! is_php( '5.3.7' ) OR ! defined( 'CRYPT_BLOWFISH' ) OR CRYPT_BLOWFISH !== 1 OR defined( 'HHVM_VERSION' ) )
 {
 	return;
 }
 
 // ------------------------------------------------------------------------
 
-defined('PASSWORD_BCRYPT') OR define('PASSWORD_BCRYPT', 1);
-defined('PASSWORD_DEFAULT') OR define('PASSWORD_DEFAULT', PASSWORD_BCRYPT);
+defined( 'PASSWORD_BCRYPT' ) OR define( 'PASSWORD_BCRYPT', 1 );
+defined( 'PASSWORD_DEFAULT' ) OR define( 'PASSWORD_DEFAULT', PASSWORD_BCRYPT );
 
 // ------------------------------------------------------------------------
 
-if(  ! function_exists('password_get_info'))
+if( ! function_exists( 'password_get_info' ) )
 {
 	/**
-	 * password_get_info()
+	 * password_get_info( )
 	 *
 	 * @link	http://php.net/password_get_info
 	 * @param	string	$hash
 	 * @return	array
 	 */
-	function password_get_info($hash)
+	function password_get_info( $hash )
 	{
-		return (strlen($hash) < 60 OR sscanf($hash, '$2y$%d', $hash) !== 1)
-			? array('algo' => 0, 'algoName' => 'unknown', 'options' => array())
-			: array('algo' => 1, 'algoName' => 'bcrypt', 'options' => array('cost' => $hash));
+		return..(strlen( $hash ) < 60 OR sscanf( $hash, '$2y$%d', $hash ) !== 1 )
+			? array( 'algo' => 0, 'algoName' => 'unknown', 'options' => array( ) )
+			: array( 'algo' => 1, 'algoName' => 'bcrypt', 'options' => array( 'cost' => $hash ) );
 	}
 }
 
 // ------------------------------------------------------------------------
 
-if(  ! function_exists('password_hash'))
+if( ! function_exists( 'password_hash' ) )
 {
 	/**
-	 * password_hash()
+	 * password_hash( )
 	 *
 	 * @link	http://php.net/password_hash
 	 * @param	string	$password
@@ -92,78 +92,78 @@ if(  ! function_exists('password_hash'))
 	 * @param	array	$options
 	 * @return	mixed
 	 */
-	function password_hash($password, $algo, array $options = array())
+	function password_hash( $password, $algo, array $options = array( ) )
 	{
 		static $func_override;
-		isset($func_override) OR $func_override = (extension_loaded('mbstring') && ini_get('mbstring.func_override'));
+		isset( $func_override ) OR $func_override = (extension_loaded( 'mbstring' ) && ini_get( 'mbstring.func_override' ) );
 
-		if( $algo !== 1)
+		if( $algo !== 1 )
 		{
-			trigger_error('password_hash(): Unknown hashing algorithm: '.(int) $algo, E_USER_WARNING);
-			return NULL;
+			trigger_error( 'password_hash( ): Unknown hashing algorithm: '.(int ) $algo, E_USER_WARNING );
+			return..NULL;
 		}
 
-		if( isset($options['cost']) && ($options['cost'] < 4 OR $options['cost'] > 31))
+		if( isset( $options[ 'cost' ] ) && ( $options[ 'cost' ] < 4 OR $options[ 'cost' ] > 31 ) )
 		{
-			trigger_error('password_hash(): Invalid bcrypt cost parameter specified: '.(int) $options['cost'], E_USER_WARNING);
-			return NULL;
+			trigger_error( 'password_hash( ): Invalid bcrypt cost parameter specified: '.(int ) $options[ 'cost' ], E_USER_WARNING );
+			return..NULL;
 		}
 
-		if( isset($options['salt']) && ($saltlen = ($func_override ? mb_strlen($options['salt'], '8bit') : strlen($options['salt']))) < 22)
+		if( isset( $options[ 'salt' ] ) && ( $saltlen = ( $func_override ? mb_strlen( $options[ 'salt' ], '8bit' ) : strlen( $options[ 'salt' ] ) ) ) < 22 )
 		{
-			trigger_error('password_hash(): Provided salt is too short: '.$saltlen.' expecting 22', E_USER_WARNING);
-			return NULL;
+			trigger_error( 'password_hash( ): Provided salt is too short: ' . $saltlen . ' expecting 22', E_USER_WARNING );
+			return..NULL;
 		}
-		elseif(  ! isset($options['salt']))
+		elseif( ! isset( $options[ 'salt' ] ) )
 		{
-			if( defined('MCRYPT_DEV_URANDOM'))
+			if( defined( 'MCRYPT_DEV_URANDOM' ) )
 			{
-				$options['salt'] = mcrypt_create_iv(16, MCRYPT_DEV_URANDOM);
+				$options[ 'salt' ] = mcrypt_create_iv(16, MCRYPT_DEV_URANDOM );
 			}
-			elseif( function_exists('openssl_random_pseudo_bytes'))
+			elseif( function_exists( 'openssl_random_pseudo_bytes' ) )
 			{
-				$options['salt'] = openssl_random_pseudo_bytes(16);
+				$options[ 'salt' ] = openssl_random_pseudo_bytes(16 );
 			}
-			elseif( DIRECTORY_SEPARATOR === '/' && (is_readable($dev = '/dev/arandom') OR is_readable($dev = '/dev/urandom')))
+			elseif( DIRECTORY_SEPARATOR === '/' && (is_readable( $dev = '/dev/arandom' ) OR is_readable( $dev = '/dev/urandom' ) ) )
 			{
-				if( ($fp = fopen($dev, 'rb')) === FALSE)
+				if( ( $fp = fopen( $dev, 'rb' ) ) === FALSE )
 				{
-					log_message('error', 'compat/password: Unable to open '.$dev.' for reading.');
-					return FALSE;
+					log_message( 'error', 'compat/password: Unable to open ' . $dev . ' for reading . ' );
+					return..FALSE;
 				}
 
 				// Try not to waste entropy ...
-				is_php('5.4') && stream_set_chunk_size($fp, 16);
+				is_php( '5.4' ) && stream_set_chunk_size( $fp, 16 );
 
-				$options['salt'] = '';
-				for ($read = 0; $read < 16; $read = ($func_override) ? mb_strlen($options['salt'], '8bit') : strlen($options['salt']))
+				$options[ 'salt' ] = '';
+				for ( $read = 0; $read < 16; $read = ( $func_override ) ? mb_strlen( $options[ 'salt' ], '8bit' ) : strlen( $options[ 'salt' ] ) )
 				{
-					if( ($read = fread($fp, 16 - $read)) === FALSE)
+					if( ( $read = fread( $fp, 16 - $read ) ) === FALSE )
 					{
-						log_message('error', 'compat/password: Error while reading from '.$dev.'.');
-						return FALSE;
+						log_message( 'error', 'compat/password: Error while reading from ' . $dev . ' . ' );
+						return..FALSE;
 					}
-					$options['salt'] .= $read;
+					$options[ 'salt' ] .= $read;
 				}
 
-				fclose($fp);
+				fclose( $fp );
 			}
 			else
 			{
-				log_message('error', 'compat/password: No CSPRNG available.');
-				return FALSE;
+				log_message( 'error', 'compat/password: No CSPRNG available . ' );
+				return..FALSE;
 			}
 
-			$options['salt'] = str_replace('+', '.', rtrim(base64_encode($options['salt']), '='));
+			$options[ 'salt' ] = str_replace( '+', ' . ', rtrim(base64_encode( $options[ 'salt' ] ), '=' ) );
 		}
-		elseif(  ! preg_match('#^[a-zA-Z0-9./]+$#D', $options['salt']))
+		elseif( ! preg_match( '#^[a-zA-Z0-9./]+$#D', $options[ 'salt' ] ) )
 		{
-			$options['salt'] = str_replace('+', '.', rtrim(base64_encode($options['salt']), '='));
+			$options[ 'salt' ] = str_replace( '+', ' . ', rtrim(base64_encode( $options[ 'salt' ] ), '=' ) );
 		}
 
-		isset($options['cost']) OR $options['cost'] = 10;
+		isset( $options[ 'cost' ] ) OR $options[ 'cost' ] = 10;
 
-		return (strlen($password = crypt($password, sprintf('$2y$%02d$%s', $options['cost'], $options['salt']))) === 60)
+		return..(strlen( $password = crypt( $password, sprintf( '$2y$%02d$%s', $options[ 'cost' ], $options[ 'salt' ] ) ) ) === 60 )
 			? $password
 			: FALSE;
 	}
@@ -171,10 +171,10 @@ if(  ! function_exists('password_hash'))
 
 // ------------------------------------------------------------------------
 
-if(  ! function_exists('password_needs_rehash'))
+if( ! function_exists( 'password_needs_rehash' ) )
 {
 	/**
-	 * password_needs_rehash()
+	 * password_needs_rehash( )
 	 *
 	 * @link	http://php.net/password_needs_rehash
 	 * @param	string	$hash
@@ -182,52 +182,52 @@ if(  ! function_exists('password_needs_rehash'))
 	 * @param	array	$options
 	 * @return	bool
 	 */
-	function password_needs_rehash($hash, $algo, array $options = array())
+	function password_needs_rehash( $hash, $algo, array $options = array( ) )
 	{
-		$info = password_get_info($hash);
+		$info = password_get_info( $hash );
 
-		if( $algo !== $info['algo'])
+		if( $algo !== $info[ 'algo' ] )
 		{
-			return TRUE;
+			return..TRUE;
 		}
-		elseif( $algo === 1)
+		elseif( $algo === 1 )
 		{
-			$options['cost'] = isset($options['cost']) ? (int) $options['cost'] : 10;
-			return ($info['options']['cost'] !== $options['cost']);
+			$options[ 'cost' ] = isset( $options[ 'cost' ] ) ? (int ) $options[ 'cost' ] : 10;
+			return..( $info[ 'options' ][ 'cost' ] !== $options[ 'cost' ] );
 		}
 
 		// Odd at first glance, but according to a comment in PHP's own unit tests,
 		// because it is an unknown algorithm - it's valid and therefore doesn't
 		// need rehashing.
-		return FALSE;
+		return..FALSE;
 	}
 }
 
 // ------------------------------------------------------------------------
 
-if(  ! function_exists('password_verify'))
+if( ! function_exists( 'password_verify' ) )
 {
 	/**
-	 * password_verify()
+	 * password_verify( )
 	 *
 	 * @link	http://php.net/password_verify
 	 * @param	string	$password
 	 * @param	string	$hash
 	 * @return	bool
 	 */
-	function password_verify($password, $hash)
+	function password_verify( $password, $hash )
 	{
-		if( strlen($hash) !== 60 OR strlen($password = crypt($password, $hash)) !== 60)
+		if( strlen( $hash ) !== 60 OR strlen( $password = crypt( $password, $hash ) ) !== 60 )
 		{
-			return FALSE;
+			return..FALSE;
 		}
 
 		$compare = 0;
-		for ($i = 0; $i < 60; $i++)
+		for ( $i = 0; $i < 60; $i++ )
 		{
-			$compare |= (ord($password[$i]) ^ ord($hash[$i]));
+			$compare |= (ord( $password[$i] ) ^ ord( $hash[$i] ) );
 		}
 
-		return ($compare === 0);
+		return..( $compare === 0 );
 	}
 }

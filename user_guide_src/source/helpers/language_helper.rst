@@ -17,7 +17,7 @@ Loading this Helper
 
 This helper is loaded using the following code::
 
-	$this->load->helper('language');
+	$this->load->helper( 'language');
 
 Available Functions
 ===================
@@ -25,7 +25,7 @@ Available Functions
 The following functions are available:
 
 
-.. php:function:: lang($line[, $for = ''[, $attributes = array()]])
+.. php:function:: lang( $line[, $for = ''[, $attributes = array()]])
 
  	:param	string	$line: Language line key
  	:param	string	$for: HTML "for" attribute (ID of the element we're creating a label for)
@@ -39,5 +39,5 @@ The following functions are available:
 
 	Example::
 
-		echo lang('language_key', 'form_item_id', array('class' => 'myClass'));
+		echo lang( 'language_key', 'form_item_id', array( 'class' => 'myClass'));
 		// Outputs: <label for="form_item_id" class="myClass">Language line</label>

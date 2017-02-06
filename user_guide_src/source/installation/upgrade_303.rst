@@ -16,7 +16,7 @@ Replace all files and directories in your *system/* directory.
 Step 2: Make sure your 'base_url' config value is not empty
 ===========================================================
 
-When ``$config['base_url']`` is not set, CodeIgniter tries to automatically
+When ``$config[ 'base_url' ]`` is not set, CodeIgniter tries to automatically
 detect what your website's base URL is. This is done purely for convenience
 when you are starting development of a new application.
 
@@ -33,23 +33,23 @@ https:// prefixes to be dynamically used depending on the request,
 remember that *application/config/config.php* is still a PHP script, in
 which you can create this logic with a few lines of code. For example::
 
-	$allowed_domains = array('domain1.tld', 'domain2.tld');
+	$allowed_domains = array( 'domain1.tld', 'domain2.tld');
 	$default_domain  = 'domain1.tld';
 
-	if( in_array($_SERVER['HTTP_HOST'], $allowed_domains, TRUE))
+	if( in_array( $_SERVER[ 'HTTP_HOST' ], $allowed_domains, TRUE))
 	{
-		$domain = $_SERVER['HTTP_HOST'];
+		$domain = $_SERVER[ 'HTTP_HOST' ];
 	}
 	else
 	{
 		$domain = $default_domain;
 	}
 
-	if(  ! empty($_SERVER['HTTPS']))
+	if( ! empty( $_SERVER[ 'HTTPS' ]))
 	{
-		$config['base_url'] = 'https://'.$domain;
+		$config[ 'base_url' ] = 'https://' . $domain;
 	}
 	else
 	{
-		$config['base_url'] = 'http://'.$domain;
+		$config[ 'base_url' ] = 'http://' . $domain;
 	}

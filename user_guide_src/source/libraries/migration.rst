@@ -35,7 +35,7 @@ method taken. Two numbering styles are available:
   helps prevent numbering conflicts when working in a team environment, and is
   the preferred scheme in CodeIgniter 3.0 and later.
 
-The desired style may be selected using the ``$config['migration_type']``
+The desired style may be selected using the ``$config[ 'migration_type' ]``
 setting in your *application/config/migration.php* file.
 
 Regardless of which numbering style you choose to use, prefix your migration
@@ -56,7 +56,7 @@ as *20121031100537_add_blog.php*.
 
 	<?php
 
-	defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+	defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 	class Migration_Add_blog extends CI_Migration {
 
@@ -78,17 +78,17 @@ as *20121031100537_add_blog.php*.
 					'null' => TRUE,
 				),
 			));
-			$this->dbforge->add_key('blog_id', TRUE);
-			$this->dbforge->create_table('blog');
+			$this->dbforge->add_key( 'blog_id', TRUE);
+			$this->dbforge->create_table( 'blog');
 		}
 
 		public function down()
 		{
-			$this->dbforge->drop_table('blog');
+			$this->dbforge->drop_table( 'blog');
 		}
 	}
 
-Then in **application/config/migration.php** set ``$config['migration_version'] = 20121031100537;``.
+Then in **application/config/migration.php** set ``$config[ 'migration_version' ] = 20121031100537;``.
 
 *************
 Usage Example
@@ -104,11 +104,11 @@ to update the schema.::
 
 		public function index()
 		{
-			$this->load->library('migration');
+			$this->load->library( 'migration');
 
 			if( $this->migration->current() === FALSE)
 			{
-				show_error($this->migration->error_string());
+				show_error( $this->migration->error_string());
 			}
 		}
 
@@ -124,7 +124,7 @@ The following is a table of all the config options for migrations.
 Preference                 Default                Options                    Description
 ========================== ====================== ========================== =============================================
 **migration_enabled**      FALSE                  TRUE / FALSE               Enable or disable migrations.
-**migration_path**         APP_DIR_PATH.'migrations/'  None                       The path to your migrations folder.
+**migration_path**         APP_DIR_PATH . 'migrations/'  None                       The path to your migrations folder.
 **migration_version**      0                      None                       The current version your database should use.
 **migration_table**        migrations             None                       The table name for storing the schema
                                                                              version number.
@@ -146,7 +146,7 @@ Class Reference
 		:rtype:	mixed
 
 		Migrates up to the current version (whatever is set for
-		``$config['migration_version']`` in *application/config/migration.php*).
+		``$config[ 'migration_version' ]`` in *application/config/migration.php*).
 
 	.. php:method:: error_string()
 
@@ -168,17 +168,17 @@ Class Reference
 		:rtype:	mixed
 
 		This works much the same way as ``current()`` but instead of looking for 
-		the ``$config['migration_version']`` the Migration class will use the very 
+		the ``$config[ 'migration_version' ]`` the Migration class will use the very 
 		newest migration found in the filesystem.
 
-	.. php:method:: version($target_version)
+	.. php:method:: version( $target_version)
 
 		:param	mixed	$target_version: Migration version to process
 		:returns:	TRUE if no migrations are found, current version string on success, FALSE on failure
 		:rtype:	mixed
 
 		Version can be used to roll back changes or step forwards programmatically to 
-		specific versions. It works just like ``current()`` but ignores ``$config['migration_version']``.
+		specific versions. It works just like ``current()`` but ignores ``$config[ 'migration_version' ]``.
 		::
 
 			$this->migration->version(5);

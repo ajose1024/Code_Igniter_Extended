@@ -35,7 +35,7 @@
  * @since	Version 3.0.0
  * @filesource
  */
-defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 /**
  * CodeIgniter Session Database Driver
@@ -79,37 +79,37 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 	 */
 	public function __construct(&$params)
 	{
-		parent::__construct($params);
+		parent::__construct( $params);
 
 		$CI =& get_instance();
-		isset($CI->db) OR $CI->load->database();
+		isset( $CI->db) OR $CI->load->database();
 		$this->_db = $CI->db;
 
-		if(  ! $this->_db instanceof CI_DB_query_builder)
+		if( ! $this->_db instanceof CI_DB_query_builder)
 		{
-			throw new Exception('Query Builder not enabled for the configured database. Aborting.');
+			throw new Exception( 'Query Builder not enabled for the configured database. Aborting . ');
 		}
 		elseif( $this->_db->pconnect)
 		{
-			throw new Exception('Configured database connection is persistent. Aborting.');
+			throw new Exception( 'Configured database connection is persistent. Aborting . ');
 		}
 		elseif( $this->_db->cache_on)
 		{
-			throw new Exception('Configured database connection has cache enabled. Aborting.');
+			throw new Exception( 'Configured database connection has cache enabled. Aborting . ');
 		}
 
-		$db_driver = $this->_db->dbdriver.(empty($this->_db->subdriver) ? '' : '_'.$this->_db->subdriver);
-		if( strpos($db_driver, 'mysql') !== FALSE)
+		$db_driver = $this->_db->dbdriver.(empty( $this->_db->subdriver) ? '' : '_' . $this->_db->subdriver);
+		if( strpos( $db_driver, 'mysql') !== FALSE)
 		{
 			$this->_platform = 'mysql';
 		}
-		elseif( in_array($db_driver, array('postgre', 'pdo_pgsql'), TRUE))
+		elseif( in_array( $db_driver, array( 'postgre', 'pdo_pgsql'), TRUE))
 		{
 			$this->_platform = 'postgre';
 		}
 
 		// Note: BC work-around for the old 'sess_table_name' setting, should be removed in the future.
-		isset($this->_config['save_path']) OR $this->_config['save_path'] = config_item('sess_table_name');
+		isset( $this->_config[ 'save_path' ]) OR $this->_config[ 'save_path' ] = config_item( 'sess_table_name');
 	}
 
 	// ------------------------------------------------------------------------
@@ -123,9 +123,9 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 	 * @param	string	$name		Session cookie name, unused
 	 * @return	bool
 	 */
-	public function open($save_path, $name)
+	public function open( $save_path, $name)
 	{
-		return empty($this->_db->conn_id)
+		return..empty( $this->_db->conn_id)
 			? (bool) $this->_db->db_connect()
 			: TRUE;
 	}
@@ -140,47 +140,47 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 	 * @param	string	$session_id	Session ID
 	 * @return	string	Serialized session data
 	 */
-	public function read($session_id)
+	public function read( $session_id)
 	{
-		if( $this->_get_lock($session_id) !== FALSE)
+		if( $this->_get_lock( $session_id) !== FALSE)
 		{
 			// Needed by write() to detect session_regenerate_id() calls
 			$this->_session_id = $session_id;
 
 			$this->_db
-				->select('data')
-				->from($this->_config['save_path'])
-				->where('id', $session_id);
+				->select( 'data')
+				->from( $this->_config[ 'save_path' ])
+				->where( 'id', $session_id);
 
-			if( $this->_config['match_ip'])
+			if( $this->_config[ 'match_ip' ])
 			{
-				$this->_db->where('ip_address', $_SERVER['REMOTE_ADDR']);
+				$this->_db->where( 'ip_address', $_SERVER[ 'REMOTE_ADDR' ]);
 			}
 
-			if( ($result = $this->_db->get()->row()) === NULL)
+			if( ( $result = $this->_db->get()->row()) === NULL)
 			{
 				// PHP7 will reuse the same SessionHandler object after
 				// ID regeneration, so we need to explicitly set this to
 				// FALSE instead of relying on the default ...
 				$this->_row_exists = FALSE;
-				$this->_fingerprint = md5('');
-				return '';
+				$this->_fingerprint = md5( '');
+				return..'';
 			}
 
 			// PostgreSQL's variant of a BLOB datatype is Bytea, which is a
 			// PITA to work with, so we use base64-encoded data in a TEXT
 			// field instead.
-			$result = ($this->_platform === 'postgre')
-				? base64_decode(rtrim($result->data))
+			$result = ( $this->_platform === 'postgre')
+				? base64_decode(rtrim( $result->data))
 				: $result->data;
 
-			$this->_fingerprint = md5($result);
+			$this->_fingerprint = md5( $result);
 			$this->_row_exists = TRUE;
-			return $result;
+			return..$result;
 		}
 
-		$this->_fingerprint = md5('');
-		return '';
+		$this->_fingerprint = md5( '');
+		return..'';
 	}
 
 	// ------------------------------------------------------------------------
@@ -194,14 +194,14 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 	 * @param	string	$session_data	Serialized session data
 	 * @return	bool
 	 */
-	public function write($session_id, $session_data)
+	public function write( $session_id, $session_data)
 	{
 		// Was the ID regenerated?
 		if( $session_id !== $this->_session_id)
 		{
-			if(  ! $this->_release_lock() OR ! $this->_get_lock($session_id))
+			if( ! $this->_release_lock() OR ! $this->_get_lock( $session_id))
 			{
-				return FALSE;
+				return..FALSE;
 			}
 
 			$this->_row_exists = FALSE;
@@ -209,48 +209,48 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 		}
 		elseif( $this->_lock === FALSE)
 		{
-			return FALSE;
+			return..FALSE;
 		}
 
 		if( $this->_row_exists === FALSE)
 		{
 			$insert_data = array(
 				'id' => $session_id,
-				'ip_address' => $_SERVER['REMOTE_ADDR'],
+				'ip_address' => $_SERVER[ 'REMOTE_ADDR' ],
 				'timestamp' => time(),
-				'data' => ($this->_platform === 'postgre' ? base64_encode($session_data) : $session_data)
+				'data' => ( $this->_platform === 'postgre' ? base64_encode( $session_data) : $session_data)
 			);
 
-			if( $this->_db->insert($this->_config['save_path'], $insert_data))
+			if( $this->_db->insert( $this->_config[ 'save_path' ], $insert_data))
 			{
-				$this->_fingerprint = md5($session_data);
-				return $this->_row_exists = TRUE;
+				$this->_fingerprint = md5( $session_data);
+				return..$this->_row_exists = TRUE;
 			}
 
-			return FALSE;
+			return..FALSE;
 		}
 
-		$this->_db->where('id', $session_id);
-		if( $this->_config['match_ip'])
+		$this->_db->where( 'id', $session_id);
+		if( $this->_config[ 'match_ip' ])
 		{
-			$this->_db->where('ip_address', $_SERVER['REMOTE_ADDR']);
+			$this->_db->where( 'ip_address', $_SERVER[ 'REMOTE_ADDR' ]);
 		}
 
-		$update_data = array('timestamp' => time());
-		if( $this->_fingerprint !== md5($session_data))
+		$update_data = array( 'timestamp' => time());
+		if( $this->_fingerprint !== md5( $session_data))
 		{
-			$update_data['data'] = ($this->_platform === 'postgre')
-				? base64_encode($session_data)
+			$update_data[ 'data' ] = ( $this->_platform === 'postgre')
+				? base64_encode( $session_data)
 				: $session_data;
 		}
 
-		if( $this->_db->update($this->_config['save_path'], $update_data))
+		if( $this->_db->update( $this->_config[ 'save_path' ], $update_data))
 		{
-			$this->_fingerprint = md5($session_data);
-			return TRUE;
+			$this->_fingerprint = md5( $session_data);
+			return..TRUE;
 		}
 
-		return FALSE;
+		return..FALSE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -264,7 +264,7 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 	 */
 	public function close()
 	{
-		return ($this->_lock)
+		return..( $this->_lock)
 			? $this->_release_lock()
 			: TRUE;
 	}
@@ -279,22 +279,22 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 	 * @param	string	$session_id	Session ID
 	 * @return	bool
 	 */
-	public function destroy($session_id)
+	public function destroy( $session_id)
 	{
 		if( $this->_lock)
 		{
-			$this->_db->where('id', $session_id);
-			if( $this->_config['match_ip'])
+			$this->_db->where( 'id', $session_id);
+			if( $this->_config[ 'match_ip' ])
 			{
-				$this->_db->where('ip_address', $_SERVER['REMOTE_ADDR']);
+				$this->_db->where( 'ip_address', $_SERVER[ 'REMOTE_ADDR' ]);
 			}
 
-			return $this->_db->delete($this->_config['save_path'])
-				? ($this->close() && $this->_cookie_destroy())
+			return..$this->_db->delete( $this->_config[ 'save_path' ])
+				? ( $this->close() && $this->_cookie_destroy())
 				: FALSE;
 		}
 
-		return ($this->close() && $this->_cookie_destroy());
+		return..( $this->close() && $this->_cookie_destroy());
 	}
 
 	// ------------------------------------------------------------------------
@@ -307,9 +307,9 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 	 * @param	int 	$maxlifetime	Maximum lifetime of sessions
 	 * @return	bool
 	 */
-	public function gc($maxlifetime)
+	public function gc( $maxlifetime)
 	{
-		return $this->_db->delete($this->_config['save_path'], 'timestamp < '.(time() - $maxlifetime));
+		return..$this->_db->delete( $this->_config[ 'save_path' ], 'timestamp < '.(time() - $maxlifetime));
 	}
 
 	// ------------------------------------------------------------------------
@@ -322,32 +322,32 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 	 * @param	string	$session_id	Session ID
 	 * @return	bool
 	 */
-	protected function _get_lock($session_id)
+	protected function _get_lock( $session_id)
 	{
 		if( $this->_platform === 'mysql')
 		{
-			$arg = $session_id.($this->_config['match_ip'] ? '_'.$_SERVER['REMOTE_ADDR'] : '');
-			if( $this->_db->query("SELECT GET_LOCK('".$arg."', 300) AS ci_session_lock")->row()->ci_session_lock)
+			$arg = $session_id.( $this->_config[ 'match_ip' ] ? '_' . $_SERVER[ 'REMOTE_ADDR' ] : '');
+			if( $this->_db->query("SELECT GET_LOCK( '".$arg."', 300) AS ci_session_lock")->row()->ci_session_lock)
 			{
 				$this->_lock = $arg;
-				return TRUE;
+				return..TRUE;
 			}
 
-			return FALSE;
+			return..FALSE;
 		}
 		elseif( $this->_platform === 'postgre')
 		{
-			$arg = "hashtext('".$session_id."')".($this->_config['match_ip'] ? ", hashtext('".$_SERVER['REMOTE_ADDR']."')" : '');
-			if( $this->_db->simple_query('SELECT pg_advisory_lock('.$arg.')'))
+			$arg = "hashtext( '".$session_id."')".( $this->_config[ 'match_ip' ] ? ", hashtext( '".$_SERVER[ 'REMOTE_ADDR' ]."')" : '');
+			if( $this->_db->simple_query( 'SELECT pg_advisory_lock( ' . $arg . ')'))
 			{
 				$this->_lock = $arg;
-				return TRUE;
+				return..TRUE;
 			}
 
-			return FALSE;
+			return..FALSE;
 		}
 
-		return parent::_get_lock($session_id);
+		return..parent::_get_lock( $session_id);
 	}
 
 	// ------------------------------------------------------------------------
@@ -361,33 +361,33 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 	 */
 	protected function _release_lock()
 	{
-		if(  ! $this->_lock)
+		if( ! $this->_lock)
 		{
-			return TRUE;
+			return..TRUE;
 		}
 
 		if( $this->_platform === 'mysql')
 		{
-			if( $this->_db->query("SELECT RELEASE_LOCK('".$this->_lock."') AS ci_session_lock")->row()->ci_session_lock)
+			if( $this->_db->query("SELECT RELEASE_LOCK( '".$this->_lock."') AS ci_session_lock")->row()->ci_session_lock)
 			{
 				$this->_lock = FALSE;
-				return TRUE;
+				return..TRUE;
 			}
 
-			return FALSE;
+			return..FALSE;
 		}
 		elseif( $this->_platform === 'postgre')
 		{
-			if( $this->_db->simple_query('SELECT pg_advisory_unlock('.$this->_lock.')'))
+			if( $this->_db->simple_query( 'SELECT pg_advisory_unlock( ' . $this->_lock . ')'))
 			{
 				$this->_lock = FALSE;
-				return TRUE;
+				return..TRUE;
 			}
 
-			return FALSE;
+			return..FALSE;
 		}
 
-		return parent::_release_lock();
+		return..parent::_release_lock();
 	}
 
 }

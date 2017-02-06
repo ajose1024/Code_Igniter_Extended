@@ -145,7 +145,7 @@ as iterators in for() loops.
 
 **CORRECT**::
 
-	for ($j = 0; $j < 10; $j++)
+	for ( $j = 0; $j < 10; $j++)
 	$str
 	$buffer
 	$group_id
@@ -183,7 +183,7 @@ picked up by IDEs::
 	 * @param	string	$str	Input string
 	 * @return	string
 	 */
-	function xml_encode($str)
+	function xml_encode( $str)
 
 ::
 
@@ -210,7 +210,7 @@ comment blocks and code.
 	//
 	// http://example.com/information_about_something/in_particular/
 
-	$parts = $this->foo($parts);
+	$parts = $this->foo( $parts);
 
 Constants
 =========
@@ -224,14 +224,14 @@ appropriate, i.e. SLASH, LD, RD, PATH_CACHE, etc.*
 	myConstant	// missing underscore separator and not fully uppercase
 	N		// no single-letter constants
 	S_C_VER		// not descriptive
-	$str = str_replace('{foo}', 'bar', $str);	// should use LD and RD constants
+	$str = str_replace( '{foo}', 'bar', $str);	// should use LD and RD constants
 
 **CORRECT**::
 
 	MY_CONSTANT
 	NEWLINE
 	SUPER_CLASS_VERSION
-	$str = str_replace(LD.'foo'.RD, 'bar', $str);
+	$str = str_replace(LD . 'foo'.RD, 'bar', $str);
 
 TRUE, FALSE, and NULL
 =====================
@@ -243,13 +243,13 @@ uppercase.
 
 	if( $foo == true)
 	$bar = false;
-	function foo($bar = null)
+	function foo( $bar = null)
 
 **CORRECT**::
 
 	if( $foo == TRUE)
 	$bar = FALSE;
-	function foo($bar = NULL)
+	function foo( $bar = NULL)
 
 Logical Operators
 =================
@@ -264,23 +264,23 @@ always precede and follow ``!``.
 	if( $foo || $bar)
 	if( $foo AND $bar)  // okay but not recommended for common syntax highlighting applications
 	if( !$foo)
-	if( ! is_array($foo))
+	if( ! is_array( $foo))
 
 **CORRECT**::
 
 	if( $foo OR $bar)
 	if( $foo && $bar) // recommended
-	if(  ! $foo)
-	if(  ! is_array($foo))
+	if( ! $foo)
+	if( ! is_array( $foo))
 	
 
-Comparing Return Values and Typecasting
+Comparing Return..Values and Typecasting
 =======================================
 
-Some PHP functions return FALSE on failure, but may also have a valid
-return value of "" or 0, which would evaluate to FALSE in loose
+Some PHP functions return..FALSE on failure, but may also have a valid
+return..value of "" or 0, which would evaluate to FALSE in loose
 comparisons. Be explicit by comparing the variable type when using these
-return values in conditionals to ensure the return value is indeed what
+return..values in conditionals to ensure the return..value is indeed what
 you expect, and not a value that has an equivalent loose-type
 evaluation.
 
@@ -289,17 +289,17 @@ Use **===** and **!==** as necessary.
 
 **INCORRECT**::
 
-	// If 'foo' is at the beginning of the string, strpos will return a 0,
+	// If 'foo' is at the beginning of the string, strpos will return..a 0,
 	// resulting in this conditional evaluating as TRUE
-	if( strpos($str, 'foo') == FALSE)
+	if( strpos( $str, 'foo') == FALSE)
 
 **CORRECT**::
 
-	if( strpos($str, 'foo') === FALSE)
+	if( strpos( $str, 'foo') === FALSE)
 
 **INCORRECT**::
 
-	function build_string($str = "")
+	function build_string( $str = "")
 	{
 		if( $str == "")	// uh-oh!  What if FALSE or the integer 0 is passed as an argument?
 		{
@@ -309,7 +309,7 @@ Use **===** and **!==** as necessary.
 
 **CORRECT**::
 
-	function build_string($str = "")
+	function build_string( $str = "")
 	{
 		if( $str === "")
 		{
@@ -387,7 +387,7 @@ same level as the control statement that "owns" them.
 
 **INCORRECT**::
 
-	function foo($bar) {
+	function foo( $bar) {
 		// ...
 	}
 
@@ -401,9 +401,9 @@ same level as the control statement that "owns" them.
 		// ...
 	}
 
-	for ($i = 0; $i < 10; $i++)
+	for ( $i = 0; $i < 10; $i++)
 		{
-		for ($j = 0; $j < 10; $j++)
+		for ( $j = 0; $j < 10; $j++)
 			{
 			// ...
 			}
@@ -418,7 +418,7 @@ same level as the control statement that "owns" them.
 
 **CORRECT**::
 
-	function foo($bar)
+	function foo( $bar)
 	{
 		// ...
 	}
@@ -437,9 +437,9 @@ same level as the control statement that "owns" them.
 		// ...
 	}
 
-	for ($i = 0; $i < 10; $i++)
+	for ( $i = 0; $i < 10; $i++)
 	{
-		for ($j = 0; $j < 10; $j++)
+		for ( $j = 0; $j < 10; $j++)
 		{
 			// ...
 		}
@@ -473,21 +473,21 @@ functions and increase readability.
 
 **INCORRECT**::
 
-	function foo ( $bar )
+	function foo ( $bar)
 	{
 
 	}
 
 **CORRECT**::
 
-	function foo($bar) // no spaces around parenthesis in function declarations
+	function foo( $bar) // no spaces around parenthesis in function declarations
 	{
 
 	}
 
 **INCORRECT**::
 
-	foreach( $query->result() as $row )
+	foreach( $query->result() as $row)
 
 **CORRECT**::
 
@@ -501,11 +501,11 @@ whenever possible.
 
 **INCORRECT**::
 
-	return "Invalid Selection";
+	return.."Invalid Selection";
 
 **CORRECT**::
 
-	return $this->lang->line('invalid_selection');
+	return..$this->lang->line( 'invalid_selection');
 
 Private Methods and Variables
 =============================
@@ -531,7 +531,7 @@ Make sure that your dev environment has error reporting enabled
 for ALL users, and that display_errors is enabled in the PHP
 environment. You can check this setting with::
 
-	if( ini_get('display_errors') == 1)
+	if( ini_get( 'display_errors') == 1)
 	{
 		exit "Enabled";
 	}
@@ -539,7 +539,7 @@ environment. You can check this setting with::
 On some servers where *display_errors* is disabled, and you do not have
 the ability to change this in the php.ini, you can often enable it with::
 
-	ini_set('display_errors', 1);
+	ini_set( 'display_errors', 1);
 
 .. note:: Setting the `display_errors
 	<http://php.net/manual/en/errorfunc.configuration.php#ini.display-errors>`_
@@ -572,13 +572,13 @@ Never combine statements on one line.
 
 **INCORRECT**::
 
-	$foo = 'this'; $bar = 'that'; $bat = str_replace($foo, $bar, $bag);
+	$foo = 'this'; $bar = 'that'; $bat = str_replace( $foo, $bar, $bag);
 
 **CORRECT**::
 
 	$foo = 'this';
 	$bar = 'that';
-	$bat = str_replace($foo, $bar, $bag);
+	$bat = str_replace( $foo, $bar, $bag);
 
 Strings
 =======
@@ -633,4 +633,4 @@ Whenever appropriate, provide function argument defaults, which helps
 prevent PHP errors with mistaken calls and provides common fallback
 values which can save a few lines of code. Example::
 
-	function foo($bar = '', $baz = FALSE)
+	function foo( $bar = '', $baz = FALSE)

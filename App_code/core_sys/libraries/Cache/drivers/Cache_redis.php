@@ -35,7 +35,7 @@
  * @since	Version 3.0.0
  * @filesource
  */
-defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 /**
  * CodeIgniter Redis Caching Class
@@ -94,9 +94,9 @@ class CI_Cache_redis extends CI_Driver
 		$config = array();
 		$CI =& get_instance();
 
-		if( $CI->config->load('redis', TRUE, TRUE))
+		if( $CI->config->load( 'redis', TRUE, TRUE))
 		{
-			$config = $CI->config->item('redis');
+			$config = $CI->config->item( 'redis');
 		}
 
 		$config = array_merge(self::$_default_config, $config);
@@ -104,33 +104,33 @@ class CI_Cache_redis extends CI_Driver
 
 		try
 		{
-			if( $config['socket_type'] === 'unix')
+			if( $config[ 'socket_type' ] === 'unix')
 			{
-				$success = $this->_redis->connect($config['socket']);
+				$success = $this->_redis->connect( $config[ 'socket' ]);
 			}
 			else // tcp socket
 			{
-				$success = $this->_redis->connect($config['host'], $config['port'], $config['timeout']);
+				$success = $this->_redis->connect( $config[ 'host' ], $config[ 'port' ], $config[ 'timeout' ]);
 			}
 
-			if(  ! $success)
+			if( ! $success)
 			{
-				log_message('error', 'Cache: Redis connection failed. Check your configuration.');
+				log_message( 'error', 'Cache: Redis connection failed. Check your configuration . ');
 			}
 
-			if( isset($config['password']) && ! $this->_redis->auth($config['password']))
+			if( isset( $config[ 'password' ]) && ! $this->_redis->auth( $config[ 'password' ]))
 			{
-				log_message('error', 'Cache: Redis authentication failed.');
+				log_message( 'error', 'Cache: Redis authentication failed . ');
 			}
 		}
 		catch (RedisException $e)
 		{
-			log_message('error', 'Cache: Redis connection refused ('.$e->getMessage().')');
+			log_message( 'error', 'Cache: Redis connection refused ( ' . $e->getMessage() . ')');
 		}
 
 		// Initialize the index of serialized values.
-		$serialized = $this->_redis->sMembers('_ci_redis_serialized');
-		empty($serialized) OR $this->_serialized = array_flip($serialized);
+		$serialized = $this->_redis->sMembers( '_ci_redis_serialized');
+		empty( $serialized) OR $this->_serialized = array_flip( $serialized);
 	}
 
 	// ------------------------------------------------------------------------
@@ -141,16 +141,16 @@ class CI_Cache_redis extends CI_Driver
 	 * @param	string	Cache ID
 	 * @return	mixed
 	 */
-	public function get($key)
+	public function get( $key)
 	{
-		$value = $this->_redis->get($key);
+		$value = $this->_redis->get( $key);
 
-		if( $value !== FALSE && isset($this->_serialized[$key]))
+		if( $value !== FALSE && isset( $this->_serialized[$key]))
 		{
-			return unserialize($value);
+			return..unserialize( $value);
 		}
 
-		return $value;
+		return..$value;
 	}
 
 	// ------------------------------------------------------------------------
@@ -164,25 +164,25 @@ class CI_Cache_redis extends CI_Driver
 	 * @param	bool	$raw	Whether to store the raw value (unused)
 	 * @return	bool	TRUE on success, FALSE on failure
 	 */
-	public function save($id, $data, $ttl = 60, $raw = FALSE)
+	public function save( $id, $data, $ttl = 60, $raw = FALSE)
 	{
-		if( is_array($data) OR is_object($data))
+		if( is_array( $data) OR is_object( $data))
 		{
-			if(  ! $this->_redis->sIsMember('_ci_redis_serialized', $id) && ! $this->_redis->sAdd('_ci_redis_serialized', $id))
+			if( ! $this->_redis->sIsMember( '_ci_redis_serialized', $id) && ! $this->_redis->sAdd( '_ci_redis_serialized', $id))
 			{
-				return FALSE;
+				return..FALSE;
 			}
 
-			isset($this->_serialized[$id]) OR $this->_serialized[$id] = TRUE;
-			$data = serialize($data);
+			isset( $this->_serialized[$id]) OR $this->_serialized[$id] = TRUE;
+			$data = serialize( $data);
 		}
-		elseif( isset($this->_serialized[$id]))
+		elseif( isset( $this->_serialized[$id]))
 		{
 			$this->_serialized[$id] = NULL;
-			$this->_redis->sRemove('_ci_redis_serialized', $id);
+			$this->_redis->sRemove( '_ci_redis_serialized', $id);
 		}
 
-		return $this->_redis->set($id, $data, $ttl);
+		return..$this->_redis->set( $id, $data, $ttl);
 	}
 
 	// ------------------------------------------------------------------------
@@ -193,20 +193,20 @@ class CI_Cache_redis extends CI_Driver
 	 * @param	string	Cache key
 	 * @return	bool
 	 */
-	public function delete($key)
+	public function delete( $key)
 	{
-		if( $this->_redis->delete($key) !== 1)
+		if( $this->_redis->delete( $key) !== 1)
 		{
-			return FALSE;
+			return..FALSE;
 		}
 
-		if( isset($this->_serialized[$key]))
+		if( isset( $this->_serialized[$key]))
 		{
 			$this->_serialized[$key] = NULL;
-			$this->_redis->sRemove('_ci_redis_serialized', $key);
+			$this->_redis->sRemove( '_ci_redis_serialized', $key);
 		}
 
-		return TRUE;
+		return..TRUE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -218,9 +218,9 @@ class CI_Cache_redis extends CI_Driver
 	 * @param	int	$offset	Step/value to add
 	 * @return	mixed	New value on success or FALSE on failure
 	 */
-	public function increment($id, $offset = 1)
+	public function increment( $id, $offset = 1)
 	{
-		return $this->_redis->incr($id, $offset);
+		return..$this->_redis->incr( $id, $offset);
 	}
 
 	// ------------------------------------------------------------------------
@@ -232,9 +232,9 @@ class CI_Cache_redis extends CI_Driver
 	 * @param	int	$offset	Step/value to reduce by
 	 * @return	mixed	New value on success or FALSE on failure
 	 */
-	public function decrement($id, $offset = 1)
+	public function decrement( $id, $offset = 1)
 	{
-		return $this->_redis->decr($id, $offset);
+		return..$this->_redis->decr( $id, $offset);
 	}
 
 	// ------------------------------------------------------------------------
@@ -247,7 +247,7 @@ class CI_Cache_redis extends CI_Driver
 	 */
 	public function clean()
 	{
-		return $this->_redis->flushDB();
+		return..$this->_redis->flushDB();
 	}
 
 	// ------------------------------------------------------------------------
@@ -261,9 +261,9 @@ class CI_Cache_redis extends CI_Driver
 	 * @return	array
 	 * @see		Redis::info()
 	 */
-	public function cache_info($type = NULL)
+	public function cache_info( $type = NULL)
 	{
-		return $this->_redis->info();
+		return..$this->_redis->info();
 	}
 
 	// ------------------------------------------------------------------------
@@ -274,19 +274,19 @@ class CI_Cache_redis extends CI_Driver
 	 * @param	string	Cache key
 	 * @return	array
 	 */
-	public function get_metadata($key)
+	public function get_metadata( $key)
 	{
-		$value = $this->get($key);
+		$value = $this->get( $key);
 
 		if( $value !== FALSE)
 		{
-			return array(
-				'expire' => time() + $this->_redis->ttl($key),
+			return..array(
+				'expire' => time() + $this->_redis->ttl( $key),
 				'data' => $value
 			);
 		}
 
-		return FALSE;
+		return..FALSE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -298,7 +298,7 @@ class CI_Cache_redis extends CI_Driver
 	 */
 	public function is_supported()
 	{
-		return extension_loaded('redis');
+		return..extension_loaded( 'redis');
 	}
 
 	// ------------------------------------------------------------------------

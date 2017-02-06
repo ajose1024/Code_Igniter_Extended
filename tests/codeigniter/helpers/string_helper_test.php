@@ -4,7 +4,7 @@ class String_helper_test extends CI_TestCase {
 
 	public function set_up()
 	{
-		$this->helper('string');
+		$this->helper( 'string');
 	}
 
 	public function test_strip_slashes()
@@ -19,7 +19,7 @@ class String_helper_test extends CI_TestCase {
 			"No, my name is O\'connor."
 		);
 
-		$this->assertEquals($expected, strip_slashes($str));
+		$this->assertEquals( $expected, strip_slashes( $str));
 	}
 
 	public function test_trim_slashes()
@@ -31,7 +31,7 @@ class String_helper_test extends CI_TestCase {
 
 		foreach( $strs as $str => $expect)
 		{
-			$this->assertEquals($expect, trim_slashes($str));
+			$this->assertEquals( $expect, trim_slashes( $str));
 		}
 	}
 
@@ -46,7 +46,7 @@ class String_helper_test extends CI_TestCase {
 
 		foreach( $strs as $str => $expect)
 		{
-			$this->assertEquals($expect, strip_quotes($str));
+			$this->assertEquals( $expect, strip_quotes( $str));
 		}
 	}
 
@@ -61,7 +61,7 @@ class String_helper_test extends CI_TestCase {
 
 		foreach( $strs as $str => $expect)
 		{
-			$this->assertEquals($expect, quotes_to_entities($str));
+			$this->assertEquals( $expect, quotes_to_entities( $str));
 		}
 	}
 
@@ -77,7 +77,7 @@ class String_helper_test extends CI_TestCase {
 
 		foreach( $strs as $str => $expect)
 		{
-			$this->assertEquals($expect, reduce_double_slashes($str));
+			$this->assertEquals( $expect, reduce_double_slashes( $str));
 		}
 	}
 
@@ -92,7 +92,7 @@ class String_helper_test extends CI_TestCase {
 
 		foreach( $strs as $str => $expect)
 		{
-			$this->assertEquals($expect, reduce_multiples($str));
+			$this->assertEquals( $expect, reduce_multiples( $str));
 		}
 
 		$strs = array(
@@ -102,7 +102,7 @@ class String_helper_test extends CI_TestCase {
 
 		foreach( $strs as $str => $expect)
 		{
-			$this->assertEquals($expect, reduce_multiples($str, ',', TRUE));
+			$this->assertEquals( $expect, reduce_multiples( $str, ',', TRUE));
 		}
 	}
 
@@ -119,7 +119,7 @@ class String_helper_test extends CI_TestCase {
 
 		foreach( $strs as $str => $expect)
 		{
-			$this->assertEquals($expect, repeater($str, 10));
+			$this->assertEquals( $expect, repeater( $str, 10));
 		}
 	}
 
@@ -127,22 +127,22 @@ class String_helper_test extends CI_TestCase {
 
 	public function test_random_string()
 	{
-		$this->assertEquals(16, strlen(random_string('alnum', 16)));
-		$this->assertEquals(32, strlen(random_string('unique', 16)));
-		$this->assertInternalType('string', random_string('numeric', 16));
+		$this->assertEquals(16, strlen(random_string( 'alnum', 16)));
+		$this->assertEquals(32, strlen(random_string( 'unique', 16)));
+		$this->assertInternalType( 'string', random_string( 'numeric', 16));
 	}
 
 	// --------------------------------------------------------------------
 
 	public function test_increment_string()
 	{
-		$this->assertEquals('my-test_1', increment_string('my-test'));
-		$this->assertEquals('my-test-1', increment_string('my-test', '-'));
-		$this->assertEquals('file_5', increment_string('file_4'));
-		$this->assertEquals('file-5', increment_string('file-4', '-'));
-		$this->assertEquals('file-5', increment_string('file-4', '-'));
-		$this->assertEquals('file-1', increment_string('file', '-', '1'));
-		$this->assertEquals(124, increment_string('123', ''));
+		$this->assertEquals( 'my-test_1', increment_string( 'my-test'));
+		$this->assertEquals( 'my-test-1', increment_string( 'my-test', '-'));
+		$this->assertEquals( 'file_5', increment_string( 'file_4'));
+		$this->assertEquals( 'file-5', increment_string( 'file-4', '-'));
+		$this->assertEquals( 'file-5', increment_string( 'file-4', '-'));
+		$this->assertEquals( 'file-1', increment_string( 'file', '-', '1'));
+		$this->assertEquals(124, increment_string( '123', ''));
 	}
 
 }

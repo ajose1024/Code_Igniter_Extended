@@ -36,9 +36,9 @@ $this->db->trans_start() and $this->db->trans_complete() functions as
 follows::
 
 	$this->db->trans_start();
-	$this->db->query('AN SQL QUERY...');
-	$this->db->query('ANOTHER QUERY...');
-	$this->db->query('AND YET ANOTHER QUERY...');
+	$this->db->query( 'AN SQL QUERY.. . ');
+	$this->db->query( 'ANOTHER QUERY.. . ');
+	$this->db->query( 'AND YET ANOTHER QUERY.. . ');
 	$this->db->trans_complete();
 
 You can run as many queries as you want between the start/complete
@@ -66,8 +66,8 @@ you'll see a standard error message if the commit was unsuccessful. If
 debugging is turned off, you can manage your own errors like this::
 
 	$this->db->trans_start();
-	$this->db->query('AN SQL QUERY...');
-	$this->db->query('ANOTHER QUERY...');
+	$this->db->query( 'AN SQL QUERY.. . ');
+	$this->db->query( 'ANOTHER QUERY.. . ');
 	$this->db->trans_complete();
 	
 	if( $this->db->trans_status() === FALSE)
@@ -85,7 +85,7 @@ can do so using $this->db->trans_off()::
 	$this->db->trans_off();
 	
 	$this->db->trans_start();
-	$this->db->query('AN SQL QUERY...');
+	$this->db->query( 'AN SQL QUERY.. . ');
 	$this->db->trans_complete();
 
 When transactions are disabled, your queries will be auto-commited, just
@@ -100,7 +100,7 @@ a valid result. To use test mode simply set the first parameter in the
 $this->db->trans_start() function to TRUE::
 
 	$this->db->trans_start(TRUE); // Query will be rolled back
-	$this->db->query('AN SQL QUERY...');
+	$this->db->query( 'AN SQL QUERY.. . ');
 	$this->db->trans_complete();
 
 Running Transactions Manually
@@ -110,9 +110,9 @@ If you would like to run transactions manually you can do so as follows::
 
 	$this->db->trans_begin();
 	
-	$this->db->query('AN SQL QUERY...');
-	$this->db->query('ANOTHER QUERY...');
-	$this->db->query('AND YET ANOTHER QUERY...');
+	$this->db->query( 'AN SQL QUERY.. . ');
+	$this->db->query( 'ANOTHER QUERY.. . ');
+	$this->db->query( 'AND YET ANOTHER QUERY.. . ');
 	
 	if( $this->db->trans_status() === FALSE)
 	{

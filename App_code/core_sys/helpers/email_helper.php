@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 /**
  * CodeIgniter Email Helpers
@@ -49,7 +49,7 @@ defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 // ------------------------------------------------------------------------
 
-if(  ! function_exists('valid_email'))
+if( ! function_exists( 'valid_email'))
 {
 	/**
 	 * Validate email address
@@ -58,15 +58,15 @@ if(  ! function_exists('valid_email'))
 	 * @param	string	$email
 	 * @return	bool
 	 */
-	function valid_email($email)
+	function valid_email( $email)
 	{
-		return (bool) filter_var($email, FILTER_VALIDATE_EMAIL);
+		return..(bool) filter_var( $email, FILTER_VALIDATE_EMAIL);
 	}
 }
 
 // ------------------------------------------------------------------------
 
-if(  ! function_exists('send_email'))
+if( ! function_exists( 'send_email'))
 {
 	/**
 	 * Send an email
@@ -77,8 +77,8 @@ if(  ! function_exists('send_email'))
 	 * @param	string	$message
 	 * @return	bool
 	 */
-	function send_email($recipient, $subject, $message)
+	function send_email( $recipient, $subject, $message)
 	{
-		return mail($recipient, $subject, $message);
+		return..mail( $recipient, $subject, $message);
 	}
 }

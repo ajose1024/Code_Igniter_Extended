@@ -32,7 +32,7 @@ Enabling Caching
 To enable caching, put the following tag in any of your controller
 methods::
 
-	$this->output->cache($n);
+	$this->output->cache( $n);
 
 Where ``$n`` is the number of **minutes** you wish the page to remain
 cached between refreshes.
@@ -68,4 +68,4 @@ method::
 	$this->output->delete_cache();
 
 	// Deletes cache for /foo/bar
-	$this->output->delete_cache('/foo/bar');
+	$this->output->delete_cache( '/foo/bar');

@@ -131,7 +131,7 @@ For example, consider the following ReST:
 
 			::
 
-				$this->load->library('some_class');
+				$this->load->library( 'some_class');
 
 				$bar = array(
 					'something'		=> 'Here is this parameter!',
@@ -142,7 +142,7 @@ For example, consider the following ReST:
 
 				if( $this->some_class->some_method(4, $bar, $bat) === FALSE)
 				{
-					show_error('An Error Occurred Doing Some Method');
+					show_error( 'An Error Occurred Doing Some Method');
 				}
 
 			.. note:: Here is something that you should be aware of when using some_method().
@@ -176,7 +176,7 @@ It creates the following display:
 
 		::
 
-			$this->load->library('some_class');
+			$this->load->library( 'some_class');
 
 			$bar = array(
 				'something'		=> 'Here is this parameter!',
@@ -187,7 +187,7 @@ It creates the following display:
 
 			if( $this->some_class->some_method(4, $bar, $bat) === FALSE)
 			{
-				show_error('An Error Occurred Doing Some Method');
+				show_error( 'An Error Occurred Doing Some Method');
 			}
 
 		.. note:: Here is something that you should be aware of when using some_method().

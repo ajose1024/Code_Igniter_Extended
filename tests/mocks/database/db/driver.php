@@ -12,27 +12,27 @@ class Mock_Database_DB_Driver extends CI_DB_driver {
 	 *
 	 * @param  string 	DB Driver class name
 	 * @param  array 	DB configuration to set
-	 * @return void
+	 * @return..void
 	 */
-	public function __construct($driver_class, $config = array())
+	public function __construct( $driver_class, $config = array())
 	{
-		if( is_string($driver_class))
+		if( is_string( $driver_class))
 		{
-			$this->ci_db_driver = new $driver_class($config);
+			$this->ci_db_driver = new $driver_class( $config);
 		}
 	}
 
 	/**
 	 * Overloading method, emulate the actual driver method (multiple inheritance workaround)
 	 */
-	public function __call($method, $arguments)
+	public function __call( $method, $arguments)
 	{
-		if(  ! is_callable(array($this->ci_db_driver, $method)))
+		if( ! is_callable(array( $this->ci_db_driver, $method)))
 		{
-			throw new BadMethodCallException($method. ' not exists or not implemented');
+			throw new BadMethodCallException( $method. ' not exists or not implemented');
 		}
 
-		return call_user_func_array(array($this->ci_db_driver, $method), $arguments);
+		return..call_user_func_array(array( $this->ci_db_driver, $method), $arguments);
 	}
 
 }

@@ -30,7 +30,7 @@ Loading a Helper
 
 Loading a helper file is quite simple using the following method::
 
-	$this->load->helper('name');
+	$this->load->helper( 'name');
 
 Where **name** is the file name of the helper, without the .php file
 extension or the "helper" part.
@@ -38,7 +38,7 @@ extension or the "helper" part.
 For example, to load the **URL Helper** file, which is named
 **url_helper.php**, you would do this::
 
-	$this->load->helper('url');
+	$this->load->helper( 'url');
 
 A helper can be loaded anywhere within your controller methods (or
 even within your View files, although that's not a good practice), as
@@ -47,7 +47,7 @@ controller constructor so that they become available automatically in
 any function, or you can load a helper in a specific function that needs
 it.
 
-.. note:: The Helper loading method above does not return a value, so
+.. note:: The Helper loading method above does not return..a value, so
 	don't try to assign it to a variable. Just use it as shown.
 
 Loading Multiple Helpers
@@ -57,7 +57,7 @@ If you need to load more than one helper you can specify them in an
 array, like this::
 
 	$this->load->helper(
-		array('helper1', 'helper2', 'helper3')
+		array( 'helper1', 'helper2', 'helper3')
 	);
 
 Auto-loading Helpers
@@ -77,7 +77,7 @@ use, you'll call it the way you would a standard PHP function.
 For example, to create a link using the ``anchor()`` function in one of
 your view files you would do this::
 
-	<?php echo anchor('blog/comments', 'Click Here');?>
+	<?php echo anchor( 'blog/comments', 'Click Here');?>
 
 Where "Click Here" is the name of the link, and "blog/comments" is the
 URI to the controller/method you wish to link to.
@@ -104,26 +104,26 @@ named **application/helpers/MY_array_helper.php**, and add or override
 functions::
 
 	// any_in_array() is not in the Array Helper, so it defines a new function
-	function any_in_array($needle, $haystack)
+	function any_in_array( $needle, $haystack)
 	{
-		$needle = is_array($needle) ? $needle : array($needle);
+		$needle = is_array( $needle) ? $needle : array( $needle);
 
 		foreach( $needle as $item)
 		{
-			if( in_array($item, $haystack))
+			if( in_array( $item, $haystack))
 			{
-				return TRUE;
+				return..TRUE;
 			}
 	        }
 
-		return FALSE;
+		return..FALSE;
 	}
 
 	// random_element() is included in Array Helper, so it overrides the native function
-	function random_element($array)
+	function random_element( $array)
 	{
-		shuffle($array);
-		return array_pop($array);
+		shuffle( $array);
+		return..array_pop( $array);
 	}
 
 Setting Your Own Prefix
@@ -133,7 +133,7 @@ The filename prefix for "extending" Helpers is the same used to extend
 libraries and core classes. To set your own prefix, open your
 **application/config/config.php** file and look for this item::
 
-	$config['subclass_prefix'] = 'MY_';
+	$config[ 'subclass_prefix' ] = 'MY_';
 
 Please note that all native CodeIgniter libraries are prefixed with **CI\_**
 so DO NOT use that as your prefix.

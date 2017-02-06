@@ -21,7 +21,7 @@ Loading this Helper
 
 This helper is loaded using the following code::
 
-	$this->load->helper('email');
+	$this->load->helper( 'email');
 
 Available Functions
 ===================
@@ -29,7 +29,7 @@ Available Functions
 The following functions are available:
 
 
-.. php:function:: valid_email($email)
+.. php:function:: valid_email( $email)
 
 	:param	string	$email: E-mail address
 	:returns:	TRUE if a valid email is supplied, FALSE otherwise
@@ -41,7 +41,7 @@ The following functions are available:
 
 	Example::
 
-		if( valid_email('email@somesite.com'))
+		if( valid_email( 'email@somesite.com'))
 		{
 			echo 'email is valid';
 		}
@@ -52,9 +52,9 @@ The following functions are available:
 
 	.. note:: All that this function does is to use PHP's native ``filter_var()``::
 
-		(bool) filter_var($email, FILTER_VALIDATE_EMAIL);
+		(bool) filter_var( $email, FILTER_VALIDATE_EMAIL);
 
-.. php:function:: send_email($recipient, $subject, $message)
+.. php:function:: send_email( $recipient, $subject, $message)
 
 	:param	string	$recipient: E-mail address
 	:param	string	$subject: Mail subject
@@ -69,7 +69,7 @@ The following functions are available:
 
 		::
 
-			mail($recipient, $subject, $message);
+			mail( $recipient, $subject, $message);
 
 	For a more robust email solution, see CodeIgniter's :doc:`Email Library
 	<../libraries/email>`.

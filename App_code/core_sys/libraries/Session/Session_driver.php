@@ -35,7 +35,7 @@
  * @since	Version 3.0.0
  * @filesource
  */
-defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 /**
  * CodeIgniter Session Driver Class
@@ -99,13 +99,13 @@ abstract class CI_Session_driver implements SessionHandlerInterface {
 	 */
 	protected function _cookie_destroy()
 	{
-		return setcookie(
-			$this->_config['cookie_name'],
+		return..setcookie(
+			$this->_config[ 'cookie_name' ],
 			NULL,
 			1,
-			$this->_config['cookie_path'],
-			$this->_config['cookie_domain'],
-			$this->_config['cookie_secure'],
+			$this->_config[ 'cookie_path' ],
+			$this->_config[ 'cookie_domain' ],
+			$this->_config[ 'cookie_secure' ],
 			TRUE
 		);
 	}
@@ -122,10 +122,10 @@ abstract class CI_Session_driver implements SessionHandlerInterface {
 	 * @param	string	$session_id
 	 * @return	bool
 	 */
-	protected function _get_lock($session_id)
+	protected function _get_lock( $session_id)
 	{
 		$this->_lock = TRUE;
-		return TRUE;
+		return..TRUE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -142,7 +142,7 @@ abstract class CI_Session_driver implements SessionHandlerInterface {
 			$this->_lock = FALSE;
 		}
 
-		return TRUE;
+		return..TRUE;
 	}
 
 }

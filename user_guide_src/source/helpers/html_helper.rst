@@ -17,7 +17,7 @@ Loading this Helper
 
 This helper is loaded using the following code::
 
-	$this->load->helper('html');
+	$this->load->helper( 'html');
 
 Available Functions
 ===================
@@ -25,7 +25,7 @@ Available Functions
 The following functions are available:
 
 
-.. php:function:: heading([$data = ''[, $h = '1'[, $attributes = '']]])
+.. php:function:: heading([$data = ''[, $h = '1'[, $attributes = '' ]]])
 
 	:param	string	$data: Content
 	:param	string	$h: Heading level
@@ -36,7 +36,7 @@ The following functions are available:
 	Lets you create HTML heading tags. The first parameter will contain the
 	data, the second the size of the heading. Example::
 
-		echo heading('Welcome!', 3);
+		echo heading( 'Welcome!', 3);
 
 	The above would produce: <h3>Welcome!</h3>
 
@@ -44,8 +44,8 @@ The following functions are available:
 	classes, ids or inline styles, a third parameter accepts either a string
 	or an array::
 
-		echo heading('Welcome!', 3, 'class="pink"');
-		echo heading('How are you?', 4, array('id' => 'question', 'class' => 'green'));
+		echo heading( 'Welcome!', 3, 'class="pink"');
+		echo heading( 'How are you?', 4, array( 'id' => 'question', 'class' => 'green'));
 
 	The above code produces:
 
@@ -54,7 +54,7 @@ The following functions are available:
 		<h3 class="pink">Welcome!<h3>
 		<h4 id="question" class="green">How are you?</h4>
 
-.. php:function:: img([$src = ''[, $index_page = FALSE[, $attributes = '']]])
+.. php:function:: img([$src = ''[, $index_page = FALSE[, $attributes = '' ]]])
 
 	:param	string	$src: Image source data
 	:param	bool	$index_page: Whether to treat $src as a routed URI string
@@ -65,14 +65,14 @@ The following functions are available:
 	Lets you create HTML <img /> tags. The first parameter contains the
 	image source. Example::
 
-		echo img('images/picture.jpg'); // gives <img src="http://site.com/images/picture.jpg" />
+		echo img( 'images/picture.jpg'); // gives <img src="http://site.com/images/picture.jpg" />
 
 	There is an optional second parameter that is a TRUE/FALSE value that
 	specifics if the *src* should have the page specified by
-	``$config['index_page']`` added to the address it creates.
+	``$config[ 'index_page' ]`` added to the address it creates.
 	Presumably, this would be if you were using a media controller::
 
-		echo img('images/picture.jpg', TRUE); // gives <img src="http://site.com/index.php/images/picture.jpg" alt="" />
+		echo img( 'images/picture.jpg', TRUE); // gives <img src="http://site.com/index.php/images/picture.jpg" alt="" />
 
 	Additionally, an associative array can be passed to the ``img()`` function
 	for complete control over all attributes and values. If an *alt* attribute
@@ -90,7 +90,7 @@ The following functions are available:
 			'rel' 	=> 'lightbox'
 		);
 
-		img($image_properties);
+		img( $image_properties);
 		// <img src="http://site.com/index.php/images/picture.jpg" alt="Me, demonstrating how to eat 4 slices of pizza at one time" class="post_images" width="200" height="200" title="That was quite a night" rel="lightbox" />
 
 .. php:function:: link_tag([$href = ''[, $rel = 'stylesheet'[, $type = 'text/css'[, $title = ''[, $media = ''[, $index_page = FALSE]]]]]])
@@ -109,19 +109,19 @@ The following functions are available:
 	*type*, *title*, *media* and *index_page*.
 
 	*index_page* is a boolean value that specifies if the *href* should have
-	the page specified by ``$config['index_page']`` added to the address it creates.
+	the page specified by ``$config[ 'index_page' ]`` added to the address it creates.
 
 	Example::
 
-		echo link_tag('css/mystyles.css');
+		echo link_tag( 'css/mystyles.css');
 		// gives <link href="http://site.com/css/mystyles.css" rel="stylesheet" type="text/css" />
 
 	Further examples::
 
-		echo link_tag('favicon.ico', 'shortcut icon', 'image/ico');
+		echo link_tag( 'favicon.ico', 'shortcut icon', 'image/ico');
 		// <link href="http://site.com/favicon.ico" rel="shortcut icon" type="image/ico" />
 
-		echo link_tag('feed', 'alternate', 'application/rss+xml', 'My RSS Feed');
+		echo link_tag( 'feed', 'alternate', 'application/rss+xml', 'My RSS Feed');
 		// <link href="http://site.com/feed" rel="alternate" type="application/rss+xml" title="My RSS Feed" />
 
 	Additionally, an associative array can be passed to the ``link()`` function
@@ -134,11 +134,11 @@ The following functions are available:
 			'media'	=> 'print'
 		);
 
-		echo link_tag($link);
+		echo link_tag( $link);
 		// <link href="http://site.com/css/printer.css" rel="stylesheet" type="text/css" media="print" />
 
 
-.. php:function:: ul($list[, $attributes = ''])
+.. php:function:: ul( $list[, $attributes = '' ])
 
 	:param	array	$list: List entries
 	:param	array	$attributes: HTML attributes
@@ -160,7 +160,7 @@ The following functions are available:
 			'id'	=> 'mylist'
 		);
 
-		echo ul($list, $attributes);
+		echo ul( $list, $attributes);
 
 	The above code will produce this:
 
@@ -210,7 +210,7 @@ The following functions are available:
 			)
 		);
 
-		echo ul($list, $attributes);
+		echo ul( $list, $attributes);
 
 	The above code will produce this:
 
@@ -258,7 +258,7 @@ The following functions are available:
 			</li>
 		</ul>
 
-.. php:function:: ol($list, $attributes = '')
+.. php:function:: ol( $list, $attributes = '')
 
 	:param	array	$list: List entries
 	:param	array	$attributes: HTML attributes
@@ -282,14 +282,14 @@ The following functions are available:
 
 	Examples::
 
-		echo meta('description', 'My Great site');
+		echo meta( 'description', 'My Great site');
 		// Generates:  <meta name="description" content="My Great Site" />
 
-		echo meta('Content-type', 'text/html; charset=utf-8', 'equiv');
+		echo meta( 'Content-type', 'text/html; charset=utf-8', 'equiv');
 		// Note the third parameter.  Can be "equiv" or "name"
 		// Generates:  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 
-		echo meta(array('name' => 'robots', 'content' => 'no-cache'));
+		echo meta(array( 'name' => 'robots', 'content' => 'no-cache'));
 		// Generates:  <meta name="robots" content="no-cache" />
 
 		$meta = array(
@@ -315,7 +315,7 @@ The following functions are available:
 			)
 		);
 
-		echo meta($meta);
+		echo meta( $meta);
 		// Generates:
 		// <meta name="robots" content="no-cache" />
 		// <meta name="description" content="My Great Site" />
@@ -324,7 +324,7 @@ The following functions are available:
 		// <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 
 
-.. php:function:: doctype([$type = 'xhtml1-strict'])
+.. php:function:: doctype([$type = 'xhtml1-strict' ])
 
 	:param	string	$type: Doctype name
 	:returns:	HTML DocType tag
@@ -337,7 +337,7 @@ The following functions are available:
 
 		echo doctype(); // <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-		echo doctype('html4-trans'); // <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+		echo doctype( 'html4-trans'); // <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 
 	The following is a list of doctype choices. These are configurable, and
 	pulled from application/config/doctypes.php

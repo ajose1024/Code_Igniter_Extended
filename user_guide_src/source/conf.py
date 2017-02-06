@@ -16,7 +16,7 @@ import sys, os
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-#sys.path.insert(0, os.path.abspath('.'))
+#sys.path.insert(0, os.path.abspath( ' . '))
 
 # -- General configuration -----------------------------------------------------
 
@@ -25,10 +25,10 @@ import sys, os
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.ifconfig', 'sphinxcontrib.phpdomain']
+extensions = [ 'sphinx.ext.ifconfig', 'sphinxcontrib.phpdomain' ]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = [ '_templates' ]
 
 # The suffix of source filenames.
 source_suffix = '.rst'
@@ -126,7 +126,7 @@ html_favicon = 'images/ci-icon.ico'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-#html_static_path = ['_static']
+#html_static_path = [ '_static' ]
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
@@ -176,16 +176,16 @@ html_copy_source = False
 
 # -- Options for LaTeX output --------------------------------------------------
 
-# The paper size ('letter' or 'a4').
+# The paper size ( 'letter' or 'a4').
 #latex_paper_size = 'letter'
 
-# The font size ('10pt', '11pt' or '12pt').
+# The font size ( '10pt', '11pt' or '12pt').
 #latex_font_size = '10pt'
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'CodeIgniter.tex', u'CodeIgniter Documentation',
+  ( 'index', 'CodeIgniter.tex', u'CodeIgniter Documentation',
    u'British Columbia Institute of Technology', 'manual'),
 ]
 
@@ -218,8 +218,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'codeigniter', u'CodeIgniter Documentation',
-     [u'British Columbia Institute of Technology'], 1)
+    ( 'index', 'codeigniter', u'CodeIgniter Documentation',
+     [u'British Columbia Institute of Technology' ], 1)
 ]
 
 

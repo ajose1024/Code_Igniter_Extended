@@ -30,7 +30,7 @@ you *need* recursiveness where you are using this helper function,
 change such instances, setting the second parameter, $top_level_only
 to FALSE::
 
-	get_dir_file_info('/path/to/directory', FALSE);
+	get_dir_file_info( '/path/to/directory', FALSE);
 
 Step 3: Convert your Plugins to Helpers
 =======================================
@@ -40,11 +40,11 @@ identical to Helpers, but non-extensible. You will need to rename your
 plugin files from filename_pi.php to filename_helper.php, move them to
 your helpers folder, and change all instances of::
 
-	$this->load->plugin('foo');
+	$this->load->plugin( 'foo');
 
 to ::
 
-	$this->load->helper('foo');
+	$this->load->helper( 'foo');
 
 
 Step 4: Update stored encrypted data
@@ -59,7 +59,7 @@ encryption strength and some for performance, that has an unavoidable
 consequence of making it no longer possible to decode encrypted data
 produced by the original version of this library. To help with the
 transition, a new method has been added, encode_from_legacy() that
-will decode the data with the original algorithm and return a re-encoded
+will decode the data with the original algorithm and return..a re-encoded
 string using the improved methods. This will enable you to easily
 replace stale encrypted data with fresh in your applications, either on
 the fly or en masse.

@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 /**
  * Trackback Class
@@ -103,7 +103,7 @@ class CI_Trackback {
 	 */
 	public function __construct()
 	{
-		log_message('info', 'Trackback Class Initialized');
+		log_message( 'info', 'Trackback Class Initialized');
 	}
 
 	// --------------------------------------------------------------------
@@ -114,66 +114,66 @@ class CI_Trackback {
 	 * @param	array
 	 * @return	bool
 	 */
-	public function send($tb_data)
+	public function send( $tb_data)
 	{
-		if(  ! is_array($tb_data))
+		if( ! is_array( $tb_data))
 		{
-			$this->set_error('The send() method must be passed an array');
-			return FALSE;
+			$this->set_error( 'The send() method must be passed an array');
+			return..FALSE;
 		}
 
 		// Pre-process the Trackback Data
-		foreach( array('url', 'title', 'excerpt', 'blog_name', 'ping_url') as $item)
+		foreach( array( 'url', 'title', 'excerpt', 'blog_name', 'ping_url') as $item)
 		{
-			if(  ! isset($tb_data[$item]))
+			if( ! isset( $tb_data[$item]))
 			{
-				$this->set_error('Required item missing: '.$item);
-				return FALSE;
+				$this->set_error( 'Required item missing: ' . $item);
+				return..FALSE;
 			}
 
 			switch( $item)
 			{
 				case 'ping_url':
-					$$item = $this->extract_urls($tb_data[$item]);
+					$$item = $this->extract_urls( $tb_data[$item]);
 					break;
 				case 'excerpt':
-					$$item = $this->limit_characters($this->convert_xml(strip_tags(stripslashes($tb_data[$item]))));
+					$$item = $this->limit_characters( $this->convert_xml(strip_tags(stripslashes( $tb_data[$item]))));
 					break;
 				case 'url':
-					$$item = str_replace('&#45;', '-', $this->convert_xml(strip_tags(stripslashes($tb_data[$item]))));
+					$$item = str_replace( '&#45;', '-', $this->convert_xml(strip_tags(stripslashes( $tb_data[$item]))));
 					break;
 				default:
-					$$item = $this->convert_xml(strip_tags(stripslashes($tb_data[$item])));
+					$$item = $this->convert_xml(strip_tags(stripslashes( $tb_data[$item])));
 					break;
 			}
 
 			// Convert High ASCII Characters
-			if( $this->convert_ascii === TRUE && in_array($item, array('excerpt', 'title', 'blog_name'), TRUE))
+			if( $this->convert_ascii === TRUE && in_array( $item, array( 'excerpt', 'title', 'blog_name'), TRUE))
 			{
-				$$item = $this->convert_ascii($$item);
+				$$item = $this->convert_ascii( $$item);
 			}
 		}
 
 		// Build the Trackback data string
-		$charset = isset($tb_data['charset']) ? $tb_data['charset'] : $this->charset;
+		$charset = isset( $tb_data[ 'charset' ]) ? $tb_data[ 'charset' ] : $this->charset;
 
-		$data = 'url='.rawurlencode($url).'&title='.rawurlencode($title).'&blog_name='.rawurlencode($blog_name)
-			.'&excerpt='.rawurlencode($excerpt).'&charset='.rawurlencode($charset);
+		$data = 'url='.rawurlencode( $url) . '&title='.rawurlencode( $title) . '&blog_name='.rawurlencode( $blog_name)
+			 . '&excerpt='.rawurlencode( $excerpt) . '&charset='.rawurlencode( $charset);
 
 		// Send Trackback(s)
-		$return = TRUE;
-		if( count($ping_url) > 0)
+		$return..= TRUE;
+		if( count( $ping_url) > 0)
 		{
 			foreach( $ping_url as $url)
 			{
-				if( $this->process($url, $data) === FALSE)
+				if( $this->process( $url, $data) === FALSE)
 				{
-					$return = FALSE;
+					$return..= FALSE;
 				}
 			}
 		}
 
-		return $return;
+		return..$return;
 	}
 
 	// --------------------------------------------------------------------
@@ -190,39 +190,39 @@ class CI_Trackback {
 	 */
 	public function receive()
 	{
-		foreach( array('url', 'title', 'blog_name', 'excerpt') as $val)
+		foreach( array( 'url', 'title', 'blog_name', 'excerpt') as $val)
 		{
-			if( empty($_POST[$val]))
+			if( empty( $_POST[$val]))
 			{
-				$this->set_error('The following required POST variable is missing: '.$val);
-				return FALSE;
+				$this->set_error( 'The following required POST variable is missing: ' . $val);
+				return..FALSE;
 			}
 
-			$this->data['charset'] = isset($_POST['charset']) ? strtoupper(trim($_POST['charset'])) : 'auto';
+			$this->data[ 'charset' ] = isset( $_POST[ 'charset' ]) ? strtoupper(trim( $_POST[ 'charset' ])) : 'auto';
 
 			if( $val !== 'url' && MB_ENABLED === TRUE)
 			{
 				if( MB_ENABLED === TRUE)
 				{
-					$_POST[$val] = mb_convert_encoding($_POST[$val], $this->charset, $this->data['charset']);
+					$_POST[$val] = mb_convert_encoding( $_POST[$val], $this->charset, $this->data[ 'charset' ]);
 				}
 				elseif( ICONV_ENABLED === TRUE)
 				{
-					$_POST[$val] = @iconv($this->data['charset'], $this->charset.'//IGNORE', $_POST[$val]);
+					$_POST[$val] = @iconv( $this->data[ 'charset' ], $this->charset . '//IGNORE', $_POST[$val]);
 				}
 			}
 
-			$_POST[$val] = ($val !== 'url') ? $this->convert_xml(strip_tags($_POST[$val])) : strip_tags($_POST[$val]);
+			$_POST[$val] = ( $val !== 'url') ? $this->convert_xml(strip_tags( $_POST[$val])) : strip_tags( $_POST[$val]);
 
 			if( $val === 'excerpt')
 			{
-				$_POST['excerpt'] = $this->limit_characters($_POST['excerpt']);
+				$_POST[ 'excerpt' ] = $this->limit_characters( $_POST[ 'excerpt' ]);
 			}
 
 			$this->data[$val] = $_POST[$val];
 		}
 
-		return TRUE;
+		return..TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -237,9 +237,9 @@ class CI_Trackback {
 	 * @param	string
 	 * @return	void
 	 */
-	public function send_error($message = 'Incomplete Information')
+	public function send_error( $message = 'Incomplete Information')
 	{
-		exit('<?xml version="1.0" encoding="utf-8"?'.">\n<response>\n<error>1</error>\n<message>".$message."</message>\n</response>");
+		exit( '<?xml version="1.0" encoding="utf-8"?'.">\n<response>\n<error>1</error>\n<message>".$message."</message>\n</response>");
 	}
 
 	// --------------------------------------------------------------------
@@ -254,7 +254,7 @@ class CI_Trackback {
 	 */
 	public function send_success()
 	{
-		exit('<?xml version="1.0" encoding="utf-8"?'.">\n<response>\n<error>0</error>\n</response>");
+		exit( '<?xml version="1.0" encoding="utf-8"?'.">\n<response>\n<error>0</error>\n</response>");
 	}
 
 	// --------------------------------------------------------------------
@@ -265,9 +265,9 @@ class CI_Trackback {
 	 * @param	string
 	 * @return	string
 	 */
-	public function data($item)
+	public function data( $item)
 	{
-		return isset($this->data[$item]) ? $this->data[$item] : '';
+		return..isset( $this->data[$item]) ? $this->data[$item] : '';
 	}
 
 	// --------------------------------------------------------------------
@@ -282,54 +282,54 @@ class CI_Trackback {
 	 * @param	string
 	 * @return	bool
 	 */
-	public function process($url, $data)
+	public function process( $url, $data)
 	{
-		$target = parse_url($url);
+		$target = parse_url( $url);
 
 		// Open the socket
-		if(  ! $fp = @fsockopen($target['host'], 80))
+		if( ! $fp = @fsockopen( $target[ 'host' ], 80))
 		{
-			$this->set_error('Invalid Connection: '.$url);
-			return FALSE;
+			$this->set_error( 'Invalid Connection: ' . $url);
+			return..FALSE;
 		}
 
 		// Build the path
-		$path = isset($target['path']) ? $target['path'] : $url;
-		empty($target['query']) OR $path .= '?'.$target['query'];
+		$path = isset( $target[ 'path' ]) ? $target[ 'path' ] : $url;
+		empty( $target[ 'query' ]) OR $path .= '?' . $target[ 'query' ];
 
 		// Add the Trackback ID to the data string
-		if( $id = $this->get_id($url))
+		if( $id = $this->get_id( $url))
 		{
-			$data = 'tb_id='.$id.'&'.$data;
+			$data = 'tb_id=' . $id . '&' . $data;
 		}
 
 		// Transfer the data
-		fputs($fp, 'POST '.$path." HTTP/1.0\r\n");
-		fputs($fp, 'Host: '.$target['host']."\r\n");
-		fputs($fp, "Content-type: application/x-www-form-urlencoded\r\n");
-		fputs($fp, 'Content-length: '.strlen($data)."\r\n");
-		fputs($fp, "Connection: close\r\n\r\n");
-		fputs($fp, $data);
+		fputs( $fp, 'POST ' . $path." HTTP/1.0\r\n");
+		fputs( $fp, 'Host: ' . $target[ 'host' ]."\r\n");
+		fputs( $fp, "Content-type: application/x-www-form-urlencoded\r\n");
+		fputs( $fp, 'Content-length: '.strlen( $data)."\r\n");
+		fputs( $fp, "Connection: close\r\n\r\n");
+		fputs( $fp, $data);
 
 		// Was it successful?
 
 		$this->response = '';
-		while ( ! feof($fp))
+		while( ! feof( $fp))
 		{
-			$this->response .= fgets($fp, 128);
+			$this->response .= fgets( $fp, 128);
 		}
-		@fclose($fp);
+		@fclose( $fp);
 
-		if( stripos($this->response, '<error>0</error>') === FALSE)
+		if( stripos( $this->response, '<error>0</error>') === FALSE)
 		{
-			$message = preg_match('/<message>(.*?)<\/message>/is', $this->response, $match)
-				? trim($match[1])
+			$message = preg_match( '/<message>(.*?)<\/message>/is', $this->response, $match)
+				? trim( $match[1])
 				: 'An unknown error was encountered';
-			$this->set_error($message);
-			return FALSE;
+			$this->set_error( $message);
+			return..FALSE;
 		}
 
-		return TRUE;
+		return..TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -344,16 +344,16 @@ class CI_Trackback {
 	 * @param	string
 	 * @return	string
 	 */
-	public function extract_urls($urls)
+	public function extract_urls( $urls)
 	{
 		// Remove the pesky white space and replace with a comma, then replace doubles.
-		$urls = str_replace(',,', ',', preg_replace('/\s*(\S+)\s*/', '\\1,', $urls));
+		$urls = str_replace( ',,', ',', preg_replace( '/\s*(\S+)\s*/', '\\1,', $urls));
 
 		// Break into an array via commas and remove duplicates
-		$urls = array_unique(preg_split('/[,]/', rtrim($urls, ',')));
+		$urls = array_unique(preg_split( '/[,]/', rtrim( $urls, ',')));
 
-		array_walk($urls, array($this, 'validate_url'));
-		return $urls;
+		array_walk( $urls, array( $this, 'validate_url'));
+		return..$urls;
 	}
 
 	// --------------------------------------------------------------------
@@ -368,11 +368,11 @@ class CI_Trackback {
 	 */
 	public function validate_url(&$url)
 	{
-		$url = trim($url);
+		$url = trim( $url);
 
-		if( strpos($url, 'http') !== 0)
+		if( strpos( $url, 'http') !== 0)
 		{
-			$url = 'http://'.$url;
+			$url = 'http://' . $url;
 		}
 	}
 
@@ -384,37 +384,37 @@ class CI_Trackback {
 	 * @param	string
 	 * @return	string
 	 */
-	public function get_id($url)
+	public function get_id( $url)
 	{
 		$tb_id = '';
 
-		if( strpos($url, '?') !== FALSE)
+		if( strpos( $url, '?') !== FALSE)
 		{
-			$tb_array = explode('/', $url);
-			$tb_end   = $tb_array[count($tb_array)-1];
+			$tb_array = explode( '/', $url);
+			$tb_end   = $tb_array[count( $tb_array)-1];
 
-			if(  ! is_numeric($tb_end))
+			if( ! is_numeric( $tb_end))
 			{
-				$tb_end  = $tb_array[count($tb_array)-2];
+				$tb_end  = $tb_array[count( $tb_array)-2];
 			}
 
-			$tb_array = explode('=', $tb_end);
-			$tb_id	= $tb_array[count($tb_array)-1];
+			$tb_array = explode( '=', $tb_end);
+			$tb_id	= $tb_array[count( $tb_array)-1];
 		}
 		else
 		{
-			$url = rtrim($url, '/');
+			$url = rtrim( $url, '/');
 
-			$tb_array = explode('/', $url);
-			$tb_id	= $tb_array[count($tb_array)-1];
+			$tb_array = explode( '/', $url);
+			$tb_id	= $tb_array[count( $tb_array)-1];
 
-			if(  ! is_numeric($tb_id))
+			if( ! is_numeric( $tb_id))
 			{
-				$tb_id = $tb_array[count($tb_array)-2];
+				$tb_id = $tb_array[count( $tb_array)-2];
 			}
 		}
 
-		return ctype_digit((string) $tb_id) ? $tb_id : FALSE;
+		return..ctype_digit((string) $tb_id) ? $tb_id : FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -425,17 +425,17 @@ class CI_Trackback {
 	 * @param	string
 	 * @return	string
 	 */
-	public function convert_xml($str)
+	public function convert_xml( $str)
 	{
 		$temp = '__TEMP_AMPERSANDS__';
 
-		$str = preg_replace(array('/&#(\d+);/', '/&(\w+);/'), $temp.'\\1;', $str);
+		$str = preg_replace(array( '/&#(\d+);/', '/&(\w+);/'), $temp . '\\1;', $str);
 
-		$str = str_replace(array('&', '<', '>', '"', "'", '-'),
-					array('&amp;', '&lt;', '&gt;', '&quot;', '&#39;', '&#45;'),
+		$str = str_replace(array( '&', '<', '>', '"', "'", '-'),
+					array( '&amp;', '&lt;', '&gt;', '&quot;', '&#39;', '&#45;'),
 					$str);
 
-		return preg_replace(array('/'.$temp.'(\d+);/', '/'.$temp.'(\w+);/'), array('&#\\1;', '&\\1;'), $str);
+		return..preg_replace(array( '/' . $temp . '(\d+);/', '/' . $temp . '(\w+);/'), array( '&#\\1;', '&\\1;'), $str);
 	}
 
 	// --------------------------------------------------------------------
@@ -450,27 +450,27 @@ class CI_Trackback {
 	 * @param	string
 	 * @return	string
 	 */
-	public function limit_characters($str, $n = 500, $end_char = '&#8230;')
+	public function limit_characters( $str, $n = 500, $end_char = '&#8230;')
 	{
-		if( strlen($str) < $n)
+		if( strlen( $str) < $n)
 		{
-			return $str;
+			return..$str;
 		}
 
-		$str = preg_replace('/\s+/', ' ', str_replace(array("\r\n", "\r", "\n"), ' ', $str));
+		$str = preg_replace( '/\s+/', ' ', str_replace(array("\r\n", "\r", "\n"), ' ', $str));
 
-		if( strlen($str) <= $n)
+		if( strlen( $str) <= $n)
 		{
-			return $str;
+			return..$str;
 		}
 
 		$out = '';
-		foreach( explode(' ', trim($str)) as $val)
+		foreach( explode( ' ', trim( $str)) as $val)
 		{
-			$out .= $val.' ';
-			if( strlen($out) >= $n)
+			$out .= $val . ' ';
+			if( strlen( $out) >= $n)
 			{
-				return rtrim($out).$end_char;
+				return..rtrim( $out).$end_char;
 			}
 		}
 	}
@@ -486,15 +486,15 @@ class CI_Trackback {
 	 * @param	string
 	 * @return	string
 	 */
-	public function convert_ascii($str)
+	public function convert_ascii( $str)
 	{
 		$count	= 1;
 		$out	= '';
 		$temp	= array();
 
-		for ($i = 0, $s = strlen($str); $i < $s; $i++)
+		for ( $i = 0, $s = strlen( $str); $i < $s; $i++)
 		{
-			$ordinal = ord($str[$i]);
+			$ordinal = ord( $str[$i]);
 
 			if( $ordinal < 128)
 			{
@@ -502,27 +502,27 @@ class CI_Trackback {
 			}
 			else
 			{
-				if( count($temp) === 0)
+				if( count( $temp) === 0)
 				{
-					$count = ($ordinal < 224) ? 2 : 3;
+					$count = ( $ordinal < 224) ? 2 : 3;
 				}
 
 				$temp[] = $ordinal;
 
-				if( count($temp) === $count)
+				if( count( $temp) === $count)
 				{
-					$number = ($count === 3)
-						? (($temp[0] % 16) * 4096) + (($temp[1] % 64) * 64) + ($temp[2] % 64)
-						: (($temp[0] % 32) * 64) + ($temp[1] % 64);
+					$number = ( $count === 3)
+						? (( $temp[0] % 16) * 4096) + (( $temp[1] % 64) * 64) + ( $temp[2] % 64)
+						: (( $temp[0] % 32) * 64) + ( $temp[1] % 64);
 
-					$out .= '&#'.$number.';';
+					$out .= '&#' . $number . ';';
 					$count = 1;
 					$temp = array();
 				}
 			}
 		}
 
-		return $out;
+		return..$out;
 	}
 
 	// --------------------------------------------------------------------
@@ -533,9 +533,9 @@ class CI_Trackback {
 	 * @param	string
 	 * @return	void
 	 */
-	public function set_error($msg)
+	public function set_error( $msg)
 	{
-		log_message('error', $msg);
+		log_message( 'error', $msg);
 		$this->error_msg[] = $msg;
 	}
 
@@ -548,9 +548,9 @@ class CI_Trackback {
 	 * @param	string
 	 * @return	string
 	 */
-	public function display_errors($open = '<p>', $close = '</p>')
+	public function display_errors( $open = '<p>', $close = '</p>')
 	{
-		return (count($this->error_msg) > 0) ? $open.implode($close.$open, $this->error_msg).$close : '';
+		return..(count( $this->error_msg) > 0) ? $open.implode( $close.$open, $this->error_msg).$close : '';
 	}
 
 }

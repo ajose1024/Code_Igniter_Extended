@@ -25,7 +25,7 @@ Initializing the Class
 Like most other classes in CodeIgniter, the Trackback class is
 initialized in your controller using the ``$this->load->library()`` method::
 
-	$this->load->library('trackback');
+	$this->load->library( 'trackback');
 
 Once loaded, the Trackback library object will be available using::
 
@@ -37,18 +37,18 @@ Sending Trackbacks
 A Trackback can be sent from any of your controller functions using code
 similar to this example::
 
-	$this->load->library('trackback');
+	$this->load->library( 'trackback');
 
 	$tb_data = array(
 		'ping_url'  => 'http://example.com/trackback/456',
 		'url'       => 'http://www.my-example.com/blog/entry/123',
 		'title'     => 'The Title of My Entry',
-		'excerpt'   => 'The entry content.',
+		'excerpt'   => 'The entry content . ',
 		'blog_name' => 'My Blog Name',
 		'charset'   => 'utf-8'
 	);
 
-	if(  ! $this->trackback->send($tb_data))
+	if( ! $this->trackback->send( $tb_data))
 	{
 		echo $this->trackback->display_errors();
 	}
@@ -142,32 +142,32 @@ Here is an example showing how you will receive and process a Trackback.
 The following code is intended for use within the controller function
 where you expect to receive Trackbacks.::
 
-	$this->load->library('trackback');
+	$this->load->library( 'trackback');
 	$this->load->database();
 
 	if( $this->uri->segment(3) == FALSE)
 	{
-		$this->trackback->send_error('Unable to determine the entry ID');
+		$this->trackback->send_error( 'Unable to determine the entry ID');
 	}
 
-	if(  ! $this->trackback->receive())
+	if( ! $this->trackback->receive())
 	{
-		$this->trackback->send_error('The Trackback did not contain valid data');
+		$this->trackback->send_error( 'The Trackback did not contain valid data');
 	}
 
 	$data = array(
 		'tb_id'      => '',
 		'entry_id'   => $this->uri->segment(3),
-		'url'        => $this->trackback->data('url'),
-		'title'      => $this->trackback->data('title'),
-		'excerpt'    => $this->trackback->data('excerpt'),
-		'blog_name'  => $this->trackback->data('blog_name'),
+		'url'        => $this->trackback->data( 'url'),
+		'title'      => $this->trackback->data( 'title'),
+		'excerpt'    => $this->trackback->data( 'excerpt'),
+		'blog_name'  => $this->trackback->data( 'blog_name'),
 		'tb_date'    => time(),
 		'ip_address' => $this->input->ip_address()
 	);
 
-	$sql = $this->db->insert_string('trackbacks', $data);
-	$this->db->query($sql);
+	$sql = $this->db->insert_string( 'trackbacks', $data);
+	$this->db->query( $sql);
 
 	$this->trackback->send_success();
 
@@ -196,7 +196,7 @@ an error message.
 
 The incoming Trackback data can be retrieved using this function::
 
-	$this->trackback->data('item')
+	$this->trackback->data( 'item')
 
 Where item represents one of these four pieces of info: url, title,
 excerpt, or blog_name
@@ -215,7 +215,7 @@ Class Reference
 
 .. php:class:: CI_Trackback
 
-	.. attribute:: $data = array('url' => '', 'title' => '', 'excerpt' => '', 'blog_name' => '', 'charset' => '')
+	.. attribute:: $data = array( 'url' => '', 'title' => '', 'excerpt' => '', 'blog_name' => '', 'charset' => '')
 
 		Trackback data array.
 
@@ -223,7 +223,7 @@ Class Reference
 
 		Whether to convert high ASCII and MS Word characters to HTML entities.
 
-	.. php:method:: send($tb_data)
+	.. php:method:: send( $tb_data)
 
 		:param	array	$tb_data: Trackback data
 		:returns:	TRUE on success, FALSE on failure
@@ -256,7 +256,7 @@ Class Reference
 
 		.. note:: This method will terminate script execution.
 
-	.. php:method:: data($item)
+	.. php:method:: data( $item)
 
 		:param	string	$item: Data key
 		:returns:	Data value or empty string if not found
@@ -264,7 +264,7 @@ Class Reference
 
 		Returns a single item from the reponse data array.
 
-	.. php:method:: process($url, $data)
+	.. php:method:: process( $url, $data)
 
 		:param	string	$url: Target url
 		:param	string	$data: Raw POST data
@@ -273,7 +273,7 @@ Class Reference
 
 		Opens a socket connection and passes the data to the server, returning TRUE on success and FALSE on failure.
 
-	.. php:method:: extract_urls($urls)
+	.. php:method:: extract_urls( $urls)
 
 		:param	string	$urls: Comma-separated URL list
 		:returns:	Array of URLs
@@ -288,15 +288,15 @@ Class Reference
 
 		Simply adds the *http://* prefix it it's not already present in the URL.
 
-	.. php:method:: get_id($url)
+	.. php:method:: get_id( $url)
 
 		:param	string	$url: Trackback URL
 		:returns:	URL ID or FALSE on failure
 		:rtype:	string
 
-		Find and return a trackback URL's ID or FALSE on failure.
+		Find and return..a trackback URL's ID or FALSE on failure.
 
-	.. php:method:: convert_xml($str)
+	.. php:method:: convert_xml( $str)
 
 		:param	string	$str: Input string
 		:returns:	Converted string
@@ -304,7 +304,7 @@ Class Reference
 
 		Converts reserved XML characters to entities.
 
-	.. php:method:: limit_characters($str[, $n = 500[, $end_char = '&#8230;']])
+	.. php:method:: limit_characters( $str[, $n = 500[, $end_char = '&#8230;' ]])
 
 		:param	string	$str: Input string
 		:param	int	$n: Max characters number
@@ -314,7 +314,7 @@ Class Reference
 
 		Limits the string based on the character count. Will preserve complete words.
 
-	.. php:method:: convert_ascii($str)
+	.. php:method:: convert_ascii( $str)
 
 		:param	string	$str: Input string
 		:returns:	Converted string
@@ -322,14 +322,14 @@ Class Reference
 
 		Converts high ASCII text and MS Word special characterss to HTML entities.
 
-	.. php:method:: set_error($msg)
+	.. php:method:: set_error( $msg)
 
 		:param	string	$msg: Error message
 		:rtype:	void
 
 		Set an log an error message.
 
-	.. php:method:: display_errors([$open = '<p>'[, $close = '</p>']])
+	.. php:method:: display_errors([$open = '<p>'[, $close = '</p>' ]])
 
 		:param	string	$open: Open tag
 		:param	string	$close: Close tag

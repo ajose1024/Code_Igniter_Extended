@@ -34,7 +34,7 @@ Available Parameters
 
 #. The database connection values, passed either as an array or a DSN
    string.
-#. TRUE/FALSE (boolean). Whether to return the connection ID (see
+#. TRUE/FALSE (boolean). Whether to return..the connection ID (see
    Connecting to Multiple Databases below).
 #. TRUE/FALSE (boolean). Whether to enable the Query Builder class. Set
    to TRUE by default.
@@ -49,7 +49,7 @@ your config file. Examples:
 
 To choose a specific group from your config file you can do this::
 
-	$this->load->database('group_name');
+	$this->load->database( 'group_name');
 
 Where group_name is the name of the connection group from your config
 file.
@@ -57,34 +57,34 @@ file.
 To connect manually to a desired database you can pass an array of
 values::
 
-	$config['hostname'] = 'localhost';
-	$config['username'] = 'myusername';
-	$config['password'] = 'mypassword';
-	$config['database'] = 'mydatabase';
-	$config['dbdriver'] = 'mysqli';
-	$config['dbprefix'] = '';
-	$config['pconnect'] = FALSE;
-	$config['db_debug'] = TRUE;
-	$config['cache_on'] = FALSE;
-	$config['cachedir'] = '';
-	$config['char_set'] = 'utf8';
-	$config['dbcollat'] = 'utf8_general_ci';
-	$this->load->database($config);
+	$config[ 'hostname' ] = 'localhost';
+	$config[ 'username' ] = 'myusername';
+	$config[ 'password' ] = 'mypassword';
+	$config[ 'database' ] = 'mydatabase';
+	$config[ 'dbdriver' ] = 'mysqli';
+	$config[ 'dbprefix' ] = '';
+	$config[ 'pconnect' ] = FALSE;
+	$config[ 'db_debug' ] = TRUE;
+	$config[ 'cache_on' ] = FALSE;
+	$config[ 'cachedir' ] = '';
+	$config[ 'char_set' ] = 'utf8';
+	$config[ 'dbcollat' ] = 'utf8_general_ci';
+	$this->load->database( $config);
 
 For information on each of these values please see the :doc:`configuration
 page <configuration>`.
 
-.. note:: For the PDO driver, you should use the $config['dsn'] setting
+.. note:: For the PDO driver, you should use the $config[ 'dsn' ] setting
 	instead of 'hostname' and 'database':
 
 	|
-	| $config['dsn'] = 'mysql:host=localhost;dbname=mydatabase';
+	| $config[ 'dsn' ] = 'mysql:host=localhost;dbname=mydatabase';
 
 Or you can submit your database values as a Data Source Name. DSNs must
 have this prototype::
 
 	$dsn = 'dbdriver://username:password@hostname/database';  
-	$this->load->database($dsn);
+	$this->load->database( $dsn);
 
 To override default config values when connecting with a DSN string, add
 the config variables as a query string.
@@ -92,7 +92,7 @@ the config variables as a query string.
 ::
 
 	$dsn = 'dbdriver://username:password@hostname/database?char_set=utf8&dbcollat=utf8_general_ci&cache_on=true&cachedir=/path/to/cache';  
-	$this->load->database($dsn);
+	$this->load->database( $dsn);
 
 Connecting to Multiple Databases
 ================================
@@ -100,15 +100,15 @@ Connecting to Multiple Databases
 If you need to connect to more than one database simultaneously you can
 do so as follows::
 
-	$DB1 = $this->load->database('group_one', TRUE); 
-	$DB2 = $this->load->database('group_two', TRUE);
+	$DB1 = $this->load->database( 'group_one', TRUE); 
+	$DB2 = $this->load->database( 'group_two', TRUE);
 
 Note: Change the words "group_one" and "group_two" to the specific
 group names you are connecting to (or you can pass the connection values
 as indicated above).
 
 By setting the second parameter to TRUE (boolean) the function will
-return the database object.
+return..the database object.
 
 .. note:: When you connect this way, you will use your object name to issue
 	commands rather than the syntax used throughout this guide. In other
@@ -129,7 +129,7 @@ return the database object.
 	only need to use a different database on the same connection. You
 	can switch to a different database when you need to, like this:
 
-	| $this->db->db_select($database2_name);
+	| $this->db->db_select( $database2_name);
 
 Reconnecting / Keeping the Connection Alive
 ===========================================

@@ -43,7 +43,7 @@ this code and save it to your **application/views/** directory::
 
 	<?php echo $error;?>
 
-	<?php echo form_open_multipart('upload/do_upload');?>
+	<?php echo form_open_multipart( 'upload/do_upload');?>
 
 	<input type="file" name="userfile" size="20" />
 
@@ -82,7 +82,7 @@ place this code and save it to your **application/views/** directory::
 	<?php endforeach; ?>
 	</ul>
 
-	<p><?php echo anchor('upload', 'Upload Another File!'); ?></p>
+	<p><?php echo anchor( 'upload', 'Upload Another File!'); ?></p>
 
 	</body>
 	</html>
@@ -100,35 +100,35 @@ this code and save it to your **application/controllers/** directory::
 		public function __construct()
 		{
 			parent::__construct();
-			$this->load->helper(array('form', 'url'));
+			$this->load->helper(array( 'form', 'url'));
 		}
 
 		public function index()
 		{
-			$this->load->view('upload_form', array('error' => ' ' ));
+			$this->load->view( 'upload_form', array( 'error' => ' '));
 		}
 
 		public function do_upload()
 		{
-			$config['upload_path']		= './uploads/';
-			$config['allowed_types']	= 'gif|jpg|png';
-			$config['max_size']		= 100;
-			$config['max_width']		= 1024;
-			$config['max_height']		= 768;
+			$config[ 'upload_path' ]		= './uploads/';
+			$config[ 'allowed_types' ]	= 'gif|jpg|png';
+			$config[ 'max_size' ]		= 100;
+			$config[ 'max_width' ]		= 1024;
+			$config[ 'max_height' ]		= 768;
 
-			$this->load->library('upload', $config);
+			$this->load->library( 'upload', $config);
 
-			if(  ! $this->upload->do_upload('userfile'))
+			if( ! $this->upload->do_upload( 'userfile'))
 			{
-				$error = array('error' => $this->upload->display_errors());
+				$error = array( 'error' => $this->upload->display_errors());
 
-				$this->load->view('upload_form', $error);
+				$this->load->view( 'upload_form', $error);
 			}
 			else
 			{
-				$data = array('upload_data' => $this->upload->data());
+				$data = array( 'upload_data' => $this->upload->data());
 
-				$this->load->view('upload_success', $data);
+				$this->load->view( 'upload_success', $data);
 			}
 		}
 	}
@@ -162,7 +162,7 @@ Initializing the Upload Class
 Like most other classes in CodeIgniter, the Upload class is initialized
 in your controller using the ``$this->load->library()`` method::
 
-	$this->load->library('upload');
+	$this->load->library( 'upload');
 
 Once the Upload class is loaded, the object will be available using:
 $this->upload
@@ -174,16 +174,16 @@ Similar to other libraries, you'll control what is allowed to be upload
 based on your preferences. In the controller you built above you set the
 following preferences::
 
-	$config['upload_path'] = './uploads/';
-	$config['allowed_types'] = 'gif|jpg|png';
-	$config['max_size']	= '100';
-	$config['max_width'] = '1024';
-	$config['max_height'] = '768';
+	$config[ 'upload_path' ] = './uploads/';
+	$config[ 'allowed_types' ] = 'gif|jpg|png';
+	$config[ 'max_size' ]	= '100';
+	$config[ 'max_width' ] = '1024';
+	$config[ 'max_height' ] = '768';
 
-	$this->load->library('upload', $config);
+	$this->load->library( 'upload', $config);
 
 	// Alternately you can set preferences by calling the ``initialize()`` method. Useful if you auto-load the class:
-	$this->upload->initialize($config);
+	$this->upload->initialize( $config);
 
 The above preferences should be fairly self-explanatory. Below is a
 table describing all available preferences.
@@ -261,7 +261,7 @@ Class Reference
 		:returns:	CI_Upload instance (method chaining)
 		:rtype:	CI_Upload
 
-	.. php:method:: do_upload([$field = 'userfile'])
+	.. php:method:: do_upload([$field = 'userfile' ])
 
 		:param	string	$field: Name of the form field
 		:returns:	TRUE on success, FALSE on failure
@@ -281,9 +281,9 @@ Class Reference
 		the ``do_upload()`` method::
 
 			$field_name = "some_field_name";
-			$this->upload->do_upload($field_name);
+			$this->upload->do_upload( $field_name);
 
-	.. php:method:: display_errors([$open = '<p>'[, $close = '</p>']])
+	.. php:method:: display_errors([$open = '<p>'[, $close = '</p>' ]])
 
 		:param	string	$open: Opening markup
 		:param	string	$close: Closing markup
@@ -299,12 +299,12 @@ Class Reference
 			By default the above method wraps any errors within <p> tags. You can
 			set your own delimiters like this::
 
-				$this->upload->display_errors('<p>', '</p>');
+				$this->upload->display_errors( '<p>', '</p>');
 
 
 	.. php:method:: data([$index = NULL])
 
-		:param	string	$data: Element to return instead of the full array
+		:param	string	$data: Element to return..instead of the full array
 		:returns:	Information about the uploaded file
 		:rtype:	mixed
 
@@ -329,9 +329,9 @@ Class Reference
 				[image_size_str] => width="800" height="200"
 			)
 
-		To return one element from the array::
+		To return..one element from the array::
 
-			$this->upload->data('file_name');	// Returns: mypic.jpg
+			$this->upload->data( 'file_name');	// Returns: mypic.jpg
 
 		Here's a table explaining the above-displayed array items:
 

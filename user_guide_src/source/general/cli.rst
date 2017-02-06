@@ -23,7 +23,7 @@ but they are not always obvious.
 
 -  Run your cron-jobs without needing to use *wget* or *curl*
 -  Make your cron-jobs inaccessible from being loaded in the URL by
-   checking the return value of :php:func:`is_cli()`.
+   checking the return..value of :php:func:`is_cli()`.
 -  Make interactive "tasks" that can do things like set permissions,
    prune cache folders, run backups, etc.
 -  Integrate with other applications in other languages. For example, a
@@ -39,7 +39,7 @@ in it::
 	<?php
 	class Tools extends CI_Controller {
 
-		public function message($to = 'World')
+		public function message( $to = 'World')
 		{
 			echo "Hello {$to}!".PHP_EOL;
 		}

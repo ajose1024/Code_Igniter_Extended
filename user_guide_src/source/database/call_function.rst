@@ -11,7 +11,7 @@ example, let's say you want to call the mysql_get_client_info()
 function, which is **not** natively supported by CodeIgniter. You could
 do so like this::
 
-	$this->db->call_function('get_client_info');
+	$this->db->call_function( 'get_client_info');
 
 You must supply the name of the function, **without** the mysql\_
 prefix, in the first parameter. The prefix is added automatically based
@@ -25,7 +25,7 @@ the second parameter.
 
 ::
 
-	$this->db->call_function('some_function', $param1, $param2, etc..);
+	$this->db->call_function( 'some_function', $param1, $param2, etc..);
 
 Often, you will either need to supply a database connection ID or a
 database result ID. The connection ID can be accessed using::

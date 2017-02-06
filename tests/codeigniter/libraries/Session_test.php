@@ -22,8 +22,8 @@ class Session_test extends CI_TestCase {
 return;
 		// Override settings
 		foreach( $this->settings as $name => $value) {
-			$this->setting_vals[$name] = ini_get('session.'.$name);
-			ini_set('session.'.$name, $value);
+			$this->setting_vals[$name] = ini_get( 'session . ' . $name);
+			ini_set( 'session . ' . $name, $value);
 		}
 
 		// Start with clean environment
@@ -31,16 +31,16 @@ return;
 		$_COOKIE = array();
 
 		// Set subclass prefix to match our mock
-		$this->ci_set_config('subclass_prefix', 'Mock_Libraries_');
+		$this->ci_set_config( 'subclass_prefix', 'Mock_Libraries_');
 
 		// Establish necessary support classes
 		$ci = $this->ci_instance();
-		$ldr = $this->ci_core_class('load');
+		$ldr = $this->ci_core_class( 'load');
 		$ci->load = new $ldr();
 		$ci->input = new Mock_Core_Input(NULL, NULL);
 
 		// Make sure string helper is available
-		$this->ci_vfs_clone('system/helpers/string_helper.php');
+		$this->ci_vfs_clone( 'system/helpers/string_helper.php');
 
 		// Attach session instance locally
 		$config = array(
@@ -61,7 +61,7 @@ return;
 			'cookie_prefix' => '',
 			'encryption_key' => 'foobar'
 		);
-		$this->session = new Mock_Libraries_Session($config);
+		$this->session = new Mock_Libraries_Session( $config);
 	}
 
 	/**
@@ -77,7 +77,7 @@ return;
 
 		// Restore settings
 		foreach( $this->settings as $name => $value) {
-			ini_set('session.'.$name, $this->setting_vals[$name]);
+			ini_set( 'session . ' . $name, $this->setting_vals[$name]);
 		}
 	}
 
@@ -95,22 +95,22 @@ return;
 		$cmsg2 = 42;
 		$nmsg1 = 'Other test data';
 		$nmsg2 = TRUE;
-		$this->session->cookie->set_userdata($key1, $cmsg1);
-		$this->session->set_userdata($ckey2, $cmsg2);
-		$this->session->native->set_userdata($key1, $nmsg1);
-		$this->session->set_userdata($nkey2, $nmsg2);
+		$this->session->cookie->set_userdata( $key1, $cmsg1);
+		$this->session->set_userdata( $ckey2, $cmsg2);
+		$this->session->native->set_userdata( $key1, $nmsg1);
+		$this->session->set_userdata( $nkey2, $nmsg2);
 
 		// Verify independent messages
-		$this->assertEquals($cmsg1, $this->session->cookie->userdata($key1));
-		$this->assertEquals($nmsg1, $this->session->native->userdata($key1));
+		$this->assertEquals( $cmsg1, $this->session->cookie->userdata( $key1));
+		$this->assertEquals( $nmsg1, $this->session->native->userdata( $key1));
 
 		// Verify pre-selected driver sets
-		$this->assertEquals($cmsg2, $this->session->cookie->userdata($ckey2));
-		$this->assertEquals($nmsg2, $this->session->native->userdata($nkey2));
+		$this->assertEquals( $cmsg2, $this->session->cookie->userdata( $ckey2));
+		$this->assertEquals( $nmsg2, $this->session->native->userdata( $nkey2));
 
 		// Verify no crossover
-		$this->assertNull($this->session->cookie->userdata($nkey2));
-		$this->assertNull($this->session->native->userdata($ckey2));
+		$this->assertNull( $this->session->cookie->userdata( $nkey2));
+		$this->assertNull( $this->session->native->userdata( $ckey2));
 	}
 
 	/**
@@ -122,18 +122,18 @@ return;
 		// Set a userdata value for each driver
 		$key = 'hastest';
 		$cmsg = 'My test data';
-		$this->session->cookie->set_userdata($key, $cmsg);
+		$this->session->cookie->set_userdata( $key, $cmsg);
 		$nmsg = 'Your test data';
-		$this->session->native->set_userdata($key, $nmsg);
+		$this->session->native->set_userdata( $key, $nmsg);
 
 		// Verify values exist
-		$this->assertTrue($this->session->cookie->has_userdata($key));
-		$this->assertTrue($this->session->native->has_userdata($key));
+		$this->assertTrue( $this->session->cookie->has_userdata( $key));
+		$this->assertTrue( $this->session->native->has_userdata( $key));
 
 		// Verify non-existent values
 		$nokey = 'hasnot';
-		$this->assertFalse($this->session->cookie->has_userdata($nokey));
-		$this->assertFalse($this->session->native->has_userdata($nokey));
+		$this->assertFalse( $this->session->cookie->has_userdata( $nokey));
+		$this->assertFalse( $this->session->native->has_userdata( $nokey));
 	}
 
 	/**
@@ -157,17 +157,17 @@ return;
 			'foo' => 'baz',
 			'bar' => 'foo'
 		);
-		$this->session->cookie->set_userdata($cdata);
-		$this->session->native->set_userdata($ndata);
+		$this->session->cookie->set_userdata( $cdata);
+		$this->session->native->set_userdata( $ndata);
 
 		// Make sure all values are present
 		$call = $this->session->cookie->userdata();
 		foreach( $cdata as $key => $value) {
-			$this->assertEquals($value, $call[$key]);
+			$this->assertEquals( $value, $call[$key]);
 		}
 		$nall = $this->session->native->userdata();
 		foreach( $ndata as $key => $value) {
-			$this->assertEquals($value, $nall[$key]);
+			$this->assertEquals( $value, $nall[$key]);
 		}
 	}
 
@@ -180,19 +180,19 @@ return;
 		// Set a userdata message for each driver
 		$key = 'untest';
 		$cmsg = 'Other test data';
-		$this->session->cookie->set_userdata($key, $cmsg);
+		$this->session->cookie->set_userdata( $key, $cmsg);
 		$nmsg = 'Sundry test data';
-		$this->session->native->set_userdata($key, $nmsg);
+		$this->session->native->set_userdata( $key, $nmsg);
 
 		// Verify independent messages
-		$this->assertEquals($this->session->cookie->userdata($key), $cmsg);
-		$this->assertEquals($this->session->native->userdata($key), $nmsg);
+		$this->assertEquals( $this->session->cookie->userdata( $key), $cmsg);
+		$this->assertEquals( $this->session->native->userdata( $key), $nmsg);
 
 		// Unset them and verify absence
-		$this->session->cookie->unset_userdata($key);
-		$this->session->native->unset_userdata($key);
-		$this->assertNull($this->session->cookie->userdata($key));
-		$this->assertNull($this->session->native->userdata($key));
+		$this->session->cookie->unset_userdata( $key);
+		$this->session->native->unset_userdata( $key);
+		$this->assertNull( $this->session->cookie->userdata( $key));
+		$this->assertNull( $this->session->native->userdata( $key));
 	}
 
 	/**
@@ -204,25 +204,25 @@ return;
 		// Set flashdata message for each driver
 		$key = 'fltest';
 		$cmsg = 'Some flash data';
-		$this->session->cookie->set_flashdata($key, $cmsg);
+		$this->session->cookie->set_flashdata( $key, $cmsg);
 		$nmsg = 'Other flash data';
-		$this->session->native->set_flashdata($key, $nmsg);
+		$this->session->native->set_flashdata( $key, $nmsg);
 
 		// Simulate page reload
 		$this->session->cookie->reload();
 		$this->session->native->reload();
 
 		// Verify independent messages
-		$this->assertEquals($cmsg, $this->session->cookie->flashdata($key));
-		$this->assertEquals($nmsg, $this->session->native->flashdata($key));
+		$this->assertEquals( $cmsg, $this->session->cookie->flashdata( $key));
+		$this->assertEquals( $nmsg, $this->session->native->flashdata( $key));
 
 		// Simulate next page reload
 		$this->session->cookie->reload();
 		$this->session->native->reload();
 
 		// Verify absence of messages
-		$this->assertNull($this->session->cookie->flashdata($key));
-		$this->assertNull($this->session->native->flashdata($key));
+		$this->assertNull( $this->session->cookie->flashdata( $key));
+		$this->assertNull( $this->session->native->flashdata( $key));
 	}
 
 	/**
@@ -234,31 +234,31 @@ return;
 		// Set flashdata message for each driver
 		$key = 'kfltest';
 		$cmsg = 'My flash data';
-		$this->session->cookie->set_flashdata($key, $cmsg);
+		$this->session->cookie->set_flashdata( $key, $cmsg);
 		$nmsg = 'Your flash data';
-		$this->session->native->set_flashdata($key, $nmsg);
+		$this->session->native->set_flashdata( $key, $nmsg);
 
 		// Simulate page reload and verify independent messages
 		$this->session->cookie->reload();
 		$this->session->native->reload();
-		$this->assertEquals($cmsg, $this->session->cookie->flashdata($key));
-		$this->assertEquals($nmsg, $this->session->native->flashdata($key));
+		$this->assertEquals( $cmsg, $this->session->cookie->flashdata( $key));
+		$this->assertEquals( $nmsg, $this->session->native->flashdata( $key));
 
 		// Keep messages
-		$this->session->cookie->keep_flashdata($key);
-		$this->session->native->keep_flashdata($key);
+		$this->session->cookie->keep_flashdata( $key);
+		$this->session->native->keep_flashdata( $key);
 
 		// Simulate next page reload and verify message persistence
 		$this->session->cookie->reload();
 		$this->session->native->reload();
-		$this->assertEquals($cmsg, $this->session->cookie->flashdata($key));
-		$this->assertEquals($nmsg, $this->session->native->flashdata($key));
+		$this->assertEquals( $cmsg, $this->session->cookie->flashdata( $key));
+		$this->assertEquals( $nmsg, $this->session->native->flashdata( $key));
 
 		// Simulate next page reload and verify absence of messages
 		$this->session->cookie->reload();
 		$this->session->native->reload();
-		$this->assertNull($this->session->cookie->flashdata($key));
-		$this->assertNull($this->session->native->flashdata($key));
+		$this->assertNull( $this->session->cookie->flashdata( $key));
+		$this->assertNull( $this->session->native->flashdata( $key));
 	}
 
 	public function test_keep_flashdata_with_array()
@@ -286,30 +286,30 @@ return;
 			'foo',
 			'bar'
 		);
-		$this->session->cookie->set_flashdata($cdata);
-		$this->session->native->set_flashdata($ndata);
+		$this->session->cookie->set_flashdata( $cdata);
+		$this->session->native->set_flashdata( $ndata);
 
 		// Simulate page reload and verify independent messages
 		$this->session->cookie->reload();
 		$this->session->native->reload();
-		$this->assertEquals($cdata, $this->session->cookie->flashdata());
-		$this->assertEquals($ndata, $this->session->native->flashdata());
+		$this->assertEquals( $cdata, $this->session->cookie->flashdata());
+		$this->assertEquals( $ndata, $this->session->native->flashdata());
 
 		// Keep messages
-		$this->session->cookie->keep_flashdata($kdata);
-		$this->session->native->keep_flashdata($kdata);
+		$this->session->cookie->keep_flashdata( $kdata);
+		$this->session->native->keep_flashdata( $kdata);
 
 		// Simulate next page reload and verify message persistence
 		$this->session->cookie->reload();
 		$this->session->native->reload();
-		$this->assertEquals($cdata, $this->session->cookie->flashdata());
-		$this->assertEquals($ndata, $this->session->native->flashdata());
+		$this->assertEquals( $cdata, $this->session->cookie->flashdata());
+		$this->assertEquals( $ndata, $this->session->native->flashdata());
 
 		// Simulate next page reload and verify absence of messages
 		$this->session->cookie->reload();
 		$this->session->native->reload();
-		$this->assertEmpty($this->session->cookie->flashdata());
-		$this->assertEmpty($this->session->native->flashdata());
+		$this->assertEmpty( $this->session->cookie->flashdata());
+		$this->assertEmpty( $this->session->native->flashdata());
 	}
 
 	/**
@@ -333,14 +333,14 @@ return;
 			'foo' => 'baz',
 			'bar' => 'foo'
 		);
-		$this->session->cookie->set_flashdata($cdata);
-		$this->session->native->set_flashdata($ndata);
+		$this->session->cookie->set_flashdata( $cdata);
+		$this->session->native->set_flashdata( $ndata);
 
 		// Simulate page reload and make sure all values are present
 		$this->session->cookie->reload();
 		$this->session->native->reload();
-		$this->assertEquals($cdata, $this->session->cookie->flashdata());
-		$this->assertEquals($ndata, $this->session->native->flashdata());
+		$this->assertEquals( $cdata, $this->session->cookie->flashdata());
+		$this->assertEquals( $ndata, $this->session->native->flashdata());
 	}
 
 	/**
@@ -352,22 +352,22 @@ return;
 		// Set tempdata message for each driver - 1 second timeout
 		$key = 'tmptest';
 		$cmsg = 'Some temp data';
-		$this->session->cookie->set_tempdata($key, $cmsg, 1);
+		$this->session->cookie->set_tempdata( $key, $cmsg, 1);
 		$nmsg = 'Other temp data';
-		$this->session->native->set_tempdata($key, $nmsg, 1);
+		$this->session->native->set_tempdata( $key, $nmsg, 1);
 
 		// Simulate page reload and verify independent messages
 		$this->session->cookie->reload();
 		$this->session->native->reload();
-		$this->assertEquals($cmsg, $this->session->cookie->tempdata($key));
-		$this->assertEquals($nmsg, $this->session->native->tempdata($key));
+		$this->assertEquals( $cmsg, $this->session->cookie->tempdata( $key));
+		$this->assertEquals( $nmsg, $this->session->native->tempdata( $key));
 
 		// Wait 2 seconds, simulate page reload and verify message absence
 		sleep(2);
 		$this->session->cookie->reload();
 		$this->session->native->reload();
-		$this->assertNull($this->session->cookie->tempdata($key));
-		$this->assertNull($this->session->native->tempdata($key));
+		$this->assertNull( $this->session->cookie->tempdata( $key));
+		$this->assertNull( $this->session->native->tempdata( $key));
 	}
 
 	/**
@@ -379,19 +379,19 @@ return;
 		// Set tempdata message for each driver - 1 second timeout
 		$key = 'utmptest';
 		$cmsg = 'My temp data';
-		$this->session->cookie->set_tempdata($key, $cmsg, 1);
+		$this->session->cookie->set_tempdata( $key, $cmsg, 1);
 		$nmsg = 'Your temp data';
-		$this->session->native->set_tempdata($key, $nmsg, 1);
+		$this->session->native->set_tempdata( $key, $nmsg, 1);
 
 		// Verify independent messages
-		$this->assertEquals($cmsg, $this->session->cookie->tempdata($key));
-		$this->assertEquals($nmsg, $this->session->native->tempdata($key));
+		$this->assertEquals( $cmsg, $this->session->cookie->tempdata( $key));
+		$this->assertEquals( $nmsg, $this->session->native->tempdata( $key));
 
 		// Unset data and verify message absence
-		$this->session->cookie->unset_tempdata($key);
-		$this->session->native->unset_tempdata($key);
-		$this->assertNull($this->session->cookie->tempdata($key));
-		$this->assertNull($this->session->native->tempdata($key));
+		$this->session->cookie->unset_tempdata( $key);
+		$this->session->native->unset_tempdata( $key);
+		$this->assertNull( $this->session->cookie->tempdata( $key));
+		$this->assertNull( $this->session->native->tempdata( $key));
 	}
 
 	/**
@@ -402,16 +402,16 @@ return;
 return;
 		// Get current session id, regenerate, and compare
 		// Cookie driver
-		$oldid = $this->session->cookie->userdata('session_id');
+		$oldid = $this->session->cookie->userdata( 'session_id');
 		$this->session->cookie->sess_regenerate();
-		$newid = $this->session->cookie->userdata('session_id');
-		$this->assertNotEquals($oldid, $newid);
+		$newid = $this->session->cookie->userdata( 'session_id');
+		$this->assertNotEquals( $oldid, $newid);
 
 		// Native driver - bug #55267 (https://bugs.php.net/bug.php?id=55267) prevents testing this
 		// $oldid = session_id();
 		// $this->session->native->sess_regenerate();
 		// $oldid = session_id();
-		// $this->assertNotEquals($oldid, $newid);
+		// $this->assertNotEquals( $oldid, $newid);
 	}
 
 	/**
@@ -425,16 +425,16 @@ return;
 		$msg = 'More test data';
 
 		// Cookie driver
-		$this->session->cookie->set_userdata($key, $msg);
-		$this->assertEquals($msg, $this->session->cookie->userdata($key));
+		$this->session->cookie->set_userdata( $key, $msg);
+		$this->assertEquals( $msg, $this->session->cookie->userdata( $key));
 		$this->session->cookie->sess_destroy();
-		$this->assertNull($this->session->cookie->userdata($key));
+		$this->assertNull( $this->session->cookie->userdata( $key));
 
 		// Native driver
-		$this->session->native->set_userdata($key, $msg);
-		$this->assertEquals($msg, $this->session->native->userdata($key));
+		$this->session->native->set_userdata( $key, $msg);
+		$this->assertEquals( $msg, $this->session->native->userdata( $key));
 		$this->session->native->sess_destroy();
-		$this->assertNull($this->session->native->userdata($key));
+		$this->assertNull( $this->session->native->userdata( $key));
 	}
 
 }

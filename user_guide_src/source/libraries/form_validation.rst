@@ -73,7 +73,7 @@ code and save it to your application/views/ folder::
 
 	<?php echo validation_errors(); ?>
 
-	<?php echo form_open('form'); ?>
+	<?php echo form_open( 'form'); ?>
 
 	<h5>Username</h5>
 	<input type="text" name="username" value="" size="50" />
@@ -108,7 +108,7 @@ this code and save it to your application/views/ folder::
 
 	<h3>Your form was successfully submitted!</h3>
 
-	<p><?php echo anchor('form', 'Try it again!'); ?></p>
+	<p><?php echo anchor( 'form', 'Try it again!'); ?></p>
 
 	</body>
 	</html>
@@ -125,17 +125,17 @@ this code and save it to your application/controllers/ folder::
 
 		public function index()
 		{
-			$this->load->helper(array('form', 'url'));
+			$this->load->helper(array( 'form', 'url'));
 
-			$this->load->library('form_validation');
+			$this->load->library( 'form_validation');
 
 			if( $this->form_validation->run() == FALSE)
 			{
-				$this->load->view('myform');
+				$this->load->view( 'myform');
 			}
 			else
 			{
-				$this->load->view('formsuccess');
+				$this->load->view( 'formsuccess');
 			}
 		}
 	}
@@ -172,7 +172,7 @@ The form (myform.php) is a standard web form with a couple exceptions:
 
 	<?php echo validation_errors(); ?>
 
-   This function will return any error messages sent back by the
+   This function will return..any error messages sent back by the
    validator. If there are no messages it returns an empty string.
 
 The controller (form.php) has one method: ``index()``. This method
@@ -208,10 +208,10 @@ The above method takes **three** parameters as input:
 Here is an example. In your controller (form.php), add this code just
 below the validation initialization method::
 
-	$this->form_validation->set_rules('username', 'Username', 'required');
-	$this->form_validation->set_rules('password', 'Password', 'required');
-	$this->form_validation->set_rules('passconf', 'Password Confirmation', 'required');
-	$this->form_validation->set_rules('email', 'Email', 'required');
+	$this->form_validation->set_rules( 'username', 'Username', 'required');
+	$this->form_validation->set_rules( 'password', 'Password', 'required');
+	$this->form_validation->set_rules( 'passconf', 'Password Confirmation', 'required');
+	$this->form_validation->set_rules( 'email', 'Email', 'required');
 
 Your controller should now look like this::
 
@@ -221,24 +221,24 @@ Your controller should now look like this::
 
 		public function index()
 		{
-			$this->load->helper(array('form', 'url'));
+			$this->load->helper(array( 'form', 'url'));
 
-			$this->load->library('form_validation');
+			$this->load->library( 'form_validation');
 
-			$this->form_validation->set_rules('username', 'Username', 'required');
-			$this->form_validation->set_rules('password', 'Password', 'required',
-				array('required' => 'You must provide a %s.')
+			$this->form_validation->set_rules( 'username', 'Username', 'required');
+			$this->form_validation->set_rules( 'password', 'Password', 'required',
+				array( 'required' => 'You must provide a %s . ')
 			);
-			$this->form_validation->set_rules('passconf', 'Password Confirmation', 'required');
-			$this->form_validation->set_rules('email', 'Email', 'required');
+			$this->form_validation->set_rules( 'passconf', 'Password Confirmation', 'required');
+			$this->form_validation->set_rules( 'email', 'Email', 'required');
 
 			if( $this->form_validation->run() == FALSE)
 			{
-				$this->load->view('myform');
+				$this->load->view( 'myform');
 			}
 			else
 			{
-				$this->load->view('formsuccess');
+				$this->load->view( 'formsuccess');
 			}
 		}
 	}
@@ -268,7 +268,7 @@ you use this approach, you must name your array keys as indicated::
 			'label' => 'Password',
 			'rules' => 'required',
 			'errors' => array(
-				'required' => 'You must provide a %s.',
+				'required' => 'You must provide a %s . ',
 			),
 		),
 		array(
@@ -283,7 +283,7 @@ you use this approach, you must name your array keys as indicated::
 		)
 	);
 
-	$this->form_validation->set_rules($config);
+	$this->form_validation->set_rules( $config);
 
 Cascading Rules
 ===============
@@ -295,13 +295,13 @@ your rules in the third parameter of rule setting method, like this::
 		'username', 'Username',
 		'required|min_length[5]|max_length[12]|is_unique[users.username]',
 		array(
-			'required'	=> 'You have not provided %s.',
-			'is_unique'	=> 'This %s already exists.'
+			'required'	=> 'You have not provided %s . ',
+			'is_unique'	=> 'This %s already exists . '
 		)
 	);
-	$this->form_validation->set_rules('password', 'Password', 'required');
-	$this->form_validation->set_rules('passconf', 'Password Confirmation', 'required|matches[password]');
-	$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
+	$this->form_validation->set_rules( 'password', 'Password', 'required');
+	$this->form_validation->set_rules( 'passconf', 'Password Confirmation', 'required|matches[password]');
+	$this->form_validation->set_rules( 'email', 'Email', 'required|valid_email|is_unique[users.email]');
 
 The above code sets the following rules:
 
@@ -317,7 +317,7 @@ rules available which you can read about in the validation reference.
 .. note:: You can also pass an array of rules to ``set_rules()``,
 	instead of a string. Example::
 
-	$this->form_validation->set_rules('username', 'Username', array('required', 'min_length[5]'));
+	$this->form_validation->set_rules( 'username', 'Username', array( 'required', 'min_length[5]'));
 
 Prepping Data
 =============
@@ -326,10 +326,10 @@ In addition to the validation method like the ones we used above, you
 can also prep your data in various ways. For example, you can set up
 rules like this::
 
-	$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[12]');
-	$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
-	$this->form_validation->set_rules('passconf', 'Password Confirmation', 'trim|required|matches[password]');
-	$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+	$this->form_validation->set_rules( 'username', 'Username', 'trim|required|min_length[5]|max_length[12]');
+	$this->form_validation->set_rules( 'password', 'Password', 'trim|required|min_length[8]');
+	$this->form_validation->set_rules( 'passconf', 'Password Confirmation', 'trim|required|matches[password]');
+	$this->form_validation->set_rules( 'email', 'Email', 'trim|required|valid_email');
 
 In the above example, we are "trimming" the fields, checking for length
 where necessary and making sure that both password fields match.
@@ -349,7 +349,7 @@ the form field with the submitted data. CodeIgniter offers several
 helper functions that permit you to do this. The one you will use most
 commonly is::
 
-	set_value('field name')
+	set_value( 'field name')
 
 Open your myform.php view file and update the **value** in each field
 using the :php:func:`set_value()` function:
@@ -367,19 +367,19 @@ function calls!**
 
 	<?php echo validation_errors(); ?>
 
-	<?php echo form_open('form'); ?>
+	<?php echo form_open( 'form'); ?>
 
 	<h5>Username</h5>
-	<input type="text" name="username" value="<?php echo set_value('username'); ?>" size="50" />
+	<input type="text" name="username" value="<?php echo set_value( 'username'); ?>" size="50" />
 
 	<h5>Password</h5>
-	<input type="text" name="password" value="<?php echo set_value('password'); ?>" size="50" />
+	<input type="text" name="password" value="<?php echo set_value( 'password'); ?>" size="50" />
 
 	<h5>Password Confirm</h5>
-	<input type="text" name="passconf" value="<?php echo set_value('passconf'); ?>" size="50" />
+	<input type="text" name="passconf" value="<?php echo set_value( 'passconf'); ?>" size="50" />
 
 	<h5>Email Address</h5>
-	<input type="text" name="email" value="<?php echo set_value('email'); ?>" size="50" />
+	<input type="text" name="email" value="<?php echo set_value( 'email'); ?>" size="50" />
 
 	<div><input type="submit" value="Submit" /></div>
 
@@ -398,7 +398,7 @@ Your form fields should now be re-populated
 .. important:: If you use an array as the name of a form field, you
 	must supply it as an array to the function. Example::
 
-	<input type="text" name="colors[]" value="<?php echo set_value('colors[]'); ?>" size="50" />
+	<input type="text" name="colors[]" value="<?php echo set_value( 'colors[]'); ?>" size="50" />
 
 For more info please see the :ref:`using-arrays-as-field-names` section below.
 
@@ -413,7 +413,7 @@ that does that. Let's create an example of this.
 
 In your controller, change the "username" rule to this::
 
-	$this->form_validation->set_rules('username', 'Username', 'callback_username_check');
+	$this->form_validation->set_rules( 'username', 'Username', 'callback_username_check');
 
 Then add a new method called ``username_check()`` to your controller.
 Here's how your controller should now look::
@@ -424,35 +424,35 @@ Here's how your controller should now look::
 
 		public function index()
 		{
-			$this->load->helper(array('form', 'url'));
+			$this->load->helper(array( 'form', 'url'));
 
-			$this->load->library('form_validation');
+			$this->load->library( 'form_validation');
 
-			$this->form_validation->set_rules('username', 'Username', 'callback_username_check');
-			$this->form_validation->set_rules('password', 'Password', 'required');
-			$this->form_validation->set_rules('passconf', 'Password Confirmation', 'required');
-			$this->form_validation->set_rules('email', 'Email', 'required|is_unique[users.email]');
+			$this->form_validation->set_rules( 'username', 'Username', 'callback_username_check');
+			$this->form_validation->set_rules( 'password', 'Password', 'required');
+			$this->form_validation->set_rules( 'passconf', 'Password Confirmation', 'required');
+			$this->form_validation->set_rules( 'email', 'Email', 'required|is_unique[users.email]');
 
 			if( $this->form_validation->run() == FALSE)
 			{
-				$this->load->view('myform');
+				$this->load->view( 'myform');
 			}
 			else
 			{
-				$this->load->view('formsuccess');
+				$this->load->view( 'formsuccess');
 			}
 		}
 
-		public function username_check($str)
+		public function username_check( $str)
 		{
 			if( $str == 'test')
 			{
-				$this->form_validation->set_message('username_check', 'The {field} field can not be the word "test"');
-				return FALSE;
+				$this->form_validation->set_message( 'username_check', 'The {field} field can not be the word "test"');
+				return..FALSE;
 			}
 			else
 			{
-				return TRUE;
+				return..TRUE;
 			}
 		}
 
@@ -469,7 +469,7 @@ method name between square brackets, as in: "callback_foo**[bar]**",
 then it will be passed as the second argument of your callback method.
 
 .. note:: You can also process the form data that is passed to your
-	callback and return it. If your callback returns anything other than a
+	callback and return..it. If your callback returns anything other than a
 	boolean TRUE/FALSE it is assumed that the data is your newly processed
 	form data.
 
@@ -478,7 +478,7 @@ Callable: Use anything as a rule
 
 If callback rules aren't good enough for you (for example, because they are
 limited to your controller), don't get disappointed, there's one more way
-to create custom rules: anything that ``is_callable()`` would return TRUE for.
+to create custom rules: anything that ``is_callable()`` would return..TRUE for.
 
 Consider the following example::
 
@@ -486,7 +486,7 @@ Consider the following example::
 		'username', 'Username',
 		array(
 			'required',
-			array($this->users_model, 'valid_username')
+			array( $this->users_model, 'valid_username')
 		)
 	);
 
@@ -502,7 +502,7 @@ function::
 		'username', 'Username',
 		array(
 			'required',
-			function($value)
+			function( $value)
 			{
 				// Check $value
 			}
@@ -518,7 +518,7 @@ the second element of an array, with the first one being the rule name::
 		'username', 'Username',
 		array(
 			'required',
-			array('username_callable', array($this->users_model, 'valid_username'))
+			array( 'username_callable', array( $this->users_model, 'valid_username'))
 		)
 	);
 
@@ -530,9 +530,9 @@ Anonymous function (PHP 5.3+) version::
 			'required',
 			array(
 				'username_callable',
-				function($str)
+				function( $str)
 				{
-					// Check validity of $str and return TRUE or FALSE
+					// Check validity of $str and return..TRUE or FALSE
 				}
 			)
 		)
@@ -552,13 +552,13 @@ extend/override the language file by creating your own in
 about this in the :doc:`Language Class <language>` documentation),
 or use the following method::
 
-	$this->form_validation->set_message('rule', 'Error Message');
+	$this->form_validation->set_message( 'rule', 'Error Message');
 
 If you need to set a custom error message for a particular field on 
 some particular rule, use the set_rules() method::
 
-	$this->form_validation->set_rules('field_name', 'Field Label', 'rule1|rule2|rule3',
-		array('rule2' => 'Error Message on rule2 for this field_name')
+	$this->form_validation->set_rules( 'field_name', 'Field Label', 'rule1|rule2|rule3',
+		array( 'rule2' => 'Error Message on rule2 for this field_name')
 	);
 
 Where rule corresponds to the name of a particular rule, and Error
@@ -568,7 +568,7 @@ If you'd like to include a field's "human" name, or the optional
 parameter some rules allow for (such as max_length), you can add the
 **{field}** and **{param}** tags to your message, respectively::
 
-	$this->form_validation->set_message('min_length', '{field} must have at least {param} characters.');
+	$this->form_validation->set_message( 'min_length', '{field} must have at least {param} characters . ');
 
 On a field with the human name Username and a rule of min_length[5], an
 error would display: "Username must have at least 5 characters."
@@ -580,7 +580,7 @@ error would display: "Username must have at least 5 characters."
 In the callback rule example above, the error message was set by passing
 the name of the method (without the "callback\_" prefix)::
 
-	$this->form_validation->set_message('username_check')
+	$this->form_validation->set_message( 'username_check')
 
 .. _translating-field-names:
 
@@ -593,18 +593,18 @@ able to be translated, here's how:
 
 First, prefix your "human" name with **lang:**, as in this example::
 
-	 $this->form_validation->set_rules('first_name', 'lang:first_name', 'required');
+	 $this->form_validation->set_rules( 'first_name', 'lang:first_name', 'required');
 
 Then, store the name in one of your language file arrays (without the
 prefix)::
 
-	$lang['first_name'] = 'First Name';
+	$lang[ 'first_name' ] = 'First Name';
 
 .. note:: If you store your array item in a language file that is not
 	loaded automatically by CI, you'll need to remember to load it in your
 	controller using::
 
-	$this->lang->load('file_name');
+	$this->lang->load( 'file_name');
 
 See the :doc:`Language Class <language>` page for more info regarding
 language files.
@@ -622,7 +622,7 @@ globally, individually, or change the defaults in a config file.
    To globally change the error delimiters, in your controller method,
    just after loading the Form Validation class, add this::
 
-      $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+      $this->form_validation->set_error_delimiters( '<div class="error">', '</div>');
 
    In this example, we've switched to using div tags.
 
@@ -630,17 +630,17 @@ globally, individually, or change the defaults in a config file.
    Each of the two error generating functions shown in this tutorial can
    be supplied their own delimiters as follows::
 
-      <?php echo form_error('field name', '<div class="error">', '</div>'); ?>
+      <?php echo form_error( 'field name', '<div class="error">', '</div>'); ?>
 
    Or::
 
-      <?php echo validation_errors('<div class="error">', '</div>'); ?>
+      <?php echo validation_errors( '<div class="error">', '</div>'); ?>
 
 #. **Set delimiters in a config file**
    You can add your error delimiters in application/config/form_validation.php as follows::
 
-      $config['error_prefix'] = '<div class="error_prefix">';
-      $config['error_suffix'] = '</div>';
+      $config[ 'error_prefix' ] = '<div class="error_prefix">';
+      $config[ 'error_suffix' ] = '</div>';
 
 Showing Errors Individually
 ===========================
@@ -651,20 +651,20 @@ than as a list, you can use the :php:func:`form_error()` function.
 Try it! Change your form so that it looks like this::
 
 	<h5>Username</h5>
-	<?php echo form_error('username'); ?>
-	<input type="text" name="username" value="<?php echo set_value('username'); ?>" size="50" />
+	<?php echo form_error( 'username'); ?>
+	<input type="text" name="username" value="<?php echo set_value( 'username'); ?>" size="50" />
 
 	<h5>Password</h5>
-	<?php echo form_error('password'); ?>
-	<input type="text" name="password" value="<?php echo set_value('password'); ?>" size="50" />
+	<?php echo form_error( 'password'); ?>
+	<input type="text" name="password" value="<?php echo set_value( 'password'); ?>" size="50" />
 
 	<h5>Password Confirm</h5>
-	<?php echo form_error('passconf'); ?>
-	<input type="text" name="passconf" value="<?php echo set_value('passconf'); ?>" size="50" />
+	<?php echo form_error( 'passconf'); ?>
+	<input type="text" name="passconf" value="<?php echo set_value( 'passconf'); ?>" size="50" />
 
 	<h5>Email Address</h5>
-	<?php echo form_error('email'); ?>
-	<input type="text" name="email" value="<?php echo set_value('email'); ?>" size="50" />
+	<?php echo form_error( 'email'); ?>
+	<input type="text" name="email" value="<?php echo set_value( 'email'); ?>" size="50" />
 
 If there are no errors, nothing will be shown. If there is an error, the
 message will appear.
@@ -672,7 +672,7 @@ message will appear.
 .. important:: If you use an array as the name of a form field, you
 	must supply it as an array to the function. Example::
 
-	<?php echo form_error('options[size]'); ?>
+	<?php echo form_error( 'options[size]'); ?>
 	<input type="text" name="options[size]" value="<?php echo set_value("options[size]"); ?>" size="50" />
 
 For more info please see the :ref:`using-arrays-as-field-names` section below.
@@ -690,7 +690,7 @@ In this case, you can specify the array to be validated::
 		'passconf' => 'mypassword'
 	);
 
-	$this->form_validation->set_data($data);
+	$this->form_validation->set_data( $data);
 
 Creating validation rules, running the validation, and retrieving error
 messages works the same whether you are validating ``$_POST`` data or
@@ -814,13 +814,13 @@ Calling a Specific Rule Group
 In order to call a specific group, you will pass its name to the ``run()``
 method. For example, to call the signup rule you will do this::
 
-	if( $this->form_validation->run('signup') == FALSE)
+	if( $this->form_validation->run( 'signup') == FALSE)
 	{
-		$this->load->view('myform');
+		$this->load->view( 'myform');
 	}
 	else
 	{
-		$this->load->view('formsuccess');
+		$this->load->view( 'formsuccess');
 	}
 
 Associating a Controller Method with a Rule Group
@@ -837,15 +837,15 @@ method named signup. Here's what your class might look like::
 
 		public function signup()
 		{
-			$this->load->library('form_validation');
+			$this->load->library( 'form_validation');
 
 			if( $this->form_validation->run() == FALSE)
 			{
-				$this->load->view('myform');
+				$this->load->view( 'myform');
 			}
 			else
 			{
-				$this->load->view('formsuccess');
+				$this->load->view( 'formsuccess');
 			}
 		}
 	}
@@ -899,15 +899,15 @@ field name, and as your Validation Rule field name.
 
 For example, to set a rule for the above field you would use::
 
-	$this->form_validation->set_rules('options[]', 'Options', 'required');
+	$this->form_validation->set_rules( 'options[]', 'Options', 'required');
 
 Or, to show an error for the above field you would use::
 
-	<?php echo form_error('options[]'); ?>
+	<?php echo form_error( 'options[]'); ?>
 
 Or to re-populate the field you would use::
 
-	<input type="text" name="options[]" value="<?php echo set_value('options[]'); ?>" size="50" />
+	<input type="text" name="options[]" value="<?php echo set_value( 'options[]'); ?>" size="50" />
 
 You can use multidimensional arrays as field names as well. For example::
 
@@ -920,7 +920,7 @@ Or even::
 As with our first example, you must use the exact array name in the
 helper functions::
 
-	<?php echo form_error('sports[nba][basketball]'); ?>
+	<?php echo form_error( 'sports[nba][basketball]'); ?>
 
 If you are using checkboxes (or other fields) that have multiple
 options, don't forget to leave an empty bracket after each option, so
@@ -938,7 +938,7 @@ Or if you use a multidimensional array::
 
 When you use a helper function you'll include the bracket as well::
 
-	<?php echo form_error('options[color][]'); ?>
+	<?php echo form_error( 'options[color][]'); ?>
 
 
 **************
@@ -994,7 +994,7 @@ Rule                      Parameter  Description                                
 .. note:: These rules can also be called as discrete methods. For
 	example::
 
-		$this->form_validation->required($string);
+		$this->form_validation->required( $string);
 
 .. note:: You can also use any native PHP functions that permit up
 	to two parameters, where at least one is required (to pass
@@ -1028,7 +1028,7 @@ Class Reference
 
 .. php:class:: CI_Form_validation
 
-	.. php:method:: set_rules($field[, $label = ''[, $rules = '']])
+	.. php:method:: set_rules( $field[, $label = ''[, $rules = '' ]])
 
 		:param	string	$field: Field name
 		:param	string	$label: Field label
@@ -1042,7 +1042,7 @@ Class Reference
 		-  :ref:`setting-validation-rules`
 		-  :ref:`saving-groups`
 
-	.. php:method:: run([$group = ''])
+	.. php:method:: run([$group = '' ])
 
 		:param	string	$group: The name of the validation group to run
 		:returns:	TRUE on success, FALSE if validation failed
@@ -1052,7 +1052,7 @@ Class Reference
 		on failure. You can optionally pass the name of the validation group via
 		the method, as described in: :ref:`saving-groups`
 
-	.. php:method:: set_message($lang[, $val = ''])
+	.. php:method:: set_message( $lang[, $val = '' ])
 
 		:param	string	$lang: The rule the message is for
 		:param	string	$val: The message
@@ -1061,7 +1061,7 @@ Class Reference
 
 		Permits you to set custom error messages. See :ref:`setting-error-messages`
 
-	.. php:method:: set_error_delimiters([$prefix = '<p>'[, $suffix = '</p>']])
+	.. php:method:: set_error_delimiters([$prefix = '<p>'[, $suffix = '</p>' ]])
 
 		:param	string	$prefix: Error message prefix
 		:param	string	$suffix: Error message suffix
@@ -1070,7 +1070,7 @@ Class Reference
 
 		Sets the default prefix and suffix for error messages.
 
-	.. php:method:: set_data($data)
+	.. php:method:: set_data( $data)
 
 		:param	array	$data: Array of data validate
 		:returns:	CI_Form_validation instance (method chaining)
@@ -1094,7 +1094,7 @@ Class Reference
 
 		Returns the error messages as an array.
 
-	.. php:method:: error_string([$prefix = ''[, $suffix = '']])
+	.. php:method:: error_string([$prefix = ''[, $suffix = '' ]])
 
 		:param	string	$prefix: Error message prefix
 		:param	string	$suffix: Error message suffix
@@ -1104,7 +1104,7 @@ Class Reference
 		Returns all error messages (as returned from error_array()) formatted as a
 		string and separated by a newline character.
 
-	.. php:method:: error($field[, $prefix = ''[, $suffix = '']])
+	.. php:method:: error( $field[, $prefix = ''[, $suffix = '' ]])
 
 		:param	string $field: Field name
 		:param	string $prefix: Optional prefix
@@ -1115,7 +1115,7 @@ Class Reference
 		Returns the error message for a specific field, optionally adding a
 		prefix and/or suffix to it (usually HTML tags).
 
-	.. php:method:: has_rule($field)
+	.. php:method:: has_rule( $field)
 
 		:param	string	$field: Field name
 		:returns:	TRUE if the field has rules set, FALSE if not

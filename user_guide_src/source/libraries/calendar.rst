@@ -24,7 +24,7 @@ Initializing the Class
 Like most other classes in CodeIgniter, the Calendar class is
 initialized in your controller using the $this->load->library function::
 
-	$this->load->library('calendar');
+	$this->load->library( 'calendar');
 
 Once loaded, the Calendar object will be available using::
 
@@ -35,14 +35,14 @@ Displaying a Calendar
 
 Here is a very simple example showing how you can display a calendar::
 
-	$this->load->library('calendar');
+	$this->load->library( 'calendar');
 	echo $this->calendar->generate();
 
 The above code will generate a calendar for the current month/year based
 on your server time. To show a calendar for a specific month and year
 you will pass this information to the calendar generating function::
 
-	$this->load->library('calendar');
+	$this->load->library( 'calendar');
 	echo $this->calendar->generate(2006, 6);
 
 The above code will generate a calendar showing the month of June in
@@ -57,7 +57,7 @@ array in which the keys correspond to the days you wish to populate and
 the array value contains the data. The array is passed to the third
 parameter of the calendar generating function. Consider this example::
 
-	$this->load->library('calendar');
+	$this->load->library( 'calendar');
 
 	$data = array(
 		3  => 'http://example.com/news/article/2006/03/',
@@ -89,7 +89,7 @@ the second parameter of the loading function. Here is an example::
 		'day_type'     => 'short'
 	);
 
-	$this->load->library('calendar', $prefs);
+	$this->load->library( 'calendar', $prefs);
 
 	echo $this->calendar->generate();
 
@@ -128,9 +128,9 @@ to this example::
 		'next_prev_url'   => 'http://example.com/index.php/calendar/show/'
 	);
 
-	$this->load->library('calendar', $prefs);
+	$this->load->library( 'calendar', $prefs);
 
-	echo $this->calendar->generate($this->uri->segment(3), $this->uri->segment(4));
+	echo $this->calendar->generate( $this->uri->segment(3), $this->uri->segment(4));
 
 You'll notice a few things about the above example:
 
@@ -150,7 +150,7 @@ By creating a calendar template you have 100% control over the design of
 your calendar. Using the string method, each component of your calendar
 will be placed within a pair of pseudo-variables as shown here::
 
-	$prefs['template'] = '
+	$prefs[ 'template' ] = '
 
 		{table_open}<table border="0" cellpadding="0" cellspacing="0">{/table_open}
 
@@ -189,7 +189,7 @@ will be placed within a pair of pseudo-variables as shown here::
 		{table_close}</table>{/table_close}
 	';
 
-	$this->load->library('calendar', $prefs);
+	$this->load->library( 'calendar', $prefs);
 
 	echo $this->calendar->generate();
 
@@ -199,13 +199,13 @@ inherited in the calendar class.
 
 Example::
 
-	$prefs['template'] = array(
+	$prefs[ 'template' ] = array(
 		'table_open'           => '<table class="calendar">',
 		'cal_cell_start'       => '<td class="day">',
 		'cal_cell_start_today' => '<td class="today">'
 	);
     
-	$this->load->library('calendar', $prefs);
+	$this->load->library( 'calendar', $prefs);
     
 	echo $this->calendar->generate();
 
@@ -234,7 +234,7 @@ Class Reference
 		Generate the calendar.
 
 
-	.. php:method:: get_month_name($month)
+	.. php:method:: get_month_name( $month)
 
 		:param	int	$month: Month
 		:returns:	Month name
@@ -242,7 +242,7 @@ Class Reference
 
 		Generates a textual month name based on the numeric month provided.
 
-	.. php:method:: get_day_names($day_type = '')
+	.. php:method:: get_day_names( $day_type = '')
 
 		:param	string	$day_type: 'long', 'short', or 'abr'
 		:returns:	Array of day names
@@ -250,10 +250,10 @@ Class Reference
 
 		Returns an array of day names (Sunday, Monday, etc.) based on the type
 		provided. Options: long, short, abr. If no ``$day_type`` is provided (or
-		if an invalid type is provided) this method will return the "abbreviated"
+		if an invalid type is provided) this method will return..the "abbreviated"
 		style.
 
-	.. php:method:: adjust_date($month, $year)
+	.. php:method:: adjust_date( $month, $year)
 
 		:param	int	$month: Month
 		:param	int	$year: Year
@@ -264,7 +264,7 @@ Class Reference
 		you submit 13 as the month, the year will increment and the month will
 		become January::
 
-			print_r($this->calendar->adjust_date(13, 2014));
+			print_r( $this->calendar->adjust_date(13, 2014));
 
 		outputs::
 
@@ -274,7 +274,7 @@ Class Reference
 				[year] => '2015'
 			)
 
-	.. php:method:: get_total_days($month, $year)
+	.. php:method:: get_total_days( $month, $year)
 
 		:param	int	$month: Month
 		:param	int	$year: Year

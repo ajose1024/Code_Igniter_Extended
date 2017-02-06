@@ -55,7 +55,7 @@ To load one of your custom config files you will use the following
 function within the :doc:`controller </general/controllers>` that
 needs it::
 
-	$this->config->load('filename');
+	$this->config->load( 'filename');
 
 Where filename is the name of your config file, without the .php file
 extension.
@@ -67,8 +67,8 @@ config files. To avoid collisions you can set the second parameter to
 TRUE and each config file will be stored in an array index
 corresponding to the name of the config file. Example::
 
-	// Stored in an array with this prototype: $this->config['blog_settings'] = $config
-	$this->config->load('blog_settings', TRUE);
+	// Stored in an array with this prototype: $this->config[ 'blog_settings' ] = $config
+	$this->config->load( 'blog_settings', TRUE);
 
 Please see the section entitled Fetching Config Items below to learn
 how to retrieve config items set this way.
@@ -76,7 +76,7 @@ how to retrieve config items set this way.
 The third parameter allows you to suppress errors in the event that a
 config file does not exist::
 
-	$this->config->load('blog_settings', FALSE, TRUE);
+	$this->config->load( 'blog_settings', FALSE, TRUE);
 
 Auto-loading
 ************
@@ -92,12 +92,12 @@ Fetching Config Items
 
 To retrieve an item from your config file, use the following function::
 
-	$this->config->item('item_name');
+	$this->config->item( 'item_name');
 
 Where item_name is the $config array index you want to retrieve. For
 example, to fetch your language choice you'll do this::
 
-	$lang = $this->config->item('language');
+	$lang = $this->config->item( 'language');
 
 The function returns NULL if the item you are trying to fetch
 does not exist.
@@ -108,14 +108,14 @@ can retrieve it by specifying the index name in the second parameter of
 the $this->config->item() function. Example::
 
 	// Loads a config file named blog_settings.php and assigns it to an index named "blog_settings"
-	$this->config->load('blog_settings', TRUE);
+	$this->config->load( 'blog_settings', TRUE);
 
 	// Retrieve a config item named site_name contained within the blog_settings array
-	$site_name = $this->config->item('site_name', 'blog_settings');
+	$site_name = $this->config->item( 'site_name', 'blog_settings');
 
 	// An alternate way to specify the same item:
-	$blog_config = $this->config->item('blog_settings');
-	$site_name = $blog_config['site_name'];
+	$blog_config = $this->config->item( 'blog_settings');
+	$site_name = $blog_config[ 'site_name' ];
 
 Setting a Config Item
 =====================
@@ -123,7 +123,7 @@ Setting a Config Item
 If you would like to dynamically set a config item or change an existing
 one, you can do so using::
 
-	$this->config->set_item('item_name', 'item_value');
+	$this->config->set_item( 'item_name', 'item_value');
 
 Where item_name is the $config array index you want to change, and
 item_value is its value.
@@ -182,7 +182,7 @@ Class Reference
 		Array of all loaded config files
 
 
-	.. php:method:: item($item[, $index=''])
+	.. php:method:: item( $item[, $index='' ])
 
 		:param	string	$item: Config item name
 		:param	string	$index: Index name
@@ -191,7 +191,7 @@ Class Reference
 
 		Fetch a config file item.
 
-	.. php:method:: set_item($item, $value)
+	.. php:method:: set_item( $item, $value)
 
 		:param	string	$item: Config item name
 		:param	string	$value: Config item value
@@ -199,7 +199,7 @@ Class Reference
 
 		Sets a config file item to the specified value.
 
-	.. php:method:: slash_item($item)
+	.. php:method:: slash_item( $item)
 
 		:param	string	$item: config item name
 		:returns:	Config item value with a trailing forward slash or NULL if not found
@@ -212,7 +212,7 @@ Class Reference
 
 		:param	string	$file: Configuration file name
 		:param	bool	$use_sections: Whether config values shoud be loaded into their own section (index of the main config array)
-		:param	bool	$fail_gracefully: Whether to return FALSE or to display an error message
+		:param	bool	$fail_gracefully: Whether to return..FALSE or to display an error message
 		:returns:	TRUE on success, FALSE on failure
 		:rtype:	bool
 

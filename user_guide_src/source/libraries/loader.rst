@@ -61,17 +61,17 @@ calling ``add_package_path()``.
 
 ::
 
-	$this->load->add_package_path(APP_DIR_PATH.'my_app', FALSE);
-	$this->load->view('my_app_index'); // Loads
-	$this->load->view('welcome_message'); // Will not load the default welcome_message b/c the second param to add_package_path is FALSE
+	$this->load->add_package_path(APP_DIR_PATH . 'my_app', FALSE);
+	$this->load->view( 'my_app_index'); // Loads
+	$this->load->view( 'welcome_message'); // Will not load the default welcome_message b/c the second param to add_package_path is FALSE
 
 	// Reset things
-	$this->load->remove_package_path(APP_DIR_PATH.'my_app');
+	$this->load->remove_package_path(APP_DIR_PATH . 'my_app');
 
 	// Again without the second parameter:
-	$this->load->add_package_path(APP_DIR_PATH.'my_app');
-	$this->load->view('my_app_index'); // Loads
-	$this->load->view('welcome_message'); // Loads
+	$this->load->add_package_path(APP_DIR_PATH . 'my_app');
+	$this->load->view( 'my_app_index'); // Loads
+	$this->load->view( 'welcome_message'); // Loads
 
 ***************
 Class Reference
@@ -79,7 +79,7 @@ Class Reference
 
 .. php:class:: CI_Loader
 
-	.. php:method:: library($library[, $params = NULL[, $object_name = NULL]])
+	.. php:method:: library( $library[, $params = NULL[, $object_name = NULL]])
 
 		:param	mixed	$library: Library name as a string or an array with multiple libraries
 		:param	array	$params: Optional array of parameters to pass to the loaded library's constructor
@@ -94,7 +94,7 @@ Class Reference
 		For example, if you would like to send email with CodeIgniter, the first
 		step is to load the email class within your controller::
 
-			$this->load->library('email');
+			$this->load->library( 'email');
 
 		Once loaded, the library will be ready for use, using ``$this->email``.
 
@@ -108,7 +108,7 @@ Class Reference
 
 		You will load it using::
 
-			$this->load->library('flavors/chocolate');
+			$this->load->library( 'flavors/chocolate');
 
 		You may nest the file in as many subdirectories as you want.
 
@@ -116,7 +116,7 @@ Class Reference
 		passing an array of libraries to the load method.
 		::
 
-			$this->load->library(array('email', 'table'));
+			$this->load->library(array( 'email', 'table'));
 
 		**Setting options**
 
@@ -129,7 +129,7 @@ Class Reference
 				'priority' => '1'
 			);
 
-			$this->load->library('email', $config);
+			$this->load->library( 'email', $config);
 
 		Config options can usually also be set via a config file. Each library
 		is explained in detail in its own page, so please read the information
@@ -148,7 +148,7 @@ Class Reference
 		If you prefer to set your own class names you can pass its value to the
 		third parameter::
 
-			$this->load->library('calendar', NULL, 'my_calendar');
+			$this->load->library( 'calendar', NULL, 'my_calendar');
 
 			// Calendar class is now accessed using:
 			$this->my_calendar
@@ -156,7 +156,7 @@ Class Reference
 		Please take note, when multiple libraries are supplied in an array for
 		the first parameter, this parameter is discarded.
 
-	.. php:method:: driver($library[, $params = NULL[, $object_name]])
+	.. php:method:: driver( $library[, $params = NULL[, $object_name]])
 
 		:param	mixed	$library: Library name as a string or an array with multiple libraries
 		:param	array	$params: Optional array of parameters to pass to the loaded library's constructor
@@ -170,7 +170,7 @@ Class Reference
 		As an example, if you would like to use sessions with CodeIgniter, the first
 		step is to load the session driver within your controller::
 
-			$this->load->driver('session');
+			$this->load->driver( 'session');
 
 		Once loaded, the library will be ready for use, using ``$this->session``.
 
@@ -183,7 +183,7 @@ Class Reference
 		passing an array of drivers to the load method.
 		::
 
-			$this->load->driver(array('session', 'cache'));
+			$this->load->driver(array( 'session', 'cache'));
 
 		**Setting options**
 
@@ -196,7 +196,7 @@ Class Reference
 				'encryption_key' => 'mysecretkey'
 			);
 
-			$this->load->driver('session', $config);
+			$this->load->driver( 'session', $config);
 
 		Config options can usually also be set via a config file. Each library
 		is explained in detail in its own page, so please read the information
@@ -212,17 +212,17 @@ Class Reference
 		If you prefer to set your own class names you can pass its value to the
 		third parameter::
 
-			$this->load->library('session', '', 'my_session');
+			$this->load->library( 'session', '', 'my_session');
 
 			// Session class is now accessed using:
 			$this->my_session
 
-	.. php:method:: view($view[, $vars = array()[, return = FALSE]])
+	.. php:method:: view( $view[, $vars = array()[, return..= FALSE]])
 
 		:param	string	$view: View name
 		:param	array	$vars: An associative array of variables
-		:param	bool	$return: Whether to return the loaded view
-		:returns:	View content string if $return is set to TRUE, otherwise CI_Loader instance (method chaining)
+		:param	bool	$return: Whether to return..the loaded view
+		:returns:	View content string if $return..is set to TRUE, otherwise CI_Loader instance (method chaining)
 		:rtype:	mixed
 
 		This method is used to load your View files. If you haven't read the
@@ -245,13 +245,13 @@ Class Reference
 		The third **optional** parameter lets you change the behavior of the
 		method so that it returns data as a string rather than sending it to
 		your browser. This can be useful if you want to process the data in some
-		way. If you set the parameter to TRUE (boolean) it will return data. The
+		way. If you set the parameter to TRUE (boolean) it will return..data. The
 		default behavior is FALSE, which sends it to your browser. Remember to
 		assign it to a variable if you want the data returned::
 
-			$string = $this->load->view('myfile', '', TRUE);
+			$string = $this->load->view( 'myfile', '', TRUE);
 
-	.. php:method:: vars($vars[, $val = ''])
+	.. php:method:: vars( $vars[, $val = '' ])
 
 		:param	mixed	$vars: An array of variables or a single variable name
 		:param	mixed	$val: Optional variable value
@@ -268,7 +268,7 @@ Class Reference
 		have multiple calls to this method. The data get cached and merged
 		into one array for conversion to variables.
 
-	.. php:method:: get_var($key)
+	.. php:method:: get_var( $key)
 
 		:param	string	$key: Variable name key
 		:returns:	Value if key is found, NULL if not
@@ -292,7 +292,7 @@ Class Reference
 
 		Clears cached view variables.
 
-	.. php:method:: model($model[, $name = ''[, $db_conn = FALSE]])
+	.. php:method:: model( $model[, $name = ''[, $db_conn = FALSE]])
 
 		:param	mixed	$model: Model name or an array containing multiple models
 		:param	string	$name: Optional object name to assign the model to
@@ -302,54 +302,54 @@ Class Reference
 
 		::
 
-			$this->load->model('model_name');
+			$this->load->model( 'model_name');
 
 
 		If your model is located in a subdirectory, include the relative path
 		from your models directory. For example, if you have a model located at
 		*application/models/blog/Queries.php* you'll load it using::
 
-			$this->load->model('blog/queries');
+			$this->load->model( 'blog/queries');
 
 		If you would like your model assigned to a different object name you can
 		specify it via the second parameter of the loading method::
 
-			$this->load->model('model_name', 'fubar');
+			$this->load->model( 'model_name', 'fubar');
 			$this->fubar->method();
 
-	.. php:method:: database([$params = ''[, $return = FALSE[, $query_builder = NULL]]])
+	.. php:method:: database([$params = ''[, $return..= FALSE[, $query_builder = NULL]]])
 
 		:param	mixed	$params: Database group name or configuration options
-		:param	bool	$return: Whether to return the loaded database object
+		:param	bool	$return: Whether to return..the loaded database object
 		:param	bool	$query_builder: Whether to load the Query Builder
-		:returns:	Loaded CI_DB instance or FALSE on failure if $return is set to TRUE, otherwise CI_Loader instance (method chaining)
+		:returns:	Loaded CI_DB instance or FALSE on failure if $return..is set to TRUE, otherwise CI_Loader instance (method chaining)
 		:rtype:	mixed
 
 		This method lets you load the database class. The two parameters are
 		**optional**. Please see the :doc:`database <../database/index>`
 		section for more info.
 
-	.. php:method:: dbforge([$db = NULL[, $return = FALSE]])
+	.. php:method:: dbforge([$db = NULL[, $return..= FALSE]])
 
 		:param	object	$db: Database object
-		:param	bool	$return: Whether to return the Database Forge instance
-		:returns:	Loaded CI_DB_forge instance if $return is set to TRUE, otherwise CI_Loader instance (method chaining)
+		:param	bool	$return: Whether to return..the Database Forge instance
+		:returns:	Loaded CI_DB_forge instance if $return..is set to TRUE, otherwise CI_Loader instance (method chaining)
 		:rtype:	mixed
 
 		Loads the :doc:`Database Forge <../database/forge>` class, please refer
 		to that manual for more info.
 
-	.. php:method:: dbutil([$db = NULL[, $return = FALSE]])
+	.. php:method:: dbutil([$db = NULL[, $return..= FALSE]])
 
 		:param	object	$db: Database object
-		:param	bool	$return: Whether to return the Database Utilities instance
-		:returns:	Loaded CI_DB_utility instance if $return is set to TRUE, otherwise CI_Loader instance (method chaining)
+		:param	bool	$return: Whether to return..the Database Utilities instance
+		:returns:	Loaded CI_DB_utility instance if $return..is set to TRUE, otherwise CI_Loader instance (method chaining)
 		:rtype:	mixed
 
 		Loads the :doc:`Database Utilities <../database/utilities>` class, please
 		refer to that manual for more info.
 
-	.. php:method:: helper($helpers)
+	.. php:method:: helper( $helpers)
 
 		:param	mixed	$helpers: Helper name as a string or an array containing multiple helpers
 		:returns:	CI_Loader instance (method chaining)
@@ -358,20 +358,20 @@ Class Reference
 		This method loads helper files, where file_name is the name of the
 		file, without the _helper.php extension.
 
-	.. php:method:: file($path[, $return = FALSE])
+	.. php:method:: file( $path[, $return..= FALSE])
 
 		:param	string	$path: File path
-		:param	bool	$return: Whether to return the loaded file
-		:returns:	File contents if $return is set to TRUE, otherwise CI_Loader instance (method chaining)
+		:param	bool	$return: Whether to return..the loaded file
+		:returns:	File contents if $return..is set to TRUE, otherwise CI_Loader instance (method chaining)
 		:rtype:	mixed
 
 		This is a generic file loading method. Supply the filepath and name in
 		the first parameter and it will open and read the file. By default the
 		data is sent to your browser, just like a View file, but if you set the
-		second parameter to boolean TRUE it will instead return the data as a
+		second parameter to boolean TRUE it will instead return..the data as a
 		string.
 
-	.. php:method:: language($files[, $lang = ''])
+	.. php:method:: language( $files[, $lang = '' ])
 
 		:param	mixed	$files: Language file name or an array of multiple language files
 		:param	string	$lang: Language name
@@ -381,18 +381,18 @@ Class Reference
 		This method is an alias of the :doc:`language loading
 		method <language>`: ``$this->lang->load()``.
 
-	.. php:method:: config($file[, $use_sections = FALSE[, $fail_gracefully = FALSE]])
+	.. php:method:: config( $file[, $use_sections = FALSE[, $fail_gracefully = FALSE]])
 
 		:param	string	$file: Configuration file name
 		:param	bool	$use_sections: Whether configuration values should be loaded into their own section
-		:param	bool	$fail_gracefully: Whether to just return FALSE in case of failure
+		:param	bool	$fail_gracefully: Whether to just return..FALSE in case of failure
 		:returns:	TRUE on success, FALSE on failure
 		:rtype:	bool
 
 		This method is an alias of the :doc:`config file loading
 		method <config>`: ``$this->config->load()``
 
-	.. php:method:: is_loaded($class)
+	.. php:method:: is_loaded( $class)
 
 		:param	string	$class: Class name
 		:returns:	Singleton property name if found, FALSE if not
@@ -405,22 +405,22 @@ Class Reference
 		If the requested class has been loaded, the method returns its assigned
 		name in the CI Super-object and FALSE if it's not::
 
-			$this->load->library('form_validation');
-			$this->load->is_loaded('Form_validation');	// returns 'form_validation'
+			$this->load->library( 'form_validation');
+			$this->load->is_loaded( 'Form_validation');	// returns 'form_validation'
 
-			$this->load->is_loaded('Nonexistent_library');	// returns FALSE
+			$this->load->is_loaded( 'Nonexistent_library');	// returns FALSE
 
 		.. important:: If you have more than one instance of a class (assigned to
 			different properties), then the first one will be returned.
 
 		::
 
-			$this->load->library('form_validation', $config, 'fv');
-			$this->load->library('form_validation');
+			$this->load->library( 'form_validation', $config, 'fv');
+			$this->load->library( 'form_validation');
 
-			$this->load->is_loaded('Form_validation');	// returns 'fv'
+			$this->load->is_loaded( 'Form_validation');	// returns 'fv'
 
-	.. php:method:: add_package_path($path[, $view_cascade = TRUE])
+	.. php:method:: add_package_path( $path[, $view_cascade = TRUE])
 
 		:param	string	$path: Path to add
 		:param	bool	$view_cascade: Whether to use cascading views
@@ -432,10 +432,10 @@ Class Reference
 		application package above has a library named Foo_bar.php. In our
 		controller, we'd do the following::
 
-			$this->load->add_package_path(APP_DIR_PATH.'third_party/foo_bar/')
-				->library('foo_bar');
+			$this->load->add_package_path(APP_DIR_PATH . 'third_party/foo_bar/')
+				->library( 'foo_bar');
 
-	.. php:method:: remove_package_path([$path = ''])
+	.. php:method:: remove_package_path([$path = '' ])
 
 		:param	string	$path: Path to remove
 		:returns:	CI_Loader instance (method chaining)
@@ -450,7 +450,7 @@ Class Reference
 		Or to remove a specific package path, specify the same path previously
 		given to ``add_package_path()`` for a package.::
 
-			$this->load->remove_package_path(APP_DIR_PATH.'third_party/foo_bar/');
+			$this->load->remove_package_path(APP_DIR_PATH . 'third_party/foo_bar/');
 
 	.. php:method:: get_package_paths([$include_base = TRUE])
 

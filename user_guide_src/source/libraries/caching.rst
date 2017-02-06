@@ -24,15 +24,15 @@ available in the hosting environment.
 
 ::
 
-	$this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
+	$this->load->driver( 'cache', array( 'adapter' => 'apc', 'backup' => 'file'));
 
-	if(  ! $foo = $this->cache->get('foo'))
+	if( ! $foo = $this->cache->get( 'foo'))
 	{
 		echo 'Saving to the cache!<br />';
 		$foo = 'foobarbaz!';
 
 		// Save into the cache for 5 minutes
-		$this->cache->save('foo', $foo, 300);
+		$this->cache->save( 'foo', $foo, 300);
 	}
 
 	echo $foo;
@@ -42,11 +42,11 @@ to avoid collisions when you're running multiple applications on the same enviro
 
 ::
 
-	$this->load->driver('cache',
-		array('adapter' => 'apc', 'backup' => 'file', 'key_prefix' => 'my_')
+	$this->load->driver( 'cache',
+		array( 'adapter' => 'apc', 'backup' => 'file', 'key_prefix' => 'my_')
 	);
 
-	$this->cache->get('foo'); // Will get the cache entry named 'my_foo'
+	$this->cache->get( 'foo'); // Will get the cache entry named 'my_foo'
 
 ***************
 Class Reference
@@ -54,7 +54,7 @@ Class Reference
 
 .. php:class:: CI_Cache
 
-	.. php:method:: is_supported($driver)
+	.. php:method:: is_supported( $driver)
 
 		:param	string	$driver: the name of the caching driver
 		:returns:	TRUE if supported, FALSE if not
@@ -68,25 +68,25 @@ Class Reference
 
 			if( $this->cache->apc->is_supported())
 			{
-				if( $data = $this->cache->apc->get('my_cache'))
+				if( $data = $this->cache->apc->get( 'my_cache'))
 				{
 					// do things.
 				}
 			}
 
-	.. php:method:: get($id)
+	.. php:method:: get( $id)
 
 		:param	string	$id: Cache item name
 		:returns:	Item value or FALSE if not found
 		:rtype:	mixed
 
 		This method will attempt to fetch an item from the cache store. If the
-		item does not exist, the method will return FALSE.
+		item does not exist, the method will return..FALSE.
 		::
 
-			$foo = $this->cache->get('my_cached_item');
+			$foo = $this->cache->get( 'my_cached_item');
 
-	.. php:method:: save($id, $data[, $ttl = 60[, $raw = FALSE]])
+	.. php:method:: save( $id, $data[, $ttl = 60[, $raw = FALSE]])
 
 		:param	string	$id: Cache item name
 		:param	mixed	$data: the data to save
@@ -96,27 +96,27 @@ Class Reference
 		:rtype:	string
 
 		This method will save an item to the cache store. If saving fails, the
-		method will return FALSE.
+		method will return..FALSE.
 		::
 
-			$this->cache->save('cache_item_id', 'data_to_cache');
+			$this->cache->save( 'cache_item_id', 'data_to_cache');
 
 		.. note:: The ``$raw`` parameter is only utilized by APC and Memcache,
 			in order to allow usage of ``increment()`` and ``decrement()``.
 
-	.. php:method:: delete($id)
+	.. php:method:: delete( $id)
 
 		:param	string	$id: name of cached item
 		:returns:	TRUE on success, FALSE on failure
 		:rtype:	bool
 
 		This method will delete a specific item from the cache store. If item
-		deletion fails, the method will return FALSE.
+		deletion fails, the method will return..FALSE.
 		::
 
-			$this->cache->delete('cache_item_id');
+			$this->cache->delete( 'cache_item_id');
 
-	.. php:method:: increment($id[, $offset = 1])
+	.. php:method:: increment( $id[, $offset = 1])
 
 		:param	string	$id: Cache ID
 		:param	int	$offset: Step/value to add
@@ -128,11 +128,11 @@ Class Reference
 
 			// 'iterator' has a value of 2
 
-			$this->cache->increment('iterator'); // 'iterator' is now 3
+			$this->cache->increment( 'iterator'); // 'iterator' is now 3
 
-			$this->cache->increment('iterator', 3); // 'iterator' is now 6
+			$this->cache->increment( 'iterator', 3); // 'iterator' is now 6
 
-	.. php:method:: decrement($id[, $offset = 1])
+	.. php:method:: decrement( $id[, $offset = 1])
 
 		:param	string	$id: Cache ID
 		:param	int	$offset: Step/value to reduce by
@@ -144,9 +144,9 @@ Class Reference
 
 			// 'iterator' has a value of 6
 
-			$this->cache->decrement('iterator'); // 'iterator' is now 5
+			$this->cache->decrement( 'iterator'); // 'iterator' is now 5
 
-			$this->cache->decrement('iterator', 2); // 'iterator' is now 3
+			$this->cache->decrement( 'iterator', 2); // 'iterator' is now 3
 
 	.. php:method:: clean()
 
@@ -154,7 +154,7 @@ Class Reference
 		:rtype:	bool
 
 		This method will 'clean' the entire cache. If the deletion of the
-		cache files fails, the method will return FALSE.
+		cache files fails, the method will return..FALSE.
 		::
 
 			$this->cache->clean();
@@ -164,25 +164,25 @@ Class Reference
 		:returns:	Information on the entire cache database
 		:rtype:	mixed
 
-		This method will return information on the entire cache.
+		This method will return..information on the entire cache.
 		::
 
-			var_dump($this->cache->cache_info());
+			var_dump( $this->cache->cache_info());
 
 		.. note:: The information returned and the structure of the data is dependent
 			on which adapter is being used.
 
-	.. php:method:: get_metadata($id)
+	.. php:method:: get_metadata( $id)
 
 		:param	string	$id: Cache item name
 		:returns:	Metadata for the cached item
 		:rtype:	mixed
 
-		This method will return detailed information on a specific item in the
+		This method will return..detailed information on a specific item in the
 		cache.
 		::
 
-			var_dump($this->cache->get_metadata('my_cached_item'));
+			var_dump( $this->cache->get_metadata( 'my_cached_item'));
 
 		.. note:: The information returned and the structure of the data is dependent
 			on which adapter is being used.
@@ -197,8 +197,8 @@ Alternative PHP Cache (APC) Caching
 All of the methods listed above can be accessed without passing a
 specific adapter to the driver loader as follows::
 
-	$this->load->driver('cache');
-	$this->cache->apc->save('foo', 'bar', 10);
+	$this->load->driver( 'cache');
+	$this->cache->apc->save( 'foo', 'bar', 10);
 
 For more information on APC, please see
 `http://php.net/apc <http://php.net/apc>`_.
@@ -214,8 +214,8 @@ I/O will negate positive gains by caching.
 All of the methods listed above can be accessed without passing a
 specific adapter to the driver loader as follows::
 
-	$this->load->driver('cache');
-	$this->cache->file->save('foo', 'bar', 10);
+	$this->load->driver( 'cache');
+	$this->cache->file->save( 'foo', 'bar', 10);
 
 Memcached Caching
 =================
@@ -226,8 +226,8 @@ configuration file, located in the _application/config/* directory.
 All of the methods listed above can be accessed without passing a
 specific adapter to the driver loader as follows::
 
-	$this->load->driver('cache');
-	$this->cache->memcached->save('foo', 'bar', 10);
+	$this->load->driver( 'cache');
+	$this->cache->memcached->save( 'foo', 'bar', 10);
 
 For more information on Memcached, please see
 `http://php.net/memcached <http://php.net/memcached>`_.
@@ -240,8 +240,8 @@ Under Windows, you can also utilize the WinCache driver.
 All of the methods listed above can be accessed without passing a
 specific adapter to the driver loader as follows::
 
-	$this->load->driver('cache');
-	$this->cache->wincache->save('foo', 'bar', 10);
+	$this->load->driver( 'cache');
+	$this->cache->wincache->save( 'foo', 'bar', 10);
 
 For more information on WinCache, please see
 `http://php.net/wincache <http://php.net/wincache>`_.
@@ -255,18 +255,18 @@ To use it, you need `Redis server and phpredis PHP extension <https://github.com
 Config options to connect to redis server must be stored in the application/config/redis.php file.
 Available options are::
 	
-	$config['socket_type'] = 'tcp'; //`tcp` or `unix`
-	$config['socket'] = '/var/run/redis.sock'; // in case of `unix` socket type
-	$config['host'] = '127.0.0.1';
-	$config['password'] = NULL;
-	$config['port'] = 6379;
-	$config['timeout'] = 0;
+	$config[ 'socket_type' ] = 'tcp'; //`tcp` or `unix`
+	$config[ 'socket' ] = '/var/run/redis.sock'; // in case of `unix` socket type
+	$config[ 'host' ] = '127.0.0.1';
+	$config[ 'password' ] = NULL;
+	$config[ 'port' ] = 6379;
+	$config[ 'timeout' ] = 0;
 
 All of the methods listed above can be accessed without passing a
 specific adapter to the driver loader as follows::
 
-	$this->load->driver('cache');
-	$this->cache->redis->save('foo', 'bar', 10);
+	$this->load->driver( 'cache');
+	$this->cache->redis->save( 'foo', 'bar', 10);
 
 For more information on Redis, please see
 `http://redis.io <http://redis.io>`_.
@@ -274,6 +274,6 @@ For more information on Redis, please see
 Dummy Cache
 ===========
 
-This is a caching backend that will always 'miss.' It stores no data,
+This is a caching backend that will always 'miss . ' It stores no data,
 but lets you keep your caching code in place in environments that don't
 support your chosen cache.

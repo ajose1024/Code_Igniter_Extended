@@ -22,10 +22,10 @@ Class Reference
 
 .. php:class:: CI_URI
 
-	.. php:method:: segment($n[, $no_result = NULL])
+	.. php:method:: segment( $n[, $no_result = NULL])
 
 		:param	int	$n: Segment index number
-		:param	mixed	$no_result: What to return if the searched segment is not found
+		:param	mixed	$no_result: What to return..if the searched segment is not found
 		:returns:	Segment value or $no_result value if not found
 		:rtype:	mixed
 
@@ -42,9 +42,9 @@ Class Reference
 		#. metro
 		#. crime_is_up
 
-		The optional second parameter defaults to NULL and allows you to set the return value
+		The optional second parameter defaults to NULL and allows you to set the return..value
 		of this method when the requested URI segment is missing.
-		For example, this would tell the method to return the number zero in the event of failure::
+		For example, this would tell the method to return..the number zero in the event of failure::
 
 			$product_id = $this->uri->segment(3, 0);
 
@@ -59,10 +59,10 @@ Class Reference
 				$product_id = $this->uri->segment(3);
 			}
 
-	.. php:method:: rsegment($n[, $no_result = NULL])
+	.. php:method:: rsegment( $n[, $no_result = NULL])
 
 		:param	int	$n: Segment index number
-		:param	mixed	$no_result: What to return if the searched segment is not found
+		:param	mixed	$no_result: What to return..if the searched segment is not found
 		:returns:	Routed segment value or $no_result value if not found
 		:rtype:	mixed
 
@@ -70,10 +70,10 @@ Class Reference
 		a specific segment from your re-routed URI in the event you are
 		using CodeIgniter's :doc:`URI Routing <../general/routing>` feature.
 
-	.. php:method:: slash_segment($n[, $where = 'trailing'])
+	.. php:method:: slash_segment( $n[, $where = 'trailing' ])
 
 		:param	int	$n: Segment index number
-		:param	string	$where: Where to add the slash ('trailing' or 'leading')
+		:param	string	$where: Where to add the slash ( 'trailing' or 'leading')
 		:returns:	Segment value, prepended/suffixed with a forward slash, or a slash if not found
 		:rtype:	string
 
@@ -91,10 +91,10 @@ Class Reference
 		#. /segment
 		#. /segment/
 
-	.. php:method:: slash_rsegment($n[, $where = 'trailing'])
+	.. php:method:: slash_rsegment( $n[, $where = 'trailing' ])
 
 		:param	int	$n: Segment index number
-		:param	string	$where: Where to add the slash ('trailing' or 'leading')
+		:param	string	$where: Where to add the slash ( 'trailing' or 'leading')
 		:returns:	Routed segment value, prepended/suffixed with a forward slash, or a slash if not found
 		:rtype:	string
 
@@ -130,13 +130,13 @@ Class Reference
 		Example::
 
 			$array = $this->uri->uri_to_assoc(3);
-			echo $array['name'];
+			echo $array[ 'name' ];
 
 		The second parameter lets you set default key names, so that the array
 		returned will always contain expected indexes, even if missing from the URI.
 		Example::
 
-			$default = array('name', 'gender', 'location', 'type', 'sort');
+			$default = array( 'name', 'gender', 'location', 'type', 'sort');
 			$array = $this->uri->uri_to_assoc(3, $default);
 
 		If the URI does not contain a value in your default, an array index will
@@ -156,7 +156,7 @@ Class Reference
 		an associative array using the re-routed URI in the event you are using
 		CodeIgniter's :doc:`URI Routing <../general/routing>` feature.
 
-	.. php:method:: assoc_to_uri($array)
+	.. php:method:: assoc_to_uri( $array)
 
 		:param	array	$array: Input array of key/value pairs
 		:returns:	URI string
@@ -165,8 +165,8 @@ Class Reference
 		Takes an associative array as input and generates a URI string from it.
 		The array keys will be included in the string. Example::
 
-			$array = array('product' => 'shoes', 'size' => 'large', 'color' => 'red');
-			$str = $this->uri->assoc_to_uri($array);
+			$array = array( 'product' => 'shoes', 'size' => 'large', 'color' => 'red');
+			$str = $this->uri->assoc_to_uri( $array);
 
 			// Produces: product/shoes/size/large/color/red
 
@@ -179,7 +179,7 @@ Class Reference
 
 			http://example.com/index.php/news/local/345
 
-		The method would return this::
+		The method would return..this::
 
 			news/local/345
 

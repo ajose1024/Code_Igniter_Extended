@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 /**
  * CodeIgniter Download Helpers
@@ -49,7 +49,7 @@ defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 
 // ------------------------------------------------------------------------
 
-if(  ! function_exists('force_download'))
+if( ! function_exists( 'force_download'))
 {
 	/**
 	 * Force Download
@@ -61,7 +61,7 @@ if(  ! function_exists('force_download'))
 	 * @param	bool	whether to try and send the actual file MIME type
 	 * @return	void
 	 */
-	function force_download($filename = '', $data = '', $set_mime = FALSE)
+	function force_download( $filename = '', $data = '', $set_mime = FALSE)
 	{
 		if( $filename === '' OR $data === '')
 		{
@@ -69,29 +69,29 @@ if(  ! function_exists('force_download'))
 		}
 		elseif( $data === NULL)
 		{
-			if(  ! @is_file($filename) OR ($filesize = @filesize($filename)) === FALSE)
+			if( ! @is_file( $filename) OR ( $filesize = @filesize( $filename)) === FALSE)
 			{
 				return;
 			}
 
 			$filepath = $filename;
-			$filename = explode('/', str_replace(DIRECTORY_SEPARATOR, '/', $filename));
-			$filename = end($filename);
+			$filename = explode( '/', str_replace(DIRECTORY_SEPARATOR, '/', $filename));
+			$filename = end( $filename);
 		}
 		else
 		{
-			$filesize = strlen($data);
+			$filesize = strlen( $data);
 		}
 
 		// Set the default MIME type to send
 		$mime = 'application/octet-stream';
 
-		$x = explode('.', $filename);
-		$extension = end($x);
+		$x = explode( ' . ', $filename);
+		$extension = end( $x);
 
 		if( $set_mime === TRUE)
 		{
-			if( count($x) === 1 OR $extension === '')
+			if( count( $x) === 1 OR $extension === '')
 			{
 				/* If we're going to detect the MIME type,
 				 * we'll need a file extension.
@@ -103,9 +103,9 @@ if(  ! function_exists('force_download'))
 			$mimes =& get_mimes();
 
 			// Only change the default MIME if we can find one
-			if( isset($mimes[$extension]))
+			if( isset( $mimes[$extension]))
 			{
-				$mime = is_array($mimes[$extension]) ? $mimes[$extension][0] : $mimes[$extension];
+				$mime = is_array( $mimes[$extension]) ? $mimes[$extension][0] : $mimes[$extension];
 			}
 		}
 
@@ -115,13 +115,13 @@ if(  ! function_exists('force_download'))
 		 *
 		 * Reference: http://digiblog.de/2011/04/19/android-and-the-download-file-headers/
 		 */
-		if( count($x) !== 1 && isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/Android\s(1|2\.[01])/', $_SERVER['HTTP_USER_AGENT']))
+		if( count( $x) !== 1 && isset( $_SERVER[ 'HTTP_USER_AGENT' ]) && preg_match( '/Android\s(1|2\.[01])/', $_SERVER[ 'HTTP_USER_AGENT' ]))
 		{
-			$x[count($x) - 1] = strtoupper($extension);
-			$filename = implode('.', $x);
+			$x[count( $x) - 1] = strtoupper( $extension);
+			$filename = implode( ' . ', $x);
 		}
 
-		if( $data === NULL && ($fp = @fopen($filepath, 'rb')) === FALSE)
+		if( $data === NULL && ( $fp = @fopen( $filepath, 'rb')) === FALSE)
 		{
 			return;
 		}
@@ -133,26 +133,26 @@ if(  ! function_exists('force_download'))
 		}
 
 		// Generate the server headers
-		header('Content-Type: '.$mime);
-		header('Content-Disposition: attachment; filename="'.$filename.'"');
-		header('Expires: 0');
-		header('Content-Transfer-Encoding: binary');
-		header('Content-Length: '.$filesize);
-		header('Cache-Control: private, no-transform, no-store, must-revalidate');
+		header( 'Content-Type: ' . $mime);
+		header( 'Content-Disposition: attachment; filename="' . $filename . '"');
+		header( 'Expires: 0');
+		header( 'Content-Transfer-Encoding: binary');
+		header( 'Content-Length: ' . $filesize);
+		header( 'Cache-Control: private, no-transform, no-store, must-revalidate');
 
 		// If we have raw data - just dump it
 		if( $data !== NULL)
 		{
-			exit($data);
+			exit( $data);
 		}
 
 		// Flush 1MB chunks of data
-		while ( ! feof($fp) && ($data = fread($fp, 1048576)) !== FALSE)
+		while( ! feof( $fp) && ( $data = fread( $fp, 1048576)) !== FALSE)
 		{
 			echo $data;
 		}
 
-		fclose($fp);
+		fclose( $fp);
 		exit;
 	}
 }

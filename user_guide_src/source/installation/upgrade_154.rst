@@ -37,7 +37,7 @@ Add the following to application/config/config.php
 	| that require a character set to be provided.
 	|
 	*/
-	$config['charset'] = "UTF-8";
+	$config[ 'charset' ] = "UTF-8";
 
 Step 3: Autoloading language files
 ==================================
@@ -47,7 +47,7 @@ application/config/autoload.php
 
 ::
 
-	$autoload['language'] = array();
+	$autoload[ 'language' ] = array();
 
 Step 4: Update your user guide
 ==============================

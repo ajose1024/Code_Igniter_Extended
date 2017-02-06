@@ -60,16 +60,16 @@ following code to your model.
 
 ::
 
-	public function get_news($slug = FALSE)
+	public function get_news( $slug = FALSE)
 	{
 		if( $slug === FALSE)
 		{
-			$query = $this->db->get('news');
-			return $query->result_array();
+			$query = $this->db->get( 'news');
+			return..$query->result_array();
 		}
 
-		$query = $this->db->get_where('news', array('slug' => $slug));
-		return $query->row_array();
+		$query = $this->db->get_where( 'news', array( 'slug' => $slug));
+		return..$query->row_array();
 	}
 
 With this code you can perform two different queries. You can get all
@@ -94,18 +94,18 @@ a new ``News`` controller is defined. Create the new controller at
 		public function __construct()
 		{
 			parent::__construct();
-			$this->load->model('news_model');
-			$this->load->helper('url_helper');
+			$this->load->model( 'news_model');
+			$this->load->helper( 'url_helper');
 		}
 
 		public function index()
 		{
-			$data['news'] = $this->news_model->get_news();
+			$data[ 'news' ] = $this->news_model->get_news();
 		}
 
-		public function view($slug = NULL)
+		public function view( $slug = NULL)
 		{
-			$data['news_item'] = $this->news_model->get_news($slug);
+			$data[ 'news_item' ] = $this->news_model->get_news( $slug);
 		}
 	}
 
@@ -129,16 +129,16 @@ the views.
 
 	public function index()
 	{
-		$data['news'] = $this->news_model->get_news();
-		$data['title'] = 'News archive';
+		$data[ 'news' ] = $this->news_model->get_news();
+		$data[ 'title' ] = 'News archive';
 
-		$this->load->view('templates/header', $data);
-		$this->load->view('news/index', $data);
-		$this->load->view('templates/footer');
+		$this->load->view( 'templates/header', $data);
+		$this->load->view( 'news/index', $data);
+		$this->load->view( 'templates/footer');
 	}
 
 The code above gets all news records from the model and assigns it to a
-variable. The value for the title is also assigned to the ``$data['title']``
+variable. The value for the title is also assigned to the ``$data[ 'title' ]``
 element and all data is passed to the views. You now need to create a
 view to render the news items. Create *application/views/news/index.php*
 and add the next piece of code.
@@ -149,11 +149,11 @@ and add the next piece of code.
 	
 	<?php foreach( $news as $news_item): ?>
 
-		<h3><?php echo $news_item['title']; ?></h3>
+		<h3><?php echo $news_item[ 'title' ]; ?></h3>
 		<div class="main">
-			<?php echo $news_item['text']; ?>
+			<?php echo $news_item[ 'text' ]; ?>
 		</div>
-		<p><a href="<?php echo site_url('news/'.$news_item['slug']); ?>">View article</a></p>
+		<p><a href="<?php echo site_url( 'news/' . $news_item[ 'slug' ]); ?>">View article</a></p>
 
 	<?php endforeach; ?>
 
@@ -170,32 +170,32 @@ add some code to the controller and create a new view. Go back to the
 
 ::
 
-	public function view($slug = NULL)
+	public function view( $slug = NULL)
 	{
-		$data['news_item'] = $this->news_model->get_news($slug);
+		$data[ 'news_item' ] = $this->news_model->get_news( $slug);
 
-		if( empty($data['news_item']))
+		if( empty( $data[ 'news_item' ]))
 		{
 			show_404();
 		}
 
-		$data['title'] = $data['news_item']['title'];
+		$data[ 'title' ] = $data[ 'news_item' ][ 'title' ];
 
-		$this->load->view('templates/header', $data);
-		$this->load->view('news/view', $data);
-		$this->load->view('templates/footer');
+		$this->load->view( 'templates/header', $data);
+		$this->load->view( 'news/view', $data);
+		$this->load->view( 'templates/footer');
 	}
 
 Instead of calling the ``get_news()`` method without a parameter, the
-``$slug`` variable is passed, so it will return the specific news item.
+``$slug`` variable is passed, so it will return..the specific news item.
 The only things left to do is create the corresponding view at
 *application/views/news/view.php*. Put the following code in this file.
 
 ::
 
 	<?php
-	echo '<h2>'.$news_item['title'].'</h2>';
-	echo $news_item['text'];
+	echo '<h2>' . $news_item[ 'title' ] . '</h2>';
+	echo $news_item[ 'text' ];
 
 Routing
 -------
@@ -209,10 +209,10 @@ with a slug to the ``view()`` method in the ``News`` controller.
 
 ::
 
-	$route['news/(:any)'] = 'news/view/$1';
-	$route['news'] = 'news';
-	$route['(:any)'] = 'pages/view/$1';
-	$route['default_controller'] = 'pages/view';
+	$route[ 'news/(:any)' ] = 'news/view/$1';
+	$route[ 'news' ] = 'news';
+	$route[ '(:any)' ] = 'pages/view/$1';
+	$route[ 'default_controller' ] = 'pages/view';
 
 Point your browser to your document root, followed by index.php/news and
 watch your news page.

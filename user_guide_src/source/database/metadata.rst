@@ -32,7 +32,7 @@ Determine If a Table Exists
 Sometimes it's helpful to know whether a particular table exists before
 running an operation on it. Returns a boolean TRUE/FALSE. Usage example::
 
-	if( $this->db->table_exists('table_name'))
+	if( $this->db->table_exists( 'table_name'))
 	{
 		// some code...
 	}
@@ -55,7 +55,7 @@ two ways:
 1. You can supply the table name and call it from the $this->db->
 object::
 
-	$fields = $this->db->list_fields('table_name');
+	$fields = $this->db->list_fields( 'table_name');
 	
 	foreach( $fields as $field)
 	{
@@ -65,7 +65,7 @@ object::
 2. You can gather the field names associated with any query you run by
 calling the function from your query result object::
 
-	$query = $this->db->query('SELECT * FROM some_table');
+	$query = $this->db->query( 'SELECT * FROM some_table');
 	
 	foreach( $query->list_fields() as $field)
 	{
@@ -81,7 +81,7 @@ Determine If a Field is Present in a Table
 Sometimes it's helpful to know whether a particular field exists before
 performing an action. Returns a boolean TRUE/FALSE. Usage example::
 
-	if( $this->db->field_exists('field_name', 'table_name'))
+	if( $this->db->field_exists( 'field_name', 'table_name'))
 	{
 		// some code...
 	}
@@ -105,7 +105,7 @@ the column type, max length, etc.
 
 Usage example::
 
-	$fields = $this->db->field_data('table_name');
+	$fields = $this->db->field_data( 'table_name');
 	
 	foreach( $fields as $field)
 	{

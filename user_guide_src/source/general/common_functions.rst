@@ -13,7 +13,7 @@ loading any libraries or helpers.
 
   <div class="custom-index container"></div>
 
-.. php:function:: is_php($version)
+.. php:function:: is_php( $version)
 
 	:param	string	$version: Version number
 	:returns:	TRUE if the running PHP version is at least the one specified or FALSE if not
@@ -24,16 +24,16 @@ loading any libraries or helpers.
 
 	Example::
 
-		if( is_php('5.3'))
+		if( is_php( '5.3'))
 		{
-			$str = quoted_printable_encode($str);
+			$str = quoted_printable_encode( $str);
 		}
 
 	Returns boolean TRUE if the installed version of PHP is equal to or
 	greater than the supplied version number. Returns FALSE if the installed
 	version of PHP is lower than the supplied version number.
 
-.. php:function:: is_really_writable($file)
+.. php:function:: is_really_writable( $file)
 
 	:param	string	$file: File path
 	:returns:	TRUE if the path is writable, FALSE if not
@@ -49,7 +49,7 @@ loading any libraries or helpers.
 
 	Example::
 
-		if( is_really_writable('file.txt'))
+		if( is_really_writable( 'file.txt'))
 		{
 			echo "I could write to this if I wanted to";
 		}
@@ -60,7 +60,7 @@ loading any libraries or helpers.
 
 	.. note:: See also `PHP bug #54709 <https://bugs.php.net/bug.php?id=54709>`_ for more info.
 
-.. php:function:: config_item($key)
+.. php:function:: config_item( $key)
 
 	:param	string	$key: Config item key
 	:returns:	Configuration key value or NULL if not found
@@ -71,7 +71,7 @@ loading any libraries or helpers.
 	to retrieve single keys. See :doc:`Config Library <../libraries/config>`
 	documentation for more information.
 
-.. :noindex: function:: show_error($message, $status_code[, $heading = 'An Error Was Encountered'])
+.. :noindex: function:: show_error( $message, $status_code[, $heading = 'An Error Was Encountered' ])
 
 	:param	mixed	$message: Error message
 	:param	int	$status_code: HTTP Response status code
@@ -90,7 +90,7 @@ loading any libraries or helpers.
 	This function calls ``CI_Exception::show_404()``. For more info,
 	please see the :doc:`Error Handling <errors>` documentation.
 
-.. :noindex: function:: log_message($level, $message)
+.. :noindex: function:: log_message( $level, $message)
 
 	:param	string	$level: Log level: 'error', 'debug' or 'info'
 	:param	string	$message: Message to log
@@ -99,7 +99,7 @@ loading any libraries or helpers.
 	This function is an alias for ``CI_Log::write_log()``. For more info,
 	please see the :doc:`Error Handling <errors>` documentation.
 
-.. php:function:: set_status_header($code[, $text = ''])
+.. php:function:: set_status_header( $code[, $text = '' ])
 
 	:param	int	$code: HTTP Reponse status code
 	:param	string	$text: A custom message to set with the status code
@@ -113,7 +113,7 @@ loading any libraries or helpers.
 	`See here <http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html>`_ for
 	a full list of headers.
 
-.. php:function:: remove_invisible_characters($str[, $url_encoded = TRUE])
+.. php:function:: remove_invisible_characters( $str[, $url_encoded = TRUE])
 
 	:param	string	$str: Input string
 	:param	bool	$url_encoded: Whether to remove URL-encoded characters as well
@@ -125,10 +125,10 @@ loading any libraries or helpers.
 
 	Example::
 
-		remove_invisible_characters('Java\\0script');
+		remove_invisible_characters( 'Java\\0script');
 		// Returns: 'Javascript'
 
-.. php:function:: html_escape($var)
+.. php:function:: html_escape( $var)
 
 	:param	mixed	$var: Variable to escape (string or array)
 	:returns:	HTML escaped string(s)
@@ -166,7 +166,7 @@ loading any libraries or helpers.
 	.. note:: This function checks both if the ``PHP_SAPI`` value is 'cli'
 		or if the ``STDIN`` constant is defined.
 
-.. php:function:: function_usable($function_name)
+.. php:function:: function_usable( $function_name)
 
 	:param	string	$function_name: Function name
 	:returns:	TRUE if the function can be used, FALSE if not

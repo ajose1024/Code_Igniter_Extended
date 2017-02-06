@@ -16,7 +16,7 @@ Loading this Helper
 
 This helper is loaded using the following code::
 
-	$this->load->helper('date');
+	$this->load->helper( 'date');
 
 Available Functions
 ===================
@@ -38,12 +38,12 @@ The following functions are available:
 	this function over PHP's ``time()`` function.
 	::
 
-		echo now('Australia/Victoria');
+		echo now( 'Australia/Victoria');
 
-	If a timezone is not provided, it will return ``time()`` based on the
+	If a timezone is not provided, it will return..``time()`` based on the
 	**time_reference** setting.
 
-.. php:function:: mdate([$datestr = ''[, $time = '']])
+.. php:function:: mdate([$datestr = ''[, $time = '' ]])
 
 	:param	string	$datestr: Date string
 	:param	int	$time: UNIX timestamp
@@ -62,7 +62,7 @@ The following functions are available:
 
 		$datestring = 'Year: %Y Month: %m Day: %d - %h:%i %a';
 		$time = time();
-		echo mdate($datestring, $time);
+		echo mdate( $datestring, $time);
 
 	If a timestamp is not included in the second parameter the current time
 	will be used.
@@ -80,7 +80,7 @@ The following functions are available:
 
 		$format = 'DATE_RFC822';
 		$time = time();
-		echo standard_date($format, $time);
+		echo standard_date( $format, $time);
 
 	.. note:: This function is DEPRECATED. Use the native ``date()`` combined with
 		`DateTime's format constants
@@ -106,7 +106,7 @@ The following functions are available:
 	DATE_W3C        W3C                     2005-08-14T16:13:03+0000
 	===============	=======================	======================================
 
-.. php:function:: local_to_gmt([$time = ''])
+.. php:function:: local_to_gmt([$time = '' ])
 
 	:param	int	$time: UNIX timestamp
 	:returns:	UNIX timestamp
@@ -135,12 +135,12 @@ The following functions are available:
 		$timestamp = 1140153693;
 		$timezone  = 'UM8';
 		$daylight_saving = TRUE;
-		echo gmt_to_local($timestamp, $timezone, $daylight_saving);
+		echo gmt_to_local( $timestamp, $timezone, $daylight_saving);
 
 
 	.. note:: For a list of timezones see the reference at the bottom of this page.
 
-.. php:function:: mysql_to_unix([$time = ''])
+.. php:function:: mysql_to_unix([$time = '' ])
 
 	:param	string	$time: MySQL timestamp
 	:returns:	UNIX timestamp
@@ -150,9 +150,9 @@ The following functions are available:
 
 	Example::
 
-		$unix = mysql_to_unix('20061124092345');
+		$unix = mysql_to_unix( '20061124092345');
 
-.. php:function:: unix_to_human([$time = ''[, $seconds = FALSE[, $fmt = 'us']]])
+.. php:function:: unix_to_human([$time = ''[, $seconds = FALSE[, $fmt = 'us' ]]])
 
 	:param	int	$time: UNIX timestamp
 	:param	bool	$seconds: Whether to show seconds
@@ -175,11 +175,11 @@ The following functions are available:
 	Examples::
 
 		$now = time();
-		echo unix_to_human($now); // U.S. time, no seconds
-		echo unix_to_human($now, TRUE, 'us'); // U.S. time with seconds
-		echo unix_to_human($now, TRUE, 'eu'); // Euro time with seconds
+		echo unix_to_human( $now); // U.S. time, no seconds
+		echo unix_to_human( $now, TRUE, 'us'); // U.S. time with seconds
+		echo unix_to_human( $now, TRUE, 'eu'); // Euro time with seconds
 
-.. php:function:: human_to_unix([$datestr = ''])
+.. php:function:: human_to_unix([$datestr = '' ])
 
 	:param	int	$datestr: Date string
 	:returns:	UNIX timestamp or FALSE on failure
@@ -193,20 +193,20 @@ The following functions are available:
 	Example::
 
 		$now = time();
-		$human = unix_to_human($now);
-		$unix = human_to_unix($human);
+		$human = unix_to_human( $now);
+		$unix = human_to_unix( $human);
 
 .. php:function:: nice_date([$bad_date = ''[, $format = FALSE]])
 
 	:param	int	$bad_date: The terribly formatted date-like string
-	:param	string	$format: Date format to return (same as PHP's ``date()`` function)
+	:param	string	$format: Date format to return..(same as PHP's ``date()`` function)
 	:returns:	Formatted date
 	:rtype:	string
 
 	This function can take a number poorly-formed date formats and convert
 	them into something useful. It also accepts well-formed dates.
 
-	The function will return a UNIX timestamp by default. You can, optionally,
+	The function will return..a UNIX timestamp by default. You can, optionally,
 	pass a format string (the same type as the PHP ``date()`` function accepts)
 	as the second parameter.
 
@@ -214,13 +214,13 @@ The following functions are available:
 
 		$bad_date = '199605';
 		// Should Produce: 1996-05-01
-		$better_date = nice_date($bad_date, 'Y-m-d');
+		$better_date = nice_date( $bad_date, 'Y-m-d');
 
 		$bad_date = '9-11-2001';
 		// Should Produce: 2001-09-11
-		$better_date = nice_date($bad_date, 'Y-m-d');
+		$better_date = nice_date( $bad_date, 'Y-m-d');
 
-.. php:function:: timespan([$seconds = 1[, $time = ''[, $units = '']]])
+.. php:function:: timespan([$seconds = 1[, $time = ''[, $units = '' ]]])
 
 	:param	int	$seconds: Number of seconds
 	:param	string	$time: UNIX timestamp
@@ -247,12 +247,12 @@ The following functions are available:
 		$post_date = '1079621429';
 		$now = time();
 		$units = 2;
-		echo timespan($post_date, $now, $units);
+		echo timespan( $post_date, $now, $units);
 
 	.. note:: The text generated by this function is found in the following language
 		file: `language/<your_lang>/date_lang.php`
 
-.. php:function:: days_in_month([$month = 0[, $year = '']])
+.. php:function:: days_in_month([$month = 0[, $year = '' ]])
 
 	:param	int	$month: a numeric month
 	:param	int	$year: a numeric year
@@ -271,7 +271,7 @@ The following functions are available:
 	.. note:: This function will alias the native ``cal_days_in_month()``, if
 		it is available.
 
-.. php:function:: date_range([$unix_start = ''[, $mixed = ''[, $is_unix = TRUE[, $format = 'Y-m-d']]]])
+.. php:function:: date_range([$unix_start = ''[, $mixed = ''[, $is_unix = TRUE[, $format = 'Y-m-d' ]]]])
 
 	:param	int	$unix_start: UNIX timestamp of the range start date
 	:param	int	$mixed: UNIX timestamp of the range end date or interval in days
@@ -284,14 +284,14 @@ The following functions are available:
 
 	Example::
 
-		$range = date_range('2012-01-01', '2012-01-15');
+		$range = date_range( '2012-01-01', '2012-01-15');
 		echo "First 15 days of 2012:";
 		foreach( $range as $date)
 		{
 			echo $date."\n";
 		}
 
-.. php:function:: timezones([$tz = ''])
+.. php:function:: timezones([$tz = '' ])
 
 	:param	string	$tz: A numeric timezone
 	:returns:	Hour difference from UTC
@@ -303,12 +303,12 @@ The following functions are available:
 
 	Example::
 
-		echo timezones('UM5');
+		echo timezones( 'UM5');
 
 
 	This function is useful when used with :php:func:`timezone_menu()`.
 
-.. php:function:: timezone_menu([$default = 'UTC'[, $class = ''[, $name = 'timezones'[, $attributes = '']]]])
+.. php:function:: timezone_menu([$default = 'UTC'[, $class = ''[, $name = 'timezones'[, $attributes = '' ]]]])
 
 	:param	string	$default: Timezone
 	:param	string	$class: Class name
@@ -373,7 +373,7 @@ The following functions are available:
 	The first parameter lets you set the "selected" state of the menu. For
 	example, to set Pacific time as the default you will do this::
 
-		echo timezone_menu('UM8');
+		echo timezone_menu( 'UM8');
 
 	Please see the timezone reference below to see the values of this menu.
 

@@ -7,13 +7,13 @@ directory. In most cases, to use one of these classes involves initializing
 it within a :doc:`controller <controllers>` using the following
 initialization method::
 
-	$this->load->library('class_name');
+	$this->load->library( 'class_name');
 
 Where 'class_name' is the name of the class you want to invoke. For
 example, to load the :doc:`Form Validation Library
 <../libraries/form_validation>` you would do this::
 
-	$this->load->library('form_validation');
+	$this->load->library( 'form_validation');
 
 Once initialized you can use it as indicated in the user guide page
 corresponding to that class.
@@ -23,7 +23,7 @@ passing an array of libraries to the load method.
 
 Example::
 
-	$this->load->library(array('email', 'table'));
+	$this->load->library(array( 'email', 'table'));
 
 Creating Your Own Libraries
 ===========================

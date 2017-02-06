@@ -23,10 +23,10 @@ class Limit_test extends CI_TestCase {
 	public function test_limit()
 	{
 		$jobs = $this->db->limit(2)
-		                      ->get('job')
+		                      ->get( 'job')
 		                      ->result_array();
 
-		$this->assertEquals(2, count($jobs));
+		$this->assertEquals(2, count( $jobs));
 	}
 
 	// ------------------------------------------------------------------------
@@ -37,12 +37,12 @@ class Limit_test extends CI_TestCase {
 	public function test_limit_and_offset()
 	{
 		$jobs = $this->db->limit(2, 2)
-		                      ->get('job')
+		                      ->get( 'job')
 		                      ->result_array();
 
-		$this->assertEquals(2, count($jobs));
-		$this->assertEquals('Accountant', $jobs[0]['name']);
-		$this->assertEquals('Musician', $jobs[1]['name']);
+		$this->assertEquals(2, count( $jobs));
+		$this->assertEquals( 'Accountant', $jobs[0][ 'name' ]);
+		$this->assertEquals( 'Musician', $jobs[1][ 'name' ]);
 	}
 
 }

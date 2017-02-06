@@ -41,7 +41,7 @@ Class Reference
 
 			$this->output->parse_exec_vars = FALSE;
 
-	.. php:method:: set_output($output)
+	.. php:method:: set_output( $output)
 
 		:param	string	$output: String to set the output to
 		:returns:	CI_Output instance (method chaining)
@@ -49,13 +49,13 @@ Class Reference
 
 		Permits you to manually set the final output string. Usage example::
 
-			$this->output->set_output($data);
+			$this->output->set_output( $data);
 
 		.. important:: If you do set your output manually, it must be the last thing done
 			in the function you call it from. For example, if you build a page in one
 			of your controller methods, don't set the output until the end.
 
-	.. php:method:: set_content_type($mime_type[, $charset = NULL])
+	.. php:method:: set_content_type( $mime_type[, $charset = NULL])
 
 		:param	string	$mime_type: MIME Type idenitifer string
 		:param	string	$charset: Character set
@@ -66,19 +66,19 @@ Class Reference
 		::
 
 			$this->output
-				->set_content_type('application/json')
-				->set_output(json_encode(array('foo' => 'bar')));
+				->set_content_type( 'application/json')
+				->set_output(json_encode(array( 'foo' => 'bar')));
 
 			$this->output
-				->set_content_type('jpeg') // You could also use ".jpeg" which will have the full stop removed before looking in config/mimes.php
-				->set_output(file_get_contents('files/something.jpg'));
+				->set_content_type( 'jpeg') // You could also use ".jpeg" which will have the full stop removed before looking in config/mimes.php
+				->set_output(file_get_contents( 'files/something.jpg'));
 
 		.. important:: Make sure any non-mime string you pass to this method
 			exists in *application/config/mimes.php* or it will have no effect.
 
 		You can also set the character set of the document, by passing a second argument::
 
-			$this->output->set_content_type('css', 'utf-8');
+			$this->output->set_content_type( 'css', 'utf-8');
 
 	.. php:method:: get_content_type()
 
@@ -90,9 +90,9 @@ Class Reference
 
 			$mime = $this->output->get_content_type();
 
-		.. note:: If not set, the default return value is 'text/html'.
+		.. note:: If not set, the default return..value is 'text/html'.
 
-	.. php:method:: get_header($header)
+	.. php:method:: get_header( $header)
 
 		:param	string	$header: HTTP header name
 		:returns:	HTTP response header or NULL if not found
@@ -101,8 +101,8 @@ Class Reference
 		Returns the requested HTTP header value, or NULL if the requested header is not set.
 		Example::
 
-			$this->output->set_content_type('text/plain', 'UTF-8');
-			echo $this->output->get_header('content-type');
+			$this->output->set_content_type( 'text/plain', 'UTF-8');
+			echo $this->output->get_header( 'content-type');
 			// Outputs: text/plain; charset=utf-8
 
 		.. note:: The header name is compared in a case-insensitive manner.
@@ -123,7 +123,7 @@ Class Reference
 		been previously sent to the output class by one of the CodeIgniter
 		functions like ``$this->load->view()``.
 
-	.. php:method:: append_output($output)
+	.. php:method:: append_output( $output)
 
 		:param	string	$output: Additional output data to append
 		:returns:	CI_Output instance (method chaining)
@@ -132,9 +132,9 @@ Class Reference
 		Appends data onto the output string.
 		::
 
-			$this->output->append_output($data);
+			$this->output->append_output( $data);
 
-	.. php:method:: set_header($header[, $replace = TRUE])
+	.. php:method:: set_header( $header[, $replace = TRUE])
 
 		:param	string	$header: HTTP response header
 		:param	bool	$replace: Whether to replace the old header value, if it is already set
@@ -144,14 +144,14 @@ Class Reference
 		Permits you to manually set server headers, which the output class will
 		send for you when outputting the final rendered display. Example::
 
-			$this->output->set_header('HTTP/1.0 200 OK');
-			$this->output->set_header('HTTP/1.1 200 OK');
-			$this->output->set_header('Last-Modified: '.gmdate('D, d M Y H:i:s', $last_update).' GMT');
-			$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate');
-			$this->output->set_header('Cache-Control: post-check=0, pre-check=0');
-			$this->output->set_header('Pragma: no-cache');
+			$this->output->set_header( 'HTTP/1.0 200 OK');
+			$this->output->set_header( 'HTTP/1.1 200 OK');
+			$this->output->set_header( 'Last-Modified: '.gmdate( 'D, d M Y H:i:s', $last_update) . ' GMT');
+			$this->output->set_header( 'Cache-Control: no-store, no-cache, must-revalidate');
+			$this->output->set_header( 'Cache-Control: post-check=0, pre-check=0');
+			$this->output->set_header( 'Pragma: no-cache');
 
-	.. php:method:: set_status_header([$code = 200[, $text = '']])
+	.. php:method:: set_status_header([$code = 200[, $text = '' ]])
 
 		:param	int	$code: HTTP status code
 		:param	string	$text: Optional message
@@ -188,7 +188,7 @@ Class Reference
 
 			$this->output->enable_profiler(FALSE);
 
-	.. php:method:: set_profiler_sections($sections)
+	.. php:method:: set_profiler_sections( $sections)
 
 		:param	array	$sections: Profiler sections
 		:returns:	CI_Output instance (method chaining)
@@ -197,7 +197,7 @@ Class Reference
 		Permits you to enable/disable specific sections of the Profiler when it is enabled.
 		Please refer to the :doc:`Profiler <../general/profiling>` documentation for further information.
 
-	.. php:method:: cache($time)
+	.. php:method:: cache( $time)
 
 		:param	int	$time: Cache expiration time in seconds
 		:returns:	CI_Output instance (method chaining)
@@ -207,7 +207,7 @@ Class Reference
 
 		For more information, please see the :doc:`caching documentation <../general/caching>`.
 
-	.. php:method:: _display([$output = ''])
+	.. php:method:: _display([$output = '' ])
 
 		:param	string	$output: Output data override
 		:returns:	void
@@ -221,12 +221,12 @@ Class Reference
 		
 		Example::
 
-			$response = array('status' => 'OK');
+			$response = array( 'status' => 'OK');
 
 			$this->output
 				->set_status_header(200)
-				->set_content_type('application/json', 'utf-8')
-				->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+				->set_content_type( 'application/json', 'utf-8')
+				->set_output(json_encode( $response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
 				->_display();
 			exit;
 

@@ -46,7 +46,7 @@ Open your application/config/config.php file and add this new item::
     | by the output class.  Do not "echo" any values with compression enabled.
     |
     */
-    $config['compress_output'] = FALSE;
+    $config[ 'compress_output' ] = FALSE;
 
 Step 3: Rename an Autoload Item
 ===============================
@@ -55,11 +55,11 @@ Open the following file: application/config/autoload.php
 
 Find this array item::
 
-	$autoload['core'] = array();
+	$autoload[ 'core' ] = array();
 
 And rename it to this::
 
-	$autoload['libraries'] = array();
+	$autoload[ 'libraries' ] = array();
 
 This change was made to improve clarity since some users were not sure
 that their own libraries could be auto-loaded.

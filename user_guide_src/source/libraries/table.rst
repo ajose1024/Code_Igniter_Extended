@@ -22,7 +22,7 @@ Initializing the Class
 Like most other classes in CodeIgniter, the Table class is initialized
 in your controller using the ``$this->load->library()`` method::
 
-	$this->load->library('table');
+	$this->load->library( 'table');
 
 Once loaded, the Table library object will be available using::
 
@@ -38,16 +38,16 @@ method described in the function reference below).
 
 ::
 
-	$this->load->library('table');
+	$this->load->library( 'table');
 
 	$data = array(
-		array('Name', 'Color', 'Size'),
-		array('Fred', 'Blue', 'Small'),
-		array('Mary', 'Red', 'Large'),
-		array('John', 'Green', 'Medium')	
+		array( 'Name', 'Color', 'Size'),
+		array( 'Fred', 'Blue', 'Small'),
+		array( 'Mary', 'Red', 'Large'),
+		array( 'John', 'Green', 'Medium')	
 	);
 
-	echo $this->table->generate($data);
+	echo $this->table->generate( $data);
 
 Here is an example of a table created from a database query result. The
 table class will automatically generate the headings based on the table
@@ -56,35 +56,35 @@ method described in the class reference below).
 
 ::
 
-	$this->load->library('table');
+	$this->load->library( 'table');
 
-	$query = $this->db->query('SELECT * FROM my_table');
+	$query = $this->db->query( 'SELECT * FROM my_table');
 
-	echo $this->table->generate($query);
+	echo $this->table->generate( $query);
 
 Here is an example showing how you might create a table using discrete
 parameters::
 
-	$this->load->library('table');
+	$this->load->library( 'table');
 
-	$this->table->set_heading('Name', 'Color', 'Size');
+	$this->table->set_heading( 'Name', 'Color', 'Size');
 
-	$this->table->add_row('Fred', 'Blue', 'Small');
-	$this->table->add_row('Mary', 'Red', 'Large');
-	$this->table->add_row('John', 'Green', 'Medium');
+	$this->table->add_row( 'Fred', 'Blue', 'Small');
+	$this->table->add_row( 'Mary', 'Red', 'Large');
+	$this->table->add_row( 'John', 'Green', 'Medium');
 
 	echo $this->table->generate();
 
 Here is the same example, except instead of individual parameters,
 arrays are used::
 
-	$this->load->library('table');
+	$this->load->library( 'table');
 
-	$this->table->set_heading(array('Name', 'Color', 'Size'));
+	$this->table->set_heading(array( 'Name', 'Color', 'Size'));
 
-	$this->table->add_row(array('Fred', 'Blue', 'Small'));
-	$this->table->add_row(array('Mary', 'Red', 'Large'));
-	$this->table->add_row(array('John', 'Green', 'Medium'));
+	$this->table->add_row(array( 'Fred', 'Blue', 'Small'));
+	$this->table->add_row(array( 'Mary', 'Red', 'Large'));
+	$this->table->add_row(array( 'John', 'Green', 'Medium'));
 
 	echo $this->table->generate();
 
@@ -121,7 +121,7 @@ specify the design of your layout. Here is the template prototype::
 		'table_close'		=> '</table>'
 	);
 
-	$this->table->set_template($template);
+	$this->table->set_template( $template);
 
 .. note:: You'll notice there are two sets of "row" blocks in the
 	template. These permit you to create alternating row colors or design
@@ -135,7 +135,7 @@ example, only the table opening tag is being changed::
 		'table_open' => '<table border="1" cellpadding="2" cellspacing="1" class="mytable">'
 	);
 
-	$this->table->set_template($template);
+	$this->table->set_template( $template);
 	
 You can also set defaults for these in a config file.
 
@@ -150,10 +150,10 @@ Class Reference
 		Allows you to specify a native PHP function or a valid function array object to be applied to all cell data.
 		::
 
-			$this->load->library('table');
+			$this->load->library( 'table');
 
-			$this->table->set_heading('Name', 'Color', 'Size');
-			$this->table->add_row('Fred', '<strong>Blue</strong>', 'Small');
+			$this->table->set_heading( 'Name', 'Color', 'Size');
+			$this->table->add_row( 'Fred', '<strong>Blue</strong>', 'Small');
 
 			$this->table->function = 'htmlspecialchars';
 			echo $this->table->generate();
@@ -170,7 +170,7 @@ Class Reference
 
 		Returns a string containing the generated table. Accepts an optional parameter which can be an array or a database result object.
 
-	.. php:method:: set_caption($caption)
+	.. php:method:: set_caption( $caption)
 
 		:param	string	$caption: Table caption
 		:returns:	CI_Table instance (method chaining)
@@ -179,7 +179,7 @@ Class Reference
 		Permits you to add a caption to the table.
 		::
 
-			$this->table->set_caption('Colors');
+			$this->table->set_caption( 'Colors');
 
 	.. php:method:: set_heading([$args = array()[, ...]])
 
@@ -189,9 +189,9 @@ Class Reference
 
 		Permits you to set the table heading. You can submit an array or discrete params::
 
-			$this->table->set_heading('Name', 'Color', 'Size');
+			$this->table->set_heading( 'Name', 'Color', 'Size');
 
-			$this->table->set_heading(array('Name', 'Color', 'Size'));
+			$this->table->set_heading(array( 'Name', 'Color', 'Size'));
 
 	.. php:method:: add_row([$args = array()[, ...]])
 
@@ -201,15 +201,15 @@ Class Reference
 
 		Permits you to add a row to your table. You can submit an array or discrete params::
 
-			$this->table->add_row('Blue', 'Red', 'Green');
+			$this->table->add_row( 'Blue', 'Red', 'Green');
 
-			$this->table->add_row(array('Blue', 'Red', 'Green'));
+			$this->table->add_row(array( 'Blue', 'Red', 'Green'));
 
 		If you would like to set an individual cell's tag attributes, you can use an associative array for that cell.
 		The associative key **data** defines the cell's data. Any other key => val pairs are added as key='val' attributes to the tag::
 
-			$cell = array('data' => 'Blue', 'class' => 'highlight', 'colspan' => 2);
-			$this->table->add_row($cell, 'Red', 'Green');
+			$cell = array( 'data' => 'Blue', 'class' => 'highlight', 'colspan' => 2);
+			$this->table->add_row( $cell, 'Red', 'Green');
 
 			// generates
 			// <td class='highlight' colspan='2'>Blue</td><td>Red</td><td>Green</td>
@@ -224,11 +224,11 @@ Class Reference
 		This method takes a one-dimensional array as input and creates a multi-dimensional array with a depth equal to the number of columns desired.
 		This allows a single array with many elements to be displayed in a table that has a fixed column count. Consider this example::
 
-			$list = array('one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve');
+			$list = array( 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve');
 
-			$new_list = $this->table->make_columns($list, 3);
+			$new_list = $this->table->make_columns( $list, 3);
 
-			$this->table->generate($new_list);
+			$this->table->generate( $new_list);
 
 			// Generates a table with this prototype
 
@@ -244,7 +244,7 @@ Class Reference
 			</table>
 
 
-	.. php:method:: set_template($template)
+	.. php:method:: set_template( $template)
 
 		:param	array	$template: An associative array containing template values
 		:returns:	TRUE on success, FALSE on failure
@@ -257,9 +257,9 @@ Class Reference
 				'table_open'  => '<table border="1" cellpadding="2" cellspacing="1" class="mytable">'
 			);
 		
-			$this->table->set_template($template);
+			$this->table->set_template( $template);
 
-	.. php:method:: set_empty($value)
+	.. php:method:: set_empty( $value)
 
 		:param	mixed	$value: Value to put in empty cells
 		:returns:	CI_Table instance (method chaining)
@@ -278,20 +278,20 @@ Class Reference
 		Lets you clear the table heading and row data. If you need to show multiple tables with different data you should to call this method
 		after each table has been generated to clear the previous table information. Example::
 
-			$this->load->library('table');
+			$this->load->library( 'table');
 
-			$this->table->set_heading('Name', 'Color', 'Size');
-			$this->table->add_row('Fred', 'Blue', 'Small');
-			$this->table->add_row('Mary', 'Red', 'Large');
-			$this->table->add_row('John', 'Green', 'Medium');
+			$this->table->set_heading( 'Name', 'Color', 'Size');
+			$this->table->add_row( 'Fred', 'Blue', 'Small');
+			$this->table->add_row( 'Mary', 'Red', 'Large');
+			$this->table->add_row( 'John', 'Green', 'Medium');
 
 			echo $this->table->generate();
 
 			$this->table->clear();
 
-			$this->table->set_heading('Name', 'Day', 'Delivery');
-			$this->table->add_row('Fred', 'Wednesday', 'Express');
-			$this->table->add_row('Mary', 'Monday', 'Air');
-			$this->table->add_row('John', 'Saturday', 'Overnight');
+			$this->table->set_heading( 'Name', 'Day', 'Delivery');
+			$this->table->add_row( 'Fred', 'Wednesday', 'Express');
+			$this->table->add_row( 'Mary', 'Monday', 'Air');
+			$this->table->add_row( 'John', 'Saturday', 'Overnight');
 
 			echo $this->table->generate();

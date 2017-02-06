@@ -24,7 +24,7 @@ Initializing the Class
 Like most other classes in CodeIgniter, the User Agent class is
 initialized in your controller using the $this->load->library function::
 
-	$this->load->library('user_agent');
+	$this->load->library( 'user_agent');
 
 Once loaded, the object will be available using: ``$this->agent``
 
@@ -45,11 +45,11 @@ is available.
 
 ::
 
-	$this->load->library('user_agent');
+	$this->load->library( 'user_agent');
 
 	if( $this->agent->is_browser())
 	{
-		$agent = $this->agent->browser().' '.$this->agent->version();
+		$agent = $this->agent->browser() . ' ' . $this->agent->version();
 	}
 	elseif( $this->agent->is_robot())
 	{
@@ -83,13 +83,13 @@ Class Reference
 		Returns TRUE/FALSE (boolean) if the user agent is a known web browser.
 		::
 
-			if( $this->agent->is_browser('Safari'))
+			if( $this->agent->is_browser( 'Safari'))
 			{
-				echo 'You are using Safari.';
+				echo 'You are using Safari . ';
 			}
 			elseif( $this->agent->is_browser())
 			{
-				echo 'You are using a browser.';
+				echo 'You are using a browser . ';
 			}
 
 		.. note:: The string "Safari" in this example is an array key in the list of browser definitions.
@@ -105,17 +105,17 @@ Class Reference
 		Returns TRUE/FALSE (boolean) if the user agent is a known mobile device.
 		::
 
-			if( $this->agent->is_mobile('iphone'))
+			if( $this->agent->is_mobile( 'iphone'))
 			{
-				$this->load->view('iphone/home');
+				$this->load->view( 'iphone/home');
 			}
 			elseif( $this->agent->is_mobile())
 			{
-				$this->load->view('mobile/home');
+				$this->load->view( 'mobile/home');
 			}
 			else
 			{
-				$this->load->view('web/home');
+				$this->load->view( 'web/home');
 			}
 
 	.. php:method:: is_robot([$key = NULL])
@@ -194,7 +194,7 @@ Class Reference
 
 			Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en-US; rv:1.8.0.4) Gecko/20060613 Camino/1.0.2
 
-	.. php:method:: accept_lang([$lang = 'en'])
+	.. php:method:: accept_lang([$lang = 'en' ])
 
 		:param	string	$lang: Language key
 		:returns:	TRUE if provided language is accepted, FALSE if not
@@ -202,7 +202,7 @@ Class Reference
 
 		Lets you determine if the user agent accepts a particular language. Example::
 
-			if( $this->agent->accept_lang('en'))
+			if( $this->agent->accept_lang( 'en'))
 			{
 				echo 'You accept English!';
 			}
@@ -217,7 +217,7 @@ Class Reference
 
 		Returns an array of languages supported by the user agent.
 
-	.. php:method:: accept_charset([$charset = 'utf-8'])
+	.. php:method:: accept_charset([$charset = 'utf-8' ])
 
 		:param	string	$charset: Character set
 		:returns:	TRUE if the character set is accepted, FALSE if not
@@ -225,7 +225,7 @@ Class Reference
 
 		Lets you determine if the user agent accepts a particular character set. Example::
 
-			if( $this->agent->accept_charset('utf-8'))
+			if( $this->agent->accept_charset( 'utf-8'))
 			{
 				echo 'You browser supports UTF-8!';
 			}
@@ -240,7 +240,7 @@ Class Reference
 
 		Returns an array of character sets accepted by the user agent.
 
-	.. php:method:: parse($string)
+	.. php:method:: parse( $string)
 
 		:param	string	$string: A custom user-agent string
 		:rtype:	void

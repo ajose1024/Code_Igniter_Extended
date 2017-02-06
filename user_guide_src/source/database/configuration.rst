@@ -12,7 +12,7 @@ it the respective environment config folder.
 The config settings are stored in a multi-dimensional array with this
 prototype::
 
-	$db['default'] = array(
+	$db[ 'default' ] = array(
 		'dsn'	=> '',
 		'hostname' => 'localhost',
 		'username' => 'root',
@@ -39,10 +39,10 @@ should use the 'dsn' configuration setting, as if you're using the
 driver's underlying native PHP extension, like this::
 
 	// PDO
-	$db['default']['dsn'] = 'pgsql:host=localhost;port=5432;dbname=database_name';
+	$db[ 'default' ][ 'dsn' ] = 'pgsql:host=localhost;port=5432;dbname=database_name';
 
 	// Oracle
-	$db['default']['dsn'] = '//localhost/XE';
+	$db[ 'default' ][ 'dsn' ] = '//localhost/XE';
 
 .. note:: If you do not specify a DSN string for a driver that requires it, CodeIgniter
 	will try to build it with the rest of the provided settings.
@@ -54,7 +54,7 @@ driver's underlying native PHP extension, like this::
 You can also specify failovers for the situation when the main connection cannot connect for some reason.
 These failovers can be specified by setting the failover for a connection like this::
 
-	$db['default']['failover'] = array(
+	$db[ 'default' ][ 'failover' ] = array(
 			array(
 				'hostname' => 'localhost1',
 				'username' => '',
@@ -102,7 +102,7 @@ production, test, etc.) under a single installation, you can set up a
 connection group for each, then switch between groups as needed. For
 example, to set up a "test" environment you would do this::
 
-	$db['test'] = array(
+	$db[ 'test' ] = array(
 		'dsn'	=> '',
 		'hostname' => 'localhost',
 		'username' => 'root',
@@ -177,7 +177,7 @@ Explanation of Values:
 **swap_pre**		A default table prefix that should be swapped with dbprefix. This is useful for distributed
 			applications where you might run manually written queries, and need the prefix to still be
 			customizable by the end user.
-**schema**		The database schema, defaults to 'public'. Used by PostgreSQL and ODBC drivers.
+**schema**		The database schema, defaults to 'public' . Used by PostgreSQL and ODBC drivers.
 **encrypt**		Whether or not to use an encrypted connection.
 
 			  - 'mysql' (deprecated), 'sqlsrv' and 'pdo/sqlsrv' drivers accept TRUE/FALSE
@@ -187,8 +187,8 @@ Explanation of Values:
 			    - 'ssl_cert'   - Path to the public key certificate file
 			    - 'ssl_ca'     - Path to the certificate authority file
 			    - 'ssl_capath' - Path to a directory containing trusted CA certificats in PEM format
-			    - 'ssl_cipher' - List of *allowed* ciphers to be used for the encryption, separated by colons (':')
-			    - 'ssl_verify' - TRUE/FALSE; Whether to verify the server certificate or not ('mysqli' only)
+			    - 'ssl_cipher' - List of *allowed* ciphers to be used for the encryption, separated by colons ( ':')
+			    - 'ssl_verify' - TRUE/FALSE; Whether to verify the server certificate or not ( 'mysqli' only)
 
 **compress**		Whether or not to use client compression (MySQL only).
 **stricton**		TRUE/FALSE (boolean) - Whether to force "Strict Mode" connections, good for ensuring strict SQL
@@ -196,7 +196,7 @@ Explanation of Values:
 **port**		The database port number. To use this value you have to add a line to the database config array.
 			::
 
-				$db['default']['port'] = 5432;
+				$db[ 'default' ][ 'port' ] = 5432;
 
 ======================  ===========================================================================================================
 

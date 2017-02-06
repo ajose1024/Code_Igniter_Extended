@@ -15,7 +15,7 @@ defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
 |
 | If it is not set, then CodeIgniter will try guess the protocol and path
 | your installation, but due to security concerns the hostname will be set
-| to $_SERVER['SERVER_ADDR'] if available, or localhost otherwise.
+| to $_SERVER[ 'SERVER_ADDR' ] if available, or localhost otherwise.
 | The auto-detection mechanism exists only for convenience during
 | development and MUST NOT be used in production!
 |
@@ -46,9 +46,9 @@ $config[ 'index_page' ] = 'index.php' ;
 | URI string.  The default setting of 'REQUEST_URI' works for most servers.
 | If your links do not seem to work, try one of the other delicious flavors:
 |
-| 'REQUEST_URI'    Uses $_SERVER['REQUEST_URI']
-| 'QUERY_STRING'   Uses $_SERVER['QUERY_STRING']
-| 'PATH_INFO'      Uses $_SERVER['PATH_INFO']
+| 'REQUEST_URI'    Uses $_SERVER[ 'REQUEST_URI' ]
+| 'QUERY_STRING'   Uses $_SERVER[ 'QUERY_STRING' ]
+| 'PATH_INFO'      Uses $_SERVER[ 'PATH_INFO' ]
 |
 | WARNING: If you set this to 'PATH_INFO', URIs will always be URL-decoded!
 */
@@ -97,7 +97,7 @@ $config[ 'charset' ] = 'UTF-8' ;
 |--------------------------------------------------------------------------
 |
 | If you would like to use the 'hooks' feature you must enable it by
-| setting this variable to TRUE (boolean).  See the user guide for details.
+| setting this variable to TRUE (boolean ).  See the user guide for details.
 |
 */
 $config[ 'enable_hooks' ] = FALSE ;
@@ -124,17 +124,17 @@ $config[ 'subclass_prefix' ] = 'CIX_' ;
 | Enabling this setting will tell CodeIgniter to look for a Composer
 | package auto-loader script in application/vendor/autoload.php.
 |
-|    $config['composer_autoload'] = TRUE;
+|    $config[ 'composer_autoload' ] = TRUE;
 |
 | Or if you have your vendor/ directory located somewhere else, you
 | can opt to set a specific path as well:
 |
-|    $config['composer_autoload'] = '/path/to/vendor/autoload.php';
+|    $config[ 'composer_autoload' ] = '/path/to/vendor/autoload.php';
 |
 | For more information about Composer, please visit http://getcomposer.org/
 |
 | Note: This will NOT disable or override the CodeIgniter-specific
-|    autoloading (application/config/autoload.php)
+|    autoloading (application/config/autoload.php )
 */
 $config[ 'composer_autoload' ] = FALSE ;
 
@@ -153,7 +153,7 @@ $config[ 'composer_autoload' ] = FALSE ;
 | Leave blank to allow all characters -- but only if you are insane.
 |
 | The configured value is actually a regular expression character group
-| and it will be executed as: ! preg_match('/^[<permitted_uri_chars>]+$/i
+| and it will be executed as: ! preg_match( '/^[<permitted_uri_chars>]+$/i
 |
 | DO NOT CHANGE THIS UNLESS YOU FULLY UNDERSTAND THE REPERCUSSIONS!!
 |
@@ -174,7 +174,7 @@ $config[ 'permitted_uri_chars' ] = 'a-z 0-9~%.:_\-' ;
 | You can optionally enable standard query string based URLs:
 | example.com?who=me&what=something&where=here
 |
-| Options are: TRUE or FALSE (boolean)
+| Options are: TRUE or FALSE (boolean )
 |
 | The other items let you set the query string 'words' that will
 | invoke your controllers and its functions:
@@ -200,16 +200,16 @@ $config[ 'directory_trigger' ]      = 'd';
 | threshold determines what gets logged. Threshold options are:
 |
 |    0 = Disables logging, Error logging TURNED OFF
-|    1 = Error Messages (including PHP errors)
+|    1 = Error Messages (including PHP errors )
 |    2 = Debug Messages
 |    3 = Informational Messages
 |    4 = All Messages
 |
 | You can also pass an array with threshold levels to show individual error types
 |
-|     array(2) = Debug Messages, without Error Messages
+|     array(2 ) = Debug Messages, without Error Messages
 |
-| For a live site you'll usually only enable Errors (1) to be logged otherwise
+| For a live site you'll usually only enable Errors (1 ) to be logged otherwise
 | your log files will fill up very fast.
 |
 */
@@ -247,8 +247,8 @@ $config[ 'log_file_extension' ] = '' ;
 |
 | The file system permissions to be applied on newly created log files.
 |
-| IMPORTANT: This MUST be an integer (no quotes) and you MUST use octal
-|            integer notation (i.e. 0700, 0644, etc.)
+| IMPORTANT: This MUST be an integer (no quotes ) and you MUST use octal
+|            integer notation (i.e. 0700, 0644, etc. )
 */
 $config[ 'log_file_permissions' ] = 0644 ;
 
@@ -297,7 +297,7 @@ $config[ 'cache_path' ] = '' ;
 |    TRUE       = Enabled, take all query parameters into account.
 |                 Please be aware that this may result in numerous cache
 |                 files generated for the same page over and over again.
-|    array('q') = Enabled, but only take into account the specified list
+|    array( 'q' ) = Enabled, but only take into account the specified list
 |                 of query parameters.
 |
 */
@@ -332,7 +332,7 @@ $config[ 'encryption_key' ] = '' ;
 | 'sess_expiration'
 |
 |    The number of SECONDS you want the session to last.
-|    Setting to 0 (zero) means expire when the browser is closed.
+|    Setting to 0 (zero ) means expire when the browser is closed.
 |
 | 'sess_save_path'
 |
@@ -384,10 +384,10 @@ $config[ 'sess_regenerate_destroy' ] = FALSE ;
 | 'cookie_domain'   = Set to .your-domain.com for site-wide cookies
 | 'cookie_path'     = Typically will be a forward slash
 | 'cookie_secure'   = Cookie will only be set if a secure HTTPS connection exists.
-| 'cookie_httponly' = Cookie will only be accessible via HTTP(S) (no javascript)
+| 'cookie_httponly' = Cookie will only be accessible via HTTP(S ) (no javascript )
 |
 | Note: These settings (with the exception of 'cookie_prefix' and
-|       'cookie_httponly') will also affect sessions.
+|       'cookie_httponly' ) will also affect sessions.
 |
 */
 $config[ 'cookie_prefix' ]      = 'CI-EXT_' ;
@@ -405,7 +405,7 @@ $config[ 'cookie_httponly' ]    = FALSE ;
 | meaning to replace \r\n, \r, \n occurrences with the PHP_EOL value.
 |
 | This is particularly useful for portability between UNIX-based OSes,
-| (usually \n) and Windows (\r\n).
+| (usually \n ) and Windows (\r\n ).
 |
 */
 $config[ 'standardize_newlines' ] = FALSE ;
@@ -443,7 +443,7 @@ $config[ 'csrf_token_name' ]    = 'csrf_test_name' ;
 $config[ 'csrf_cookie_name' ]   = 'csrf_cookie_name' ;
 $config[ 'csrf_expire' ]        = 7200 ;
 $config[ 'csrf_regenerate' ]    = TRUE ;
-$config[ 'csrf_exclude_uris' ]  = array() ;
+$config[ 'csrf_exclude_uris' ]  = array( ) ;
 
 /*
 |--------------------------------------------------------------------------
@@ -487,9 +487,9 @@ $config[ 'time_reference' ] = 'local' ;
 |
 | If your PHP installation does not have short tag support enabled CI
 | can rewrite the tags on-the-fly, enabling you to utilize that syntax
-| in your view files.  Options are TRUE or FALSE (boolean)
+| in your view files.  Options are TRUE or FALSE (boolean )
 |
-| Note: You need to have eval() enabled for this to work.
+| Note: You need to have eval( ) enabled for this to work.
 |
 */
 $config[ 'rewrite_short_tags' ] = FALSE ;
@@ -508,6 +508,6 @@ $config[ 'rewrite_short_tags' ] = FALSE ;
 | as well as specifying whole subnets. Here are a few examples:
 |
 | Comma-separated:    '10.0.1.200,192.168.5.0/24'
-| Array:        array('10.0.1.200', '192.168.5.0/24')
+| Array:        array( '10.0.1.200', '192.168.5.0/24' )
 */
 $config[ 'proxy_ips' ] = '' ;

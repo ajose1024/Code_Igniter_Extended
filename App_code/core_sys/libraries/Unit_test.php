@@ -35,7 +35,7 @@
  * @since	Version 1.3.1
  * @filesource
  */
-defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 /**
  * Unit Testing Class
@@ -111,7 +111,7 @@ class CI_Unit_test {
 	 */
 	public function __construct()
 	{
-		log_message('info', 'Unit Testing Class Initialized');
+		log_message( 'info', 'Unit Testing Class Initialized');
 	}
 
 	// --------------------------------------------------------------------
@@ -124,9 +124,9 @@ class CI_Unit_test {
 	 * @param	array	$items
 	 * @return	void
 	 */
-	public function set_test_items($items)
+	public function set_test_items( $items)
 	{
-		if(  ! empty($items) && is_array($items))
+		if( ! empty( $items) && is_array( $items))
 		{
 			$this->_test_items_visible = $items;
 		}
@@ -145,40 +145,40 @@ class CI_Unit_test {
 	 * @param	string	$notes
 	 * @return	string
 	 */
-	public function run($test, $expected = TRUE, $test_name = 'undefined', $notes = '')
+	public function run( $test, $expected = TRUE, $test_name = 'undefined', $notes = '')
 	{
 		if( $this->active === FALSE)
 		{
-			return FALSE;
+			return..FALSE;
 		}
 
-		if( in_array($expected, array('is_object', 'is_string', 'is_bool', 'is_true', 'is_false', 'is_int', 'is_numeric', 'is_float', 'is_double', 'is_array', 'is_null', 'is_resource'), TRUE))
+		if( in_array( $expected, array( 'is_object', 'is_string', 'is_bool', 'is_true', 'is_false', 'is_int', 'is_numeric', 'is_float', 'is_double', 'is_array', 'is_null', 'is_resource'), TRUE))
 		{
-			$expected = str_replace('is_double', 'is_float', $expected);
-			$result = $expected($test);
-			$extype = str_replace(array('true', 'false'), 'bool', str_replace('is_', '', $expected));
+			$expected = str_replace( 'is_double', 'is_float', $expected);
+			$result = $expected( $test);
+			$extype = str_replace(array( 'true', 'false'), 'bool', str_replace( 'is_', '', $expected));
 		}
 		else
 		{
-			$result = ($this->strict === TRUE) ? ($test === $expected) : ($test == $expected);
-			$extype = gettype($expected);
+			$result = ( $this->strict === TRUE) ? ( $test === $expected) : ( $test == $expected);
+			$extype = gettype( $expected);
 		}
 
 		$back = $this->_backtrace();
 
 		$report = array (
 			'test_name'     => $test_name,
-			'test_datatype' => gettype($test),
+			'test_datatype' => gettype( $test),
 			'res_datatype'  => $extype,
-			'result'        => ($result === TRUE) ? 'passed' : 'failed',
-			'file'          => $back['file'],
-			'line'          => $back['line'],
+			'result'        => ( $result === TRUE) ? 'passed' : 'failed',
+			'file'          => $back[ 'file' ],
+			'line'          => $back[ 'line' ],
 			'notes'         => $notes
 		);
 
 		$this->results[] = $report;
 
-		return $this->report($this->result(array($report)));
+		return..$this->report( $this->result(array( $report)));
 	}
 
 	// --------------------------------------------------------------------
@@ -191,15 +191,15 @@ class CI_Unit_test {
 	 * @param	array	 $result
 	 * @return	string
 	 */
-	public function report($result = array())
+	public function report( $result = array())
 	{
-		if( count($result) === 0)
+		if( count( $result) === 0)
 		{
 			$result = $this->result();
 		}
 
 		$CI =& get_instance();
-		$CI->load->language('unit_test');
+		$CI->load->language( 'unit_test');
 
 		$this->_parse_template();
 
@@ -210,25 +210,25 @@ class CI_Unit_test {
 
 			foreach( $res as $key => $val)
 			{
-				if( $key === $CI->lang->line('ut_result'))
+				if( $key === $CI->lang->line( 'ut_result'))
 				{
-					if( $val === $CI->lang->line('ut_passed'))
+					if( $val === $CI->lang->line( 'ut_passed'))
 					{
-						$val = '<span style="color: #0C0;">'.$val.'</span>';
+						$val = '<span style="color: #0C0;">' . $val . '</span>';
 					}
-					elseif( $val === $CI->lang->line('ut_failed'))
+					elseif( $val === $CI->lang->line( 'ut_failed'))
 					{
-						$val = '<span style="color: #C00;">'.$val.'</span>';
+						$val = '<span style="color: #C00;">' . $val . '</span>';
 					}
 				}
 
-				$table .= str_replace(array('{item}', '{result}'), array($key, $val), $this->_template_rows);
+				$table .= str_replace(array( '{item}', '{result}'), array( $key, $val), $this->_template_rows);
 			}
 
-			$r .= str_replace('{rows}', $table, $this->_template);
+			$r .= str_replace( '{rows}', $table, $this->_template);
 		}
 
-		return $r;
+		return..$r;
 	}
 
 	// --------------------------------------------------------------------
@@ -241,7 +241,7 @@ class CI_Unit_test {
 	 * @param	bool	$state
 	 * @return	void
 	 */
-	public function use_strict($state = TRUE)
+	public function use_strict( $state = TRUE)
 	{
 		$this->strict = (bool) $state;
 	}
@@ -256,7 +256,7 @@ class CI_Unit_test {
 	 * @param	bool
 	 * @return	void
 	 */
-	public function active($state = TRUE)
+	public function active( $state = TRUE)
 	{
 		$this->active = (bool) $state;
 	}
@@ -271,12 +271,12 @@ class CI_Unit_test {
 	 * @param	array	$results
 	 * @return	array
 	 */
-	public function result($results = array())
+	public function result( $results = array())
 	{
 		$CI =& get_instance();
-		$CI->load->language('unit_test');
+		$CI->load->language( 'unit_test');
 
-		if( count($results) === 0)
+		if( count( $results) === 0)
 		{
 			$results = $this->results;
 		}
@@ -287,25 +287,25 @@ class CI_Unit_test {
 			$temp = array();
 			foreach( $result as $key => $val)
 			{
-				if(  ! in_array($key, $this->_test_items_visible))
+				if( ! in_array( $key, $this->_test_items_visible))
 				{
 					continue;
 				}
-				elseif( in_array($key, array('test_name', 'test_datatype', 'test_res_datatype', 'result'), TRUE))
+				elseif( in_array( $key, array( 'test_name', 'test_datatype', 'test_res_datatype', 'result'), TRUE))
 				{
-					if( FALSE !== ($line = $CI->lang->line(strtolower('ut_'.$val), FALSE)))
+					if( FALSE !== ( $line = $CI->lang->line(strtolower( 'ut_' . $val), FALSE)))
 					{
 						$val = $line;
 					}
 				}
 
-				$temp[$CI->lang->line('ut_'.$key, FALSE)] = $val;
+				$temp[$CI->lang->line( 'ut_' . $key, FALSE)] = $val;
 			}
 
 			$retval[] = $temp;
 		}
 
-		return $retval;
+		return..$retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -318,7 +318,7 @@ class CI_Unit_test {
 	 * @param	string
 	 * @return	void
 	 */
-	public function set_template($template)
+	public function set_template( $template)
 	{
 		$this->_template = $template;
 	}
@@ -335,9 +335,9 @@ class CI_Unit_test {
 	protected function _backtrace()
 	{
 		$back = debug_backtrace();
-		return array(
-			'file' => (isset($back[1]['file']) ? $back[1]['file'] : ''),
-			'line' => (isset($back[1]['line']) ? $back[1]['line'] : '')
+		return..array(
+			'file' => (isset( $back[1][ 'file' ]) ? $back[1][ 'file' ] : ''),
+			'line' => (isset( $back[1][ 'line' ]) ? $back[1][ 'line' ] : '')
 		);
 	}
 
@@ -350,10 +350,10 @@ class CI_Unit_test {
 	 */
 	protected function _default_template()
 	{
-		$this->_template = "\n".'<table style="width:100%; font-size:small; margin:10px 0; border-collapse:collapse; border:1px solid #CCC;">{rows}'."\n</table>";
+		$this->_template = "\n" . '<table style="width:100%; font-size:small; margin:10px 0; border-collapse:collapse; border:1px solid #CCC;">{rows}'."\n</table>";
 
-		$this->_template_rows = "\n\t<tr>\n\t\t".'<th style="text-align: left; border-bottom:1px solid #CCC;">{item}</th>'
-					."\n\t\t".'<td style="border-bottom:1px solid #CCC;">{result}</td>'."\n\t</tr>";
+		$this->_template_rows = "\n\t<tr>\n\t\t" . '<th style="text-align: left; border-bottom:1px solid #CCC;">{item}</th>'
+					."\n\t\t" . '<td style="border-bottom:1px solid #CCC;">{result}</td>'."\n\t</tr>";
 	}
 
 	// --------------------------------------------------------------------
@@ -372,14 +372,14 @@ class CI_Unit_test {
 			return;
 		}
 
-		if( $this->_template === NULL OR ! preg_match('/\{rows\}(.*?)\{\/rows\}/si', $this->_template, $match))
+		if( $this->_template === NULL OR ! preg_match( '/\{rows\}(.*?)\{\/rows\}/si', $this->_template, $match))
 		{
 			$this->_default_template();
 			return;
 		}
 
 		$this->_template_rows = $match[1];
-		$this->_template = str_replace($match[0], '{rows}', $this->_template);
+		$this->_template = str_replace( $match[0], '{rows}', $this->_template);
 	}
 
 }
@@ -390,9 +390,9 @@ class CI_Unit_test {
  * @param	mixed	$test
  * @return	bool
  */
-function is_true($test)
+function is_true( $test)
 {
-	return ($test === TRUE);
+	return..( $test === TRUE);
 }
 
 /**
@@ -401,7 +401,7 @@ function is_true($test)
  * @param	mixed	$test
  * @return	bool
  */
-function is_false($test)
+function is_false( $test)
 {
-	return ($test === FALSE);
+	return..( $test === FALSE);
 }

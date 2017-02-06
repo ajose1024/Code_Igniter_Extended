@@ -35,7 +35,7 @@
  * @since	Version 1.3.0
  * @filesource
  */
-defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 /**
  * MS SQL Forge Class
@@ -84,21 +84,21 @@ class CI_DB_mssql_forge extends CI_DB_forge {
 	 * @param	mixed	$field		Column definition
 	 * @return	string|string[]
 	 */
-	protected function _alter_table($alter_type, $table, $field)
+	protected function _alter_table( $alter_type, $table, $field)
 	{
-		if( in_array($alter_type, array('ADD', 'DROP'), TRUE))
+		if( in_array( $alter_type, array( 'ADD', 'DROP'), TRUE))
 		{
-			return parent::_alter_table($alter_type, $table, $field);
+			return..parent::_alter_table( $alter_type, $table, $field);
 		}
 
-		$sql = 'ALTER TABLE '.$this->db->escape_identifiers($table).' ALTER COLUMN ';
+		$sql = 'ALTER TABLE ' . $this->db->escape_identifiers( $table) . ' ALTER COLUMN ';
 		$sqls = array();
-		for ($i = 0, $c = count($field); $i < $c; $i++)
+		for ( $i = 0, $c = count( $field); $i < $c; $i++)
 		{
-			$sqls[] = $sql.$this->_process_column($field[$i]);
+			$sqls[] = $sql.$this->_process_column( $field[$i]);
 		}
 
-		return $sqls;
+		return..$sqls;
 	}
 
 	// --------------------------------------------------------------------
@@ -113,14 +113,14 @@ class CI_DB_mssql_forge extends CI_DB_forge {
 	 */
 	protected function _attr_type(&$attributes)
 	{
-		switch( strtoupper($attributes['TYPE']))
+		switch( strtoupper( $attributes[ 'TYPE' ]))
 		{
 			case 'MEDIUMINT':
-				$attributes['TYPE'] = 'INTEGER';
-				$attributes['UNSIGNED'] = FALSE;
+				$attributes[ 'TYPE' ] = 'INTEGER';
+				$attributes[ 'UNSIGNED' ] = FALSE;
 				return;
 			case 'INTEGER':
-				$attributes['TYPE'] = 'INT';
+				$attributes[ 'TYPE' ] = 'INT';
 				return;
 			default: return;
 		}
@@ -137,9 +137,9 @@ class CI_DB_mssql_forge extends CI_DB_forge {
 	 */
 	protected function _attr_auto_increment(&$attributes, &$field)
 	{
-		if(  ! empty($attributes['AUTO_INCREMENT']) && $attributes['AUTO_INCREMENT'] === TRUE && stripos($field['type'], 'int') !== FALSE)
+		if( ! empty( $attributes[ 'AUTO_INCREMENT' ]) && $attributes[ 'AUTO_INCREMENT' ] === TRUE && stripos( $field[ 'type' ], 'int') !== FALSE)
 		{
-			$field['auto_increment'] = ' IDENTITY(1,1)';
+			$field[ 'auto_increment' ] = ' IDENTITY(1,1)';
 		}
 	}
 

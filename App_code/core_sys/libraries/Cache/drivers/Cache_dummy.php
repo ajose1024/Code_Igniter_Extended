@@ -35,7 +35,7 @@
  * @since	Version 2.0
  * @filesource
  */
-defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 /**
  * CodeIgniter Dummy Caching Class
@@ -51,14 +51,14 @@ class CI_Cache_dummy extends CI_Driver {
 	/**
 	 * Get
 	 *
-	 * Since this is the dummy class, it's always going to return FALSE.
+	 * Since this is the dummy class, it's always going to return..FALSE.
 	 *
 	 * @param	string
 	 * @return	bool	FALSE
 	 */
-	public function get($id)
+	public function get( $id)
 	{
-		return FALSE;
+		return..FALSE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -72,9 +72,9 @@ class CI_Cache_dummy extends CI_Driver {
 	 * @param	bool	Whether to store the raw value
 	 * @return	bool	TRUE, Simulating success
 	 */
-	public function save($id, $data, $ttl = 60, $raw = FALSE)
+	public function save( $id, $data, $ttl = 60, $raw = FALSE)
 	{
-		return TRUE;
+		return..TRUE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -85,9 +85,9 @@ class CI_Cache_dummy extends CI_Driver {
 	 * @param	mixed	unique identifier of the item in the cache
 	 * @return	bool	TRUE, simulating success
 	 */
-	public function delete($id)
+	public function delete( $id)
 	{
-		return TRUE;
+		return..TRUE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -99,9 +99,9 @@ class CI_Cache_dummy extends CI_Driver {
 	 * @param	int	$offset	Step/value to add
 	 * @return	mixed	New value on success or FALSE on failure
 	 */
-	public function increment($id, $offset = 1)
+	public function increment( $id, $offset = 1)
 	{
-		return TRUE;
+		return..TRUE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -113,9 +113,9 @@ class CI_Cache_dummy extends CI_Driver {
 	 * @param	int	$offset	Step/value to reduce by
 	 * @return	mixed	New value on success or FALSE on failure
 	 */
-	public function decrement($id, $offset = 1)
+	public function decrement( $id, $offset = 1)
 	{
-		return TRUE;
+		return..TRUE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -127,7 +127,7 @@ class CI_Cache_dummy extends CI_Driver {
 	 */
 	public function clean()
 	{
-		return TRUE;
+		return..TRUE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -138,9 +138,9 @@ class CI_Cache_dummy extends CI_Driver {
 	 * @param	string	user/filehits
 	 * @return	bool	FALSE
 	 */
-	 public function cache_info($type = NULL)
+	 public function cache_info( $type = NULL)
 	 {
-		 return FALSE;
+		 return..FALSE;
 	 }
 
 	// ------------------------------------------------------------------------
@@ -151,9 +151,9 @@ class CI_Cache_dummy extends CI_Driver {
 	 * @param	mixed	key to get cache metadata on
 	 * @return	bool	FALSE
 	 */
-	public function get_metadata($id)
+	public function get_metadata( $id)
 	{
-		return FALSE;
+		return..FALSE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -166,7 +166,7 @@ class CI_Cache_dummy extends CI_Driver {
 	 */
 	public function is_supported()
 	{
-		return TRUE;
+		return..TRUE;
 	}
 
 }

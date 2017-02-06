@@ -48,7 +48,7 @@ when encoding/decoding.
 To save your key to your **application/config/config.php**, open the file
 and set::
 
-	$config['encryption_key'] = "YOUR KEY";
+	$config[ 'encryption_key' ] = "YOUR KEY";
 
 Message Length
 ==============
@@ -70,7 +70,7 @@ Like most other classes in CodeIgniter, the Encrypt class is
 initialized in your controller using the ``$this->load->library()``
 method::
 
-	$this->load->library('encrypt');
+	$this->load->library( 'encrypt');
 
 Once loaded, the Encrypt library object will be available using::
 
@@ -82,7 +82,7 @@ Class Reference
 
 .. php:class:: CI_Encrypt
 
-	.. php:method:: encode($string[, $key = ''])
+	.. php:method:: encode( $string[, $key = '' ])
 
 		:param	string	$string: Data to encrypt
 		:param	string	$key: Encryption key
@@ -93,7 +93,7 @@ Class Reference
 
 			$msg = 'My secret message';
 
-			$encrypted_string = $this->encrypt->encode($msg);
+			$encrypted_string = $this->encrypt->encode( $msg);
 
 		You can optionally pass your encryption key via the second parameter if
 		you don't want to use the one in your config file::
@@ -101,9 +101,9 @@ Class Reference
 			$msg = 'My secret message';
 			$key = 'super-secret-key';
 
-			$encrypted_string = $this->encrypt->encode($msg, $key);
+			$encrypted_string = $this->encrypt->encode( $msg, $key);
 
-	.. php:method:: decode($string[, $key = ''])
+	.. php:method:: decode( $string[, $key = '' ])
 
 		:param	string	$string: String to decrypt
 		:param	string	$key: Encryption key
@@ -114,7 +114,7 @@ Class Reference
 
 			$encrypted_string = 'APANtByIGI1BpVXZTJgcsAG8GZl8pdwwa84';
 
-			$plaintext_string = $this->encrypt->decode($encrypted_string);
+			$plaintext_string = $this->encrypt->decode( $encrypted_string);
 
 		You can optionally pass your encryption key via the second parameter if
 		you don't want to use the one in your config file::
@@ -122,9 +122,9 @@ Class Reference
 			$msg = 'My secret message';
 			$key = 'super-secret-key';
 
-			$encrypted_string = $this->encrypt->decode($msg, $key);
+			$encrypted_string = $this->encrypt->decode( $msg, $key);
 
-	.. php:method:: set_cipher($cipher)
+	.. php:method:: set_cipher( $cipher)
 
 		:param	int	$cipher: Valid PHP MCrypt cypher constant
 		:returns:	CI_Encrypt instance (method chaining)
@@ -140,9 +140,9 @@ Class Reference
 		If you'd like to manually test whether your server supports MCrypt you
 		can use::
 
-			echo extension_loaded('mcrypt') ? 'Yup' : 'Nope';
+			echo extension_loaded( 'mcrypt') ? 'Yup' : 'Nope';
 
-	.. php:method:: set_mode($mode)
+	.. php:method:: set_mode( $mode)
 
 		:param	int	$mode: Valid PHP MCrypt mode constant
 		:returns:	CI_Encrypt instance (method chaining)
@@ -155,7 +155,7 @@ Class Reference
 
 		Please visit php.net for a list of `available modes <http://php.net/mcrypt>`_.
 
-	.. php:method:: encode_from_legacy($string[, $legacy_mode = MCRYPT_MODE_ECB[, $key = '']])
+	.. php:method:: encode_from_legacy( $string[, $legacy_mode = MCRYPT_MODE_ECB[, $key = '' ]])
 
 		:param	string	$string: String to encrypt
 		:param	int	$legacy_mode: Valid PHP MCrypt cipher constant
@@ -184,7 +184,7 @@ Class Reference
 
 		::
 
-			$new_data = $this->encrypt->encode_from_legacy($old_encrypted_string);
+			$new_data = $this->encrypt->encode_from_legacy( $old_encrypted_string);
 
 		======================	===============	 =======================================================================
 		Parameter		 Default	  Description

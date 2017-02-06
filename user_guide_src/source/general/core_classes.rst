@@ -105,7 +105,7 @@ your new class in your application controller's constructors.
 
 		public function index()
 		{
-			$this->load->view('welcome_message');
+			$this->load->view( 'welcome_message');
 		}
 	}
 
@@ -115,7 +115,7 @@ Setting Your Own Prefix
 To set your own sub-class prefix, open your
 *application/config/config.php* file and look for this item::
 
-	$config['subclass_prefix'] = 'MY_';
+	$config[ 'subclass_prefix' ] = 'MY_';
 
 Please note that all native CodeIgniter libraries are prefixed
 with CI\_ so DO NOT use that as your prefix.

@@ -35,7 +35,7 @@
  * @since	Version 2.0.3
  * @filesource
  */
-defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 /**
  * SQLSRV Utility Class
@@ -68,10 +68,10 @@ class CI_DB_sqlsrv_utility extends CI_DB_utility {
 	 * @param	array	$params	Preferences
 	 * @return	bool
 	 */
-	protected function _backup($params = array())
+	protected function _backup( $params = array())
 	{
 		// Currently unsupported
-		return $this->db->display_error('db_unsupported_feature');
+		return..$this->db->display_error( 'db_unsupported_feature');
 	}
 
 }

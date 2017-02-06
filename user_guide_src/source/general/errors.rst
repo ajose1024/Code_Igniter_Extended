@@ -29,7 +29,7 @@ software keep track of your scripts and the health of your application.
 
 The following functions let you generate errors:
 
-.. php:function:: show_error($message, $status_code, $heading = 'An Error Was Encountered')
+.. php:function:: show_error( $message, $status_code, $heading = 'An Error Was Encountered')
 
 	:param	mixed	$message: Error message
 	:param	int	$status_code: HTTP Response status code
@@ -54,7 +54,7 @@ The following functions let you generate errors:
 	to ``EXIT_ERROR``.
 	You can check in *application/config/constants.php* for more detail.
 
-.. php:function:: show_404($page = '', $log_error = TRUE)
+.. php:function:: show_404( $page = '', $log_error = TRUE)
 
 	:param	string	$page: URI string
 	:param	bool	$log_error: Whether to log the error
@@ -78,7 +78,7 @@ The following functions let you generate errors:
 	CodeIgniter automatically logs any ``show_404()`` calls. Setting the
 	optional second parameter to FALSE will skip logging.
 
-.. php:function:: log_message($level, $message, $php_error = FALSE)
+.. php:function:: log_message( $level, $message, $php_error = FALSE)
 
 	:param	string	$level: Log level: 'error', 'debug' or 'info'
 	:param	string	$message: Message to log
@@ -94,14 +94,14 @@ The following functions let you generate errors:
 
 		if( $some_var == '')
 		{
-			log_message('error', 'Some variable did not contain a value.');
+			log_message( 'error', 'Some variable did not contain a value . ');
 		}
 		else
 		{
-			log_message('debug', 'Some variable was correctly set');
+			log_message( 'debug', 'Some variable was correctly set');
 		}
 
-		log_message('info', 'The purpose of some variable is to provide some value.');
+		log_message( 'info', 'The purpose of some variable is to provide some value . ');
 
 	There are three message types:
 

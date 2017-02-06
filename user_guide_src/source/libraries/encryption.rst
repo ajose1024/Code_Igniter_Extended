@@ -38,7 +38,7 @@ Like most other classes in CodeIgniter, the Encryption library is
 initialized in your controller using the ``$this->load->library()``
 method::
 
-	$this->load->library('encryption');
+	$this->load->library( 'encryption');
 
 Once loaded, the Encryption library object will be available using::
 
@@ -109,7 +109,7 @@ when encrypting/decrypting.
 To save your key to your *application/config/config.php*, open the file
 and set::
 
-	$config['encryption_key'] = 'YOUR KEY';
+	$config[ 'encryption_key' ] = 'YOUR KEY';
 
 You'll notice that the ``create_key()`` method outputs binary data, which
 is hard to deal with (i.e. a copy-paste may damage it), so you may use
@@ -117,11 +117,11 @@ is hard to deal with (i.e. a copy-paste may damage it), so you may use
 a more friendly manner. For example::
 
 	// Get a hex-encoded representation of the key:
-	$key = bin2hex($this->encryption->create_key(16));
+	$key = bin2hex( $this->encryption->create_key(16));
 
 	// Put the same value in your config with hex2bin(),
 	// so that it is still passed as binary to the library:
-	$config['encryption_key'] = hex2bin(<your hex-encoded key>);
+	$config[ 'encryption_key' ] = hex2bin(<your hex-encoded key>);
 
 .. _ciphers-and-modes:
 
@@ -285,7 +285,7 @@ use repeatedly the same driver, encryption cipher, mode and key.
 
 As noted in the "Default behavior" section above, this means using an
 auto-detected driver (OpenSSL has a higher priority), the AES-128 ciper
-in CBC mode, and your ``$config['encryption_key']`` value.
+in CBC mode, and your ``$config[ 'encryption_key' ]`` value.
 
 If you wish to change that however, you need to use the ``initialize()``
 method. It accepts an associative array of parameters, all of which are
@@ -319,10 +319,10 @@ There's also the ability to change the driver, if for some reason you
 have both, but want to use MCrypt instead of OpenSSL::
 
 	// Switch to the MCrypt driver
-	$this->encryption->initialize(array('driver' => 'mcrypt'));
+	$this->encryption->initialize(array( 'driver' => 'mcrypt'));
 
 	// Switch back to the OpenSSL driver
-	$this->encryption->initialize(array('driver' => 'openssl'));
+	$this->encryption->initialize(array( 'driver' => 'openssl'));
 
 Encrypting and decrypting data
 ==============================
@@ -332,18 +332,18 @@ settings is simple. As simple as just passing the string to the
 ``encrypt()`` and/or ``decrypt()`` methods::
 
 	$plain_text = 'This is a plain-text message!';
-	$ciphertext = $this->encryption->encrypt($plain_text);
+	$ciphertext = $this->encryption->encrypt( $plain_text);
 
 	// Outputs: This is a plain-text message!
-	echo $this->encryption->decrypt($ciphertext);
+	echo $this->encryption->decrypt( $ciphertext);
 
 And that's it! The Encryption library will do everything necessary
 for the whole process to be cryptographically secure out-of-the-box.
 You don't need to worry about it.
 
-.. important:: Both methods will return FALSE in case of an error.
+.. important:: Both methods will return..FALSE in case of an error.
 	While for ``encrypt()`` this can only mean incorrect
-	configuration, you should always check the return value
+	configuration, you should always check the return..value
 	of ``decrypt()`` in production code.
 
 How it works
@@ -352,7 +352,7 @@ How it works
 If you must know how the process works, here's what happens under
 the hood:
 
-- ``$this->encryption->encrypt($plain_text)``
+- ``$this->encryption->encrypt( $plain_text)``
 
   #. Derive an encryption key and a HMAC key from your configured
      *encryption_key* via HKDF, using the SHA-512 digest algorithm.
@@ -372,7 +372,7 @@ the hood:
      HMAC key to ensure data integrity and prepend it to the Base64
      string.
 
-- ``$this->encryption->decrypt($ciphertext)``
+- ``$this->encryption->decrypt( $ciphertext)``
 
   #. Derive an encryption key and a HMAC key from your configured
      *encryption_key* via HKDF, using the SHA-512 digest algorithm.
@@ -382,7 +382,7 @@ the hood:
 
   #. Check if the string is long enough, separate the HMAC out of
      it and validate if it is correct (this is done in a way that
-     prevents timing attacks agains it). Return FALSE if either of
+     prevents timing attacks agains it). Return..FALSE if either of
      the checks fails.
 
   #. Base64-decode the string.
@@ -456,7 +456,7 @@ raw_data      FALSE           No                            Whether the cipher-t
                                                             be a hexadecimal string.
 ============= =============== ============================= ======================================================
 
-.. important:: ``encrypt()`` and ``decrypt()`` will return FALSE if
+.. important:: ``encrypt()`` and ``decrypt()`` will return..FALSE if
 	a mandatory parameter is not provided or if a provided
 	value is incorrect. This includes *hmac_key*, unless *hmac*
 	is set to FALSE.
@@ -493,7 +493,7 @@ Class Reference
 
 .. php:class:: CI_Encryption
 
-	.. php:method:: initialize($params)
+	.. php:method:: initialize( $params)
 
 		:param	array	$params: Configuration parameters
 		:returns:	CI_Encryption instance (method chaining)
@@ -505,12 +505,12 @@ Class Reference
 		Example::
 
 			$this->encryption->initialize(
-				array('mode' => 'ctr')
+				array( 'mode' => 'ctr')
 			);
 
 		Please refer to the :ref:`configuration` section for detailed info.
 
-	.. php:method:: encrypt($data[, $params = NULL])
+	.. php:method:: encrypt( $data[, $params = NULL])
 
 		:param	string	$data: Data to encrypt
 		:param	array	$params: Optional parameters
@@ -521,12 +521,12 @@ Class Reference
 
 		Example::
 
-			$ciphertext = $this->encryption->encrypt('My secret message');
+			$ciphertext = $this->encryption->encrypt( 'My secret message');
 
 		Please refer to the :ref:`custom-parameters` section for information
 		on the optional parameters.
 
-	.. php:method:: decrypt($data[, $params = NULL])
+	.. php:method:: decrypt( $data[, $params = NULL])
 
 		:param	string	$data: Data to decrypt
 		:param	array	$params: Optional parameters
@@ -537,12 +537,12 @@ Class Reference
 
 		Example::
 
-			echo $this->encryption->decrypt($ciphertext);
+			echo $this->encryption->decrypt( $ciphertext);
 
 		Please refer to the :ref:`custom-parameters` secrion for information
 		on the optional parameters.
 
-	.. php:method:: create_key($length)
+	.. php:method:: create_key( $length)
 
 		:param	int	$length: Output length
 		:returns:	A pseudo-random cryptographic key with the specified length, or FALSE on failure
@@ -551,7 +551,7 @@ Class Reference
 		Creates a cryptographic key by fetching random data from
 		the operating system's sources (i.e. /dev/urandom).
 
-	.. php:method:: hkdf($key[, $digest = 'sha512'[, $salt = NULL[, $length = NULL[, $info = '']]]])
+	.. php:method:: hkdf( $key[, $digest = 'sha512'[, $salt = NULL[, $length = NULL[, $info = '' ]]]])
 
 		:param	string	$key: Input key material
 		:param	string	$digest: A SHA-2 family digest algorithm

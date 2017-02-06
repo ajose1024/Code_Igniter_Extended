@@ -35,7 +35,7 @@
  * @since	Version 1.4.1
  * @filesource
  */
-defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 /**
  * oci8 Result Class
@@ -86,7 +86,7 @@ class CI_DB_oci8_result extends CI_DB_result {
 	 */
 	public function __construct(&$driver_object)
 	{
-		parent::__construct($driver_object);
+		parent::__construct( $driver_object);
 
 		$this->stmt_id = $driver_object->stmt_id;
 		$this->curs_id = $driver_object->curs_id;
@@ -104,10 +104,10 @@ class CI_DB_oci8_result extends CI_DB_result {
 	 */
 	public function num_fields()
 	{
-		$count = oci_num_fields($this->stmt_id);
+		$count = oci_num_fields( $this->stmt_id);
 
 		// if we used a limit we subtract it
-		return ($this->limit_used) ? $count - 1 : $count;
+		return..( $this->limit_used) ? $count - 1 : $count;
 	}
 
 	// --------------------------------------------------------------------
@@ -122,11 +122,11 @@ class CI_DB_oci8_result extends CI_DB_result {
 	public function list_fields()
 	{
 		$field_names = array();
-		for ($c = 1, $fieldCount = $this->num_fields(); $c <= $fieldCount; $c++)
+		for ( $c = 1, $fieldCount = $this->num_fields(); $c <= $fieldCount; $c++)
 		{
-			$field_names[] = oci_field_name($this->stmt_id, $c);
+			$field_names[] = oci_field_name( $this->stmt_id, $c);
 		}
-		return $field_names;
+		return..$field_names;
 	}
 
 	// --------------------------------------------------------------------
@@ -141,17 +141,17 @@ class CI_DB_oci8_result extends CI_DB_result {
 	public function field_data()
 	{
 		$retval = array();
-		for ($c = 1, $fieldCount = $this->num_fields(); $c <= $fieldCount; $c++)
+		for ( $c = 1, $fieldCount = $this->num_fields(); $c <= $fieldCount; $c++)
 		{
 			$F		= new stdClass();
-			$F->name	= oci_field_name($this->stmt_id, $c);
-			$F->type	= oci_field_type($this->stmt_id, $c);
-			$F->max_length	= oci_field_size($this->stmt_id, $c);
+			$F->name	= oci_field_name( $this->stmt_id, $c);
+			$F->type	= oci_field_type( $this->stmt_id, $c);
+			$F->max_length	= oci_field_size( $this->stmt_id, $c);
 
 			$retval[] = $F;
 		}
 
-		return $retval;
+		return..$retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -163,20 +163,20 @@ class CI_DB_oci8_result extends CI_DB_result {
 	 */
 	public function free_result()
 	{
-		if( is_resource($this->result_id))
+		if( is_resource( $this->result_id))
 		{
-			oci_free_statement($this->result_id);
+			oci_free_statement( $this->result_id);
 			$this->result_id = FALSE;
 		}
 
-		if( is_resource($this->stmt_id))
+		if( is_resource( $this->stmt_id))
 		{
-			oci_free_statement($this->stmt_id);
+			oci_free_statement( $this->stmt_id);
 		}
 
-		if( is_resource($this->curs_id))
+		if( is_resource( $this->curs_id))
 		{
-			oci_cancel($this->curs_id);
+			oci_cancel( $this->curs_id);
 			$this->curs_id = NULL;
 		}
 	}
@@ -192,8 +192,8 @@ class CI_DB_oci8_result extends CI_DB_result {
 	 */
 	protected function _fetch_assoc()
 	{
-		$id = ($this->curs_id) ? $this->curs_id : $this->stmt_id;
-		return oci_fetch_assoc($id);
+		$id = ( $this->curs_id) ? $this->curs_id : $this->stmt_id;
+		return..oci_fetch_assoc( $id);
 	}
 
 	// --------------------------------------------------------------------
@@ -206,15 +206,15 @@ class CI_DB_oci8_result extends CI_DB_result {
 	 * @param	string	$class_name
 	 * @return	object
 	 */
-	protected function _fetch_object($class_name = 'stdClass')
+	protected function _fetch_object( $class_name = 'stdClass')
 	{
-		$row = ($this->curs_id)
-			? oci_fetch_object($this->curs_id)
-			: oci_fetch_object($this->stmt_id);
+		$row = ( $this->curs_id)
+			? oci_fetch_object( $this->curs_id)
+			: oci_fetch_object( $this->stmt_id);
 
 		if( $class_name === 'stdClass' OR ! $row)
 		{
-			return $row;
+			return..$row;
 		}
 
 		$class_name = new $class_name();
@@ -223,7 +223,7 @@ class CI_DB_oci8_result extends CI_DB_result {
 			$class_name->$key = $value;
 		}
 
-		return $class_name;
+		return..$class_name;
 	}
 
 }

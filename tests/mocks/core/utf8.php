@@ -8,7 +8,7 @@ class Mock_Core_Utf8 extends CI_Utf8 {
 	 */
 	public function __construct()
 	{
-		if( defined('UTF8_ENABLED'))
+		if( defined( 'UTF8_ENABLED'))
 		{
 			return;
 		}

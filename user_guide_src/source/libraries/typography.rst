@@ -21,7 +21,7 @@ Initializing the Class
 Like most other classes in CodeIgniter, the Typography class is
 initialized in your controller using the ``$this->load->library()`` method::
 
-	$this->load->library('typography');
+	$this->load->library( 'typography');
 
 Once loaded, the Typography library object will be available using::
 
@@ -41,10 +41,10 @@ Class Reference
 
 		Usage example::
 
-			$this->load->library('typography');
+			$this->load->library( 'typography');
 			$this->typography->protect_braced_quotes = TRUE;
 
-	.. method auto_typography($str[, $reduce_linebreaks = FALSE])
+	.. method auto_typography( $str[, $reduce_linebreaks = FALSE])
 
 		:param	string	$str: Input string
 		:param	bool	$reduce_linebreaks: Whether to reduce consequitive linebreaks
@@ -65,17 +65,17 @@ Class Reference
 
 		Usage example::
 
-			$string = $this->typography->auto_typography($string);
+			$string = $this->typography->auto_typography( $string);
 
 		There is one optional parameter that determines whether the parser should reduce more than two consecutive line breaks down to two.
 		Pass boolean TRUE to enable reducing line breaks::
 
-			$string = $this->typography->auto_typography($string, TRUE);
+			$string = $this->typography->auto_typography( $string, TRUE);
 
 		.. note:: Typographic formatting can be processor intensive, particularly if you have a lot of content being formatted.
 			If you choose to use this method you may want to consider :doc:`caching <../general/caching>` your pages.
 
-	.. php:method:: format_characters($str)
+	.. php:method:: format_characters( $str)
 
 		:param	string	$str: Input string
 		:returns:	Formatted string
@@ -91,9 +91,9 @@ Class Reference
 
 		Usage example::
 
-			$string = $this->typography->format_characters($string);
+			$string = $this->typography->format_characters( $string);
 
-	.. php:method:: nl2br_except_pre($str)
+	.. php:method:: nl2br_except_pre( $str)
 
 		:param	string	$str: Input string
 		:returns:	Formatted string
@@ -104,4 +104,4 @@ Class Reference
 
 		Usage example::
 
-			$string = $this->typography->nl2br_except_pre($string);
+			$string = $this->typography->nl2br_except_pre( $string);

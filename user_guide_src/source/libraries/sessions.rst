@@ -41,7 +41,7 @@ sessions when necessary.
 To initialize the Session class manually in your controller constructor,
 use the ``$this->load->library()`` method::
 
-	$this->load->library('session');
+	$this->load->library( 'session');
 
 Once loaded, the Sessions library object will be available using::
 
@@ -124,7 +124,7 @@ In addition, CodeIgniter also provides 2 special types of session data
 that are further explained below: flashdata and tempdata.
 
 .. note:: In previous versions, regular session data in CodeIgniter was
-	referred to as 'userdata'. Have this in mind if that term is used
+	referred to as 'userdata' . Have this in mind if that term is used
 	elsewhere in the manual. Most of it is written to explain how
 	the custom 'userdata' methods work.
 
@@ -134,7 +134,7 @@ Retrieving Session Data
 Any piece of information from the session array is available through the
 ``$_SESSION`` superglobal::
 
-	$_SESSION['item']
+	$_SESSION[ 'item' ]
 
 Or through the magic getter::
 
@@ -142,13 +142,13 @@ Or through the magic getter::
 
 And for backwards compatibility, through the ``userdata()`` method::
 
-	$this->session->userdata('item');
+	$this->session->userdata( 'item');
 
 Where item is the array key corresponding to the item you wish to fetch.
 For example, to assign a previously stored 'name' item to the ``$name``
 variable, you will do this::
 
-	$name = $_SESSION['name'];
+	$name = $_SESSION[ 'name' ];
 
 	// or:
 
@@ -156,7 +156,7 @@ variable, you will do this::
 
 	// or:
 
-	$name = $this->session->userdata('name');
+	$name = $this->session->userdata( 'name');
 
 .. note:: The ``userdata()`` method returns NULL if the item you are trying
 	to access does not exist.
@@ -185,7 +185,7 @@ Alternatively, the old method of assigning it as "userdata" is also
 available. That however passing an array containing your new data to the
 ``set_userdata()`` method::
 
-	$this->session->set_userdata($array);
+	$this->session->set_userdata( $array);
 
 Where ``$array`` is an associative array containing your new data. Here's
 an example::
@@ -196,23 +196,23 @@ an example::
 		'logged_in' => TRUE
 	);
 
-	$this->session->set_userdata($newdata);
+	$this->session->set_userdata( $newdata);
 
 If you want to add userdata one value at a time, ``set_userdata()`` also
 supports this syntax::
 
-	$this->session->set_userdata('some_name', 'some_value');
+	$this->session->set_userdata( 'some_name', 'some_value');
 
 If you want to verify that a session value exists, simply check with
 ``isset()``::
 
 	// returns FALSE if the 'some_name' item doesn't exist or is NULL,
 	// TRUE otherwise:
-	isset($_SESSION['some_name'])
+	isset( $_SESSION[ 'some_name' ])
 
 Or you can call ``has_userdata()``::
 
-	$this->session->has_userdata('some_name');
+	$this->session->has_userdata( 'some_name');
 
 Removing Session Data
 =====================
@@ -220,13 +220,13 @@ Removing Session Data
 Just as with any other variable, unsetting a value in ``$_SESSION`` can be
 done through ``unset()``::
 
-	unset($_SESSION['some_name']);
+	unset( $_SESSION[ 'some_name' ]);
 
 	// or multiple values:
 
 	unset(
-		$_SESSION['some_name'],
-		$_SESSION['another_name']
+		$_SESSION[ 'some_name' ],
+		$_SESSION[ 'another_name' ]
 	);
 
 Also, just as ``set_userdata()`` can be used to add information to a
@@ -234,13 +234,13 @@ session, ``unset_userdata()`` can be used to remove it, by passing the
 session key. For example, if you wanted to remove 'some_name' from your
 session data array::
 
-	$this->session->unset_userdata('some_name');
+	$this->session->unset_userdata( 'some_name');
 
 This method also accepts an array of item keys to unset::
 
-	$array_items = array('username', 'email');
+	$array_items = array( 'username', 'email');
 
-	$this->session->unset_userdata($array_items);
+	$this->session->unset_userdata( $array_items);
 
 .. note:: In previous versions, the ``unset_userdata()`` method used
 	to accept an associative array of ``key => 'dummy value'``
@@ -261,21 +261,21 @@ that one, you've been warned).
 
 To mark an existing item as "flashdata"::
 
-	$this->session->mark_as_flash('item');
+	$this->session->mark_as_flash( 'item');
 
 If you want to mark multiple items as flashdata, simply pass the keys as an
 array::
 
-	$this->session->mark_as_flash(array('item', 'item2'));
+	$this->session->mark_as_flash(array( 'item', 'item2'));
 
 To add flashdata::
 
-	$_SESSION['item'] = 'value';
-	$this->session->mark_as_flash('item');
+	$_SESSION[ 'item' ] = 'value';
+	$this->session->mark_as_flash( 'item');
 
 Or alternatively, using the ``set_flashdata()`` method::
 
-	$this->session->set_flashdata('item', 'value');
+	$this->session->set_flashdata( 'item', 'value');
 
 You can also pass an array to ``set_flashdata()``, in the same manner as
 ``set_userdata()``.
@@ -283,14 +283,14 @@ You can also pass an array to ``set_flashdata()``, in the same manner as
 Reading flashdata variables is the same as reading regular session data
 through ``$_SESSION``::
 
-	$_SESSION['item']
+	$_SESSION[ 'item' ]
 
-.. important:: The ``userdata()`` method will NOT return flashdata items.
+.. important:: The ``userdata()`` method will NOT return..flashdata items.
 
 However, if you want to be sure that you're reading "flashdata" (and not
 any other kind), you can also use the ``flashdata()`` method::
 
-	$this->session->flashdata('item');
+	$this->session->flashdata( 'item');
 
 Or to get an array with all flashdata, simply omit the key parameter::
 
@@ -305,8 +305,8 @@ You can either pass a single item or an array of flashdata items to keep.
 
 ::
 
-	$this->session->keep_flashdata('item');
-	$this->session->keep_flashdata(array('item1', 'item2', 'item3'));
+	$this->session->keep_flashdata( 'item');
+	$this->session->keep_flashdata(array( 'item1', 'item2', 'item3'));
 
 Tempdata
 ========
@@ -323,13 +323,13 @@ To mark an existing item as "tempdata", simply pass its key and expiry time
 (in seconds!) to the ``mark_as_temp()`` method::
 
 	// 'item' will be erased after 300 seconds
-	$this->session->mark_as_temp('item', 300);
+	$this->session->mark_as_temp( 'item', 300);
 
 You can mark multiple items as tempdata in two ways, depending on whether
 you want them all to have the same expiry time or not::
 
 	// Both 'item' and 'item2' will expire after 300 seconds
-	$this->session->mark_as_temp(array('item', 'item2'), 300);
+	$this->session->mark_as_temp(array( 'item', 'item2'), 300);
 
 	// 'item' will be erased after 300 seconds, while 'item2'
 	// will do so after only 240 seconds
@@ -340,18 +340,18 @@ you want them all to have the same expiry time or not::
 
 To add tempdata::
 
-	$_SESSION['item'] = 'value';
-	$this->session->mark_as_temp('item', 300); // Expire in 5 minutes
+	$_SESSION[ 'item' ] = 'value';
+	$this->session->mark_as_temp( 'item', 300); // Expire in 5 minutes
 
 Or alternatively, using the ``set_tempdata()`` method::
 
-	$this->session->set_tempdata('item', 'value', 300);
+	$this->session->set_tempdata( 'item', 'value', 300);
 
 You can also pass an array to ``set_tempdata()``::
 
-	$tempdata = array('newuser' => TRUE, 'message' => 'Thanks for joining!');
+	$tempdata = array( 'newuser' => TRUE, 'message' => 'Thanks for joining!');
 
-	$this->session->set_tempdata($tempdata, NULL, $expire);
+	$this->session->set_tempdata( $tempdata, NULL, $expire);
 
 .. note:: If the expiration is omitted or set to 0, the default
 	time-to-live value of 300 seconds (or 5 minutes) will be used.
@@ -359,14 +359,14 @@ You can also pass an array to ``set_tempdata()``::
 To read a tempdata variable, again you can just access it through the
 ``$_SESSION`` superglobal array::
 
-	$_SESSION['item']
+	$_SESSION[ 'item' ]
 
-.. important:: The ``userdata()`` method will NOT return tempdata items.
+.. important:: The ``userdata()`` method will NOT return..tempdata items.
 
 Or if you want to be sure that you're reading "tempdata" (and not any
 other kind), you can also use the ``tempdata()`` method::
 
-	$this->session->tempdata('item');
+	$this->session->tempdata( 'item');
 
 And of course, if you want to retrieve all existing tempdata::
 
@@ -378,14 +378,14 @@ And of course, if you want to retrieve all existing tempdata::
 If you need to remove a tempdata value before it expires, you can directly
 unset it from the ``$_SESSION`` array::
 
-	unset($_SESSION['item']);
+	unset( $_SESSION[ 'item' ]);
 
 However, this won't remove the marker that makes this specific item to be
 tempdata (it will be invalidated on the next HTTP request), so if you
 intend to reuse that same key in the same request, you'd want to use
 ``unset_tempdata()``::
 
-	$this->session->unset_tempdata('item');
+	$this->session->unset_tempdata( 'item');
 
 Destroying a Session
 ====================
@@ -418,7 +418,7 @@ application relied on these values, so here are alternative methods of
 accessing them:
 
   - session_id: ``session_id()``
-  - ip_address: ``$_SERVER['REMOTE_ADDR']``
+  - ip_address: ``$_SERVER[ 'REMOTE_ADDR' ]``
   - user_agent: ``$this->input->user_agent()`` (unused by sessions)
   - last_activity: Depends on the storage, no straightforward way. Sorry!
 
@@ -489,7 +489,7 @@ By default, the `Files Driver`_ will be used when a session is initialized,
 because it is the most safe choice and is expected to work everywhere
 (virtually every environment has a file system).
 
-However, any other driver may be selected via the ``$config['sess_driver']``
+However, any other driver may be selected via the ``$config[ 'sess_driver' ]``
 line in your **application/config/config.php** file, if you chose to do so.
 Have it in mind though, every driver has different caveats, so be sure to
 get yourself familiar with them (below) before you make that choice.
@@ -518,7 +518,7 @@ To be more specific, it doesn't support PHP's `directory level and mode
 formats used in session.save_path
 <http://php.net/manual/en/session.configuration.php#ini.session.save-path>`_,
 and it has most of the options hard-coded for safety. Instead, only
-absolute paths are supported for ``$config['sess_save_path']``.
+absolute paths are supported for ``$config[ 'sess_save_path' ]``.
 
 Another important thing that you should know, is to make sure that you
 don't use a publicly-readable or shared directory for storing your session
@@ -576,12 +576,12 @@ However, there are some conditions that must be met:
 
 In order to use the 'database' session driver, you must also create this
 table that we already mentioned and then set it as your
-``$config['sess_save_path']`` value.
+``$config[ 'sess_save_path' ]`` value.
 For example, if you would like to use 'ci_sessions' as your table name,
 you would do this::
 
-	$config['sess_driver'] = 'database';
-	$config['sess_save_path'] = 'ci_sessions';
+	$config[ 'sess_driver' ] = 'database';
+	$config[ 'sess_save_path' ] = 'ci_sessions';
 
 .. note:: If you've upgraded from a previous version of CodeIgniter and
 	you don't have 'sess_save_path' configured, then the Session
@@ -653,7 +653,7 @@ both familiar with Redis and using it for other purposes.
 
 Just as with the 'files' and 'database' drivers, you must also configure
 the storage location for your sessions via the
-``$config['sess_save_path']`` setting.
+``$config[ 'sess_save_path' ]`` setting.
 The format here is a bit different and complicated at the same time. It is
 best explained by the *phpredis* extension's README file, so we'll simply
 link you to it:
@@ -667,8 +667,8 @@ link you to it:
 For the most common case however, a simple ``host:port`` pair should be
 sufficient::
 
-	$config['sess_driver'] = 'redis';
-	$config['sess_save_path'] = 'tcp://localhost:6379';
+	$config[ 'sess_driver' ] = 'redis';
+	$config[ 'sess_save_path' ] = 'tcp://localhost:6379';
 
 Memcached Driver
 ----------------
@@ -692,11 +692,11 @@ deleted after Y seconds have passed (but not necessarily that it won't
 expire earlier than that time). This happens very rarely, but should be
 considered as it may result in loss of sessions.
 
-The ``$config['sess_save_path']`` format is fairly straightforward here,
+The ``$config[ 'sess_save_path' ]`` format is fairly straightforward here,
 being just a ``host:port`` pair::
 
-	$config['sess_driver'] = 'memcached';
-	$config['sess_save_path'] = 'localhost:11211';
+	$config[ 'sess_driver' ] = 'memcached';
+	$config[ 'sess_save_path' ] = 'localhost:11211';
 
 Bonus Tip
 ^^^^^^^^^
@@ -710,7 +710,7 @@ separate the multiple server paths with commas::
 
 	// localhost will be given higher priority (5) here,
 	// compared to 192.0.2.1 with a weight of 1.
-	$config['sess_save_path'] = 'localhost:11211:5,192.0.2.1:11211:1';
+	$config[ 'sess_save_path' ] = 'localhost:11211:5,192.0.2.1:11211:1';
 
 Custom Drivers
 --------------
@@ -773,22 +773,22 @@ like this::
 		public function __construct(&$params)
 		{
 			// DO NOT forget this
-			parent::__construct($params);
+			parent::__construct( $params);
 
 			// Configuration & other initializations
 		}
 
-		public function open($save_path, $name)
+		public function open( $save_path, $name)
 		{
 			// Initialize storage mechanism (connection)
 		}
 
-		public function read($session_id)
+		public function read( $session_id)
 		{
 			// Read session data (if exists), acquire locks
 		}
 
-		public function write($session_id, $session_data)
+		public function write( $session_id, $session_data)
 		{
 			// Create / update session data (it might not exist!)
 		}
@@ -798,12 +798,12 @@ like this::
 			// Free locks, close connections / streams / etc.
 		}
 
-		public function destroy($session_id)
+		public function destroy( $session_id)
 		{
 			// Call close() method & destroy data for current session (order may differ)
 		}
 
-		public function gc($maxlifetime)
+		public function gc( $maxlifetime)
 		{
 			// Erase data for expired sessions
 		}
@@ -852,7 +852,7 @@ Class Reference
 		.. note:: This is a legacy method kept only for backwards
 			compatibility with older applications.
 
-	.. php:method:: has_userdata($key)
+	.. php:method:: has_userdata( $key)
 
 		:param	string	$key: Session item key
 		:returns:	TRUE if the specified key exists, FALSE if not
@@ -862,10 +862,10 @@ Class Reference
 
 		.. note:: This is a legacy method kept only for backwards
 			compatibility with older applications. It is just
-			an alias for ``isset($_SESSION[$key])`` - please
+			an alias for ``isset( $_SESSION[$key])`` - please
 			use that instead.
 
-	.. php:method:: set_userdata($data[, $value = NULL])
+	.. php:method:: set_userdata( $data[, $value = NULL])
 
 		:param	mixed	$data: An array of key/value pairs to set as session data, or the key for a single item
 		:param	mixed	$value:	The value to set for a specific session item, if $data is a key
@@ -876,7 +876,7 @@ Class Reference
 		.. note:: This is a legacy method kept only for backwards
 			compatibility with older applications.
 
-	.. php:method:: unset_userdata($key)
+	.. php:method:: unset_userdata( $key)
 
 		:param	mixed	$key: Key for the session data item to unset, or an array of multiple keys
 		:rtype:	void
@@ -886,10 +886,10 @@ Class Reference
 
 		.. note:: This is a legacy method kept only for backwards
 			compatibility with older applications. It is just
-			an alias for ``unset($_SESSION[$key])`` - please
+			an alias for ``unset( $_SESSION[$key])`` - please
 			use that instead.
 
-	.. php:method:: mark_as_flash($key)
+	.. php:method:: mark_as_flash( $key)
 
 		:param	mixed	$key: Key to mark as flashdata, or an array of multiple keys
 		:returns:	TRUE on success, FALSE on failure
@@ -906,7 +906,7 @@ Class Reference
 		Gets a list of all ``$_SESSION`` that have been marked as
 		"flashdata".
 
-	.. php:method:: umark_flash($key)
+	.. php:method:: umark_flash( $key)
 
 		:param	mixed	$key: Key to be un-marked as flashdata, or an array of multiple keys
 		:rtype:	void
@@ -928,7 +928,7 @@ Class Reference
 			compatibility with older applications. You should
 			directly access ``$_SESSION`` instead.
 
-	.. php:method:: keep_flashdata($key)
+	.. php:method:: keep_flashdata( $key)
 
 		:param	mixed	$key: Flashdata key to keep, or an array of multiple keys
 		:returns:	TRUE on success, FALSE on failure
@@ -941,7 +941,7 @@ Class Reference
 			compatibility with older applications. It is just
 			an alias for the ``mark_as_flash()`` method.
 
-	.. php:method:: set_flashdata($data[, $value = NULL])
+	.. php:method:: set_flashdata( $data[, $value = NULL])
 
 		:param	mixed	$data: An array of key/value pairs to set as flashdata, or the key for a single item
 		:param	mixed	$value:	The value to set for a specific session item, if $data is a key
@@ -953,7 +953,7 @@ Class Reference
 		.. note:: This is a legacy method kept only for backwards
 			compatibility with older applications.
 
-	.. php:method:: mark_as_temp($key[, $ttl = 300])
+	.. php:method:: mark_as_temp( $key[, $ttl = 300])
 
 		:param	mixed	$key: Key to mark as tempdata, or an array of multiple keys
 		:param	int	$ttl: Time-to-live value for the tempdata, in seconds
@@ -971,7 +971,7 @@ Class Reference
 		Gets a list of all ``$_SESSION`` that have been marked as
 		"tempdata".
 
-	.. php:method:: umark_temp($key)
+	.. php:method:: umark_temp( $key)
 
 		:param	mixed	$key: Key to be un-marked as tempdata, or an array of multiple keys
 		:rtype:	void
@@ -993,7 +993,7 @@ Class Reference
 			compatibility with older applications. You should
 			directly access ``$_SESSION`` instead.
 
-	.. php:method:: set_tempdata($data[, $value = NULL])
+	.. php:method:: set_tempdata( $data[, $value = NULL])
 
 		:param	mixed	$data: An array of key/value pairs to set as tempdata, or the key for a single item
 		:param	mixed	$value:	The value to set for a specific session item, if $data is a key
@@ -1032,21 +1032,21 @@ Class Reference
 			`session_destroy()
 			<http://php.net/session_destroy>`_ function.
 
-	.. php:method:: __get($key)
+	.. php:method:: __get( $key)
 
 		:param	string	$key: Session item key
 		:returns:	The requested session data item, or NULL if it doesn't exist
 		:rtype:	mixed
 
 		A magic method that allows you to use
-		``$this->session->item`` instead of ``$_SESSION['item']``,
+		``$this->session->item`` instead of ``$_SESSION[ 'item' ]``,
 		if that's what you prefer.
 
-		It will also return the session ID by calling
+		It will also return..the session ID by calling
 		``session_id()`` if you try to access
 		``$this->session->session_id``.
 
-	.. php:method:: __set($key, $value)
+	.. php:method:: __set( $key, $value)
 
 		:param	string	$key: Session item key
 		:param	mixed	$value: Value to assign to the session item key
@@ -1059,4 +1059,4 @@ Class Reference
 			$this->session->foo = 'bar';
 
 			// Results in:
-			// $_SESSION['foo'] = 'bar';
+			// $_SESSION[ 'foo' ] = 'bar';

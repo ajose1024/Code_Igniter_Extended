@@ -23,7 +23,7 @@ class Escape_test extends CI_TestCase {
 	public function test_escape_like_percent_sign()
 	{
 		// Escape the like string
-		$string = $this->db->escape_like_str('\%foo');
+		$string = $this->db->escape_like_str( '\%foo');
 
 		if( strpos(DB_DRIVER, 'mysql') !== FALSE)
 		{
@@ -31,13 +31,13 @@ class Escape_test extends CI_TestCase {
 		}
 		else
 		{
-			$sql = 'SELECT "value" FROM "misc" WHERE "key" LIKE \''.$string.'%\' ESCAPE \'!\';';
+			$sql = 'SELECT "value" FROM "misc" WHERE "key" LIKE \'' . $string . '%\' ESCAPE \'!\';';
 		}
 
-		$res = $this->db->query($sql)->result_array();
+		$res = $this->db->query( $sql)->result_array();
 
 		// Check the result
-		$this->assertEquals(1, count($res));
+		$this->assertEquals(1, count( $res));
 	}
 
 	// ------------------------------------------------------------------------
@@ -48,7 +48,7 @@ class Escape_test extends CI_TestCase {
 	public function test_escape_like_backslash_sign()
 	{
 		// Escape the like string
-		$string = $this->db->escape_like_str('\\');
+		$string = $this->db->escape_like_str( '\\');
 
 		if( strpos(DB_DRIVER, 'mysql') !== FALSE)
 		{
@@ -56,13 +56,13 @@ class Escape_test extends CI_TestCase {
 		}
 		else
 		{
-			$sql = 'SELECT "value" FROM "misc" WHERE "key" LIKE \''.$string.'%\' ESCAPE \'!\';';
+			$sql = 'SELECT "value" FROM "misc" WHERE "key" LIKE \'' . $string . '%\' ESCAPE \'!\';';
 		}
 
-		$res = $this->db->query($sql)->result_array();
+		$res = $this->db->query( $sql)->result_array();
 
 		// Check the result
-		$this->assertEquals(2, count($res));
+		$this->assertEquals(2, count( $res));
 	}
 
 }

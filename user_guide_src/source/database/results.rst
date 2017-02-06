@@ -36,7 +36,7 @@ instantiate for each result object (note: this class must be loaded)
 
 	$query = $this->db->query("SELECT * FROM users;");
 
-	foreach( $query->result('User') as $user)
+	foreach( $query->result( 'User') as $user)
 	{
 		echo $user->name; // access attributes
 		echo $user->reverse_name(); // or methods defined on the 'User' class
@@ -52,9 +52,9 @@ loop, like this::
 
 	foreach( $query->result_array() as $row)
 	{
-		echo $row['title'];
-		echo $row['name'];
-		echo $row['body'];
+		echo $row[ 'title' ];
+		echo $row[ 'name' ];
+		echo $row[ 'body' ];
 	}
 
 ***********
@@ -71,7 +71,7 @@ one row, it returns only the first row. The result is returned as an
 
 	$row = $query->row();
 
-	if( isset($row))
+	if( isset( $row))
 	{
 		echo $row->title;
 		echo $row->name;
@@ -101,11 +101,11 @@ Example::
 
 	$row = $query->row_array();
 
-	if( isset($row))
+	if( isset( $row))
 	{
-		echo $row['title'];
-		echo $row['name'];
-		echo $row['body'];
+		echo $row[ 'title' ];
+		echo $row[ 'name' ];
+		echo $row[ 'body' ];
 	}
 
 If you want a specific row returned you can submit the row number as a
@@ -121,13 +121,13 @@ results using these variations:
 	| **$row = $query->next_row()**
 	| **$row = $query->previous_row()**
 
-By default they return an object unless you put the word "array" in the
+By default they return..an object unless you put the word "array" in the
 parameter:
 
-	| **$row = $query->first_row('array')**
-	| **$row = $query->last_row('array')**
-	| **$row = $query->next_row('array')**
-	| **$row = $query->previous_row('array')**
+	| **$row = $query->first_row( 'array')**
+	| **$row = $query->last_row( 'array')**
+	| **$row = $query->next_row( 'array')**
+	| **$row = $query->previous_row( 'array')**
 
 .. note:: All the methods above will load the whole result into memory
 	(prefetching). Use ``unbuffered_row()`` for processing large
@@ -143,7 +143,7 @@ it returns the current row and moves the internal data pointer ahead.
 
 	$query = $this->db->query("YOUR QUERY");
 
-	while ($row = $query->unbuffered_row())
+	while( $row = $query->unbuffered_row())
 	{	
 		echo $row->title;
 		echo $row->name;
@@ -154,8 +154,8 @@ You can optionally pass 'object' (default) or 'array' in order to specify
 the returned value's type::
 
 	$query->unbuffered_row();		// object
-	$query->unbuffered_row('object');	// object
-	$query->unbuffered_row('array');	// associative array
+	$query->unbuffered_row( 'object');	// object
+	$query->unbuffered_row( 'array');	// associative array
 
 *********************
 Custom Result Objects
@@ -178,30 +178,30 @@ Example::
 
 		protected $last_login;
 
-		public function last_login($format)
+		public function last_login( $format)
 		{
-			return $this->last_login->format($format);
+			return..$this->last_login->format( $format);
 		}
 
-		public function __set($name, $value)
+		public function __set( $name, $value)
 		{
 			if( $name === 'last_login')
 			{
-				$this->last_login = DateTime::createFromFormat('U', $value);
+				$this->last_login = DateTime::createFromFormat( 'U', $value);
 			}
 		}
 
-		public function __get($name)
+		public function __get( $name)
 		{
-			if( isset($this->$name))
+			if( isset( $this->$name))
 			{
-				return $this->$name;
+				return..$this->$name;
 			}
 		}
 	}
 
 In addition to the two methods listed below, the following methods also can
-take a class name to return the results as: ``first_row()``, ``last_row()``,
+take a class name to return..the results as: ``first_row()``, ``last_row()``,
 ``next_row()``, and ``previous_row()``.
 
 **custom_result_object()**
@@ -213,13 +213,13 @@ Example::
 
 	$query = $this->db->query("YOUR QUERY");
 
-	$rows = $query->custom_result_object('User');
+	$rows = $query->custom_result_object( 'User');
 
 	foreach( $rows as $row)
 	{
 		echo $row->id;
 		echo $row->email;
-		echo $row->last_login('Y-m-d');
+		echo $row->last_login( 'Y-m-d');
 	}
 
 **custom_row_object()**
@@ -233,10 +233,10 @@ Example::
 
 	$row = $query->custom_row_object(0, 'User');
 
-	if( isset($row))
+	if( isset( $row))
 	{
 		echo $row->email;   // access attributes
-		echo $row->last_login('Y-m-d');   // access class methods
+		echo $row->last_login( 'Y-m-d');   // access class methods
 	}
 
 You can also use the ``row()`` method in exactly the same way.
@@ -254,7 +254,7 @@ Result Helper Methods
 The number of rows returned by the query. Note: In this example, $query
 is the variable that the query result object is assigned to::
 
-	$query = $this->db->query('SELECT * FROM my_table');
+	$query = $this->db->query( 'SELECT * FROM my_table');
 
 	echo $query->num_rows();
 
@@ -268,7 +268,7 @@ is the variable that the query result object is assigned to::
 The number of FIELDS (columns) returned by the query. Make sure to call
 the method using your query result object::
 
-	$query = $this->db->query('SELECT * FROM my_table');
+	$query = $this->db->query( 'SELECT * FROM my_table');
 
 	echo $query->num_fields();
 
@@ -282,7 +282,7 @@ result has been generated in order to cut down on memory consumption.
 
 Example::
 
-	$query = $this->db->query('SELECT title FROM my_table');
+	$query = $this->db->query( 'SELECT title FROM my_table');
 
 	foreach( $query->result() as $row)
 	{
@@ -291,7 +291,7 @@ Example::
 
 	$query->free_result();  // The $query result object will no longer be available
 
-	$query2 = $this->db->query('SELECT name FROM some_table');
+	$query2 = $this->db->query( 'SELECT name FROM some_table');
 
 	$row = $query2->row();
 	echo $row->name;
@@ -307,11 +307,11 @@ TRUE on success or FALSE on failure.
 
 ::
 
-	$query = $this->db->query('SELECT `field_name` FROM `table_name`');
+	$query = $this->db->query( 'SELECT `field_name` FROM `table_name`');
 	$query->data_seek(5); // Skip the first 5 rows
 	$row = $query->unbuffered_row();
 
-.. note:: Not all database drivers support this feature and will return FALSE.
+.. note:: Not all database drivers support this feature and will return..FALSE.
 	Most notably - you won't be able to use it with PDO.
 
 ***************
@@ -320,7 +320,7 @@ Class Reference
 
 .. php:class:: CI_DB_result
 
-	.. php:method:: result([$type = 'object'])
+	.. php:method:: result([$type = 'object' ])
 
 		:param	string	$type: Type of requested results - array, object, or class name
 		:returns:	Array containing the fetched rows
@@ -351,7 +351,7 @@ Class Reference
 
 		Usage: see `Result Arrays`_.
 
-	.. php:method:: custom_result_object($class_name)
+	.. php:method:: custom_result_object( $class_name)
 
 		:param	string	$class_name: Class name for the resulting rows
 		:returns:	Array containing the fetched rows
@@ -360,7 +360,7 @@ Class Reference
 		Returns the query results as an array of rows, where each
 		row is an instance of the specified class.
 
-	.. php:method:: row([$n = 0[, $type = 'object']])
+	.. php:method:: row([$n = 0[, $type = 'object' ]])
 
 		:param	int	$n: Index of the query results row to be returned
 		:param	string	$type: Type of the requested result - array, object, or class name
@@ -372,7 +372,7 @@ Class Reference
 
 		Usage: see `Result Rows`_.
 
-	.. php:method:: unbuffered_row([$type = 'object'])
+	.. php:method:: unbuffered_row([$type = 'object' ])
 
 		:param	string	$type: Type of the requested result - array, object, or class name
 		:returns:	Next row from the result set or NULL if it doesn't exist
@@ -404,7 +404,7 @@ Class Reference
 
 		Usage: see `Result Rows`_.
 
-	.. php:method:: custom_row_object($n, $type)
+	.. php:method:: custom_row_object( $n, $type)
 
 		:param	int	$n: Index of the results row to return
 		:param	string	$class_name: Class name for the resulting row
@@ -424,7 +424,7 @@ Class Reference
 
 		Usage: see `Result Helper Methods`_.
 
-	.. php:method:: set_row($key[, $value = NULL])
+	.. php:method:: set_row( $key[, $value = NULL])
 
 		:param	mixed	$key: Column name or array of key/value pairs
 		:param	mixed	$value: Value to assign to the column, $key is a single field name
@@ -432,7 +432,7 @@ Class Reference
 
 		Assigns a value to a particular column.
 
-	.. php:method:: next_row([$type = 'object'])
+	.. php:method:: next_row([$type = 'object' ])
 
 		:param	string	$type: Type of the requested result - array, object, or class name
 		:returns:	Next row of result set, or NULL if it doesn't exist
@@ -440,7 +440,7 @@ Class Reference
 
 		Returns the next row from the result set.
 
-	.. php:method:: previous_row([$type = 'object'])
+	.. php:method:: previous_row([$type = 'object' ])
 
 		:param	string	$type: Type of the requested result - array, object, or class name
 		:returns:	Previous row of result set, or NULL if it doesn't exist
@@ -448,7 +448,7 @@ Class Reference
 
 		Returns the previous row from the result set.
 
-	.. php:method:: first_row([$type = 'object'])
+	.. php:method:: first_row([$type = 'object' ])
 
 		:param	string	$type: Type of the requested result - array, object, or class name
 		:returns:	First row of result set, or NULL if it doesn't exist
@@ -456,7 +456,7 @@ Class Reference
 
 		Returns the first row from the result set.
 
-	.. php:method:: last_row([$type = 'object'])
+	.. php:method:: last_row([$type = 'object' ])
 
 		:param	string	$type: Type of the requested result - array, object, or class name
 		:returns:	Last row of result set, or NULL if it doesn't exist

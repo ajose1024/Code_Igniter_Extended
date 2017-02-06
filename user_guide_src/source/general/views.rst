@@ -38,7 +38,7 @@ Loading a View
 
 To load a particular view file you will use the following method::
 
-	$this->load->view('name');
+	$this->load->view( 'name');
 
 Where name is the name of your view file.
 
@@ -53,7 +53,7 @@ replace the echo statement with the view loading method::
 
 		public function index()
 		{
-			$this->load->view('blogview');
+			$this->load->view( 'blogview');
 		}
 	}
 
@@ -77,11 +77,11 @@ might look something like this::
 
 		public function index()
 		{
-			$data['page_title'] = 'Your title';
-			$this->load->view('header');
-			$this->load->view('menu');
-			$this->load->view('content', $data);
-			$this->load->view('footer');
+			$data[ 'page_title' ] = 'Your title';
+			$this->load->view( 'header');
+			$this->load->view( 'menu');
+			$this->load->view( 'content', $data);
+			$this->load->view( 'footer');
 		}
 
 	}
@@ -96,7 +96,7 @@ Your view files can also be stored within sub-directories if you prefer
 that type of organization. When doing so you will need to include the
 directory name loading the view. Example::
 
-	$this->load->view('directory_name/file_name');
+	$this->load->view( 'directory_name/file_name');
 
 Adding Dynamic Data to the View
 ===============================
@@ -111,12 +111,12 @@ is an example using an array::
 		'message' => 'My Message'
 	);
 
-	$this->load->view('blogview', $data);
+	$this->load->view( 'blogview', $data);
 
 And here's an example using an object::
 
 	$data = new Someclass();
-	$this->load->view('blogview', $data);
+	$this->load->view( 'blogview', $data);
 
 .. note:: If you use an object, the class variables will be turned
 	into array elements.
@@ -128,10 +128,10 @@ Let's try it with your controller file. Open it add this code::
 
 		public function index()
 		{
-			$data['title'] = "My Real Title";
-			$data['heading'] = "My Real Heading";
+			$data[ 'title' ] = "My Real Title";
+			$data[ 'heading' ] = "My Real Heading";
 
-			$this->load->view('blogview', $data);
+			$this->load->view( 'blogview', $data);
 		}
 	}
 
@@ -165,12 +165,12 @@ Here's a simple example. Add this to your controller::
 
 		public function index()
 		{
-			$data['todo_list'] = array('Clean House', 'Call Mom', 'Run Errands');
+			$data[ 'todo_list' ] = array( 'Clean House', 'Call Mom', 'Run Errands');
 
-			$data['title'] = "My Real Title";
-			$data['heading'] = "My Real Heading";
+			$data[ 'title' ] = "My Real Title";
+			$data[ 'heading' ] = "My Real Heading";
 
-			$this->load->view('blogview', $data);
+			$this->load->view( 'blogview', $data);
 		}
 	}
 
@@ -210,4 +210,4 @@ some way. If you set the parameter to TRUE (boolean) it will return
 data. The default behavior is false, which sends it to your browser.
 Remember to assign it to a variable if you want the data returned::
 
-	$string = $this->load->view('myfile', '', TRUE);
+	$string = $this->load->view( 'myfile', '', TRUE);

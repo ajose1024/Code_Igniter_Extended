@@ -19,7 +19,7 @@ This helper is loaded using the following code:
 
 ::
 
-	$this->load->helper('directory');
+	$this->load->helper( 'directory');
 
 Available Functions
 ===================
@@ -27,7 +27,7 @@ Available Functions
 The following functions are available:
 
 
-.. php:function:: directory_map($source_dir[, $directory_depth = 0[, $hidden = FALSE]])
+.. php:function:: directory_map( $source_dir[, $directory_depth = 0[, $hidden = FALSE]])
 
 	:param	string	$source_dir: Path to the source directory
 	:param	int	$directory_depth: Depth of directories to traverse (0 = fully recursive, 1 = current dir, etc)
@@ -37,7 +37,7 @@ The following functions are available:
 
 	Examples::
 
-		$map = directory_map('./mydirectory/');
+		$map = directory_map( './mydirectory/');
 
 	.. note:: Paths are almost always relative to your main index.php file.
 
@@ -46,12 +46,12 @@ The following functions are available:
 	you wish to control the recursion depth, you can do so using the second
 	parameter (integer). A depth of 1 will only map the top level directory::
 
-		$map = directory_map('./mydirectory/', 1);
+		$map = directory_map( './mydirectory/', 1);
 
 	By default, hidden files will not be included in the returned array. To
 	override this behavior, you may set a third parameter to true (boolean)::
 
-		$map = directory_map('./mydirectory/', FALSE, TRUE);
+		$map = directory_map( './mydirectory/', FALSE, TRUE);
 
 	Each folder name will be an array index, while its contained files will
 	be numerically indexed. Here is an example of a typical array::

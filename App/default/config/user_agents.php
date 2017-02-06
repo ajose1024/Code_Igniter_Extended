@@ -53,7 +53,7 @@ $platforms = array(
     'gnu'                => 'GNU/Linux',
     'unix'                => 'Unknown Unix OS',
     'symbian'             => 'Symbian OS'
-);
+ );
 
 
 // The order of this array should NOT be changed. Many browsers return
@@ -88,7 +88,7 @@ $browsers = array(
     'IBrowse'        => 'IBrowse',
     'Maxthon'        => 'Maxthon',
     'Ubuntu'        => 'Ubuntu Web Browser'
-);
+ );
 
 $mobiles = array(
     // legacy array, old values commented out
@@ -188,7 +188,7 @@ $mobiles = array(
     'up.browser'    => 'Generic Mobile',
     'smartphone'    => 'Generic Mobile',
     'cellphone'        => 'Generic Mobile'
-);
+ );
 
 // There are hundreds of bots but these are the most common.
 $robots = array(
@@ -208,4 +208,4 @@ $robots = array(
     'adsbot-google'        => 'AdsBot Google',
     'feedfetcher-google'    => 'Feedfetcher Google',
     'curious george'    => 'Curious George'
-);
+ );

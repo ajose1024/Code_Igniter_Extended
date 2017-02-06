@@ -17,7 +17,7 @@ Loading this Helper
 
 This helper is loaded using the following code::
 
-	$this->load->helper('cookie');
+	$this->load->helper( 'cookie');
 
 Available Functions
 ===================
@@ -25,7 +25,7 @@ Available Functions
 The following functions are available:
 
 
-.. php:function:: set_cookie($name[, $value = ''[, $expire = ''[, $domain = ''[, $path = '/'[, $prefix = ''[, $secure = FALSE[, $httponly = FALSE]]]]]]]])
+.. php:function:: set_cookie( $name[, $value = ''[, $expire = ''[, $domain = ''[, $path = '/'[, $prefix = ''[, $secure = FALSE[, $httponly = FALSE]]]]]]]])
 
 	:param	mixed	$name: Cookie name *or* associative array of all of the parameters available to this function
 	:param	string	$value: Cookie value
@@ -42,7 +42,7 @@ The following functions are available:
 	a description of its use, as this function is an alias for
 	``CI_Input::set_cookie()``.
 
-.. php:function:: get_cookie($index[, $xss_clean = NULL]])
+.. php:function:: get_cookie( $index[, $xss_clean = NULL]])
 
 	:param	string	$index: Cookie name
 	:param	bool	$xss_clean: Whether to apply XSS filtering to the returned value
@@ -53,10 +53,10 @@ The following functions are available:
 	cookies. Refer to the :doc:`Input Library <../libraries/input>` for
 	detailed description of its use, as this function acts very
 	similarly to ``CI_Input::cookie()``, except it will also prepend
-	the ``$config['cookie_prefix']`` that you might've set in your
+	the ``$config[ 'cookie_prefix' ]`` that you might've set in your
 	*application/config/config.php* file.
 
-.. php:function:: delete_cookie($name[, $domain = ''[, $path = '/'[, $prefix = '']]]])
+.. php:function:: delete_cookie( $name[, $domain = ''[, $path = '/'[, $prefix = '' ]]]])
 
 	:param	string	$name: Cookie name
 	:param	string	$domain: Cookie domain (usually: .yourdomain.com)
@@ -68,7 +68,7 @@ The following functions are available:
 	values, only the name of the cookie is needed.
 	::
 
-		delete_cookie('name');
+		delete_cookie( 'name');
 
 	This function is otherwise identical to ``set_cookie()``, except that it
 	does not have the value and expiration parameters. You can submit an
@@ -76,4 +76,4 @@ The following functions are available:
 	parameters.
 	::
 
-		delete_cookie($name, $domain, $path, $prefix);
+		delete_cookie( $name, $domain, $path, $prefix);

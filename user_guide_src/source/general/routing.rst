@@ -36,7 +36,7 @@ Wildcards
 
 A typical wildcard route might look something like this::
 
-	$route['product/:num'] = 'catalog/product_lookup';
+	$route[ 'product/:num' ] = 'catalog/product_lookup';
 
 In a route, the array key contains the URI to be matched, while the
 array value contains the destination it should be re-routed to. In the
@@ -66,21 +66,21 @@ Examples
 
 Here are a few routing examples::
 
-	$route['journals'] = 'blogs';
+	$route[ 'journals' ] = 'blogs';
 
 A URL containing the word "journals" in the first segment will be
 remapped to the "blogs" class.
 
 ::
 
-	$route['blog/joe'] = 'blogs/users/34';
+	$route[ 'blog/joe' ] = 'blogs/users/34';
 
 A URL containing the segments blog/joe will be remapped to the "blogs"
 class and the "users" method. The ID will be set to "34".
 
 ::
 
-	$route['product/(:any)'] = 'catalog/product_lookup';
+	$route[ 'product/(:any)' ] = 'catalog/product_lookup';
 
 A URL with "product" as the first segment, and anything in the second
 will be remapped to the "catalog" class and the "product_lookup"
@@ -88,7 +88,7 @@ method.
 
 ::
 
-	$route['product/(:num)'] = 'catalog/product_lookup_by_id/$1';
+	$route[ 'product/(:num)' ] = 'catalog/product_lookup_by_id/$1';
 
 A URL with "product" as the first segment, and a number in the second
 will be remapped to the "catalog" class and the
@@ -108,20 +108,20 @@ rules. Any valid regular expression is allowed, as are back-references.
 
 A typical RegEx route might look something like this::
 
-	$route['products/([a-z]+)/(\d+)'] = '$1/id_$2';
+	$route[ 'products/([a-z]+)/(\d+)' ] = '$1/id_$2';
 
 In the above example, a URI similar to products/shirts/123 would instead
 call the "shirts" controller class and the "id_123" method.
 
 With regular expressions, you can also catch a segment containing a
-forward slash ('/'), which would usually represent the delimiter between
+forward slash ( '/'), which would usually represent the delimiter between
 multiple segments.
 
 For example, if a user accesses a password protected area of your web
 application and you wish to be able to redirect them back to the same
 page after they log in, you may find this example useful::
 
-	$route['login/(.+)'] = 'auth/login/$1';
+	$route[ 'login/(.+)' ] = 'auth/login/$1';
 
 For those of you who don't know regular expressions and want to learn
 more about them, `regular-expressions.info <http://www.regular-expressions.info/>`
@@ -135,9 +135,9 @@ Callbacks
 If you are using PHP >= 5.3 you can use callbacks in place of the normal
 routing rules to process the back-references. Example::
 
-	$route['products/([a-zA-Z]+)/edit/(\d+)'] = function ($product_type, $id)
+	$route[ 'products/([a-zA-Z]+)/edit/(\d+)' ] = function ( $product_type, $id)
 	{
-		return 'catalog/product_edit/' . strtolower($product_type) . '/' . $id;
+		return..'catalog/product_edit/' . strtolower( $product_type) . '/' . $id;
 	};
 
 Using HTTP verbs in routes
@@ -149,14 +149,14 @@ verbs (GET, PUT, POST, DELETE, PATCH) or a custom one such (e.g. PURGE). HTTP ve
 are case-insensitive. All you need to do is to add the verb as an array key to your route.
 Example::
 
-	$route['products']['put'] = 'product/insert';
+	$route[ 'products' ][ 'put' ] = 'product/insert';
 
 In the above example, a PUT request to URI "products" would call the ``Product::insert()``
 controller method.
 
 ::
 
-	$route['products/(:num)']['DELETE'] = 'product/delete/$1';
+	$route[ 'products/(:num)' ][ 'DELETE' ] = 'product/delete/$1';
 
 A DELETE request to URL with "products" as first the segment and a number in the second will be
 mapped to the ``Product::delete()`` method, passing the numeric value as the first parameter.
@@ -168,7 +168,7 @@ Reserved Routes
 
 There are three reserved routes::
 
-	$route['default_controller'] = 'welcome';
+	$route[ 'default_controller' ] = 'welcome';
 
 This route points to the action that should be executed if the URI contains
 no data, which will be the case when people load your root URL.
@@ -183,7 +183,7 @@ will appear by default.
 
 ::
 
-	$route['404_override'] = '';
+	$route[ '404_override' ] = '';
 
 This route indicates which controller class should be loaded if the
 requested controller is not found. It will override the default 404
@@ -196,10 +196,10 @@ continue loading the default *error_404.php* file at
 
 ::
 
-	$route['translate_uri_dashes'] = FALSE;
+	$route[ 'translate_uri_dashes' ] = FALSE;
 
 As evident by the boolean value, this is not exactly a route. This
-option enables you to automatically replace dashes ('-') with
+option enables you to automatically replace dashes ( '-') with
 underscores in the controller and method URI segments, thus saving you
 additional route entries if you need to do that.
 This is required, because the dash isn't a valid class or method name

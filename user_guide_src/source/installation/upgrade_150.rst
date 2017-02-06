@@ -32,8 +32,8 @@ Step 2: Update your database.php file
 Open your application/config/database.php file and add these new items::
 
 
-    $db['default']['cache_on'] = FALSE;
-    $db['default']['cachedir'] = '';
+    $db[ 'default' ][ 'cache_on' ] = FALSE;
+    $db[ 'default' ][ 'cachedir' ] = '';
 
 Step 3: Update your config.php file
 ===================================
@@ -53,7 +53,7 @@ Open your application/config/config.php file and ADD these new items::
     | http://codeigniter.com/user_guide/general/creating_libraries.html
     |
     */
-    $config['subclass_prefix'] = 'MY_';
+    $config[ 'subclass_prefix' ] = 'MY_';
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ Open your application/config/config.php file and ADD these new items::
     | in your view files.  Options are TRUE or FALSE (boolean)
     |
     */
-    $config['rewrite_short_tags'] = FALSE;
+    $config[ 'rewrite_short_tags' ] = FALSE;
 
 In that same file REMOVE this item::
 
@@ -80,7 +80,7 @@ In that same file REMOVE this item::
     | such that it is writable.
     |
     */
-    $config['log_errors'] = FALSE;
+    $config[ 'log_errors' ] = FALSE;
 
 Error logging is now disabled simply by setting the threshold to zero.
 

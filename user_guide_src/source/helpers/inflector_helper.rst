@@ -17,7 +17,7 @@ Loading this Helper
 
 This helper is loaded using the following code::
 
-	$this->load->helper('inflector');
+	$this->load->helper( 'inflector');
 
 Available Functions
 ===================
@@ -25,7 +25,7 @@ Available Functions
 The following functions are available:
 
 
-.. php:function:: singular($str)
+.. php:function:: singular( $str)
 
 	:param	string	$str: Input string
 	:returns:	A singular word
@@ -33,9 +33,9 @@ The following functions are available:
 
 	Changes a plural word to singular. Example::
 
-		echo singular('dogs'); // Prints 'dog'
+		echo singular( 'dogs'); // Prints 'dog'
 
-.. php:function:: plural($str)
+.. php:function:: plural( $str)
 
 	:param	string	$str: Input string
 	:returns:	A plular word
@@ -43,9 +43,9 @@ The following functions are available:
 
 	Changes a singular word to plural. Example::
 
-		echo plural('dog'); // Prints 'dogs'
+		echo plural( 'dog'); // Prints 'dogs'
 
-.. php:function:: camelize($str)
+.. php:function:: camelize( $str)
 
 	:param	string	$str: Input string
 	:returns:	Camelized string
@@ -54,9 +54,9 @@ The following functions are available:
 	Changes a string of words separated by spaces or underscores to camel
 	case. Example::
 
-		echo camelize('my_dog_spot'); // Prints 'myDogSpot'
+		echo camelize( 'my_dog_spot'); // Prints 'myDogSpot'
 
-.. php:function:: underscore($str)
+.. php:function:: underscore( $str)
 
 	:param	string	$str: Input string
 	:returns:	String containing underscores instead of spaces
@@ -65,9 +65,9 @@ The following functions are available:
 	Takes multiple words separated by spaces and underscores them.
 	Example::
 
-		echo underscore('my dog spot'); // Prints 'my_dog_spot'
+		echo underscore( 'my dog spot'); // Prints 'my_dog_spot'
 
-.. php:function:: humanize($str[, $separator = '_'])
+.. php:function:: humanize( $str[, $separator = '_' ])
 
 	:param	string	$str: Input string
 	:param	string	$separator: Input separator
@@ -79,13 +79,13 @@ The following functions are available:
 
 	Example::
 
-		echo humanize('my_dog_spot'); // Prints 'My Dog Spot'
+		echo humanize( 'my_dog_spot'); // Prints 'My Dog Spot'
 
 	To use dashes instead of underscores::
 
-		echo humanize('my-dog-spot', '-'); // Prints 'My Dog Spot'
+		echo humanize( 'my-dog-spot', '-'); // Prints 'My Dog Spot'
 
-.. php:function:: is_countable($word)
+.. php:function:: is_countable( $word)
 
 	:param	string	$word: Input string
 	:returns:	TRUE if the word is countable or FALSE if not
@@ -93,4 +93,4 @@ The following functions are available:
 
 	Checks if the given word has a plural version. Example::
 
-		is_countable('equipment'); // Returns FALSE
+		is_countable( 'equipment'); // Returns FALSE

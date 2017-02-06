@@ -48,8 +48,8 @@ two ways. First, you can set application wide defaults with the
 
 Example::
 
-	$config['config']          = FALSE;
-	$config['queries']         = FALSE;
+	$config[ 'config' ]          = FALSE;
+	$config[ 'queries' ]         = FALSE;
 
 In your controllers, you can override the defaults and config file
 values by calling the ``set_profiler_sections()`` method of the
@@ -60,7 +60,7 @@ values by calling the ``set_profiler_sections()`` method of the
 		'queries' => TRUE
 	);
 
-	$this->output->set_profiler_sections($sections);
+	$this->output->set_profiler_sections( $sections);
 
 Available sections and the array key used to access them are described
 in the table below.

@@ -12,10 +12,10 @@ The ENVIRONMENT Constant
 ========================
 
 By default, CodeIgniter comes with the environment constant set to use
-the value provided in ``$_SERVER['CI_ENV']``, otherwise defaults to
-'development'. At the top of index.php, you will see::
+the value provided in ``$_SERVER[ 'CI_ENV' ]``, otherwise defaults to
+'development' . At the top of index.php, you will see::
 
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+	define( 'ENVIRONMENT', isset( $_SERVER[ 'CI_ENV' ]) ? $_SERVER[ 'CI_ENV' ] : 'development');
 
 This server variable can be set in your .htaccess file, or Apache 
 config using `SetEnv <https://httpd.apache.org/docs/2.2/mod/mod_env.html#setenv>`_. 

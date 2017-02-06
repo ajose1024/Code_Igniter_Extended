@@ -39,15 +39,15 @@ This example assumes you are sending the email from one of your
 
 ::
 
-	$this->load->library('email');
+	$this->load->library( 'email');
 
-	$this->email->from('your@example.com', 'Your Name');
-	$this->email->to('someone@example.com');
-	$this->email->cc('another@another-example.com');
-	$this->email->bcc('them@their-example.com');
+	$this->email->from( 'your@example.com', 'Your Name');
+	$this->email->to( 'someone@example.com');
+	$this->email->cc( 'another@another-example.com');
+	$this->email->bcc( 'them@their-example.com');
 
-	$this->email->subject('Email Test');
-	$this->email->message('Testing the email class.');
+	$this->email->subject( 'Email Test');
+	$this->email->message( 'Testing the email class . ');
 
 	$this->email->send();
 
@@ -63,12 +63,12 @@ Preferences are set by passing an array of preference values to the
 email initialize method. Here is an example of how you might set some
 preferences::
 
-	$config['protocol'] = 'sendmail';
-	$config['mailpath'] = '/usr/sbin/sendmail';
-	$config['charset'] = 'iso-8859-1';
-	$config['wordwrap'] = TRUE;
+	$config[ 'protocol' ] = 'sendmail';
+	$config[ 'mailpath' ] = '/usr/sbin/sendmail';
+	$config[ 'charset' ] = 'iso-8859-1';
+	$config[ 'wordwrap' ] = TRUE;
 
-	$this->email->initialize($config);
+	$this->email->initialize( $config);
 
 .. note:: Most of the preferences have default values that will be used
 	if you do not set them.
@@ -107,7 +107,7 @@ Preference          Default Value          Options                      Descript
 **mailtype**        text                   text or html                 Type of mail. If you send HTML email you must send it as a complete web
                                                                         page. Make sure you don't have any relative links or relative image
                                                                         paths otherwise they will not work.
-**charset**         ``$config['charset']``                              Character set (utf-8, iso-8859-1, etc.).
+**charset**         ``$config[ 'charset' ]``                              Character set (utf-8, iso-8859-1, etc.).
 **validate**        FALSE                  TRUE or FALSE (boolean)      Whether to validate the email address.
 **priority**        3                      1, 2, 3, 4, 5                Email Priority. 1 = highest. 5 = lowest. 3 = normal.
 **crlf**            \\n                    "\\r\\n" or "\\n" or "\\r"   Newline character. (Use "\\r\\n" to comply with RFC 822).
@@ -143,7 +143,7 @@ Class Reference
 
 .. php:class:: CI_Email
 
-	.. php:method:: from($from[, $name = ''[, $return_path = NULL]])
+	.. php:method:: from( $from[, $name = ''[, $return_path = NULL]])
 
 		:param	string	$from: "From" e-mail address
 		:param	string	$name: "From" display name
@@ -153,16 +153,16 @@ Class Reference
 
 		Sets the email address and name of the person sending the email::
 
-			$this->email->from('you@example.com', 'Your Name');
+			$this->email->from( 'you@example.com', 'Your Name');
 
 		You can also set a Return-Path, to help redirect undelivered mail::
 
-			$this->email->from('you@example.com', 'Your Name', 'returned_emails@example.com');
+			$this->email->from( 'you@example.com', 'Your Name', 'returned_emails@example.com');
 
 		.. note:: Return-Path can't be used if you've configured 'smtp' as
 			your protocol.
 
-	.. php:method:: reply_to($replyto[, $name = ''])
+	.. php:method:: reply_to( $replyto[, $name = '' ])
 
 		:param	string	$replyto: E-mail address for replies
 		:param	string	$name: Display name for the reply-to e-mail address
@@ -172,9 +172,9 @@ Class Reference
 		Sets the reply-to address. If the information is not provided the
 		information in the :meth:from method is used. Example::
 
-			$this->email->reply_to('you@example.com', 'Your Name');
+			$this->email->reply_to( 'you@example.com', 'Your Name');
 
-	.. php:method:: to($to)
+	.. php:method:: to( $to)
 
 		:param	mixed	$to: Comma-delimited string or an array of e-mail addresses
 		:returns:	CI_Email instance (method chaining)
@@ -183,19 +183,19 @@ Class Reference
 		Sets the email address(s) of the recipient(s). Can be a single e-mail,
 		a comma-delimited list or an array::
 
-			$this->email->to('someone@example.com');
+			$this->email->to( 'someone@example.com');
 
 		::
 
-			$this->email->to('one@example.com, two@example.com, three@example.com');
+			$this->email->to( 'one@example.com, two@example.com, three@example.com');
 
 		::
 
 			$this->email->to(
-				array('one@example.com', 'two@example.com', 'three@example.com')
+				array( 'one@example.com', 'two@example.com', 'three@example.com')
 			);
 
-	.. php:method:: cc($cc)
+	.. php:method:: cc( $cc)
 
 		:param	mixed	$cc: Comma-delimited string or an array of e-mail addresses
 		:returns:	CI_Email instance (method chaining)
@@ -204,7 +204,7 @@ Class Reference
 		Sets the CC email address(s). Just like the "to", can be a single e-mail,
 		a comma-delimited list or an array.
 
-	.. php:method:: bcc($bcc[, $limit = ''])
+	.. php:method:: bcc( $bcc[, $limit = '' ])
 
 		:param	mixed	$bcc: Comma-delimited string or an array of e-mail addresses
 		:param	int	$limit: Maximum number of e-mails to send per batch
@@ -218,7 +218,7 @@ Class Reference
 		the emails to batches, with each batch not exceeding the specified
 		``$limit``.
 
-	.. php:method:: subject($subject)
+	.. php:method:: subject( $subject)
 
 		:param	string	$subject: E-mail subject line
 		:returns:	CI_Email instance (method chaining)
@@ -226,9 +226,9 @@ Class Reference
 
 		Sets the email subject::
 
-			$this->email->subject('This is my subject');
+			$this->email->subject( 'This is my subject');
 
-	.. php:method:: message($body)
+	.. php:method:: message( $body)
 
 		:param	string	$body: E-mail message body
 		:returns:	CI_Email instance (method chaining)
@@ -236,9 +236,9 @@ Class Reference
 
 		Sets the e-mail message body::
 
-			$this->email->message('This is my message');
+			$this->email->message( 'This is my message');
 
-	.. php:method:: set_alt_message($str)
+	.. php:method:: set_alt_message( $str)
 
 		:param	string	$str: Alternative e-mail message body
 		:returns:	CI_Email instance (method chaining)
@@ -246,7 +246,7 @@ Class Reference
 
 		Sets the alternative e-mail message body::
 
-			$this->email->set_alt_message('This is the alternative message');
+			$this->email->set_alt_message( 'This is the alternative message');
 
 		This is an optional message string which can be used if you send
 		HTML formatted email. It lets you specify an alternative message
@@ -255,7 +255,7 @@ Class Reference
 		message CodeIgniter will extract the message from your HTML email
 		and strip the tags.
 
-	.. php:method:: set_header($header, $value)
+	.. php:method:: set_header( $header, $value)
 
 		:param	string	$header: Header name
 		:param	string	$value: Header value
@@ -264,8 +264,8 @@ Class Reference
 
 		Appends additional headers to the e-mail::
 
-			$this->email->set_header('Header1', 'Value1');
-			$this->email->set_header('Header2', 'Value2');
+			$this->email->set_header( 'Header1', 'Value1');
+			$this->email->set_header( 'Header2', 'Value2');
 
 	.. php:method:: clear([$clear_attachments = FALSE])
 
@@ -283,10 +283,10 @@ Class Reference
 			{
 				$this->email->clear();
 
-				$this->email->to($address);
-				$this->email->from('your@example.com');
-				$this->email->subject('Here is your info '.$name);
-				$this->email->message('Hi '.$name.' Here is the info you requested.');
+				$this->email->to( $address);
+				$this->email->from( 'your@example.com');
+				$this->email->subject( 'Here is your info ' . $name);
+				$this->email->message( 'Hi ' . $name . ' Here is the info you requested . ');
 				$this->email->send();
 			}
 
@@ -304,7 +304,7 @@ Class Reference
 		The e-mail sending method. Returns boolean TRUE or FALSE based on
 		success or failure, enabling it to be used conditionally::
 
-			if(  ! $this->email->send())
+			if( ! $this->email->send())
 			{
 				// Generate error
 			}
@@ -320,7 +320,7 @@ Class Reference
 		.. note:: In order to use the ``print_debugger()`` method, you need
 			to avoid clearing the email parameters.
 
-	.. php:method:: attach($filename[, $disposition = ''[, $newname = NULL[, $mime = '']]])
+	.. php:method:: attach( $filename[, $disposition = ''[, $newname = NULL[, $mime = '' ]]])
 
 		:param	string	$filename: File name
 		:param	string	$disposition: 'disposition' of the attachment. Most
@@ -335,30 +335,30 @@ Class Reference
 		parameter. For multiple attachments use the method multiple times.
 		For example::
 
-			$this->email->attach('/path/to/photo1.jpg');
-			$this->email->attach('/path/to/photo2.jpg');
-			$this->email->attach('/path/to/photo3.jpg');
+			$this->email->attach( '/path/to/photo1.jpg');
+			$this->email->attach( '/path/to/photo2.jpg');
+			$this->email->attach( '/path/to/photo3.jpg');
 
 		To use the default disposition (attachment), leave the second parameter blank,
 		otherwise use a custom disposition::
 
-			$this->email->attach('image.jpg', 'inline');
+			$this->email->attach( 'image.jpg', 'inline');
 
 		You can also use a URL::
 
-			$this->email->attach('http://example.com/filename.pdf');
+			$this->email->attach( 'http://example.com/filename.pdf');
 
 		If you'd like to use a custom file name, you can use the third paramater::
 
-			$this->email->attach('filename.pdf', 'attachment', 'report.pdf');
+			$this->email->attach( 'filename.pdf', 'attachment', 'report.pdf');
 
 		If you need to use a buffer string instead of a real - physical - file you can
 		use the first parameter as buffer, the third parameter as file name and the fourth
 		parameter as mime-type::
 
-			$this->email->attach($buffer, 'attachment', 'report.pdf', 'application/pdf');
+			$this->email->attach( $buffer, 'attachment', 'report.pdf', 'application/pdf');
 
-	.. php:method:: attachment_cid($filename)
+	.. php:method:: attachment_cid( $filename)
 
 		:param	string	$filename: Existing attachment filename
 		:returns:	Attachment Content-ID or FALSE if not found
@@ -369,18 +369,18 @@ Class Reference
 		::
  
 			$filename = '/img/photo1.jpg';
-			$this->email->attach($filename);
+			$this->email->attach( $filename);
 			foreach( $list as $address)
 			{
-				$this->email->to($address);
-				$cid = $this->email->attachment_cid($filename);
-				$this->email->message('<img src='cid:". $cid ."' alt="photo1" />');
+				$this->email->to( $address);
+				$cid = $this->email->attachment_cid( $filename);
+				$this->email->message( '<img src='cid:". $cid ."' alt="photo1" />');
 				$this->email->send();
 			}
 
 		.. note:: Content-ID for each e-mail must be re-created for it to be unique.
 
-	.. php:method:: print_debugger([$include = array('headers', 'subject', 'body')])
+	.. php:method:: print_debugger([$include = array( 'headers', 'subject', 'body')])
 
 		:param	array	$include: Which parts of the message to print out
 		:returns:	Formatted debug data
@@ -400,6 +400,6 @@ Class Reference
 			$this->email->send(FALSE);
 
 			// Will only print the email headers, excluding the message subject and body
-			$this->email->print_debugger(array('headers'));
+			$this->email->print_debugger(array( 'headers'));
 
 		.. note:: By default, all of the raw data will be printed.

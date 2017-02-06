@@ -16,7 +16,7 @@ Loading this Helper
 
 This helper is loaded using the following code::
 
-	$this->load->helper('download');
+	$this->load->helper( 'download');
 
 Available Functions
 ===================
@@ -47,10 +47,10 @@ The following functions are available:
 
 		$data = 'Here is some text!';
 		$name = 'mytext.txt';
-		force_download($name, $data);
+		force_download( $name, $data);
 
 	If you want to download an existing file from your server you'll need to
 	do the following::
 
 		// Contents of photo.jpg will be automatically read
-		force_download('/path/to/photo.jpg', NULL);
+		force_download( '/path/to/photo.jpg', NULL);

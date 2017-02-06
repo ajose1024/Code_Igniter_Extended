@@ -22,11 +22,11 @@ class Mock_Libraries_Session_cookie extends CI_Session_cookie {
 	/**
 	 * Overload _setcookie to manage $_COOKIE values, since actual cookies can't be set in unit testing
 	 */
-	protected function _setcookie($name, $value = '', $expire = 0, $path = '', $domain = '', $secure = FALSE, $httponly = FALSE)
+	protected function _setcookie( $name, $value = '', $expire = 0, $path = '', $domain = '', $secure = FALSE, $httponly = FALSE)
 	{
-		if( empty($value) OR $expire <= time())
+		if( empty( $value) OR $expire <= time())
 		{
-			unset($_COOKIE[$name]);
+			unset( $_COOKIE[$name]);
 		}
 		else
 		{

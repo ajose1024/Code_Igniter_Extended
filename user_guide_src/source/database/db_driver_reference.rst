@@ -10,7 +10,7 @@ The how-to material for this has been split over several articles.
 This article is intended to be a reference for them.
 
 .. important:: Not all methods are supported by all database drivers,
-	some of them may fail (and return FALSE) if the underlying
+	some of them may fail (and return..FALSE) if the underlying
 	driver does not support them.
 
 .. php:class:: CI_DB_driver
@@ -23,7 +23,7 @@ This article is intended to be a reference for them.
 		Initialize database settings, establish a connection to
 		the database.
 
-	.. php:method:: db_connect($persistent = TRUE)
+	.. php:method:: db_connect( $persistent = TRUE)
 
 		:param	bool	$persistent: Whether to establish a persistent connection or a regular one
 		:returns:	Database connection resource/object or FALSE on failure
@@ -53,7 +53,7 @@ This article is intended to be a reference for them.
 		have been sent for a length of time exceeding the
 		server's idle timeout.
 
-	.. php:method:: db_select([$database = ''])
+	.. php:method:: db_select([$database = '' ])
 
 		:param	string	$database: Database name
 		:returns:	TRUE on success, FALSE on failure
@@ -61,7 +61,7 @@ This article is intended to be a reference for them.
 
 		Select / switch the current database.
 
-	.. php:method:: db_set_charset($charset)
+	.. php:method:: db_set_charset( $charset)
 
 		:param	string	$charset: Character set name
 		:returns:	TRUE on success, FALSE on failure
@@ -83,11 +83,11 @@ This article is intended to be a reference for them.
 
 		Database version number.
 
-	.. php:method:: query($sql[, $binds = FALSE[, $return_object = NULL]]])
+	.. php:method:: query( $sql[, $binds = FALSE[, $return_object = NULL]]])
 
 		:param	string	$sql: The SQL statement to execute
 		:param	array	$binds: An array of binding data
-		:param	bool	$return_object: Whether to return a result object or not
+		:param	bool	$return_object: Whether to return..a result object or not
 		:returns:	TRUE for successful "write-type" queries, CI_DB_result instance (method chaining) on "query" success, FALSE on failure
 		:rtype:	mixed
 
@@ -106,7 +106,7 @@ This article is intended to be a reference for them.
 			page will be displayed instead of returning FALSE
 			on failures and script execution will stop.
 
-	.. php:method:: simple_query($sql)
+	.. php:method:: simple_query( $sql)
 
 		:param	string	$sql: The SQL statement to execute
 		:returns:	Whatever the underlying driver's "query" function returns
@@ -160,7 +160,7 @@ This article is intended to be a reference for them.
 		Lets you retrieve the transaction status flag to
 		determine if it has failed.
 
-	.. php:method:: compile_binds($sql, $binds)
+	.. php:method:: compile_binds( $sql, $binds)
 
 		:param	string	$sql: The SQL statement 
 		:param	array	$binds: An array of binding data
@@ -169,7 +169,7 @@ This article is intended to be a reference for them.
 
 		Compiles an SQL query with the bind values passed for it.
 
-	.. php:method:: is_write_type($sql)
+	.. php:method:: is_write_type( $sql)
 
 		:param	string	$sql: The SQL statement 
 		:returns:	TRUE if the SQL statement is of "write type", FALSE if not
@@ -201,7 +201,7 @@ This article is intended to be a reference for them.
 
 		Returns the last query that was executed.
 
-	.. php:method:: escape($str)
+	.. php:method:: escape( $str)
 
 		:param	mixed	$str: The value to escape, or an array of multiple ones
 		:returns:	The escaped value(s)
@@ -210,7 +210,7 @@ This article is intended to be a reference for them.
 		Escapes input data based on type, including boolean and
 		NULLs.
 
-	.. php:method:: escape_str($str[, $like = FALSE])
+	.. php:method:: escape_str( $str[, $like = FALSE])
 
 		:param	mixed	$str: A string value or array of multiple ones
 		:param	bool	$like: Whether or not the string will be used in a LIKE condition
@@ -222,7 +222,7 @@ This article is intended to be a reference for them.
 		.. warning:: The returned strings do NOT include quotes
 			around them.
 
-	.. php:method:: escape_like_str($str)
+	.. php:method:: escape_like_str( $str)
 
 		:param	mixed	$str: A string value or array of multiple ones
 		:returns:	The escaped string(s)
@@ -234,7 +234,7 @@ This article is intended to be a reference for them.
 		and ``_`` wildcard characters, so that they don't cause
 		false-positives in LIKE conditions.
 
-	.. php:method:: primary($table)
+	.. php:method:: primary( $table)
 
 		:param	string	$table: Table name
 		:returns:	The primary key name, FALSE if none
@@ -246,7 +246,7 @@ This article is intended to be a reference for them.
 			key detection, the first column name may be assumed
 			as the primary key.
 
-	.. php:method:: count_all([$table = ''])
+	.. php:method:: count_all([$table = '' ])
 
 		:param	string	$table: Table name
 		:returns:	Row count for the specified table
@@ -263,7 +263,7 @@ This article is intended to be a reference for them.
 
 		Gets a list of the tables in the current database.
 
-	.. php:method:: table_exists($table_name)
+	.. php:method:: table_exists( $table_name)
 
 		:param	string	$table_name: The table name
 		:returns:	TRUE if that table exists, FALSE if not
@@ -271,7 +271,7 @@ This article is intended to be a reference for them.
 
 		Determine if a particular table exists.
 
-	.. php:method:: list_fields($table)
+	.. php:method:: list_fields( $table)
 
 		:param	string	$table: The table name
 		:returns:	Array of field names or FALSE on failure
@@ -279,7 +279,7 @@ This article is intended to be a reference for them.
 
 		Gets a list of the field names in a table.
 
-	.. php:method:: field_exists($field_name, $table_name)
+	.. php:method:: field_exists( $field_name, $table_name)
 
 		:param	string	$table_name: The table name
 		:param	string	$field_name: The field name
@@ -288,7 +288,7 @@ This article is intended to be a reference for them.
 
 		Determine if a particular field exists.
 
-	.. php:method:: field_data($table)
+	.. php:method:: field_data( $table)
 
 		:param	string	$table: The table name
 		:returns:	Array of field data items or FALSE on failure
@@ -296,7 +296,7 @@ This article is intended to be a reference for them.
 
 		Gets a list containing field data about a table.
 
-	.. php:method:: escape_identifiers($item)
+	.. php:method:: escape_identifiers( $item)
 
 		:param	mixed	$item: The item or array of items to escape
 		:returns:	The input item(s), escaped
@@ -304,7 +304,7 @@ This article is intended to be a reference for them.
 
 		Escape SQL identifiers, such as column, table and names.
 
-	.. php:method:: insert_string($table, $data)
+	.. php:method:: insert_string( $table, $data)
 
 		:param	string	$table: The target table
 		:param	array	$data: An associative array of key/value pairs
@@ -313,7 +313,7 @@ This article is intended to be a reference for them.
 
 		Generate an INSERT statement string.
 
-	.. php:method:: update_string($table, $data, $where)
+	.. php:method:: update_string( $table, $data, $where)
 
 		:param	string	$table: The target table
 		:param	array	$data: An associative array of key/value pairs
@@ -323,7 +323,7 @@ This article is intended to be a reference for them.
 
 		Generate an UPDATE statement string.
 
-	.. php:method:: call_function($function)
+	.. php:method:: call_function( $function)
 
 		:param	string	$function: Function name
 		:returns:	The function result
@@ -332,7 +332,7 @@ This article is intended to be a reference for them.
 		Runs a native PHP function , using a platform agnostic
 		wrapper.
 
-	.. php:method:: cache_set_path([$path = ''])
+	.. php:method:: cache_set_path([$path = '' ])
 
 		:param	string	$path: Path to the cache directory
 		:rtype:	void
@@ -353,7 +353,7 @@ This article is intended to be a reference for them.
 
 		Disable database results caching.
 
-	.. php:method:: cache_delete([$segment_one = ''[, $segment_two = '']])
+	.. php:method:: cache_delete([$segment_one = ''[, $segment_two = '' ]])
 
 		:param	string	$segment_one: First URI segment
 		:param	string	$segment_two: Second URI segment
@@ -390,7 +390,7 @@ This article is intended to be a reference for them.
 		The message is displayed using the
 		*application/views/errors/error_db.php* template.
 
-	.. php:method:: protect_identifiers($item[, $prefix_single = FALSE[, $protect_identifiers = NULL[, $field_exists = TRUE]]])
+	.. php:method:: protect_identifiers( $item[, $prefix_single = FALSE[, $protect_identifiers = NULL[, $field_exists = TRUE]]])
 
 		:param	string	$item: The item to work with
 		:param	bool	$prefix_single: Whether to apply the dbprefix even if the input item is a single identifier

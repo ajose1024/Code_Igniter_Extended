@@ -22,10 +22,10 @@ Load the Forge Class as follows::
 You can also pass another database object to the DB Forge loader, in case
 the database you want to manage isn't the default one::
 
-	$this->myforge = $this->load->dbforge($this->other_db, TRUE);
+	$this->myforge = $this->load->dbforge( $this->other_db, TRUE);
 
 In the above example, we're passing a custom database object as the first
-parameter and then tell it to return the dbforge object, instead of
+parameter and then tell it to return..the dbforge object, instead of
 assigning it directly to ``$this->dbforge``.
 
 .. note:: Both of the parameters can be used individually, just pass an empty
@@ -40,22 +40,22 @@ object::
 Creating and Dropping Databases
 *******************************
 
-**$this->dbforge->create_database('db_name')**
+**$this->dbforge->create_database( 'db_name')**
 
 Permits you to create the database specified in the first parameter.
 Returns TRUE/FALSE based on success or failure::
 
-	if( $this->dbforge->create_database('my_db'))
+	if( $this->dbforge->create_database( 'my_db'))
 	{
 		echo 'Database created!';
 	}
 
-**$this->dbforge->drop_database('db_name')**
+**$this->dbforge->drop_database( 'db_name')**
 
 Permits you to drop the database specified in the first parameter.
 Returns TRUE/FALSE based on success or failure::
 
-	if( $this->dbforge->drop_database('my_db'))
+	if( $this->dbforge->drop_database( 'my_db'))
 	{
 		echo 'Database deleted!';
 	}
@@ -124,7 +124,7 @@ Additionally, the following key/values can be used:
 
 
 After the fields have been defined, they can be added using
-``$this->dbforge->add_field($fields);`` followed by a call to the
+``$this->dbforge->add_field( $fields);`` followed by a call to the
 ``create_table()`` method.
 
 **$this->dbforge->add_field()**
@@ -156,7 +156,7 @@ Primary Key.
 
 ::
 
-	$this->dbforge->add_field('id');
+	$this->dbforge->add_field( 'id');
 	// gives id INT(9) NOT NULL AUTO_INCREMENT
 
 
@@ -164,7 +164,7 @@ Adding Keys
 ===========
 
 Generally speaking, you'll want your table to have Keys. This is
-accomplished with $this->dbforge->add_key('field'). An optional second
+accomplished with $this->dbforge->add_key( 'field'). An optional second
 parameter set to TRUE will make it a primary key. Note that add_key()
 must be followed by a call to create_table().
 
@@ -173,17 +173,17 @@ below is for MySQL.
 
 ::
 
-	$this->dbforge->add_key('blog_id', TRUE);
+	$this->dbforge->add_key( 'blog_id', TRUE);
 	// gives PRIMARY KEY `blog_id` (`blog_id`)
 	
-	$this->dbforge->add_key('blog_id', TRUE);
-	$this->dbforge->add_key('site_id', TRUE);
+	$this->dbforge->add_key( 'blog_id', TRUE);
+	$this->dbforge->add_key( 'site_id', TRUE);
 	// gives PRIMARY KEY `blog_id_site_id` (`blog_id`, `site_id`)
 	
-	$this->dbforge->add_key('blog_name');
+	$this->dbforge->add_key( 'blog_name');
 	// gives KEY `blog_name` (`blog_name`)
 	
-	$this->dbforge->add_key(array('blog_name', 'blog_label'));
+	$this->dbforge->add_key(array( 'blog_name', 'blog_label'));
 	// gives KEY `blog_name_blog_label` (`blog_name`, `blog_label`)
 
 
@@ -195,7 +195,7 @@ with
 
 ::
 
-	$this->dbforge->create_table('table_name');
+	$this->dbforge->create_table( 'table_name');
 	// gives CREATE TABLE table_name
 
 
@@ -204,13 +204,13 @@ into the definition
 
 ::
 
-	$this->dbforge->create_table('table_name', TRUE);
+	$this->dbforge->create_table( 'table_name', TRUE);
 	// gives CREATE TABLE IF NOT EXISTS table_name
 
 You could also pass optional table attributes, such as MySQL's ``ENGINE``::
 
-	$attributes = array('ENGINE' => 'InnoDB');
-	$this->dbforge->create_table('table_name', FALSE, $attributes);
+	$attributes = array( 'ENGINE' => 'InnoDB');
+	$this->dbforge->create_table( 'table_name', FALSE, $attributes);
 	// produces: CREATE TABLE `table_name` (...) ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci
 
 .. note:: Unless you specify the ``CHARACTER SET`` and/or ``COLLATE`` attributes,
@@ -226,10 +226,10 @@ Execute a DROP TABLE statement and optionally add an IF EXISTS clause.
 ::
 
 	// Produces: DROP TABLE table_name
-	$this->dbforge->drop_table('table_name');
+	$this->dbforge->drop_table( 'table_name');
 
 	// Produces: DROP TABLE IF EXISTS table_name
-	$this->dbforge->drop_table('table_name',TRUE);
+	$this->dbforge->drop_table( 'table_name',TRUE);
 
 
 Renaming a table
@@ -239,7 +239,7 @@ Executes a TABLE rename
 
 ::
 
-	$this->dbforge->rename_table('old_table_name', 'new_table_name');
+	$this->dbforge->rename_table( 'old_table_name', 'new_table_name');
 	// gives ALTER TABLE old_table_name RENAME TO new_table_name
 
 
@@ -259,9 +259,9 @@ number of additional fields.
 ::
 
 	$fields = array(
-		'preferences' => array('type' => 'TEXT')
+		'preferences' => array( 'type' => 'TEXT')
 	);
-	$this->dbforge->add_column('table_name', $fields); 
+	$this->dbforge->add_column( 'table_name', $fields); 
 	// Executes: ALTER TABLE table_name ADD preferences TEXT
 
 If you are using MySQL or CUBIRD, then you can take advantage of their
@@ -271,12 +271,12 @@ Examples::
 
 	// Will place the new column after the `another_field` column:
 	$fields = array(
-		'preferences' => array('type' => 'TEXT', 'after' => 'another_field')
+		'preferences' => array( 'type' => 'TEXT', 'after' => 'another_field')
 	);
 
 	// Will place the new column at the start of the table definition:
 	$fields = array(
-		'preferences' => array('type' => 'TEXT', 'first' => TRUE)
+		'preferences' => array( 'type' => 'TEXT', 'first' => TRUE)
 	);
 
 
@@ -289,7 +289,7 @@ Used to remove a column from a table.
 
 ::
 
-	$this->dbforge->drop_column('table_name', 'column_to_drop');
+	$this->dbforge->drop_column( 'table_name', 'column_to_drop');
 
 
 
@@ -310,7 +310,7 @@ change the name you can add a "name" key into the field defining array.
 			'type' => 'TEXT',
 		),
 	);
-	$this->dbforge->modify_column('table_name', $fields);
+	$this->dbforge->modify_column( 'table_name', $fields);
 	// gives ALTER TABLE table_name CHANGE old_name new_name TEXT
 
 
@@ -320,7 +320,7 @@ Class Reference
 
 .. php:class:: CI_DB_forge
 
-	.. php:method:: add_column($table[, $field = array()[, $_after = NULL]])
+	.. php:method:: add_column( $table[, $field = array()[, $_after = NULL]])
 
 		:param	string	$table: Table name to add the column to
 		:param	array	$field: Column definition(s)
@@ -330,7 +330,7 @@ Class Reference
 
 		Adds a column to a table. Usage:  See `Adding a Column to a Table`_.
 
-	.. php:method:: add_field($field)
+	.. php:method:: add_field( $field)
 
 		:param	array	$field: Field definition to add
 		:returns:	CI_DB_forge instance (method chaining)
@@ -338,7 +338,7 @@ Class Reference
 
                 Adds a field to the set that will be used to create a table. Usage:  See `Adding fields`_.
 
-	.. php:method:: add_key($key[, $primary = FALSE])
+	.. php:method:: add_key( $key[, $primary = FALSE])
 
 		:param	array	$key: Name of a key field
 		:param	bool	$primary: Set to TRUE if it should be a primary key or a regular one
@@ -347,7 +347,7 @@ Class Reference
 
 		Adds a key to the set that will be used to create a table. Usage:  See `Adding Keys`_.
 
-	.. php:method:: create_database($db_name)
+	.. php:method:: create_database( $db_name)
 
 		:param	string	$db_name: Name of the database to create
 		:returns:	TRUE on success, FALSE on failure
@@ -355,7 +355,7 @@ Class Reference
 
 		Creates a new database. Usage:  See `Creating and Dropping Databases`_.
 
-	.. php:method:: create_table($table[, $if_not_exists = FALSE[, array $attributes = array()]])
+	.. php:method:: create_table( $table[, $if_not_exists = FALSE[, array $attributes = array()]])
 
 		:param	string	$table: Name of the table to create
 		:param	string	$if_not_exists: Set to TRUE to add an 'IF NOT EXISTS' clause
@@ -365,7 +365,7 @@ Class Reference
 
 		Creates a new table. Usage:  See `Creating a table`_.
 
-	.. php:method:: drop_column($table, $column_name)
+	.. php:method:: drop_column( $table, $column_name)
 
 		:param	string	$table: Table name
 		:param	array	$column_name: The column name to drop
@@ -374,7 +374,7 @@ Class Reference
 
 		Drops a column from a table. Usage:  See `Dropping a Column From a Table`_.
 
-	.. php:method:: drop_database($db_name)
+	.. php:method:: drop_database( $db_name)
 
 		:param	string	$db_name: Name of the database to drop
 		:returns:	TRUE on success, FALSE on failure
@@ -382,7 +382,7 @@ Class Reference
 
 		Drops a database. Usage:  See `Creating and Dropping Databases`_.
 
-	.. php:method:: drop_table($table_name[, $if_exists = FALSE])
+	.. php:method:: drop_table( $table_name[, $if_exists = FALSE])
 
 		:param	string	$table: Name of the table to drop
 		:param	string	$if_exists: Set to TRUE to add an 'IF EXISTS' clause
@@ -391,7 +391,7 @@ Class Reference
 
 		Drops a table. Usage:  See `Dropping a table`_.
 
-	.. php:method:: modify_column($table, $field)
+	.. php:method:: modify_column( $table, $field)
 
 		:param	string	$table: Table name
 		:param	array	$field: Column definition(s)
@@ -400,7 +400,7 @@ Class Reference
 
 		Modifies a table column. Usage:  See `Modifying a Column in a Table`_.
 
-	.. php:method:: rename_table($table_name, $new_table_name)
+	.. php:method:: rename_table( $table_name, $new_table_name)
 
 		:param	string	$table: Current of the table
 		:param	string	$new_table_name: New name of the table

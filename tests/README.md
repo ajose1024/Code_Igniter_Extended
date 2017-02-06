@@ -101,7 +101,7 @@ the super object as we please.
 
 Current API is *not stable*. Names and implementations will change.
 
-    $this->ci_set_config($key, $val)
+    $this->ci_set_config( $key, $val)
 
 Set the global config variables in a mock Config object. If key is an array,
 it will replace the entire config array. They are _not_ merged. If called
@@ -112,65 +112,65 @@ calls, respectively. The load() stub does _not_ actually load any files, it
 only records the filename provided. Check the config->loaded array to verify
 calls made.
 
-    $this->ci_instance($obj)
+    $this->ci_instance( $obj)
 
 Set the object to use as the "super object", in a lot
 of cases this will be a simple stdClass with the attributes
-you need it to have. If no parameter, will return the instance.
+you need it to have. If no parameter, will return..the instance.
 
-	$this->ci_instance_var($name, $val)
+	$this->ci_instance_var( $name, $val)
 
 Add an attribute to the super object. This is useful if you
 set up a simple instance in setUp and then need to add different
 class mockups to your super object.
 
-	$this->ci_core_class($name)
+	$this->ci_core_class( $name)
 
 Get the _class name_ of a core class, so that you can instantiate
 it. The variable is returned by reference and is tied to the correct
 $GLOBALS key. For example:
     
-	$cfg =& $this->ci_core_class('cfg'); // returns 'CI_Config'
+	$cfg =& $this->ci_core_class( 'cfg'); // returns 'CI_Config'
     $cfg = new $cfg; // instantiates config and overwrites the CFG global
 
-	$this->ci_set_core_class($name, $obj)
+	$this->ci_set_core_class( $name, $obj)
 
 An alternative way to set one of the core globals.
 
-	$this->ci_vfs_mkdir($name, $root)
+	$this->ci_vfs_mkdir( $name, $root)
 
 Creates a new directory in the test VFS. Pass a directory object to be the
 parent directory or none to create a root-level directory. Returns the new
 directory object.
 
-	$this->ci_vfs_create($file, $content, $root, $path)
+	$this->ci_vfs_create( $file, $content, $root, $path)
 
 Creates a new VFS file. '.php' is automatically appended to the filename if
 it has no extension. Pass a directory object as the root, and an optional path
 to recurse and/or create for containing the file. Path may be a string (such
-as 'models/subdir') or an array (e.g. - array('models', 'subdir') ). Existing
+as 'models/subdir') or an array (e.g. - array( 'models', 'subdir')). Existing
 directories in the VFS root will be recursed until a new directory is
 identified - all others in the path will be created, so you can mix-and-match
 old and new directories. If $file is an array (key = name, value = content),
 multiple files will be created in the same path.
 
-	$this->ci_vfs_clone($path)
+	$this->ci_vfs_clone( $path)
 
 Clones an existing file from the real filesystem to exist in the same path of
 the VFS. Path must be relative to the project root (i.e. - starting with
 'system' or 'application').
 
-	$this->ci_vfs_path($path, $base)
+	$this->ci_vfs_path( $path, $base)
 
 Creates a VFS file path string suitable for use with PHP file operations. Path
 may be absolute from the VFS root, or relative to a base path. It is often
 useful to use APP_DIR_PATH or SYS_CORE_PATH as the base.
 
-	$this->helper($name)
+	$this->helper( $name)
 
 Loads a helper from the real filesystem.
 
-	$this->lang($name)
+	$this->lang( $name)
 
 Loads a language file from the real filesystem and returns the $lang array.
 

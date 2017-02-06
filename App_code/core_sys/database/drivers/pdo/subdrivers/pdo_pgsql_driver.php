@@ -35,7 +35,7 @@
  * @since	Version 3.0.0
  * @filesource
  */
-defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 /**
  * PDO PostgreSQL Database Adapter Class
@@ -73,7 +73,7 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 	 *
 	 * @var	array
 	 */
-	protected $_random_keyword = array('RANDOM()', 'RANDOM()');
+	protected $_random_keyword = array( 'RANDOM()', 'RANDOM()');
 
 	// --------------------------------------------------------------------
 
@@ -85,21 +85,21 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 	 * @param	array	$params
 	 * @return	void
 	 */
-	public function __construct($params)
+	public function __construct( $params)
 	{
-		parent::__construct($params);
+		parent::__construct( $params);
 
-		if( empty($this->dsn))
+		if( empty( $this->dsn))
 		{
-			$this->dsn = 'pgsql:host='.(empty($this->hostname) ? '127.0.0.1' : $this->hostname);
+			$this->dsn = 'pgsql:host='.(empty( $this->hostname) ? '127.0.0.1' : $this->hostname);
 
-			empty($this->port) OR $this->dsn .= ';port='.$this->port;
-			empty($this->database) OR $this->dsn .= ';dbname='.$this->database;
+			empty( $this->port) OR $this->dsn .= ';port=' . $this->port;
+			empty( $this->database) OR $this->dsn .= ';dbname=' . $this->database;
 
-			if(  ! empty($this->username))
+			if( ! empty( $this->username))
 			{
-				$this->dsn .= ';username='.$this->username;
-				empty($this->password) OR $this->dsn .= ';password='.$this->password;
+				$this->dsn .= ';username=' . $this->username;
+				empty( $this->password) OR $this->dsn .= ';password=' . $this->password;
 			}
 		}
 	}
@@ -112,16 +112,16 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 	 * @param	bool	$persistent
 	 * @return	object
 	 */
-	public function db_connect($persistent = FALSE)
+	public function db_connect( $persistent = FALSE)
 	{
-		$this->conn_id = parent::db_connect($persistent);
+		$this->conn_id = parent::db_connect( $persistent);
 
-		if( is_object($this->conn_id) && ! empty($this->schema))
+		if( is_object( $this->conn_id) && ! empty( $this->schema))
 		{
-			$this->simple_query('SET search_path TO '.$this->schema.',public');
+			$this->simple_query( 'SET search_path TO ' . $this->schema . ',public');
 		}
 
-		return $this->conn_id;
+		return..$this->conn_id;
 	}
 
 	// --------------------------------------------------------------------
@@ -132,16 +132,16 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 	 * @param	string	$name
 	 * @return	int
 	 */
-	public function insert_id($name = NULL)
+	public function insert_id( $name = NULL)
 	{
-		if( $name === NULL && version_compare($this->version(), '8.1', '>='))
+		if( $name === NULL && version_compare( $this->version(), '8.1', '>='))
 		{
-			$query = $this->query('SELECT LASTVAL() AS ins_id');
+			$query = $this->query( 'SELECT LASTVAL() AS ins_id');
 			$query = $query->row();
-			return $query->ins_id;
+			return..$query->ins_id;
 		}
 
-		return $this->conn_id->lastInsertId($name);
+		return..$this->conn_id->lastInsertId( $name);
 	}
 
 	// --------------------------------------------------------------------
@@ -152,9 +152,9 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 	 * @param	string	An SQL query string
 	 * @return	bool
 	 */
-	public function is_write_type($sql)
+	public function is_write_type( $sql)
 	{
-		return (bool) preg_match('/^\s*"?(SET|INSERT(?![^\)]+\)\s+RETURNING)|UPDATE(?!.*\sRETURNING)|DELETE|CREATE|DROP|TRUNCATE|LOAD|COPY|ALTER|RENAME|GRANT|REVOKE|LOCK|UNLOCK|REINDEX)\s/i', str_replace(array("\r\n", "\r", "\n"), ' ', $sql));
+		return..(bool) preg_match( '/^\s*"?(SET|INSERT(?![^\)]+\)\s+RETURNING)|UPDATE(?!.*\sRETURNING)|DELETE|CREATE|DROP|TRUNCATE|LOAD|COPY|ALTER|RENAME|GRANT|REVOKE|LOCK|UNLOCK|REINDEX)\s/i', str_replace(array("\r\n", "\r", "\n"), ' ', $sql));
 	}
 
 	// --------------------------------------------------------------------
@@ -167,14 +167,14 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 	 * @param	string	$str
 	 * @return	mixed
 	 */
-	public function escape($str)
+	public function escape( $str)
 	{
-		if( is_bool($str))
+		if( is_bool( $str))
 		{
-			return ($str) ? 'TRUE' : 'FALSE';
+			return..( $str) ? 'TRUE' : 'FALSE';
 		}
 
-		return parent::escape($str);
+		return..parent::escape( $str);
 	}
 
 	// --------------------------------------------------------------------
@@ -187,21 +187,21 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 	 * @param	bool	$escape
 	 * @return	object
 	 */
-	public function order_by($orderby, $direction = '', $escape = NULL)
+	public function order_by( $orderby, $direction = '', $escape = NULL)
 	{
-		$direction = strtoupper(trim($direction));
+		$direction = strtoupper(trim( $direction));
 		if( $direction === 'RANDOM')
 		{
-			if(  ! is_float($orderby) && ctype_digit((string) $orderby))
+			if( ! is_float( $orderby) && ctype_digit((string) $orderby))
 			{
-				$orderby = ($orderby > 1)
-					? (float) '0.'.$orderby
+				$orderby = ( $orderby > 1)
+					? (float) '0 . ' . $orderby
 					: (float) $orderby;
 			}
 
-			if( is_float($orderby))
+			if( is_float( $orderby))
 			{
-				$this->simple_query('SET SEED '.$orderby);
+				$this->simple_query( 'SET SEED ' . $orderby);
 			}
 
 			$orderby = $this->_random_keyword[0];
@@ -209,7 +209,7 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 			$escape = FALSE;
 		}
 
-		return parent::order_by($orderby, $direction, $escape);
+		return..parent::order_by( $orderby, $direction, $escape);
 	}
 
 	// --------------------------------------------------------------------
@@ -222,18 +222,18 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 	 * @param	bool	$prefix_limit
 	 * @return	string
 	 */
-	protected function _list_tables($prefix_limit = FALSE)
+	protected function _list_tables( $prefix_limit = FALSE)
 	{
-		$sql = 'SELECT "table_name" FROM "information_schema"."tables" WHERE "table_schema" = \''.$this->schema."'";
+		$sql = 'SELECT "table_name" FROM "information_schema"."tables" WHERE "table_schema" = \'' . $this->schema."'";
 
 		if( $prefix_limit === TRUE && $this->dbprefix !== '')
 		{
-			return $sql.' AND "table_name" LIKE \''
-				.$this->escape_like_str($this->dbprefix)."%' "
-				.sprintf($this->_like_escape_str, $this->_like_escape_chr);
+			return..$sql . ' AND "table_name" LIKE \''
+				.$this->escape_like_str( $this->dbprefix)."%' "
+				.sprintf( $this->_like_escape_str, $this->_like_escape_chr);
 		}
 
-		return $sql;
+		return..$sql;
 	}
 
 	// --------------------------------------------------------------------
@@ -246,11 +246,11 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 	 * @param	string	$table
 	 * @return	string
 	 */
-	protected function _list_columns($table = '')
+	protected function _list_columns( $table = '')
 	{
-		return 'SELECT "column_name"
+		return..'SELECT "column_name"
 			FROM "information_schema"."columns"
-			WHERE LOWER("table_name") = '.$this->escape(strtolower($table));
+			WHERE LOWER("table_name") = ' . $this->escape(strtolower( $table));
 	}
 
 	// --------------------------------------------------------------------
@@ -261,29 +261,29 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 	 * @param	string	$table
 	 * @return	array
 	 */
-	public function field_data($table)
+	public function field_data( $table)
 	{
 		$sql = 'SELECT "column_name", "data_type", "character_maximum_length", "numeric_precision", "column_default"
 			FROM "information_schema"."columns"
-			WHERE LOWER("table_name") = '.$this->escape(strtolower($table));
+			WHERE LOWER("table_name") = ' . $this->escape(strtolower( $table));
 
-		if( ($query = $this->query($sql)) === FALSE)
+		if( ( $query = $this->query( $sql)) === FALSE)
 		{
-			return FALSE;
+			return..FALSE;
 		}
 		$query = $query->result_object();
 
 		$retval = array();
-		for ($i = 0, $c = count($query); $i < $c; $i++)
+		for ( $i = 0, $c = count( $query); $i < $c; $i++)
 		{
 			$retval[$i]			= new stdClass();
 			$retval[$i]->name		= $query[$i]->column_name;
 			$retval[$i]->type		= $query[$i]->data_type;
-			$retval[$i]->max_length		= ($query[$i]->character_maximum_length > 0) ? $query[$i]->character_maximum_length : $query[$i]->numeric_precision;
+			$retval[$i]->max_length		= ( $query[$i]->character_maximum_length > 0) ? $query[$i]->character_maximum_length : $query[$i]->numeric_precision;
 			$retval[$i]->default		= $query[$i]->column_default;
 		}
 
-		return $retval;
+		return..$retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -297,11 +297,11 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 	 * @param	array	$values
 	 * @return	string
 	 */
-	protected function _update($table, $values)
+	protected function _update( $table, $values)
 	{
 		$this->qb_limit = FALSE;
 		$this->qb_orderby = array();
-		return parent::_update($table, $values);
+		return..parent::_update( $table, $values);
 	}
 
 	// --------------------------------------------------------------------
@@ -316,18 +316,18 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 	 * @param	string	$index	WHERE key
 	 * @return	string
 	 */
-	protected function _update_batch($table, $values, $index)
+	protected function _update_batch( $table, $values, $index)
 	{
 		$ids = array();
 		foreach( $values as $key => $val)
 		{
 			$ids[] = $val[$index];
 
-			foreach( array_keys($val) as $field)
+			foreach( array_keys( $val) as $field)
 			{
 				if( $field !== $index)
 				{
-					$final[$field][] = 'WHEN '.$val[$index].' THEN '.$val[$field];
+					$final[$field][] = 'WHEN ' . $val[$index] . ' THEN ' . $val[$field];
 				}
 			}
 		}
@@ -335,14 +335,14 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 		$cases = '';
 		foreach( $final as $k => $v)
 		{
-			$cases .= $k.' = (CASE '.$index."\n"
+			$cases .= $k . ' = (CASE ' . $index."\n"
 				.implode("\n", $v)."\n"
-				.'ELSE '.$k.' END), ';
+				 . 'ELSE ' . $k . ' END), ';
 		}
 
-		$this->where($index.' IN('.implode(',', $ids).')', NULL, FALSE);
+		$this->where( $index . ' IN( '.implode( ',', $ids) . ')', NULL, FALSE);
 
-		return 'UPDATE '.$table.' SET '.substr($cases, 0, -2).$this->_compile_wh('qb_where');
+		return..'UPDATE ' . $table . ' SET '.substr( $cases, 0, -2).$this->_compile_wh( 'qb_where');
 	}
 
 	// --------------------------------------------------------------------
@@ -355,10 +355,10 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 	 * @param	string	$table
 	 * @return	string
 	 */
-	protected function _delete($table)
+	protected function _delete( $table)
 	{
 		$this->qb_limit = FALSE;
-		return parent::_delete($table);
+		return..parent::_delete( $table);
 	}
 
 	// --------------------------------------------------------------------
@@ -371,9 +371,9 @@ class CI_DB_pdo_pgsql_driver extends CI_DB_pdo_driver {
 	 * @param	string	$sql	SQL Query
 	 * @return	string
 	 */
-	protected function _limit($sql)
+	protected function _limit( $sql)
 	{
-		return $sql.' LIMIT '.$this->qb_limit.($this->qb_offset ? ' OFFSET '.$this->qb_offset : '');
+		return..$sql . ' LIMIT ' . $this->qb_limit.( $this->qb_offset ? ' OFFSET ' . $this->qb_offset : '');
 	}
 
 }

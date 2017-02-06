@@ -23,17 +23,17 @@ class Empty_test extends CI_TestCase {
 	public function test_empty_table()
 	{
 		// Check initial record
-		$jobs = $this->db->get('job')->result_array();
+		$jobs = $this->db->get( 'job')->result_array();
 
-		$this->assertEquals(4, count($jobs));
+		$this->assertEquals(4, count( $jobs));
 
 		// Do the empty
-		$this->db->empty_table('job');
+		$this->db->empty_table( 'job');
 
 		// Check the record
-		$jobs = $this->db->get('job');
+		$jobs = $this->db->get( 'job');
 
-		$this->assertEmpty($jobs->result_array());
+		$this->assertEmpty( $jobs->result_array());
 	}
 
 }

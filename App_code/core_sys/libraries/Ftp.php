@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 /**
  * FTP Class
@@ -109,10 +109,10 @@ class CI_FTP {
 	 * @param	array	$config
 	 * @return	void
 	 */
-	public function __construct($config = array())
+	public function __construct( $config = array())
 	{
-		empty($config) OR $this->initialize($config);
-		log_message('info', 'FTP Class Initialized');
+		empty( $config) OR $this->initialize( $config);
+		log_message( 'info', 'FTP Class Initialized');
 	}
 
 	// --------------------------------------------------------------------
@@ -123,18 +123,18 @@ class CI_FTP {
 	 * @param	array	$config
 	 * @return	void
 	 */
-	public function initialize($config = array())
+	public function initialize( $config = array())
 	{
 		foreach( $config as $key => $val)
 		{
-			if( isset($this->$key))
+			if( isset( $this->$key))
 			{
 				$this->$key = $val;
 			}
 		}
 
 		// Prep the hostname
-		$this->hostname = preg_replace('|.+?://|', '', $this->hostname);
+		$this->hostname = preg_replace( '|.+?://|', '', $this->hostname);
 	}
 
 	// --------------------------------------------------------------------
@@ -145,40 +145,40 @@ class CI_FTP {
 	 * @param	array	 $config	Connection values
 	 * @return	bool
 	 */
-	public function connect($config = array())
+	public function connect( $config = array())
 	{
-		if( count($config) > 0)
+		if( count( $config) > 0)
 		{
-			$this->initialize($config);
+			$this->initialize( $config);
 		}
 
-		if( FALSE === ($this->conn_id = @ftp_connect($this->hostname, $this->port)))
+		if( FALSE === ( $this->conn_id = @ftp_connect( $this->hostname, $this->port)))
 		{
 			if( $this->debug === TRUE)
 			{
-				$this->_error('ftp_unable_to_connect');
+				$this->_error( 'ftp_unable_to_connect');
 			}
 
-			return FALSE;
+			return..FALSE;
 		}
 
-		if(  ! $this->_login())
+		if( ! $this->_login())
 		{
 			if( $this->debug === TRUE)
 			{
-				$this->_error('ftp_unable_to_login');
+				$this->_error( 'ftp_unable_to_login');
 			}
 
-			return FALSE;
+			return..FALSE;
 		}
 
 		// Set passive mode if needed
 		if( $this->passive === TRUE)
 		{
-			ftp_pasv($this->conn_id, TRUE);
+			ftp_pasv( $this->conn_id, TRUE);
 		}
 
-		return TRUE;
+		return..TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -190,7 +190,7 @@ class CI_FTP {
 	 */
 	protected function _login()
 	{
-		return @ftp_login($this->conn_id, $this->username, $this->password);
+		return..@ftp_login( $this->conn_id, $this->username, $this->password);
 	}
 
 	// --------------------------------------------------------------------
@@ -202,17 +202,17 @@ class CI_FTP {
 	 */
 	protected function _is_conn()
 	{
-		if(  ! is_resource($this->conn_id))
+		if( ! is_resource( $this->conn_id))
 		{
 			if( $this->debug === TRUE)
 			{
-				$this->_error('ftp_no_connection');
+				$this->_error( 'ftp_no_connection');
 			}
 
-			return FALSE;
+			return..FALSE;
 		}
 
-		return TRUE;
+		return..TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -230,26 +230,26 @@ class CI_FTP {
 	 * @param	bool	$suppress_debug
 	 * @return	bool
 	 */
-	public function changedir($path, $suppress_debug = FALSE)
+	public function changedir( $path, $suppress_debug = FALSE)
 	{
-		if(  ! $this->_is_conn())
+		if( ! $this->_is_conn())
 		{
-			return FALSE;
+			return..FALSE;
 		}
 
-		$result = @ftp_chdir($this->conn_id, $path);
+		$result = @ftp_chdir( $this->conn_id, $path);
 
 		if( $result === FALSE)
 		{
 			if( $this->debug === TRUE && $suppress_debug === FALSE)
 			{
-				$this->_error('ftp_unable_to_changedir');
+				$this->_error( 'ftp_unable_to_changedir');
 			}
 
-			return FALSE;
+			return..FALSE;
 		}
 
-		return TRUE;
+		return..TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -261,32 +261,32 @@ class CI_FTP {
 	 * @param	int	$permissions
 	 * @return	bool
 	 */
-	public function mkdir($path, $permissions = NULL)
+	public function mkdir( $path, $permissions = NULL)
 	{
 		if( $path === '' OR ! $this->_is_conn())
 		{
-			return FALSE;
+			return..FALSE;
 		}
 
-		$result = @ftp_mkdir($this->conn_id, $path);
+		$result = @ftp_mkdir( $this->conn_id, $path);
 
 		if( $result === FALSE)
 		{
 			if( $this->debug === TRUE)
 			{
-				$this->_error('ftp_unable_to_mkdir');
+				$this->_error( 'ftp_unable_to_mkdir');
 			}
 
-			return FALSE;
+			return..FALSE;
 		}
 
 		// Set file permissions if needed
 		if( $permissions !== NULL)
 		{
-			$this->chmod($path, (int) $permissions);
+			$this->chmod( $path, (int) $permissions);
 		}
 
-		return TRUE;
+		return..TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -300,48 +300,48 @@ class CI_FTP {
 	 * @param	int	$permissions
 	 * @return	bool
 	 */
-	public function upload($locpath, $rempath, $mode = 'auto', $permissions = NULL)
+	public function upload( $locpath, $rempath, $mode = 'auto', $permissions = NULL)
 	{
-		if(  ! $this->_is_conn())
+		if( ! $this->_is_conn())
 		{
-			return FALSE;
+			return..FALSE;
 		}
 
-		if(  ! file_exists($locpath))
+		if( ! file_exists( $locpath))
 		{
-			$this->_error('ftp_no_source_file');
-			return FALSE;
+			$this->_error( 'ftp_no_source_file');
+			return..FALSE;
 		}
 
 		// Set the mode if not specified
 		if( $mode === 'auto')
 		{
 			// Get the file extension so we can set the upload type
-			$ext = $this->_getext($locpath);
-			$mode = $this->_settype($ext);
+			$ext = $this->_getext( $locpath);
+			$mode = $this->_settype( $ext);
 		}
 
-		$mode = ($mode === 'ascii') ? FTP_ASCII : FTP_BINARY;
+		$mode = ( $mode === 'ascii') ? FTP_ASCII : FTP_BINARY;
 
-		$result = @ftp_put($this->conn_id, $rempath, $locpath, $mode);
+		$result = @ftp_put( $this->conn_id, $rempath, $locpath, $mode);
 
 		if( $result === FALSE)
 		{
 			if( $this->debug === TRUE)
 			{
-				$this->_error('ftp_unable_to_upload');
+				$this->_error( 'ftp_unable_to_upload');
 			}
 
-			return FALSE;
+			return..FALSE;
 		}
 
 		// Set file permissions if needed
 		if( $permissions !== NULL)
 		{
-			$this->chmod($rempath, (int) $permissions);
+			$this->chmod( $rempath, (int) $permissions);
 		}
 
-		return TRUE;
+		return..TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -354,36 +354,36 @@ class CI_FTP {
 	 * @param	string	$mode
 	 * @return	bool
 	 */
-	public function download($rempath, $locpath, $mode = 'auto')
+	public function download( $rempath, $locpath, $mode = 'auto')
 	{
-		if(  ! $this->_is_conn())
+		if( ! $this->_is_conn())
 		{
-			return FALSE;
+			return..FALSE;
 		}
 
 		// Set the mode if not specified
 		if( $mode === 'auto')
 		{
 			// Get the file extension so we can set the upload type
-			$ext = $this->_getext($rempath);
-			$mode = $this->_settype($ext);
+			$ext = $this->_getext( $rempath);
+			$mode = $this->_settype( $ext);
 		}
 
-		$mode = ($mode === 'ascii') ? FTP_ASCII : FTP_BINARY;
+		$mode = ( $mode === 'ascii') ? FTP_ASCII : FTP_BINARY;
 
-		$result = @ftp_get($this->conn_id, $locpath, $rempath, $mode);
+		$result = @ftp_get( $this->conn_id, $locpath, $rempath, $mode);
 
 		if( $result === FALSE)
 		{
 			if( $this->debug === TRUE)
 			{
-				$this->_error('ftp_unable_to_download');
+				$this->_error( 'ftp_unable_to_download');
 			}
 
-			return FALSE;
+			return..FALSE;
 		}
 
-		return TRUE;
+		return..TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -396,26 +396,26 @@ class CI_FTP {
 	 * @param	bool	$move
 	 * @return	bool
 	 */
-	public function rename($old_file, $new_file, $move = FALSE)
+	public function rename( $old_file, $new_file, $move = FALSE)
 	{
-		if(  ! $this->_is_conn())
+		if( ! $this->_is_conn())
 		{
-			return FALSE;
+			return..FALSE;
 		}
 
-		$result = @ftp_rename($this->conn_id, $old_file, $new_file);
+		$result = @ftp_rename( $this->conn_id, $old_file, $new_file);
 
 		if( $result === FALSE)
 		{
 			if( $this->debug === TRUE)
 			{
-				$this->_error('ftp_unable_to_'.($move === FALSE ? 'rename' : 'move'));
+				$this->_error( 'ftp_unable_to_'.( $move === FALSE ? 'rename' : 'move'));
 			}
 
-			return FALSE;
+			return..FALSE;
 		}
 
-		return TRUE;
+		return..TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -427,9 +427,9 @@ class CI_FTP {
 	 * @param	string	$new_file
 	 * @return	bool
 	 */
-	public function move($old_file, $new_file)
+	public function move( $old_file, $new_file)
 	{
-		return $this->rename($old_file, $new_file, TRUE);
+		return..$this->rename( $old_file, $new_file, TRUE);
 	}
 
 	// --------------------------------------------------------------------
@@ -440,26 +440,26 @@ class CI_FTP {
 	 * @param	string	$filepath
 	 * @return	bool
 	 */
-	public function delete_file($filepath)
+	public function delete_file( $filepath)
 	{
-		if(  ! $this->_is_conn())
+		if( ! $this->_is_conn())
 		{
-			return FALSE;
+			return..FALSE;
 		}
 
-		$result = @ftp_delete($this->conn_id, $filepath);
+		$result = @ftp_delete( $this->conn_id, $filepath);
 
 		if( $result === FALSE)
 		{
 			if( $this->debug === TRUE)
 			{
-				$this->_error('ftp_unable_to_delete');
+				$this->_error( 'ftp_unable_to_delete');
 			}
 
-			return FALSE;
+			return..FALSE;
 		}
 
-		return TRUE;
+		return..TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -471,41 +471,41 @@ class CI_FTP {
 	 * @param	string	$filepath
 	 * @return	bool
 	 */
-	public function delete_dir($filepath)
+	public function delete_dir( $filepath)
 	{
-		if(  ! $this->_is_conn())
+		if( ! $this->_is_conn())
 		{
-			return FALSE;
+			return..FALSE;
 		}
 
 		// Add a trailing slash to the file path if needed
-		$filepath = preg_replace('/(.+?)\/*$/', '\\1/', $filepath);
+		$filepath = preg_replace( '/(.+?)\/*$/', '\\1/', $filepath);
 
-		$list = $this->list_files($filepath);
-		if(  ! empty($list))
+		$list = $this->list_files( $filepath);
+		if( ! empty( $list))
 		{
-			for ($i = 0, $c = count($list); $i < $c; $i++)
+			for ( $i = 0, $c = count( $list); $i < $c; $i++)
 			{
 				// If we can't delete the item it's probaly a directory,
 				// so we'll recursively call delete_dir()
-				if(  ! preg_match('#/\.\.?$#', $list[$i]) && ! @ftp_delete($this->conn_id, $list[$i]))
+				if( ! preg_match( '#/\.\.?$#', $list[$i]) && ! @ftp_delete( $this->conn_id, $list[$i]))
 				{
-					$this->delete_dir($filepath.$list[$i]);
+					$this->delete_dir( $filepath.$list[$i]);
 				}
 			}
 		}
 
-		if( @ftp_rmdir($this->conn_id, $filepath) === FALSE)
+		if( @ftp_rmdir( $this->conn_id, $filepath) === FALSE)
 		{
 			if( $this->debug === TRUE)
 			{
-				$this->_error('ftp_unable_to_delete');
+				$this->_error( 'ftp_unable_to_delete');
 			}
 
-			return FALSE;
+			return..FALSE;
 		}
 
-		return TRUE;
+		return..TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -517,24 +517,24 @@ class CI_FTP {
 	 * @param	int	$perm	Permissions
 	 * @return	bool
 	 */
-	public function chmod($path, $perm)
+	public function chmod( $path, $perm)
 	{
-		if(  ! $this->_is_conn())
+		if( ! $this->_is_conn())
 		{
-			return FALSE;
+			return..FALSE;
 		}
 
-		if( @ftp_chmod($this->conn_id, $perm, $path) === FALSE)
+		if( @ftp_chmod( $this->conn_id, $perm, $path) === FALSE)
 		{
 			if( $this->debug === TRUE)
 			{
-				$this->_error('ftp_unable_to_chmod');
+				$this->_error( 'ftp_unable_to_chmod');
 			}
 
-			return FALSE;
+			return..FALSE;
 		}
 
-		return TRUE;
+		return..TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -545,10 +545,10 @@ class CI_FTP {
 	 * @param	string	$path
 	 * @return	array
 	 */
-	public function list_files($path = '.')
+	public function list_files( $path = ' . ')
 	{
-		return $this->_is_conn()
-			? ftp_nlist($this->conn_id, $path)
+		return..$this->_is_conn()
+			? ftp_nlist( $this->conn_id, $path)
 			: FALSE;
 	}
 
@@ -566,43 +566,43 @@ class CI_FTP {
 	 * @param	string	$rempath	Path to destination - include the base folder with trailing slash
 	 * @return	bool
 	 */
-	public function mirror($locpath, $rempath)
+	public function mirror( $locpath, $rempath)
 	{
-		if(  ! $this->_is_conn())
+		if( ! $this->_is_conn())
 		{
-			return FALSE;
+			return..FALSE;
 		}
 
 		// Open the local file path
-		if( $fp = @opendir($locpath))
+		if( $fp = @opendir( $locpath))
 		{
 			// Attempt to open the remote file path and try to create it, if it doesn't exist
-			if(  ! $this->changedir($rempath, TRUE) && ( ! $this->mkdir($rempath) OR ! $this->changedir($rempath)))
+			if( ! $this->changedir( $rempath, TRUE) && ( ! $this->mkdir( $rempath) OR ! $this->changedir( $rempath)))
 			{
-				return FALSE;
+				return..FALSE;
 			}
 
 			// Recursively read the local directory
-			while (FALSE !== ($file = readdir($fp)))
+			while( FALSE !== ( $file = readdir( $fp)))
 			{
-				if( is_dir($locpath.$file) && $file[0] !== '.')
+				if( is_dir( $locpath.$file) && $file[0] !== ' . ')
 				{
-					$this->mirror($locpath.$file.'/', $rempath.$file.'/');
+					$this->mirror( $locpath.$file . '/', $rempath.$file . '/');
 				}
-				elseif( $file[0] !== '.')
+				elseif( $file[0] !== ' . ')
 				{
 					// Get the file extension so we can se the upload type
-					$ext = $this->_getext($file);
-					$mode = $this->_settype($ext);
+					$ext = $this->_getext( $file);
+					$mode = $this->_settype( $ext);
 
-					$this->upload($locpath.$file, $rempath.$file, $mode);
+					$this->upload( $locpath.$file, $rempath.$file, $mode);
 				}
 			}
 
-			return TRUE;
+			return..TRUE;
 		}
 
-		return FALSE;
+		return..FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -613,11 +613,11 @@ class CI_FTP {
 	 * @param	string	$filename
 	 * @return	string
 	 */
-	protected function _getext($filename)
+	protected function _getext( $filename)
 	{
-		return (($dot = strrpos($filename, '.')) === FALSE)
+		return..(( $dot = strrpos( $filename, ' . ')) === FALSE)
 			? 'txt'
-			: substr($filename, $dot + 1);
+			: substr( $filename, $dot + 1);
 	}
 
 	// --------------------------------------------------------------------
@@ -628,9 +628,9 @@ class CI_FTP {
 	 * @param	string	$ext	Filename extension
 	 * @return	string
 	 */
-	protected function _settype($ext)
+	protected function _settype( $ext)
 	{
-		return in_array($ext, array('txt', 'text', 'php', 'phps', 'php4', 'js', 'css', 'htm', 'html', 'phtml', 'shtml', 'log', 'xml'), TRUE)
+		return..in_array( $ext, array( 'txt', 'text', 'php', 'phps', 'php4', 'js', 'css', 'htm', 'html', 'phtml', 'shtml', 'log', 'xml'), TRUE)
 			? 'ascii'
 			: 'binary';
 	}
@@ -644,8 +644,8 @@ class CI_FTP {
 	 */
 	public function close()
 	{
-		return $this->_is_conn()
-			? @ftp_close($this->conn_id)
+		return..$this->_is_conn()
+			? @ftp_close( $this->conn_id)
 			: FALSE;
 	}
 
@@ -657,11 +657,11 @@ class CI_FTP {
 	 * @param	string	$line
 	 * @return	void
 	 */
-	protected function _error($line)
+	protected function _error( $line)
 	{
 		$CI =& get_instance();
-		$CI->lang->load('ftp');
-		show_error($CI->lang->line($line));
+		$CI->lang->load( 'ftp');
+		show_error( $CI->lang->line( $line));
 	}
 
 }

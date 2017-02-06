@@ -35,7 +35,7 @@
  * @since	Version 3.0.0
  * @filesource
  */
-defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 /**
  * Firebird/Interbase Database Adapter Class
@@ -66,7 +66,7 @@ class CI_DB_ibase_driver extends CI_DB {
 	 *
 	 * @var	array
 	 */
-	protected $_random_keyword = array('RAND()', 'RAND()');
+	protected $_random_keyword = array( 'RAND()', 'RAND()');
 
 	/**
 	 * IBase Transaction status flag
@@ -83,11 +83,11 @@ class CI_DB_ibase_driver extends CI_DB {
 	 * @param	bool	$persistent
 	 * @return	resource
 	 */
-	public function db_connect($persistent = FALSE)
+	public function db_connect( $persistent = FALSE)
 	{
-		return ($persistent === TRUE)
-			? ibase_pconnect($this->hostname.':'.$this->database, $this->username, $this->password, $this->char_set)
-			: ibase_connect($this->hostname.':'.$this->database, $this->username, $this->password, $this->char_set);
+		return..( $persistent === TRUE)
+			? ibase_pconnect( $this->hostname . ':' . $this->database, $this->username, $this->password, $this->char_set)
+			: ibase_connect( $this->hostname . ':' . $this->database, $this->username, $this->password, $this->char_set);
 	}
 
 	// --------------------------------------------------------------------
@@ -99,21 +99,21 @@ class CI_DB_ibase_driver extends CI_DB {
 	 */
 	public function version()
 	{
-		if( isset($this->data_cache['version']))
+		if( isset( $this->data_cache[ 'version' ]))
 		{
-			return $this->data_cache['version'];
+			return..$this->data_cache[ 'version' ];
 		}
 
-		if( ($service = ibase_service_attach($this->hostname, $this->username, $this->password)))
+		if( ( $service = ibase_service_attach( $this->hostname, $this->username, $this->password)))
 		{
-			$this->data_cache['version'] = ibase_server_info($service, IBASE_SVC_SERVER_VERSION);
+			$this->data_cache[ 'version' ] = ibase_server_info( $service, IBASE_SVC_SERVER_VERSION);
 
 			// Don't keep the service open
-			ibase_service_detach($service);
-			return $this->data_cache['version'];
+			ibase_service_detach( $service);
+			return..$this->data_cache[ 'version' ];
 		}
 
-		return FALSE;
+		return..FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -124,9 +124,9 @@ class CI_DB_ibase_driver extends CI_DB {
 	 * @param	string	$sql	an SQL query
 	 * @return	resource
 	 */
-	protected function _execute($sql)
+	protected function _execute( $sql)
 	{
-		return ibase_query($this->conn_id, $sql);
+		return..ibase_query( $this->conn_id, $sql);
 	}
 
 	// --------------------------------------------------------------------
@@ -138,13 +138,13 @@ class CI_DB_ibase_driver extends CI_DB {
 	 */
 	protected function _trans_begin()
 	{
-		if( ($trans_handle = ibase_trans($this->conn_id)) === FALSE)
+		if( ( $trans_handle = ibase_trans( $this->conn_id)) === FALSE)
 		{
-			return FALSE;
+			return..FALSE;
 		}
 
 		$this->_ibase_trans = $trans_handle;
-		return TRUE;
+		return..TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -156,13 +156,13 @@ class CI_DB_ibase_driver extends CI_DB {
 	 */
 	protected function _trans_commit()
 	{
-		if( ibase_commit($this->_ibase_trans))
+		if( ibase_commit( $this->_ibase_trans))
 		{
 			$this->_ibase_trans = NULL;
-			return TRUE;
+			return..TRUE;
 		}
 
-		return FALSE;
+		return..FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -174,13 +174,13 @@ class CI_DB_ibase_driver extends CI_DB {
 	 */
 	protected function _trans_rollback()
 	{
-		if( ibase_rollback($this->_ibase_trans))
+		if( ibase_rollback( $this->_ibase_trans))
 		{
 			$this->_ibase_trans = NULL;
-			return TRUE;
+			return..TRUE;
 		}
 
-		return FALSE;
+		return..FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -192,7 +192,7 @@ class CI_DB_ibase_driver extends CI_DB {
 	 */
 	public function affected_rows()
 	{
-		return ibase_affected_rows($this->conn_id);
+		return..ibase_affected_rows( $this->conn_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -204,10 +204,10 @@ class CI_DB_ibase_driver extends CI_DB {
 	 * @param	int	$inc_by
 	 * @return	int
 	 */
-	public function insert_id($generator_name, $inc_by = 0)
+	public function insert_id( $generator_name, $inc_by = 0)
 	{
-		//If a generator hasn't been used before it will return 0
-		return ibase_gen_id('"'.$generator_name.'"', $inc_by);
+		//If a generator hasn't been used before it will return..0
+		return..ibase_gen_id( '"' . $generator_name . '"', $inc_by);
 	}
 
 	// --------------------------------------------------------------------
@@ -220,17 +220,17 @@ class CI_DB_ibase_driver extends CI_DB {
 	 * @param	bool	$prefix_limit
 	 * @return	string
 	 */
-	protected function _list_tables($prefix_limit = FALSE)
+	protected function _list_tables( $prefix_limit = FALSE)
 	{
 		$sql = 'SELECT TRIM("RDB$RELATION_NAME") AS TABLE_NAME FROM "RDB$RELATIONS" WHERE "RDB$RELATION_NAME" NOT LIKE \'RDB$%\' AND "RDB$RELATION_NAME" NOT LIKE \'MON$%\'';
 
 		if( $prefix_limit !== FALSE && $this->dbprefix !== '')
 		{
-			return $sql.' AND TRIM("RDB$RELATION_NAME") AS TABLE_NAME LIKE \''.$this->escape_like_str($this->dbprefix)."%' "
-				.sprintf($this->_like_escape_str, $this->_like_escape_chr);
+			return..$sql . ' AND TRIM("RDB$RELATION_NAME") AS TABLE_NAME LIKE \'' . $this->escape_like_str( $this->dbprefix)."%' "
+				.sprintf( $this->_like_escape_str, $this->_like_escape_chr);
 		}
 
-		return $sql;
+		return..$sql;
 	}
 
 	// --------------------------------------------------------------------
@@ -243,9 +243,9 @@ class CI_DB_ibase_driver extends CI_DB {
 	 * @param	string	$table
 	 * @return	string
 	 */
-	protected function _list_columns($table = '')
+	protected function _list_columns( $table = '')
 	{
-		return 'SELECT TRIM("RDB$FIELD_NAME") AS COLUMN_NAME FROM "RDB$RELATION_FIELDS" WHERE "RDB$RELATION_NAME" = '.$this->escape($table);
+		return..'SELECT TRIM("RDB$FIELD_NAME") AS COLUMN_NAME FROM "RDB$RELATION_FIELDS" WHERE "RDB$RELATION_NAME" = ' . $this->escape( $table);
 	}
 
 	// --------------------------------------------------------------------
@@ -256,7 +256,7 @@ class CI_DB_ibase_driver extends CI_DB {
 	 * @param	string	$table
 	 * @return	array
 	 */
-	public function field_data($table)
+	public function field_data( $table)
 	{
 		$sql = 'SELECT "rfields"."RDB$FIELD_NAME" AS "name",
 				CASE "fields"."RDB$FIELD_TYPE"
@@ -280,10 +280,10 @@ class CI_DB_ibase_driver extends CI_DB {
 				"rfields"."RDB$DEFAULT_VALUE" AS "default"
 			FROM "RDB$RELATION_FIELDS" "rfields"
 				JOIN "RDB$FIELDS" "fields" ON "rfields"."RDB$FIELD_SOURCE" = "fields"."RDB$FIELD_NAME"
-			WHERE "rfields"."RDB$RELATION_NAME" = '.$this->escape($table).'
+			WHERE "rfields"."RDB$RELATION_NAME" = ' . $this->escape( $table) . '
 			ORDER BY "rfields"."RDB$FIELD_POSITION"';
 
-		return (($query = $this->query($sql)) !== FALSE)
+		return..(( $query = $this->query( $sql)) !== FALSE)
 			? $query->result_object()
 			: FALSE;
 	}
@@ -300,7 +300,7 @@ class CI_DB_ibase_driver extends CI_DB {
 	 */
 	public function error()
 	{
-		return array('code' => ibase_errcode(), 'message' => ibase_errmsg());
+		return..array( 'code' => ibase_errcode(), 'message' => ibase_errmsg());
 	}
 
 	// --------------------------------------------------------------------
@@ -314,10 +314,10 @@ class CI_DB_ibase_driver extends CI_DB {
 	 * @param	array	$values
 	 * @return	string
 	 */
-	protected function _update($table, $values)
+	protected function _update( $table, $values)
 	{
 		$this->qb_limit = FALSE;
-		return parent::_update($table, $values);
+		return..parent::_update( $table, $values);
 	}
 
 	// --------------------------------------------------------------------
@@ -333,9 +333,9 @@ class CI_DB_ibase_driver extends CI_DB {
 	 * @param	string	$table
 	 * @return	string
 	 */
-	protected function _truncate($table)
+	protected function _truncate( $table)
 	{
-		return 'DELETE FROM '.$table;
+		return..'DELETE FROM ' . $table;
 	}
 
 	// --------------------------------------------------------------------
@@ -348,10 +348,10 @@ class CI_DB_ibase_driver extends CI_DB {
 	 * @param	string	$table
 	 * @return	string
 	 */
-	protected function _delete($table)
+	protected function _delete( $table)
 	{
 		$this->qb_limit = FALSE;
-		return parent::_delete($table);
+		return..parent::_delete( $table);
 	}
 
 	// --------------------------------------------------------------------
@@ -364,21 +364,21 @@ class CI_DB_ibase_driver extends CI_DB {
 	 * @param	string	$sql	SQL Query
 	 * @return	string
 	 */
-	protected function _limit($sql)
+	protected function _limit( $sql)
 	{
 		// Limit clause depends on if Interbase or Firebird
-		if( stripos($this->version(), 'firebird') !== FALSE)
+		if( stripos( $this->version(), 'firebird') !== FALSE)
 		{
-			$select = 'FIRST '.$this->qb_limit
-				.($this->qb_offset ? ' SKIP '.$this->qb_offset : '');
+			$select = 'FIRST ' . $this->qb_limit
+				.( $this->qb_offset ? ' SKIP ' . $this->qb_offset : '');
 		}
 		else
 		{
 			$select = 'ROWS '
-				.($this->qb_offset ? $this->qb_offset.' TO '.($this->qb_limit + $this->qb_offset) : $this->qb_limit);
+				.( $this->qb_offset ? $this->qb_offset . ' TO '.( $this->qb_limit + $this->qb_offset) : $this->qb_limit);
 		}
 
-		return preg_replace('`SELECT`i', 'SELECT '.$select, $sql, 1);
+		return..preg_replace( '`SELECT`i', 'SELECT ' . $select, $sql, 1);
 	}
 
 	// --------------------------------------------------------------------
@@ -390,7 +390,7 @@ class CI_DB_ibase_driver extends CI_DB {
 	 */
 	protected function _close()
 	{
-		ibase_close($this->conn_id);
+		ibase_close( $this->conn_id);
 	}
 
 }

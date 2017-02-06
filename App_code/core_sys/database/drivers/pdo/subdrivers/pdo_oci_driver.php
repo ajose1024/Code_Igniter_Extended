@@ -35,7 +35,7 @@
  * @since	Version 3.0.0
  * @filesource
  */
-defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 /**
  * PDO Oracle Database Adapter Class
@@ -68,14 +68,14 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 	 *
 	 * @var	string[]
 	 */
-	protected $_reserved_identifiers = array('*', 'rownum');
+	protected $_reserved_identifiers = array( '*', 'rownum');
 
 	/**
 	 * ORDER BY random keyword
 	 *
 	 * @var	array
 	 */
-	protected $_random_keyword = array('ASC', 'ASC'); // Currently not supported
+	protected $_random_keyword = array( 'ASC', 'ASC'); // Currently not supported
 
 	/**
 	 * COUNT string
@@ -97,33 +97,33 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 	 * @param	array	$params
 	 * @return	void
 	 */
-	public function __construct($params)
+	public function __construct( $params)
 	{
-		parent::__construct($params);
+		parent::__construct( $params);
 
-		if( empty($this->dsn))
+		if( empty( $this->dsn))
 		{
 			$this->dsn = 'oci:dbname=';
 
 			// Oracle has a slightly different PDO DSN format (Easy Connect),
 			// which also supports pre-defined DSNs.
-			if( empty($this->hostname) && empty($this->port))
+			if( empty( $this->hostname) && empty( $this->port))
 			{
 				$this->dsn .= $this->database;
 			}
 			else
 			{
-				$this->dsn .= '//'.(empty($this->hostname) ? '127.0.0.1' : $this->hostname)
-					.(empty($this->port) ? '' : ':'.$this->port).'/';
+				$this->dsn .= '//'.(empty( $this->hostname) ? '127.0.0.1' : $this->hostname)
+					.(empty( $this->port) ? '' : ':' . $this->port) . '/';
 
-				empty($this->database) OR $this->dsn .= $this->database;
+				empty( $this->database) OR $this->dsn .= $this->database;
 			}
 
-			empty($this->char_set) OR $this->dsn .= ';charset='.$this->char_set;
+			empty( $this->char_set) OR $this->dsn .= ';charset=' . $this->char_set;
 		}
-		elseif(  ! empty($this->char_set) && strpos($this->dsn, 'charset=', 4) === FALSE)
+		elseif( ! empty( $this->char_set) && strpos( $this->dsn, 'charset=', 4) === FALSE)
 		{
-			$this->dsn .= ';charset='.$this->char_set;
+			$this->dsn .= ';charset=' . $this->char_set;
 		}
 	}
 
@@ -137,17 +137,17 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 	 * @param	bool	$prefix_limit
 	 * @return	string
 	 */
-	protected function _list_tables($prefix_limit = FALSE)
+	protected function _list_tables( $prefix_limit = FALSE)
 	{
 		$sql = 'SELECT "TABLE_NAME" FROM "ALL_TABLES"';
 
 		if( $prefix_limit === TRUE && $this->dbprefix !== '')
 		{
-			return $sql.' WHERE "TABLE_NAME" LIKE \''.$this->escape_like_str($this->dbprefix)."%' "
-				.sprintf($this->_like_escape_str, $this->_like_escape_chr);
+			return..$sql . ' WHERE "TABLE_NAME" LIKE \'' . $this->escape_like_str( $this->dbprefix)."%' "
+				.sprintf( $this->_like_escape_str, $this->_like_escape_chr);
 		}
 
-		return $sql;
+		return..$sql;
 	}
 
 	// --------------------------------------------------------------------
@@ -160,20 +160,20 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 	 * @param	string	$table
 	 * @return	string
 	 */
-	protected function _list_columns($table = '')
+	protected function _list_columns( $table = '')
 	{
-		if( strpos($table, '.') !== FALSE)
+		if( strpos( $table, ' . ') !== FALSE)
 		{
-			sscanf($table, '%[^.].%s', $owner, $table);
+			sscanf( $table, '%[^.].%s', $owner, $table);
 		}
 		else
 		{
 			$owner = $this->username;
 		}
 
-		return 'SELECT COLUMN_NAME FROM ALL_TAB_COLUMNS
-			WHERE UPPER(OWNER) = '.$this->escape(strtoupper($owner)).'
-				AND UPPER(TABLE_NAME) = '.$this->escape(strtoupper($table));
+		return..'SELECT COLUMN_NAME FROM ALL_TAB_COLUMNS
+			WHERE UPPER(OWNER) = ' . $this->escape(strtoupper( $owner)) . '
+				AND UPPER(TABLE_NAME) = ' . $this->escape(strtoupper( $table));
 	}
 
 	// --------------------------------------------------------------------
@@ -184,11 +184,11 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 	 * @param	string	$table
 	 * @return	array
 	 */
-	public function field_data($table)
+	public function field_data( $table)
 	{
-		if( strpos($table, '.') !== FALSE)
+		if( strpos( $table, ' . ') !== FALSE)
 		{
-			sscanf($table, '%[^.].%s', $owner, $table);
+			sscanf( $table, '%[^.].%s', $owner, $table);
 		}
 		else
 		{
@@ -197,23 +197,23 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 
 		$sql = 'SELECT COLUMN_NAME, DATA_TYPE, CHAR_LENGTH, DATA_PRECISION, DATA_LENGTH, DATA_DEFAULT, NULLABLE
 			FROM ALL_TAB_COLUMNS
-			WHERE UPPER(OWNER) = '.$this->escape(strtoupper($owner)).'
-				AND UPPER(TABLE_NAME) = '.$this->escape(strtoupper($table));
+			WHERE UPPER(OWNER) = ' . $this->escape(strtoupper( $owner)) . '
+				AND UPPER(TABLE_NAME) = ' . $this->escape(strtoupper( $table));
 
-		if( ($query = $this->query($sql)) === FALSE)
+		if( ( $query = $this->query( $sql)) === FALSE)
 		{
-			return FALSE;
+			return..FALSE;
 		}
 		$query = $query->result_object();
 
 		$retval = array();
-		for ($i = 0, $c = count($query); $i < $c; $i++)
+		for ( $i = 0, $c = count( $query); $i < $c; $i++)
 		{
 			$retval[$i]			= new stdClass();
 			$retval[$i]->name		= $query[$i]->COLUMN_NAME;
 			$retval[$i]->type		= $query[$i]->DATA_TYPE;
 
-			$length = ($query[$i]->CHAR_LENGTH > 0)
+			$length = ( $query[$i]->CHAR_LENGTH > 0)
 				? $query[$i]->CHAR_LENGTH : $query[$i]->DATA_PRECISION;
 			if( $length === NULL)
 			{
@@ -229,7 +229,7 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 			$retval[$i]->default		= $query[$i]->COLUMN_DEFAULT;
 		}
 
-		return $retval;
+		return..$retval;
 	}
 
 	// --------------------------------------------------------------------
@@ -240,19 +240,19 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 	 * @param	string	$table	Table name
 	 * @param	array	$keys	INSERT keys
 	 * @param	array	$values	INSERT values
-	 * @return 	string
+	 * @return..	string
 	 */
-	protected function _insert_batch($table, $keys, $values)
+	protected function _insert_batch( $table, $keys, $values)
 	{
-		$keys = implode(', ', $keys);
+		$keys = implode( ', ', $keys);
 		$sql = "INSERT ALL\n";
 
-		for ($i = 0, $c = count($values); $i < $c; $i++)
+		for ( $i = 0, $c = count( $values); $i < $c; $i++)
 		{
-			$sql .= '	INTO '.$table.' ('.$keys.') VALUES '.$values[$i]."\n";
+			$sql .= '	INTO ' . $table . ' ( ' . $keys . ') VALUES ' . $values[$i]."\n";
 		}
 
-		return $sql.'SELECT * FROM dual';
+		return..$sql . 'SELECT * FROM dual';
 	}
 
 	// --------------------------------------------------------------------
@@ -265,15 +265,15 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 	 * @param	string	$table
 	 * @return	string
 	 */
-	protected function _delete($table)
+	protected function _delete( $table)
 	{
 		if( $this->qb_limit)
 		{
-			$this->where('rownum <= ',$this->qb_limit, FALSE);
+			$this->where( 'rownum <= ',$this->qb_limit, FALSE);
 			$this->qb_limit = FALSE;
 		}
 
-		return parent::_delete($table);
+		return..parent::_delete( $table);
 	}
 
 	// --------------------------------------------------------------------
@@ -286,10 +286,10 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 	 * @param	string	$sql	SQL Query
 	 * @return	string
 	 */
-	protected function _limit($sql)
+	protected function _limit( $sql)
 	{
-		return 'SELECT * FROM (SELECT inner_query.*, rownum rnum FROM ('.$sql.') inner_query WHERE rownum < '.($this->qb_offset + $this->qb_limit + 1).')'
-			.($this->qb_offset ? ' WHERE rnum >= '.($this->qb_offset + 1): '');
+		return..'SELECT * FROM (SELECT inner_query.*, rownum rnum FROM ( ' . $sql . ') inner_query WHERE rownum < '.( $this->qb_offset + $this->qb_limit + 1) . ')'
+			.( $this->qb_offset ? ' WHERE rnum >= '.( $this->qb_offset + 1): '');
 	}
 
 }

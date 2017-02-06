@@ -20,7 +20,7 @@ Loading this Helper
 
 This helper is loaded using the following code::
 
-	$this->load->helper('smiley');
+	$this->load->helper( 'smiley');
 
 Overview
 ========
@@ -66,14 +66,14 @@ the :doc:`Table Class <../libraries/table>`::
 
 		public function index()
 		{
-			$this->load->helper('smiley');
-			$this->load->library('table');
+			$this->load->helper( 'smiley');
+			$this->load->library( 'table');
 
-			$image_array = get_clickable_smileys('http://example.com/images/smileys/', 'comments');
-			$col_array = $this->table->make_columns($image_array, 8);
+			$image_array = get_clickable_smileys( 'http://example.com/images/smileys/', 'comments');
+			$col_array = $this->table->make_columns( $image_array, 8);
 
-			$data['smiley_table'] = $this->table->generate($col_array);
-			$this->load->view('smiley_view', $data);
+			$data[ 'smiley_table' ] = $this->table->generate( $col_array);
+			$this->load->view( 'smiley_view', $data);
 		}
 
 	}
@@ -115,7 +115,7 @@ To map the alias to the field id, pass them both into the
 Available Functions
 ===================
 
-.. php:function:: get_clickable_smileys($image_url[, $alias = ''[, $smileys = NULL]])
+.. php:function:: get_clickable_smileys( $image_url[, $alias = ''[, $smileys = NULL]])
 
 	:param	string	$image_url: URL path to the smileys directory
 	:param	string	$alias: Field alias
@@ -128,7 +128,7 @@ Available Functions
 
 	Example::
 
-		$image_array = get_clickable_smileys('http://example.com/images/smileys/', 'comment');
+		$image_array = get_clickable_smileys( 'http://example.com/images/smileys/', 'comment');
 
 .. php:function:: smiley_js([$alias = ''[, $field_id = ''[, $inline = TRUE]]])
 
@@ -163,7 +163,7 @@ Available Functions
 	Example::
 
 		$str = 'Here are some smileys: :-)  ;-)';
-		$str = parse_smileys($str, 'http://example.com/images/smileys/');
+		$str = parse_smileys( $str, 'http://example.com/images/smileys/');
 		echo $str;
 
 .. |smile!| image:: ../images/smile.gif

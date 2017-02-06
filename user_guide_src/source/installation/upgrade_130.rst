@@ -80,7 +80,7 @@ Open your application/config/config.php file and add these new items::
     | example.com/index.php/products/view/shoes.html
     |
     */
-    $config['url_suffix'] = "";
+    $config[ 'url_suffix' ] = "";
 
 
     /*
@@ -105,9 +105,9 @@ Open your application/config/config.php file and add these new items::
     | example.com/index.php?c=controller&m=function
     |
     */
-    $config['enable_query_strings'] = FALSE;
-    $config['controller_trigger'] = 'c';
-    $config['function_trigger'] = 'm';
+    $config[ 'enable_query_strings' ] = FALSE;
+    $config[ 'controller_trigger' ] = 'c';
+    $config[ 'function_trigger' ] = 'm';
 
 Step 5: Update your database.php file
 =====================================
@@ -115,8 +115,8 @@ Step 5: Update your database.php file
 Open your application/config/database.php file and add these new items::
 
 
-    $db['default']['dbprefix'] = "";
-    $db['default']['active_r'] = TRUE;
+    $db[ 'default' ][ 'dbprefix' ] = "";
+    $db[ 'default' ][ 'active_r' ] = TRUE;
 
 Step 6: Update your user guide
 ==============================

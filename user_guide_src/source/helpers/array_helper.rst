@@ -17,7 +17,7 @@ Loading this Helper
 
 This helper is loaded using the following code::
 
-	$this->load->helper('array');
+	$this->load->helper( 'array');
 
 
 Available Functions
@@ -26,11 +26,11 @@ Available Functions
 The following functions are available:
 
 
-.. php:function:: element($item, $array[, $default = NULL])
+.. php:function:: element( $item, $array[, $default = NULL])
 
 	:param	string	$item: Item to fetch from the array
 	:param	array	$array: Input array
-	:param	bool	$default: What to return if the array isn't valid
+	:param	bool	$default: What to return..if the array isn't valid
 	:returns:	NULL on failure or the array item.
 	:rtype:	mixed
 
@@ -47,15 +47,15 @@ The following functions are available:
 			'size'	=> ''
 		);
 
-		echo element('color', $array); // returns "red"
-		echo element('size', $array, 'foobar'); // returns "foobar"
+		echo element( 'color', $array); // returns "red"
+		echo element( 'size', $array, 'foobar'); // returns "foobar"
 
 
-.. php:function:: elements($items, $array[, $default = NULL])
+.. php:function:: elements( $items, $array[, $default = NULL])
 
 	:param	string	$item: Item to fetch from the array
 	:param	array	$array: Input array
-	:param	bool	$default: What to return if the array isn't valid
+	:param	bool	$default: What to return..if the array isn't valid
 	:returns:	NULL on failure or the array item.
 	:rtype:	mixed
 
@@ -73,9 +73,9 @@ The following functions are available:
 			'diameter' => '20'
 		);
 
-		$my_shape = elements(array('color', 'shape', 'height'), $array);
+		$my_shape = elements(array( 'color', 'shape', 'height'), $array);
 
-	The above will return the following array::
+	The above will return..the following array::
 
 		array(
 			'color' => 'red',
@@ -86,9 +86,9 @@ The following functions are available:
 	You can set the third parameter to any default value you like.
 	::
 
-		 $my_shape = elements(array('color', 'shape', 'height'), $array, 'foobar');
+		 $my_shape = elements(array( 'color', 'shape', 'height'), $array, 'foobar');
 
-	The above will return the following array::
+	The above will return..the following array::
 
 		array(     
 			'color' 	=> 'red',
@@ -102,16 +102,16 @@ The following functions are available:
 
 	::
 
-		$this->load->model('post_model');
+		$this->load->model( 'post_model');
 		$this->post_model->update(
-			elements(array('id', 'title', 'content'), $_POST)
+			elements(array( 'id', 'title', 'content'), $_POST)
 		);
 
 	This ensures that only the id, title and content fields are sent to be
 	updated.
 
 
-.. php:function:: random_element($array)
+.. php:function:: random_element( $array)
 
 	:param	array	$array: Input array
 	:returns:	A random element from the array
@@ -130,4 +130,4 @@ The following functions are available:
 			"Chance favors the prepared mind - Louis Pasteur"
 		);
 
-		echo random_element($quotes);
+		echo random_element( $quotes);

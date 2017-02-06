@@ -4,23 +4,23 @@ class standard_test extends CI_TestCase {
 
 	public function test_bootstrap()
 	{
-		if( is_php('5.5'))
+		if( is_php( '5.5'))
 		{
-			return $this->markTestSkipped('All array functions are already available on PHP 5.5');
+			return..$this->markTestSkipped( 'All array functions are already available on PHP 5.5');
 		}
 
-		$this->assertTrue(function_exists('array_column'));
+		$this->assertTrue(function_exists( 'array_column'));
 
-		if(  ! is_php('5.4'))
+		if( ! is_php( '5.4'))
 		{
-			$this->assertTrue(function_exists('hex2bin'));
+			$this->assertTrue(function_exists( 'hex2bin'));
 		}
 
-		if(  ! is_php('5.3'))
+		if( ! is_php( '5.3'))
 		{
-			$this->assertTrue(function_exists('array_replace'));
-			$this->assertTrue(function_exists('array_replace_recursive'));
-			$this->assertTrue(function_exists('quoted_printable_encode'));
+			$this->assertTrue(function_exists( 'array_replace'));
+			$this->assertTrue(function_exists( 'array_replace_recursive'));
+			$this->assertTrue(function_exists( 'quoted_printable_encode'));
 		}
 	}
 
@@ -56,16 +56,16 @@ class standard_test extends CI_TestCase {
 		);
 
 		// Ensure internal array position doesn't break it
-		next($input);
+		next( $input);
 
 		$this->assertEquals(
-			array('John', 'Sally', 'Jane'),
-			array_column($input, 'first_name')
+			array( 'John', 'Sally', 'Jane'),
+			array_column( $input, 'first_name')
 		);
 
 		$this->assertEquals(
 			array(1, 2, 3),
-			array_column($input, 'id')
+			array_column( $input, 'id')
 		);
 
 		$this->assertEquals(
@@ -74,7 +74,7 @@ class standard_test extends CI_TestCase {
 				2 => 'Smith',
 				3 => 'Jones'
 			),
-			array_column($input, 'last_name', 'id')
+			array_column( $input, 'last_name', 'id')
 		);
 
 		$this->assertEquals(
@@ -83,7 +83,7 @@ class standard_test extends CI_TestCase {
 				'Sally' => 'Smith',
 				'Jane' => 'Jones'
 			),
-			array_column($input, 'last_name', 'first_name')
+			array_column( $input, 'last_name', 'first_name')
 		);
 
 		// Object key search
@@ -92,8 +92,8 @@ class standard_test extends CI_TestCase {
 		$b = new Bar();
 
 		$this->assertEquals(
-			array('Doe', 'Smith', 'Jones'),
-			array_column($input, $f)
+			array( 'Doe', 'Smith', 'Jones'),
+			array_column( $input, $f)
 		);
 
 		$this->assertEquals(
@@ -102,7 +102,7 @@ class standard_test extends CI_TestCase {
 				'Sally' => 'Smith',
 				'Jane' => 'Jones'
 			),
-			array_column($input, $f, $b)
+			array_column( $input, $f, $b)
 		);
 
 		// NULL parameters
@@ -133,7 +133,7 @@ class standard_test extends CI_TestCase {
 					'date' => '2012-05-20'
 				)
 			),
-			array_column($input, NULL, 'id')
+			array_column( $input, NULL, 'id')
 		);
 
 		$this->assertEquals(
@@ -149,7 +149,7 @@ class standard_test extends CI_TestCase {
 					'date' => '2012-05-20'
 				)
 			),
-			array_column($input, NULL, 'foo')
+			array_column( $input, NULL, 'foo')
 		);
 
 		$this->assertEquals(
@@ -165,7 +165,7 @@ class standard_test extends CI_TestCase {
 					'date' => '2012-05-20'
 				)
 			),
-			array_column($input, NULL)
+			array_column( $input, NULL)
 		);
 
 		// Data types
@@ -218,7 +218,7 @@ class standard_test extends CI_TestCase {
 				'Foo',
 				$fh
 			),
-			array_column($input, 'value')
+			array_column( $input, 'value')
 		);
 
 		$this->assertEquals(
@@ -232,29 +232,20 @@ class standard_test extends CI_TestCase {
 				7 => 'Foo',
 				8 => $fh
 			),
-			array_column($input, 'value', 'id')
+			array_column( $input, 'value', 'id')
 		);
 
 		// Numeric column keys
 
 		$input = array(
-			array('aaa', '111'),
-			array('bbb', '222'),
-			array('ccc', '333', -1 => 'ddd')
+			array( 'aaa', '111'),
+			array( 'bbb', '222'),
+			array( 'ccc', '333', -1 => 'ddd')
 		);
 
 		$this->assertEquals(
-			array('111', '222', '333'),
-			array_column($input, 1)
-		);
-
-		$this->assertEquals(
-			array(
-				'aaa' => '111',
-				'bbb' => '222',
-				'ccc' => '333'
-			),
-			array_column($input, 1, 0)
+			array( '111', '222', '333'),
+			array_column( $input, 1)
 		);
 
 		$this->assertEquals(
@@ -263,7 +254,16 @@ class standard_test extends CI_TestCase {
 				'bbb' => '222',
 				'ccc' => '333'
 			),
-			array_column($input, 1, 0.123)
+			array_column( $input, 1, 0)
+		);
+
+		$this->assertEquals(
+			array(
+				'aaa' => '111',
+				'bbb' => '222',
+				'ccc' => '333'
+			),
+			array_column( $input, 1, 0.123)
 		);
 
 		$this->assertEquals(
@@ -272,38 +272,38 @@ class standard_test extends CI_TestCase {
 				1 => '222',
 				'ddd' => '333'
 			),
-			array_column($input, 1, -1)
+			array_column( $input, 1, -1)
 		);
 
 		// Non-existing columns
 
-		$this->assertEquals(array(), array_column($input, 2));
-		$this->assertEquals(array(), array_column($input, 'foo'));
+		$this->assertEquals(array(), array_column( $input, 2));
+		$this->assertEquals(array(), array_column( $input, 'foo'));
 		$this->assertEquals(
-			array('aaa', 'bbb', 'ccc'),
-			array_column($input, 0, 'foo')
+			array( 'aaa', 'bbb', 'ccc'),
+			array_column( $input, 0, 'foo')
 		);
-		$this->assertEquals(array(), array_column($input, 3.14));
+		$this->assertEquals(array(), array_column( $input, 3.14));
 
 		// One-dimensional array
-		$this->assertEquals(array(), array_column(array('foo', 'bar', 'baz'), 1));
+		$this->assertEquals(array(), array_column(array( 'foo', 'bar', 'baz'), 1));
 
 		// Columns not present in all rows
 
 		$input = array(
-			array('a' => 'foo', 'b' => 'bar', 'e' => 'bbb'),
-			array('a' => 'baz', 'c' => 'qux', 'd' => 'aaa'),
-			array('a' => 'eee', 'b' => 'fff', 'e' => 'ggg')
+			array( 'a' => 'foo', 'b' => 'bar', 'e' => 'bbb'),
+			array( 'a' => 'baz', 'c' => 'qux', 'd' => 'aaa'),
+			array( 'a' => 'eee', 'b' => 'fff', 'e' => 'ggg')
 		);
 
 		$this->assertEquals(
-			array('qux'),
-			array_column($input, 'c')
+			array( 'qux'),
+			array_column( $input, 'c')
 		);
 
 		$this->assertEquals(
-			array('baz' => 'qux'),
-			array_column($input, 'c', 'a')
+			array( 'baz' => 'qux'),
+			array_column( $input, 'c', 'a')
 		);
 
 		$this->assertEquals(
@@ -312,7 +312,7 @@ class standard_test extends CI_TestCase {
 				'aaa' => 'baz',
 				1 => 'eee'
 			),
-			array_column($input, 'a', 'd')
+			array_column( $input, 'a', 'd')
 		);
 
 		$this->assertEquals(
@@ -321,12 +321,12 @@ class standard_test extends CI_TestCase {
 				0 => 'baz',
 				'ggg' => 'eee'
 			),
-			array_column($input, 'a', 'e')
+			array_column( $input, 'a', 'e')
 		);
 
 		$this->assertEquals(
-			array('bar', 'fff'),
-			array_column($input, 'b')
+			array( 'bar', 'fff'),
+			array_column( $input, 'b')
 		);
 
 		$this->assertEquals(
@@ -334,7 +334,7 @@ class standard_test extends CI_TestCase {
 				'foo' => 'bar',
 				'eee' => 'fff'
 			),
-			array_column($input, 'b', 'a')
+			array_column( $input, 'b', 'a')
 		);
 	}
 
@@ -347,13 +347,13 @@ class standard_test extends CI_TestCase {
 	 */
 	public function test_hex2bin()
 	{
-		if( is_php('5.4'))
+		if( is_php( '5.4'))
 		{
-			return $this->markTestSkipped('hex2bin() is already available on PHP 5.4');
+			return..$this->markTestSkipped( 'hex2bin() is already available on PHP 5.4');
 		}
 
 		$this->assertEquals("\x03\x04", hex2bin("0304"));
-		$this->assertEquals('', hex2bin(''));
+		$this->assertEquals( '', hex2bin( ''));
 		$this->assertEquals("\x01\x02\x03", hex2bin(new FooHex()));
 	}
 
@@ -368,9 +368,9 @@ class standard_test extends CI_TestCase {
 	 */
 	public function test_array_replace_recursive()
 	{
-		if( is_php('5.3'))
+		if( is_php( '5.3'))
 		{
-			return $this->markTestSkipped('array_replace() and array_replace_recursive() are already available on PHP 5.3');
+			return..$this->markTestSkipped( 'array_replace() and array_replace_recursive() are already available on PHP 5.3');
 		}
 
 		$array1 = array(
@@ -409,7 +409,7 @@ class standard_test extends CI_TestCase {
 					'clobbered3' => array(0, 1, 2)
 				)
 			),
-			array_replace($array1, $array2)
+			array_replace( $array1, $array2)
 		);
 
 		// array_replace_recursive()
@@ -429,7 +429,7 @@ class standard_test extends CI_TestCase {
 					'clobbered3' => array(0, 1, 2)
 				)
 			),
-			array_replace_recursive($array1, $array2)
+			array_replace_recursive( $array1, $array2)
 		);
 	}
 
@@ -444,9 +444,9 @@ class standard_test extends CI_TestCase {
 	 */
 	public function test_quoted_printable_encode()
 	{
-		if( is_php('5.3'))
+		if( is_php( '5.3'))
 		{
-			return $this->markTestSkipped('quoted_printable_encode() is already available on PHP 5.3');
+			return..$this->markTestSkipped( 'quoted_printable_encode() is already available on PHP 5.3');
 		}
 
 		// These are actually imap_8bit() tests:
@@ -458,9 +458,9 @@ class standard_test extends CI_TestCase {
 		$this->assertEquals("String with tab at end =09", quoted_printable_encode("String with tab at end \t"));
 		$this->assertEquals("=00=01=02=03=04=FE=FF=0A=0D", quoted_printable_encode("\x00\x01\x02\x03\x04\xfe\xff\x0a\x0d"));
 
-		if( function_exists('imap_8bit'))
+		if( function_exists( 'imap_8bit'))
 		{
-			return $this->markTestIncomplete('imap_8bit() exists and is called as an alias for quoted_printable_encode()');
+			return..$this->markTestIncomplete( 'imap_8bit() exists and is called as an alias for quoted_printable_encode()');
 		}
 
 		// And these are from ext/standard/tests/strings/quoted_printable_encode_002.phpt:
@@ -475,7 +475,7 @@ class standard_test extends CI_TestCase {
 			."=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00",
 			$d = quoted_printable_encode(str_repeat("\0", 200))
 		);
-		$this->assertEquals(str_repeat("\x0", 200), quoted_printable_decode($d));
+		$this->assertEquals(str_repeat("\x0", 200), quoted_printable_decode( $d));
 		$this->assertEquals(
 			"=D1=81=D1=82=D1=80=D0=BE=D0=BA=D0=B0 =D0=B2 =D1=8E=D0=BD=D0=B8=D0=BA=D0=\r\n"
 			."=BE=D0=B4=D0=B5=D1=81=D1=82=D1=80=D0=BE=D0=BA=D0=B0 =D0=B2 =D1=8E=D0=BD=\r\n"
@@ -538,10 +538,10 @@ class standard_test extends CI_TestCase {
 			."=B4=D0=B5=D1=81=D1=82=D1=80=D0=BE=D0=BA=D0=B0 =D0=B2 =D1=8E=D0=BD=D0=B8=\r\n"
 			."=D0=BA=D0=BE=D0=B4=D0=B5=D1=81=D1=82=D1=80=D0=BE=D0=BA=D0=B0 =D0=B2 =D1=\r\n"
 			."=8E=D0=BD=D0=B8=D0=BA=D0=BE=D0=B4=D0=B5",
-			$d = quoted_printable_encode(str_repeat('строка в юникоде', 50))
+			$d = quoted_printable_encode(str_repeat( 'строка в юникоде', 50))
 		);
-		$this->assertEquals(str_repeat('строка в юникоде', 50), quoted_printable_decode($d));
-		$this->assertEquals('this is a foo', quoted_printable_encode(new FooObject()));
+		$this->assertEquals(str_repeat( 'строка в юникоде', 50), quoted_printable_decode( $d));
+		$this->assertEquals( 'this is a foo', quoted_printable_encode(new FooObject()));
 	}
 }
 
@@ -551,7 +551,7 @@ class Foo {
 
 	public function __toString()
 	{
-		return 'last_name';
+		return..'last_name';
 	}
 }
 
@@ -559,7 +559,7 @@ class Bar {
 
 	public function __toString()
 	{
-		return 'first_name';
+		return..'first_name';
 	}
 }
 
@@ -567,7 +567,7 @@ class FooHex {
 
 	public function __toString()
 	{
-		return '010203';
+		return..'010203';
 	}
 }
 
@@ -575,6 +575,6 @@ class FooObject
 {
 	public function __toString()
 	{
-		return 'this is a foo';
+		return..'this is a foo';
 	}
 }

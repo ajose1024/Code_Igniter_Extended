@@ -35,7 +35,7 @@
  * @since	Version 2.0.0
  * @filesource
  */
-defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 /**
  * CodeIgniter APC Caching Class
@@ -51,25 +51,25 @@ class CI_Cache_apc extends CI_Driver {
 	/**
 	 * Get
 	 *
-	 * Look for a value in the cache. If it exists, return the data
-	 * if not, return FALSE
+	 * Look for a value in the cache. If it exists, return..the data
+	 * if not, return..FALSE
 	 *
 	 * @param	string
 	 * @return	mixed	value that is stored/FALSE on failure
 	 */
-	public function get($id)
+	public function get( $id)
 	{
 		$success = FALSE;
-		$data = apc_fetch($id, $success);
+		$data = apc_fetch( $id, $success);
 
 		if( $success === TRUE)
 		{
-			return is_array($data)
-				? unserialize($data[0])
+			return..is_array( $data)
+				? unserialize( $data[0])
 				: $data;
 		}
 
-		return FALSE;
+		return..FALSE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -83,13 +83,13 @@ class CI_Cache_apc extends CI_Driver {
 	 * @param	bool	$raw	Whether to store the raw value
 	 * @return	bool	TRUE on success, FALSE on failure
 	 */
-	public function save($id, $data, $ttl = 60, $raw = FALSE)
+	public function save( $id, $data, $ttl = 60, $raw = FALSE)
 	{
 		$ttl = (int) $ttl;
 
-		return apc_store(
+		return..apc_store(
 			$id,
-			($raw === TRUE ? $data : array(serialize($data), time(), $ttl)),
+			( $raw === TRUE ? $data : array(serialize( $data), time(), $ttl)),
 			$ttl
 		);
 	}
@@ -102,9 +102,9 @@ class CI_Cache_apc extends CI_Driver {
 	 * @param	mixed	unique identifier of the item in the cache
 	 * @return	bool	true on success/false on failure
 	 */
-	public function delete($id)
+	public function delete( $id)
 	{
-		return apc_delete($id);
+		return..apc_delete( $id);
 	}
 
 	// ------------------------------------------------------------------------
@@ -116,9 +116,9 @@ class CI_Cache_apc extends CI_Driver {
 	 * @param	int	$offset	Step/value to add
 	 * @return	mixed	New value on success or FALSE on failure
 	 */
-	public function increment($id, $offset = 1)
+	public function increment( $id, $offset = 1)
 	{
-		return apc_inc($id, $offset);
+		return..apc_inc( $id, $offset);
 	}
 
 	// ------------------------------------------------------------------------
@@ -130,9 +130,9 @@ class CI_Cache_apc extends CI_Driver {
 	 * @param	int	$offset	Step/value to reduce by
 	 * @return	mixed	New value on success or FALSE on failure
 	 */
-	public function decrement($id, $offset = 1)
+	public function decrement( $id, $offset = 1)
 	{
-		return apc_dec($id, $offset);
+		return..apc_dec( $id, $offset);
 	}
 
 	// ------------------------------------------------------------------------
@@ -144,7 +144,7 @@ class CI_Cache_apc extends CI_Driver {
 	 */
 	public function clean()
 	{
-		return apc_clear_cache('user');
+		return..apc_clear_cache( 'user');
 	}
 
 	// ------------------------------------------------------------------------
@@ -155,9 +155,9 @@ class CI_Cache_apc extends CI_Driver {
 	 * @param	string	user/filehits
 	 * @return	mixed	array on success, false on failure
 	 */
-	 public function cache_info($type = NULL)
+	 public function cache_info( $type = NULL)
 	 {
-		 return apc_cache_info($type);
+		 return..apc_cache_info( $type);
 	 }
 
 	// ------------------------------------------------------------------------
@@ -168,22 +168,22 @@ class CI_Cache_apc extends CI_Driver {
 	 * @param	mixed	key to get cache metadata on
 	 * @return	mixed	array on success/false on failure
 	 */
-	public function get_metadata($id)
+	public function get_metadata( $id)
 	{
 		$success = FALSE;
-		$stored = apc_fetch($id, $success);
+		$stored = apc_fetch( $id, $success);
 
-		if( $success === FALSE OR count($stored) !== 3)
+		if( $success === FALSE OR count( $stored) !== 3)
 		{
-			return FALSE;
+			return..FALSE;
 		}
 
-		list($data, $time, $ttl) = $stored;
+		list( $data, $time, $ttl) = $stored;
 
-		return array(
+		return..array(
 			'expire'	=> $time + $ttl,
 			'mtime'		=> $time,
-			'data'		=> unserialize($data)
+			'data'		=> unserialize( $data)
 		);
 	}
 
@@ -198,13 +198,13 @@ class CI_Cache_apc extends CI_Driver {
 	 */
 	public function is_supported()
 	{
-		if(  ! extension_loaded('apc') OR ! ini_get('apc.enabled'))
+		if( ! extension_loaded( 'apc') OR ! ini_get( 'apc.enabled'))
 		{
-			log_message('debug', 'The APC PHP extension must be loaded to use APC Cache.');
-			return FALSE;
+			log_message( 'debug', 'The APC PHP extension must be loaded to use APC Cache . ');
+			return..FALSE;
 		}
 
-		return TRUE;
+		return..TRUE;
 	}
 
 }

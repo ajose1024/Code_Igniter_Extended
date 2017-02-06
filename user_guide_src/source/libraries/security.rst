@@ -24,7 +24,7 @@ the data to character entities.
 
 To filter data through the XSS filter use the ``xss_clean()`` method::
 
-	$data = $this->security->xss_clean($data);
+	$data = $this->security->xss_clean( $data);
 
 An optional second parameter, *is_image*, allows this function to be used
 to test images for potential XSS attacks, useful for file upload
@@ -35,7 +35,7 @@ browser may attempt to execute.
 
 ::
 
-	if( $this->security->xss_clean($file, TRUE) === FALSE)
+	if( $this->security->xss_clean( $file, TRUE) === FALSE)
 	{
 		// file failed the XSS test
 	}
@@ -47,7 +47,7 @@ Cross-site request forgery (CSRF)
 You can enable CSRF protection by altering your **application/config/config.php**
 file in the following way::
 
-	$config['csrf_protection'] = TRUE;
+	$config[ 'csrf_protection' ] = TRUE;
 
 If you use the :doc:`form helper <../helpers/form_helper>`, then
 :func:`form_open()` will automatically insert a hidden csrf field in
@@ -62,7 +62,7 @@ and ``get_csrf_hash()``
 
 	...
 
-	<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
+	<input type="hidden" name="<?=$csrf[ 'name' ];?>" value="<?=$csrf[ 'hash' ];?>" />
 
 Tokens may be either regenerated on every submission (default) or
 kept the same throughout the life of the CSRF cookie. The default
@@ -73,17 +73,17 @@ may alter this behavior by editing the following config parameter
 
 ::
 
-	$config['csrf_regenerate'] = TRUE;
+	$config[ 'csrf_regenerate' ] = TRUE;
 
 Select URIs can be whitelisted from csrf protection (for example API
 endpoints expecting externally POSTed content). You can add these URIs
 by editing the 'csrf_exclude_uris' config parameter::
 
-	$config['csrf_exclude_uris'] = array('api/person/add');
+	$config[ 'csrf_exclude_uris' ] = array( 'api/person/add');
 
 Regular expressions are also supported (case-insensitive)::
 
-	$config['csrf_exclude_uris'] = array(
+	$config[ 'csrf_exclude_uris' ] = array(
 		'api/record/[0-9]+',
 		'api/title/[a-z]+'
 	);
@@ -94,16 +94,16 @@ Class Reference
 
 .. php:class:: CI_Security
 
-	.. php:method:: xss_clean($str[, $is_image = FALSE])
+	.. php:method:: xss_clean( $str[, $is_image = FALSE])
 
 		:param	mixed	$str: Input string or an array of strings
 		:returns:	XSS-clean data
 		:rtype:	mixed
 
 		Tries to remove XSS exploits from the input data and returns the cleaned string.
-		If the optional second parameter is set to true, it will return boolean TRUE if the image is safe to use and FALSE if malicious data was detected in it.
+		If the optional second parameter is set to true, it will return..boolean TRUE if the image is safe to use and FALSE if malicious data was detected in it.
 
-	.. php:method:: sanitize_filename($str[, $relative_path = FALSE])
+	.. php:method:: sanitize_filename( $str[, $relative_path = FALSE])
 
 		:param	string	$str: File name/path
 		:param	bool	$relative_path: Whether to preserve any directories in the file path
@@ -114,20 +114,20 @@ Class Reference
 		and other security threats, which is particularly useful for files that were supplied via user input.
 		::
 
-			$filename = $this->security->sanitize_filename($this->input->post('filename'));
+			$filename = $this->security->sanitize_filename( $this->input->post( 'filename'));
 
 		If it is acceptable for the user input to include relative paths, e.g.
 		*file/in/some/approved/folder.txt*, you can set the second optional parameter, ``$relative_path`` to TRUE.
 		::
 
-			$filename = $this->security->sanitize_filename($this->input->post('filename'), TRUE);
+			$filename = $this->security->sanitize_filename( $this->input->post( 'filename'), TRUE);
 
 	.. php:method:: get_csrf_token_name()
 
 		:returns:	CSRF token name
 		:rtype:	string
 
-		Returns the CSRF token name (the ``$config['csrf_token_name']`` value).
+		Returns the CSRF token name (the ``$config[ 'csrf_token_name' ]`` value).
 
 	.. php:method:: get_csrf_hash()
 
@@ -137,7 +137,7 @@ Class Reference
 		Returns the CSRF hash value. Useful in combination with ``get_csrf_token_name()``
 		for manually building forms or sending valid AJAX POST requests.
 
-	.. php:method:: entity_decode($str[, $charset = NULL])
+	.. php:method:: entity_decode( $str[, $charset = NULL])
 
 		:param	string	$str: Input string
 		:param	string	$charset: Character set of the input string
@@ -147,9 +147,9 @@ Class Reference
 		This method acts a lot like PHP's own native ``html_entity_decode()`` function in ENT_COMPAT mode, only
 		it tries to detect HTML entities that don't end in a semicolon because some browsers allow that.
 
-		If the ``$charset`` parameter is left empty, then your configured ``$config['charset']`` value will be used.
+		If the ``$charset`` parameter is left empty, then your configured ``$config[ 'charset' ]`` value will be used.
 
-	.. php:method:: get_random_bytes($length)
+	.. php:method:: get_random_bytes( $length)
 
 		:param	int	$length: Output length
 		:returns:	A binary stream of random bytes or FALSE on failure

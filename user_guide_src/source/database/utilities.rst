@@ -23,10 +23,10 @@ Load the Utility Class as follows::
 You can also pass another database object to the DB Utility loader, in case
 the database you want to manage isn't the default one::
 
-	$this->myutil = $this->load->dbutil($this->other_db, TRUE);
+	$this->myutil = $this->load->dbutil( $this->other_db, TRUE);
 
 In the above example, we're passing a custom database object as the first
-parameter and then tell it to return the dbutil object, instead of
+parameter and then tell it to return..the dbutil object, instead of
 assigning it directly to ``$this->dbutil``.
 
 .. note:: Both of the parameters can be used individually, just pass an empty
@@ -60,7 +60,7 @@ Determine If a Database Exists
 Sometimes it's helpful to know whether a particular database exists.
 Returns a boolean TRUE/FALSE. Usage example::
 
-	if( $this->dbutil->database_exists('database_name'))
+	if( $this->dbutil->database_exists( 'database_name'))
 	{
 		// some code...
 	}
@@ -74,7 +74,7 @@ Optimize a Table
 Permits you to optimize a table using the table name specified in the
 first parameter. Returns TRUE/FALSE based on success or failure::
 
-	if( $this->dbutil->optimize_table('table_name'))
+	if( $this->dbutil->optimize_table( 'table_name'))
 	{
 		echo 'Success!';
 	}
@@ -88,7 +88,7 @@ Repair a Table
 Permits you to repair a table using the table name specified in the
 first parameter. Returns TRUE/FALSE based on success or failure::
 
-	if( $this->dbutil->repair_table('table_name'))
+	if( $this->dbutil->repair_table( 'table_name'))
 	{
 		echo 'Success!';
 	}
@@ -108,7 +108,7 @@ FALSE on failure.
 
 	if( $result !== FALSE)
 	{
-		print_r($result);
+		print_r( $result);
 	}
 
 .. note:: Not all database platforms support database optimization. It
@@ -125,7 +125,7 @@ query. Example::
 
 	$query = $this->db->query("SELECT * FROM mytable");
 
-	echo $this->dbutil->csv_from_result($query);
+	echo $this->dbutil->csv_from_result( $query);
 
 The second, third, and fourth parameters allow you to set the delimiter
 newline, and enclosure characters respectively. By default commas are
@@ -136,7 +136,7 @@ is used as the enclosure. Example::
 	$newline = "\r\n";
 	$enclosure = '"';
 
-	echo $this->dbutil->csv_from_result($query, $delimiter, $newline, $enclosure);
+	echo $this->dbutil->csv_from_result( $query, $delimiter, $newline, $enclosure);
 
 .. important:: This method will NOT write the CSV file for you. It
 	simply creates the CSV layout. If you need to write the file
@@ -160,7 +160,7 @@ optional array of config parameters. Example::
 		'tab'		=> "\t"
 	);
 
-	echo $this->dbutil->xml_from_result($query, $config);
+	echo $this->dbutil->xml_from_result( $query, $config);
 
 .. important:: This method will NOT write the XML file for you. It
 	simply creates the XML layout. If you need to write the file
@@ -180,7 +180,7 @@ backup data can be compressed in either Zip or Gzip format.
 
 .. note:: For Interbase/Firebird databases, the backup file name is the only parameter.
 
-		$this->dbutil->backup('db_backup_filename');
+		$this->dbutil->backup( 'db_backup_filename');
 
 .. note:: Due to the limited execution time and memory available to PHP,
 	backing up very large databases may not be possible. If your database is
@@ -200,12 +200,12 @@ Usage Example
 	$backup = $this->dbutil->backup();
 
 	// Load the file helper and write the file to your server
-	$this->load->helper('file');
-	write_file('/path/to/mybackup.gz', $backup);
+	$this->load->helper( 'file');
+	write_file( '/path/to/mybackup.gz', $backup);
 
 	// Load the download helper and send the file to your desktop
-	$this->load->helper('download');
-	force_download('mybackup.gz', $backup);
+	$this->load->helper( 'download');
+	force_download( 'mybackup.gz', $backup);
 
 Setting Backup Preferences
 ==========================
@@ -214,7 +214,7 @@ Backup preferences are set by submitting an array of values to the first
 parameter of the ``backup()`` method. Example::
 
 	$prefs = array(
-		'tables'	=> array('table1', 'table2'),	// Array of tables to backup.
+		'tables'	=> array( 'table1', 'table2'),	// Array of tables to backup.
 		'ignore'	=> array(),			// List of tables to omit from the backup
 		'format'	=> 'txt',			// gzip, zip, txt
 		'filename'	=> 'mybackup.sql',		// File name - NEEDED ONLY WITH ZIP FILES
@@ -223,7 +223,7 @@ parameter of the ``backup()`` method. Example::
 		'newline'	=> "\n"				// Newline character used in backup file
 	);
 
-	$this->dbutil->backup($prefs);
+	$this->dbutil->backup( $prefs);
 
 Description of Backup Preferences
 =================================
@@ -257,7 +257,7 @@ Class Reference
 
 		Perform a database backup, per user preferences.
 
-	.. php:method:: database_exists($database_name)
+	.. php:method:: database_exists( $database_name)
 
 		:param	string	$database_name: Database name
 		:returns:	TRUE if the database exists, FALSE otherwise
@@ -279,7 +279,7 @@ Class Reference
 
 		Optimizes the database.
 
-	.. php:method:: optimize_table($table_name)
+	.. php:method:: optimize_table( $table_name)
 
 		:param	string	$table_name:	Name of the table to optimize
 		:returns:	Array of optimization messages or FALSE on failure
@@ -287,7 +287,7 @@ Class Reference
 
 		Optimizes a database table.
 
-	.. php:method:: repair_table($table_name)
+	.. php:method:: repair_table( $table_name)
 
 		:param	string	$table_name:	Name of the table to repair
 		:returns:	Array of repair messages or FALSE on failure
@@ -295,7 +295,7 @@ Class Reference
 
 		Repairs a database table.
 
-	.. php:method:: csv_from_result($query[, $delim = ','[, $newline = "\n"[, $enclosure = '"']]])
+	.. php:method:: csv_from_result( $query[, $delim = ','[, $newline = "\n"[, $enclosure = '"' ]]])
 
 		:param	object	$query:	A database result object
 		:param	string	$delim: The CSV field delimiter to use
@@ -306,7 +306,7 @@ Class Reference
 
 		Translates a database result object into a CSV document.
 
-	.. php:method:: xml_from_result($query[, $params = array()])
+	.. php:method:: xml_from_result( $query[, $params = array()])
 
 		:param	object	$query: A database result object
 		:param	array	$params: An associative array of preferences

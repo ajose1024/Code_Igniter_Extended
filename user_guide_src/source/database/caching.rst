@@ -148,7 +148,7 @@ page at example.com/index.php/blog/comments, the caching system will put
 all cache files associated with it in a folder called blog+comments. To
 delete those particular cache files you will use::
 
-	$this->db->cache_delete('blog', 'comments');
+	$this->db->cache_delete( 'blog', 'comments');
 
 If you do not use any parameters the current URI will be used when
 determining what should be cleared.

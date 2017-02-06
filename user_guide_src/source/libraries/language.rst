@@ -81,9 +81,9 @@ Example of switching languages
 
 ::
 
-	$idiom = $this->session->get_userdata('language');
-	$this->lang->load('error_messages', $idiom);
-	$oops = $this->lang->line('message_key');
+	$idiom = $this->session->get_userdata( 'language');
+	$this->lang->load( 'error_messages', $idiom);
+	$oops = $this->lang->line( 'message_key');
 
 ********************
 Internationalization
@@ -114,7 +114,7 @@ You might name it: error_lang.php
 Within the file you will assign each line of text to an array called
 ``$lang`` with this prototype::
 
-	$lang['language_key'] = 'The actual message to be shown';
+	$lang[ 'language_key' ] = 'The actual message to be shown';
 
 .. note:: It's a good practice to use a common prefix for all messages
 	in a given file to avoid collisions with similarly named items in other
@@ -123,9 +123,9 @@ Within the file you will assign each line of text to an array called
 
 ::
 
-	$lang['error_email_missing'] = 'You must submit an email address';
-	$lang['error_url_missing'] = 'You must submit a URL';
-	$lang['error_username_missing'] = 'You must submit a username';
+	$lang[ 'error_email_missing' ] = 'You must submit an email address';
+	$lang[ 'error_url_missing' ] = 'You must submit a URL';
+	$lang[ 'error_username_missing' ] = 'You must submit a username';
 
 Loading A Language File
 =======================
@@ -133,7 +133,7 @@ Loading A Language File
 In order to fetch a line from a particular file you must load the file
 first. Loading a language file is done with the following code::
 
-	$this->lang->load('filename', 'language');
+	$this->lang->load( 'filename', 'language');
 
 Where filename is the name of the file you wish to load (without the
 file extension), and language is the language set containing it (ie,
@@ -143,7 +143,7 @@ in your **application/config/config.php** file will be used.
 You can also load multiple language files at the same time by passing an array of language files as first parameter.
 ::
 
-	$this->lang->load(array('filename1', 'filename2'));
+	$this->lang->load(array( 'filename1', 'filename2'));
 
 .. note:: The *language* parameter can only consist of letters.
 
@@ -153,7 +153,7 @@ Fetching a Line of Text
 Once your desired language file is loaded you can access any line of
 text using this function::
 
-	$this->lang->line('language_key');
+	$this->lang->line( 'language_key');
 
 Where *language_key* is the array key corresponding to the line you wish
 to show.
@@ -161,7 +161,7 @@ to show.
 You can optionally pass FALSE as the second argument of that method to
 disable error logging, in case you're not sure if the line exists::
 
-	$this->lang->line('misc_key', FALSE);
+	$this->lang->line( 'misc_key', FALSE);
 
 .. note:: This method simply returns the line. It does not echo it.
 
@@ -187,19 +187,19 @@ Class Reference
 
 .. php:class:: CI_Lang
 
-	.. php:method:: load($langfile[, $idiom = ''[, $return = FALSE[, $add_suffix = TRUE[, $alt_path = '']]]])
+	.. php:method:: load( $langfile[, $idiom = ''[, $return..= FALSE[, $add_suffix = TRUE[, $alt_path = '' ]]]])
 
 		:param	mixed	$langfile: Language file to load or array with multiple files
 		:param	string	$idiom: Language name (i.e. 'english')
-		:param	bool	$return: Whether to return the loaded array of translations
+		:param	bool	$return: Whether to return..the loaded array of translations
 		:param	bool	$add_suffix: Whether to add the '_lang' suffix to the language file name
 		:param	string	$alt_path: An alternative path to look in for the language file
-		:returns:	Array of language lines if $return is set to TRUE, otherwise void
+		:returns:	Array of language lines if $return..is set to TRUE, otherwise void
 		:rtype:	mixed
 
 		Loads a language file.
 
-	.. php:method:: line($line[, $log_errors = TRUE])
+	.. php:method:: line( $line[, $log_errors = TRUE])
 
 		:param	string	$line: Language line key name
 		:param	bool	$log_errors: Whether to log an error if the line isn't found

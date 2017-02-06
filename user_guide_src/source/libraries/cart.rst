@@ -38,7 +38,7 @@ Initializing the Shopping Cart Class
 To initialize the Shopping Cart Class in your controller constructor,
 use the ``$this->load->library()`` method::
 
-	$this->load->library('cart');
+	$this->load->library( 'cart');
 
 Once loaded, the Cart object will be available using::
 
@@ -60,10 +60,10 @@ below::
 		'qty'     => 1,
 		'price'   => 39.95,
 		'name'    => 'T-Shirt',
-		'options' => array('Size' => 'L', 'Color' => 'Red')
+		'options' => array( 'Size' => 'L', 'Color' => 'Red')
 	);
 
-	$this->cart->insert($data);
+	$this->cart->insert( $data);
 
 .. important:: The first four array indexes above (id, qty, price, and
 	name) are **required**. If you omit any of them the data will not be
@@ -101,9 +101,9 @@ information in a table easier.
 		'coupon'	 => 'XMAS-50OFF'
 	);
 
-	$this->cart->insert($data);
+	$this->cart->insert( $data);
 
-The ``insert()`` method will return the $rowid if you successfully insert a
+The ``insert()`` method will return..the $rowid if you successfully insert a
 single item.
 
 Adding Multiple Items to The Cart
@@ -122,7 +122,7 @@ same page.
 			'qty'     => 1,
 			'price'   => 39.95,
 			'name'    => 'T-Shirt',
-			'options' => array('Size' => 'L', 'Color' => 'Red')
+			'options' => array( 'Size' => 'L', 'Color' => 'Red')
 		),
 		array(
 			'id'      => 'sku_567ZYX',
@@ -138,7 +138,7 @@ same page.
 		)
 	);
 
-	$this->cart->insert($data);
+	$this->cart->insert( $data);
 
 Displaying the Cart
 ===================
@@ -151,7 +151,7 @@ helper </helpers/form_helper>`.
 
 ::
 
-	<?php echo form_open('path/to/controller/update/method'); ?>
+	<?php echo form_open( 'path/to/controller/update/method'); ?>
 
 	<table cellpadding="6" cellspacing="1" style="width:100%" border="0">
 
@@ -166,17 +166,17 @@ helper </helpers/form_helper>`.
 
 	<?php foreach( $this->cart->contents() as $items): ?>
 
-		<?php echo form_hidden($i.'[rowid]', $items['rowid']); ?>
+		<?php echo form_hidden( $i . '[rowid]', $items[ 'rowid' ]); ?>
 
 		<tr>
-			<td><?php echo form_input(array('name' => $i.'[qty]', 'value' => $items['qty'], 'maxlength' => '3', 'size' => '5')); ?></td>
+			<td><?php echo form_input(array( 'name' => $i . '[qty]', 'value' => $items[ 'qty' ], 'maxlength' => '3', 'size' => '5')); ?></td>
 			<td>
-				<?php echo $items['name']; ?>
+				<?php echo $items[ 'name' ]; ?>
 
-				<?php if( $this->cart->has_options($items['rowid']) == TRUE): ?>
+				<?php if( $this->cart->has_options( $items[ 'rowid' ]) == TRUE): ?>
 
 					<p>
-						<?php foreach( $this->cart->product_options($items['rowid']) as $option_name => $option_value): ?>
+						<?php foreach( $this->cart->product_options( $items[ 'rowid' ]) as $option_name => $option_value): ?>
 
 							<strong><?php echo $option_name; ?>:</strong> <?php echo $option_value; ?><br />
 
@@ -186,8 +186,8 @@ helper </helpers/form_helper>`.
 				<?php endif; ?>
 
 			</td>
-			<td style="text-align:right"><?php echo $this->cart->format_number($items['price']); ?></td>
-			<td style="text-align:right">$<?php echo $this->cart->format_number($items['subtotal']); ?></td>
+			<td style="text-align:right"><?php echo $this->cart->format_number( $items[ 'price' ]); ?></td>
+			<td style="text-align:right">$<?php echo $this->cart->format_number( $items[ 'subtotal' ]); ?></td>
 		</tr>
 
 	<?php $i++; ?>
@@ -197,12 +197,12 @@ helper </helpers/form_helper>`.
 	<tr>
 		<td colspan="2"> </td>
 		<td class="right"><strong>Total</strong></td>
-		<td class="right">$<?php echo $this->cart->format_number($this->cart->total()); ?></td>
+		<td class="right">$<?php echo $this->cart->format_number( $this->cart->total()); ?></td>
 	</tr>
 
 	</table>
 
-	<p><?php echo form_submit('', 'Update your Cart'); ?></p>
+	<p><?php echo form_submit( '', 'Update your Cart'); ?></p>
 
 Updating The Cart
 =================
@@ -221,7 +221,7 @@ containing the Row ID and one or more pre-defined properties to the
 		'qty'   => 3
 	);
 
-	$this->cart->update($data);
+	$this->cart->update( $data);
 
 	// Or a multi-dimensional array
 
@@ -240,7 +240,7 @@ containing the Row ID and one or more pre-defined properties to the
 		)
 	);
 
-	$this->cart->update($data);
+	$this->cart->update( $data);
 
 You may also update any property you have previously defined when
 inserting the item such as options, price or other custom fields.
@@ -254,7 +254,7 @@ inserting the item such as options, price or other custom fields.
 		'coupon' => NULL
 	);
 
-	$this->cart->update($data);
+	$this->cart->update( $data);
 
 What is a Row ID?
 *****************
@@ -323,7 +323,7 @@ Class Reference
 		to the quantity before checkout. That array must contain the rowid
 		for each item.
 
-	.. php:method:: remove($rowid)
+	.. php:method:: remove( $rowid)
 
 		:param	int	$rowid: ID of the item to remove from the cart
 		:returns:	TRUE on success, FALSE on failure
@@ -359,7 +359,7 @@ Class Reference
 		will be sorted from newest to oldest, otherwise it is sorted from oldest
 		to newest.
 
-	.. php:method:: get_item($row_id)
+	.. php:method:: get_item( $row_id)
 
 		:param	int	$row_id: Row ID to retrieve
 		:returns:	Array of item data
@@ -368,7 +368,7 @@ Class Reference
 		Returns an array containing data for the item matching the specified row
 		ID, or FALSE if no such item exists.
 
-	.. php:method:: has_options($row_id = '')
+	.. php:method:: has_options( $row_id = '')
 
 		:param	int	$row_id: Row ID to inspect
 		:returns:	TRUE if options exist, FALSE otherwise
@@ -379,7 +379,7 @@ Class Reference
 		you must pass the rowid to this method, as shown in the Displaying
 		the Cart example above.
 
-	.. php:method:: product_options([$row_id = ''])
+	.. php:method:: product_options([$row_id = '' ])
 
 		:param	int	$row_id: Row ID
 		:returns:	Array of product options

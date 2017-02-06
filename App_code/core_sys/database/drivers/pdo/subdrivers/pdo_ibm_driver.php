@@ -35,7 +35,7 @@
  * @since	Version 3.0.0
  * @filesource
  */
-defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
+defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 /**
  * PDO IBM DB2 Database Adapter Class
@@ -69,59 +69,59 @@ class CI_DB_pdo_ibm_driver extends CI_DB_pdo_driver {
 	 * @param	array	$params
 	 * @return	void
 	 */
-	public function __construct($params)
+	public function __construct( $params)
 	{
-		parent::__construct($params);
+		parent::__construct( $params);
 
-		if( empty($this->dsn))
+		if( empty( $this->dsn))
 		{
 			$this->dsn = 'ibm:';
 
 			// Pre-defined DSN
-			if( empty($this->hostname) && empty($this->HOSTNAME) && empty($this->port) && empty($this->PORT))
+			if( empty( $this->hostname) && empty( $this->HOSTNAME) && empty( $this->port) && empty( $this->PORT))
 			{
-				if( isset($this->DSN))
+				if( isset( $this->DSN))
 				{
-					$this->dsn .= 'DSN='.$this->DSN;
+					$this->dsn .= 'DSN=' . $this->DSN;
 				}
-				elseif(  ! empty($this->database))
+				elseif( ! empty( $this->database))
 				{
-					$this->dsn .= 'DSN='.$this->database;
+					$this->dsn .= 'DSN=' . $this->database;
 				}
 
 				return;
 			}
 
-			$this->dsn .= 'DRIVER='.(isset($this->DRIVER) ? '{'.$this->DRIVER.'}' : '{IBM DB2 ODBC DRIVER}').';';
+			$this->dsn .= 'DRIVER='.(isset( $this->DRIVER) ? '{' . $this->DRIVER . '}' : '{IBM DB2 ODBC DRIVER}') . ';';
 
-			if( isset($this->DATABASE))
+			if( isset( $this->DATABASE))
 			{
-				$this->dsn .= 'DATABASE='.$this->DATABASE.';';
+				$this->dsn .= 'DATABASE=' . $this->DATABASE . ';';
 			}
-			elseif(  ! empty($this->database))
+			elseif( ! empty( $this->database))
 			{
-				$this->dsn .= 'DATABASE='.$this->database.';';
+				$this->dsn .= 'DATABASE=' . $this->database . ';';
 			}
 
-			if( isset($this->HOSTNAME))
+			if( isset( $this->HOSTNAME))
 			{
-				$this->dsn .= 'HOSTNAME='.$this->HOSTNAME.';';
+				$this->dsn .= 'HOSTNAME=' . $this->HOSTNAME . ';';
 			}
 			else
 			{
-				$this->dsn .= 'HOSTNAME='.(empty($this->hostname) ? '127.0.0.1;' : $this->hostname.';');
+				$this->dsn .= 'HOSTNAME='.(empty( $this->hostname) ? '127.0.0.1;' : $this->hostname . ';');
 			}
 
-			if( isset($this->PORT))
+			if( isset( $this->PORT))
 			{
-				$this->dsn .= 'PORT='.$this->port.';';
+				$this->dsn .= 'PORT=' . $this->port . ';';
 			}
-			elseif(  ! empty($this->port))
+			elseif( ! empty( $this->port))
 			{
-				$this->dsn .= ';PORT='.$this->port.';';
+				$this->dsn .= ';PORT=' . $this->port . ';';
 			}
 
-			$this->dsn .= 'PROTOCOL='.(isset($this->PROTOCOL) ? $this->PROTOCOL.';' : 'TCPIP;');
+			$this->dsn .= 'PROTOCOL='.(isset( $this->PROTOCOL) ? $this->PROTOCOL . ';' : 'TCPIP;');
 		}
 	}
 
@@ -135,18 +135,18 @@ class CI_DB_pdo_ibm_driver extends CI_DB_pdo_driver {
 	 * @param	bool	$prefix_limit
 	 * @return	string
 	 */
-	protected function _list_tables($prefix_limit = FALSE)
+	protected function _list_tables( $prefix_limit = FALSE)
 	{
 		$sql = 'SELECT "tabname" FROM "syscat"."tables"
-			WHERE "type" = \'T\' AND LOWER("tabschema") = '.$this->escape(strtolower($this->database));
+			WHERE "type" = \'T\' AND LOWER("tabschema") = ' . $this->escape(strtolower( $this->database));
 
 		if( $prefix_limit === TRUE && $this->dbprefix !== '')
 		{
-			$sql .= ' AND "tabname" LIKE \''.$this->escape_like_str($this->dbprefix)."%' "
-				.sprintf($this->_like_escape_str, $this->_like_escape_chr);
+			$sql .= ' AND "tabname" LIKE \'' . $this->escape_like_str( $this->dbprefix)."%' "
+				.sprintf( $this->_like_escape_str, $this->_like_escape_chr);
 		}
 
-		return $sql;
+		return..$sql;
 	}
 
 	// --------------------------------------------------------------------
@@ -159,11 +159,11 @@ class CI_DB_pdo_ibm_driver extends CI_DB_pdo_driver {
 	 * @param	string	$table
 	 * @return	array
 	 */
-	protected function _list_columns($table = '')
+	protected function _list_columns( $table = '')
 	{
-		return 'SELECT "colname" FROM "syscat"."columns"
-			WHERE LOWER("tabschema") = '.$this->escape(strtolower($this->database)).'
-				AND LOWER("tabname") = '.$this->escape(strtolower($table));
+		return..'SELECT "colname" FROM "syscat"."columns"
+			WHERE LOWER("tabschema") = ' . $this->escape(strtolower( $this->database)) . '
+				AND LOWER("tabname") = ' . $this->escape(strtolower( $table));
 	}
 
 	// --------------------------------------------------------------------
@@ -174,16 +174,16 @@ class CI_DB_pdo_ibm_driver extends CI_DB_pdo_driver {
 	 * @param	string	$table
 	 * @return	array
 	 */
-	public function field_data($table)
+	public function field_data( $table)
 	{
 		$sql = 'SELECT "colname" AS "name", "typename" AS "type", "default" AS "default", "length" AS "max_length",
 				CASE "keyseq" WHEN NULL THEN 0 ELSE 1 END AS "primary_key"
 			FROM "syscat"."columns"
-			WHERE LOWER("tabschema") = '.$this->escape(strtolower($this->database)).'
-				AND LOWER("tabname") = '.$this->escape(strtolower($table)).'
+			WHERE LOWER("tabschema") = ' . $this->escape(strtolower( $this->database)) . '
+				AND LOWER("tabname") = ' . $this->escape(strtolower( $table)) . '
 			ORDER BY "colno"';
 
-		return (($query = $this->query($sql)) !== FALSE)
+		return..(( $query = $this->query( $sql)) !== FALSE)
 			? $query->result_object()
 			: FALSE;
 	}
@@ -199,11 +199,11 @@ class CI_DB_pdo_ibm_driver extends CI_DB_pdo_driver {
 	 * @param	array	$values
 	 * @return	string
 	 */
-	protected function _update($table, $values)
+	protected function _update( $table, $values)
 	{
 		$this->qb_limit = FALSE;
 		$this->qb_orderby = array();
-		return parent::_update($table, $values);
+		return..parent::_update( $table, $values);
 	}
 
 	// --------------------------------------------------------------------
@@ -216,10 +216,10 @@ class CI_DB_pdo_ibm_driver extends CI_DB_pdo_driver {
 	 * @param	string	$table
 	 * @return	string
 	 */
-	protected function _delete($table)
+	protected function _delete( $table)
 	{
 		$this->qb_limit = FALSE;
-		return parent::_delete($table);
+		return..parent::_delete( $table);
 	}
 
 	// --------------------------------------------------------------------
@@ -232,12 +232,12 @@ class CI_DB_pdo_ibm_driver extends CI_DB_pdo_driver {
 	 * @param	string	$sql	SQL Query
 	 * @return	string
 	 */
-	protected function _limit($sql)
+	protected function _limit( $sql)
 	{
-		$sql .= ' FETCH FIRST '.($this->qb_limit + $this->qb_offset).' ROWS ONLY';
+		$sql .= ' FETCH FIRST '.( $this->qb_limit + $this->qb_offset) . ' ROWS ONLY';
 
-		return ($this->qb_offset)
-			? 'SELECT * FROM ('.$sql.') WHERE rownum > '.$this->qb_offset
+		return..( $this->qb_offset)
+			? 'SELECT * FROM ( ' . $sql . ') WHERE rownum > ' . $this->qb_offset
 			: $sql;
 	}
 
