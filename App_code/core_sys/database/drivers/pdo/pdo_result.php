@@ -57,7 +57,7 @@ class CI_DB_pdo_result extends CI_DB_result {
 	 */
 	public function num_rows()
 	{
-		if( is_int( $this->num_rows))
+		if( is_int( $this->num_rows ) )
 		{
 			return  $this->num_rows;
 		}
@@ -69,12 +69,12 @@ class CI_DB_pdo_result extends CI_DB_result {
 		{
 			return  $this->num_rows = count( $this->result_object);
 		}
-		elseif( ( $num_rows = $this->result_id->rowCount()) > 0)
+		elseif( ( $num_rows = $this->result_id->rowCount( ) ) > 0)
 		{
 			return  $this->num_rows = $num_rows;
 		}
 
-		return  $this->num_rows = count( $this->result_array());
+		return  $this->num_rows = count( $this->result_array( ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -101,7 +101,7 @@ class CI_DB_pdo_result extends CI_DB_result {
 	public function list_fields()
 	{
 		$field_names = array();
-		for ( $i = 0, $c = $this->num_fields(); $i < $c; $i++)
+		for( $i = 0, $c = $this->num_fields(); $i < $c; $i++)
 		{
 			// Might trigger an E_WARNING due to not all subdrivers
 			// supporting getColumnMeta()
@@ -127,7 +127,7 @@ class CI_DB_pdo_result extends CI_DB_result {
 		{
 			$retval = array();
 
-			for ( $i = 0, $c = $this->num_fields(); $i < $c; $i++)
+			for( $i = 0, $c = $this->num_fields(); $i < $c; $i++)
 			{
 				$field = $this->result_id->getColumnMeta( $i);
 
@@ -135,7 +135,7 @@ class CI_DB_pdo_result extends CI_DB_result {
 				$retval[$i]->name		= $field[ 'name' ];
 				$retval[$i]->type		= $field[ 'native_type' ];
 				$retval[$i]->max_length		= ( $field[ 'len' ] > 0) ? $field[ 'len' ] : NULL;
-				$retval[$i]->primary_key	= (int) ( ! empty( $field[ 'flags' ]) && in_array( 'primary_key', $field[ 'flags' ], TRUE));
+				$retval[$i]->primary_key	= (int) ( ! empty( $field[ 'flags' ]) && in_array( 'primary_key', $field[ 'flags' ], TRUE ) );
 			}
 
 			return  $retval;
@@ -160,7 +160,7 @@ class CI_DB_pdo_result extends CI_DB_result {
 	 */
 	public function free_result()
 	{
-		if( is_object( $this->result_id))
+		if( is_object( $this->result_id ) )
 		{
 			$this->result_id = FALSE;
 		}

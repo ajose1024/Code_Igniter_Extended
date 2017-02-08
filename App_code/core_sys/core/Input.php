@@ -200,7 +200,7 @@ class CI_Input {
 		elseif( ( $count = preg_match_all( '/(?:^[^\[]+ )|\[[^]]*\]/', $index, $matches ) ) > 1 ) // Does the index contain array notation
 		{
 			$value = $array;
-			for ( $i = 0; $i < $count; $i++ )
+			for( $i = 0; $i < $count; $i++ )
 			{
 				$key = trim( $matches[0][$i], '[]' );
 				if( $key === '' ) // Empty notation will return  the value as array
@@ -458,7 +458,7 @@ class CI_Input {
 
 			if( $spoof )
 			{
-				for ( $i = 0, $c = count( $proxy_ips ); $i < $c; $i++ )
+				for( $i = 0, $c = count( $proxy_ips ); $i < $c; $i++ )
 				{
 					// Check if we have an IP address or a subnet
 					if( strpos( $proxy_ips[$i], '/' ) === FALSE )
@@ -496,7 +496,7 @@ class CI_Input {
 								 )
 							 );
 
-							for ( $j = 0; $j < 8; $j++ )
+							for( $j = 0; $j < 8; $j++ )
 							{
 								$ip[$j] = intval( $ip[$j], 16 );
 							}
@@ -519,7 +519,7 @@ class CI_Input {
 					if( $separator === ':' )
 					{
 						$netaddr = explode( ':', str_replace( '::', str_repeat( ':', 9 - substr_count( $netaddr, ':' ) ), $netaddr ) );
-						for ( $i = 0; $i < 8; $i++ )
+						for( $i = 0; $i < 8; $i++ )
 						{
 							$netaddr[$i] = intval( $netaddr[$i], 16 );
 						}

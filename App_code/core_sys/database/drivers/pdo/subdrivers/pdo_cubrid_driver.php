@@ -87,7 +87,7 @@ class CI_DB_pdo_cubrid_driver extends CI_DB_pdo_driver {
 	{
 		parent::__construct( $params);
 
-		if( empty( $this->dsn))
+		if( empty( $this->dsn ) )
 		{
 			$this->dsn = 'cubrid:host='.(empty( $this->hostname) ? '127.0.0.1' : $this->hostname);
 
@@ -107,7 +107,7 @@ class CI_DB_pdo_cubrid_driver extends CI_DB_pdo_driver {
 	 * @param	bool	$prefix_limit
 	 * @return	string
 	 */
-	protected function _list_tables( $prefix_limit = FALSE)
+	protected function _list_tables( $prefix_limit = FALSE )
 	{
 		$sql = 'SHOW TABLES';
 
@@ -131,7 +131,7 @@ class CI_DB_pdo_cubrid_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _list_columns( $table = '')
 	{
-		return  'SHOW COLUMNS FROM ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE);
+		return  'SHOW COLUMNS FROM ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE );
 	}
 
 	// --------------------------------------------------------------------
@@ -144,14 +144,14 @@ class CI_DB_pdo_cubrid_driver extends CI_DB_pdo_driver {
 	 */
 	public function field_data( $table)
 	{
-		if( ( $query = $this->query( 'SHOW COLUMNS FROM ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE))) === FALSE)
+		if( ( $query = $this->query( 'SHOW COLUMNS FROM ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE ) )) === FALSE )
 		{
 			return  FALSE;
 		}
 		$query = $query->result_object();
 
 		$retval = array();
-		for ( $i = 0, $c = count( $query); $i < $c; $i++)
+		for( $i = 0, $c = count( $query); $i < $c; $i++)
 		{
 			$retval[$i]			= new stdClass();
 			$retval[$i]->name		= $query[$i]->Field;
@@ -204,7 +204,7 @@ class CI_DB_pdo_cubrid_driver extends CI_DB_pdo_driver {
 				 . 'ELSE ' . $k . ' END), ';
 		}
 
-		$this->where( $index . ' IN( '.implode( ',', $ids) . ')', NULL, FALSE);
+		$this->where( $index . ' IN( '.implode( ',', $ids) . ')', NULL, FALSE );
 
 		return  'UPDATE ' . $table . ' SET '.substr( $cases, 0, -2).$this->_compile_wh( 'qb_where');
 	}

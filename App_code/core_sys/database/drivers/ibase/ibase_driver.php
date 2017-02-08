@@ -83,7 +83,7 @@ class CI_DB_ibase_driver extends CI_DB {
 	 * @param	bool	$persistent
 	 * @return	resource
 	 */
-	public function db_connect( $persistent = FALSE)
+	public function db_connect( $persistent = FALSE )
 	{
 		return  ( $persistent === TRUE)
 			? ibase_pconnect( $this->hostname . ':' . $this->database, $this->username, $this->password, $this->char_set)
@@ -99,12 +99,12 @@ class CI_DB_ibase_driver extends CI_DB {
 	 */
 	public function version()
 	{
-		if( isset( $this->data_cache[ 'version' ]))
+		if( isset( $this->data_cache[ 'version' ] ) )
 		{
 			return  $this->data_cache[ 'version' ];
 		}
 
-		if( ( $service = ibase_service_attach( $this->hostname, $this->username, $this->password)))
+		if( ( $service = ibase_service_attach( $this->hostname, $this->username, $this->password ) ))
 		{
 			$this->data_cache[ 'version' ] = ibase_server_info( $service, IBASE_SVC_SERVER_VERSION);
 
@@ -138,7 +138,7 @@ class CI_DB_ibase_driver extends CI_DB {
 	 */
 	protected function _trans_begin()
 	{
-		if( ( $trans_handle = ibase_trans( $this->conn_id)) === FALSE)
+		if( ( $trans_handle = ibase_trans( $this->conn_id ) ) === FALSE )
 		{
 			return  FALSE;
 		}
@@ -156,7 +156,7 @@ class CI_DB_ibase_driver extends CI_DB {
 	 */
 	protected function _trans_commit()
 	{
-		if( ibase_commit( $this->_ibase_trans))
+		if( ibase_commit( $this->_ibase_trans ) )
 		{
 			$this->_ibase_trans = NULL;
 			return  TRUE;
@@ -174,7 +174,7 @@ class CI_DB_ibase_driver extends CI_DB {
 	 */
 	protected function _trans_rollback()
 	{
-		if( ibase_rollback( $this->_ibase_trans))
+		if( ibase_rollback( $this->_ibase_trans ) )
 		{
 			$this->_ibase_trans = NULL;
 			return  TRUE;
@@ -220,7 +220,7 @@ class CI_DB_ibase_driver extends CI_DB {
 	 * @param	bool	$prefix_limit
 	 * @return	string
 	 */
-	protected function _list_tables( $prefix_limit = FALSE)
+	protected function _list_tables( $prefix_limit = FALSE )
 	{
 		$sql = 'SELECT TRIM("RDB$RELATION_NAME") AS TABLE_NAME FROM "RDB$RELATIONS" WHERE "RDB$RELATION_NAME" NOT LIKE \'RDB$%\' AND "RDB$RELATION_NAME" NOT LIKE \'MON$%\'';
 
@@ -283,7 +283,7 @@ class CI_DB_ibase_driver extends CI_DB {
 			WHERE "rfields"."RDB$RELATION_NAME" = ' . $this->escape( $table) . '
 			ORDER BY "rfields"."RDB$FIELD_POSITION"';
 
-		return  (( $query = $this->query( $sql)) !== FALSE)
+		return  (( $query = $this->query( $sql ) ) !== FALSE )
 			? $query->result_object()
 			: FALSE;
 	}
@@ -300,7 +300,7 @@ class CI_DB_ibase_driver extends CI_DB {
 	 */
 	public function error()
 	{
-		return  array( 'code' => ibase_errcode(), 'message' => ibase_errmsg());
+		return  array( 'code' => ibase_errcode(), 'message' => ibase_errmsg( ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -367,7 +367,7 @@ class CI_DB_ibase_driver extends CI_DB {
 	protected function _limit( $sql)
 	{
 		// Limit clause depends on if Interbase or Firebird
-		if( stripos( $this->version(), 'firebird') !== FALSE)
+		if( stripos( $this->version(), 'firebird') !== FALSE )
 		{
 			$select = 'FIRST ' . $this->qb_limit
 				.( $this->qb_offset ? ' SKIP ' . $this->qb_offset : '');

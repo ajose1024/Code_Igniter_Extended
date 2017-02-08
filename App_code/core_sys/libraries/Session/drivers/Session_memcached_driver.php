@@ -81,7 +81,7 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 	{
 		parent::__construct( $params);
 
-		if( empty( $this->_config[ 'save_path' ]))
+		if( empty( $this->_config[ 'save_path' ] ) )
 		{
 			log_message( 'error', 'Session: No Memcached save path configured . ');
 		}
@@ -113,7 +113,7 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 			$server_list[] = $server[ 'host' ] . ':' . $server[ 'port' ];
 		}
 
-		if( ! preg_match_all( '#,?([^,:]+)\:(\d{1,5})(?:\:(\d+))?#', $this->_config[ 'save_path' ], $matches, PREG_SET_ORDER))
+		if( ! preg_match_all( '#,?([^,:]+)\:(\d{1,5})(?:\:(\d+ ) )?#', $this->_config[ 'save_path' ], $matches, PREG_SET_ORDER ) )
 		{
 			$this->_memcached = NULL;
 			log_message( 'error', 'Session: Invalid Memcached save path format: ' . $this->_config[ 'save_path' ]);
@@ -123,13 +123,13 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 		foreach( $matches as $match)
 		{
 			// If Memcached already has this server (or if the port is invalid), skip it
-			if( in_array( $match[1] . ':' . $match[2], $server_list, TRUE))
+			if( in_array( $match[1] . ':' . $match[2], $server_list, TRUE ) )
 			{
 				log_message( 'debug', 'Session: Memcached server pool already has ' . $match[1] . ':' . $match[2]);
 				continue;
 			}
 
-			if( ! $this->_memcached->addServer( $match[1], $match[2], isset( $match[3]) ? $match[3] : 0))
+			if( ! $this->_memcached->addServer( $match[1], $match[2], isset( $match[3]) ? $match[3] : 0 ) )
 			{
 				log_message( 'error', 'Could not add ' . $match[1] . ':' . $match[2] . ' to Memcached server pool . ');
 			}
@@ -139,7 +139,7 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 			}
 		}
 
-		if( empty( $server_list))
+		if( empty( $server_list ) )
 		{
 			log_message( 'error', 'Session: Memcached server pool is empty . ');
 			return  FALSE;
@@ -160,7 +160,7 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 	 */
 	public function read( $session_id)
 	{
-		if( isset( $this->_memcached) && $this->_get_lock( $session_id))
+		if( isset( $this->_memcached) && $this->_get_lock( $session_id ) )
 		{
 			// Needed by write() to detect session_regenerate_id() calls
 			$this->_session_id = $session_id;
@@ -186,14 +186,14 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 	 */
 	public function write( $session_id, $session_data)
 	{
-		if( ! isset( $this->_memcached))
+		if( ! isset( $this->_memcached ) )
 		{
 			return  FALSE;
 		}
 		// Was the ID regenerated?
 		elseif( $session_id !== $this->_session_id)
 		{
-			if( ! $this->_release_lock() OR ! $this->_get_lock( $session_id))
+			if( ! $this->_release_lock() OR ! $this->_get_lock( $session_id ) )
 			{
 				return  FALSE;
 			}
@@ -202,12 +202,12 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 			$this->_session_id = $session_id;
 		}
 
-		if( isset( $this->_lock_key))
+		if( isset( $this->_lock_key ) )
 		{
 			$this->_memcached->replace( $this->_lock_key, time(), 300);
-			if( $this->_fingerprint !== ( $fingerprint = md5( $session_data)))
+			if( $this->_fingerprint !== ( $fingerprint = md5( $session_data ) ))
 			{
-				if( $this->_memcached->set( $this->_key_prefix.$session_id, $session_data, $this->_config[ 'expiration' ]))
+				if( $this->_memcached->set( $this->_key_prefix.$session_id, $session_data, $this->_config[ 'expiration' ] ) )
 				{
 					$this->_fingerprint = $fingerprint;
 					return  TRUE;
@@ -233,10 +233,10 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 	 */
 	public function close()
 	{
-		if( isset( $this->_memcached))
+		if( isset( $this->_memcached ) )
 		{
 			isset( $this->_lock_key) && $this->_memcached->delete( $this->_lock_key);
-			if( ! $this->_memcached->quit())
+			if( ! $this->_memcached->quit( ) )
 			{
 				return  FALSE;
 			}
@@ -260,7 +260,7 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 	 */
 	public function destroy( $session_id)
 	{
-		if( isset( $this->_memcached, $this->_lock_key))
+		if( isset( $this->_memcached, $this->_lock_key ) )
 		{
 			$this->_memcached->delete( $this->_key_prefix.$session_id);
 			return  $this->_cookie_destroy();
@@ -297,7 +297,7 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 	 */
 	protected function _get_lock( $session_id)
 	{
-		if( isset( $this->_lock_key))
+		if( isset( $this->_lock_key ) )
 		{
 			return  $this->_memcached->replace( $this->_lock_key, time(), 300);
 		}
@@ -307,13 +307,13 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 		$attempt = 0;
 		do
 		{
-			if( $this->_memcached->get( $lock_key))
+			if( $this->_memcached->get( $lock_key ) )
 			{
 				sleep(1);
 				continue;
 			}
 
-			if( ! $this->_memcached->set( $lock_key, time(), 300))
+			if( ! $this->_memcached->set( $lock_key, time(), 300 ) )
 			{
 				log_message( 'error', 'Session: Error while trying to obtain lock for ' . $this->_key_prefix.$session_id);
 				return  FALSE;

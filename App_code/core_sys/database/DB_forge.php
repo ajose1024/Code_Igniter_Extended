@@ -353,7 +353,7 @@ abstract class CI_DB_forge {
 			// Most databases don't support creating indexes from within the CREATE TABLE statement
 			if( ! empty( $this->keys ) )
 			{
-				for ( $i = 0, $sqls = $this->_process_indexes( $table ), $c = count( $sqls ); $i < $c; $i++ )
+				for( $i = 0, $sqls = $this->_process_indexes( $table ), $c = count( $sqls ); $i < $c; $i++ )
 				{
 					$this->db->query( $sqls[$i] );
 				}
@@ -393,7 +393,7 @@ abstract class CI_DB_forge {
 			: 'CREATE TABLE';
 
 		$columns = $this->_process_fields(TRUE );
-		for ( $i = 0, $c = count( $columns ); $i < $c; $i++ )
+		for( $i = 0, $c = count( $columns ); $i < $c; $i++ )
 		{
 			$columns[$i] = ( $columns[$i][ '_literal' ] !== FALSE )
 					? "\n\t".$columns[$i][ '_literal' ]
@@ -584,7 +584,7 @@ abstract class CI_DB_forge {
 			return  ( $this->db->db_debug ) ? $this->db->display_error( 'db_unsupported_feature' ) : FALSE;
 		}
 
-		for ( $i = 0, $c = count( $sqls ); $i < $c; $i++ )
+		for( $i = 0, $c = count( $sqls ); $i < $c; $i++ )
 		{
 			if( $this->db->query( $sqls[$i] ) === FALSE )
 			{
@@ -646,7 +646,7 @@ abstract class CI_DB_forge {
 			return  ( $this->db->db_debug ) ? $this->db->display_error( 'db_unsupported_feature' ) : FALSE;
 		}
 
-		for ( $i = 0, $c = count( $sqls ); $i < $c; $i++ )
+		for( $i = 0, $c = count( $sqls ); $i < $c; $i++ )
 		{
 			if( $this->db->query( $sqls[$i] ) === FALSE )
 			{
@@ -682,7 +682,7 @@ abstract class CI_DB_forge {
 			: $alter_type . ' COLUMN ';
 
 		$sqls = array( );
-		for ( $i = 0, $c = count( $field ); $i < $c; $i++ )
+		for( $i = 0, $c = count( $field ); $i < $c; $i++ )
 		{
 			$sqls[] = $sql
 				.( $field[$i][ '_literal' ] !== FALSE ? $field[$i][ '_literal' ] : $this->_process_column( $field[$i] ) );
@@ -961,7 +961,7 @@ abstract class CI_DB_forge {
 	{
 		$sql = '';
 
-		for ( $i = 0, $c = count( $this->primary_keys ); $i < $c; $i++ )
+		for( $i = 0, $c = count( $this->primary_keys ); $i < $c; $i++ )
 		{
 			if( ! isset( $this->fields[$this->primary_keys[$i]] ) )
 			{
@@ -990,11 +990,11 @@ abstract class CI_DB_forge {
 	{
 		$sqls = array( );
 
-		for ( $i = 0, $c = count( $this->keys ); $i < $c; $i++ )
+		for( $i = 0, $c = count( $this->keys ); $i < $c; $i++ )
 		{
 			if( is_array( $this->keys[$i] ) )
 			{
-				for ( $i2 = 0, $c2 = count( $this->keys[$i] ); $i2 < $c2; $i2++ )
+				for( $i2 = 0, $c2 = count( $this->keys[$i] ); $i2 < $c2; $i2++ )
 				{
 					if( ! isset( $this->fields[$this->keys[$i][$i2]] ) )
 					{

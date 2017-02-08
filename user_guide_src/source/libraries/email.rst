@@ -304,7 +304,7 @@ Class Reference
 		The e-mail sending method. Returns boolean TRUE or FALSE based on
 		success or failure, enabling it to be used conditionally::
 
-			if( ! $this->email->send())
+			if( ! $this->email->send( ) )
 			{
 				// Generate error
 			}
@@ -312,7 +312,7 @@ Class Reference
 		This method will automatically clear all parameters if the request was
 		successful. To stop this behaviour pass FALSE::
 
-		 	if( $this->email->send(FALSE))
+		 	if( $this->email->send(FALSE ) )
 		 	{
 		 		// Parameters won't be cleared
 		 	}
@@ -397,9 +397,9 @@ Class Reference
 			// You need to pass FALSE while sending in order for the email data
 			// to not be cleared - if that happens, print_debugger() would have
 			// nothing to output.
-			$this->email->send(FALSE);
+			$this->email->send(FALSE );
 
 			// Will only print the email headers, excluding the message subject and body
-			$this->email->print_debugger(array( 'headers'));
+			$this->email->print_debugger(array( 'headers' ) );
 
 		.. note:: By default, all of the raw data will be printed.

@@ -23,7 +23,7 @@ class Mock_Core_Input extends CI_Input {
 		$this->_sanitize_globals();
 	}
 
-	public function fetch_from_array( $array, $index = '', $xss_clean = FALSE)
+	public function fetch_from_array( $array, $index = '', $xss_clean = FALSE )
 	{
 		return  parent::_fetch_from_array( $array, $index, $xss_clean);
 	}

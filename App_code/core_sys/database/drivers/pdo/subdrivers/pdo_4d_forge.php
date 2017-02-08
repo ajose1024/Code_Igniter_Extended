@@ -112,7 +112,7 @@ class CI_DB_pdo_4d_forge extends CI_DB_pdo_forge {
 	 */
 	protected function _alter_table( $alter_type, $table, $field)
 	{
-		if( in_array( $alter_type, array( 'ADD', 'DROP'), TRUE))
+		if( in_array( $alter_type, array( 'ADD', 'DROP'), TRUE ) )
 		{
 			return  parent::_alter_table( $alter_type, $table, $field);
 		}
@@ -150,7 +150,7 @@ class CI_DB_pdo_4d_forge extends CI_DB_pdo_forge {
 	 */
 	protected function _attr_type(&$attributes)
 	{
-		switch( strtoupper( $attributes[ 'TYPE' ]))
+		switch( strtoupper( $attributes[ 'TYPE' ] ) )
 		{
 			case 'TINYINT':
 				$attributes[ 'TYPE' ] = 'SMALLINT';
@@ -203,7 +203,7 @@ class CI_DB_pdo_4d_forge extends CI_DB_pdo_forge {
 	{
 		if( ! empty( $attributes[ 'AUTO_INCREMENT' ]) && $attributes[ 'AUTO_INCREMENT' ] === TRUE)
 		{
-			if( stripos( $field[ 'type' ], 'int') !== FALSE)
+			if( stripos( $field[ 'type' ], 'int') !== FALSE )
 			{
 				$field[ 'auto_increment' ] = ' AUTO_INCREMENT';
 			}

@@ -11,7 +11,7 @@
 // and so on...
 function autoload( $class)
 {
-	$dir = realpath(dirname(__FILE__)).DIRECTORY_SEPARATOR;
+	$dir = realpath(dirname(__FILE__ ) ).DIRECTORY_SEPARATOR;
 
 	$ci_core = array(
 		'Benchmark',
@@ -60,28 +60,28 @@ function autoload( $class)
 
 	if( strpos( $class, 'Mock_') === 0)
 	{
-		$class = strtolower(str_replace(array( 'Mock_', '_'), array( '', DIRECTORY_SEPARATOR), $class));
+		$class = strtolower(str_replace(array( 'Mock_', '_'), array( '', DIRECTORY_SEPARATOR), $class ) );
 	}
 	elseif( strpos( $class, 'CI_') === 0)
 	{
 		$subclass = substr( $class, 3);
 
-		if( in_array( $subclass, $ci_core))
+		if( in_array( $subclass, $ci_core ) )
 		{
 			$dir = SYSTEM_PATH . 'core'.DIRECTORY_SEPARATOR;
 			$class = $subclass;
 		}
-		elseif( in_array( $subclass, $ci_libraries))
+		elseif( in_array( $subclass, $ci_libraries ) )
 		{
 			$dir = SYSTEM_PATH . 'libraries'.DIRECTORY_SEPARATOR;
 			$class = ( $subclass === 'Driver_Library') ? 'Driver' : $subclass;
 		}
-		elseif( in_array( $subclass, $ci_drivers))
+		elseif( in_array( $subclass, $ci_drivers ) )
 		{
 			$dir = SYSTEM_PATH . 'libraries'.DIRECTORY_SEPARATOR.$subclass.DIRECTORY_SEPARATOR;
 			$class = $subclass;
 		}
-		elseif( in_array(( $parent = strtok( $subclass, '_')), $ci_drivers)) {
+		elseif( in_array(( $parent = strtok( $subclass, '_' ) ), $ci_drivers ) ) {
 			$dir = SYSTEM_PATH . 'libraries'.DIRECTORY_SEPARATOR.$parent.DIRECTORY_SEPARATOR . 'drivers'.DIRECTORY_SEPARATOR;
 			$class = $subclass;
 		}
@@ -110,7 +110,7 @@ function autoload( $class)
 
 	$file = isset( $file) ? $file : $dir.$class . '.php';
 
-	if( ! file_exists( $file))
+	if( ! file_exists( $file ) )
 	{
 		return  FALSE;
 	}

@@ -97,7 +97,7 @@ page actually exists:
 
 	public function view( $page = 'home')
 	{
-	        if( ! file_exists(APP_DIR_PATH . '/views/pages/' . $page . '.php'))
+	        if( ! file_exists( APP_DIR_PATH . '/views/pages/' . $page . '.php' ) )
 		{
 			// Whoops, we don't have a page for that!
 			show_404();

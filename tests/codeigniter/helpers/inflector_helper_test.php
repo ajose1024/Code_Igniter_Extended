@@ -19,7 +19,7 @@ class Inflector_helper_test extends CI_TestCase {
 
 		foreach( $strs as $str => $expect)
 		{
-			$this->assertEquals( $expect, singular( $str));
+			$this->assertEquals( $expect, singular( $str ) );
 		}
 	}
 
@@ -38,7 +38,7 @@ class Inflector_helper_test extends CI_TestCase {
 
 		foreach( $strs as $str => $expect)
 		{
-			$this->assertEquals( $expect, plural( $str));
+			$this->assertEquals( $expect, plural( $str ) );
 		}
 	}
 
@@ -55,7 +55,7 @@ class Inflector_helper_test extends CI_TestCase {
 
 		foreach( $strs as $str => $expect)
 		{
-			$this->assertEquals( $expect, camelize( $str));
+			$this->assertEquals( $expect, camelize( $str ) );
 		}
 	}
 
@@ -72,7 +72,7 @@ class Inflector_helper_test extends CI_TestCase {
 
 		foreach( $strs as $str => $expect)
 		{
-			$this->assertEquals( $expect, underscore( $str));
+			$this->assertEquals( $expect, underscore( $str ) );
 		}
 	}
 
@@ -89,7 +89,7 @@ class Inflector_helper_test extends CI_TestCase {
 
 		foreach( $strs as $str => $expect)
 		{
-			$this->assertEquals( $expect, humanize( $str));
+			$this->assertEquals( $expect, humanize( $str ) );
 		}
 	}
 

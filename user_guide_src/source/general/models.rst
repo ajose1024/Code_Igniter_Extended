@@ -49,7 +49,7 @@ model class might look like::
 			$this->content	= $_POST[ 'content' ];
 			$this->date	= time();
 
-			$this->db->update( 'entries', $this, array( 'id' => $_POST[ 'id' ]));
+			$this->db->update( 'entries', $this, array( 'id' => $_POST[ 'id' ] ) );
 		}
 
 	}

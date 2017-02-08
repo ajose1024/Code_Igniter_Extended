@@ -54,7 +54,7 @@ Constants
 ---------
 
 -  ENVIRONMENT
--  FCPATH
+-  FC_PATH
 -  SELF
 -  SYS_CORE_PATH
 -  APP_DIR_PATH

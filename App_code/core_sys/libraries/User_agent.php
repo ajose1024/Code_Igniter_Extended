@@ -173,12 +173,12 @@ class CI_User_agent {
 	 */
 	public function __construct()
 	{
-		if( isset( $_SERVER[ 'HTTP_USER_AGENT' ]))
+		if( isset( $_SERVER[ 'HTTP_USER_AGENT' ] ) )
 		{
 			$this->agent = trim( $_SERVER[ 'HTTP_USER_AGENT' ]);
 		}
 
-		if( $this->agent !== NULL && $this->_load_agent_file())
+		if( $this->agent !== NULL && $this->_load_agent_file( ) )
 		{
 			$this->_compile_data();
 		}
@@ -195,14 +195,14 @@ class CI_User_agent {
 	 */
 	protected function _load_agent_file()
 	{
-		if( ( $found = file_exists(APP_DIR_PATH . 'config/user_agents.php')))
+		if( ( $found = file_exists( APP_DIR_PATH . 'config/user_agents.php' ) ))
 		{
-			include(APP_DIR_PATH . 'config/user_agents.php');
+			include( APP_DIR_PATH . 'config/user_agents.php');
 		}
 
-		if( file_exists(APP_DIR_PATH . 'config/'.ENVIRONMENT . '/user_agents.php'))
+		if( file_exists( APP_DIR_PATH . 'config/' . ENVIRONMENT . '/user_agents.php' ) )
 		{
-			include(APP_DIR_PATH . 'config/'.ENVIRONMENT . '/user_agents.php');
+			include( APP_DIR_PATH . 'config/' . ENVIRONMENT . '/user_agents.php');
 			$found = TRUE;
 		}
 
@@ -213,28 +213,28 @@ class CI_User_agent {
 
 		$return  = FALSE;
 
-		if( isset( $platforms))
+		if( isset( $platforms ) )
 		{
 			$this->platforms = $platforms;
 			unset( $platforms);
 			$return  = TRUE;
 		}
 
-		if( isset( $browsers))
+		if( isset( $browsers ) )
 		{
 			$this->browsers = $browsers;
 			unset( $browsers);
 			$return  = TRUE;
 		}
 
-		if( isset( $mobiles))
+		if( isset( $mobiles ) )
 		{
 			$this->mobiles = $mobiles;
 			unset( $mobiles);
 			$return  = TRUE;
 		}
 
-		if( isset( $robots))
+		if( isset( $robots ) )
 		{
 			$this->robots = $robots;
 			unset( $robots);
@@ -277,7 +277,7 @@ class CI_User_agent {
 		{
 			foreach( $this->platforms as $key => $val)
 			{
-				if( preg_match( '|'.preg_quote( $key) . '|i', $this->agent))
+				if( preg_match( '|'.preg_quote( $key) . '|i', $this->agent ) )
 				{
 					$this->platform = $val;
 					return  TRUE;
@@ -302,7 +302,7 @@ class CI_User_agent {
 		{
 			foreach( $this->browsers as $key => $val)
 			{
-				if( preg_match( '|' . $key . '.*?([0-9\.]+)|i', $this->agent, $match))
+				if( preg_match( '|' . $key . '.*?([0-9\.]+)|i', $this->agent, $match ) )
 				{
 					$this->is_browser = TRUE;
 					$this->version = $match[1];
@@ -329,7 +329,7 @@ class CI_User_agent {
 		{
 			foreach( $this->robots as $key => $val)
 			{
-				if( preg_match( '|'.preg_quote( $key) . '|i', $this->agent))
+				if( preg_match( '|'.preg_quote( $key) . '|i', $this->agent ) )
 				{
 					$this->is_robot = TRUE;
 					$this->robot = $val;
@@ -355,7 +355,7 @@ class CI_User_agent {
 		{
 			foreach( $this->mobiles as $key => $val)
 			{
-				if( FALSE !== (stripos( $this->agent, $key)))
+				if( FALSE !== (stripos( $this->agent, $key ) ))
 				{
 					$this->is_mobile = TRUE;
 					$this->mobile = $val;
@@ -376,9 +376,9 @@ class CI_User_agent {
 	 */
 	protected function _set_languages()
 	{
-		if( (count( $this->languages) === 0) && ! empty( $_SERVER[ 'HTTP_ACCEPT_LANGUAGE' ]))
+		if( (count( $this->languages) === 0) && ! empty( $_SERVER[ 'HTTP_ACCEPT_LANGUAGE' ] ) )
 		{
-			$this->languages = explode( ',', preg_replace( '/(;\s?q=[0-9\.]+)|\s/i', '', strtolower(trim( $_SERVER[ 'HTTP_ACCEPT_LANGUAGE' ]))));
+			$this->languages = explode( ',', preg_replace( '/(;\s?q=[0-9\.]+)|\s/i', '', strtolower(trim( $_SERVER[ 'HTTP_ACCEPT_LANGUAGE' ] ) ) ) );
 		}
 
 		if( count( $this->languages) === 0)
@@ -396,9 +396,9 @@ class CI_User_agent {
 	 */
 	protected function _set_charsets()
 	{
-		if( (count( $this->charsets) === 0) && ! empty( $_SERVER[ 'HTTP_ACCEPT_CHARSET' ]))
+		if( (count( $this->charsets) === 0) && ! empty( $_SERVER[ 'HTTP_ACCEPT_CHARSET' ] ) )
 		{
-			$this->charsets = explode( ',', preg_replace( '/(;\s?q=.+)|\s/i', '', strtolower(trim( $_SERVER[ 'HTTP_ACCEPT_CHARSET' ]))));
+			$this->charsets = explode( ',', preg_replace( '/(;\s?q=.+)|\s/i', '', strtolower(trim( $_SERVER[ 'HTTP_ACCEPT_CHARSET' ] ) ) ) );
 		}
 
 		if( count( $this->charsets) === 0)
@@ -491,9 +491,9 @@ class CI_User_agent {
 	 */
 	public function is_referral()
 	{
-		if( ! isset( $this->referer))
+		if( ! isset( $this->referer ) )
 		{
-			if( empty( $_SERVER[ 'HTTP_REFERER' ]))
+			if( empty( $_SERVER[ 'HTTP_REFERER' ] ) )
 			{
 				$this->referer = FALSE;
 			}
@@ -674,7 +674,7 @@ class CI_User_agent {
 		// Set the new user-agent string and parse it, unless empty
 		$this->agent = $string;
 
-		if( ! empty( $string))
+		if( ! empty( $string ) )
 		{
 			$this->_compile_data();
 		}

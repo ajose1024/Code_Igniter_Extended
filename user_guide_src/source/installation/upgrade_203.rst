@@ -42,7 +42,7 @@ Step 5: Remove APP_DIR_PATH . 'third_party' from autoload.php
 
 Open application/config/autoload.php, and look for the following::
 
-	$autoload[ 'packages' ] = array(APP_DIR_PATH . 'third_party');
+	$autoload[ 'packages' ] = array( APP_DIR_PATH . 'third_party');
 
 If you have not chosen to load any additional packages, that line can be
 changed to::

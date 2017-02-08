@@ -24,9 +24,9 @@ available in the hosting environment.
 
 ::
 
-	$this->load->driver( 'cache', array( 'adapter' => 'apc', 'backup' => 'file'));
+	$this->load->driver( 'cache', array( 'adapter' => 'apc', 'backup' => 'file' ) );
 
-	if( ! $foo = $this->cache->get( 'foo'))
+	if( ! $foo = $this->cache->get( 'foo' ) )
 	{
 		echo 'Saving to the cache!<br />';
 		$foo = 'foobarbaz!';
@@ -66,9 +66,9 @@ Class Reference
 		hosting environment.
 		::
 
-			if( $this->cache->apc->is_supported())
+			if( $this->cache->apc->is_supported( ) )
 			{
-				if( $data = $this->cache->apc->get( 'my_cache'))
+				if( $data = $this->cache->apc->get( 'my_cache' ) )
 				{
 					// do things.
 				}
@@ -167,7 +167,7 @@ Class Reference
 		This method will return  information on the entire cache.
 		::
 
-			var_dump( $this->cache->cache_info());
+			var_dump( $this->cache->cache_info( ) );
 
 		.. note:: The information returned and the structure of the data is dependent
 			on which adapter is being used.
@@ -182,7 +182,7 @@ Class Reference
 		cache.
 		::
 
-			var_dump( $this->cache->get_metadata( 'my_cached_item'));
+			var_dump( $this->cache->get_metadata( 'my_cached_item' ) );
 
 		.. note:: The information returned and the structure of the data is dependent
 			on which adapter is being used.

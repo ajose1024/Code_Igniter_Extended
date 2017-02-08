@@ -117,7 +117,7 @@ is hard to deal with (i.e. a copy-paste may damage it), so you may use
 a more friendly manner. For example::
 
 	// Get a hex-encoded representation of the key:
-	$key = bin2hex( $this->encryption->create_key(16));
+	$key = bin2hex( $this->encryption->create_key(16 ) );
 
 	// Put the same value in your config with hex2bin(),
 	// so that it is still passed as binary to the library:
@@ -319,10 +319,10 @@ There's also the ability to change the driver, if for some reason you
 have both, but want to use MCrypt instead of OpenSSL::
 
 	// Switch to the MCrypt driver
-	$this->encryption->initialize(array( 'driver' => 'mcrypt'));
+	$this->encryption->initialize(array( 'driver' => 'mcrypt' ) );
 
 	// Switch back to the OpenSSL driver
-	$this->encryption->initialize(array( 'driver' => 'openssl'));
+	$this->encryption->initialize(array( 'driver' => 'openssl' ) );
 
 Encrypting and decrypting data
 ==============================

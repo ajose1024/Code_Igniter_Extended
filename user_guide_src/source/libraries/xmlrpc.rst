@@ -85,7 +85,7 @@ Here is a basic example that sends a simple Weblogs.com ping to the
 	$request = array( 'My Photoblog', 'http://www.my-site.com/photoblog/');
 	$this->xmlrpc->request( $request);
 
-	if( ! $this->xmlrpc->send_request())
+	if( ! $this->xmlrpc->send_request( ) )
 	{
 		echo $this->xmlrpc->display_error();
 	}
@@ -331,14 +331,14 @@ folder::
 			$request = array( 'How is it going?');
 			$this->xmlrpc->request( $request);
 
-			if( ! $this->xmlrpc->send_request())
+			if( ! $this->xmlrpc->send_request( ) )
 			{
 				echo $this->xmlrpc->display_error();
 			}
 			else
 			{
 				echo '<pre>';
-				print_r( $this->xmlrpc->display_response());
+				print_r( $this->xmlrpc->display_response( ) );
 				echo '</pre>';
 			}
 		}

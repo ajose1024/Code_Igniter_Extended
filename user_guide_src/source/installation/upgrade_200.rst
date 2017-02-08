@@ -30,7 +30,7 @@ you *need* recursiveness where you are using this helper function,
 change such instances, setting the second parameter, $top_level_only
 to FALSE::
 
-	get_dir_file_info( '/path/to/directory', FALSE);
+	get_dir_file_info( '/path/to/directory', FALSE );
 
 Step 3: Convert your Plugins to Helpers
 =======================================

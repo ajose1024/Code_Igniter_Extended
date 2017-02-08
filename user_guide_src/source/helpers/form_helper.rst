@@ -629,7 +629,7 @@ The following functions are available:
 
 	The first parameter must contain the name of the select menu, the second
 	parameter must contain the value of each item, and the third (optional)
-	parameter lets you set an item as the default (use boolean TRUE/FALSE).
+	parameter lets you set an item as the default (use boolean TRUE/FALSE ).
 
 	Example::
 
@@ -651,7 +651,7 @@ The following functions are available:
 
 	The first parameter must contain the name of the checkbox, the second
 	parameter must contain its value, and the third (optional) parameter
-	lets you set an item as the default (use boolean TRUE/FALSE).
+	lets you set an item as the default (use boolean TRUE/FALSE ).
 
 	Example::
 

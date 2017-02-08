@@ -49,7 +49,7 @@ defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'xml_convert'))
+if( ! function_exists( 'xml_convert' ) )
 {
 	/**
 	 * Convert Reserved XML characters to Entities
@@ -58,7 +58,7 @@ if( ! function_exists( 'xml_convert'))
 	 * @param	bool
 	 * @return	string
 	 */
-	function xml_convert( $str, $protect_all = FALSE)
+	function xml_convert( $str, $protect_all = FALSE )
 	{
 		$temp = '__TEMP_AMPERSANDS__';
 

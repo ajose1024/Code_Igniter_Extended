@@ -49,7 +49,7 @@ defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 // --------------------------------------------------------------------
 
-if( ! function_exists( 'singular'))
+if( ! function_exists( 'singular' ) )
 {
 	/**
 	 * Singular
@@ -63,7 +63,7 @@ if( ! function_exists( 'singular'))
 	{
 		$result = strval( $str);
 
-		if( ! is_countable( $result))
+		if( ! is_countable( $result ) )
 		{
 			return  $result;
 		}
@@ -100,7 +100,7 @@ if( ! function_exists( 'singular'))
 
 		foreach( $singular_rules as $rule => $replacement)
 		{
-			if( preg_match( $rule, $result))
+			if( preg_match( $rule, $result ) )
 			{
 				$result = preg_replace( $rule, $replacement, $result);
 				break;
@@ -113,7 +113,7 @@ if( ! function_exists( 'singular'))
 
 // --------------------------------------------------------------------
 
-if( ! function_exists( 'plural'))
+if( ! function_exists( 'plural' ) )
 {
 	/**
 	 * Plural
@@ -127,7 +127,7 @@ if( ! function_exists( 'plural'))
 	{
 		$result = strval( $str);
 
-		if( ! is_countable( $result))
+		if( ! is_countable( $result ) )
 		{
 			return  $result;
 		}
@@ -157,7 +157,7 @@ if( ! function_exists( 'plural'))
 
 		foreach( $plural_rules as $rule => $replacement)
 		{
-			if( preg_match( $rule, $result))
+			if( preg_match( $rule, $result ) )
 			{
 				$result = preg_replace( $rule, $replacement, $result);
 				break;
@@ -170,7 +170,7 @@ if( ! function_exists( 'plural'))
 
 // --------------------------------------------------------------------
 
-if( ! function_exists( 'camelize'))
+if( ! function_exists( 'camelize' ) )
 {
 	/**
 	 * Camelize
@@ -182,13 +182,13 @@ if( ! function_exists( 'camelize'))
 	 */
 	function camelize( $str)
 	{
-		return  strtolower( $str[0]).substr(str_replace( ' ', '', ucwords(preg_replace( '/[\s_]+/', ' ', $str))), 1);
+		return  strtolower( $str[0]).substr(str_replace( ' ', '', ucwords(preg_replace( '/[\s_]+/', ' ', $str ) )), 1);
 	}
 }
 
 // --------------------------------------------------------------------
 
-if( ! function_exists( 'underscore'))
+if( ! function_exists( 'underscore' ) )
 {
 	/**
 	 * Underscore
@@ -200,13 +200,13 @@ if( ! function_exists( 'underscore'))
 	 */
 	function underscore( $str)
 	{
-		return  preg_replace( '/[\s]+/', '_', trim(MB_ENABLED ? mb_strtolower( $str) : strtolower( $str)));
+		return  preg_replace( '/[\s]+/', '_', trim(MB_ENABLED ? mb_strtolower( $str) : strtolower( $str ) ));
 	}
 }
 
 // --------------------------------------------------------------------
 
-if( ! function_exists( 'humanize'))
+if( ! function_exists( 'humanize' ) )
 {
 	/**
 	 * Humanize
@@ -219,13 +219,13 @@ if( ! function_exists( 'humanize'))
 	 */
 	function humanize( $str, $separator = '_')
 	{
-		return  ucwords(preg_replace( '/[ ' . $separator . ' ]+/', ' ', trim(MB_ENABLED ? mb_strtolower( $str) : strtolower( $str))));
+		return  ucwords(preg_replace( '/[ ' . $separator . ' ]+/', ' ', trim(MB_ENABLED ? mb_strtolower( $str) : strtolower( $str ) ) ) );
 	}
 }
 
 // --------------------------------------------------------------------
 
-if( ! function_exists( 'is_countable'))
+if( ! function_exists( 'is_countable' ) )
 {
 	/**
 	 * Checks if the given word has a plural version.

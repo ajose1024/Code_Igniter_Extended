@@ -10,7 +10,7 @@ The how-to material for this has been split over several articles.
 This article is intended to be a reference for them.
 
 .. important:: Not all methods are supported by all database drivers,
-	some of them may fail (and return  FALSE) if the underlying
+	some of them may fail (and return  FALSE ) if the underlying
 	driver does not support them.
 
 .. php:class:: CI_DB_driver

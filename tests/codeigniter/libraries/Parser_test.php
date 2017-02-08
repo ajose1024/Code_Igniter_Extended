@@ -44,7 +44,7 @@ class Parser_test extends CI_TestCase {
 
 		$result = implode("\n", $data);
 
-		$this->assertEquals( $result, $this->parser->parse_string( $template, $data, TRUE));
+		$this->assertEquals( $result, $this->parser->parse_string( $template, $data, TRUE ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -60,7 +60,7 @@ class Parser_test extends CI_TestCase {
 
 	private function _parse_no_template()
 	{
-		$this->assertFalse( $this->parser->parse_string( '', '', TRUE));
+		$this->assertFalse( $this->parser->parse_string( '', '', TRUE ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -69,12 +69,12 @@ class Parser_test extends CI_TestCase {
 	{
 		$data = array(
 			'title'		=> 'Super Heroes',
-			'powers'	=> array(array( 'invisibility' => 'yes', 'flying' => 'no'))
+			'powers'	=> array(array( 'invisibility' => 'yes', 'flying' => 'no' ) )
 		);
 
 		$template = "{title}\n{powers}{invisibility}\n{flying}{/powers}\nsecond:{powers} {invisibility} {flying}{/powers}";
 
-		$this->assertEquals("Super Heroes\nyes\nno\nsecond: yes no", $this->parser->parse_string( $template, $data, TRUE));
+		$this->assertEquals("Super Heroes\nyes\nno\nsecond: yes no", $this->parser->parse_string( $template, $data, TRUE ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -83,13 +83,13 @@ class Parser_test extends CI_TestCase {
 	{
 		$data = array(
 			'title'		=> 'Super Heroes',
-			'powers'	=> array(array( 'invisibility' => 'yes', 'flying' => 'no'))
+			'powers'	=> array(array( 'invisibility' => 'yes', 'flying' => 'no' ) )
 		);
 
 		$template = "{title}\n{powers}{invisibility}\n{flying}";
 		$result = "Super Heroes\n{powers}{invisibility}\n{flying}";
 
-		$this->assertEquals( $result, $this->parser->parse_string( $template, $data, TRUE));
+		$this->assertEquals( $result, $this->parser->parse_string( $template, $data, TRUE ) );
 	}
 
 }

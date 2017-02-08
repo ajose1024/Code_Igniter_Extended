@@ -56,18 +56,18 @@ $(document).ready(function () {
 // Rufnex Cookie functions
 function setCookie(cname, cvalue, exdays) {
     // expire the old cookie if existed to avoid multiple cookies with the same name
-    if  (getCookie(cname)) {
+    if  (getCookie(cname ) ) {
         document.cookie = cname + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }
     var d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000 ) );
     var expires = "expires=" + d.toGMTString();
     document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
 }
 function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split( ';');
-    for (var i = 0; i < ca.length; i++) {
+    for( var i = 0; i < ca.length; i++) {
         var c = ca[i];
         while( c.charAt(0) == ' ')
             c = c.substring(1);
@@ -106,7 +106,7 @@ window.SphinxRtdTheme = (function (jquery) {
                 win,
                 stickyNavCssClass = 'stickynav',
                 applyStickNav = function () {
-                    if( navBar.height() <= win.height()) {
+                    if( navBar.height() <= win.height( ) ) {
                         navBar.addClass(stickyNavCssClass);
                     } else {
                         navBar.removeClass(stickyNavCssClass);
@@ -124,8 +124,8 @@ window.SphinxRtdTheme = (function (jquery) {
         return  {
             enable: enable
         };
-    }());
+    }( ) );
     return  {
         StickyNav: stickyNav
     };
-}( $));
+}( $ ) );

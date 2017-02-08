@@ -98,7 +98,7 @@ Available Functions
 
 	.. note:: Calling this function is the same as doing this:
 		|
-		| site_url(uri_string());
+		| site_url(uri_string( ) );
 
 
 .. php:function:: uri_string()
@@ -160,14 +160,14 @@ Available Functions
 		echo anchor( 'news/local/123', 'My News', 'title="News title"');
 		// Prints: <a href="http://example.com/index.php/news/local/123" title="News title">My News</a>
 
-		echo anchor( 'news/local/123', 'My News', array( 'title' => 'The best news!'));
+		echo anchor( 'news/local/123', 'My News', array( 'title' => 'The best news!' ) );
 		// Prints: <a href="http://example.com/index.php/news/local/123" title="The best news!">My News</a>
 
 		echo anchor( '', 'Click here');
 		// Prints: <a href="http://example.com">Click Here</a>
 
 
-.. php:function:: anchor_popup( $uri = '', $title = '', $attributes = FALSE)
+.. php:function:: anchor_popup( $uri = '', $title = '', $attributes = FALSE )
 
 	:param	string	$uri: URI string
 	:param	string	$title: Anchor title
@@ -201,7 +201,7 @@ Available Functions
 		function to use all of its defaults simply pass an empty array in the
 		third parameter:
 		|
-		| echo anchor_popup( 'news/local/123', 'Click Me!', array());
+		| echo anchor_popup( 'news/local/123', 'Click Me!', array( ) );
 
 	.. note:: The **window_name** is not really an attribute, but an argument to
 		the JavaScript `window.open() <http://www.w3schools.com/jsref/met_win_open.asp>`
@@ -241,7 +241,7 @@ Available Functions
 	version of the *mailto* tag using ordinal numbers written with JavaScript to
 	help prevent the e-mail address from being harvested by spam bots.
 
-.. php:function:: auto_link( $str, $type = 'both', $popup = FALSE)
+.. php:function:: auto_link( $str, $type = 'both', $popup = FALSE )
 
 	:param	string	$str: Input string
 	:param	string	$type: Link type ( 'email', 'url' or 'both')
@@ -273,7 +273,7 @@ Available Functions
 		$string = auto_link( $string, 'both', TRUE);
 
 
-.. php:function:: url_title( $str, $separator = '-', $lowercase = FALSE)
+.. php:function:: url_title( $str, $separator = '-', $lowercase = FALSE )
 
 	:param	string	$str: Input string
 	:param	string	$separator: Word separator
@@ -348,7 +348,7 @@ Available Functions
 	engine purposes. The default Response Code is 302. The third parameter is
 	*only* available with **location** redirects, and not *refresh*. Examples::
 
-		if( $logged_in == FALSE)
+		if( $logged_in == FALSE )
 		{      
 			redirect( '/login/form/');
 		}

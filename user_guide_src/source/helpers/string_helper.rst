@@ -84,7 +84,7 @@ The following functions are available:
 	Allows two or more items to be alternated between, when cycling through
 	a loop. Example::
 
-		for ( $i = 0; $i < 10; $i++)
+		for( $i = 0; $i < 10; $i++)
 		{     
 			echo alternator( 'string one', 'string two');
 		}
@@ -94,7 +94,7 @@ The following functions are available:
 
 	::
 
-		for ( $i = 0; $i < 10; $i++)
+		for( $i = 0; $i < 10; $i++)
 		{     
 			echo alternator( 'one', 'two', 'three', 'four', 'five');
 		}

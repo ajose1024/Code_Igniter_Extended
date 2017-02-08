@@ -87,7 +87,7 @@ The following functions are available:
 		<http://php.net/manual/en/class.datetime.php#datetime.constants.types>`_
 		instead::
 
-			echo date(DATE_RFC822, time());
+			echo date(DATE_RFC822, time( ) );
 
 	**Supported formats:**
 
@@ -116,7 +116,7 @@ The following functions are available:
 
 	Example::
 
-		$gmt = local_to_gmt(time());
+		$gmt = local_to_gmt(time( ) );
 
 .. php:function:: gmt_to_local([$time = ''[, $timezone = 'UTC'[, $dst = FALSE]]])
 

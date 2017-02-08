@@ -125,11 +125,11 @@ this code and save it to your application/controllers/ folder::
 
 		public function index()
 		{
-			$this->load->helper(array( 'form', 'url'));
+			$this->load->helper(array( 'form', 'url' ) );
 
 			$this->load->library( 'form_validation');
 
-			if( $this->form_validation->run() == FALSE)
+			if( $this->form_validation->run() == FALSE )
 			{
 				$this->load->view( 'myform');
 			}
@@ -151,7 +151,7 @@ If you submit the form you should simply see the form reload. That's
 because you haven't set up any validation rules yet.
 
 **Since you haven't told the Form Validation class to validate anything
-yet, it returns FALSE (boolean false) by default. ``The run()`` method
+yet, it returns FALSE (boolean false ) by default. ``The run()`` method
 only returns TRUE if it has successfully applied your rules without any
 of them failing.**
 
@@ -221,7 +221,7 @@ Your controller should now look like this::
 
 		public function index()
 		{
-			$this->load->helper(array( 'form', 'url'));
+			$this->load->helper(array( 'form', 'url' ) );
 
 			$this->load->library( 'form_validation');
 
@@ -232,7 +232,7 @@ Your controller should now look like this::
 			$this->form_validation->set_rules( 'passconf', 'Password Confirmation', 'required');
 			$this->form_validation->set_rules( 'email', 'Email', 'required');
 
-			if( $this->form_validation->run() == FALSE)
+			if( $this->form_validation->run() == FALSE )
 			{
 				$this->load->view( 'myform');
 			}
@@ -317,7 +317,7 @@ rules available which you can read about in the validation reference.
 .. note:: You can also pass an array of rules to ``set_rules()``,
 	instead of a string. Example::
 
-	$this->form_validation->set_rules( 'username', 'Username', array( 'required', 'min_length[5]'));
+	$this->form_validation->set_rules( 'username', 'Username', array( 'required', 'min_length[5]' ) );
 
 Prepping Data
 =============
@@ -424,7 +424,7 @@ Here's how your controller should now look::
 
 		public function index()
 		{
-			$this->load->helper(array( 'form', 'url'));
+			$this->load->helper(array( 'form', 'url' ) );
 
 			$this->load->library( 'form_validation');
 
@@ -433,7 +433,7 @@ Here's how your controller should now look::
 			$this->form_validation->set_rules( 'passconf', 'Password Confirmation', 'required');
 			$this->form_validation->set_rules( 'email', 'Email', 'required|is_unique[users.email]');
 
-			if( $this->form_validation->run() == FALSE)
+			if( $this->form_validation->run() == FALSE )
 			{
 				$this->load->view( 'myform');
 			}
@@ -518,7 +518,7 @@ the second element of an array, with the first one being the rule name::
 		'username', 'Username',
 		array(
 			'required',
-			array( 'username_callable', array( $this->users_model, 'valid_username'))
+			array( 'username_callable', array( $this->users_model, 'valid_username' ) )
 		)
 	);
 
@@ -565,7 +565,7 @@ Where rule corresponds to the name of a particular rule, and Error
 Message is the text you would like displayed.
 
 If you'd like to include a field's "human" name, or the optional
-parameter some rules allow for (such as max_length), you can add the
+parameter some rules allow for( such as max_length), you can add the
 **{field}** and **{param}** tags to your message, respectively::
 
 	$this->form_validation->set_message( 'min_length', '{field} must have at least {param} characters . ');
@@ -814,7 +814,7 @@ Calling a Specific Rule Group
 In order to call a specific group, you will pass its name to the ``run()``
 method. For example, to call the signup rule you will do this::
 
-	if( $this->form_validation->run( 'signup') == FALSE)
+	if( $this->form_validation->run( 'signup') == FALSE )
 	{
 		$this->load->view( 'myform');
 	}
@@ -839,7 +839,7 @@ method named signup. Here's what your class might look like::
 		{
 			$this->load->library( 'form_validation');
 
-			if( $this->form_validation->run() == FALSE)
+			if( $this->form_validation->run() == FALSE )
 			{
 				$this->load->view( 'myform');
 			}
@@ -1101,7 +1101,7 @@ Class Reference
 		:returns:	Error messages as a string
 		:rtype:	string
 
-		Returns all error messages (as returned from error_array()) formatted as a
+		Returns all error messages (as returned from error_array( ) ) formatted as a
 		string and separated by a newline character.
 
 	.. php:method:: error( $field[, $prefix = ''[, $suffix = '' ]])

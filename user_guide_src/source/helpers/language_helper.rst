@@ -39,5 +39,5 @@ The following functions are available:
 
 	Example::
 
-		echo lang( 'language_key', 'form_item_id', array( 'class' => 'myClass'));
+		echo lang( 'language_key', 'form_item_id', array( 'class' => 'myClass' ) );
 		// Outputs: <label for="form_item_id" class="myClass">Language line</label>

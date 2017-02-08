@@ -9,13 +9,13 @@ class Path_helper_test extends CI_TestCase {
 
 	public function test_set_realpath()
 	{
-		$this->assertEquals(getcwd().DIRECTORY_SEPARATOR, set_realpath(getcwd()));
+		$this->assertEquals(getcwd().DIRECTORY_SEPARATOR, set_realpath(getcwd( ) ));
 	}
 
 	public function test_set_realpath_nonexistent_directory()
 	{
 		$expected = '/path/to/nowhere';
-		$this->assertEquals( $expected, set_realpath( '/path/to/nowhere', FALSE));
+		$this->assertEquals( $expected, set_realpath( '/path/to/nowhere', FALSE ) );
 	}
 
 	public function test_set_realpath_error_trigger()

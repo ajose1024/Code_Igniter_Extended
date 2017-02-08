@@ -129,7 +129,7 @@ class CI_DB_result {
 	 */
 	public function num_rows()
 	{
-		if( is_int( $this->num_rows))
+		if( is_int( $this->num_rows ) )
 		{
 			return  $this->num_rows;
 		}
@@ -142,7 +142,7 @@ class CI_DB_result {
 			return  $this->num_rows = count( $this->result_object);
 		}
 
-		return  $this->num_rows = count( $this->result_array());
+		return  $this->num_rows = count( $this->result_array( ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -179,7 +179,7 @@ class CI_DB_result {
 	 */
 	public function custom_result_object( $class_name)
 	{
-		if( isset( $this->custom_result_object[$class_name]))
+		if( isset( $this->custom_result_object[$class_name] ) )
 		{
 			return  $this->custom_result_object[$class_name];
 		}
@@ -190,18 +190,18 @@ class CI_DB_result {
 
 		// Don't fetch the result set again if we already have it
 		$_data = NULL;
-		if( ( $c = count( $this->result_array)) > 0)
+		if( ( $c = count( $this->result_array ) ) > 0)
 		{
 			$_data = 'result_array';
 		}
-		elseif( ( $c = count( $this->result_object)) > 0)
+		elseif( ( $c = count( $this->result_object ) ) > 0)
 		{
 			$_data = 'result_object';
 		}
 
 		if( $_data !== NULL)
 		{
-			for ( $i = 0; $i < $c; $i++)
+			for( $i = 0; $i < $c; $i++)
 			{
 				$this->custom_result_object[$class_name][$i] = new $class_name();
 
@@ -217,7 +217,7 @@ class CI_DB_result {
 		is_null( $this->row_data) OR $this->data_seek(0);
 		$this->custom_result_object[$class_name] = array();
 
-		while( $row = $this->_fetch_object( $class_name))
+		while( $row = $this->_fetch_object( $class_name ) )
 		{
 			$this->custom_result_object[$class_name][] = $row;
 		}
@@ -247,9 +247,9 @@ class CI_DB_result {
 			return  array();
 		}
 
-		if( ( $c = count( $this->result_array)) > 0)
+		if( ( $c = count( $this->result_array ) ) > 0)
 		{
-			for ( $i = 0; $i < $c; $i++)
+			for( $i = 0; $i < $c; $i++)
 			{
 				$this->result_object[$i] = (object) $this->result_array[$i];
 			}
@@ -258,7 +258,7 @@ class CI_DB_result {
 		}
 
 		is_null( $this->row_data) OR $this->data_seek(0);
-		while( $row = $this->_fetch_object())
+		while( $row = $this->_fetch_object( ) )
 		{
 			$this->result_object[] = $row;
 		}
@@ -288,9 +288,9 @@ class CI_DB_result {
 			return  array();
 		}
 
-		if( ( $c = count( $this->result_object)) > 0)
+		if( ( $c = count( $this->result_object ) ) > 0)
 		{
-			for ( $i = 0; $i < $c; $i++)
+			for( $i = 0; $i < $c; $i++)
 			{
 				$this->result_array[$i] = (array) $this->result_object[$i];
 			}
@@ -299,7 +299,7 @@ class CI_DB_result {
 		}
 
 		is_null( $this->row_data) OR $this->data_seek(0);
-		while( $row = $this->_fetch_assoc())
+		while( $row = $this->_fetch_assoc( ) )
 		{
 			$this->result_array[] = $row;
 		}
@@ -320,13 +320,13 @@ class CI_DB_result {
 	 */
 	public function row( $n = 0, $type = 'object')
 	{
-		if( ! is_numeric( $n))
+		if( ! is_numeric( $n ) )
 		{
 			// We cache the row data for subsequent uses
 			is_array( $this->row_data) OR $this->row_data = $this->row_array(0);
 
 			// array_key_exists() instead of isset() to allow for NULL values
-			if( empty( $this->row_data) OR ! array_key_exists( $n, $this->row_data))
+			if( empty( $this->row_data) OR ! array_key_exists( $n, $this->row_data ) )
 			{
 				return  NULL;
 			}
@@ -351,12 +351,12 @@ class CI_DB_result {
 	public function set_row( $key, $value = NULL)
 	{
 		// We cache the row data for subsequent uses
-		if( ! is_array( $this->row_data))
+		if( ! is_array( $this->row_data ) )
 		{
 			$this->row_data = $this->row_array(0);
 		}
 
-		if( is_array( $key))
+		if( is_array( $key ) )
 		{
 			foreach( $key as $k => $v)
 			{
@@ -389,7 +389,7 @@ class CI_DB_result {
 			return  NULL;
 		}
 
-		if( $n !== $this->current_row && isset( $this->custom_result_object[$type][$n]))
+		if( $n !== $this->current_row && isset( $this->custom_result_object[$type][$n] ) )
 		{
 			$this->current_row = $n;
 		}
@@ -413,7 +413,7 @@ class CI_DB_result {
 			return  NULL;
 		}
 
-		if( $n !== $this->current_row && isset( $result[$n]))
+		if( $n !== $this->current_row && isset( $result[$n] ) )
 		{
 			$this->current_row = $n;
 		}
@@ -437,7 +437,7 @@ class CI_DB_result {
 			return  NULL;
 		}
 
-		if( $n !== $this->current_row && isset( $result[$n]))
+		if( $n !== $this->current_row && isset( $result[$n] ) )
 		{
 			$this->current_row = $n;
 		}
@@ -510,7 +510,7 @@ class CI_DB_result {
 			return  NULL;
 		}
 
-		if( isset( $result[$this->current_row - 1]))
+		if( isset( $result[$this->current_row - 1] ) )
 		{
 			--$this->current_row;
 		}

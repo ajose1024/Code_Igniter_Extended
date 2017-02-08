@@ -35,7 +35,7 @@ browser may attempt to execute.
 
 ::
 
-	if( $this->security->xss_clean( $file, TRUE) === FALSE)
+	if( $this->security->xss_clean( $file, TRUE) === FALSE )
 	{
 		// file failed the XSS test
 	}
@@ -114,7 +114,7 @@ Class Reference
 		and other security threats, which is particularly useful for files that were supplied via user input.
 		::
 
-			$filename = $this->security->sanitize_filename( $this->input->post( 'filename'));
+			$filename = $this->security->sanitize_filename( $this->input->post( 'filename' ) );
 
 		If it is acceptable for the user input to include relative paths, e.g.
 		*file/in/some/approved/folder.txt*, you can set the second optional parameter, ``$relative_path`` to TRUE.

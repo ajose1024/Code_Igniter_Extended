@@ -175,7 +175,7 @@ Class Reference
 
 			$path = '/path/to/your/directory/';
 
-			$this->zip->read_dir( $path, FALSE);
+			$this->zip->read_dir( $path, FALSE );
 
 		This will create a ZIP with a directory named "directory" inside, then all sub-directories
 		stored correctly inside that, but will not include the */path/to/your* part of the path.

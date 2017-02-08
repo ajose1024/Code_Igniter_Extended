@@ -23,7 +23,7 @@ passing an array of libraries to the load method.
 
 Example::
 
-	$this->load->library(array( 'email', 'table'));
+	$this->load->library(array( 'email', 'table' ) );
 
 Creating Your Own Libraries
 ===========================

@@ -121,12 +121,12 @@ class CI_Exceptions {
         if( is_cli( ) )
         {
             $heading = 'Not Found';
-            $message = 'The controller/method pair you requested was not found . ';
+            $message = 'The controller/method pair you requested was not found.';
         }
         else
         {
             $heading = '404 Page Not Found';
-            $message = 'The page you requested was not found . ';
+            $message = 'The page you requested was not found.';
         }
 
         // By default we log this, but allow a dev to skip it
@@ -159,19 +159,23 @@ class CI_Exceptions {
         $templates_path = config_item( 'error_views_path' );
         if( empty( $templates_path ) )
         {
-            $templates_path = VIEWPATH . 'errors'.DIRECTORY_SEPARATOR;
+            $templates_path = VIEWPATH . 'errors'. DIRECTORY_SEPARATOR;
         }
 
         if( is_cli( ) )
         {
-            $message = "\t".(is_array( $message ) ? implode("\n\t", $message ) : $message );
-            $template = 'cli'.DIRECTORY_SEPARATOR.$template;
+            $message = "\t" . ( is_array( $message )
+                ?   implode( "\n\t", $message )
+                :   $message );
+            $template = 'cli' . DIRECTORY_SEPARATOR . $template ;
         }
         else
         {
             set_status_header( $status_code );
-            $message = '<p>'.(is_array( $message ) ? implode( '</p><p>', $message ) : $message ) . '</p>';
-            $template = 'html'.DIRECTORY_SEPARATOR.$template;
+            $message = '<p>'.(is_array( $message )
+                ?   implode( '</p><p>', $message )
+                :   $message ) . '</p>' ;
+            $template = 'html' . DIRECTORY_SEPARATOR . $template;
         }
 
 		if( ob_get_level( ) > $this->ob_level + 1 )

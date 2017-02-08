@@ -16,7 +16,7 @@ defined( 'SYS_CORE_PATH' ) OR exit( 'No direct script access allowed' ) ;
     <p>Backtrace:</p>
     <?php foreach( $exception->getTrace( ) as $error ): ?>
 
-        <?php if( isset( $error[ 'file' ] ) && strpos( $error[ 'file' ], realpath(SYS_CORE_PATH ) ) !== 0 ): ?>
+        <?php if( isset( $error[ 'file' ] ) && strpos( $error[ 'file' ], realpath( SYS_CORE_PATH ) ) !== 0 ): ?>
 
             <p style="margin-left:10px">
             File: <?php echo $error[ 'file' ]; ?><br />

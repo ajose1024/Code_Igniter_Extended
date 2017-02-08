@@ -49,7 +49,7 @@ defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'now'))
+if( ! function_exists( 'now' ) )
 {
 	/**
 	 * Get "now" time
@@ -62,17 +62,17 @@ if( ! function_exists( 'now'))
 	 */
 	function now( $timezone = NULL)
 	{
-		if( empty( $timezone))
+		if( empty( $timezone ) )
 		{
 			$timezone = config_item( 'time_reference');
 		}
 
-		if( $timezone === 'local' OR $timezone === date_default_timezone_get())
+		if( $timezone === 'local' OR $timezone === date_default_timezone_get( ) )
 		{
 			return  time();
 		}
 
-		$datetime = new DateTime( 'now', new DateTimeZone( $timezone));
+		$datetime = new DateTime( 'now', new DateTimeZone( $timezone ) );
 		sscanf( $datetime->format( 'j-n-Y G:i:s'), '%d-%d-%d %d:%d:%d', $day, $month, $year, $hour, $minute, $second);
 
 		return  mktime( $hour, $minute, $second, $month, $day, $year);
@@ -81,7 +81,7 @@ if( ! function_exists( 'now'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'mdate'))
+if( ! function_exists( 'mdate' ) )
 {
 	/**
 	 * Convert MySQL Style Datecodes
@@ -105,7 +105,7 @@ if( ! function_exists( 'mdate'))
 		{
 			return  '';
 		}
-		elseif( empty( $time))
+		elseif( empty( $time ) )
 		{
 			$time = now();
 		}
@@ -122,7 +122,7 @@ if( ! function_exists( 'mdate'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'standard_date'))
+if( ! function_exists( 'standard_date' ) )
 {
 	/**
 	 * Standard Date
@@ -136,7 +136,7 @@ if( ! function_exists( 'standard_date'))
 	 * @deprecated	3.0.0	Use PHP's native date() instead.
 	 * @link	http://www.php.net/manual/en/class.datetime.php#datetime.constants.types
 	 *
-	 * @example	date(DATE_RFC822, now()); // default
+	 * @example	date(DATE_RFC822, now( ) ); // default
 	 * @example	date(DATE_W3C, $time); // a different format and time
 	 *
 	 * @param	string	$fmt = 'DATE_RFC822'	the chosen format
@@ -145,13 +145,13 @@ if( ! function_exists( 'standard_date'))
 	 */
 	function standard_date( $fmt = 'DATE_RFC822', $time = NULL)
 	{
-		if( empty( $time))
+		if( empty( $time ) )
 		{
 			$time = now();
 		}
 
 		// Procedural style pre-defined constants from the DateTime extension
-		if( strpos( $fmt, 'DATE_') !== 0 OR defined( $fmt) === FALSE)
+		if( strpos( $fmt, 'DATE_') !== 0 OR defined( $fmt) === FALSE )
 		{
 			return  FALSE;
 		}
@@ -162,7 +162,7 @@ if( ! function_exists( 'standard_date'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'timespan'))
+if( ! function_exists( 'timespan' ) )
 {
 	/**
 	 * Timespan
@@ -197,7 +197,7 @@ if( ! function_exists( 'timespan'))
 		$seconds -= $years * 31557600;
 		$months = floor( $seconds / 2629743);
 
-		if( count( $str) < $units && ( $years > 0 OR $months > 0))
+		if( count( $str) < $units && ( $years > 0 OR $months > 0 ) )
 		{
 			if( $months > 0)
 			{
@@ -209,7 +209,7 @@ if( ! function_exists( 'timespan'))
 
 		$weeks = floor( $seconds / 604800);
 
-		if( count( $str) < $units && ( $years > 0 OR $months > 0 OR $weeks > 0))
+		if( count( $str) < $units && ( $years > 0 OR $months > 0 OR $weeks > 0 ) )
 		{
 			if( $weeks > 0)
 			{
@@ -221,7 +221,7 @@ if( ! function_exists( 'timespan'))
 
 		$days = floor( $seconds / 86400);
 
-		if( count( $str) < $units && ( $months > 0 OR $weeks > 0 OR $days > 0))
+		if( count( $str) < $units && ( $months > 0 OR $weeks > 0 OR $days > 0 ) )
 		{
 			if( $days > 0)
 			{
@@ -233,7 +233,7 @@ if( ! function_exists( 'timespan'))
 
 		$hours = floor( $seconds / 3600);
 
-		if( count( $str) < $units && ( $days > 0 OR $hours > 0))
+		if( count( $str) < $units && ( $days > 0 OR $hours > 0 ) )
 		{
 			if( $hours > 0)
 			{
@@ -245,7 +245,7 @@ if( ! function_exists( 'timespan'))
 
 		$minutes = floor( $seconds / 60);
 
-		if( count( $str) < $units && ( $days > 0 OR $hours > 0 OR $minutes > 0))
+		if( count( $str) < $units && ( $days > 0 OR $hours > 0 OR $minutes > 0 ) )
 		{
 			if( $minutes > 0)
 			{
@@ -266,7 +266,7 @@ if( ! function_exists( 'timespan'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'days_in_month'))
+if( ! function_exists( 'days_in_month' ) )
 {
 	/**
 	 * Number of days in a month
@@ -289,19 +289,19 @@ if( ! function_exists( 'days_in_month'))
 			$year = date( 'Y');
 		}
 
-		if( defined( 'CAL_GREGORIAN'))
+		if( defined( 'CAL_GREGORIAN' ) )
 		{
 			return  cal_days_in_month(CAL_GREGORIAN, $month, $year);
 		}
 
 		if( $year >= 1970)
 		{
-			return  (int) date( 't', mktime(12, 0, 0, $month, 1, $year));
+			return  (int) date( 't', mktime(12, 0, 0, $month, 1, $year ) );
 		}
 
 		if( $month == 2)
 		{
-			if( $year % 400 === 0 OR ( $year % 4 === 0 && $year % 100 !== 0))
+			if( $year % 400 === 0 OR ( $year % 4 === 0 && $year % 100 !== 0 ) )
 			{
 				return  29;
 			}
@@ -314,7 +314,7 @@ if( ! function_exists( 'days_in_month'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'local_to_gmt'))
+if( ! function_exists( 'local_to_gmt' ) )
 {
 	/**
 	 * Converts a local Unix timestamp to GMT
@@ -342,7 +342,7 @@ if( ! function_exists( 'local_to_gmt'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'gmt_to_local'))
+if( ! function_exists( 'gmt_to_local' ) )
 {
 	/**
 	 * Converts GMT time to a localized value
@@ -356,7 +356,7 @@ if( ! function_exists( 'gmt_to_local'))
 	 * @param	bool	whether DST is active
 	 * @return	int
 	 */
-	function gmt_to_local( $time = '', $timezone = 'UTC', $dst = FALSE)
+	function gmt_to_local( $time = '', $timezone = 'UTC', $dst = FALSE )
 	{
 		if( $time === '')
 		{
@@ -371,7 +371,7 @@ if( ! function_exists( 'gmt_to_local'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'mysql_to_unix'))
+if( ! function_exists( 'mysql_to_unix' ) )
 {
 	/**
 	 * Converts a MySQL Timestamp to Unix
@@ -401,7 +401,7 @@ if( ! function_exists( 'mysql_to_unix'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'unix_to_human'))
+if( ! function_exists( 'unix_to_human' ) )
 {
 	/**
 	 * Unix to "Human"
@@ -442,7 +442,7 @@ if( ! function_exists( 'unix_to_human'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'human_to_unix'))
+if( ! function_exists( 'human_to_unix' ) )
 {
 	/**
 	 * Convert "human" date to GMT
@@ -459,9 +459,9 @@ if( ! function_exists( 'human_to_unix'))
 			return  FALSE;
 		}
 
-		$datestr = preg_replace( '/\040+/', ' ', trim( $datestr));
+		$datestr = preg_replace( '/\040+/', ' ', trim( $datestr ) );
 
-		if( ! preg_match( '/^(\d{2}|\d{4})\-[0-9]{1,2}\-[0-9]{1,2}\s[0-9]{1,2}:[0-9]{1,2}(?::[0-9]{1,2})?(?:\s[AP]M)?$/i', $datestr))
+		if( ! preg_match( '/^(\d{2}|\d{4})\-[0-9]{1,2}\-[0-9]{1,2}\s[0-9]{1,2}:[0-9]{1,2}(?::[0-9]{1,2})?(?:\s[AP]M)?$/i', $datestr ) )
 		{
 			return  FALSE;
 		}
@@ -470,7 +470,7 @@ if( ! function_exists( 'human_to_unix'))
 		sscanf( $time, '%d:%d:%d', $hour, $min, $sec);
 		isset( $sec) OR $sec = 0;
 
-		if( isset( $ampm))
+		if( isset( $ampm ) )
 		{
 			$ampm = strtolower( $ampm);
 
@@ -490,7 +490,7 @@ if( ! function_exists( 'human_to_unix'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'nice_date'))
+if( ! function_exists( 'nice_date' ) )
 {
 	/**
 	 * Turns many "reasonably-date-like" strings into something
@@ -500,21 +500,21 @@ if( ! function_exists( 'nice_date'))
 	 * @param	string	Date format to return  (same as php date function)
 	 * @return	string
 	 */
-	function nice_date( $bad_date = '', $format = FALSE)
+	function nice_date( $bad_date = '', $format = FALSE )
 	{
-		if( empty( $bad_date))
+		if( empty( $bad_date ) )
 		{
 			return  'Unknown';
 		}
-		elseif( empty( $format))
+		elseif( empty( $format ) )
 		{
 			$format = 'U';
 		}
 
 		// Date like: YYYYMM
-		if( preg_match( '/^\d{6}$/i', $bad_date))
+		if( preg_match( '/^\d{6}$/i', $bad_date ) )
 		{
-			if( in_array(substr( $bad_date, 0, 2), array( '19', '20')))
+			if( in_array(substr( $bad_date, 0, 2), array( '19', '20' ) ))
 			{
 				$year  = substr( $bad_date, 0, 4);
 				$month = substr( $bad_date, 4, 2);
@@ -525,37 +525,37 @@ if( ! function_exists( 'nice_date'))
 				$year   = substr( $bad_date, 2, 4);
 			}
 
-			return  date( $format, strtotime( $year . '-' . $month . '-01'));
+			return  date( $format, strtotime( $year . '-' . $month . '-01' ) );
 		}
 
 		// Date Like: YYYYMMDD
-		if( preg_match( '/^(\d{2})\d{2}(\d{4})$/i', $bad_date, $matches))
+		if( preg_match( '/^(\d{2})\d{2}(\d{4})$/i', $bad_date, $matches ) )
 		{
-			return  date( $format, strtotime( $matches[1] . '/01/' . $matches[2]));
+			return  date( $format, strtotime( $matches[1] . '/01/' . $matches[2] ) );
 		}
 
 		// Date Like: MM-DD-YYYY __or__ M-D-YYYY (or anything in between)
-		if( preg_match( '/^(\d{1,2})-(\d{1,2})-(\d{4})$/i', $bad_date, $matches))
+		if( preg_match( '/^(\d{1,2})-(\d{1,2})-(\d{4})$/i', $bad_date, $matches ) )
 		{
-			return  date( $format, strtotime( $matches[3] . '-' . $matches[1] . '-' . $matches[2]));
+			return  date( $format, strtotime( $matches[3] . '-' . $matches[1] . '-' . $matches[2] ) );
 		}
 
 		// Any other kind of string, when converted into UNIX time,
 		// produces "0 seconds after epoc..." is probably bad...
 		// return  "Invalid Date".
-		if( date( 'U', strtotime( $bad_date)) === '0')
+		if( date( 'U', strtotime( $bad_date ) ) === '0')
 		{
 			return  'Invalid Date';
 		}
 
 		// It's probably a valid-ish date format already
-		return  date( $format, strtotime( $bad_date));
+		return  date( $format, strtotime( $bad_date ) );
 	}
 }
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'timezone_menu'))
+if( ! function_exists( 'timezone_menu' ) )
 {
 	/**
 	 * Timezone Menu
@@ -596,7 +596,7 @@ if( ! function_exists( 'timezone_menu'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'timezones'))
+if( ! function_exists( 'timezones' ) )
 {
 	/**
 	 * Timezones
@@ -666,7 +666,7 @@ if( ! function_exists( 'timezones'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'date_range'))
+if( ! function_exists( 'date_range' ) )
 {
 	/**
 	 * Date range
@@ -693,16 +693,16 @@ if( ! function_exists( 'date_range'))
 		$is_unix = ! ( ! $is_unix OR $is_unix === 'days');
 
 		// Validate input and try strtotime() on invalid timestamps/intervals, just in case
-		if(  ( ! ctype_digit((string) $unix_start) && ( $unix_start = @strtotime( $unix_start)) === FALSE)
-			OR ( ! ctype_digit((string) $mixed) && ( $is_unix === FALSE OR ( $mixed = @strtotime( $mixed)) === FALSE))
-			OR ( $is_unix === TRUE && $mixed < $unix_start))
+		if(  ( ! ctype_digit((string) $unix_start) && ( $unix_start = @strtotime( $unix_start ) ) === FALSE )
+			OR ( ! ctype_digit((string) $mixed) && ( $is_unix === FALSE OR ( $mixed = @strtotime( $mixed ) ) === FALSE ) )
+			OR ( $is_unix === TRUE && $mixed < $unix_start ) )
 		{
 			return  FALSE;
 		}
 
-		if( $is_unix && ( $unix_start == $mixed OR date( $format, $unix_start) === date( $format, $mixed)))
+		if( $is_unix && ( $unix_start == $mixed OR date( $format, $unix_start) === date( $format, $mixed ) ))
 		{
-			return  array(date( $format, $unix_start));
+			return  array(date( $format, $unix_start ) );
 		}
 
 		$range = array();
@@ -725,7 +725,7 @@ if( ! function_exists( 'date_range'))
 		*/
 		$from = new DateTime();
 
-		if( is_php( '5.3'))
+		if( is_php( '5.3' ) )
 		{
 			$from->setTimestamp( $unix_start);
 			if( $is_unix)
@@ -749,7 +749,7 @@ if( ! function_exists( 'date_range'))
 			 * the end date might actually be less than 24 hours away from the previously
 			 * generated DateTime object, but either way - we have to append it manually.
 			 */
-			if( ! is_int( $arg) && $range[count( $range) - 1] !== $arg->format( $format))
+			if( ! is_int( $arg) && $range[count( $range) - 1] !== $arg->format( $format ) )
 			{
 				$range[] = $arg->format( $format);
 			}
@@ -757,13 +757,13 @@ if( ! function_exists( 'date_range'))
 			return  $range;
 		}
 
-		$from->setDate(date( 'Y', $unix_start), date( 'n', $unix_start), date( 'j', $unix_start));
-		$from->setTime(date( 'G', $unix_start), date( 'i', $unix_start), date( 's', $unix_start));
+		$from->setDate(date( 'Y', $unix_start), date( 'n', $unix_start), date( 'j', $unix_start ) );
+		$from->setTime(date( 'G', $unix_start), date( 'i', $unix_start), date( 's', $unix_start ) );
 		if( $is_unix)
 		{
 			$arg = new DateTime();
-			$arg->setDate(date( 'Y', $mixed), date( 'n', $mixed), date( 'j', $mixed));
-			$arg->setTime(date( 'G', $mixed), date( 'i', $mixed), date( 's', $mixed));
+			$arg->setDate(date( 'Y', $mixed), date( 'n', $mixed), date( 'j', $mixed ) );
+			$arg->setTime(date( 'G', $mixed), date( 'i', $mixed), date( 's', $mixed ) );
 		}
 		else
 		{
@@ -771,7 +771,7 @@ if( ! function_exists( 'date_range'))
 		}
 		$range[] = $from->format( $format);
 
-		if( is_int( $arg)) // Day intervals
+		if( is_int( $arg ) ) // Day intervals
 		{
 			do
 			{
@@ -782,7 +782,7 @@ if( ! function_exists( 'date_range'))
 		}
 		else // end date UNIX timestamp
 		{
-			for ( $from->modify( '+1 day'), $end_check = $arg->format( 'Ymd'); $from->format( 'Ymd') < $end_check; $from->modify( '+1 day'))
+			for( $from->modify( '+1 day'), $end_check = $arg->format( 'Ymd'); $from->format( 'Ymd') < $end_check; $from->modify( '+1 day' ) )
 			{
 				$range[] = $from->format( $format);
 			}

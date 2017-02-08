@@ -143,7 +143,7 @@ in your **application/config/config.php** file will be used.
 You can also load multiple language files at the same time by passing an array of language files as first parameter.
 ::
 
-	$this->lang->load(array( 'filename1', 'filename2'));
+	$this->lang->load(array( 'filename1', 'filename2' ) );
 
 .. note:: The *language* parameter can only consist of letters.
 
@@ -161,7 +161,7 @@ to show.
 You can optionally pass FALSE as the second argument of that method to
 disable error logging, in case you're not sure if the line exists::
 
-	$this->lang->line( 'misc_key', FALSE);
+	$this->lang->line( 'misc_key', FALSE );
 
 .. note:: This method simply returns the line. It does not echo it.
 

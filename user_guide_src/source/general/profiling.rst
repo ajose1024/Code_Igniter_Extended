@@ -27,7 +27,7 @@ your pages.
 
 To disable the profiler you will use::
 
-	$this->output->enable_profiler(FALSE);
+	$this->output->enable_profiler(FALSE );
 
 Setting Benchmark Points
 ========================

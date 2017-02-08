@@ -113,10 +113,10 @@ class CI_Migration {
 	 * @param	array	$config
 	 * @return	void
 	 */
-	public function __construct( $config = array())
+	public function __construct( $config = array( ) )
 	{
 		// Only run this constructor on main library load
-		if( ! in_array(get_class( $this), array( 'CI_Migration', config_item( 'subclass_prefix') . 'Migration'), TRUE))
+		if( ! in_array(get_class( $this), array( 'CI_Migration', config_item( 'subclass_prefix') . 'Migration'), TRUE ) )
 		{
 			return;
 		}
@@ -147,7 +147,7 @@ class CI_Migration {
 		$this->load->dbforge();
 
 		// Make sure the migration table name was set.
-		if( empty( $this->_migration_table))
+		if( empty( $this->_migration_table ) )
 		{
 			show_error( 'Migrations configuration file (migration.php) must have "migration_table" set . ');
 		}
@@ -158,27 +158,27 @@ class CI_Migration {
 			: '/^\d{3}_(\w+)$/';
 
 		// Make sure a valid migration numbering type was set.
-		if( ! in_array( $this->_migration_type, array( 'sequential', 'timestamp')))
+		if( ! in_array( $this->_migration_type, array( 'sequential', 'timestamp' ) ))
 		{
 			show_error( 'An invalid migration numbering type was specified: ' . $this->_migration_type);
 		}
 
 		// If the migrations table is missing, make it
-		if( ! $this->db->table_exists( $this->_migration_table))
+		if( ! $this->db->table_exists( $this->_migration_table ) )
 		{
 			$this->dbforge->add_field(array(
 				'version' => array( 'type' => 'BIGINT', 'constraint' => 20),
-			));
+			 ) );
 
 			$this->dbforge->create_table( $this->_migration_table, TRUE);
 
-			$this->db->insert( $this->_migration_table, array( 'version' => 0));
+			$this->db->insert( $this->_migration_table, array( 'version' => 0 ) );
 		}
 
 		// Do we auto migrate to the latest migration?
-		if( $this->_migration_auto_latest === TRUE && ! $this->latest())
+		if( $this->_migration_auto_latest === TRUE && ! $this->latest( ) )
 		{
-			show_error( $this->error_string());
+			show_error( $this->error_string( ) );
 		}
 	}
 
@@ -209,7 +209,7 @@ class CI_Migration {
 
 		$migrations = $this->find_migrations();
 
-		if( $target_version > 0 && ! isset( $migrations[$target_version]))
+		if( $target_version > 0 && ! isset( $migrations[$target_version] ) )
 		{
 			$this->_error_string = sprintf( $this->lang->line( 'migration_not_found'), $target_version);
 			return  FALSE;
@@ -227,7 +227,7 @@ class CI_Migration {
 			krsort( $migrations);
 		}
 
-		if( empty( $migrations))
+		if( empty( $migrations ) )
 		{
 			return  TRUE;
 		}
@@ -245,10 +245,10 @@ class CI_Migration {
 			}
 
 			include_once( $file);
-			$class = 'Migration_'.ucfirst(strtolower( $this->_get_migration_name(basename( $file, '.php'))));
+			$class = 'Migration_'.ucfirst(strtolower( $this->_get_migration_name(basename( $file, '.php' ) ) ) );
 
 			// Validate the migration file structure
-			if( ! class_exists( $class, FALSE))
+			if( ! class_exists( $class, FALSE ) )
 			{
 				$this->_error_string = sprintf( $this->lang->line( 'migration_class_doesnt_exist'), $class);
 				return  FALSE;
@@ -263,14 +263,14 @@ class CI_Migration {
 			)
 			{
 				$instance = new $class();
-				if( ! is_callable(array( $instance, $method)))
+				if( ! is_callable(array( $instance, $method ) ))
 				{
 					$this->_error_string = sprintf( $this->lang->line( 'migration_missing_' . $method . '_method'), $class);
 					return  FALSE;
 				}
 
 				log_message( 'debug', 'Migrating ' . $method . ' from version ' . $current_version . ' to version ' . $number);
-				call_user_func(array( $instance, $method));
+				call_user_func(array( $instance, $method ) );
 				$current_version = $number;
 				$this->_update_version( $current_version);
 			}
@@ -300,17 +300,17 @@ class CI_Migration {
 	{
 		$migrations = $this->find_migrations();
 
-		if( empty( $migrations))
+		if( empty( $migrations ) )
 		{
 			$this->_error_string = $this->lang->line( 'migration_none_found');
 			return  FALSE;
 		}
 
-		$last_migration = basename(end( $migrations));
+		$last_migration = basename(end( $migrations ) );
 
 		// Calculate the last migration step from existing migration
 		// filenames and proceed to the standard version migration
-		return  $this->version( $this->_get_migration_number( $last_migration));
+		return  $this->version( $this->_get_migration_number( $last_migration ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -354,12 +354,12 @@ class CI_Migration {
 			$name = basename( $file, '.php');
 
 			// Filter out non-migration files
-			if( preg_match( $this->_migration_regex, $name))
+			if( preg_match( $this->_migration_regex, $name ) )
 			{
 				$number = $this->_get_migration_number( $name);
 
 				// There cannot be duplicate migration numbers
-				if( isset( $migrations[$number]))
+				if( isset( $migrations[$number] ) )
 				{
 					$this->_error_string = sprintf( $this->lang->line( 'migration_multiple_version'), $number);
 					show_error( $this->_error_string);
@@ -427,7 +427,7 @@ class CI_Migration {
 	{
 		$this->db->update( $this->_migration_table, array(
 			'version' => $migration
-		));
+		 ) );
 	}
 
 	// --------------------------------------------------------------------

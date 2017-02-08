@@ -82,11 +82,11 @@ class CI_DB_pdo_sqlite_driver extends CI_DB_pdo_driver {
 	{
 		parent::__construct( $params);
 
-		if( empty( $this->dsn))
+		if( empty( $this->dsn ) )
 		{
 			$this->dsn = 'sqlite:';
 
-			if( empty( $this->database) && empty( $this->hostname))
+			if( empty( $this->database) && empty( $this->hostname ) )
 			{
 				$this->database = ':memory:';
 			}
@@ -105,7 +105,7 @@ class CI_DB_pdo_sqlite_driver extends CI_DB_pdo_driver {
 	 * @param	bool	$prefix_limit
 	 * @return	string
 	 */
-	protected function _list_tables( $prefix_limit = FALSE)
+	protected function _list_tables( $prefix_limit = FALSE )
 	{
 		$sql = 'SELECT "NAME" FROM "SQLITE_MASTER" WHERE "TYPE" = \'table\'';
 
@@ -129,12 +129,12 @@ class CI_DB_pdo_sqlite_driver extends CI_DB_pdo_driver {
 	public function list_fields( $table)
 	{
 		// Is there a cached result?
-		if( isset( $this->data_cache[ 'field_names' ][$table]))
+		if( isset( $this->data_cache[ 'field_names' ][$table] ) )
 		{
 			return  $this->data_cache[ 'field_names' ][$table];
 		}
 
-		if( ( $result = $this->query( 'PRAGMA TABLE_INFO( ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE) . ')')) === FALSE)
+		if( ( $result = $this->query( 'PRAGMA TABLE_INFO( ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE ) . ')' ) ) === FALSE )
 		{
 			return  FALSE;
 		}
@@ -158,19 +158,19 @@ class CI_DB_pdo_sqlite_driver extends CI_DB_pdo_driver {
 	 */
 	public function field_data( $table)
 	{
-		if( ( $query = $this->query( 'PRAGMA TABLE_INFO( ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE) . ')')) === FALSE)
+		if( ( $query = $this->query( 'PRAGMA TABLE_INFO( ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE ) . ')' ) ) === FALSE )
 		{
 			return  FALSE;
 		}
 
 		$query = $query->result_array();
-		if( empty( $query))
+		if( empty( $query ) )
 		{
 			return  FALSE;
 		}
 
 		$retval = array();
-		for ( $i = 0, $c = count( $query); $i < $c; $i++)
+		for( $i = 0, $c = count( $query); $i < $c; $i++)
 		{
 			$retval[$i]			= new stdClass();
 			$retval[$i]->name		= $query[$i][ 'name' ];

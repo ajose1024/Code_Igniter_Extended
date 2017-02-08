@@ -53,7 +53,10 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-    define( 'ENVIRONMENT', isset( $_SERVER[ 'CI_ENV' ]) ? $_SERVER[ 'CI_ENV' ] : 'development') ;
+    define( 'ENVIRONMENT', isset( $_SERVER[ 'CI_ENV' ] )
+        ?   $_SERVER[ 'CI_ENV' ]
+        :   'development')
+        ;
 
 /*
  *---------------------------------------------------------------
@@ -63,30 +66,30 @@
  * Different environments will require different levels of error reporting.
  * By default development will show errors but testing and live will hide them.
  */
-switch( ENVIRONMENT)
+switch( ENVIRONMENT )
 {
-    case 'development':
-        error_reporting( -1) ;
-        ini_set( 'display_errors', 1) ;
+    case 'development' :
+        error_reporting( -1 ) ;
+        ini_set( 'display_errors', 1 ) ;
         break ;
 
-        case 'testing':
-        case 'production':
-        ini_set( 'display_errors', 0) ;
-        if( version_compare( PHP_VERSION, '5.3', '>='))
+        case 'testing' :
+        case 'production' :
+        ini_set( 'display_errors', 0 ) ;
+        if( version_compare( PHP_VERSION, '5.3', '>=' ) )
         {
-            error_reporting( E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED) ;
+            error_reporting( E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED ) ;
         }
         else
         {
-            error_reporting( E_ALL & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE) ;
+            error_reporting( E_ALL & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE ) ;
         }
-        break;
+        break ;
 
     default:
-        header( 'HTTP/1.1 503 Service Unavailable . ', TRUE, 503) ;
-        echo 'The application environment is not set correctly . ' ;
-        exit( 1) ;     // EXIT_ERROR
+        header( 'HTTP/1.1 503 Service Unavailable . ', TRUE, 503 ) ;
+        echo 'The application environment is not set correctly.' ;
+        exit( 1 ) ;     // EXIT_ERROR
 }
 
 
@@ -115,8 +118,7 @@ switch( ENVIRONMENT)
  *
  * NO TRAILING SLASH!
  */
-    $application_folder = 'App/default'
-    . '' ;
+    $application_folder = 'App/default' ;
 
 
 /*
@@ -193,12 +195,12 @@ switch( ENVIRONMENT)
  */
 
     // Set the current directory correctly for CLI requests
-    if( defined( 'STDIN'))
+    if( defined( 'STDIN' ) )
     {
-        chdir( dirname( __FILE__)) ;
+        chdir( dirname( __FILE__ ) ) ;
     }
 
-    if( ( $_temp = realpath( $system_path)) !== FALSE)
+    if( ( $_temp = realpath( $system_path ) ) !== FALSE )
     {
         $system_path = $_temp . '/' ;
     }
@@ -209,10 +211,10 @@ switch( ENVIRONMENT)
     }
 
     // Is the system path correct?
-    if( ! is_dir( $system_path))
+    if( ! is_dir( $system_path ) )
     {
         header( 'HTTP/1.1 503 Service Unavailable . ', TRUE, 503) ;
-        echo 'Your system folder path does not appear to be set correctly. Please open the following file and correct this: ' . pathinfo( __FILE__, PATHINFO_BASENAME) ;
+        echo 'Your system folder path does not appear to be set correctly. Please open the following file and correct this: ' . pathinfo( __FILE__, PATHINFO_BASENAME ) ;
         exit( 3) ;     // EXIT_CONFIG
     }
 
@@ -222,30 +224,30 @@ switch( ENVIRONMENT)
  * -------------------------------------------------------------------
  */
     // The name of THIS file
-    define( 'SELF', pathinfo( __FILE__, PATHINFO_BASENAME)) ;
+    define( 'SELF', pathinfo( __FILE__, PATHINFO_BASENAME ) ) ;
 
     // Path to the system folder
-    define( 'SYS_CORE_PATH', str_replace( '\\', '/', $system_path)) ;
+    define( 'SYS_CORE_PATH', str_replace( '\\', '/', $system_path ) ) ;
 
     // Path to the front controller (this file)
-    define( 'FCPATH', dirname( __FILE__) . '/') ;
+    define( 'FC_PATH', dirname( __FILE__) . '/') ;
 
     // Name of the "system folder"
-    define( 'SYSDIR', trim( strrchr( trim( SYS_CORE_PATH, '/'), '/'), '/')) ;
+    define( 'SYSDIR', trim( strrchr( trim( SYS_CORE_PATH, '/'), '/'), '/' ) ) ;
 
     // The path to the "application" folder
-    if( is_dir( $application_folder))
+    if( is_dir( $application_folder ) )
     {
-        if( ( $_temp = realpath( $application_folder)) !== FALSE)
+        if( ( $_temp = realpath( $application_folder ) ) !== FALSE )
         {
             $application_folder = $_temp ;
         }
 
-        define( 'APP_DIR_PATH', $application_folder . DIRECTORY_SEPARATOR) ;
+        define( 'APP_DIR_PATH', $application_folder . DIRECTORY_SEPARATOR ) ;
     }
     else
     {
-        if( ! is_dir( SYS_CORE_PATH . $application_folder . DIRECTORY_SEPARATOR))
+        if( ! is_dir( SYS_CORE_PATH . $application_folder . DIRECTORY_SEPARATOR ) )
         {
             header( 'HTTP/1.1 503 Service Unavailable . ', TRUE, 503) ;
             echo 'Your application folder path does not appear to be set correctly. Please open the following file and correct this: ' . SELF ;
@@ -256,15 +258,15 @@ switch( ENVIRONMENT)
     }
 
     // The path to the "views" folder
-    if( ! is_dir( $view_folder))
+    if( ! is_dir( $view_folder ) )
     {
-        if( ! empty( $view_folder) && is_dir( APP_DIR_PATH . $view_folder . DIRECTORY_SEPARATOR))
+        if( ! empty( $view_folder) && is_dir( APP_DIR_PATH . $view_folder . DIRECTORY_SEPARATOR ) )
         {
             $view_folder = APP_DIR_PATH . $view_folder ;
         }
-        elseif( ! is_dir( APP_DIR_PATH . 'views' . DIRECTORY_SEPARATOR))
+        elseif( ! is_dir( APP_DIR_PATH . 'views' . DIRECTORY_SEPARATOR ) )
         {
-            header( 'HTTP/1.1 503 Service Unavailable . ', TRUE, 503) ;
+            header( 'HTTP/1.1 503 Service Unavailable . ', TRUE, 503 ) ;
             echo 'Your view folder path does not appear to be set correctly. Please open the following file and correct this: ' . SELF ;
             exit( 3) ;     // EXIT_CONFIG
         }
@@ -274,16 +276,16 @@ switch( ENVIRONMENT)
         }
     }
 
-    if( ( $_temp = realpath( $view_folder)) !== FALSE)
+    if( ( $_temp = realpath( $view_folder ) ) !== FALSE )
     {
         $view_folder = $_temp . DIRECTORY_SEPARATOR ;
     }
     else
     {
-        $view_folder = rtrim( $view_folder, '/\\') . DIRECTORY_SEPARATOR ;
+        $view_folder = rtrim( $view_folder, '/\\' ) . DIRECTORY_SEPARATOR ;
     }
 
-    define( 'VIEWPATH', $view_folder) ;
+    define( 'VIEWPATH', $view_folder ) ;
 
 /*
  * --------------------------------------------------------------------

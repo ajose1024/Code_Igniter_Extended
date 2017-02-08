@@ -17,7 +17,7 @@ class Cookie_helper_test extends CI_TestCase {
 		$this->assertTrue(set_cookie(
 			'my_cookie',
 			'foobar'
-		));*/
+		 ) );*/
 
 		$this->markTestSkipped( 'Need to find a way to overcome a headers already set exception');
 	}
@@ -31,15 +31,15 @@ class Cookie_helper_test extends CI_TestCase {
 		$security = new Mock_Core_Security();
 		$utf8 = new Mock_Core_Utf8();
 		$input_cls = $this->ci_core_class( 'input');
-		$this->ci_instance_var( 'input', new Mock_Core_Input( $security, $utf8));
+		$this->ci_instance_var( 'input', new Mock_Core_Input( $security, $utf8 ) );
 
-		$this->assertEquals( 'bar', get_cookie( 'foo', FALSE));
-		$this->assertEquals( 'bar', get_cookie( 'foo', TRUE));
+		$this->assertEquals( 'bar', get_cookie( 'foo', FALSE ) );
+		$this->assertEquals( 'bar', get_cookie( 'foo', TRUE ) );
 
 		$_COOKIE[ 'bar' ] = "Hello, i try to <script>alert( 'Hack');</script> your site";
 
-		$this->assertEquals("Hello, i try to [removed]alert&#40;'Hack'&#41;;[removed] your site", get_cookie( 'bar', TRUE));
-		$this->assertEquals("Hello, i try to <script>alert( 'Hack');</script> your site", get_cookie( 'bar', FALSE));
+		$this->assertEquals("Hello, i try to [removed]alert&#40;'Hack'&#41;;[removed] your site", get_cookie( 'bar', TRUE ) );
+		$this->assertEquals("Hello, i try to <script>alert( 'Hack');</script> your site", get_cookie( 'bar', FALSE ) );
 	}
 
 	// ------------------------------------------------------------------------
@@ -51,7 +51,7 @@ class Cookie_helper_test extends CI_TestCase {
 
 		$this->assertTrue(delete_cookie(
 			'my_cookie'
-		));*/
+		 ) );*/
 
 		$this->markTestSkipped( 'Need to find a way to overcome a headers already set exception');
 	}

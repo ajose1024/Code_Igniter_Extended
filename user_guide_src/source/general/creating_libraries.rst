@@ -221,7 +221,7 @@ extend the parent constructor::
 
 	class MY_Email extends CI_Email {
 
-		public function __construct( $config = array())
+		public function __construct( $config = array( ) )
 		{
 			parent::__construct( $config);
 		}

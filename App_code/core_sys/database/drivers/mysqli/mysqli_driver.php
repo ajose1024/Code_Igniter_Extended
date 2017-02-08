@@ -103,7 +103,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 	 * @param	bool	$persistent
 	 * @return	object
 	 */
-	public function db_connect( $persistent = FALSE)
+	public function db_connect( $persistent = FALSE )
 	{
 		// Do we have a socket path?
 		if( $this->hostname[0] === '/')
@@ -115,7 +115,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 		else
 		{
 			// Persistent connection support was added in PHP 5.3.0
-			$hostname = ( $persistent === TRUE && is_php( '5.3'))
+			$hostname = ( $persistent === TRUE && is_php( '5.3' ) )
 				? 'p:' . $this->hostname : $this->hostname;
 			$port = empty( $this->port) ? NULL : $this->port;
 			$socket = NULL;
@@ -131,7 +131,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 			$mysqli->options(MYSQLI_INIT_COMMAND, 'SET SESSION sql_mode="STRICT_ALL_TABLES"');
 		}
 
-		if( is_array( $this->encrypt))
+		if( is_array( $this->encrypt ) )
 		{
 			$ssl = array();
 			empty( $this->encrypt[ 'ssl_key' ])    OR $ssl[ 'key' ]    = $this->encrypt[ 'ssl_key' ];
@@ -140,9 +140,9 @@ class CI_DB_mysqli_driver extends CI_DB {
 			empty( $this->encrypt[ 'ssl_capath' ]) OR $ssl[ 'capath' ] = $this->encrypt[ 'ssl_capath' ];
 			empty( $this->encrypt[ 'ssl_cipher' ]) OR $ssl[ 'cipher' ] = $this->encrypt[ 'ssl_cipher' ];
 
-			if( ! empty( $ssl))
+			if( ! empty( $ssl ) )
 			{
-				if( ! empty( $this->encrypt[ 'ssl_verify' ]) && defined( 'MYSQLI_OPT_SSL_VERIFY_SERVER_CERT'))
+				if( ! empty( $this->encrypt[ 'ssl_verify' ]) && defined( 'MYSQLI_OPT_SSL_VERIFY_SERVER_CERT' ) )
 				{
 					$mysqli->options(MYSQLI_OPT_SSL_VERIFY_SERVER_CERT, TRUE);
 				}
@@ -158,7 +158,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 			}
 		}
 
-		if( $mysqli->real_connect( $hostname, $this->username, $this->password, $this->database, $port, $socket, $client_flags))
+		if( $mysqli->real_connect( $hostname, $this->username, $this->password, $this->database, $port, $socket, $client_flags ) )
 		{
 			// Prior to version 5.7.3, MySQL silently downgrades to an unencrypted connection if SSL setup fails
 			if( 
@@ -191,7 +191,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 	 */
 	public function reconnect()
 	{
-		if( $this->conn_id !== FALSE && $this->conn_id->ping() === FALSE)
+		if( $this->conn_id !== FALSE && $this->conn_id->ping() === FALSE )
 		{
 			$this->conn_id = FALSE;
 		}
@@ -212,7 +212,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 			$database = $this->database;
 		}
 
-		if( $this->conn_id->select_db( $database))
+		if( $this->conn_id->select_db( $database ) )
 		{
 			$this->database = $database;
 			return  TRUE;
@@ -243,7 +243,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 	 */
 	public function version()
 	{
-		if( isset( $this->data_cache[ 'version' ]))
+		if( isset( $this->data_cache[ 'version' ] ) )
 		{
 			return  $this->data_cache[ 'version' ];
 		}
@@ -261,7 +261,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 	 */
 	protected function _execute( $sql)
 	{
-		return  $this->conn_id->query( $this->_prep_query( $sql));
+		return  $this->conn_id->query( $this->_prep_query( $sql ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -278,7 +278,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 	{
 		// mysqli_affected_rows() returns 0 for "DELETE FROM TABLE" queries. This hack
 		// modifies the query so that it a proper number of affected rows is returned.
-		if( $this->delete_hack === TRUE && preg_match( '/^\s*DELETE\s+FROM\s+(\S+)\s*$/i', $sql))
+		if( $this->delete_hack === TRUE && preg_match( '/^\s*DELETE\s+FROM\s+(\S+)\s*$/i', $sql ) )
 		{
 			return  trim( $sql) . ' WHERE 1=1';
 		}
@@ -295,7 +295,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 	 */
 	protected function _trans_begin()
 	{
-		$this->conn_id->autocommit(FALSE);
+		$this->conn_id->autocommit(FALSE );
 		return  is_php( '5.5')
 			? $this->conn_id->begin_transaction()
 			: $this->simple_query( 'START TRANSACTION'); // can also be BEGIN or BEGIN WORK
@@ -310,7 +310,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 	 */
 	protected function _trans_commit()
 	{
-		if( $this->conn_id->commit())
+		if( $this->conn_id->commit( ) )
 		{
 			$this->conn_id->autocommit(TRUE);
 			return  TRUE;
@@ -328,7 +328,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 	 */
 	protected function _trans_rollback()
 	{
-		if( $this->conn_id->rollback())
+		if( $this->conn_id->rollback( ) )
 		{
 			$this->conn_id->autocommit(TRUE);
 			return  TRUE;
@@ -384,7 +384,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 	 * @param	bool	$prefix_limit
 	 * @return	string
 	 */
-	protected function _list_tables( $prefix_limit = FALSE)
+	protected function _list_tables( $prefix_limit = FALSE )
 	{
 		$sql = 'SHOW TABLES FROM ' . $this->escape_identifiers( $this->database);
 
@@ -408,7 +408,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 	 */
 	protected function _list_columns( $table = '')
 	{
-		return  'SHOW COLUMNS FROM ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE);
+		return  'SHOW COLUMNS FROM ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE );
 	}
 
 	// --------------------------------------------------------------------
@@ -421,14 +421,14 @@ class CI_DB_mysqli_driver extends CI_DB {
 	 */
 	public function field_data( $table)
 	{
-		if( ( $query = $this->query( 'SHOW COLUMNS FROM ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE))) === FALSE)
+		if( ( $query = $this->query( 'SHOW COLUMNS FROM ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE ) )) === FALSE )
 		{
 			return  FALSE;
 		}
 		$query = $query->result_object();
 
 		$retval = array();
-		for ( $i = 0, $c = count( $query); $i < $c; $i++)
+		for( $i = 0, $c = count( $query); $i < $c; $i++)
 		{
 			$retval[$i]			= new stdClass();
 			$retval[$i]->name		= $query[$i]->Field;
@@ -457,7 +457,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 	 */
 	public function error()
 	{
-		if( ! empty( $this->conn_id->connect_errno))
+		if( ! empty( $this->conn_id->connect_errno ) )
 		{
 			return  array(
 				'code' => $this->conn_id->connect_errno,

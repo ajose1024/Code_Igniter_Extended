@@ -72,7 +72,7 @@ Example::
 The second parameter enables you to set whether or not the query builder query
 will be reset (by default it will be reset, just like when using `$this->db->get()`)::
 
-	echo $this->db->limit(10,20)->get_compiled_select( 'mytable', FALSE);
+	echo $this->db->limit(10,20)->get_compiled_select( 'mytable', FALSE );
 
 	// Prints string: SELECT * FROM mytable LIMIT 20, 10
 	// (in MySQL. Other databases have slightly different syntax)
@@ -119,7 +119,7 @@ escaping of fields may break them.
 
 ::
 
-	$this->db->select( '(SELECT SUM(payments.amount) FROM payments WHERE payments.invoice_id=4') AS amount_paid', FALSE);
+	$this->db->select( '(SELECT SUM(payments.amount) FROM payments WHERE payments.invoice_id=4') AS amount_paid', FALSE );
 	$query = $this->db->get( 'mytable');
 
 **$this->db->select_max()**
@@ -273,7 +273,7 @@ FALSE, CodeIgniter will not try to protect your field or table names.
 
 ::
 
-	$this->db->where( 'MATCH (field) AGAINST ("value")', NULL, FALSE);
+	$this->db->where( 'MATCH (field) AGAINST ("value")', NULL, FALSE );
 
 **$this->db->or_where()**
 
@@ -410,7 +410,7 @@ Permits you to write the GROUP BY portion of your query::
 
 You can also pass an array of multiple values as well::
 
-	$this->db->group_by(array("title", "date"));  // Produces: GROUP BY title, date
+	$this->db->group_by(array("title", "date" ) );  // Produces: GROUP BY title, date
 
 .. note:: group_by() was formerly known as groupby(), which has been
 	removed.
@@ -434,7 +434,7 @@ possible syntaxes, 1 argument or 2::
 
 You can also pass an array of multiple values as well::
 
-	$this->db->having(array( 'title =' => 'My Title', 'id <' => $id));
+	$this->db->having(array( 'title =' => 'My Title', 'id <' => $id ) );
 	// Produces: HAVING title = 'My Title', id < 45
 
 
@@ -445,7 +445,7 @@ setting it to FALSE.
 ::
 
 	$this->db->having( 'user_id',  45);  // Produces: HAVING `user_id` = 45 in some databases such as MySQL
-	$this->db->having( 'user_id',  45, FALSE);  // Produces: HAVING user_id = 45
+	$this->db->having( 'user_id',  45, FALSE );  // Produces: HAVING user_id = 45
 
 
 **$this->db->or_having()**
@@ -531,7 +531,7 @@ However, this method also resets any field values that you may have passed
 to ``select()``. If you need to keep them, you can pass ``FALSE`` as the
 second parameter::
 
-	echo $this->db->count_all_results( 'my_table', FALSE);
+	echo $this->db->count_all_results( 'my_table', FALSE );
 
 **$this->db->count_all()**
 
@@ -559,7 +559,7 @@ you to create queries with complex WHERE clauses. Nested groups are supported. E
 	->get();
 
 	// Generates:
-	// SELECT * FROM (`my_table`) WHERE ( `a` = 'a' OR ( `b` = 'b' AND `c` = 'c')) AND `d` = 'd'
+	// SELECT * FROM (`my_table`) WHERE ( `a` = 'a' OR ( `b` = 'b' AND `c` = 'c' ) ) AND `d` = 'd'
 
 .. note:: groups need to be balanced, make sure every group_start() is matched by a group_end().
 
@@ -643,9 +643,9 @@ Example::
 	// Produces string: INSERT INTO mytable (`title`, `name`, `date`) VALUES ( 'My title', 'My name', 'My date')
 
 The second parameter enables you to set whether or not the query builder query
-will be reset (by default it will be--just like $this->db->insert())::
+will be reset (by default it will be--just like $this->db->insert( ) )::
 
-	echo $this->db->set( 'title', 'My Title')->get_compiled_insert( 'mytable', FALSE);
+	echo $this->db->set( 'title', 'My Title')->get_compiled_insert( 'mytable', FALSE );
 
 	// Produces string: INSERT INTO mytable (`title`) VALUES ( 'My Title')
 
@@ -695,7 +695,7 @@ Updating Data
 **$this->db->replace()**
 
 This method executes a REPLACE statement, which is basically the SQL
-standard for (optional) DELETE + INSERT, using *PRIMARY* and *UNIQUE*
+standard for( optional) DELETE + INSERT, using *PRIMARY* and *UNIQUE*
 keys as the determining factor.
 In our case, it will save you from the need to implement complex
 logics with different combinations of  ``select()``, ``update()``,
@@ -747,7 +747,7 @@ parameter.
 
 ::
 
-	$this->db->set( 'field', 'field+1', FALSE);
+	$this->db->set( 'field', 'field+1', FALSE );
 	$this->db->where( 'id', 2);
 	$this->db->update( 'mytable'); // gives UPDATE mytable SET field = field+1 WHERE id = 2
 
@@ -829,7 +829,7 @@ directly into the update function as a string::
 
 Or as an array::
 
-	$this->db->update( 'mytable', $data, array( 'id' => $id));
+	$this->db->update( 'mytable', $data, array( 'id' => $id ) );
 
 You may also use the $this->db->set() function described above when
 performing updates.
@@ -894,7 +894,7 @@ Generates a delete SQL string and runs the query.
 
 ::
 
-	$this->db->delete( 'mytable', array( 'id' => $id));  // Produces: // DELETE FROM mytable  // WHERE id = $id
+	$this->db->delete( 'mytable', array( 'id' => $id ) );  // Produces: // DELETE FROM mytable  // WHERE id = $id
 
 The first parameter is the table name, the second is the where clause.
 You can also use the where() or or_where() functions instead of passing
@@ -1037,9 +1037,9 @@ This is useful in situations where you are using Query Builder to generate SQL
 run the query::
 
 	// Note that the second parameter of the get_compiled_select method is FALSE
-	$sql = $this->db->select(array( 'field1','field2'))
+	$sql = $this->db->select(array( 'field1','field2' ) )
 					->where( 'field3',5)
-					->get_compiled_select( 'mytable', FALSE);
+					->get_compiled_select( 'mytable', FALSE );
 
 	// ...
 	// Do something crazy with the SQL code... like add it to a cron script for

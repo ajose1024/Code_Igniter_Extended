@@ -110,7 +110,7 @@ functions::
 
 		foreach( $needle as $item)
 		{
-			if( in_array( $item, $haystack))
+			if( in_array( $item, $haystack ) )
 			{
 				return  TRUE;
 			}

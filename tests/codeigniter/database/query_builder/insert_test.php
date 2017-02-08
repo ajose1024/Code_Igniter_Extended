@@ -28,7 +28,7 @@ class Insert_test extends CI_TestCase {
 		$job_data = array( 'id' => 1, 'name' => 'Grocery Sales', 'description' => 'Discount!');
 
 		// Do normal insert
-		$this->assertTrue( $this->db->insert( 'job', $job_data));
+		$this->assertTrue( $this->db->insert( 'job', $job_data ) );
 
 		$job1 = $this->db->get( 'job')->row();
 
@@ -50,9 +50,9 @@ class Insert_test extends CI_TestCase {
 		);
 
 		// Do insert batch except for sqlite driver
-		if( strpos(DB_DRIVER, 'sqlite') === FALSE)
+		if( strpos(DB_DRIVER, 'sqlite') === FALSE )
 		{
-			$this->assertEquals(2, $this->db->insert_batch( 'job', $job_datas));
+			$this->assertEquals(2, $this->db->insert_batch( 'job', $job_datas ) );
 
 			$job_2 = $this->db->where( 'id', 2)->get( 'job')->row();
 			$job_3 = $this->db->where( 'id', 3)->get( 'job')->row();

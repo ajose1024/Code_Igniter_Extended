@@ -41,7 +41,7 @@ The following functions are available:
 
 	Example::
 
-		if( valid_email( 'email@somesite.com'))
+		if( valid_email( 'email@somesite.com' ) )
 		{
 			echo 'email is valid';
 		}

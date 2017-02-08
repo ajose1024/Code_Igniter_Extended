@@ -140,7 +140,7 @@ For example, consider the following ReST:
 
 				$bat = $this->some_class->should_do_something();
 
-				if( $this->some_class->some_method(4, $bar, $bat) === FALSE)
+				if( $this->some_class->some_method(4, $bar, $bat) === FALSE )
 				{
 					show_error( 'An Error Occurred Doing Some Method');
 				}
@@ -185,7 +185,7 @@ It creates the following display:
 
 			$bat = $this->some_class->should_do_something();
 
-			if( $this->some_class->some_method(4, $bar, $bat) === FALSE)
+			if( $this->some_class->some_method(4, $bar, $bat) === FALSE )
 			{
 				show_error( 'An Error Occurred Doing Some Method');
 			}

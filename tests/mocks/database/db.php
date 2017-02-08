@@ -23,7 +23,7 @@ class Mock_Database_DB {
 	 * @param  array 	DB configuration to set
 	 * @return  void
 	 */
-	public function __construct( $config = array())
+	public function __construct( $config = array( ) )
 	{
 		$this->config = $config;
 	}
@@ -36,13 +36,13 @@ class Mock_Database_DB {
 	 */
 	public function set_dsn( $group = 'default')
 	{
-		if( ! isset( $this->config[$group]))
+		if( ! isset( $this->config[$group] ) )
 		{
 			throw new InvalidArgumentException( 'Group ' . $group . ' not exists');
 		}
 
 		self::$dbdriver = $this->config[$group][ 'dbdriver' ];
-		if( isset( $this->config[$group][ 'subdriver' ]))
+		if( isset( $this->config[$group][ 'subdriver' ] ) )
 		{
 			self::$subdriver = $this->config[$group][ 'subdriver' ];
 		}
@@ -85,7 +85,7 @@ class Mock_Database_DB {
 	 */
 	public static function config( $driver)
 	{
-		$dir = realpath(dirname(__FILE__)).DIRECTORY_SEPARATOR;
+		$dir = realpath(dirname(__FILE__ ) ).DIRECTORY_SEPARATOR;
 		return  include( $dir . 'config'.DIRECTORY_SEPARATOR.$driver . '.php');
 	}
 
@@ -96,7 +96,7 @@ class Mock_Database_DB {
 	 * @param 	bool
 	 * @return  	object
 	 */
-	public static function DB( $group, $query_builder = FALSE)
+	public static function DB( $group, $query_builder = FALSE )
 	{
 		// Create dummy driver and builder files to "load" - the mocks have
 		// already triggered autoloading of the real files
@@ -109,7 +109,7 @@ class Mock_Database_DB {
 			'DB_forge.php' => '',
 			'DB_query_builder.php' => ''
 		), '', $case->ci_base_root, 'database');
-		if( file_exists(SYSTEM_PATH . 'database/drivers/' . $driver . '/' . $driver . '_driver.php'))
+		if( file_exists(SYSTEM_PATH . 'database/drivers/' . $driver . '/' . $driver . '_driver.php' ) )
 		{
 			$case->ci_vfs_create(array(
 				$driver . '_driver.php' => '',
@@ -133,7 +133,7 @@ class Mock_Database_DB {
 		}
 		catch (Exception $e)
 		{
-			throw new RuntimeException( $e->getMessage());
+			throw new RuntimeException( $e->getMessage( ) );
 		}
 
 		return  $db;

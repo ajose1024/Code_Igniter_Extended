@@ -33,7 +33,7 @@ class Typography_test extends CI_TestCase {
 
 		foreach( $strs as $str => $expected)
 		{
-			$this->assertEquals( $expected, $this->type->format_characters( $str));
+			$this->assertEquals( $expected, $this->type->format_characters( $str ) );
 		}
 	}
 
@@ -81,7 +81,7 @@ That's my story and I'm sticking to it.<br />
 The End.
 EOH;
 
-		$this->assertEquals( $expected, $this->type->nl2br_except_pre( $str));
+		$this->assertEquals( $expected, $this->type->nl2br_except_pre( $str ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -102,7 +102,7 @@ EOH;
 	private function _blank_string()
 	{
 		// Test blank string
-		$this->assertEquals( '', $this->type->auto_typography( ''));
+		$this->assertEquals( '', $this->type->auto_typography( '' ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -116,7 +116,7 @@ EOH;
 
 		foreach( $strs as $str => $expect)
 		{
-			$this->assertEquals( $expect, $this->type->auto_typography( $str));
+			$this->assertEquals( $expect, $this->type->auto_typography( $str ) );
 		}
 	}
 
@@ -127,7 +127,7 @@ EOH;
 		$str = "This has way too many linebreaks.\n\n\n\nSee?";
 		$expect = "<p>This has way too many linebreaks.</p>\n\n<p>See?</p>";
 
-		$this->assertEquals( $expect, $this->type->auto_typography( $str, TRUE));
+		$this->assertEquals( $expect, $this->type->auto_typography( $str, TRUE ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -137,7 +137,7 @@ EOH;
 		$str = '<!-- I can haz comments? -->  But no!';
 		$expect = '<p><!-- I can haz comments? -->&nbsp; But no!</p>';
 
-		$this->assertEquals( $expect, $this->type->auto_typography( $str));
+		$this->assertEquals( $expect, $this->type->auto_typography( $str ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -147,7 +147,7 @@ EOH;
 		$str = '<p>My Sentence</p><pre>var_dump( $this);</pre>';
 		$expect = '<p>My Sentence</p><pre>var_dump( $this);</pre>';
 
-		$this->assertEquals( $expect, $this->type->auto_typography( $str));
+		$this->assertEquals( $expect, $this->type->auto_typography( $str ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -157,7 +157,7 @@ EOH;
 		$str = 'My Sentence<pre>var_dump( $this);</pre>';
 		$expect = '<p>My Sentence</p><pre>var_dump( $this);</pre>';
 
-		$this->assertEquals( $expect, $this->type->auto_typography( $str));
+		$this->assertEquals( $expect, $this->type->auto_typography( $str ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -169,14 +169,14 @@ EOH;
 		$str = 'Test {parse="foobar"}';
 		$expect = '<p>Test {parse="foobar"}</p>';
 
-		$this->assertEquals( $expect, $this->type->auto_typography( $str));
+		$this->assertEquals( $expect, $this->type->auto_typography( $str ) );
 
 		$this->type->protect_braced_quotes = FALSE;
 
 		$str = 'Test {parse="foobar"}';
 		$expect = '<p>Test {parse=&#8220;foobar&#8221;}</p>';
 
-		$this->assertEquals( $expect, $this->type->auto_typography( $str));
+		$this->assertEquals( $expect, $this->type->auto_typography( $str ) );
 	}
 
 }

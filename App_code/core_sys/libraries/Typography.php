@@ -105,7 +105,7 @@ class CI_Typography {
 	 * @param	bool	whether to reduce more then two consecutive newlines to two
 	 * @return	string
 	 */
-	public function auto_typography( $str, $reduce_linebreaks = FALSE)
+	public function auto_typography( $str, $reduce_linebreaks = FALSE )
 	{
 		if( $str === '')
 		{
@@ -113,7 +113,7 @@ class CI_Typography {
 		}
 
 		// Standardize Newlines to make matching easier
-		if( strpos( $str, "\r") !== FALSE)
+		if( strpos( $str, "\r") !== FALSE )
 		{
 			$str = str_replace(array("\r\n", "\r"), "\n", $str);
 		}
@@ -127,9 +127,9 @@ class CI_Typography {
 
 		// HTML comment tags don't conform to patterns of normal tags, so pull them out separately, only if needed
 		$html_comments = array();
-		if( strpos( $str, '<!--') !== FALSE && preg_match_all( '#(<!\-\-.*?\-\->)#s', $str, $matches))
+		if( strpos( $str, '<!--') !== FALSE && preg_match_all( '#(<!\-\-.*?\-\->)#s', $str, $matches ) )
 		{
-			for ( $i = 0, $total = count( $matches[0]); $i < $total; $i++)
+			for( $i = 0, $total = count( $matches[0]); $i < $total; $i++)
 			{
 				$html_comments[] = $matches[0][$i];
 				$str = str_replace( $matches[0][$i], '{@HC' . $i . '}', $str);
@@ -138,7 +138,7 @@ class CI_Typography {
 
 		// match and yank <pre> tags if they exist.  It's cheaper to do this separately since most content will
 		// not contain <pre> tags, and it keeps the PCRE patterns below simpler and faster
-		if( strpos( $str, '<pre') !== FALSE)
+		if( strpos( $str, '<pre') !== FALSE )
 		{
 			$str = preg_replace_callback( '#<pre.*?>.*?</pre>#si', array( $this, '_protect_characters'), $str);
 		}
@@ -173,13 +173,13 @@ class CI_Typography {
 		$str = '';
 		$process = TRUE;
 
-		for ( $i = 0, $c = count( $chunks) - 1; $i <= $c; $i++)
+		for( $i = 0, $c = count( $chunks) - 1; $i <= $c; $i++)
 		{
 			// Are we dealing with a tag? If so, we'll skip the processing for this cycle.
 			// Well also set the "process" flag which allows us to skip <pre> tags and a few other things.
-			if( preg_match( '#<(/*)( ' . $this->block_elements . ').*?>#', $chunks[$i], $match))
+			if( preg_match( '#<(/*)( ' . $this->block_elements . ').*?>#', $chunks[$i], $match ) )
 			{
-				if( preg_match( '#' . $this->skip_elements . '#', $match[2]))
+				if( preg_match( '#' . $this->skip_elements . '#', $match[2] ) )
 				{
 					$process = ( $match[1] === '/');
 				}
@@ -193,7 +193,7 @@ class CI_Typography {
 				continue;
 			}
 
-			if( $process === FALSE)
+			if( $process === FALSE )
 			{
 				$str .= $chunks[$i];
 				continue;
@@ -210,7 +210,7 @@ class CI_Typography {
 		}
 
 		// No opening block level tag? Add it if needed.
-		if( ! preg_match( '/^\s*<(?:' . $this->block_elements . ')/i', $str))
+		if( ! preg_match( '/^\s*<(?:' . $this->block_elements . ')/i', $str ) )
 		{
 			$str = preg_replace( '/^(.*?)<( ' . $this->block_elements . ')/i', '<p>$1</p><$2', $str);
 		}
@@ -219,7 +219,7 @@ class CI_Typography {
 		$str = $this->format_characters( $str);
 
 		// restore HTML comments
-		for ( $i = 0, $total = count( $html_comments); $i < $total; $i++)
+		for( $i = 0, $total = count( $html_comments); $i < $total; $i++)
 		{
 			// remove surrounding paragraph tags, but only if there's an opening paragraph tag
 			// otherwise HTML comments at the ends of paragraphs will have the closing tag removed
@@ -294,7 +294,7 @@ class CI_Typography {
 	{
 		static $table;
 
-		if( ! isset( $table))
+		if( ! isset( $table ) )
 		{
 			$table = array(
 							// nested smart quotes, opening and closing
@@ -355,7 +355,7 @@ class CI_Typography {
 	 */
 	protected function _format_newlines( $str)
 	{
-		if( $str === '' OR (strpos( $str, "\n") === FALSE && ! in_array( $this->last_block_element, $this->inner_block_required)))
+		if( $str === '' OR (strpos( $str, "\n") === FALSE && ! in_array( $this->last_block_element, $this->inner_block_required ) ))
 		{
 			return  $str;
 		}
@@ -409,7 +409,7 @@ class CI_Typography {
 	public function nl2br_except_pre( $str)
 	{
 		$newstr = '';
-		for ( $ex = explode( 'pre>', $str), $ct = count( $ex), $i = 0; $i < $ct; $i++)
+		for( $ex = explode( 'pre>', $str), $ct = count( $ex), $i = 0; $i < $ct; $i++)
 		{
 			$newstr .= (( $i % 2) === 0) ? nl2br( $ex[$i]) : $ex[$i];
 			if( $ct - 1 !== $i)

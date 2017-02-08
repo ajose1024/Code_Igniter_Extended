@@ -98,14 +98,14 @@ class CI_Hooks {
 		}
 
 		// Grab the "hooks" definition file.
-		if( file_exists(APP_DIR_PATH . 'config/hooks.php' ) )
+		if( file_exists( APP_DIR_PATH . 'config/hooks.php' ) )
 		{
-			include(APP_DIR_PATH . 'config/hooks.php' );
+			include( APP_DIR_PATH . 'config/hooks.php' );
 		}
 
-		if( file_exists(APP_DIR_PATH . 'config/'.ENVIRONMENT . '/hooks.php' ) )
+		if( file_exists( APP_DIR_PATH . 'config/' . ENVIRONMENT . '/hooks.php' ) )
 		{
-			include(APP_DIR_PATH . 'config/'.ENVIRONMENT . '/hooks.php' );
+			include( APP_DIR_PATH . 'config/' . ENVIRONMENT . '/hooks.php' );
 		}
 
 		// If there are no hooks, we're done.

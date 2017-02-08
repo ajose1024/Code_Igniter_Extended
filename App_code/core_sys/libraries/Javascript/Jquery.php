@@ -168,7 +168,7 @@ class CI_Jquery extends CI_Javascript {
 	{
 		is_array( $js) OR $js = array( $js);
 
-		if( $ret_false)
+		if( $ret_false )
 		{
 			$js[] = 'return  false;';
 		}
@@ -367,9 +367,9 @@ class CI_Jquery extends CI_Javascript {
 	 * @param	array	$array_js = array()
 	 * @return	void
 	 */
-	protected function _output( $array_js = array())
+	protected function _output( $array_js = array( ) )
 	{
-		if( ! is_array( $array_js))
+		if( ! is_array( $array_js ) )
 		{
 			$array_js = array( $array_js);
 		}
@@ -729,7 +729,7 @@ class CI_Jquery extends CI_Javascript {
 	protected function _updater( $container = 'this', $controller = '', $options = '')
 	{
 		$container = $this->_prep_element( $container);
-		$controller = (strpos( '://', $controller) === FALSE) ? $controller : $this->CI->config->site_url( $controller);
+		$controller = (strpos( '://', $controller) === FALSE ) ? $controller : $this->CI->config->site_url( $controller);
 
 		// ajaxStart and ajaxStop are better choices here... but this is a stop gap
 		if( $this->CI->config->item( 'javascript_ajax_img') === '')
@@ -818,7 +818,7 @@ class CI_Jquery extends CI_Javascript {
 	 * @param	bool	$relative
 	 * @return	void
 	 */
-	public function modal( $src, $relative = FALSE)
+	public function modal( $src, $relative = FALSE )
 	{
 		$this->jquery_code_for_load[] = $this->external( $src, $relative);
 	}
@@ -834,7 +834,7 @@ class CI_Jquery extends CI_Javascript {
 	 * @param	bool	$relative
 	 * @return	void
 	 */
-	public function effect( $src, $relative = FALSE)
+	public function effect( $src, $relative = FALSE )
 	{
 		$this->jquery_code_for_load[] = $this->external( $src, $relative);
 	}
@@ -850,7 +850,7 @@ class CI_Jquery extends CI_Javascript {
 	 * @param	bool	$relative
 	 * @return	void
 	 */
-	public function plugin( $src, $relative = FALSE)
+	public function plugin( $src, $relative = FALSE )
 	{
 		$this->jquery_code_for_load[] = $this->external( $src, $relative);
 	}
@@ -866,7 +866,7 @@ class CI_Jquery extends CI_Javascript {
 	 * @param	bool	$relative
 	 * @return	void
 	 */
-	public function ui( $src, $relative = FALSE)
+	public function ui( $src, $relative = FALSE )
 	{
 		$this->jquery_code_for_load[] = $this->external( $src, $relative);
 	}
@@ -882,7 +882,7 @@ class CI_Jquery extends CI_Javascript {
 	 * @param	array	$options
 	 * @return	string
 	 */
-	public function sortable( $element, $options = array())
+	public function sortable( $element, $options = array( ) )
 	{
 		if( count( $options) > 0)
 		{
@@ -931,7 +931,7 @@ class CI_Jquery extends CI_Javascript {
 	 */
 	protected function _add_event( $element, $js, $event)
 	{
-		if( is_array( $js))
+		if( is_array( $js ) )
 		{
 			$js = implode("\n\t\t", $js);
 		}
@@ -957,7 +957,7 @@ class CI_Jquery extends CI_Javascript {
 	{
 		// External references
 		$external_scripts = implode( '', $this->jquery_code_for_load);
-		$this->CI->load->vars(array( 'library_src' => $external_scripts));
+		$this->CI->load->vars(array( 'library_src' => $external_scripts ) );
 
 		if( count( $this->jquery_code_for_compile) === 0)
 		{
@@ -970,9 +970,9 @@ class CI_Jquery extends CI_Javascript {
 			.implode( '', $this->jquery_code_for_compile)
 			 . '});';
 
-		$output = ( $script_tags === FALSE) ? $script : $this->inline( $script);
+		$output = ( $script_tags === FALSE ) ? $script : $this->inline( $script);
 
-		$this->CI->load->vars(array( $view_var => $output));
+		$this->CI->load->vars(array( $view_var => $output ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -1020,7 +1020,7 @@ class CI_Jquery extends CI_Javascript {
 	 * @param	bool	$relative
 	 * @return	string
 	 */
-	public function script( $library_src = '', $relative = FALSE)
+	public function script( $library_src = '', $relative = FALSE )
 	{
 		$library_src = $this->external( $library_src, $relative);
 		$this->jquery_code_for_load[] = $library_src;
@@ -1061,11 +1061,11 @@ class CI_Jquery extends CI_Javascript {
 	 */
 	protected function _validate_speed( $speed)
 	{
-		if( in_array( $speed, array( 'slow', 'normal', 'fast')))
+		if( in_array( $speed, array( 'slow', 'normal', 'fast' ) ))
 		{
 			return  '"' . $speed . '"';
 		}
-		elseif( preg_match( '/[^0-9]/', $speed))
+		elseif( preg_match( '/[^0-9]/', $speed ) )
 		{
 			return  '';
 		}

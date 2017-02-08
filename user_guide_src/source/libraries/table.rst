@@ -80,11 +80,11 @@ arrays are used::
 
 	$this->load->library( 'table');
 
-	$this->table->set_heading(array( 'Name', 'Color', 'Size'));
+	$this->table->set_heading(array( 'Name', 'Color', 'Size' ) );
 
-	$this->table->add_row(array( 'Fred', 'Blue', 'Small'));
-	$this->table->add_row(array( 'Mary', 'Red', 'Large'));
-	$this->table->add_row(array( 'John', 'Green', 'Medium'));
+	$this->table->add_row(array( 'Fred', 'Blue', 'Small' ) );
+	$this->table->add_row(array( 'Mary', 'Red', 'Large' ) );
+	$this->table->add_row(array( 'John', 'Green', 'Medium' ) );
 
 	echo $this->table->generate();
 
@@ -191,7 +191,7 @@ Class Reference
 
 			$this->table->set_heading( 'Name', 'Color', 'Size');
 
-			$this->table->set_heading(array( 'Name', 'Color', 'Size'));
+			$this->table->set_heading(array( 'Name', 'Color', 'Size' ) );
 
 	.. php:method:: add_row([$args = array()[, ...]])
 
@@ -203,7 +203,7 @@ Class Reference
 
 			$this->table->add_row( 'Blue', 'Red', 'Green');
 
-			$this->table->add_row(array( 'Blue', 'Red', 'Green'));
+			$this->table->add_row(array( 'Blue', 'Red', 'Green' ) );
 
 		If you would like to set an individual cell's tag attributes, you can use an associative array for that cell.
 		The associative key **data** defines the cell's data. Any other key => val pairs are added as key='val' attributes to the tag::

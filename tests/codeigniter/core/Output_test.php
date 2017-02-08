@@ -41,14 +41,14 @@ HTML;
 
 	public function test_get_content_type()
 	{
-		$this->assertEquals( 'text/html', $this->output->get_content_type());
+		$this->assertEquals( 'text/html', $this->output->get_content_type( ) );
 	}
 
 	// --------------------------------------------------------------------
 
 	public function test_get_header()
 	{
-		$this->assertNull( $this->output->get_header( 'Non-Existent-Header'));
+		$this->assertNull( $this->output->get_header( 'Non-Existent-Header' ) );
 
 		// TODO: Find a way to test header() values as well. Currently,
 		//	 PHPUnit prevents this by not using output buffering.

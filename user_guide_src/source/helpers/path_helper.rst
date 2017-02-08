@@ -43,11 +43,11 @@ The following functions are available:
 
 		$non_existent_file = '/path/to/non-exist-file.txt';
 		echo set_realpath( $non_existent_file, TRUE);	// Shows an error, as the path cannot be resolved
-		echo set_realpath( $non_existent_file, FALSE);	// Prints '/path/to/non-exist-file.txt'
+		echo set_realpath( $non_existent_file, FALSE );	// Prints '/path/to/non-exist-file.txt'
 
 		$directory = '/etc/php5';
 		echo set_realpath( $directory);	// Prints '/etc/php5/'
 
 		$non_existent_directory = '/path/to/nowhere';
 		echo set_realpath( $non_existent_directory, TRUE);	// Shows an error, as the path cannot be resolved
-		echo set_realpath( $non_existent_directory, FALSE);	// Prints '/path/to/nowhere'
+		echo set_realpath( $non_existent_directory, FALSE );	// Prints '/path/to/nowhere'

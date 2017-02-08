@@ -76,7 +76,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	 * @param	bool	$persistent
 	 * @return	resource
 	 */
-	public function db_connect( $persistent = FALSE)
+	public function db_connect( $persistent = FALSE )
 	{
 		$error = NULL;
 		$conn_id = ( $persistent === TRUE)
@@ -200,7 +200,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	 * @param	bool	$prefix_limit
 	 * @return	string
 	 */
-	protected function _list_tables( $prefix_limit = FALSE)
+	protected function _list_tables( $prefix_limit = FALSE )
 	{
 		$sql = "SELECT name FROM sqlite_master WHERE type='table'";
 
@@ -238,19 +238,19 @@ class CI_DB_sqlite_driver extends CI_DB {
 	 */
 	public function field_data( $table)
 	{
-		if( ( $query = $this->query( 'PRAGMA TABLE_INFO( ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE) . ')')) === FALSE)
+		if( ( $query = $this->query( 'PRAGMA TABLE_INFO( ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE ) . ')' ) ) === FALSE )
 		{
 			return  FALSE;
 		}
 
 		$query = $query->result_array();
-		if( empty( $query))
+		if( empty( $query ) )
 		{
 			return  FALSE;
 		}
 
 		$retval = array();
-		for ( $i = 0, $c = count( $query); $i < $c; $i++)
+		for( $i = 0, $c = count( $query); $i < $c; $i++)
 		{
 			$retval[$i]			= new stdClass();
 			$retval[$i]->name		= $query[$i][ 'name' ];
@@ -275,7 +275,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	 */
 	public function error()
 	{
-		$error = array( 'code' => sqlite_last_error( $this->conn_id));
+		$error = array( 'code' => sqlite_last_error( $this->conn_id ) );
 		$error[ 'message' ] = sqlite_error_string( $error[ 'code' ]);
 		return  $error;
 	}

@@ -13,7 +13,7 @@ class Table_test extends CI_TestCase {
 
 	public function test_set_template()
 	{
-		$this->assertFalse( $this->table->set_template( 'not an array'));
+		$this->assertFalse( $this->table->set_template( 'not an array' ) );
 
 		$template = array( 'a' => 'b');
 
@@ -92,7 +92,7 @@ class Table_test extends CI_TestCase {
 
 		$this->assertEquals(
 			$expected,
-			$this->table->prep_args(array( 'name', 'color', 'size'))
+			$this->table->prep_args(array( 'name', 'color', 'size' ) )
 		);
 
 		// with cell attributes
@@ -101,7 +101,7 @@ class Table_test extends CI_TestCase {
 
 		$this->assertEquals(
 			$expected,
-			$this->table->prep_args(array( 'name', 'color', 'size', array( 'data' => 'weight', 'class' => 'awesome')))
+			$this->table->prep_args(array( 'name', 'color', 'size', array( 'data' => 'weight', 'class' => 'awesome' ) ))
 		);
 	}
 
@@ -119,23 +119,23 @@ class Table_test extends CI_TestCase {
 
 		foreach( $keys as $key)
 		{
-			$this->assertArrayHasKey( $key, $this->table->default_template());
+			$this->assertArrayHasKey( $key, $this->table->default_template( ) );
 		}
 	}
 
 	public function test_compile_template()
 	{
-		$this->assertFalse( $this->table->set_template( 'invalid_junk'));
+		$this->assertFalse( $this->table->set_template( 'invalid_junk' ) );
 
 		// non default key
-		$this->table->set_template(array( 'nonsense' => 'foo'));
+		$this->table->set_template(array( 'nonsense' => 'foo' ) );
 		$this->table->compile_template();
 
 		$this->assertArrayHasKey( 'nonsense', $this->table->template);
 		$this->assertEquals( 'foo', $this->table->template[ 'nonsense' ]);
 
 		// override default
-		$this->table->set_template(array( 'table_close' => '</table junk>'));
+		$this->table->set_template(array( 'table_close' => '</table junk>' ) );
 		$this->table->compile_template();
 
 		$this->assertArrayHasKey( 'table_close', $this->table->template);
@@ -145,9 +145,9 @@ class Table_test extends CI_TestCase {
 	public function test_make_columns()
 	{
 		// Test bogus parameters
-		$this->assertFalse( $this->table->make_columns( 'invalid_junk'));
-		$this->assertFalse( $this->table->make_columns(array()));
-		$this->assertFalse( $this->table->make_columns(array( 'one', 'two'), '2.5'));
+		$this->assertFalse( $this->table->make_columns( 'invalid_junk' ) );
+		$this->assertFalse( $this->table->make_columns(array( ) ));
+		$this->assertFalse( $this->table->make_columns(array( 'one', 'two'), '2.5' ) );
 
 		// Now on to the actual column creation
 
@@ -270,14 +270,14 @@ class Table_test extends CI_TestCase {
 		$table = $this->table->generate( $data);
 
 		// Test the table header
-		$this->assertTrue(strpos( $table, '<th>Name</th>') !== FALSE);
-		$this->assertTrue(strpos( $table, '<th>Color</th>') !== FALSE);
-		$this->assertTrue(strpos( $table, '<th>Size</th>') !== FALSE);
+		$this->assertTrue(strpos( $table, '<th>Name</th>') !== FALSE );
+		$this->assertTrue(strpos( $table, '<th>Color</th>') !== FALSE );
+		$this->assertTrue(strpos( $table, '<th>Size</th>') !== FALSE );
 
 		// Test the first entry
-		$this->assertTrue(strpos( $table, '<td>Fred</td>') !== FALSE);
-		$this->assertTrue(strpos( $table, '<td>Blue</td>') !== FALSE);
-		$this->assertTrue(strpos( $table, '<td>Small</td>') !== FALSE);
+		$this->assertTrue(strpos( $table, '<td>Fred</td>') !== FALSE );
+		$this->assertTrue(strpos( $table, '<td>Blue</td>') !== FALSE );
+		$this->assertTrue(strpos( $table, '<td>Small</td>') !== FALSE );
 	}
 
 }

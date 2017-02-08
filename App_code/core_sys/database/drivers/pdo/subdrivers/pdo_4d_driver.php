@@ -80,7 +80,7 @@ class CI_DB_pdo_4d_driver extends CI_DB_pdo_driver {
 	{
 		parent::__construct( $params);
 
-		if( empty( $this->dsn))
+		if( empty( $this->dsn ) )
 		{
 			$this->dsn = '4D:host='.(empty( $this->hostname) ? '127.0.0.1' : $this->hostname);
 
@@ -88,7 +88,7 @@ class CI_DB_pdo_4d_driver extends CI_DB_pdo_driver {
 			empty( $this->database) OR $this->dsn .= ';dbname=' . $this->database;
 			empty( $this->char_set) OR $this->dsn .= ';charset=' . $this->char_set;
 		}
-		elseif( ! empty( $this->char_set) && strpos( $this->dsn, 'charset=', 3) === FALSE)
+		elseif( ! empty( $this->char_set) && strpos( $this->dsn, 'charset=', 3) === FALSE )
 		{
 			$this->dsn .= ';charset=' . $this->char_set;
 		}
@@ -104,7 +104,7 @@ class CI_DB_pdo_4d_driver extends CI_DB_pdo_driver {
 	 * @param	bool	$prefix_limit
 	 * @return	string
 	 */
-	protected function _list_tables( $prefix_limit = FALSE)
+	protected function _list_tables( $prefix_limit = FALSE )
 	{
 		$sql = 'SELECT ' . $this->escape_identifiers( 'TABLE_NAME') . ' FROM ' . $this->escape_identifiers( '_USER_TABLES');
 
@@ -145,7 +145,7 @@ class CI_DB_pdo_4d_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _field_data( $table)
 	{
-		return  'SELECT * FROM ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE) . ' LIMIT 1';
+		return  'SELECT * FROM ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE ) . ' LIMIT 1';
 	}
 
 	// --------------------------------------------------------------------

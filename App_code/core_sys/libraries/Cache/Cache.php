@@ -98,16 +98,16 @@ class CI_Cache extends CI_Driver_Library {
 	 * @param	array	$config = array()
 	 * @return	void
 	 */
-	public function __construct( $config = array())
+	public function __construct( $config = array( ) )
 	{
 		isset( $config[ 'adapter' ]) && $this->_adapter = $config[ 'adapter' ];
 		isset( $config[ 'backup' ]) && $this->_backup_driver = $config[ 'backup' ];
 		isset( $config[ 'key_prefix' ]) && $this->key_prefix = $config[ 'key_prefix' ];
 
 		// If the specified adapter isn't available, check the backup.
-		if( ! $this->is_supported( $this->_adapter))
+		if( ! $this->is_supported( $this->_adapter ) )
 		{
-			if( ! $this->is_supported( $this->_backup_driver))
+			if( ! $this->is_supported( $this->_backup_driver ) )
 			{
 				// Backup isn't supported either. Default to 'Dummy' driver.
 				log_message( 'error', 'Cache adapter "' . $this->_adapter . '" and backup "' . $this->_backup_driver . '" are both unavailable. Cache is now using "Dummy" adapter . ');
@@ -149,7 +149,7 @@ class CI_Cache extends CI_Driver_Library {
 	 * @param	bool	$raw	Whether to store the raw value
 	 * @return	bool	TRUE on success, FALSE on failure
 	 */
-	public function save( $id, $data, $ttl = 60, $raw = FALSE)
+	public function save( $id, $data, $ttl = 60, $raw = FALSE )
 	{
 		return  $this->{$this->_adapter}->save( $this->key_prefix.$id, $data, $ttl, $raw);
 	}
@@ -245,7 +245,7 @@ class CI_Cache extends CI_Driver_Library {
 	{
 		static $support;
 
-		if( ! isset( $support, $support[$driver]))
+		if( ! isset( $support, $support[$driver] ) )
 		{
 			$support[$driver] = $this->{$driver}->is_supported();
 		}

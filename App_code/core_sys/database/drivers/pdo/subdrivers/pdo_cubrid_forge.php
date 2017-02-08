@@ -104,16 +104,16 @@ class CI_DB_pdo_cubrid_forge extends CI_DB_pdo_forge {
 	 */
 	protected function _alter_table( $alter_type, $table, $field)
 	{
-		if( in_array( $alter_type, array( 'DROP', 'ADD'), TRUE))
+		if( in_array( $alter_type, array( 'DROP', 'ADD'), TRUE ) )
 		{
 			return  parent::_alter_table( $alter_type, $table, $field);
 		}
 
 		$sql = 'ALTER TABLE ' . $this->db->escape_identifiers( $table);
 		$sqls = array();
-		for ( $i = 0, $c = count( $field); $i < $c; $i++)
+		for( $i = 0, $c = count( $field); $i < $c; $i++)
 		{
-			if( $field[$i][ '_literal' ] !== FALSE)
+			if( $field[$i][ '_literal' ] !== FALSE )
 			{
 				$sqls[] = $sql . ' CHANGE ' . $field[$i][ '_literal' ];
 			}
@@ -146,7 +146,7 @@ class CI_DB_pdo_cubrid_forge extends CI_DB_pdo_forge {
 		}
 
 		return  $this->db->escape_identifiers( $field[ 'name' ])
-			.(empty( $field[ 'new_name' ]) ? '' : ' ' . $this->db->escape_identifiers( $field[ 'new_name' ]))
+			.(empty( $field[ 'new_name' ]) ? '' : ' ' . $this->db->escape_identifiers( $field[ 'new_name' ] ) )
 			 . ' ' . $field[ 'type' ].$field[ 'length' ]
 			.$field[ 'unsigned' ]
 			.$field[ 'null' ]
@@ -168,7 +168,7 @@ class CI_DB_pdo_cubrid_forge extends CI_DB_pdo_forge {
 	 */
 	protected function _attr_type(&$attributes)
 	{
-		switch( strtoupper( $attributes[ 'TYPE' ]))
+		switch( strtoupper( $attributes[ 'TYPE' ] ) )
 		{
 			case 'TINYINT':
 				$attributes[ 'TYPE' ] = 'SMALLINT';
@@ -194,20 +194,20 @@ class CI_DB_pdo_cubrid_forge extends CI_DB_pdo_forge {
 	{
 		$sql = '';
 
-		for ( $i = 0, $c = count( $this->keys); $i < $c; $i++)
+		for( $i = 0, $c = count( $this->keys); $i < $c; $i++)
 		{
-			if( is_array( $this->keys[$i]))
+			if( is_array( $this->keys[$i] ) )
 			{
-				for ( $i2 = 0, $c2 = count( $this->keys[$i]); $i2 < $c2; $i2++)
+				for( $i2 = 0, $c2 = count( $this->keys[$i]); $i2 < $c2; $i2++)
 				{
-					if( ! isset( $this->fields[$this->keys[$i][$i2]]))
+					if( ! isset( $this->fields[$this->keys[$i][$i2]] ) )
 					{
 						unset( $this->keys[$i][$i2]);
 						continue;
 					}
 				}
 			}
-			elseif( ! isset( $this->fields[$this->keys[$i]]))
+			elseif( ! isset( $this->fields[$this->keys[$i]] ) )
 			{
 				unset( $this->keys[$i]);
 				continue;
@@ -215,8 +215,8 @@ class CI_DB_pdo_cubrid_forge extends CI_DB_pdo_forge {
 
 			is_array( $this->keys[$i]) OR $this->keys[$i] = array( $this->keys[$i]);
 
-			$sql .= ",\n\tKEY ".$this->db->escape_identifiers(implode( '_', $this->keys[$i]))
-				 . ' ( '.implode( ', ', $this->db->escape_identifiers( $this->keys[$i])) . ')';
+			$sql .= ",\n\tKEY ".$this->db->escape_identifiers(implode( '_', $this->keys[$i] ) )
+				 . ' ( '.implode( ', ', $this->db->escape_identifiers( $this->keys[$i] ) ) . ')';
 		}
 
 		$this->keys = array();

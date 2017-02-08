@@ -78,7 +78,7 @@ The following functions let you generate errors:
 	CodeIgniter automatically logs any ``show_404()`` calls. Setting the
 	optional second parameter to FALSE will skip logging.
 
-.. php:function:: log_message( $level, $message, $php_error = FALSE)
+.. php:function:: log_message( $level, $message, $php_error = FALSE )
 
 	:param	string	$level: Log level: 'error', 'debug' or 'info'
 	:param	string	$message: Message to log

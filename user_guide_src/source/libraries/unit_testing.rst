@@ -125,7 +125,7 @@ Enabling/Disabling Unit Testing
 If you would like to leave some testing in place in your scripts, but
 not have it run unless you need it, you can disable unit testing using::
 
-	$this->unit->active(FALSE);
+	$this->unit->active(FALSE );
 
 Unit Test Display
 =================
@@ -150,7 +150,7 @@ Customizing displayed tests
 
 ::
 
-	$this->unit->set_test_items(array( 'test_name', 'result'));
+	$this->unit->set_test_items(array( 'test_name', 'result' ) );
 
 Creating a Template
 -------------------

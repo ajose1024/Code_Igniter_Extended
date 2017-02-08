@@ -60,7 +60,7 @@ validation <../libraries/form_validation>` library to do this.
         $this->form_validation->set_rules( 'title', 'Title', 'required');
         $this->form_validation->set_rules( 'text', 'Text', 'required');
         
-        if( $this->form_validation->run() === FALSE)
+        if( $this->form_validation->run() === FALSE )
         {
             $this->load->view( 'templates/header', $data);   
             $this->load->view( 'news/create');

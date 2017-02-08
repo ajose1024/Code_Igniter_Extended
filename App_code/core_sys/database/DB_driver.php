@@ -752,8 +752,8 @@ abstract class CI_DB_driver {
 
 		if( ! class_exists( $driver, FALSE ) )
 		{
-			require_once(SYS_CORE_PATH . 'database/DB_result.php' );
-			require_once(SYS_CORE_PATH . 'database/drivers/' . $this->dbdriver . '/' . $this->dbdriver . '_result.php' );
+			require_once( SYS_CORE_PATH . 'database/DB_result.php' );
+			require_once( SYS_CORE_PATH . 'database/drivers/' . $this->dbdriver . '/' . $this->dbdriver . '_result.php' );
 		}
 
 		return  $driver;
@@ -1675,7 +1675,7 @@ abstract class CI_DB_driver {
 	{
 		if( ! class_exists( 'CI_DB_Cache', FALSE ) )
 		{
-			require_once(SYS_CORE_PATH . 'database/DB_cache.php' );
+			require_once( SYS_CORE_PATH . 'database/DB_cache.php' );
 		}
 		elseif( is_object( $this->CACHE ) )
 		{
@@ -1759,7 +1759,7 @@ abstract class CI_DB_driver {
 				if( strpos( $call[ 'file' ], SYS_CORE_PATH . 'database' ) === FALSE && strpos( $call[ 'class' ], 'Loader' ) === FALSE )
 				{
 					// Found it - use a relative path for safety
-					$message[] = 'Filename: '.str_replace(array(APP_DIR_PATH, SYS_CORE_PATH ), '', $call[ 'file' ] );
+					$message[] = 'Filename: '.str_replace(array( APP_DIR_PATH, SYS_CORE_PATH ), '', $call[ 'file' ] );
 					$message[] = 'Line Number: ' . $call[ 'line' ];
 					break;
 				}

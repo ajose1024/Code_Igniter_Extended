@@ -115,7 +115,7 @@ tag for the main jQuery file will be automatically included when loading
 the library. It will be created by default. To prevent this, load the
 library as follows::
 
-	$this->load->library( 'javascript/jquery', FALSE);
+	$this->load->library( 'javascript/jquery', FALSE );
 
 Once loaded, the jQuery library object will be available using:
 
@@ -127,7 +127,7 @@ jQuery Events
 Events are set using the following syntax.
 ::
 
-	$this->jquery->event( 'element_path', code_to_run());
+	$this->jquery->event( 'element_path', code_to_run( ) );
 
 In the above example:
 
@@ -213,7 +213,7 @@ and triggered by a click using the jQuery library's click() event.
 	'width' => '50%',
 	'marginLeft' => 125
 	);
-	$this->jquery->click( '#trigger', $this->jquery->animate( '#note', $params, 'normal'));
+	$this->jquery->click( '#trigger', $this->jquery->animate( '#note', $params, 'normal' ) );
 
 fadeIn() / fadeOut()
 --------------------

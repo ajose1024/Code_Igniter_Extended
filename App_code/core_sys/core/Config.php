@@ -251,7 +251,7 @@ class CI_Config implements CI_Config_Interface
                         return  FALSE ;
                     }
 
-                    show_error( 'Your ' . $file_path . ' file does not appear to contain a valid configuration array . ' ) ;
+                    show_error( 'Your ' . $file_path . ' file does not appear to contain a valid configuration array.' ) ;
                 }
 
                 if( $use_sections === TRUE )
@@ -281,7 +281,7 @@ class CI_Config implements CI_Config_Interface
             return  FALSE ;
         }
 
-        show_error( 'The configuration file ' . $file . '.php does not exist . ' ) ;
+        show_error( 'The configuration file ' . $file . '.php does not exist.' ) ;
     }
 
     // -----------------------------    ---------------------------------------

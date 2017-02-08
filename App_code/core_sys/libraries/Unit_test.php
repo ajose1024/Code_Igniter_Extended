@@ -126,7 +126,7 @@ class CI_Unit_test {
 	 */
 	public function set_test_items( $items)
 	{
-		if( ! empty( $items) && is_array( $items))
+		if( ! empty( $items) && is_array( $items ) )
 		{
 			$this->_test_items_visible = $items;
 		}
@@ -147,16 +147,16 @@ class CI_Unit_test {
 	 */
 	public function run( $test, $expected = TRUE, $test_name = 'undefined', $notes = '')
 	{
-		if( $this->active === FALSE)
+		if( $this->active === FALSE )
 		{
 			return  FALSE;
 		}
 
-		if( in_array( $expected, array( 'is_object', 'is_string', 'is_bool', 'is_true', 'is_false', 'is_int', 'is_numeric', 'is_float', 'is_double', 'is_array', 'is_null', 'is_resource'), TRUE))
+		if( in_array( $expected, array( 'is_object', 'is_string', 'is_bool', 'is_true', 'is_false', 'is_int', 'is_numeric', 'is_float', 'is_double', 'is_array', 'is_null', 'is_resource'), TRUE ) )
 		{
 			$expected = str_replace( 'is_double', 'is_float', $expected);
 			$result = $expected( $test);
-			$extype = str_replace(array( 'true', 'false'), 'bool', str_replace( 'is_', '', $expected));
+			$extype = str_replace(array( 'true', 'false'), 'bool', str_replace( 'is_', '', $expected ) );
 		}
 		else
 		{
@@ -178,7 +178,7 @@ class CI_Unit_test {
 
 		$this->results[] = $report;
 
-		return  $this->report( $this->result(array( $report)));
+		return  $this->report( $this->result(array( $report ) ));
 	}
 
 	// --------------------------------------------------------------------
@@ -191,7 +191,7 @@ class CI_Unit_test {
 	 * @param	array	 $result
 	 * @return	string
 	 */
-	public function report( $result = array())
+	public function report( $result = array( ) )
 	{
 		if( count( $result) === 0)
 		{
@@ -210,13 +210,13 @@ class CI_Unit_test {
 
 			foreach( $res as $key => $val)
 			{
-				if( $key === $CI->lang->line( 'ut_result'))
+				if( $key === $CI->lang->line( 'ut_result' ) )
 				{
-					if( $val === $CI->lang->line( 'ut_passed'))
+					if( $val === $CI->lang->line( 'ut_passed' ) )
 					{
 						$val = '<span style="color: #0C0;">' . $val . '</span>';
 					}
-					elseif( $val === $CI->lang->line( 'ut_failed'))
+					elseif( $val === $CI->lang->line( 'ut_failed' ) )
 					{
 						$val = '<span style="color: #C00;">' . $val . '</span>';
 					}
@@ -271,7 +271,7 @@ class CI_Unit_test {
 	 * @param	array	$results
 	 * @return	array
 	 */
-	public function result( $results = array())
+	public function result( $results = array( ) )
 	{
 		$CI =& get_instance();
 		$CI->load->language( 'unit_test');
@@ -287,19 +287,19 @@ class CI_Unit_test {
 			$temp = array();
 			foreach( $result as $key => $val)
 			{
-				if( ! in_array( $key, $this->_test_items_visible))
+				if( ! in_array( $key, $this->_test_items_visible ) )
 				{
 					continue;
 				}
-				elseif( in_array( $key, array( 'test_name', 'test_datatype', 'test_res_datatype', 'result'), TRUE))
+				elseif( in_array( $key, array( 'test_name', 'test_datatype', 'test_res_datatype', 'result'), TRUE ) )
 				{
-					if( FALSE !== ( $line = $CI->lang->line(strtolower( 'ut_' . $val), FALSE)))
+					if( FALSE !== ( $line = $CI->lang->line(strtolower( 'ut_' . $val), FALSE ) ))
 					{
 						$val = $line;
 					}
 				}
 
-				$temp[$CI->lang->line( 'ut_' . $key, FALSE)] = $val;
+				$temp[$CI->lang->line( 'ut_' . $key, FALSE )] = $val;
 			}
 
 			$retval[] = $temp;
@@ -372,7 +372,7 @@ class CI_Unit_test {
 			return;
 		}
 
-		if( $this->_template === NULL OR ! preg_match( '/\{rows\}(.*?)\{\/rows\}/si', $this->_template, $match))
+		if( $this->_template === NULL OR ! preg_match( '/\{rows\}(.*?)\{\/rows\}/si', $this->_template, $match ) )
 		{
 			$this->_default_template();
 			return;
@@ -403,5 +403,5 @@ function is_true( $test)
  */
 function is_false( $test)
 {
-	return  ( $test === FALSE);
+	return  ( $test === FALSE );
 }

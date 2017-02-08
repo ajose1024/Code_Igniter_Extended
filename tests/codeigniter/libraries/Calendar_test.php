@@ -5,10 +5,10 @@ class Calendar_test extends CI_TestCase {
 	public function set_up()
 	{
 		// Required for get_total_days()
-		$this->ci_instance_var( 'load', $this->getMock( 'CI_Loader', array( 'helper')));
+		$this->ci_instance_var( 'load', $this->getMock( 'CI_Loader', array( 'helper' ) ));
 
-		$lang = $this->getMock( 'CI_Lang', array( 'load', 'line'));
-		$lang->expects( $this->any())->method( 'line')->will( $this->returnValue(FALSE));
+		$lang = $this->getMock( 'CI_Lang', array( 'load', 'line' ) );
+		$lang->expects( $this->any( ) )->method( 'line')->will( $this->returnValue(FALSE ) );
 		$this->ci_instance_var( 'lang', $lang);
 
 		$this->calendar = new CI_Calendar();
@@ -21,7 +21,7 @@ class Calendar_test extends CI_TestCase {
 		$this->calendar->initialize(array(
 			'month_type'	=>	'short',
 			'start_day'	=>	'monday'
-		));
+		 ) );
 		$this->assertEquals( 'short', $this->calendar->month_type);
 		$this->assertEquals( 'monday', $this->calendar->start_day);
 	}
@@ -63,7 +63,7 @@ class Calendar_test extends CI_TestCase {
 
 </table>';
 
-		$this->assertEquals( $no_events, $this->calendar->generate(2011, 9));
+		$this->assertEquals( $no_events, $this->calendar->generate(2011, 9 ) );
 
 		$data = array(
 			3  => 'http://example.com/news/article/2006/03/',
@@ -105,7 +105,7 @@ class Calendar_test extends CI_TestCase {
 
 </table>';
 
-		$this->assertEquals( $events, $this->calendar->generate(2011, 9, $data));
+		$this->assertEquals( $events, $this->calendar->generate(2011, 9, $data ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -113,10 +113,10 @@ class Calendar_test extends CI_TestCase {
 	public function test_get_month_name()
 	{
 		$this->calendar->month_type = NULL;
-		$this->assertEquals( 'January', $this->calendar->get_month_name( '01'));
+		$this->assertEquals( 'January', $this->calendar->get_month_name( '01' ) );
 
 		$this->calendar->month_type = 'short';
-		$this->assertEquals( 'Jan', $this->calendar->get_month_name( '01'));
+		$this->assertEquals( 'Jan', $this->calendar->get_month_name( '01' ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -131,7 +131,7 @@ class Calendar_test extends CI_TestCase {
 			'Thursday',
 			'Friday',
 			'Saturday'
-		), $this->calendar->get_day_names( 'long'));
+		), $this->calendar->get_day_names( 'long' ) );
 
 		$this->assertEquals(array(
 			'Sun',
@@ -141,7 +141,7 @@ class Calendar_test extends CI_TestCase {
 			'Thu',
 			'Fri',
 			'Sat'
-		), $this->calendar->get_day_names( 'short'));
+		), $this->calendar->get_day_names( 'short' ) );
 
 		$this->calendar->day_type = NULL;
 
@@ -153,36 +153,36 @@ class Calendar_test extends CI_TestCase {
 			'Th',
 			'Fr',
 			'Sa'
-		), $this->calendar->get_day_names());
+		), $this->calendar->get_day_names( ) );
 	}
 
 	// --------------------------------------------------------------------
 
 	public function test_adjust_date()
 	{
-		$this->assertEquals(array( 'month' => 8, 'year' => 2012), $this->calendar->adjust_date(8, 2012));
-		$this->assertEquals(array( 'month' => 1, 'year' => 2013), $this->calendar->adjust_date(13, 2012));
+		$this->assertEquals(array( 'month' => 8, 'year' => 2012), $this->calendar->adjust_date(8, 2012 ) );
+		$this->assertEquals(array( 'month' => 1, 'year' => 2013), $this->calendar->adjust_date(13, 2012 ) );
 	}
 
 	// --------------------------------------------------------------------
 
 	public function test_get_total_days()
 	{
-		$this->assertEquals(0, $this->calendar->get_total_days(13, 2012));
+		$this->assertEquals(0, $this->calendar->get_total_days(13, 2012 ) );
 
-		$this->assertEquals(31, $this->calendar->get_total_days(1, 2012));
-		$this->assertEquals(28, $this->calendar->get_total_days(2, 2011));
-		$this->assertEquals(29, $this->calendar->get_total_days(2, 2012));
-		$this->assertEquals(31, $this->calendar->get_total_days(3, 2012));
-		$this->assertEquals(30, $this->calendar->get_total_days(4, 2012));
-		$this->assertEquals(31, $this->calendar->get_total_days(5, 2012));
-		$this->assertEquals(30, $this->calendar->get_total_days(6, 2012));
-		$this->assertEquals(31, $this->calendar->get_total_days(7, 2012));
-		$this->assertEquals(31, $this->calendar->get_total_days(8, 2012));
-		$this->assertEquals(30, $this->calendar->get_total_days(9, 2012));
-		$this->assertEquals(31, $this->calendar->get_total_days(10, 2012));
-		$this->assertEquals(30, $this->calendar->get_total_days(11, 2012));
-		$this->assertEquals(31, $this->calendar->get_total_days(12, 2012));
+		$this->assertEquals(31, $this->calendar->get_total_days(1, 2012 ) );
+		$this->assertEquals(28, $this->calendar->get_total_days(2, 2011 ) );
+		$this->assertEquals(29, $this->calendar->get_total_days(2, 2012 ) );
+		$this->assertEquals(31, $this->calendar->get_total_days(3, 2012 ) );
+		$this->assertEquals(30, $this->calendar->get_total_days(4, 2012 ) );
+		$this->assertEquals(31, $this->calendar->get_total_days(5, 2012 ) );
+		$this->assertEquals(30, $this->calendar->get_total_days(6, 2012 ) );
+		$this->assertEquals(31, $this->calendar->get_total_days(7, 2012 ) );
+		$this->assertEquals(31, $this->calendar->get_total_days(8, 2012 ) );
+		$this->assertEquals(30, $this->calendar->get_total_days(9, 2012 ) );
+		$this->assertEquals(31, $this->calendar->get_total_days(10, 2012 ) );
+		$this->assertEquals(30, $this->calendar->get_total_days(11, 2012 ) );
+		$this->assertEquals(31, $this->calendar->get_total_days(12, 2012 ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -216,7 +216,7 @@ class Calendar_test extends CI_TestCase {
 			'cal_cell_end_other'		=> '</td>'
 		);
 
-		$this->assertEquals( $array, $this->calendar->default_template());
+		$this->assertEquals( $array, $this->calendar->default_template( ) );
 	}
 
 }

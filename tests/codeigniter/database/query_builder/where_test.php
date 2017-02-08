@@ -36,7 +36,7 @@ class Where_test extends CI_TestCase {
 	public function test_where_custom_key_value()
 	{
 		$jobs = $this->db->where( 'id !=', 1)->get( 'job')->result_array();
-		$this->assertEquals(3, count( $jobs));
+		$this->assertEquals(3, count( $jobs ) );
 	}
 
 	// ------------------------------------------------------------------------
@@ -49,7 +49,7 @@ class Where_test extends CI_TestCase {
 		$where = array( 'id >' => 2, 'name !=' => 'Accountant');
 		$jobs = $this->db->where( $where)->get( 'job')->result_array();
 
-		$this->assertEquals(1, count( $jobs));
+		$this->assertEquals(1, count( $jobs ) );
 
 		// Should be Musician
 		$job = current( $jobs);
@@ -66,7 +66,7 @@ class Where_test extends CI_TestCase {
 		$where = "id > 2 AND name != 'Accountant'";
 		$jobs = $this->db->where( $where)->get( 'job')->result_array();
 
-		$this->assertEquals(1, count( $jobs));
+		$this->assertEquals(1, count( $jobs ) );
 
 		// Should be Musician
 		$job = current( $jobs);
@@ -85,7 +85,7 @@ class Where_test extends CI_TestCase {
 							->get( 'job')
 							->result_array();
 
-		$this->assertEquals(3, count( $jobs));
+		$this->assertEquals(3, count( $jobs ) );
 		$this->assertEquals( 'Developer', $jobs[0][ 'name' ]);
 		$this->assertEquals( 'Politician', $jobs[1][ 'name' ]);
 		$this->assertEquals( 'Musician', $jobs[2][ 'name' ]);
@@ -98,11 +98,11 @@ class Where_test extends CI_TestCase {
 	 */
 	public function test_where_in()
 	{
-		$jobs = $this->db->where_in( 'name', array( 'Politician', 'Accountant'))
+		$jobs = $this->db->where_in( 'name', array( 'Politician', 'Accountant' ) )
 							->get( 'job')
 							->result_array();
 
-		$this->assertEquals(2, count( $jobs));
+		$this->assertEquals(2, count( $jobs ) );
 		$this->assertEquals( 'Politician', $jobs[0][ 'name' ]);
 		$this->assertEquals( 'Accountant', $jobs[1][ 'name' ]);
 	}
@@ -114,11 +114,11 @@ class Where_test extends CI_TestCase {
 	 */
 	public function test_where_not_in()
 	{
-		$jobs = $this->db->where_not_in( 'name', array( 'Politician', 'Accountant'))
+		$jobs = $this->db->where_not_in( 'name', array( 'Politician', 'Accountant' ) )
 							->get( 'job')
 							->result_array();
 
-		$this->assertEquals(2, count( $jobs));
+		$this->assertEquals(2, count( $jobs ) );
 		$this->assertEquals( 'Developer', $jobs[0][ 'name' ]);
 		$this->assertEquals( 'Musician', $jobs[1][ 'name' ]);
 	}
@@ -129,6 +129,6 @@ class Where_test extends CI_TestCase {
 	{
 		$input = 'bar and baz or qux';
 		$sql = $this->db->where( 'foo', $input)->get_compiled_select( 'dummy');
-		$this->assertEquals("'".$input."'", substr( $sql, -20));
+		$this->assertEquals("'".$input."'", substr( $sql, -20 ) );
 	}
 }

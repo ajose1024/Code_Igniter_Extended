@@ -17,16 +17,16 @@ class Encryption_test extends CI_TestCase {
 	public function test___construct()
 	{
 		// Assume no configuration from set_up()
-		$this->assertNull( $this->encryption->get_key());
+		$this->assertNull( $this->encryption->get_key( ) );
 
 		// Try with an empty value
 		$this->ci_set_config( 'encryption_key');
 		$this->encrypt = new Mock_Libraries_Encryption();
-		$this->assertNull( $this->encrypt->get_key());
+		$this->assertNull( $this->encrypt->get_key( ) );
 
-		$this->ci_set_config( 'encryption_key', str_repeat("\x0", 16));
+		$this->ci_set_config( 'encryption_key', str_repeat("\x0", 16 ) );
 		$this->encrypt = new Mock_Libraries_Encryption();
-		$this->assertEquals(str_repeat("\x0", 16), $this->encrypt->get_key());
+		$this->assertEquals(str_repeat("\x0", 16), $this->encrypt->get_key( ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -94,14 +94,14 @@ class Encryption_test extends CI_TestCase {
 		}
 
 		// Test default length, it must match the digest size
-		$this->assertEquals(64, strlen( $this->encryption->hkdf( 'foobar', 'sha512')));
+		$this->assertEquals(64, strlen( $this->encryption->hkdf( 'foobar', 'sha512' ) ));
 
 		// Test maximum length (RFC5869 says that it must be up to 255 times the digest size)
-		$this->assertEquals(12240, strlen( $this->encryption->hkdf( 'foobar', 'sha384', NULL, 48 * 255)));
-		$this->assertFalse( $this->encryption->hkdf( 'foobar', 'sha224', NULL, 28 * 255 + 1));
+		$this->assertEquals(12240, strlen( $this->encryption->hkdf( 'foobar', 'sha384', NULL, 48 * 255 ) ));
+		$this->assertFalse( $this->encryption->hkdf( 'foobar', 'sha224', NULL, 28 * 255 + 1 ) );
 
 		// CI-specific test for an invalid digest
-		$this->assertFalse( $this->encryption->hkdf( 'fobar', 'sha1'));
+		$this->assertFalse( $this->encryption->hkdf( 'fobar', 'sha1' ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -126,9 +126,9 @@ class Encryption_test extends CI_TestCase {
 			array( 'cipher' => 'aes-128', 'mode' => 'foo', 'key' => $key, 'hmac_digest' => 'sha256', 'hmac_key' => $key)
 		);
 
-		for ( $i = 0, $c = count( $params); $i < $c; $i++)
+		for( $i = 0, $c = count( $params); $i < $c; $i++)
 		{
-			$this->assertFalse( $this->encryption->__get_params( $params[$i]));
+			$this->assertFalse( $this->encryption->__get_params( $params[$i] ) );
 		}
 
 		// Valid parameters
@@ -139,7 +139,7 @@ class Encryption_test extends CI_TestCase {
 			'hmac_key' => str_repeat("\x0", 16)
 		);
 
-		$this->assertTrue(is_array( $this->encryption->__get_params( $params)));
+		$this->assertTrue(is_array( $this->encryption->__get_params( $params ) ));
 
 		$params[ 'base64' ] = TRUE;
 		$params[ 'hmac_digest' ] = 'sha512';
@@ -188,16 +188,16 @@ class Encryption_test extends CI_TestCase {
 		$key = "\xd0\xc9\x08\xc4\xde\x52\x12\x6e\xf8\xcc\xdb\x03\xea\xa0\x3a\x5c";
 
 		// Default state (AES-128/Rijndael-128 in CBC mode)
-		$this->encryption->initialize(array( 'key' => $key));
+		$this->encryption->initialize(array( 'key' => $key ) );
 
 		// Was the key properly set?
-		$this->assertEquals( $key, $this->encryption->get_key());
+		$this->assertEquals( $key, $this->encryption->get_key( ) );
 
-		$this->assertEquals( $message, $this->encryption->decrypt( $this->encryption->encrypt( $message)));
+		$this->assertEquals( $message, $this->encryption->decrypt( $this->encryption->encrypt( $message ) ));
 
 		// Try DES in ECB mode, just for the sake of changing stuff
-		$this->encryption->initialize(array( 'cipher' => 'des', 'mode' => 'ecb', 'key' => substr( $key, 0, 8)));
-		$this->assertEquals( $message, $this->encryption->decrypt( $this->encryption->encrypt( $message)));
+		$this->encryption->initialize(array( 'cipher' => 'des', 'mode' => 'ecb', 'key' => substr( $key, 0, 8 ) ));
+		$this->assertEquals( $message, $this->encryption->decrypt( $this->encryption->encrypt( $message ) ));
 	}
 
 	// --------------------------------------------------------------------
@@ -212,8 +212,8 @@ class Encryption_test extends CI_TestCase {
 		$message = 'Another plain-text message . ';
 
 		// A random invalid parameter
-		$this->assertFalse( $this->encryption->encrypt( $message, array( 'foo')));
-		$this->assertFalse( $this->encryption->decrypt( $message, array( 'foo')));
+		$this->assertFalse( $this->encryption->encrypt( $message, array( 'foo' ) ));
+		$this->assertFalse( $this->encryption->decrypt( $message, array( 'foo' ) ));
 
 		// No HMAC, binary output
 		$params = array(
@@ -226,7 +226,7 @@ class Encryption_test extends CI_TestCase {
 
 		$ciphertext = $this->encryption->encrypt( $message, $params);
 
-		$this->assertEquals( $message, $this->encryption->decrypt( $ciphertext, $params));
+		$this->assertEquals( $message, $this->encryption->decrypt( $ciphertext, $params ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -236,12 +236,12 @@ class Encryption_test extends CI_TestCase {
 	 */
 	public function test__mcrypt_get_handle()
 	{
-		if( $this->encryption->drivers[ 'mcrypt' ] === FALSE)
+		if( $this->encryption->drivers[ 'mcrypt' ] === FALSE )
 		{
 			return  $this->markTestSkipped( 'Cannot test MCrypt because it is not available . ');
 		}
 
-		$this->assertTrue(is_resource( $this->encryption->__driver_get_handle( 'mcrypt', 'rijndael-128', 'cbc')));
+		$this->assertTrue(is_resource( $this->encryption->__driver_get_handle( 'mcrypt', 'rijndael-128', 'cbc' ) ));
 	}
 
 	// --------------------------------------------------------------------
@@ -251,13 +251,13 @@ class Encryption_test extends CI_TestCase {
 	 */
 	public function test__openssl_mcrypt_get_handle()
 	{
-		if( $this->encryption->drivers[ 'openssl' ] === FALSE)
+		if( $this->encryption->drivers[ 'openssl' ] === FALSE )
 		{
 			return  $this->markTestSkipped( 'Cannot test OpenSSL because it is not available . ');
 		}
 
-		$this->assertEquals( 'aes-128-cbc', $this->encryption->__driver_get_handle( 'openssl', 'aes-128', 'cbc'));
-		$this->assertEquals( 'rc4-40', $this->encryption->__driver_get_handle( 'openssl', 'rc4-40', 'stream'));
+		$this->assertEquals( 'aes-128-cbc', $this->encryption->__driver_get_handle( 'openssl', 'aes-128', 'cbc' ) );
+		$this->assertEquals( 'rc4-40', $this->encryption->__driver_get_handle( 'openssl', 'rc4-40', 'stream' ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -358,7 +358,7 @@ class Encryption_test extends CI_TestCase {
 			$params[ 'driver' ] = $driver_index[$driver];
 
 			$this->encryption->initialize( $params);
-			$this->assertEquals( $message, $this->encryption->decrypt( $ciphertext));
+			$this->assertEquals( $message, $this->encryption->decrypt( $ciphertext ) );
 		}
 	}
 
@@ -370,10 +370,10 @@ class Encryption_test extends CI_TestCase {
 	public function test_magic_get()
 	{
 		$this->assertNull( $this->encryption->foo);
-		$this->assertEquals(array( 'mcrypt', 'openssl'), array_keys( $this->encryption->drivers));
+		$this->assertEquals(array( 'mcrypt', 'openssl'), array_keys( $this->encryption->drivers ) );
 
 		// 'stream' mode is translated into an empty string for OpenSSL
-		$this->encryption->initialize(array( 'cipher' => 'rc4', 'mode' => 'stream'));
+		$this->encryption->initialize(array( 'cipher' => 'rc4', 'mode' => 'stream' ) );
 		$this->assertEquals( 'stream', $this->encryption->mode);
 	}
 

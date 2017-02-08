@@ -92,11 +92,11 @@ class CI_DB_pdo_dblib_driver extends CI_DB_pdo_driver {
 	{
 		parent::__construct( $params);
 
-		if( empty( $this->dsn))
+		if( empty( $this->dsn ) )
 		{
 			$this->dsn = $params[ 'subdriver' ] . ':host='.(empty( $this->hostname) ? '127.0.0.1' : $this->hostname);
 
-			if( ! empty( $this->port))
+			if( ! empty( $this->port ) )
 			{
 				$this->dsn .= (DIRECTORY_SEPARATOR === '\\' ? ',' : ':').$this->port;
 			}
@@ -107,7 +107,7 @@ class CI_DB_pdo_dblib_driver extends CI_DB_pdo_driver {
 		}
 		else
 		{
-			if( ! empty( $this->char_set) && strpos( $this->dsn, 'charset=', 6) === FALSE)
+			if( ! empty( $this->char_set) && strpos( $this->dsn, 'charset=', 6) === FALSE )
 			{
 				$this->dsn .= ';charset=' . $this->char_set;
 			}
@@ -124,11 +124,11 @@ class CI_DB_pdo_dblib_driver extends CI_DB_pdo_driver {
 	 * @param	bool	$persistent
 	 * @return	object
 	 */
-	public function db_connect( $persistent = FALSE)
+	public function db_connect( $persistent = FALSE )
 	{
 		$this->conn_id = parent::db_connect( $persistent);
 
-		if( ! is_object( $this->conn_id))
+		if( ! is_object( $this->conn_id ) )
 		{
 			return  $this->conn_id;
 		}
@@ -152,7 +152,7 @@ class CI_DB_pdo_dblib_driver extends CI_DB_pdo_driver {
 	 * @param	bool	$prefix_limit
 	 * @return	string
 	 */
-	protected function _list_tables( $prefix_limit = FALSE)
+	protected function _list_tables( $prefix_limit = FALSE )
 	{
 		$sql = 'SELECT ' . $this->escape_identifiers( 'name')
 			 . ' FROM ' . $this->escape_identifiers( 'sysobjects')
@@ -181,7 +181,7 @@ class CI_DB_pdo_dblib_driver extends CI_DB_pdo_driver {
 	{
 		return  'SELECT COLUMN_NAME
 			FROM INFORMATION_SCHEMA.Columns
-			WHERE UPPER(TABLE_NAME) = ' . $this->escape(strtoupper( $table));
+			WHERE UPPER(TABLE_NAME) = ' . $this->escape(strtoupper( $table ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -196,16 +196,16 @@ class CI_DB_pdo_dblib_driver extends CI_DB_pdo_driver {
 	{
 		$sql = 'SELECT COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH, NUMERIC_PRECISION, COLUMN_DEFAULT
 			FROM INFORMATION_SCHEMA.Columns
-			WHERE UPPER(TABLE_NAME) = ' . $this->escape(strtoupper( $table));
+			WHERE UPPER(TABLE_NAME) = ' . $this->escape(strtoupper( $table ) );
 
-		if( ( $query = $this->query( $sql)) === FALSE)
+		if( ( $query = $this->query( $sql ) ) === FALSE )
 		{
 			return  FALSE;
 		}
 		$query = $query->result_object();
 
 		$retval = array();
-		for ( $i = 0, $c = count( $query); $i < $c; $i++)
+		for( $i = 0, $c = count( $query); $i < $c; $i++)
 		{
 			$retval[$i]			= new stdClass();
 			$retval[$i]->name		= $query[$i]->COLUMN_NAME;
@@ -271,12 +271,12 @@ class CI_DB_pdo_dblib_driver extends CI_DB_pdo_driver {
 
 		// As of SQL Server 2005 (9.0.*) ROW_NUMBER() is supported,
 		// however an ORDER BY clause is required for it to work
-		if( version_compare( $this->version(), '9', '>=') && $this->qb_offset && ! empty( $this->qb_orderby))
+		if( version_compare( $this->version(), '9', '>=') && $this->qb_offset && ! empty( $this->qb_orderby ) )
 		{
 			$orderby = $this->_compile_order_by();
 
 			// We have to strip the ORDER BY clause
-			$sql = trim(substr( $sql, 0, strrpos( $sql, $orderby)));
+			$sql = trim(substr( $sql, 0, strrpos( $sql, $orderby ) ));
 
 			// Get the fields to select from our subquery, so that we can avoid CI_rownum appearing in the actual results
 			if( count( $this->qb_select) === 0)
@@ -289,7 +289,7 @@ class CI_DB_pdo_dblib_driver extends CI_DB_pdo_driver {
 				$select = array();
 				$field_regexp = ( $this->_quoted_identifier)
 					? '("[^\"]+")' : '(\[[^\]]+\])';
-				for ( $i = 0, $c = count( $this->qb_select); $i < $c; $i++)
+				for( $i = 0, $c = count( $this->qb_select); $i < $c; $i++)
 				{
 					$select[] = preg_match( '/(?:\s|\.)' . $field_regexp . '$/i', $this->qb_select[$i], $m)
 						? $m[1] : $this->qb_select[$i];
@@ -321,7 +321,7 @@ class CI_DB_pdo_dblib_driver extends CI_DB_pdo_driver {
 	protected function _insert_batch( $table, $keys, $values)
 	{
 		// Multiple-value inserts are only supported as of SQL Server 2008
-		if( version_compare( $this->version(), '10', '>='))
+		if( version_compare( $this->version(), '10', '>=' ) )
 		{
 			return  parent::_insert_batch( $table, $keys, $values);
 		}

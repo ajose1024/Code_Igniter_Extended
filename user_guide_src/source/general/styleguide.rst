@@ -145,7 +145,7 @@ as iterators in for() loops.
 
 **CORRECT**::
 
-	for ( $j = 0; $j < 10; $j++)
+	for( $j = 0; $j < 10; $j++)
 	$str
 	$buffer
 	$group_id
@@ -264,14 +264,14 @@ always precede and follow ``!``.
 	if( $foo || $bar)
 	if( $foo AND $bar)  // okay but not recommended for common syntax highlighting applications
 	if( !$foo)
-	if( ! is_array( $foo))
+	if( ! is_array( $foo ) )
 
 **CORRECT**::
 
 	if( $foo OR $bar)
 	if( $foo && $bar) // recommended
 	if( ! $foo)
-	if( ! is_array( $foo))
+	if( ! is_array( $foo ) )
 	
 
 Comparing Return  Values and Typecasting
@@ -291,11 +291,11 @@ Use **===** and **!==** as necessary.
 
 	// If 'foo' is at the beginning of the string, strpos will return  a 0,
 	// resulting in this conditional evaluating as TRUE
-	if( strpos( $str, 'foo') == FALSE)
+	if( strpos( $str, 'foo') == FALSE )
 
 **CORRECT**::
 
-	if( strpos( $str, 'foo') === FALSE)
+	if( strpos( $str, 'foo') === FALSE )
 
 **INCORRECT**::
 
@@ -401,9 +401,9 @@ same level as the control statement that "owns" them.
 		// ...
 	}
 
-	for ( $i = 0; $i < 10; $i++)
+	for( $i = 0; $i < 10; $i++)
 		{
-		for ( $j = 0; $j < 10; $j++)
+		for( $j = 0; $j < 10; $j++)
 			{
 			// ...
 			}
@@ -437,9 +437,9 @@ same level as the control statement that "owns" them.
 		// ...
 	}
 
-	for ( $i = 0; $i < 10; $i++)
+	for( $i = 0; $i < 10; $i++)
 	{
-		for ( $j = 0; $j < 10; $j++)
+		for( $j = 0; $j < 10; $j++)
 		{
 			// ...
 		}
@@ -633,4 +633,4 @@ Whenever appropriate, provide function argument defaults, which helps
 prevent PHP errors with mistaken calls and provides common fallback
 values which can save a few lines of code. Example::
 
-	function foo( $bar = '', $baz = FALSE)
+	function foo( $bar = '', $baz = FALSE )

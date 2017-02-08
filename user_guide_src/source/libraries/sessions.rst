@@ -266,7 +266,7 @@ To mark an existing item as "flashdata"::
 If you want to mark multiple items as flashdata, simply pass the keys as an
 array::
 
-	$this->session->mark_as_flash(array( 'item', 'item2'));
+	$this->session->mark_as_flash(array( 'item', 'item2' ) );
 
 To add flashdata::
 
@@ -306,7 +306,7 @@ You can either pass a single item or an array of flashdata items to keep.
 ::
 
 	$this->session->keep_flashdata( 'item');
-	$this->session->keep_flashdata(array( 'item1', 'item2', 'item3'));
+	$this->session->keep_flashdata(array( 'item1', 'item2', 'item3' ) );
 
 Tempdata
 ========
@@ -336,7 +336,7 @@ you want them all to have the same expiry time or not::
 	$this->session->mark_as_temp(array(
 		'item'	=> 300,
 		'item2'	=> 240
-	));
+	 ) );
 
 To add tempdata::
 

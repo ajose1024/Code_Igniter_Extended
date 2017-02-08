@@ -101,13 +101,13 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 	{
 		parent::__construct( $params);
 
-		if( empty( $this->dsn))
+		if( empty( $this->dsn ) )
 		{
 			$this->dsn = 'oci:dbname=';
 
 			// Oracle has a slightly different PDO DSN format (Easy Connect),
 			// which also supports pre-defined DSNs.
-			if( empty( $this->hostname) && empty( $this->port))
+			if( empty( $this->hostname) && empty( $this->port ) )
 			{
 				$this->dsn .= $this->database;
 			}
@@ -121,7 +121,7 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 
 			empty( $this->char_set) OR $this->dsn .= ';charset=' . $this->char_set;
 		}
-		elseif( ! empty( $this->char_set) && strpos( $this->dsn, 'charset=', 4) === FALSE)
+		elseif( ! empty( $this->char_set) && strpos( $this->dsn, 'charset=', 4) === FALSE )
 		{
 			$this->dsn .= ';charset=' . $this->char_set;
 		}
@@ -137,7 +137,7 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 	 * @param	bool	$prefix_limit
 	 * @return	string
 	 */
-	protected function _list_tables( $prefix_limit = FALSE)
+	protected function _list_tables( $prefix_limit = FALSE )
 	{
 		$sql = 'SELECT "TABLE_NAME" FROM "ALL_TABLES"';
 
@@ -162,7 +162,7 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _list_columns( $table = '')
 	{
-		if( strpos( $table, ' . ') !== FALSE)
+		if( strpos( $table, ' . ') !== FALSE )
 		{
 			sscanf( $table, '%[^.].%s', $owner, $table);
 		}
@@ -172,8 +172,8 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 		}
 
 		return  'SELECT COLUMN_NAME FROM ALL_TAB_COLUMNS
-			WHERE UPPER(OWNER) = ' . $this->escape(strtoupper( $owner)) . '
-				AND UPPER(TABLE_NAME) = ' . $this->escape(strtoupper( $table));
+			WHERE UPPER(OWNER) = ' . $this->escape(strtoupper( $owner ) ) . '
+				AND UPPER(TABLE_NAME) = ' . $this->escape(strtoupper( $table ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -186,7 +186,7 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 	 */
 	public function field_data( $table)
 	{
-		if( strpos( $table, ' . ') !== FALSE)
+		if( strpos( $table, ' . ') !== FALSE )
 		{
 			sscanf( $table, '%[^.].%s', $owner, $table);
 		}
@@ -197,17 +197,17 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 
 		$sql = 'SELECT COLUMN_NAME, DATA_TYPE, CHAR_LENGTH, DATA_PRECISION, DATA_LENGTH, DATA_DEFAULT, NULLABLE
 			FROM ALL_TAB_COLUMNS
-			WHERE UPPER(OWNER) = ' . $this->escape(strtoupper( $owner)) . '
-				AND UPPER(TABLE_NAME) = ' . $this->escape(strtoupper( $table));
+			WHERE UPPER(OWNER) = ' . $this->escape(strtoupper( $owner ) ) . '
+				AND UPPER(TABLE_NAME) = ' . $this->escape(strtoupper( $table ) );
 
-		if( ( $query = $this->query( $sql)) === FALSE)
+		if( ( $query = $this->query( $sql ) ) === FALSE )
 		{
 			return  FALSE;
 		}
 		$query = $query->result_object();
 
 		$retval = array();
-		for ( $i = 0, $c = count( $query); $i < $c; $i++)
+		for( $i = 0, $c = count( $query); $i < $c; $i++)
 		{
 			$retval[$i]			= new stdClass();
 			$retval[$i]->name		= $query[$i]->COLUMN_NAME;
@@ -247,7 +247,7 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 		$keys = implode( ', ', $keys);
 		$sql = "INSERT ALL\n";
 
-		for ( $i = 0, $c = count( $values); $i < $c; $i++)
+		for( $i = 0, $c = count( $values); $i < $c; $i++)
 		{
 			$sql .= '	INTO ' . $table . ' ( ' . $keys . ') VALUES ' . $values[$i]."\n";
 		}
@@ -269,7 +269,7 @@ class CI_DB_pdo_oci_driver extends CI_DB_pdo_driver {
 	{
 		if( $this->qb_limit)
 		{
-			$this->where( 'rownum <= ',$this->qb_limit, FALSE);
+			$this->where( 'rownum <= ',$this->qb_limit, FALSE );
 			$this->qb_limit = FALSE;
 		}
 

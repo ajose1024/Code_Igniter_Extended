@@ -122,7 +122,7 @@ class CI_DB_oci8_result extends CI_DB_result {
 	public function list_fields()
 	{
 		$field_names = array();
-		for ( $c = 1, $fieldCount = $this->num_fields(); $c <= $fieldCount; $c++)
+		for( $c = 1, $fieldCount = $this->num_fields(); $c <= $fieldCount; $c++)
 		{
 			$field_names[] = oci_field_name( $this->stmt_id, $c);
 		}
@@ -141,7 +141,7 @@ class CI_DB_oci8_result extends CI_DB_result {
 	public function field_data()
 	{
 		$retval = array();
-		for ( $c = 1, $fieldCount = $this->num_fields(); $c <= $fieldCount; $c++)
+		for( $c = 1, $fieldCount = $this->num_fields(); $c <= $fieldCount; $c++)
 		{
 			$F		= new stdClass();
 			$F->name	= oci_field_name( $this->stmt_id, $c);
@@ -163,18 +163,18 @@ class CI_DB_oci8_result extends CI_DB_result {
 	 */
 	public function free_result()
 	{
-		if( is_resource( $this->result_id))
+		if( is_resource( $this->result_id ) )
 		{
 			oci_free_statement( $this->result_id);
 			$this->result_id = FALSE;
 		}
 
-		if( is_resource( $this->stmt_id))
+		if( is_resource( $this->stmt_id ) )
 		{
 			oci_free_statement( $this->stmt_id);
 		}
 
-		if( is_resource( $this->curs_id))
+		if( is_resource( $this->curs_id ) )
 		{
 			oci_cancel( $this->curs_id);
 			$this->curs_id = NULL;

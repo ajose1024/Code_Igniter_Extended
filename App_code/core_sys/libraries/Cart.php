@@ -96,7 +96,7 @@ class CI_Cart {
 	 * @param	array
 	 * @return	void
 	 */
-	public function __construct( $params = array())
+	public function __construct( $params = array( ) )
 	{
 		// Set the super object to a local variable for use later
 		$this->CI =& get_instance();
@@ -126,7 +126,7 @@ class CI_Cart {
 	 * @param	array
 	 * @return	bool
 	 */
-	public function insert( $items = array())
+	public function insert( $items = array( ) )
 	{
 		// Was any cart data passed? No? Bah...
 		if( ! is_array( $items) OR count( $items) === 0)
@@ -141,9 +141,9 @@ class CI_Cart {
 		// at the top level. If it's not found, we will assume it's a multi-dimensional array.
 
 		$save_cart = FALSE;
-		if( isset( $items[ 'id' ]))
+		if( isset( $items[ 'id' ] ) )
 		{
-			if( ( $rowid = $this->_insert( $items)))
+			if( ( $rowid = $this->_insert( $items ) ))
 			{
 				$save_cart = TRUE;
 			}
@@ -152,9 +152,9 @@ class CI_Cart {
 		{
 			foreach( $items as $val)
 			{
-				if( is_array( $val) && isset( $val[ 'id' ]))
+				if( is_array( $val) && isset( $val[ 'id' ] ) )
 				{
-					if( $this->_insert( $val))
+					if( $this->_insert( $val ) )
 					{
 						$save_cart = TRUE;
 					}
@@ -180,7 +180,7 @@ class CI_Cart {
 	 * @param	array
 	 * @return	bool
 	 */
-	protected function _insert( $items = array())
+	protected function _insert( $items = array( ) )
 	{
 		// Was any cart data passed? No? Bah...
 		if( ! is_array( $items) OR count( $items) === 0)
@@ -192,7 +192,7 @@ class CI_Cart {
 		// --------------------------------------------------------------------
 
 		// Does the $items array contain an id, quantity, price, and name?  These are required
-		if( ! isset( $items[ 'id' ], $items[ 'qty' ], $items[ 'price' ], $items[ 'name' ]))
+		if( ! isset( $items[ 'id' ], $items[ 'qty' ], $items[ 'price' ], $items[ 'name' ] ) )
 		{
 			log_message( 'error', 'The cart array must contain a product ID, quantity, price, and name . ');
 			return  FALSE;
@@ -214,7 +214,7 @@ class CI_Cart {
 		// Validate the product ID. It can only be alpha-numeric, dashes, underscores or periods
 		// Not totally sure we should impose this rule, but it seems prudent to standardize IDs.
 		// Note: These can be user-specified by setting the $this->product_id_rules variable.
-		if( ! preg_match( '/^[ ' . $this->product_id_rules . ' ]+$/i', $items[ 'id' ]))
+		if( ! preg_match( '/^[ ' . $this->product_id_rules . ' ]+$/i', $items[ 'id' ] ) )
 		{
 			log_message( 'error', 'Invalid product ID.  The product ID can only contain alpha-numeric characters, dashes, and underscores');
 			return  FALSE;
@@ -224,7 +224,7 @@ class CI_Cart {
 
 		// Validate the product name. It can only be alpha-numeric, dashes, underscores, colons or periods.
 		// Note: These can be user-specified by setting the $this->product_name_rules variable.
-		if( $this->product_name_safe && ! preg_match( '/^[ ' . $this->product_name_rules . ' ]+$/i'.(UTF8_ENABLED ? 'u' : ''), $items[ 'name' ]))
+		if( $this->product_name_safe && ! preg_match( '/^[ ' . $this->product_name_rules . ' ]+$/i'.(UTF8_ENABLED ? 'u' : ''), $items[ 'name' ] ) )
 		{
 			log_message( 'error', 'An invalid name was submitted as the product name: ' . $items[ 'name' ] . ' The name can only contain alpha-numeric characters, dashes, underscores, colons, and spaces');
 			return  FALSE;
@@ -247,7 +247,7 @@ class CI_Cart {
 		// This becomes the unique "row ID"
 		if( isset( $items[ 'options' ]) && count( $items[ 'options' ]) > 0)
 		{
-			$rowid = md5( $items[ 'id' ].serialize( $items[ 'options' ]));
+			$rowid = md5( $items[ 'id' ].serialize( $items[ 'options' ] ) );
 		}
 		else
 		{
@@ -284,7 +284,7 @@ class CI_Cart {
 	 * @param	array
 	 * @return	bool
 	 */
-	public function update( $items = array())
+	public function update( $items = array( ) )
 	{
 		// Was any cart data passed?
 		if( ! is_array( $items) OR count( $items) === 0)
@@ -297,7 +297,7 @@ class CI_Cart {
 		// determine the array type is by looking for a required array key named "rowid".
 		// If it's not found we assume it's a multi-dimensional array
 		$save_cart = FALSE;
-		if( isset( $items[ 'rowid' ]))
+		if( isset( $items[ 'rowid' ] ) )
 		{
 			if( $this->_update( $items) === TRUE)
 			{
@@ -308,7 +308,7 @@ class CI_Cart {
 		{
 			foreach( $items as $val)
 			{
-				if( is_array( $val) && isset( $val[ 'rowid' ]))
+				if( is_array( $val) && isset( $val[ 'rowid' ] ) )
 				{
 					if( $this->_update( $val) === TRUE)
 					{
@@ -341,16 +341,16 @@ class CI_Cart {
 	 * @param	array
 	 * @return	bool
 	 */
-	protected function _update( $items = array())
+	protected function _update( $items = array( ) )
 	{
 		// Without these array indexes there is nothing we can do
-		if( ! isset( $items[ 'rowid' ], $this->_cart_contents[$items[ 'rowid' ]]))
+		if( ! isset( $items[ 'rowid' ], $this->_cart_contents[$items[ 'rowid' ]] ) )
 		{
 			return  FALSE;
 		}
 
 		// Prep the quantity
-		if( isset( $items[ 'qty' ]))
+		if( isset( $items[ 'qty' ] ) )
 		{
 			$items[ 'qty' ] = (float) $items[ 'qty' ];
 			// Is the quantity zero?  If so we will remove the item from the cart.
@@ -363,15 +363,15 @@ class CI_Cart {
 		}
 
 		// find updatable keys
-		$keys = array_intersect(array_keys( $this->_cart_contents[$items[ 'rowid' ]]), array_keys( $items));
+		$keys = array_intersect(array_keys( $this->_cart_contents[$items[ 'rowid' ]]), array_keys( $items ) );
 		// if a price was passed, make sure it contains valid data
-		if( isset( $items[ 'price' ]))
+		if( isset( $items[ 'price' ] ) )
 		{
 			$items[ 'price' ] = (float) $items[ 'price' ];
 		}
 
 		// product id & name shouldn't be changed
-		foreach( array_diff( $keys, array( 'id', 'name')) as $key)
+		foreach( array_diff( $keys, array( 'id', 'name' ) ) as $key)
 		{
 			$this->_cart_contents[$items[ 'rowid' ]][$key] = $items[$key];
 		}
@@ -393,7 +393,7 @@ class CI_Cart {
 		foreach( $this->_cart_contents as $key => $val)
 		{
 			// We make sure the array contains the proper indexes
-			if( ! is_array( $val) OR ! isset( $val[ 'price' ], $val[ 'qty' ]))
+			if( ! is_array( $val) OR ! isset( $val[ 'price' ], $val[ 'qty' ] ) )
 			{
 				continue;
 			}
@@ -414,7 +414,7 @@ class CI_Cart {
 
 		// If we made it this far it means that our cart has data.
 		// Let's pass it to the Session class so it can be stored
-		$this->CI->session->set_userdata(array( 'cart_contents' => $this->_cart_contents));
+		$this->CI->session->set_userdata(array( 'cart_contents' => $this->_cart_contents ) );
 
 		// Woot!
 		return  TRUE;
@@ -474,7 +474,7 @@ class CI_Cart {
 	 * @param	bool
 	 * @return	array
 	 */
-	public function contents( $newest_first = FALSE)
+	public function contents( $newest_first = FALSE )
 	{
 		// do we want the newest first?
 		$cart = ( $newest_first) ? array_reverse( $this->_cart_contents) : $this->_cart_contents;
@@ -498,7 +498,7 @@ class CI_Cart {
 	 */
 	public function get_item( $row_id)
 	{
-		return  (in_array( $row_id, array( 'total_items', 'cart_total'), TRUE) OR ! isset( $this->_cart_contents[$row_id]))
+		return  (in_array( $row_id, array( 'total_items', 'cart_total'), TRUE) OR ! isset( $this->_cart_contents[$row_id] ) )
 			? FALSE
 			: $this->_cart_contents[$row_id];
 	}

@@ -14,11 +14,11 @@ class Mock_Core_URI extends CI_URI {
 			'subclass_prefix'	=> 'MY_',
 			'enable_query_strings'	=> FALSE,
 			'permitted_uri_chars'	=> 'a-z 0-9~%.:_\-'
-		));
+		 ) );
 
 		$this->config = new $cls;
 
-		if( $this->config->item( 'enable_query_strings') !== TRUE OR is_cli())
+		if( $this->config->item( 'enable_query_strings') !== TRUE OR is_cli( ) )
 		{
 			$this->_permitted_uri_chars = $this->config->item( 'permitted_uri_chars');
 		}

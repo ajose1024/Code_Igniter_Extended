@@ -49,7 +49,7 @@ defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'set_cookie'))
+if( ! function_exists( 'set_cookie' ) )
 {
 	/**
 	 * Set cookie
@@ -67,7 +67,7 @@ if( ! function_exists( 'set_cookie'))
 	 * @param	bool	true makes the cookie accessible via http(s) only (no javascript)
 	 * @return	void
 	 */
-	function set_cookie( $name, $value = '', $expire = '', $domain = '', $path = '/', $prefix = '', $secure = FALSE, $httponly = FALSE)
+	function set_cookie( $name, $value = '', $expire = '', $domain = '', $path = '/', $prefix = '', $secure = FALSE, $httponly = FALSE )
 	{
 		// Set the config file options
 		get_instance()->input->set_cookie( $name, $value, $expire, $domain, $path, $prefix, $secure, $httponly);
@@ -76,7 +76,7 @@ if( ! function_exists( 'set_cookie'))
 
 // --------------------------------------------------------------------
 
-if( ! function_exists( 'get_cookie'))
+if( ! function_exists( 'get_cookie' ) )
 {
 	/**
 	 * Fetch an item from the COOKIE array
@@ -95,7 +95,7 @@ if( ! function_exists( 'get_cookie'))
 
 // --------------------------------------------------------------------
 
-if( ! function_exists( 'delete_cookie'))
+if( ! function_exists( 'delete_cookie' ) )
 {
 	/**
 	 * Delete a COOKIE

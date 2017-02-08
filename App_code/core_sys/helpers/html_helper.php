@@ -49,7 +49,7 @@ defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'heading'))
+if( ! function_exists( 'heading' ) )
 {
 	/**
 	 * Heading
@@ -69,7 +69,7 @@ if( ! function_exists( 'heading'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'ul'))
+if( ! function_exists( 'ul' ) )
 {
 	/**
 	 * Unordered List
@@ -88,7 +88,7 @@ if( ! function_exists( 'ul'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'ol'))
+if( ! function_exists( 'ol' ) )
 {
 	/**
 	 * Ordered List
@@ -107,7 +107,7 @@ if( ! function_exists( 'ol'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( '_list'))
+if( ! function_exists( '_list' ) )
 {
 	/**
 	 * Generates the list
@@ -123,7 +123,7 @@ if( ! function_exists( '_list'))
 	function _list( $type = 'ul', $list = array(), $attributes = '', $depth = 0)
 	{
 		// If an array wasn't submitted there's nothing to do...
-		if( ! is_array( $list))
+		if( ! is_array( $list ) )
 		{
 			return  $list;
 		}
@@ -144,7 +144,7 @@ if( ! function_exists( '_list'))
 
 			$out .= str_repeat( ' ', $depth + 2) . '<li>';
 
-			if( ! is_array( $val))
+			if( ! is_array( $val ) )
 			{
 				$out .= $val;
 			}
@@ -163,7 +163,7 @@ if( ! function_exists( '_list'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'img'))
+if( ! function_exists( 'img' ) )
 {
 	/**
 	 * Image
@@ -177,13 +177,13 @@ if( ! function_exists( 'img'))
 	 */
 	function img( $src = '', $index_page = FALSE, $attributes = '')
 	{
-		if( ! is_array( $src))
+		if( ! is_array( $src ) )
 		{
 			$src = array( 'src' => $src);
 		}
 
 		// If there is no alt attribute defined, set it to an empty string
-		if( ! isset( $src[ 'alt' ]))
+		if( ! isset( $src[ 'alt' ] ) )
 		{
 			$src[ 'alt' ] = '';
 		}
@@ -192,7 +192,7 @@ if( ! function_exists( 'img'))
 
 		foreach( $src as $k => $v)
 		{
-			if( $k === 'src' && ! preg_match( '#^([a-z]+:)?//#i', $v))
+			if( $k === 'src' && ! preg_match( '#^([a-z]+:)?//#i', $v ) )
 			{
 				if( $index_page === TRUE)
 				{
@@ -215,7 +215,7 @@ if( ! function_exists( 'img'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'doctype'))
+if( ! function_exists( 'doctype' ) )
 {
 	/**
 	 * Doctype
@@ -233,19 +233,19 @@ if( ! function_exists( 'doctype'))
 	{
 		static $doctypes;
 
-		if( ! is_array( $doctypes))
+		if( ! is_array( $doctypes ) )
 		{
-			if( file_exists(APP_DIR_PATH . 'config/doctypes.php'))
+			if( file_exists( APP_DIR_PATH . 'config/doctypes.php' ) )
 			{
-				include(APP_DIR_PATH . 'config/doctypes.php');
+				include( APP_DIR_PATH . 'config/doctypes.php');
 			}
 
-			if( file_exists(APP_DIR_PATH . 'config/'.ENVIRONMENT . '/doctypes.php'))
+			if( file_exists( APP_DIR_PATH . 'config/' . ENVIRONMENT . '/doctypes.php' ) )
 			{
-				include(APP_DIR_PATH . 'config/'.ENVIRONMENT . '/doctypes.php');
+				include( APP_DIR_PATH . 'config/' . ENVIRONMENT . '/doctypes.php');
 			}
 
-			if( empty( $_doctypes) OR ! is_array( $_doctypes))
+			if( empty( $_doctypes) OR ! is_array( $_doctypes ) )
 			{
 				$doctypes = array();
 				return  FALSE;
@@ -260,7 +260,7 @@ if( ! function_exists( 'doctype'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'link_tag'))
+if( ! function_exists( 'link_tag' ) )
 {
 	/**
 	 * Link
@@ -275,16 +275,16 @@ if( ! function_exists( 'link_tag'))
 	 * @param	bool	should index_page be added to the css path
 	 * @return	string
 	 */
-	function link_tag( $href = '', $rel = 'stylesheet', $type = 'text/css', $title = '', $media = '', $index_page = FALSE)
+	function link_tag( $href = '', $rel = 'stylesheet', $type = 'text/css', $title = '', $media = '', $index_page = FALSE )
 	{
 		$CI =& get_instance();
 		$link = '<link ';
 
-		if( is_array( $href))
+		if( is_array( $href ) )
 		{
 			foreach( $href as $k => $v)
 			{
-				if( $k === 'href' && ! preg_match( '#^([a-z]+:)?//#i', $v))
+				if( $k === 'href' && ! preg_match( '#^([a-z]+:)?//#i', $v ) )
 				{
 					if( $index_page === TRUE)
 					{
@@ -303,7 +303,7 @@ if( ! function_exists( 'link_tag'))
 		}
 		else
 		{
-			if( preg_match( '#^([a-z]+:)?//#i', $href))
+			if( preg_match( '#^([a-z]+:)?//#i', $href ) )
 			{
 				$link .= 'href="' . $href . '" ';
 			}
@@ -335,7 +335,7 @@ if( ! function_exists( 'link_tag'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'meta'))
+if( ! function_exists( 'meta' ) )
 {
 	/**
 	 * Generates meta tags from an array of key/values
@@ -350,11 +350,11 @@ if( ! function_exists( 'meta'))
 	{
 		// Since we allow the data to be passes as a string, a simple array
 		// or a multidimensional one, we need to do a little prepping.
-		if( ! is_array( $name))
+		if( ! is_array( $name ) )
 		{
-			$name = array(array( 'name' => $name, 'content' => $content, 'type' => $type, 'newline' => $newline));
+			$name = array(array( 'name' => $name, 'content' => $content, 'type' => $type, 'newline' => $newline ) );
 		}
-		elseif( isset( $name[ 'name' ]))
+		elseif( isset( $name[ 'name' ] ) )
 		{
 			// Turn single array into multidimensional
 			$name = array( $name);
@@ -377,7 +377,7 @@ if( ! function_exists( 'meta'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'br'))
+if( ! function_exists( 'br' ) )
 {
 	/**
 	 * Generates HTML BR tags based on number supplied
@@ -394,7 +394,7 @@ if( ! function_exists( 'br'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'nbs'))
+if( ! function_exists( 'nbs' ) )
 {
 	/**
 	 * Generates non-breaking space entities based on number supplied

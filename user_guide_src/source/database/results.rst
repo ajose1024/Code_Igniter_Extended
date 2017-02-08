@@ -71,7 +71,7 @@ one row, it returns only the first row. The result is returned as an
 
 	$row = $query->row();
 
-	if( isset( $row))
+	if( isset( $row ) )
 	{
 		echo $row->title;
 		echo $row->name;
@@ -101,7 +101,7 @@ Example::
 
 	$row = $query->row_array();
 
-	if( isset( $row))
+	if( isset( $row ) )
 	{
 		echo $row[ 'title' ];
 		echo $row[ 'name' ];
@@ -143,7 +143,7 @@ it returns the current row and moves the internal data pointer ahead.
 
 	$query = $this->db->query("YOUR QUERY");
 
-	while( $row = $query->unbuffered_row())
+	while( $row = $query->unbuffered_row( ) )
 	{	
 		echo $row->title;
 		echo $row->name;
@@ -193,7 +193,7 @@ Example::
 
 		public function __get( $name)
 		{
-			if( isset( $this->$name))
+			if( isset( $this->$name ) )
 			{
 				return  $this->$name;
 			}
@@ -233,7 +233,7 @@ Example::
 
 	$row = $query->custom_row_object(0, 'User');
 
-	if( isset( $row))
+	if( isset( $row ) )
 	{
 		echo $row->email;   // access attributes
 		echo $row->last_login( 'Y-m-d');   // access class methods

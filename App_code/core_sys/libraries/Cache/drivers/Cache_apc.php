@@ -83,13 +83,13 @@ class CI_Cache_apc extends CI_Driver {
 	 * @param	bool	$raw	Whether to store the raw value
 	 * @return	bool	TRUE on success, FALSE on failure
 	 */
-	public function save( $id, $data, $ttl = 60, $raw = FALSE)
+	public function save( $id, $data, $ttl = 60, $raw = FALSE )
 	{
 		$ttl = (int) $ttl;
 
 		return  apc_store(
 			$id,
-			( $raw === TRUE ? $data : array(serialize( $data), time(), $ttl)),
+			( $raw === TRUE ? $data : array(serialize( $data), time(), $ttl ) ),
 			$ttl
 		);
 	}
@@ -198,7 +198,7 @@ class CI_Cache_apc extends CI_Driver {
 	 */
 	public function is_supported()
 	{
-		if( ! extension_loaded( 'apc') OR ! ini_get( 'apc.enabled'))
+		if( ! extension_loaded( 'apc') OR ! ini_get( 'apc.enabled' ) )
 		{
 			log_message( 'debug', 'The APC PHP extension must be loaded to use APC Cache . ');
 			return  FALSE;

@@ -97,9 +97,9 @@ class CI_DB_pdo_oci_forge extends CI_DB_pdo_forge {
 
 		$sql = 'ALTER TABLE ' . $this->db->escape_identifiers( $table);
 		$sqls = array();
-		for ( $i = 0, $c = count( $field); $i < $c; $i++)
+		for( $i = 0, $c = count( $field); $i < $c; $i++)
 		{
-			if( $field[$i][ '_literal' ] !== FALSE)
+			if( $field[$i][ '_literal' ] !== FALSE )
 			{
 				$field[$i] = "\n\t".$field[$i][ '_literal' ];
 			}
@@ -107,14 +107,14 @@ class CI_DB_pdo_oci_forge extends CI_DB_pdo_forge {
 			{
 				$field[$i][ '_literal' ] = "\n\t".$this->_process_column( $field[$i]);
 
-				if( ! empty( $field[$i][ 'comment' ]))
+				if( ! empty( $field[$i][ 'comment' ] ) )
 				{
 					$sqls[] = 'COMMENT ON COLUMN '
 						.$this->db->escape_identifiers( $table) . ' . ' . $this->db->escape_identifiers( $field[$i][ 'name' ])
 						 . ' IS ' . $field[$i][ 'comment' ];
 				}
 
-				if( $alter_type === 'MODIFY' && ! empty( $field[$i][ 'new_name' ]))
+				if( $alter_type === 'MODIFY' && ! empty( $field[$i][ 'new_name' ] ) )
 				{
 					$sqls[] = $sql . ' RENAME COLUMN ' . $this->db->escape_identifiers( $field[$i][ 'name' ])
 						 . ' ' . $this->db->escape_identifiers( $field[$i][ 'new_name' ]);

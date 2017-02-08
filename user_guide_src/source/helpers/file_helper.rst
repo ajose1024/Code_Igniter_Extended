@@ -63,7 +63,7 @@ The following functions are available:
 	Example::
 
 		$data = 'Some file data';
-		if( ! write_file( './path/to/file.php', $data))
+		if( ! write_file( './path/to/file.php', $data ) )
 		{     
 			echo 'Unable to write the file';
 		}
@@ -125,7 +125,7 @@ The following functions are available:
 
 	Example::
 
-		$controllers = get_filenames(APP_DIR_PATH . 'controllers/');
+		$controllers = get_filenames( APP_DIR_PATH . 'controllers/');
 
 .. php:function:: get_dir_file_info( $source_dir, $top_level_only)
 
@@ -141,7 +141,7 @@ The following functions are available:
 
 	Example::
 
-		$models_info = get_dir_file_info(APP_DIR_PATH . 'models/');
+		$models_info = get_dir_file_info( APP_DIR_PATH . 'models/');
 
 .. php:function:: get_file_info( $file[, $returned_values = array( 'name', 'server_path', 'size', 'date')])
 
@@ -186,7 +186,7 @@ The following functions are available:
 
 	::
 
-		echo symbolic_permissions(fileperms( './index.php'));  // -rw-r--r--
+		echo symbolic_permissions(fileperms( './index.php' ) );  // -rw-r--r--
 
 .. php:function:: octal_permissions( $perms)
 
@@ -199,4 +199,4 @@ The following functions are available:
 
 	::
 
-		echo octal_permissions(fileperms( './index.php')); // 644
+		echo octal_permissions(fileperms( './index.php' ) ); // 644

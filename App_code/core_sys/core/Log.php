@@ -208,7 +208,7 @@ class CI_Log {
 
 		flock( $fp, LOCK_EX );
 
-		for ( $written = 0, $length = strlen( $message ); $written < $length; $written += $result )
+		for( $written = 0, $length = strlen( $message ); $written < $length; $written += $result )
 		{
 			if( ( $result = fwrite( $fp, substr( $message, $written ) ) ) === FALSE )
 			{

@@ -67,11 +67,11 @@ Class Reference
 
 			$this->output
 				->set_content_type( 'application/json')
-				->set_output(json_encode(array( 'foo' => 'bar')));
+				->set_output(json_encode(array( 'foo' => 'bar' ) ));
 
 			$this->output
 				->set_content_type( 'jpeg') // You could also use ".jpeg" which will have the full stop removed before looking in config/mimes.php
-				->set_output(file_get_contents( 'files/something.jpg'));
+				->set_output(file_get_contents( 'files/something.jpg' ) );
 
 		.. important:: Make sure any non-mime string you pass to this method
 			exists in *application/config/mimes.php* or it will have no effect.
@@ -186,7 +186,7 @@ Class Reference
 
 		To disable the profiler you would use::
 
-			$this->output->enable_profiler(FALSE);
+			$this->output->enable_profiler(FALSE );
 
 	.. php:method:: set_profiler_sections( $sections)
 
@@ -226,7 +226,7 @@ Class Reference
 			$this->output
 				->set_status_header(200)
 				->set_content_type( 'application/json', 'utf-8')
-				->set_output(json_encode( $response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+				->set_output(json_encode( $response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) )
 				->_display();
 			exit;
 

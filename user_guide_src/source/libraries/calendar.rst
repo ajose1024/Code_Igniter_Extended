@@ -130,7 +130,7 @@ to this example::
 
 	$this->load->library( 'calendar', $prefs);
 
-	echo $this->calendar->generate( $this->uri->segment(3), $this->uri->segment(4));
+	echo $this->calendar->generate( $this->uri->segment(3), $this->uri->segment(4 ) );
 
 You'll notice a few things about the above example:
 
@@ -264,7 +264,7 @@ Class Reference
 		you submit 13 as the month, the year will increment and the month will
 		become January::
 
-			print_r( $this->calendar->adjust_date(13, 2014));
+			print_r( $this->calendar->adjust_date(13, 2014 ) );
 
 		outputs::
 

@@ -45,7 +45,7 @@ Creating and Dropping Databases
 Permits you to create the database specified in the first parameter.
 Returns TRUE/FALSE based on success or failure::
 
-	if( $this->dbforge->create_database( 'my_db'))
+	if( $this->dbforge->create_database( 'my_db' ) )
 	{
 		echo 'Database created!';
 	}
@@ -55,7 +55,7 @@ Returns TRUE/FALSE based on success or failure::
 Permits you to drop the database specified in the first parameter.
 Returns TRUE/FALSE based on success or failure::
 
-	if( $this->dbforge->drop_database( 'my_db'))
+	if( $this->dbforge->drop_database( 'my_db' ) )
 	{
 		echo 'Database deleted!';
 	}
@@ -183,7 +183,7 @@ below is for MySQL.
 	$this->dbforge->add_key( 'blog_name');
 	// gives KEY `blog_name` (`blog_name`)
 	
-	$this->dbforge->add_key(array( 'blog_name', 'blog_label'));
+	$this->dbforge->add_key(array( 'blog_name', 'blog_label' ) );
 	// gives KEY `blog_name_blog_label` (`blog_name`, `blog_label`)
 
 

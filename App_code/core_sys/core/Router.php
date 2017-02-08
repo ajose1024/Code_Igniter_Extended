@@ -156,14 +156,14 @@ class CI_Router {
 		// Load the routes.php file. It would be great if we could
 		// skip this for enable_query_strings = TRUE, but then
 		// default_controller would be empty ...
-		if( file_exists(APP_DIR_PATH . 'config/routes.php' ) )
+		if( file_exists( APP_DIR_PATH . 'config/routes.php' ) )
 		{
-			include(APP_DIR_PATH . 'config/routes.php' );
+			include( APP_DIR_PATH . 'config/routes.php' );
 		}
 
-		if( file_exists(APP_DIR_PATH . 'config/'.ENVIRONMENT . '/routes.php' ) )
+		if( file_exists( APP_DIR_PATH . 'config/' . ENVIRONMENT . '/routes.php' ) )
 		{
-			include(APP_DIR_PATH . 'config/'.ENVIRONMENT . '/routes.php' );
+			include( APP_DIR_PATH . 'config/' . ENVIRONMENT . '/routes.php' );
 		}
 
 		// Validate & get reserved routes
@@ -299,7 +299,7 @@ class CI_Router {
 			$method = 'index';
 		}
 
-		if( ! file_exists(APP_DIR_PATH . 'controllers/' . $this->directory.ucfirst( $class ) . '.php' ) )
+		if( ! file_exists( APP_DIR_PATH . 'controllers/' . $this->directory.ucfirst( $class ) . '.php' ) )
 		{
 			// This will trigger 404 later
 			return;
@@ -340,9 +340,9 @@ class CI_Router {
 			$test = $this->directory
 				.ucfirst( $this->translate_uri_dashes === TRUE ? str_replace( '-', '_', $segments[0] ) : $segments[0] );
 
-			if( ! file_exists(APP_DIR_PATH . 'controllers/' . $test . '.php' )
+			if( ! file_exists( APP_DIR_PATH . 'controllers/' . $test . '.php' )
 				&& $directory_override === FALSE
-				&& is_dir(APP_DIR_PATH . 'controllers/' . $this->directory.$segments[0] )
+				&& is_dir( APP_DIR_PATH . 'controllers/' . $this->directory.$segments[0] )
 			 )
 			{
 				$this->set_directory(array_shift( $segments ), TRUE );

@@ -50,7 +50,7 @@ defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'smiley_js'))
+if( ! function_exists( 'smiley_js' ) )
 {
 	/**
 	 * Smiley Javascript
@@ -68,7 +68,7 @@ if( ! function_exists( 'smiley_js'))
 		static $do_setup = TRUE;
 		$r = '';
 
-		if( $alias !== '' && ! is_array( $alias))
+		if( $alias !== '' && ! is_array( $alias ) )
 		{
 			$alias = array( $alias => $field_id);
 		}
@@ -78,7 +78,7 @@ if( ! function_exists( 'smiley_js'))
 			$do_setup = FALSE;
 			$m = array();
 
-			if( is_array( $alias))
+			if( is_array( $alias ) )
 			{
 				foreach( $alias as $name => $id)
 				{
@@ -118,7 +118,7 @@ if( ! function_exists( 'smiley_js'))
 			}
 EOF;
 		}
-		elseif( is_array( $alias))
+		elseif( is_array( $alias ) )
 		{
 			foreach( $alias as $name => $id)
 			{
@@ -134,7 +134,7 @@ EOF;
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'get_clickable_smileys'))
+if( ! function_exists( 'get_clickable_smileys' ) )
 {
 	/**
 	 * Get Clickable Smileys
@@ -149,11 +149,11 @@ if( ! function_exists( 'get_clickable_smileys'))
 	function get_clickable_smileys( $image_url, $alias = '')
 	{
 		// For backward compatibility with js_insert_smiley
-		if( is_array( $alias))
+		if( is_array( $alias ) )
 		{
 			$smileys = $alias;
 		}
-		elseif( FALSE === ( $smileys = _get_smiley_array()))
+		elseif( FALSE === ( $smileys = _get_smiley_array( ) ))
 		{
 			return  FALSE;
 		}
@@ -168,7 +168,7 @@ if( ! function_exists( 'get_clickable_smileys'))
 			// mapping array contains multiple identical replacements. For example:
 			// :-) and :) might be replaced with the same image so both smileys
 			// will be in the array.
-			if( isset( $used[$smileys[$key][0]]))
+			if( isset( $used[$smileys[$key][0]] ) )
 			{
 				continue;
 			}
@@ -183,7 +183,7 @@ if( ! function_exists( 'get_clickable_smileys'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'parse_smileys'))
+if( ! function_exists( 'parse_smileys' ) )
 {
 	/**
 	 * Parse Smileys
@@ -197,7 +197,7 @@ if( ! function_exists( 'parse_smileys'))
 	 */
 	function parse_smileys( $str = '', $image_url = '', $smileys = NULL)
 	{
-		if( $image_url === '' OR ( ! is_array( $smileys) && FALSE === ( $smileys = _get_smiley_array())))
+		if( $image_url === '' OR ( ! is_array( $smileys) && FALSE === ( $smileys = _get_smiley_array( ) ) ) )
 		{
 			return  $str;
 		}
@@ -216,7 +216,7 @@ if( ! function_exists( 'parse_smileys'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( '_get_smiley_array'))
+if( ! function_exists( '_get_smiley_array' ) )
 {
 	/**
 	 * Get Smiley Array
@@ -229,19 +229,19 @@ if( ! function_exists( '_get_smiley_array'))
 	{
 		static $_smileys;
 
-		if( ! is_array( $_smileys))
+		if( ! is_array( $_smileys ) )
 		{
-			if( file_exists(APP_DIR_PATH . 'config/smileys.php'))
+			if( file_exists( APP_DIR_PATH . 'config/smileys.php' ) )
 			{
-				include(APP_DIR_PATH . 'config/smileys.php');
+				include( APP_DIR_PATH . 'config/smileys.php');
 			}
 
-			if( file_exists(APP_DIR_PATH . 'config/'.ENVIRONMENT . '/smileys.php'))
+			if( file_exists( APP_DIR_PATH . 'config/' . ENVIRONMENT . '/smileys.php' ) )
 			{
-				include(APP_DIR_PATH . 'config/'.ENVIRONMENT . '/smileys.php');
+				include( APP_DIR_PATH . 'config/' . ENVIRONMENT . '/smileys.php');
 			}
 
-			if( empty( $smileys) OR ! is_array( $smileys))
+			if( empty( $smileys) OR ! is_array( $smileys ) )
 			{
 				$_smileys = array();
 				return  FALSE;

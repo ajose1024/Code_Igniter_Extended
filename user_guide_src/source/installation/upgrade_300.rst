@@ -180,10 +180,10 @@ that you should make:
     ::
 
     	// Old
-    	$this->session->unset_userdata(array( 'item' => '', 'item2' => ''));
+    	$this->session->unset_userdata(array( 'item' => '', 'item2' => '' ) );
 
     	// New
-    	$this->session->unset_userdata(array( 'item', 'item2'));
+    	$this->session->unset_userdata(array( 'item', 'item2' ) );
 
 Finally, if you have written a Session extension, you must now move it to
 the *application/libraries/Session/* directory, although chances are that
@@ -428,7 +428,7 @@ pass FALSE as the first parameter in the ``send()`` method:
 
 ::
 
-	if( $this->email->send(FALSE))
+	if( $this->email->send(FALSE ) )
  	{
  		// Parameters won't be cleared
  	}
@@ -488,7 +488,7 @@ which you can create this logic with a few lines of code. For example::
 	$allowed_domains = array( 'domain1.tld', 'domain2.tld');
 	$default_domain  = 'domain1.tld';
 
-	if( in_array( $_SERVER[ 'HTTP_HOST' ], $allowed_domains, TRUE))
+	if( in_array( $_SERVER[ 'HTTP_HOST' ], $allowed_domains, TRUE ) )
 	{
 		$domain = $_SERVER[ 'HTTP_HOST' ];
 	}
@@ -497,7 +497,7 @@ which you can create this logic with a few lines of code. For example::
 		$domain = $default_domain;
 	}
 
-	if( ! empty( $_SERVER[ 'HTTPS' ]))
+	if( ! empty( $_SERVER[ 'HTTPS' ] ) )
 	{
 		$config[ 'base_url' ] = 'https://' . $domain;
 	}
@@ -679,10 +679,10 @@ its usage:
 ::
 
 	// Old way
-	standard_date(); // defaults to standard_date( 'DATE_RFC822', now());
+	standard_date(); // defaults to standard_date( 'DATE_RFC822', now( ) );
 
 	// Replacement
-	date(DATE_RFC822, now());
+	date(DATE_RFC822, now( ) );
 
 	// Old way
 	standard_date( 'DATE_ATOM', $time);

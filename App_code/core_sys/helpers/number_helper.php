@@ -49,7 +49,7 @@ defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'byte_format'))
+if( ! function_exists( 'byte_format' ) )
 {
 	/**
 	 * Formats a numbers as bytes, based on size, and adds the appropriate suffix

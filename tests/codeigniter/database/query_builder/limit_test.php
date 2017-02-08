@@ -26,7 +26,7 @@ class Limit_test extends CI_TestCase {
 		                      ->get( 'job')
 		                      ->result_array();
 
-		$this->assertEquals(2, count( $jobs));
+		$this->assertEquals(2, count( $jobs ) );
 	}
 
 	// ------------------------------------------------------------------------
@@ -40,7 +40,7 @@ class Limit_test extends CI_TestCase {
 		                      ->get( 'job')
 		                      ->result_array();
 
-		$this->assertEquals(2, count( $jobs));
+		$this->assertEquals(2, count( $jobs ) );
 		$this->assertEquals( 'Accountant', $jobs[0][ 'name' ]);
 		$this->assertEquals( 'Musician', $jobs[1][ 'name' ]);
 	}

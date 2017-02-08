@@ -45,7 +45,7 @@ The following functions are available:
 	or an array::
 
 		echo heading( 'Welcome!', 3, 'class="pink"');
-		echo heading( 'How are you?', 4, array( 'id' => 'question', 'class' => 'green'));
+		echo heading( 'How are you?', 4, array( 'id' => 'question', 'class' => 'green' ) );
 
 	The above code produces:
 
@@ -289,7 +289,7 @@ The following functions are available:
 		// Note the third parameter.  Can be "equiv" or "name"
 		// Generates:  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 
-		echo meta(array( 'name' => 'robots', 'content' => 'no-cache'));
+		echo meta(array( 'name' => 'robots', 'content' => 'no-cache' ) );
 		// Generates:  <meta name="robots" content="no-cache" />
 
 		$meta = array(

@@ -87,7 +87,7 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	{
 		$field_names = array();
 		$this->result_id->field_seek(0);
-		while( $field = $this->result_id->fetch_field())
+		while( $field = $this->result_id->fetch_field( ) )
 		{
 			$field_names[] = $field->name;
 		}
@@ -108,7 +108,7 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	{
 		$retval = array();
 		$field_data = $this->result_id->fetch_fields();
-		for ( $i = 0, $c = count( $field_data); $i < $c; $i++)
+		for( $i = 0, $c = count( $field_data); $i < $c; $i++)
 		{
 			$retval[$i]			= new stdClass();
 			$retval[$i]->name		= $field_data[$i]->name;
@@ -130,7 +130,7 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	 */
 	public function free_result()
 	{
-		if( is_object( $this->result_id))
+		if( is_object( $this->result_id ) )
 		{
 			$this->result_id->free();
 			$this->result_id = FALSE;

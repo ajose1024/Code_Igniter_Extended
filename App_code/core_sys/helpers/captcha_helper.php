@@ -49,7 +49,7 @@ defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'create_captcha'))
+if( ! function_exists( 'create_captcha' ) )
 {
 	/**
 	 * Create CAPTCHA
@@ -84,7 +84,7 @@ if( ! function_exists( 'create_captcha'))
 
 		foreach( $defaults as $key => $val)
 		{
-			if( ! is_array( $data) && empty( $$key))
+			if( ! is_array( $data) && empty( $$key ) )
 			{
 				$$key = $val;
 			}
@@ -96,7 +96,7 @@ if( ! function_exists( 'create_captcha'))
 
 		if( $img_path === '' OR $img_url === ''
 			OR ! is_dir( $img_path) OR ! is_really_writable( $img_path)
-			OR ! extension_loaded( 'gd'))
+			OR ! extension_loaded( 'gd' ) )
 		{
 			return  FALSE;
 		}
@@ -108,7 +108,7 @@ if( ! function_exists( 'create_captcha'))
 		$now = microtime(TRUE);
 
 		$current_dir = @opendir( $img_path);
-		while( $filename = @readdir( $current_dir))
+		while( $filename = @readdir( $current_dir ) )
 		{
 			if( substr( $filename, -4) === '.jpg' && (str_replace( '.jpg', '', $filename) + $expiration) < $now)
 			{
@@ -122,18 +122,18 @@ if( ! function_exists( 'create_captcha'))
 		// Do we have a "word" yet?
 		// -----------------------------------
 
-		if( empty( $word))
+		if( empty( $word ) )
 		{
 			$word = '';
 			$pool_length = strlen( $pool);
 			$rand_max = $pool_length - 1;
 
 			// PHP7 or a suitable polyfill
-			if( function_exists( 'random_int'))
+			if( function_exists( 'random_int' ) )
 			{
 				try
 				{
-					for ( $i = 0; $i < $word_length; $i++)
+					for( $i = 0; $i < $word_length; $i++)
 					{
 						$word .= $pool[random_int(0, $rand_max)];
 					}
@@ -147,7 +147,7 @@ if( ! function_exists( 'create_captcha'))
 			}
 		}
 
-		if( empty( $word))
+		if( empty( $word ) )
 		{
 			// Nobody will have a larger character pool than
 			// 256 characters, but let's handle it just in case ...
@@ -166,12 +166,12 @@ if( ! function_exists( 'create_captcha'))
 
 			// To avoid numerous get_random_bytes() calls, we'll
 			// just try fetching as much bytes as we need at once.
-			if( ( $bytes = $security->get_random_bytes( $pool_length)) !== FALSE)
+			if( ( $bytes = $security->get_random_bytes( $pool_length ) ) !== FALSE )
 			{
 				$byte_index = $word_index = 0;
 				while( $word_index < $word_length)
 				{
-					if( ( $rand_index = unpack( 'C', $bytes[$byte_index++])) > $rand_max)
+					if( ( $rand_index = unpack( 'C', $bytes[$byte_index++] ) ) > $rand_max)
 					{
 						// Was this the last byte we have?
 						// If so, try to fetch more.
@@ -180,9 +180,9 @@ if( ! function_exists( 'create_captcha'))
 							// No failures should be possible if
 							// the first get_random_bytes() call
 							// didn't return  FALSE, but still ...
-							for ( $i = 0; $i < 5; $i++)
+							for( $i = 0; $i < 5; $i++)
 							{
-								if( ( $bytes = $security->get_random_bytes( $pool_length)) === FALSE)
+								if( ( $bytes = $security->get_random_bytes( $pool_length ) ) === FALSE )
 								{
 									continue;
 								}
@@ -191,7 +191,7 @@ if( ! function_exists( 'create_captcha'))
 								break;
 							}
 
-							if( $bytes === FALSE)
+							if( $bytes === FALSE )
 							{
 								// Sadly, this means fallback to mt_rand()
 								$word = '';
@@ -208,14 +208,14 @@ if( ! function_exists( 'create_captcha'))
 			}
 		}
 
-		if( empty( $word))
+		if( empty( $word ) )
 		{
-			for ( $i = 0; $i < $word_length; $i++)
+			for( $i = 0; $i < $word_length; $i++)
 			{
 				$word .= $pool[mt_rand(0, $rand_max)];
 			}
 		}
-		elseif( ! is_string( $word))
+		elseif( ! is_string( $word ) )
 		{
 			$word = (string) $word;
 		}
@@ -224,7 +224,7 @@ if( ! function_exists( 'create_captcha'))
 		// Determine angle and position
 		// -----------------------------------
 		$length	= strlen( $word);
-		$angle	= ( $length >= 6) ? mt_rand(-( $length-6), ( $length-6)) : 0;
+		$angle	= ( $length >= 6) ? mt_rand(-( $length-6), ( $length-6 ) ) : 0;
 		$x_axis	= mt_rand(6, (360/$length)-16);
 		$y_axis = ( $angle >= 0) ? mt_rand( $img_height, $img_width) : mt_rand(6, $img_height);
 
@@ -259,16 +259,16 @@ if( ! function_exists( 'create_captcha'))
 		$circles	= 20;
 		$points		= 32;
 
-		for ( $i = 0, $cp = ( $circles * $points) - 1; $i < $cp; $i++)
+		for( $i = 0, $cp = ( $circles * $points) - 1; $i < $cp; $i++)
 		{
 			$theta += $thetac;
 			$rad = $radius * ( $i / $points);
-			$x = ( $rad * cos( $theta)) + $x_axis;
-			$y = ( $rad * sin( $theta)) + $y_axis;
+			$x = ( $rad * cos( $theta ) ) + $x_axis;
+			$y = ( $rad * sin( $theta ) ) + $y_axis;
 			$theta += $thetac;
 			$rad1 = $radius * (( $i + 1) / $points);
-			$x1 = ( $rad1 * cos( $theta)) + $x_axis;
-			$y1 = ( $rad1 * sin( $theta)) + $y_axis;
+			$x1 = ( $rad1 * cos( $theta ) ) + $x_axis;
+			$y1 = ( $rad1 * sin( $theta ) ) + $y_axis;
 			imageline( $im, $x, $y, $x1, $y1, $colors[ 'grid' ]);
 			$theta -= $thetac;
 		}
@@ -277,23 +277,23 @@ if( ! function_exists( 'create_captcha'))
 		//  Write the text
 		// -----------------------------------
 
-		$use_font = ( $font_path !== '' && file_exists( $font_path) && function_exists( 'imagettftext'));
-		if( $use_font === FALSE)
+		$use_font = ( $font_path !== '' && file_exists( $font_path) && function_exists( 'imagettftext' ) );
+		if( $use_font === FALSE )
 		{
 			( $font_size > 5) && $font_size = 5;
-			$x = mt_rand(0, $img_width / ( $length / 3));
+			$x = mt_rand(0, $img_width / ( $length / 3 ) );
 			$y = 0;
 		}
 		else
 		{
 			( $font_size > 30) && $font_size = 30;
-			$x = mt_rand(0, $img_width / ( $length / 1.5));
+			$x = mt_rand(0, $img_width / ( $length / 1.5 ) );
 			$y = $font_size + 2;
 		}
 
-		for ( $i = 0; $i < $length; $i++)
+		for( $i = 0; $i < $length; $i++)
 		{
-			if( $use_font === FALSE)
+			if( $use_font === FALSE )
 			{
 				$y = mt_rand(0 , $img_height / 2);
 				imagestring( $im, $font_size, $x, $y, $word[$i], $colors[ 'text' ]);
@@ -315,12 +315,12 @@ if( ! function_exists( 'create_captcha'))
 		// -----------------------------------
 		$img_url = rtrim( $img_url, '/') . '/';
 
-		if( function_exists( 'imagejpeg'))
+		if( function_exists( 'imagejpeg' ) )
 		{
 			$img_filename = $now . '.jpg';
 			imagejpeg( $im, $img_path.$img_filename);
 		}
-		elseif( function_exists( 'imagepng'))
+		elseif( function_exists( 'imagepng' ) )
 		{
 			$img_filename = $now . '.png';
 			imagepng( $im, $img_path.$img_filename);

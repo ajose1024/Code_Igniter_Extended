@@ -136,7 +136,7 @@ if( ! function_exists( 'password_hash' ) )
 				is_php( '5.4' ) && stream_set_chunk_size( $fp, 16 );
 
 				$options[ 'salt' ] = '';
-				for ( $read = 0; $read < 16; $read = ( $func_override ) ? mb_strlen( $options[ 'salt' ], '8bit' ) : strlen( $options[ 'salt' ] ) )
+				for( $read = 0; $read < 16; $read = ( $func_override ) ? mb_strlen( $options[ 'salt' ], '8bit' ) : strlen( $options[ 'salt' ] ) )
 				{
 					if( ( $read = fread( $fp, 16 - $read ) ) === FALSE )
 					{
@@ -223,7 +223,7 @@ if( ! function_exists( 'password_verify' ) )
 		}
 
 		$compare = 0;
-		for ( $i = 0; $i < 60; $i++ )
+		for( $i = 0; $i < 60; $i++ )
 		{
 			$compare |= (ord( $password[$i] ) ^ ord( $hash[$i] ) );
 		}

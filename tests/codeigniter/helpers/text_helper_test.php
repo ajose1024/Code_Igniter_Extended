@@ -15,19 +15,19 @@ class Text_helper_test extends CI_TestCase {
 
 	public function test_word_limiter()
 	{
-		$this->assertEquals( 'Once upon a time,&#8230;', word_limiter( $this->_long_string, 4));
-		$this->assertEquals( 'Once upon a time,&hellip;', word_limiter( $this->_long_string, 4, '&hellip;'));
-		$this->assertEquals( '', word_limiter( '', 4));
+		$this->assertEquals( 'Once upon a time,&#8230;', word_limiter( $this->_long_string, 4 ) );
+		$this->assertEquals( 'Once upon a time,&hellip;', word_limiter( $this->_long_string, 4, '&hellip;' ) );
+		$this->assertEquals( '', word_limiter( '', 4 ) );
 	}
 
 	// ------------------------------------------------------------------------
 
 	public function test_character_limiter()
 	{
-		$this->assertEquals( 'Once upon a time, a&#8230;', character_limiter( $this->_long_string, 20));
-		$this->assertEquals( 'Once upon a time, a&hellip;', character_limiter( $this->_long_string, 20, '&hellip;'));
-		$this->assertEquals( 'Short', character_limiter( 'Short', 20));
-		$this->assertEquals( 'Short', character_limiter( 'Short', 5));
+		$this->assertEquals( 'Once upon a time, a&#8230;', character_limiter( $this->_long_string, 20 ) );
+		$this->assertEquals( 'Once upon a time, a&hellip;', character_limiter( $this->_long_string, 20, '&hellip;' ) );
+		$this->assertEquals( 'Short', character_limiter( 'Short', 20 ) );
+		$this->assertEquals( 'Short', character_limiter( 'Short', 5 ) );
 	}
 
 	// ------------------------------------------------------------------------
@@ -41,7 +41,7 @@ class Text_helper_test extends CI_TestCase {
 
 		foreach( $strs as $str => $expect)
 		{
-			$this->assertEquals( $expect, ascii_to_entities( $str));
+			$this->assertEquals( $expect, ascii_to_entities( $str ) );
 		}
 	}
 
@@ -56,7 +56,7 @@ class Text_helper_test extends CI_TestCase {
 
 		foreach( $strs as $str => $expect)
 		{
-			$this->assertEquals( $expect, entities_to_ascii( $str));
+			$this->assertEquals( $expect, entities_to_ascii( $str ) );
 		}
 	}
 
@@ -65,8 +65,8 @@ class Text_helper_test extends CI_TestCase {
 	public function test_convert_accented_characters()
 	{
 		$this->ci_vfs_clone( 'application/config/foreign_chars.php');
-		$this->assertEquals( 'AAAeEEEIIOOEUUUeY', convert_accented_characters( 'ÀÂÄÈÊËÎÏÔŒÙÛÜŸ'));
-		$this->assertEquals( 'a e i o u n ue', convert_accented_characters( 'á é í ó ú ñ ü'));
+		$this->assertEquals( 'AAAeEEEIIOOEUUUeY', convert_accented_characters( 'ÀÂÄÈÊËÎÏÔŒÙÛÜŸ' ) );
+		$this->assertEquals( 'a e i o u n ue', convert_accented_characters( 'á é í ó ú ñ ü' ) );
 	}
 
 	// ------------------------------------------------------------------------
@@ -85,11 +85,11 @@ class Text_helper_test extends CI_TestCase {
 
 		foreach( $strs as $str => $expect)
 		{
-			$this->assertEquals( $expect, word_censor( $str, $censored, '$*#'));
+			$this->assertEquals( $expect, word_censor( $str, $censored, '$*#' ) );
 		}
 
 		// test censored words being sent as a string
-		$this->assertEquals( 'test', word_censor( 'test', 'test'));
+		$this->assertEquals( 'test', word_censor( 'test', 'test' ) );
 	}
 
 	// ------------------------------------------------------------------------
@@ -98,7 +98,7 @@ class Text_helper_test extends CI_TestCase {
 	{
 		$expect = "<code><span style=\"color: #000000\">\n<span style=\"color: #0000BB\">&lt;?php&nbsp;var_dump</span><span style=\"color: #007700\">(</span><span style=\"color: #0000BB\">\$this</span><span style=\"color: #007700\">);&nbsp;</span><span style=\"color: #0000BB\">?&gt;&nbsp;</span>\n</span>\n</code>";
 
-		$this->assertEquals( $expect, highlight_code( '<?php var_dump( $this); ?>'));
+		$this->assertEquals( $expect, highlight_code( '<?php var_dump( $this); ?>' ) );
 	}
 
 	// ------------------------------------------------------------------------
@@ -115,10 +115,10 @@ class Text_helper_test extends CI_TestCase {
 
 		foreach( $strs as $str => $expect)
 		{
-			$this->assertEquals( $expect, highlight_phrase( $str, 'this is'));
+			$this->assertEquals( $expect, highlight_phrase( $str, 'this is' ) );
 		}
 
-		$this->assertEquals( '<strong>this is</strong> a strong test', highlight_phrase( 'this is a strong test', 'this is', '<strong>', '</strong>'));
+		$this->assertEquals( '<strong>this is</strong> a strong test', highlight_phrase( 'this is a strong test', 'this is', '<strong>', '</strong>' ) );
 	}
 
 	// ------------------------------------------------------------------------
@@ -150,7 +150,7 @@ class Text_helper_test extends CI_TestCase {
 		{
 			foreach( $s as $str => $expect)
 			{
-				$this->assertEquals( $expect, ellipsize( $str, 10, $pos));
+				$this->assertEquals( $expect, ellipsize( $str, 10, $pos ) );
 			}
 		}
 	}

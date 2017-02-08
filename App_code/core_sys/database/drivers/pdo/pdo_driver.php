@@ -95,7 +95,7 @@ class CI_DB_pdo_driver extends CI_DB {
 			$this->subdriver = $match[1];
 			return;
 		}
-		elseif( in_array( $this->subdriver, array( 'mssql', 'sybase'), TRUE))
+		elseif( in_array( $this->subdriver, array( 'mssql', 'sybase'), TRUE ) )
 		{
 			$this->subdriver = 'dblib';
 		}
@@ -103,7 +103,7 @@ class CI_DB_pdo_driver extends CI_DB {
 		{
 			$this->subdriver = '4d';
 		}
-		elseif( ! in_array( $this->subdriver, array( '4d', 'cubrid', 'dblib', 'firebird', 'ibm', 'informix', 'mysql', 'oci', 'odbc', 'pgsql', 'sqlite', 'sqlsrv'), TRUE))
+		elseif( ! in_array( $this->subdriver, array( '4d', 'cubrid', 'dblib', 'firebird', 'ibm', 'informix', 'mysql', 'oci', 'odbc', 'pgsql', 'sqlite', 'sqlsrv'), TRUE ) )
 		{
 			log_message( 'error', 'PDO: Invalid or non-existent subdriver');
 
@@ -124,7 +124,7 @@ class CI_DB_pdo_driver extends CI_DB {
 	 * @param	bool	$persistent
 	 * @return	object
 	 */
-	public function db_connect( $persistent = FALSE)
+	public function db_connect( $persistent = FALSE )
 	{
 		$this->options[PDO::ATTR_PERSISTENT] = $persistent;
 
@@ -134,7 +134,7 @@ class CI_DB_pdo_driver extends CI_DB {
 		}
 		catch (PDOException $e)
 		{
-			if( $this->db_debug && empty( $this->failover))
+			if( $this->db_debug && empty( $this->failover ) )
 			{
 				$this->display_error( $e->getMessage(), '', TRUE);
 			}
@@ -152,7 +152,7 @@ class CI_DB_pdo_driver extends CI_DB {
 	 */
 	public function version()
 	{
-		if( isset( $this->data_cache[ 'version' ]))
+		if( isset( $this->data_cache[ 'version' ] ) )
 		{
 			return  $this->data_cache[ 'version' ];
 		}
@@ -291,13 +291,13 @@ class CI_DB_pdo_driver extends CI_DB {
 		$error = array( 'code' => '00000', 'message' => '');
 		$pdo_error = $this->conn_id->errorInfo();
 
-		if( empty( $pdo_error[0]))
+		if( empty( $pdo_error[0] ) )
 		{
 			return  $error;
 		}
 
 		$error[ 'code' ] = isset( $pdo_error[1]) ? $pdo_error[0] . '/' . $pdo_error[1] : $pdo_error[0];
-		if( isset( $pdo_error[2]))
+		if( isset( $pdo_error[2] ) )
 		{
 			 $error[ 'message' ] = $pdo_error[2];
 		}
@@ -346,7 +346,7 @@ class CI_DB_pdo_driver extends CI_DB {
 			$cases .= 'ELSE ' . $k . ' END, ';
 		}
 
-		$this->where( $index . ' IN( '.implode( ',', $ids) . ')', NULL, FALSE);
+		$this->where( $index . ' IN( '.implode( ',', $ids) . ')', NULL, FALSE );
 
 		return  'UPDATE ' . $table . ' SET '.substr( $cases, 0, -2).$this->_compile_wh( 'qb_where');
 	}

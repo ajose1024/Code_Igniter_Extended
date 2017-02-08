@@ -83,9 +83,9 @@ class CI_Cache_memcached extends CI_Driver {
 		$CI =& get_instance();
 		$defaults = $this->_memcache_conf[ 'default' ];
 
-		if( $CI->config->load( 'memcached', TRUE, TRUE))
+		if( $CI->config->load( 'memcached', TRUE, TRUE ) )
 		{
-			if( is_array( $CI->config->config[ 'memcached' ]))
+			if( is_array( $CI->config->config[ 'memcached' ] ) )
 			{
 				$this->_memcache_conf = array();
 
@@ -96,11 +96,11 @@ class CI_Cache_memcached extends CI_Driver {
 			}
 		}
 
-		if( class_exists( 'Memcached', FALSE))
+		if( class_exists( 'Memcached', FALSE ) )
 		{
 			$this->_memcached = new Memcached();
 		}
-		elseif( class_exists( 'Memcache', FALSE))
+		elseif( class_exists( 'Memcache', FALSE ) )
 		{
 			$this->_memcached = new Memcache();
 		}
@@ -162,7 +162,7 @@ class CI_Cache_memcached extends CI_Driver {
 	 * @param	bool	$raw	Whether to store the raw value
 	 * @return	bool	TRUE on success, FALSE on failure
 	 */
-	public function save( $id, $data, $ttl = 60, $raw = FALSE)
+	public function save( $id, $data, $ttl = 60, $raw = FALSE )
 	{
 		if( $raw !== TRUE)
 		{
@@ -284,6 +284,6 @@ class CI_Cache_memcached extends CI_Driver {
 	 */
 	public function is_supported()
 	{
-		return  (extension_loaded( 'memcached') OR extension_loaded( 'memcache'));
+		return  (extension_loaded( 'memcached') OR extension_loaded( 'memcache' ) );
 	}
 }

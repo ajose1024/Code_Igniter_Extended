@@ -16,7 +16,7 @@ class Url_helper_test extends CI_TestCase {
 
 		foreach( $words as $in => $out)
 		{
-			$this->assertEquals( $out, url_title( $in, 'dash', TRUE));
+			$this->assertEquals( $out, url_title( $in, 'dash', TRUE ) );
 		}
 	}
 
@@ -31,7 +31,7 @@ class Url_helper_test extends CI_TestCase {
 
 		foreach( $words as $in => $out)
 		{
-			$this->assertEquals( $out, url_title( $in, 'underscore'));
+			$this->assertEquals( $out, url_title( $in, 'underscore' ) );
 		}
 	}
 
@@ -39,8 +39,8 @@ class Url_helper_test extends CI_TestCase {
 
 	public function test_prep_url()
 	{
-		$this->assertEquals( 'http://codeigniter.com', prep_url( 'codeigniter.com'));
-		$this->assertEquals( 'http://www.codeigniter.com', prep_url( 'www.codeigniter.com'));
+		$this->assertEquals( 'http://codeigniter.com', prep_url( 'codeigniter.com' ) );
+		$this->assertEquals( 'http://www.codeigniter.com', prep_url( 'www.codeigniter.com' ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -58,7 +58,7 @@ class Url_helper_test extends CI_TestCase {
 
 		foreach( $strings as $in => $out)
 		{
-			$this->assertEquals( $out, auto_link( $in, 'url'));
+			$this->assertEquals( $out, auto_link( $in, 'url' ) );
 		}
 	}
 
@@ -72,7 +72,7 @@ class Url_helper_test extends CI_TestCase {
 
 		foreach( $strings as $in => $out)
 		{
-			$this->assertEquals( $out, auto_link( $in, 'url'));
+			$this->assertEquals( $out, auto_link( $in, 'url' ) );
 		}
 	}
 

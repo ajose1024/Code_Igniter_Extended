@@ -109,7 +109,7 @@ class CI_URI
             // If it's a CLI request, ignore the configuration
             if( is_cli( ) )
             {
-                $uri = $this->_parse_argv( ) ;
+                $uri = $this->_parse_argv() ;
             }
             else
             {
@@ -118,18 +118,20 @@ class CI_URI
 
                 switch( $protocol )
                 {
-                    case 'AUTO':    // For BC purposes only
+                    case 'AUTO' :                   // For BC purposes only
                     case 'REQUEST_URI' :
-                        $uri = $this->_parse_request_uri( ) ;
+                        $uri = $this->_parse_request_uri() ;
                         break ;
+                        
                     case 'QUERY_STRING' :
-                        $uri = $this->_parse_query_string( ) ;
+                        $uri = $this->_parse_query_string() ;
                         break ;
+                        
                     case 'PATH_INFO' :
                     default :
                         $uri = isset( $_SERVER[ $protocol ] )
                             ? $_SERVER[ $protocol ]
-                            : $this->_parse_request_uri( ) ;
+                            : $this->_parse_request_uri() ;
                         break ;
                 }
             }

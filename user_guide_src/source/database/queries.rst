@@ -39,7 +39,7 @@ fetchable results.
 
 ::
 
-	if( $this->db->simple_query( 'YOUR QUERY'))
+	if( $this->db->simple_query( 'YOUR QUERY' ) )
 	{
 		echo "Success!";
 	}
@@ -134,7 +134,7 @@ Bindings enable you to simplify your query syntax by letting the system
 put the queries together for you. Consider the following example::
 
 	$sql = "SELECT * FROM some_table WHERE id = ? AND status = ? AND author = ?";
-	$this->db->query( $sql, array(3, 'live', 'Rick'));
+	$this->db->query( $sql, array(3, 'live', 'Rick' ) );
 
 The question marks in the query are automatically replaced with the
 values in the array in the second parameter of the query function.
@@ -142,7 +142,7 @@ values in the array in the second parameter of the query function.
 Binding also work with arrays, which will be transformed to IN sets::
 
 	$sql = "SELECT * FROM some_table WHERE id IN ? AND status = ? AND author = ?";
-	$this->db->query( $sql, array(array(3, 6), 'live', 'Rick'));
+	$this->db->query( $sql, array(array(3, 6), 'live', 'Rick' ) );
 
 The resulting query will be::
 
@@ -163,7 +163,7 @@ If you need to get the last error that has occured, the error() method
 will return  an array containing its code and message. Here's a quick
 example::
 
-	if( ! $this->db->simple_query( 'SELECT `example_field` FROM `example_table`'))
+	if( ! $this->db->simple_query( 'SELECT `example_field` FROM `example_table`' ) )
 	{
 		$error = $this->db->error(); // Has keys 'code' and 'message'
 	}

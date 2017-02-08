@@ -113,7 +113,7 @@ decide whether to run the data through ``xss_clean()`` by passing
 a boolean value as the second parameter::
 
 	$this->input->input_stream( 'key', TRUE); // XSS Clean
-	$this->input->input_stream( 'key', FALSE); // No XSS filter
+	$this->input->input_stream( 'key', FALSE ); // No XSS filter
 
 .. note:: You can utilize ``method()`` in order to know if you're reading
 	PUT, DELETE or PATCH data.
@@ -159,13 +159,13 @@ Class Reference
 		::
 
 			$this->input->post(NULL, TRUE); // returns all POST items with XSS filter
-			$this->input->post(NULL, FALSE); // returns all POST items without XSS filter
+			$this->input->post(NULL, FALSE ); // returns all POST items without XSS filter
 
 		To return  an array of multiple POST parameters, pass all the required keys
 		as an array.
 		::
 
-			$this->input->post(array( 'field1', 'field2'));
+			$this->input->post(array( 'field1', 'field2' ) );
 
 		Same rule applied here, to retrive the parameters with XSS filtering enabled, set the
 		second parameter to boolean TRUE.
@@ -192,13 +192,13 @@ Class Reference
 		::
 
 			$this->input->get(NULL, TRUE); // returns all GET items with XSS filter
-			$this->input->get(NULL, FALSE); // returns all GET items without XSS filtering
+			$this->input->get(NULL, FALSE ); // returns all GET items without XSS filtering
 
 		To return  an array of multiple GET parameters, pass all the required keys
 		as an array.
 		::
 
-			$this->input->get(array( 'field1', 'field2'));
+			$this->input->get(array( 'field1', 'field2' ) );
 
 		Same rule applied here, to retrive the parameters with XSS filtering enabled, set the
 		second parameter to boolean TRUE.
@@ -251,7 +251,7 @@ Class Reference
 		as an array.
 		::
 
-			$this->input->cookie(array( 'some_cookie', 'some_cookie2'));
+			$this->input->cookie(array( 'some_cookie', 'some_cookie2' ) );
 
 		.. note:: Unlike the :doc:`Cookie Helper <../helpers/cookie_helper>`
 			function :php:func:`get_cookie()`, this method does NOT prepend
@@ -273,7 +273,7 @@ Class Reference
 		as an array.
 		::
 
-			$this->input->server(array( 'SERVER_PROTOCOL', 'REQUEST_URI'));
+			$this->input->server(array( 'SERVER_PROTOCOL', 'REQUEST_URI' ) );
 
 	.. php:method:: input_stream([$index = NULL[, $xss_clean = NULL]])
 
@@ -378,7 +378,7 @@ Class Reference
 
 		::
 
-			if( ! $this->input->valid_ip( $ip))
+			if( ! $this->input->valid_ip( $ip ) )
 			{
 				echo 'Not Valid';
 			}
@@ -470,5 +470,5 @@ Class Reference
 		::
 
 			echo $this->input->method(TRUE); // Outputs: POST
-			echo $this->input->method(FALSE); // Outputs: post
+			echo $this->input->method(FALSE ); // Outputs: post
 			echo $this->input->method(); // Outputs: post

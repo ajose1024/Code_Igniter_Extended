@@ -100,11 +100,11 @@ abstract class CI_DB_utility {
 	public function list_databases()
 	{
 		// Is there a cached result?
-		if( isset( $this->db->data_cache[ 'db_names' ]))
+		if( isset( $this->db->data_cache[ 'db_names' ] ) )
 		{
 			return  $this->db->data_cache[ 'db_names' ];
 		}
-		elseif( $this->_list_databases === FALSE)
+		elseif( $this->_list_databases === FALSE )
 		{
 			return  ( $this->db->db_debug) ? $this->db->display_error( 'db_unsupported_feature') : FALSE;
 		}
@@ -112,12 +112,12 @@ abstract class CI_DB_utility {
 		$this->db->data_cache[ 'db_names' ] = array();
 
 		$query = $this->db->query( $this->_list_databases);
-		if( $query === FALSE)
+		if( $query === FALSE )
 		{
 			return  $this->db->data_cache[ 'db_names' ];
 		}
 
-		for ( $i = 0, $query = $query->result_array(), $c = count( $query); $i < $c; $i++)
+		for( $i = 0, $query = $query->result_array(), $c = count( $query); $i < $c; $i++)
 		{
 			$this->db->data_cache[ 'db_names' ][] = current( $query[$i]);
 		}
@@ -135,7 +135,7 @@ abstract class CI_DB_utility {
 	 */
 	public function database_exists( $database_name)
 	{
-		return  in_array( $database_name, $this->list_databases());
+		return  in_array( $database_name, $this->list_databases( ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -148,13 +148,13 @@ abstract class CI_DB_utility {
 	 */
 	public function optimize_table( $table_name)
 	{
-		if( $this->_optimize_table === FALSE)
+		if( $this->_optimize_table === FALSE )
 		{
 			return  ( $this->db->db_debug) ? $this->db->display_error( 'db_unsupported_feature') : FALSE;
 		}
 
-		$query = $this->db->query(sprintf( $this->_optimize_table, $this->db->escape_identifiers( $table_name)));
-		if( $query !== FALSE)
+		$query = $this->db->query(sprintf( $this->_optimize_table, $this->db->escape_identifiers( $table_name ) ));
+		if( $query !== FALSE )
 		{
 			$query = $query->result_array();
 			return  current( $query);
@@ -172,7 +172,7 @@ abstract class CI_DB_utility {
 	 */
 	public function optimize_database()
 	{
-		if( $this->_optimize_table === FALSE)
+		if( $this->_optimize_table === FALSE )
 		{
 			return  ( $this->db->db_debug) ? $this->db->display_error( 'db_unsupported_feature') : FALSE;
 		}
@@ -180,8 +180,8 @@ abstract class CI_DB_utility {
 		$result = array();
 		foreach( $this->db->list_tables() as $table_name)
 		{
-			$res = $this->db->query(sprintf( $this->_optimize_table, $this->db->escape_identifiers( $table_name)));
-			if( is_bool( $res))
+			$res = $this->db->query(sprintf( $this->_optimize_table, $this->db->escape_identifiers( $table_name ) ));
+			if( is_bool( $res ) )
 			{
 				return  $res;
 			}
@@ -189,7 +189,7 @@ abstract class CI_DB_utility {
 			// Build the result array...
 			$res = $res->result_array();
 			$res = current( $res);
-			$key = str_replace( $this->db->database . ' . ', '', current( $res));
+			$key = str_replace( $this->db->database . ' . ', '', current( $res ) );
 			$keys = array_keys( $res);
 			unset( $res[$keys[0]]);
 
@@ -209,13 +209,13 @@ abstract class CI_DB_utility {
 	 */
 	public function repair_table( $table_name)
 	{
-		if( $this->_repair_table === FALSE)
+		if( $this->_repair_table === FALSE )
 		{
 			return  ( $this->db->db_debug) ? $this->db->display_error( 'db_unsupported_feature') : FALSE;
 		}
 
-		$query = $this->db->query(sprintf( $this->_repair_table, $this->db->escape_identifiers( $table_name)));
-		if( is_bool( $query))
+		$query = $this->db->query(sprintf( $this->_repair_table, $this->db->escape_identifiers( $table_name ) ));
+		if( is_bool( $query ) )
 		{
 			return  $query;
 		}
@@ -237,7 +237,7 @@ abstract class CI_DB_utility {
 	 */
 	public function csv_from_result( $query, $delim = ',', $newline = "\n", $enclosure = '"')
 	{
-		if( ! is_object( $query) OR ! method_exists( $query, 'list_fields'))
+		if( ! is_object( $query) OR ! method_exists( $query, 'list_fields' ) )
 		{
 			show_error( 'You must submit a valid result object');
 		}
@@ -249,10 +249,10 @@ abstract class CI_DB_utility {
 			$out .= $enclosure.str_replace( $enclosure, $enclosure.$enclosure, $name).$enclosure.$delim;
 		}
 
-		$out = substr( $out, 0, -strlen( $delim)).$newline;
+		$out = substr( $out, 0, -strlen( $delim ) ).$newline;
 
 		// Next blast through the result array and build out the rows
-		while( $row = $query->unbuffered_row( 'array'))
+		while( $row = $query->unbuffered_row( 'array' ) )
 		{
 			$line = array();
 			foreach( $row as $item)
@@ -274,9 +274,9 @@ abstract class CI_DB_utility {
 	 * @param	array	$params	Any preferences
 	 * @return	string
 	 */
-	public function xml_from_result( $query, $params = array())
+	public function xml_from_result( $query, $params = array( ) )
 	{
-		if( ! is_object( $query) OR ! method_exists( $query, 'list_fields'))
+		if( ! is_object( $query) OR ! method_exists( $query, 'list_fields' ) )
 		{
 			show_error( 'You must submit a valid result object');
 		}
@@ -284,7 +284,7 @@ abstract class CI_DB_utility {
 		// Set our default values
 		foreach( array( 'root' => 'root', 'element' => 'element', 'newline' => "\n", 'tab' => "\t") as $key => $val)
 		{
-			if( ! isset( $params[$key]))
+			if( ! isset( $params[$key] ) )
 			{
 				$params[$key] = $val;
 			}
@@ -298,7 +298,7 @@ abstract class CI_DB_utility {
 
 		// Generate the result
 		$xml = '<' . $root . '>' . $newline;
-		while( $row = $query->unbuffered_row())
+		while( $row = $query->unbuffered_row( ) )
 		{
 			$xml .= $tab . '<' . $element . '>' . $newline;
 			foreach( $row as $key => $val)
@@ -319,12 +319,12 @@ abstract class CI_DB_utility {
 	 * @param	array	$params
 	 * @return	string
 	 */
-	public function backup( $params = array())
+	public function backup( $params = array( ) )
 	{
 		// If the parameters have not been submitted as an
 		// array then we know that it is simply the table
 		// name, which is a valid short cut.
-		if( is_string( $params))
+		if( is_string( $params ) )
 		{
 			$params = array( 'tables' => $params);
 		}
@@ -346,7 +346,7 @@ abstract class CI_DB_utility {
 		{
 			foreach( $prefs as $key => $val)
 			{
-				if( isset( $params[$key]))
+				if( isset( $params[$key] ) )
 				{
 					$prefs[$key] = $params[$key];
 				}
@@ -361,15 +361,15 @@ abstract class CI_DB_utility {
 		}
 
 		// Validate the format
-		if( ! in_array( $prefs[ 'format' ], array( 'gzip', 'zip', 'txt'), TRUE))
+		if( ! in_array( $prefs[ 'format' ], array( 'gzip', 'zip', 'txt'), TRUE ) )
 		{
 			$prefs[ 'format' ] = 'txt';
 		}
 
 		// Is the encoder supported? If not, we'll either issue an
 		// error or use plain text depending on the debug settings
-		if( ( $prefs[ 'format' ] === 'gzip' && ! function_exists( 'gzencode'))
-			OR ( $prefs[ 'format' ] === 'zip' && ! function_exists( 'gzcompress')))
+		if( ( $prefs[ 'format' ] === 'gzip' && ! function_exists( 'gzencode' ) )
+			OR ( $prefs[ 'format' ] === 'zip' && ! function_exists( 'gzcompress' ) ))
 		{
 			if( $this->db->db_debug)
 			{
@@ -386,18 +386,18 @@ abstract class CI_DB_utility {
 			if( $prefs[ 'filename' ] === '')
 			{
 				$prefs[ 'filename' ] = (count( $prefs[ 'tables' ]) === 1 ? $prefs[ 'tables' ] : $this->db->database)
-							.date( 'Y-m-d_H-i', time()) . '.sql';
+							.date( 'Y-m-d_H-i', time( ) ) . '.sql';
 			}
 			else
 			{
 				// If they included the .zip file extension we'll remove it
-				if( preg_match( '|.+?\.zip$|', $prefs[ 'filename' ]))
+				if( preg_match( '|.+?\.zip$|', $prefs[ 'filename' ] ) )
 				{
 					$prefs[ 'filename' ] = str_replace( '.zip', '', $prefs[ 'filename' ]);
 				}
 
 				// Tack on the ".sql" file extension if needed
-				if( ! preg_match( '|.+?\.sql$|', $prefs[ 'filename' ]))
+				if( ! preg_match( '|.+?\.sql$|', $prefs[ 'filename' ] ) )
 				{
 					$prefs[ 'filename' ] .= '.sql';
 				}
@@ -406,7 +406,7 @@ abstract class CI_DB_utility {
 			// Load the Zip class and output it
 			$CI =& get_instance();
 			$CI->load->library( 'zip');
-			$CI->zip->add_data( $prefs[ 'filename' ], $this->_backup( $prefs));
+			$CI->zip->add_data( $prefs[ 'filename' ], $this->_backup( $prefs ) );
 			return  $CI->zip->get_zip();
 		}
 		elseif( $prefs[ 'format' ] === 'txt') // Was a text file requested?
@@ -415,7 +415,7 @@ abstract class CI_DB_utility {
 		}
 		elseif( $prefs[ 'format' ] === 'gzip') // Was a Gzip file requested?
 		{
-			return  gzencode( $this->_backup( $prefs));
+			return  gzencode( $this->_backup( $prefs ) );
 		}
 
 		return;

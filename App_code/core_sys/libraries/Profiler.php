@@ -95,7 +95,7 @@ class CI_Profiler {
 	 *
 	 * @param	array	$config	Parameters
 	 */
-	public function __construct( $config = array())
+	public function __construct( $config = array( ) )
 	{
 		$this->CI =& get_instance();
 		$this->CI->load->language( 'profiler');
@@ -103,7 +103,7 @@ class CI_Profiler {
 		// default all sections to display
 		foreach( $this->_available_sections as $section)
 		{
-			if( ! isset( $config[$section]))
+			if( ! isset( $config[$section] ) )
 			{
 				$this->_compile_{$section} = TRUE;
 			}
@@ -125,7 +125,7 @@ class CI_Profiler {
 	 */
 	public function set_sections( $config)
 	{
-		if( isset( $config[ 'query_toggle_count' ]))
+		if( isset( $config[ 'query_toggle_count' ] ) )
 		{
 			$this->_query_toggle_count = (int) $config[ 'query_toggle_count' ];
 			unset( $config[ 'query_toggle_count' ]);
@@ -133,9 +133,9 @@ class CI_Profiler {
 
 		foreach( $config as $method => $enable)
 		{
-			if( in_array( $method, $this->_available_sections))
+			if( in_array( $method, $this->_available_sections ) )
 			{
-				$this->_compile_{$method} = ( $enable !== FALSE);
+				$this->_compile_{$method} = ( $enable !== FALSE );
 			}
 		}
 	}
@@ -160,7 +160,7 @@ class CI_Profiler {
 			// We match the "end" marker so that the list ends
 			// up in the order that it was defined
 			if( preg_match( '/(.+?)_end$/i', $key, $match)
-				&& isset( $this->CI->benchmark->marker[$match[1] . '_end' ], $this->CI->benchmark->marker[$match[1] . '_start' ]))
+				&& isset( $this->CI->benchmark->marker[$match[1] . '_end' ], $this->CI->benchmark->marker[$match[1] . '_start' ] ) )
 			{
 				$profile[$match[1]] = $this->CI->benchmark->elapsed_time( $match[1] . '_start', $key);
 			}
@@ -178,7 +178,7 @@ class CI_Profiler {
 
 		foreach( $profile as $key => $val)
 		{
-			$key = ucwords(str_replace(array( '_', '-'), ' ', $key));
+			$key = ucwords(str_replace(array( '_', '-'), ' ', $key ) );
 			$output .= '<tr><td style="padding:5px;width:50%;color:#000;font-weight:bold;background-color:#ddd;">'
 					.$key . '&nbsp;&nbsp;</td><td style="padding:5px;width:50%;color:#900;font-weight:normal;background-color:#ddd;">'
 					.$val."</td></tr>\n";
@@ -201,7 +201,7 @@ class CI_Profiler {
 		// Let's determine which databases are currently connected to
 		foreach( get_object_vars( $this->CI) as $name => $cobject)
 		{
-			if( is_object( $cobject))
+			if( is_object( $cobject ) )
 			{
 				if( $cobject instanceof CI_DB)
 				{
@@ -318,7 +318,7 @@ class CI_Profiler {
 
 				$output .= '<tr><td style="width:50%;color:#000;background-color:#ddd;padding:5px;">&#36;_GET[ '
 					.$key . ' ]&nbsp;&nbsp; </td><td style="width:50%;padding:5px;color:#cd6e00;font-weight:normal;background-color:#ddd;">'
-					.((is_array( $val) OR is_object( $val)) ? '<pre>'.htmlspecialchars(stripslashes(print_r( $val, TRUE))) . '</pre>' : htmlspecialchars(stripslashes( $val)))
+					.((is_array( $val) OR is_object( $val ) ) ? '<pre>'.htmlspecialchars(stripslashes(print_r( $val, TRUE ) )) . '</pre>' : htmlspecialchars(stripslashes( $val ) ))
 					."</td></tr>\n";
 			}
 
@@ -357,13 +357,13 @@ class CI_Profiler {
 				$output .= '<tr><td style="width:50%;padding:5px;color:#000;background-color:#ddd;">&#36;_POST[ '
 					.$key . ' ]&nbsp;&nbsp; </td><td style="width:50%;padding:5px;color:#009900;font-weight:normal;background-color:#ddd;">';
 
-				if( is_array( $val) OR is_object( $val))
+				if( is_array( $val) OR is_object( $val ) )
 				{
-					$output .= '<pre>'.htmlspecialchars(stripslashes(print_r( $val, TRUE))) . '</pre>';
+					$output .= '<pre>'.htmlspecialchars(stripslashes(print_r( $val, TRUE ) )) . '</pre>';
 				}
 				else
 				{
-					$output .= htmlspecialchars(stripslashes( $val));
+					$output .= htmlspecialchars(stripslashes( $val ) );
 				}
 
 				$output .= "</td></tr>\n";
@@ -376,9 +376,9 @@ class CI_Profiler {
 				$output .= '<tr><td style="width:50%;padding:5px;color:#000;background-color:#ddd;">&#36;_FILES[ '
 					.$key . ' ]&nbsp;&nbsp; </td><td style="width:50%;padding:5px;color:#009900;font-weight:normal;background-color:#ddd;">';
 
-				if( is_array( $val) OR is_object( $val))
+				if( is_array( $val) OR is_object( $val ) )
 				{
-					$output .= '<pre>'.htmlspecialchars(stripslashes(print_r( $val, TRUE))) . '</pre>';
+					$output .= '<pre>'.htmlspecialchars(stripslashes(print_r( $val, TRUE ) )) . '</pre>';
 				}
 
 				$output .= "</td></tr>\n";
@@ -441,7 +441,7 @@ class CI_Profiler {
 			."\n"
 			 . '<legend style="color:#5a0099;">&nbsp;&nbsp;' . $this->CI->lang->line( 'profiler_memory_usage')."&nbsp;&nbsp;</legend>\n"
 			 . '<div style="color:#5a0099;font-weight:normal;padding:4px 0 4px 0;">'
-			.(( $usage = memory_get_usage()) != '' ? number_format( $usage) . ' bytes' : $this->CI->lang->line( 'profiler_no_memory'))
+			.(( $usage = memory_get_usage( ) ) != '' ? number_format( $usage) . ' bytes' : $this->CI->lang->line( 'profiler_no_memory' ) )
 			 . '</div></fieldset>';
 	}
 
@@ -492,7 +492,7 @@ class CI_Profiler {
 
 		foreach( $this->CI->config->config as $config => $val)
 		{
-			if( is_array( $val) OR is_object( $val))
+			if( is_array( $val) OR is_object( $val ) )
 			{
 				$val = print_r( $val, TRUE);
 			}
@@ -513,7 +513,7 @@ class CI_Profiler {
 	 */
 	protected function _compile_session_data()
 	{
-		if( ! isset( $this->CI->session))
+		if( ! isset( $this->CI->session ) )
 		{
 			return;
 		}
@@ -524,7 +524,7 @@ class CI_Profiler {
 
 		foreach( $this->CI->session->userdata() as $key => $val)
 		{
-			if( is_array( $val) OR is_object( $val))
+			if( is_array( $val) OR is_object( $val ) )
 			{
 				$val = print_r( $val, TRUE);
 			}
@@ -550,7 +550,7 @@ class CI_Profiler {
 
 		foreach( $this->_available_sections as $section)
 		{
-			if( $this->_compile_{$section} !== FALSE)
+			if( $this->_compile_{$section} !== FALSE )
 			{
 				$func = '_compile_' . $section;
 				$output .= $this->{$func}();

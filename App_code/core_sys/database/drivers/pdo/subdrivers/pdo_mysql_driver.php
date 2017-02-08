@@ -98,7 +98,7 @@ class CI_DB_pdo_mysql_driver extends CI_DB_pdo_driver {
 	{
 		parent::__construct( $params);
 
-		if( empty( $this->dsn))
+		if( empty( $this->dsn ) )
 		{
 			$this->dsn = 'mysql:host='.(empty( $this->hostname) ? '127.0.0.1' : $this->hostname);
 
@@ -106,7 +106,7 @@ class CI_DB_pdo_mysql_driver extends CI_DB_pdo_driver {
 			empty( $this->database) OR $this->dsn .= ';dbname=' . $this->database;
 			empty( $this->char_set) OR $this->dsn .= ';charset=' . $this->char_set;
 		}
-		elseif( ! empty( $this->char_set) && strpos( $this->dsn, 'charset=', 6) === FALSE && is_php( '5.3.6'))
+		elseif( ! empty( $this->char_set) && strpos( $this->dsn, 'charset=', 6) === FALSE && is_php( '5.3.6' ) )
 		{
 			$this->dsn .= ';charset=' . $this->char_set;
 		}
@@ -120,14 +120,14 @@ class CI_DB_pdo_mysql_driver extends CI_DB_pdo_driver {
 	 * @param	bool	$persistent
 	 * @return	object
 	 */
-	public function db_connect( $persistent = FALSE)
+	public function db_connect( $persistent = FALSE )
 	{
 		/* Prior to PHP 5.3.6, even if the charset was supplied in the DSN
 		 * on connect - it was ignored. This is a work-around for the issue.
 		 *
 		 * Reference: http://www.php.net/manual/en/ref.pdo-mysql.connection.php
 		 */
-		if( ! is_php( '5.3.6') && ! empty( $this->char_set))
+		if( ! is_php( '5.3.6') && ! empty( $this->char_set ) )
 		{
 			$this->options[PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES ' . $this->char_set
 				.(empty( $this->dbcollat) ? '' : ' COLLATE ' . $this->dbcollat);
@@ -135,7 +135,7 @@ class CI_DB_pdo_mysql_driver extends CI_DB_pdo_driver {
 
 		if( $this->stricton)
 		{
-			if( empty( $this->options[PDO::MYSQL_ATTR_INIT_COMMAND]))
+			if( empty( $this->options[PDO::MYSQL_ATTR_INIT_COMMAND] ) )
 			{
 				$this->options[PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET SESSION sql_mode="STRICT_ALL_TABLES"';
 			}
@@ -151,7 +151,7 @@ class CI_DB_pdo_mysql_driver extends CI_DB_pdo_driver {
 		}
 
 		// SSL support was added to PDO_MYSQL in PHP 5.3.7
-		if( is_array( $this->encrypt) && is_php( '5.3.7'))
+		if( is_array( $this->encrypt) && is_php( '5.3.7' ) )
 		{
 			$ssl = array();
 			empty( $this->encrypt[ 'ssl_key' ])    OR $ssl[PDO::MYSQL_ATTR_SSL_KEY]    = $this->encrypt[ 'ssl_key' ];
@@ -167,7 +167,7 @@ class CI_DB_pdo_mysql_driver extends CI_DB_pdo_driver {
 
 		// Prior to version 5.7.3, MySQL silently downgrades to an unencrypted connection if SSL setup fails
 		if( 
-			( $pdo = parent::db_connect( $persistent)) !== FALSE
+			( $pdo = parent::db_connect( $persistent ) ) !== FALSE
 			&& ! empty( $ssl)
 			&& version_compare( $pdo->getAttribute(PDO::ATTR_CLIENT_VERSION), '5.7.3', '<=')
 			&& empty( $pdo->query("SHOW STATUS LIKE 'ssl_cipher'")->fetchObject()->Value)
@@ -196,7 +196,7 @@ class CI_DB_pdo_mysql_driver extends CI_DB_pdo_driver {
 			$database = $this->database;
 		}
 
-		if( FALSE !== $this->simple_query( 'USE ' . $this->escape_identifiers( $database)))
+		if( FALSE !== $this->simple_query( 'USE ' . $this->escape_identifiers( $database ) ))
 		{
 			$this->database = $database;
 			return  TRUE;
@@ -215,7 +215,7 @@ class CI_DB_pdo_mysql_driver extends CI_DB_pdo_driver {
 	 * @param	bool	$prefix_limit
 	 * @return	string
 	 */
-	protected function _list_tables( $prefix_limit = FALSE)
+	protected function _list_tables( $prefix_limit = FALSE )
 	{
 		$sql = 'SHOW TABLES';
 
@@ -239,7 +239,7 @@ class CI_DB_pdo_mysql_driver extends CI_DB_pdo_driver {
 	 */
 	protected function _list_columns( $table = '')
 	{
-		return  'SHOW COLUMNS FROM ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE);
+		return  'SHOW COLUMNS FROM ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE );
 	}
 
 	// --------------------------------------------------------------------
@@ -252,14 +252,14 @@ class CI_DB_pdo_mysql_driver extends CI_DB_pdo_driver {
 	 */
 	public function field_data( $table)
 	{
-		if( ( $query = $this->query( 'SHOW COLUMNS FROM ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE))) === FALSE)
+		if( ( $query = $this->query( 'SHOW COLUMNS FROM ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE ) )) === FALSE )
 		{
 			return  FALSE;
 		}
 		$query = $query->result_object();
 
 		$retval = array();
-		for ( $i = 0, $c = count( $query); $i < $c; $i++)
+		for( $i = 0, $c = count( $query); $i < $c; $i++)
 		{
 			$retval[$i]			= new stdClass();
 			$retval[$i]->name		= $query[$i]->Field;

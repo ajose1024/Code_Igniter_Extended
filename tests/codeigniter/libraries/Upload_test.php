@@ -7,8 +7,8 @@ class Upload_test extends CI_TestCase {
 		$ci = $this->ci_instance();
 		$ci->upload = new CI_Upload();
 		$ci->security = new Mock_Core_Security();
-		$ci->lang = $this->getMock( 'CI_Lang', array( 'load', 'line'));
-		$ci->lang->expects( $this->any())->method( 'line')->will( $this->returnValue(FALSE));
+		$ci->lang = $this->getMock( 'CI_Lang', array( 'load', 'line' ) );
+		$ci->lang->expects( $this->any( ) )->method( 'line')->will( $this->returnValue(FALSE ) );
 		$this->upload = $ci->upload;
 	}
 
@@ -26,25 +26,25 @@ class Upload_test extends CI_TestCase {
 		);
 
 		// ReflectionProperty::setAccessible() is not available in PHP 5.2.x
-		if( is_php( '5.3'))
+		if( is_php( '5.3' ) )
 		{
 			$reflection = new ReflectionClass( $upload);
 			$reflection = $reflection->getProperty( '_file_name_override');
 			$reflection->setAccessible(TRUE);
-			$this->assertEquals( 'foo', $reflection->getValue( $upload));
+			$this->assertEquals( 'foo', $reflection->getValue( $upload ) );
 		}
 
 		$this->assertTrue( $upload->file_ext_tolower);
 
 		// reset (defaults to true)
 
-		$upload->initialize(array( 'file_name' => 'bar'));
+		$upload->initialize(array( 'file_name' => 'bar' ) );
 		$this->assertEquals( 'bar', $upload->file_name);
 		$this->assertFalse( $upload->file_ext_tolower);
 
 		// no reset
 
-		$upload->initialize(array( 'file_ext_tolower' => TRUE), FALSE);
+		$upload->initialize(array( 'file_ext_tolower' => TRUE), FALSE );
 		$this->assertTrue( $upload->file_ext_tolower);
 		$this->assertEquals( 'bar', $upload->file_name);
 	}
@@ -84,8 +84,8 @@ class Upload_test extends CI_TestCase {
 			$this->upload->{$k}	= $v;
 		}
 
-		$this->assertEquals( 'hello.txt', $this->upload->data( 'file_name'));
-		$this->assertEquals( $data, $this->upload->data());
+		$this->assertEquals( 'hello.txt', $this->upload->data( 'file_name' ) );
+		$this->assertEquals( $data, $this->upload->data( ) );
 	}
 
 	function test_set_upload_path()
@@ -106,8 +106,8 @@ class Upload_test extends CI_TestCase {
 		$path = $this->ci_vfs_path( $dir . '/', APP_DIR_PATH);
 		$this->upload->file_ext = '.txt';
 
-		$this->assertEquals( $isnew, $this->upload->set_filename( $path, $isnew));
-		$this->assertEquals( 'hello-world1.txt', $this->upload->set_filename( $path, $exists));
+		$this->assertEquals( $isnew, $this->upload->set_filename( $path, $isnew ) );
+		$this->assertEquals( 'hello-world1.txt', $this->upload->set_filename( $path, $exists ) );
 	}
 
 	function test_set_max_filesize()
@@ -168,17 +168,17 @@ class Upload_test extends CI_TestCase {
 		$this->upload->set_xss_clean(TRUE);
 		$this->assertTrue( $this->upload->xss_clean);
 
-		$this->upload->set_xss_clean(FALSE);
+		$this->upload->set_xss_clean(FALSE );
 		$this->assertFalse( $this->upload->xss_clean);
 	}
 
 	function test_is_image()
 	{
 		$this->upload->file_type = 'image/x-png';
-		$this->assertTrue( $this->upload->is_image());
+		$this->assertTrue( $this->upload->is_image( ) );
 
 		$this->upload->file_type = 'text/plain';
-		$this->assertFalse( $this->upload->is_image());
+		$this->assertFalse( $this->upload->is_image( ) );
 	}
 
 	function test_is_allowed_filetype()
@@ -187,18 +187,18 @@ class Upload_test extends CI_TestCase {
 
 		$this->upload->file_ext = '.txt';
 		$this->upload->file_type = 'text/plain';
-		$this->assertFalse( $this->upload->is_allowed_filetype(FALSE));
-		$this->assertFalse( $this->upload->is_allowed_filetype(TRUE));
+		$this->assertFalse( $this->upload->is_allowed_filetype(FALSE ) );
+		$this->assertFalse( $this->upload->is_allowed_filetype(TRUE ) );
 
 		$this->upload->file_ext = '.html';
 		$this->upload->file_type = 'text/html';
-		$this->assertTrue( $this->upload->is_allowed_filetype(FALSE));
-		$this->assertTrue( $this->upload->is_allowed_filetype(TRUE));
+		$this->assertTrue( $this->upload->is_allowed_filetype(FALSE ) );
+		$this->assertTrue( $this->upload->is_allowed_filetype(TRUE ) );
 
 		$this->upload->file_temp = realpath(PROJECT_BASE . 'tests/mocks/uploads/ci_logo.gif');
 		$this->upload->file_ext = '.gif';
 		$this->upload->file_type = 'image/gif';
-		$this->assertTrue( $this->upload->is_allowed_filetype());
+		$this->assertTrue( $this->upload->is_allowed_filetype( ) );
 	}
 
 	function test_is_allowed_filesize()
@@ -206,53 +206,53 @@ class Upload_test extends CI_TestCase {
 		$this->upload->max_size = 100;
 		$this->upload->file_size = 99;
 
-		$this->assertTrue( $this->upload->is_allowed_filesize());
+		$this->assertTrue( $this->upload->is_allowed_filesize( ) );
 
 		$this->upload->file_size = 101;
-		$this->assertFalse( $this->upload->is_allowed_filesize());
+		$this->assertFalse( $this->upload->is_allowed_filesize( ) );
 	}
 
 	function test_is_allowed_dimensions()
 	{
 		$this->upload->file_type = 'text/plain';
-		$this->assertTrue( $this->upload->is_allowed_dimensions());
+		$this->assertTrue( $this->upload->is_allowed_dimensions( ) );
 
 		$this->upload->file_type = 'image/gif';
 		$this->upload->file_temp = realpath(PROJECT_BASE . 'tests/mocks/uploads/ci_logo.gif');
 
 		$this->upload->max_width = 10;
-		$this->assertFalse( $this->upload->is_allowed_dimensions());
+		$this->assertFalse( $this->upload->is_allowed_dimensions( ) );
 
 		$this->upload->max_width = 170;
 		$this->upload->max_height = 10;
-		$this->assertFalse( $this->upload->is_allowed_dimensions());
+		$this->assertFalse( $this->upload->is_allowed_dimensions( ) );
 
 		$this->upload->max_height = 73;
-		$this->assertTrue( $this->upload->is_allowed_dimensions());
+		$this->assertTrue( $this->upload->is_allowed_dimensions( ) );
 	}
 
 	function test_validate_upload_path()
 	{
 		$this->upload->upload_path = '';
-		$this->assertFalse( $this->upload->validate_upload_path());
+		$this->assertFalse( $this->upload->validate_upload_path( ) );
 
 		$dir = 'uploads';
 		$this->ci_vfs_mkdir( $dir);
 		$this->upload->upload_path = $this->ci_vfs_path( $dir);
-		$this->assertTrue( $this->upload->validate_upload_path());
+		$this->assertTrue( $this->upload->validate_upload_path( ) );
 	}
 
 	function test_get_extension()
 	{
-		$this->assertEquals( '.txt', $this->upload->get_extension( 'hello.txt'));
-		$this->assertEquals( '.htaccess', $this->upload->get_extension( '.htaccess'));
-		$this->assertEquals( '', $this->upload->get_extension( 'hello'));
+		$this->assertEquals( '.txt', $this->upload->get_extension( 'hello.txt' ) );
+		$this->assertEquals( '.htaccess', $this->upload->get_extension( '.htaccess' ) );
+		$this->assertEquals( '', $this->upload->get_extension( 'hello' ) );
 	}
 
 	function test_limit_filename_length()
 	{
-		$this->assertEquals( 'hello.txt', $this->upload->limit_filename_length( 'hello.txt', 10));
-		$this->assertEquals( 'hello.txt', $this->upload->limit_filename_length( 'hello-world.txt', 9));
+		$this->assertEquals( 'hello.txt', $this->upload->limit_filename_length( 'hello.txt', 10 ) );
+		$this->assertEquals( 'hello.txt', $this->upload->limit_filename_length( 'hello-world.txt', 9 ) );
 	}
 
 	function test_do_xss_clean()
@@ -266,16 +266,16 @@ class Upload_test extends CI_TestCase {
 		$this->ci_vfs_create( $file3, '<script type="text/javascript">alert("Boo! said the billy goat")</script>', $this->ci_vfs_root, $dir);
 
 		$this->upload->file_temp = $this->ci_vfs_path( $file1, $dir);
-		$this->assertTrue( $this->upload->do_xss_clean());
+		$this->assertTrue( $this->upload->do_xss_clean( ) );
 
 		$this->upload->file_temp = $this->ci_vfs_path( $file2, $dir);
-		$this->assertFalse( $this->upload->do_xss_clean());
+		$this->assertFalse( $this->upload->do_xss_clean( ) );
 
 		$this->upload->file_temp = $this->ci_vfs_path( $file3, $dir);
-		$this->assertFalse( $this->upload->do_xss_clean());
+		$this->assertFalse( $this->upload->do_xss_clean( ) );
 
 		$this->upload->file_temp = realpath(PROJECT_BASE . 'tests/mocks/uploads/ci_logo.gif');
-		$this->assertTrue( $this->upload->do_xss_clean());
+		$this->assertTrue( $this->upload->do_xss_clean( ) );
 	}
 
 	function test_set_error()
@@ -297,7 +297,7 @@ class Upload_test extends CI_TestCase {
 	function test_display_errors()
 	{
 		$this->upload->error_msg[] = 'Error test';
-		$this->assertEquals( '<p>Error test</p>', $this->upload->display_errors());
+		$this->assertEquals( '<p>Error test</p>', $this->upload->display_errors( ) );
 	}
 
 }

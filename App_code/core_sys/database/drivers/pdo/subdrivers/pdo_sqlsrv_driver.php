@@ -92,7 +92,7 @@ class CI_DB_pdo_sqlsrv_driver extends CI_DB_pdo_driver {
 	{
 		parent::__construct( $params);
 
-		if( empty( $this->dsn))
+		if( empty( $this->dsn ) )
 		{
 			$this->dsn = 'sqlsrv:Server='.(empty( $this->hostname) ? '127.0.0.1' : $this->hostname);
 
@@ -101,13 +101,13 @@ class CI_DB_pdo_sqlsrv_driver extends CI_DB_pdo_driver {
 
 			// Some custom options
 
-			if( isset( $this->QuotedId))
+			if( isset( $this->QuotedId ) )
 			{
 				$this->dsn .= ';QuotedId=' . $this->QuotedId;
 				$this->_quoted_identifier = (bool) $this->QuotedId;
 			}
 
-			if( isset( $this->ConnectionPooling))
+			if( isset( $this->ConnectionPooling ) )
 			{
 				$this->dsn .= ';ConnectionPooling=' . $this->ConnectionPooling;
 			}
@@ -117,12 +117,12 @@ class CI_DB_pdo_sqlsrv_driver extends CI_DB_pdo_driver {
 				$this->dsn .= ';Encrypt=1';
 			}
 
-			if( isset( $this->TraceOn))
+			if( isset( $this->TraceOn ) )
 			{
 				$this->dsn .= ';TraceOn=' . $this->TraceOn;
 			}
 
-			if( isset( $this->TrustServerCertificate))
+			if( isset( $this->TrustServerCertificate ) )
 			{
 				$this->dsn .= ';TrustServerCertificate=' . $this->TrustServerCertificate;
 			}
@@ -134,7 +134,7 @@ class CI_DB_pdo_sqlsrv_driver extends CI_DB_pdo_driver {
 			empty( $this->TraceFile) OR $this->dsn .= ';TraceFile=' . $this->TraceFile;
 			empty( $this->WSID) OR $this->dsn .= ';WSID=' . $this->WSID;
 		}
-		elseif( preg_match( '/QuotedId=(0|1)/', $this->dsn, $match))
+		elseif( preg_match( '/QuotedId=(0|1)/', $this->dsn, $match ) )
 		{
 			$this->_quoted_identifier = (bool) $match[1];
 		}
@@ -148,16 +148,16 @@ class CI_DB_pdo_sqlsrv_driver extends CI_DB_pdo_driver {
 	 * @param	bool	$persistent
 	 * @return	object
 	 */
-	public function db_connect( $persistent = FALSE)
+	public function db_connect( $persistent = FALSE )
 	{
-		if( ! empty( $this->char_set) && preg_match( '/utf[^8]*8/i', $this->char_set))
+		if( ! empty( $this->char_set) && preg_match( '/utf[^8]*8/i', $this->char_set ) )
 		{
 			$this->options[PDO::SQLSRV_ENCODING_UTF8] = 1;
 		}
 
 		$this->conn_id = parent::db_connect( $persistent);
 
-		if( ! is_object( $this->conn_id) OR is_bool( $this->_quoted_identifier))
+		if( ! is_object( $this->conn_id) OR is_bool( $this->_quoted_identifier ) )
 		{
 			return  $this->conn_id;
 		}
@@ -181,7 +181,7 @@ class CI_DB_pdo_sqlsrv_driver extends CI_DB_pdo_driver {
 	 * @param	bool	$prefix_limit
 	 * @return	string
 	 */
-	protected function _list_tables( $prefix_limit = FALSE)
+	protected function _list_tables( $prefix_limit = FALSE )
 	{
 		$sql = 'SELECT ' . $this->escape_identifiers( 'name')
 			 . ' FROM ' . $this->escape_identifiers( 'sysobjects')
@@ -210,7 +210,7 @@ class CI_DB_pdo_sqlsrv_driver extends CI_DB_pdo_driver {
 	{
 		return  'SELECT COLUMN_NAME
 			FROM INFORMATION_SCHEMA.Columns
-			WHERE UPPER(TABLE_NAME) = ' . $this->escape(strtoupper( $table));
+			WHERE UPPER(TABLE_NAME) = ' . $this->escape(strtoupper( $table ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -225,16 +225,16 @@ class CI_DB_pdo_sqlsrv_driver extends CI_DB_pdo_driver {
 	{
 		$sql = 'SELECT COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH, NUMERIC_PRECISION, COLUMN_DEFAULT
 			FROM INFORMATION_SCHEMA.Columns
-			WHERE UPPER(TABLE_NAME) = ' . $this->escape(strtoupper( $table));
+			WHERE UPPER(TABLE_NAME) = ' . $this->escape(strtoupper( $table ) );
 
-		if( ( $query = $this->query( $sql)) === FALSE)
+		if( ( $query = $this->query( $sql ) ) === FALSE )
 		{
 			return  FALSE;
 		}
 		$query = $query->result_object();
 
 		$retval = array();
-		for ( $i = 0, $c = count( $query); $i < $c; $i++)
+		for( $i = 0, $c = count( $query); $i < $c; $i++)
 		{
 			$retval[$i]			= new stdClass();
 			$retval[$i]->name		= $query[$i]->COLUMN_NAME;
@@ -297,7 +297,7 @@ class CI_DB_pdo_sqlsrv_driver extends CI_DB_pdo_driver {
 	protected function _limit( $sql)
 	{
 		// As of SQL Server 2012 (11.0.*) OFFSET is supported
-		if( version_compare( $this->version(), '11', '>='))
+		if( version_compare( $this->version(), '11', '>=' ) )
 		{
 			// SQL Server OFFSET-FETCH can be used only with the ORDER BY clause
 			empty( $this->qb_orderby) && $sql .= ' ORDER BY 1';
@@ -308,12 +308,12 @@ class CI_DB_pdo_sqlsrv_driver extends CI_DB_pdo_driver {
 		$limit = $this->qb_offset + $this->qb_limit;
 
 		// An ORDER BY clause is required for ROW_NUMBER() to work
-		if( $this->qb_offset && ! empty( $this->qb_orderby))
+		if( $this->qb_offset && ! empty( $this->qb_orderby ) )
 		{
 			$orderby = $this->_compile_order_by();
 
 			// We have to strip the ORDER BY clause
-			$sql = trim(substr( $sql, 0, strrpos( $sql, $orderby)));
+			$sql = trim(substr( $sql, 0, strrpos( $sql, $orderby ) ));
 
 			// Get the fields to select from our subquery, so that we can avoid CI_rownum appearing in the actual results
 			if( count( $this->qb_select) === 0)
@@ -326,7 +326,7 @@ class CI_DB_pdo_sqlsrv_driver extends CI_DB_pdo_driver {
 				$select = array();
 				$field_regexp = ( $this->_quoted_identifier)
 					? '("[^\"]+")' : '(\[[^\]]+\])';
-				for ( $i = 0, $c = count( $this->qb_select); $i < $c; $i++)
+				for( $i = 0, $c = count( $this->qb_select); $i < $c; $i++)
 				{
 					$select[] = preg_match( '/(?:\s|\.)' . $field_regexp . '$/i', $this->qb_select[$i], $m)
 						? $m[1] : $this->qb_select[$i];
@@ -358,7 +358,7 @@ class CI_DB_pdo_sqlsrv_driver extends CI_DB_pdo_driver {
 	protected function _insert_batch( $table, $keys, $values)
 	{
 		// Multiple-value inserts are only supported as of SQL Server 2008
-		if( version_compare( $this->version(), '10', '>='))
+		if( version_compare( $this->version(), '10', '>=' ) )
 		{
 			return  parent::_insert_batch( $table, $keys, $values);
 		}

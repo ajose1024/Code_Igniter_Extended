@@ -18,20 +18,20 @@ class Lang_test extends CI_TestCase {
 	{
 		// Regular usage
 		$this->ci_vfs_clone( 'system/language/english/profiler_lang.php');
-		$this->assertTrue( $this->lang->load( 'profiler', 'english'));
+		$this->assertTrue( $this->lang->load( 'profiler', 'english' ) );
 		$this->assertEquals( 'URI STRING', $this->lang->language[ 'profiler_uri_string' ]);
 
 		// Already loaded file
-		$this->assertNull( $this->lang->load( 'profiler', 'english'));
+		$this->assertNull( $this->lang->load( 'profiler', 'english' ) );
 
 		// Unspecified language (defaults to english)
 		$this->ci_vfs_clone( 'system/language/english/date_lang.php');
-		$this->assertTrue( $this->lang->load( 'date'));
+		$this->assertTrue( $this->lang->load( 'date' ) );
 		$this->assertEquals( 'Year', $this->lang->language[ 'date_year' ]);
 
 		// A language other than english
 		$this->ci_vfs_clone( 'system/language/english/email_lang.php', 'system/language/german/');
-		$this->assertTrue( $this->lang->load( 'email', 'german'));
+		$this->assertTrue( $this->lang->load( 'email', 'german' ) );
 		$this->assertEquals( 'german', $this->lang->is_loaded[ 'email_lang.php' ]);
 
 		// Non-existent file
@@ -50,12 +50,12 @@ class Lang_test extends CI_TestCase {
 		// test with existing file
 		$this->ci_vfs_clone( 'system/language/english/number_lang.php');
 		$this->ci_vfs_clone( 'system/language/english/number_lang.php', 'system/language/123funny/');
-		$this->assertTrue( $this->lang->load( 'number', '123funny'));
+		$this->assertTrue( $this->lang->load( 'number', '123funny' ) );
 		$this->assertEquals( 'Bytes', $this->lang->language[ 'bytes' ]);
 
 		// test without existing file
 		$this->ci_vfs_clone( 'system/language/english/email_lang.php');
-		$this->assertTrue( $this->lang->load( 'email', '456funny'));
+		$this->assertTrue( $this->lang->load( 'email', '456funny' ) );
 		$this->assertEquals( 'You did not specify a SMTP hostname . ', $this->lang->language[ 'email_no_hostname' ]);
 	}
 
@@ -82,7 +82,7 @@ class Lang_test extends CI_TestCase {
 	{
 		// Alternative Path
 		$this->ci_vfs_clone( 'system/language/english/profiler_lang.php');
-		$this->assertTrue( $this->lang->load( 'profiler', 'english', FALSE, TRUE, 'vfs://system/'));
+		$this->assertTrue( $this->lang->load( 'profiler', 'english', FALSE, TRUE, 'vfs://system/' ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -94,8 +94,8 @@ class Lang_test extends CI_TestCase {
 	{
 		$this->ci_vfs_clone( 'system/language/english/profiler_lang.php');
 		$this->lang->load( 'profiler', 'english');
-		$this->assertEquals( 'URI STRING', $this->lang->line( 'profiler_uri_string'));
-		$this->assertFalse( $this->lang->line( 'nonexistent_string'));
-		$this->assertFalse( $this->lang->line(NULL));
+		$this->assertEquals( 'URI STRING', $this->lang->line( 'profiler_uri_string' ) );
+		$this->assertFalse( $this->lang->line( 'nonexistent_string' ) );
+		$this->assertFalse( $this->lang->line(NULL ) );
 	}
 }

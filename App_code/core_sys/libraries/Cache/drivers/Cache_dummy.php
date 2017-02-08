@@ -72,7 +72,7 @@ class CI_Cache_dummy extends CI_Driver {
 	 * @param	bool	Whether to store the raw value
 	 * @return	bool	TRUE, Simulating success
 	 */
-	public function save( $id, $data, $ttl = 60, $raw = FALSE)
+	public function save( $id, $data, $ttl = 60, $raw = FALSE )
 	{
 		return  TRUE;
 	}

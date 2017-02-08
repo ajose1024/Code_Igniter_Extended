@@ -87,7 +87,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 	{
 		$field_names = array();
 		mssql_field_seek( $this->result_id, 0);
-		while( $field = mssql_fetch_field( $this->result_id))
+		while( $field = mssql_fetch_field( $this->result_id ) )
 		{
 			$field_names[] = $field->name;
 		}
@@ -107,7 +107,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 	public function field_data()
 	{
 		$retval = array();
-		for ( $i = 0, $c = $this->num_fields(); $i < $c; $i++)
+		for( $i = 0, $c = $this->num_fields(); $i < $c; $i++)
 		{
 			$field = mssql_fetch_field( $this->result_id, $i);
 
@@ -129,7 +129,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 	 */
 	public function free_result()
 	{
-		if( is_resource( $this->result_id))
+		if( is_resource( $this->result_id ) )
 		{
 			mssql_free_result( $this->result_id);
 			$this->result_id = FALSE;

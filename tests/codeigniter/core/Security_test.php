@@ -5,7 +5,7 @@ class Security_test extends CI_TestCase {
 	public function set_up()
 	{
 		// Set cookie for security test
-		$_COOKIE[ 'ci_csrf_cookie' ] = md5(uniqid(mt_rand(), TRUE));
+		$_COOKIE[ 'ci_csrf_cookie' ] = md5(uniqid(mt_rand(), TRUE ) );
 
 		// Set config for Security class
 		$this->ci_set_config( 'csrf_protection', TRUE);
@@ -21,7 +21,7 @@ class Security_test extends CI_TestCase {
 	{
 		$_SERVER[ 'REQUEST_METHOD' ] = 'GET';
 
-		$this->assertInstanceOf( 'CI_Security', $this->security->csrf_verify());
+		$this->assertInstanceOf( 'CI_Security', $this->security->csrf_verify( ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -43,21 +43,21 @@ class Security_test extends CI_TestCase {
 		$_SERVER[ 'REQUEST_METHOD' ] = 'POST';
 		$_POST[$this->security->csrf_token_name] = $this->security->csrf_hash;
 
-		$this->assertInstanceOf( 'CI_Security', $this->security->csrf_verify());
+		$this->assertInstanceOf( 'CI_Security', $this->security->csrf_verify( ) );
 	}
 
 	// --------------------------------------------------------------------
 
 	public function test_get_csrf_hash()
 	{
-		$this->assertEquals( $this->security->csrf_hash, $this->security->get_csrf_hash());
+		$this->assertEquals( $this->security->csrf_hash, $this->security->get_csrf_hash( ) );
 	}
 
 	// --------------------------------------------------------------------
 
 	public function test_get_csrf_token_name()
 	{
-		$this->assertEquals( 'ci_csrf_token', $this->security->get_csrf_token_name());
+		$this->assertEquals( 'ci_csrf_token', $this->security->get_csrf_token_name( ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -103,7 +103,7 @@ class Security_test extends CI_TestCase {
 
 	public function test_xss_clean_image_invalid()
 	{
-		$harm_string = '<img src=javascript:alert(String.fromCharCode(88,83,83))>';
+		$harm_string = '<img src=javascript:alert(String.fromCharCode(88,83,83 ) )>';
 
 		$xss_clean_return  = $this->security->xss_clean( $harm_string, TRUE);
 
@@ -115,7 +115,7 @@ class Security_test extends CI_TestCase {
 	public function test_xss_clean_entity_double_encoded()
 	{
 		$input = '<a href="&#38&#35&#49&#48&#54&#38&#35&#57&#55&#38&#35&#49&#49&#56&#38&#35&#57&#55&#38&#35&#49&#49&#53&#38&#35&#57&#57&#38&#35&#49&#49&#52&#38&#35&#49&#48&#53&#38&#35&#49&#49&#50&#38&#35&#49&#49&#54&#38&#35&#53&#56&#38&#35&#57&#57&#38&#35&#49&#49&#49&#38&#35&#49&#49&#48&#38&#35&#49&#48&#50&#38&#35&#49&#48&#53&#38&#35&#49&#49&#52&#38&#35&#49&#48&#57&#38&#35&#52&#48&#38&#35&#52&#57&#38&#35&#52&#49">Clickhere</a>';
-		$this->assertEquals( '<a>Clickhere</a>', $this->security->xss_clean( $input));
+		$this->assertEquals( '<a>Clickhere</a>', $this->security->xss_clean( $input ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -134,16 +134,16 @@ class Security_test extends CI_TestCase {
 	public function test_xss_clean_js_img_removal()
 	{
 		$input = '<img src="&#38&#35&#49&#48&#54&#38&#35&#57&#55&#38&#35&#49&#49&#56&#38&#35&#57&#55&#38&#35&#49&#49&#53&#38&#35&#57&#57&#38&#35&#49&#49&#52&#38&#35&#49&#48&#53&#38&#35&#49&#49&#50&#38&#35&#49&#49&#54&#38&#35&#53&#56&#38&#35&#57&#57&#38&#35&#49&#49&#49&#38&#35&#49&#49&#48&#38&#35&#49&#48&#50&#38&#35&#49&#48&#53&#38&#35&#49&#49&#52&#38&#35&#49&#48&#57&#38&#35&#52&#48&#38&#35&#52&#57&#38&#35&#52&#49">Clickhere';
-		$this->assertEquals( '<img>', $this->security->xss_clean( $input));
+		$this->assertEquals( '<img>', $this->security->xss_clean( $input ) );
 	}
 
 	// --------------------------------------------------------------------
 
 	public function test_xss_clean_sanitize_naughty_html_tags()
 	{
-		$this->assertEquals( '&lt;unclosedTag', $this->security->xss_clean( '<unclosedTag'));
-		$this->assertEquals( '&lt;blink&gt;', $this->security->xss_clean( '<blink>'));
-		$this->assertEquals( '<fubar>', $this->security->xss_clean( '<fubar>'));
+		$this->assertEquals( '&lt;unclosedTag', $this->security->xss_clean( '<unclosedTag' ) );
+		$this->assertEquals( '&lt;blink&gt;', $this->security->xss_clean( '<blink>' ) );
+		$this->assertEquals( '<fubar>', $this->security->xss_clean( '<fubar>' ) );
 
 		$this->assertEquals(
 			'<img svg=""> src="x">',
@@ -160,14 +160,14 @@ class Security_test extends CI_TestCase {
 
 	public function test_xss_clean_sanitize_naughty_html_attributes()
 	{
-		$this->assertEquals( '<foo xss=removed>', $this->security->xss_clean( '<foo onAttribute="bar">'));
-		$this->assertEquals( '<foo xss=removed>', $this->security->xss_clean( '<foo onAttributeNoQuotes=bar>'));
-		$this->assertEquals( '<foo xss=removed>', $this->security->xss_clean( '<foo onAttributeWithSpaces = bar>'));
-		$this->assertEquals( '<foo prefixOnAttribute="bar">', $this->security->xss_clean( '<foo prefixOnAttribute="bar">'));
-		$this->assertEquals( '<foo>onOutsideOfTag=test</foo>', $this->security->xss_clean( '<foo>onOutsideOfTag=test</foo>'));
-		$this->assertEquals( 'onNoTagAtAll = true', $this->security->xss_clean( 'onNoTagAtAll = true'));
-		$this->assertEquals( '<foo xss=removed>', $this->security->xss_clean( '<foo fscommand=case-insensitive>'));
-		$this->assertEquals( '<foo xss=removed>', $this->security->xss_clean( '<foo seekSegmentTime=whatever>'));
+		$this->assertEquals( '<foo xss=removed>', $this->security->xss_clean( '<foo onAttribute="bar">' ) );
+		$this->assertEquals( '<foo xss=removed>', $this->security->xss_clean( '<foo onAttributeNoQuotes=bar>' ) );
+		$this->assertEquals( '<foo xss=removed>', $this->security->xss_clean( '<foo onAttributeWithSpaces = bar>' ) );
+		$this->assertEquals( '<foo prefixOnAttribute="bar">', $this->security->xss_clean( '<foo prefixOnAttribute="bar">' ) );
+		$this->assertEquals( '<foo>onOutsideOfTag=test</foo>', $this->security->xss_clean( '<foo>onOutsideOfTag=test</foo>' ) );
+		$this->assertEquals( 'onNoTagAtAll = true', $this->security->xss_clean( 'onNoTagAtAll = true' ) );
+		$this->assertEquals( '<foo xss=removed>', $this->security->xss_clean( '<foo fscommand=case-insensitive>' ) );
+		$this->assertEquals( '<foo xss=removed>', $this->security->xss_clean( '<foo seekSegmentTime=whatever>' ) );
 
 		$this->assertEquals(
 			'<foo bar=">" baz=\'>\' xss=removed>',
@@ -255,10 +255,10 @@ class Security_test extends CI_TestCase {
 	public function test_get_random_bytes()
 	{
 		$length = "invalid";
-		$this->assertFalse( $this->security->get_random_bytes( $length));
+		$this->assertFalse( $this->security->get_random_bytes( $length ) );
 
 		$length = 10;
-		$this->assertNotEmpty( $this->security->get_random_bytes( $length));
+		$this->assertNotEmpty( $this->security->get_random_bytes( $length ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -313,9 +313,9 @@ class Security_test extends CI_TestCase {
 			'<img srcq="/img/sunset.gif" height="100%" width="100%">'
 		);
 
-		for ( $i = 0; $i < count( $imgtags); $i++)
+		for( $i = 0; $i < count( $imgtags); $i++)
 		{
-			$this->assertEquals( $urls[$i], $this->security->strip_image_tags( $imgtags[$i]));
+			$this->assertEquals( $urls[$i], $this->security->strip_image_tags( $imgtags[$i] ) );
 		}
 	}
 
@@ -324,7 +324,7 @@ class Security_test extends CI_TestCase {
 	public function test_csrf_set_hash()
 	{
 		// Set cookie for security test
-		$_COOKIE[ 'ci_csrf_cookie' ] = md5(uniqid(mt_rand(), TRUE));
+		$_COOKIE[ 'ci_csrf_cookie' ] = md5(uniqid(mt_rand(), TRUE ) );
 
 		// Set config for Security class
 		$this->ci_set_config( 'csrf_protection', TRUE);
@@ -335,6 +335,6 @@ class Security_test extends CI_TestCase {
 
 		$this->security = new Mock_Core_Security();
 
-		$this->assertNotEmpty( $this->security->get_csrf_hash());
+		$this->assertNotEmpty( $this->security->get_csrf_hash( ) );
 	}
 }

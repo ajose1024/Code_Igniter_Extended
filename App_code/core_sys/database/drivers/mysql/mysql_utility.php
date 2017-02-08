@@ -75,7 +75,7 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 	 * @param	array	$params	Preferences
 	 * @return	mixed
 	 */
-	protected function _backup( $params = array())
+	protected function _backup( $params = array( ) )
 	{
 		if( count( $params) === 0)
 		{
@@ -89,7 +89,7 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 		$output = '';
 
 		// Do we need to include a statement to disable foreign key checks?
-		if( $foreign_key_checks === FALSE)
+		if( $foreign_key_checks === FALSE )
 		{
 			$output .= 'SET foreign_key_checks = 0;' . $newline;
 		}
@@ -97,16 +97,16 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 		foreach(  (array) $tables as $table)
 		{
 			// Is the table in the "ignore" list?
-			if( in_array( $table, (array) $ignore, TRUE))
+			if( in_array( $table, (array) $ignore, TRUE ) )
 			{
 				continue;
 			}
 
 			// Get the table schema
-			$query = $this->db->query( 'SHOW CREATE TABLE ' . $this->db->escape_identifiers( $this->db->database . ' . ' . $table));
+			$query = $this->db->query( 'SHOW CREATE TABLE ' . $this->db->escape_identifiers( $this->db->database . ' . ' . $table ) );
 
 			// No result means the table name was invalid
-			if( $query === FALSE)
+			if( $query === FALSE )
 			{
 				continue;
 			}
@@ -130,13 +130,13 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 			}
 
 			// If inserts are not needed we're done...
-			if( $add_insert === FALSE)
+			if( $add_insert === FALSE )
 			{
 				continue;
 			}
 
 			// Grab all the data from the current table
-			$query = $this->db->query( 'SELECT * FROM ' . $this->db->protect_identifiers( $table));
+			$query = $this->db->query( 'SELECT * FROM ' . $this->db->protect_identifiers( $table ) );
 
 			if( $query->num_rows() === 0)
 			{
@@ -150,10 +150,10 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 			$i = 0;
 			$field_str = '';
 			$is_int = array();
-			while( $field = mysql_fetch_field( $query->result_id))
+			while( $field = mysql_fetch_field( $query->result_id ) )
 			{
 				// Most versions of MySQL store timestamp as a string
-				$is_int[$i] = in_array(strtolower(mysql_field_type( $query->result_id, $i)),
+				$is_int[$i] = in_array(strtolower(mysql_field_type( $query->result_id, $i ) ),
 							array( 'tinyint', 'smallint', 'mediumint', 'int', 'bigint'), //, 'timestamp'),
 							TRUE);
 
@@ -181,7 +181,7 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 					else
 					{
 						// Escape the data if it's not an integer
-						$val_str .= ( $is_int[$i] === FALSE) ? $this->db->escape( $v) : $v;
+						$val_str .= ( $is_int[$i] === FALSE ) ? $this->db->escape( $v) : $v;
 					}
 
 					// Append a comma
@@ -200,7 +200,7 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 		}
 
 		// Do we need to include a statement to re-enable foreign key checks?
-		if( $foreign_key_checks === FALSE)
+		if( $foreign_key_checks === FALSE )
 		{
 			$output .= 'SET foreign_key_checks = 1;' . $newline;
 		}

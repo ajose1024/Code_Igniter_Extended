@@ -84,14 +84,14 @@ class CI_DB_sqlsrv_forge extends CI_DB_forge {
 	 */
 	protected function _alter_table( $alter_type, $table, $field)
 	{
-		if( in_array( $alter_type, array( 'ADD', 'DROP'), TRUE))
+		if( in_array( $alter_type, array( 'ADD', 'DROP'), TRUE ) )
 		{
 			return  parent::_alter_table( $alter_type, $table, $field);
 		}
 
 		$sql = 'ALTER TABLE ' . $this->db->escape_identifiers( $table) . ' ALTER COLUMN ';
 		$sqls = array();
-		for ( $i = 0, $c = count( $field); $i < $c; $i++)
+		for( $i = 0, $c = count( $field); $i < $c; $i++)
 		{
 			$sqls[] = $sql.$this->_process_column( $field[$i]);
 		}
@@ -111,7 +111,7 @@ class CI_DB_sqlsrv_forge extends CI_DB_forge {
 	 */
 	protected function _attr_type(&$attributes)
 	{
-		switch( strtoupper( $attributes[ 'TYPE' ]))
+		switch( strtoupper( $attributes[ 'TYPE' ] ) )
 		{
 			case 'MEDIUMINT':
 				$attributes[ 'TYPE' ] = 'INTEGER';
@@ -135,7 +135,7 @@ class CI_DB_sqlsrv_forge extends CI_DB_forge {
 	 */
 	protected function _attr_auto_increment(&$attributes, &$field)
 	{
-		if( ! empty( $attributes[ 'AUTO_INCREMENT' ]) && $attributes[ 'AUTO_INCREMENT' ] === TRUE && stripos( $field[ 'type' ], 'int') !== FALSE)
+		if( ! empty( $attributes[ 'AUTO_INCREMENT' ]) && $attributes[ 'AUTO_INCREMENT' ] === TRUE && stripos( $field[ 'type' ], 'int') !== FALSE )
 		{
 			$field[ 'auto_increment' ] = ' IDENTITY(1,1)';
 		}

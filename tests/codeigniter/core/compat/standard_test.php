@@ -4,23 +4,23 @@ class standard_test extends CI_TestCase {
 
 	public function test_bootstrap()
 	{
-		if( is_php( '5.5'))
+		if( is_php( '5.5' ) )
 		{
 			return  $this->markTestSkipped( 'All array functions are already available on PHP 5.5');
 		}
 
-		$this->assertTrue(function_exists( 'array_column'));
+		$this->assertTrue(function_exists( 'array_column' ) );
 
-		if( ! is_php( '5.4'))
+		if( ! is_php( '5.4' ) )
 		{
-			$this->assertTrue(function_exists( 'hex2bin'));
+			$this->assertTrue(function_exists( 'hex2bin' ) );
 		}
 
-		if( ! is_php( '5.3'))
+		if( ! is_php( '5.3' ) )
 		{
-			$this->assertTrue(function_exists( 'array_replace'));
-			$this->assertTrue(function_exists( 'array_replace_recursive'));
-			$this->assertTrue(function_exists( 'quoted_printable_encode'));
+			$this->assertTrue(function_exists( 'array_replace' ) );
+			$this->assertTrue(function_exists( 'array_replace_recursive' ) );
+			$this->assertTrue(function_exists( 'quoted_printable_encode' ) );
 		}
 	}
 
@@ -277,16 +277,16 @@ class standard_test extends CI_TestCase {
 
 		// Non-existing columns
 
-		$this->assertEquals(array(), array_column( $input, 2));
-		$this->assertEquals(array(), array_column( $input, 'foo'));
+		$this->assertEquals(array(), array_column( $input, 2 ) );
+		$this->assertEquals(array(), array_column( $input, 'foo' ) );
 		$this->assertEquals(
 			array( 'aaa', 'bbb', 'ccc'),
 			array_column( $input, 0, 'foo')
 		);
-		$this->assertEquals(array(), array_column( $input, 3.14));
+		$this->assertEquals(array(), array_column( $input, 3.14 ) );
 
 		// One-dimensional array
-		$this->assertEquals(array(), array_column(array( 'foo', 'bar', 'baz'), 1));
+		$this->assertEquals(array(), array_column(array( 'foo', 'bar', 'baz'), 1 ) );
 
 		// Columns not present in all rows
 
@@ -347,14 +347,14 @@ class standard_test extends CI_TestCase {
 	 */
 	public function test_hex2bin()
 	{
-		if( is_php( '5.4'))
+		if( is_php( '5.4' ) )
 		{
 			return  $this->markTestSkipped( 'hex2bin() is already available on PHP 5.4');
 		}
 
-		$this->assertEquals("\x03\x04", hex2bin("0304"));
-		$this->assertEquals( '', hex2bin( ''));
-		$this->assertEquals("\x01\x02\x03", hex2bin(new FooHex()));
+		$this->assertEquals("\x03\x04", hex2bin("0304" ) );
+		$this->assertEquals( '', hex2bin( '' ) );
+		$this->assertEquals("\x01\x02\x03", hex2bin(new FooHex( ) ));
 	}
 
 	// ------------------------------------------------------------------------
@@ -368,7 +368,7 @@ class standard_test extends CI_TestCase {
 	 */
 	public function test_array_replace_recursive()
 	{
-		if( is_php( '5.3'))
+		if( is_php( '5.3' ) )
 		{
 			return  $this->markTestSkipped( 'array_replace() and array_replace_recursive() are already available on PHP 5.3');
 		}
@@ -444,21 +444,21 @@ class standard_test extends CI_TestCase {
 	 */
 	public function test_quoted_printable_encode()
 	{
-		if( is_php( '5.3'))
+		if( is_php( '5.3' ) )
 		{
 			return  $this->markTestSkipped( 'quoted_printable_encode() is already available on PHP 5.3');
 		}
 
 		// These are actually imap_8bit() tests:
-		$this->assertEquals("String with CRLF at end=20\r\n", quoted_printable_encode("String with CRLF at end \r\n"));
+		$this->assertEquals("String with CRLF at end=20\r\n", quoted_printable_encode("String with CRLF at end \r\n" ) );
 		// ext/imap/tests/imap_8bit_basic.phpt says for this line:
 		// NB this appears to be a bug in cclient; a space at end of string should be encoded as =20
-		$this->assertEquals("String with space at end ", quoted_printable_encode("String with space at end "));
-		$this->assertEquals("String with tabs =09=09 in middle", quoted_printable_encode("String with tabs \t\t in middle"));
-		$this->assertEquals("String with tab at end =09", quoted_printable_encode("String with tab at end \t"));
-		$this->assertEquals("=00=01=02=03=04=FE=FF=0A=0D", quoted_printable_encode("\x00\x01\x02\x03\x04\xfe\xff\x0a\x0d"));
+		$this->assertEquals("String with space at end ", quoted_printable_encode("String with space at end " ) );
+		$this->assertEquals("String with tabs =09=09 in middle", quoted_printable_encode("String with tabs \t\t in middle" ) );
+		$this->assertEquals("String with tab at end =09", quoted_printable_encode("String with tab at end \t" ) );
+		$this->assertEquals("=00=01=02=03=04=FE=FF=0A=0D", quoted_printable_encode("\x00\x01\x02\x03\x04\xfe\xff\x0a\x0d" ) );
 
-		if( function_exists( 'imap_8bit'))
+		if( function_exists( 'imap_8bit' ) )
 		{
 			return  $this->markTestIncomplete( 'imap_8bit() exists and is called as an alias for quoted_printable_encode()');
 		}
@@ -473,9 +473,9 @@ class standard_test extends CI_TestCase {
 			."=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=\r\n"
 			."=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=\r\n"
 			."=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00=00",
-			$d = quoted_printable_encode(str_repeat("\0", 200))
+			$d = quoted_printable_encode(str_repeat("\0", 200 ) )
 		);
-		$this->assertEquals(str_repeat("\x0", 200), quoted_printable_decode( $d));
+		$this->assertEquals(str_repeat("\x0", 200), quoted_printable_decode( $d ) );
 		$this->assertEquals(
 			"=D1=81=D1=82=D1=80=D0=BE=D0=BA=D0=B0 =D0=B2 =D1=8E=D0=BD=D0=B8=D0=BA=D0=\r\n"
 			."=BE=D0=B4=D0=B5=D1=81=D1=82=D1=80=D0=BE=D0=BA=D0=B0 =D0=B2 =D1=8E=D0=BD=\r\n"
@@ -538,10 +538,10 @@ class standard_test extends CI_TestCase {
 			."=B4=D0=B5=D1=81=D1=82=D1=80=D0=BE=D0=BA=D0=B0 =D0=B2 =D1=8E=D0=BD=D0=B8=\r\n"
 			."=D0=BA=D0=BE=D0=B4=D0=B5=D1=81=D1=82=D1=80=D0=BE=D0=BA=D0=B0 =D0=B2 =D1=\r\n"
 			."=8E=D0=BD=D0=B8=D0=BA=D0=BE=D0=B4=D0=B5",
-			$d = quoted_printable_encode(str_repeat( 'строка в юникоде', 50))
+			$d = quoted_printable_encode(str_repeat( 'строка в юникоде', 50 ) )
 		);
-		$this->assertEquals(str_repeat( 'строка в юникоде', 50), quoted_printable_decode( $d));
-		$this->assertEquals( 'this is a foo', quoted_printable_encode(new FooObject()));
+		$this->assertEquals(str_repeat( 'строка в юникоде', 50), quoted_printable_decode( $d ) );
+		$this->assertEquals( 'this is a foo', quoted_printable_encode(new FooObject( ) ));
 	}
 }
 

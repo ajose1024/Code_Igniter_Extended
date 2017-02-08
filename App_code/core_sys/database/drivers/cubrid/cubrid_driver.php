@@ -94,9 +94,9 @@ class CI_DB_cubrid_driver extends CI_DB {
 	{
 		parent::__construct( $params);
 
-		if( preg_match( '/^CUBRID:[^:]+(:[0-9][1-9]{0,4})?:[^:]+:[^:]*:[^:]*:(\?.+)?$/', $this->dsn, $matches))
+		if( preg_match( '/^CUBRID:[^:]+(:[0-9][1-9]{0,4})?:[^:]+:[^:]*:[^:]*:(\?.+)?$/', $this->dsn, $matches ) )
 		{
-			if( stripos( $matches[2], 'autocommit=off') !== FALSE)
+			if( stripos( $matches[2], 'autocommit=off') !== FALSE )
 			{
 				$this->auto_commit = FALSE;
 			}
@@ -116,9 +116,9 @@ class CI_DB_cubrid_driver extends CI_DB {
 	 * @param	bool	$persistent
 	 * @return	resource
 	 */
-	public function db_connect( $persistent = FALSE)
+	public function db_connect( $persistent = FALSE )
 	{
-		if( preg_match( '/^CUBRID:[^:]+(:[0-9][1-9]{0,4})?:[^:]+:([^:]*):([^:]*):(\?.+)?$/', $this->dsn, $matches))
+		if( preg_match( '/^CUBRID:[^:]+(:[0-9][1-9]{0,4})?:[^:]+:([^:]*):([^:]*):(\?.+)?$/', $this->dsn, $matches ) )
 		{
 			$func = ( $persistent !== TRUE) ? 'cubrid_connect_with_url' : 'cubrid_pconnect_with_url';
 			return  ( $matches[2] === '' && $matches[3] === '' && $this->username !== '' && $this->password !== '')
@@ -144,7 +144,7 @@ class CI_DB_cubrid_driver extends CI_DB {
 	 */
 	public function reconnect()
 	{
-		if( cubrid_ping( $this->conn_id) === FALSE)
+		if( cubrid_ping( $this->conn_id) === FALSE )
 		{
 			$this->conn_id = FALSE;
 		}
@@ -159,12 +159,12 @@ class CI_DB_cubrid_driver extends CI_DB {
 	 */
 	public function version()
 	{
-		if( isset( $this->data_cache[ 'version' ]))
+		if( isset( $this->data_cache[ 'version' ] ) )
 		{
 			return  $this->data_cache[ 'version' ];
 		}
 
-		return  ( ! $this->conn_id OR ( $version = cubrid_get_server_info( $this->conn_id)) === FALSE)
+		return  ( ! $this->conn_id OR ( $version = cubrid_get_server_info( $this->conn_id ) ) === FALSE )
 			? FALSE
 			: $this->data_cache[ 'version' ] = $version;
 	}
@@ -191,13 +191,13 @@ class CI_DB_cubrid_driver extends CI_DB {
 	 */
 	protected function _trans_begin()
 	{
-		if( ( $autocommit = cubrid_get_autocommit( $this->conn_id)) === NULL)
+		if( ( $autocommit = cubrid_get_autocommit( $this->conn_id ) ) === NULL)
 		{
 			return  FALSE;
 		}
 		elseif( $autocommit === TRUE)
 		{
-			return  cubrid_set_autocommit( $this->conn_id, CUBRID_AUTOCOMMIT_FALSE);
+			return  cubrid_set_autocommit( $this->conn_id, CUBRID_AUTOCOMMIT_FALSE );
 		}
 
 		return  TRUE;
@@ -212,12 +212,12 @@ class CI_DB_cubrid_driver extends CI_DB {
 	 */
 	protected function _trans_commit()
 	{
-		if( ! cubrid_commit( $this->conn_id))
+		if( ! cubrid_commit( $this->conn_id ) )
 		{
 			return  FALSE;
 		}
 
-		if( $this->auto_commit && ! cubrid_get_autocommit( $this->conn_id))
+		if( $this->auto_commit && ! cubrid_get_autocommit( $this->conn_id ) )
 		{
 			return  cubrid_set_autocommit( $this->conn_id, CUBRID_AUTOCOMMIT_TRUE);
 		}
@@ -234,12 +234,12 @@ class CI_DB_cubrid_driver extends CI_DB {
 	 */
 	protected function _trans_rollback()
 	{
-		if( ! cubrid_rollback( $this->conn_id))
+		if( ! cubrid_rollback( $this->conn_id ) )
 		{
 			return  FALSE;
 		}
 
-		if( $this->auto_commit && ! cubrid_get_autocommit( $this->conn_id))
+		if( $this->auto_commit && ! cubrid_get_autocommit( $this->conn_id ) )
 		{
 			cubrid_set_autocommit( $this->conn_id, CUBRID_AUTOCOMMIT_TRUE);
 		}
@@ -294,7 +294,7 @@ class CI_DB_cubrid_driver extends CI_DB {
 	 * @param	bool	$prefix_limit
 	 * @return	string
 	 */
-	protected function _list_tables( $prefix_limit = FALSE)
+	protected function _list_tables( $prefix_limit = FALSE )
 	{
 		$sql = 'SHOW TABLES';
 
@@ -318,7 +318,7 @@ class CI_DB_cubrid_driver extends CI_DB {
 	 */
 	protected function _list_columns( $table = '')
 	{
-		return  'SHOW COLUMNS FROM ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE);
+		return  'SHOW COLUMNS FROM ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE );
 	}
 
 	// --------------------------------------------------------------------
@@ -331,14 +331,14 @@ class CI_DB_cubrid_driver extends CI_DB {
 	 */
 	public function field_data( $table)
 	{
-		if( ( $query = $this->query( 'SHOW COLUMNS FROM ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE))) === FALSE)
+		if( ( $query = $this->query( 'SHOW COLUMNS FROM ' . $this->protect_identifiers( $table, TRUE, NULL, FALSE ) )) === FALSE )
 		{
 			return  FALSE;
 		}
 		$query = $query->result_object();
 
 		$retval = array();
-		for ( $i = 0, $c = count( $query); $i < $c; $i++)
+		for( $i = 0, $c = count( $query); $i < $c; $i++)
 		{
 			$retval[$i]			= new stdClass();
 			$retval[$i]->name		= $query[$i]->Field;
@@ -367,7 +367,7 @@ class CI_DB_cubrid_driver extends CI_DB {
 	 */
 	public function error()
 	{
-		return  array( 'code' => cubrid_errno( $this->conn_id), 'message' => cubrid_error( $this->conn_id));
+		return  array( 'code' => cubrid_errno( $this->conn_id), 'message' => cubrid_error( $this->conn_id ) );
 	}
 
 	// --------------------------------------------------------------------

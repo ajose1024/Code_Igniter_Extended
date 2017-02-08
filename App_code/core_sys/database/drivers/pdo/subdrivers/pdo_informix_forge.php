@@ -105,7 +105,7 @@ class CI_DB_pdo_informix_forge extends CI_DB_pdo_forge {
 	 */
 	protected function _attr_type(&$attributes)
 	{
-		switch( strtoupper( $attributes[ 'TYPE' ]))
+		switch( strtoupper( $attributes[ 'TYPE' ] ) )
 		{
 			case 'TINYINT':
 				$attributes[ 'TYPE' ] = 'SMALLINT';
@@ -120,7 +120,7 @@ class CI_DB_pdo_informix_forge extends CI_DB_pdo_forge {
 			case 'BLOB':
 			case 'CLOB':
 				$attributes[ 'UNIQUE' ] = FALSE;
-				if( isset( $attributes[ 'DEFAULT' ]))
+				if( isset( $attributes[ 'DEFAULT' ] ) )
 				{
 					unset( $attributes[ 'DEFAULT' ]);
 				}

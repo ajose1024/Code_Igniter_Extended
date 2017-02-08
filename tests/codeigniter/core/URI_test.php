@@ -133,7 +133,7 @@ class URI_test extends CI_TestCase {
 	{
 		$this->setExpectedException( 'RuntimeException');
 
-		$this->uri->config->set_item( 'enable_query_strings', FALSE);
+		$this->uri->config->set_item( 'enable_query_strings', FALSE );
 		$this->uri->_set_permitted_uri_chars( 'a-z 0-9~%.:_\-');
 		$segment = '$this()'; // filter_uri() accepts by reference
 		$this->uri->filter_uri( $segment);
@@ -177,7 +177,7 @@ class URI_test extends CI_TestCase {
 		$this->uri->segments = array( 'a', '1', 'b', '2', 'c');
 
 		$this->assertEquals(
-			array( 'a' => '1', 'b' => '2', 'c' => FALSE),
+			array( 'a' => '1', 'b' => '2', 'c' => FALSE ),
 			$this->uri->uri_to_assoc(1)
 		);
 
@@ -186,8 +186,8 @@ class URI_test extends CI_TestCase {
 
 		// test default
 		$this->assertEquals(
-			array( 'a' => '1', 'b' => FALSE),
-			$this->uri->uri_to_assoc(1, array( 'a', 'b'))
+			array( 'a' => '1', 'b' => FALSE ),
+			$this->uri->uri_to_assoc(1, array( 'a', 'b' ) )
 		);
 	}
 
@@ -211,7 +211,7 @@ class URI_test extends CI_TestCase {
 		$this->uri->rsegments = array( 'x', '1', 'y', '2', 'z');
 
 		$this->assertEquals(
-			array( 'x' => '1', 'y' => '2', 'z' => FALSE),
+			array( 'x' => '1', 'y' => '2', 'z' => FALSE ),
 			$this->uri->ruri_to_assoc(1)
 		);
 
@@ -220,8 +220,8 @@ class URI_test extends CI_TestCase {
 
 		// test default
 		$this->assertEquals(
-			array( 'x' => '1', 'y' => FALSE),
-			$this->uri->ruri_to_assoc(1, array( 'x', 'y'))
+			array( 'x' => '1', 'y' => FALSE ),
+			$this->uri->ruri_to_assoc(1, array( 'x', 'y' ) )
 		);
 	}
 
@@ -230,7 +230,7 @@ class URI_test extends CI_TestCase {
 	public function test_assoc_to_uri()
 	{
 		$this->uri->config->set_item( 'uri_string_slashes', 'none');
-		$this->assertEquals( 'a/1/b/2', $this->uri->assoc_to_uri(array( 'a' => '1', 'b' => '2')));
+		$this->assertEquals( 'a/1/b/2', $this->uri->assoc_to_uri(array( 'a' => '1', 'b' => '2' ) ));
 	}
 
 	// --------------------------------------------------------------------
@@ -240,15 +240,15 @@ class URI_test extends CI_TestCase {
 		$this->uri->segments[1] = 'segment';
 		$this->uri->rsegments[1] = 'segment';
 
-		$this->assertEquals( '/segment/', $this->uri->slash_segment(1, 'both'));
-		$this->assertEquals( '/segment/', $this->uri->slash_rsegment(1, 'both'));
+		$this->assertEquals( '/segment/', $this->uri->slash_segment(1, 'both' ) );
+		$this->assertEquals( '/segment/', $this->uri->slash_rsegment(1, 'both' ) );
 
 		$a = '/segment';
-		$this->assertEquals( '/segment', $this->uri->slash_segment(1, 'leading'));
-		$this->assertEquals( '/segment', $this->uri->slash_rsegment(1, 'leading'));
+		$this->assertEquals( '/segment', $this->uri->slash_segment(1, 'leading' ) );
+		$this->assertEquals( '/segment', $this->uri->slash_rsegment(1, 'leading' ) );
 
-		$this->assertEquals( 'segment/', $this->uri->slash_segment(1, 'trailing'));
-		$this->assertEquals( 'segment/', $this->uri->slash_rsegment(1, 'trailing'));
+		$this->assertEquals( 'segment/', $this->uri->slash_segment(1, 'trailing' ) );
+		$this->assertEquals( 'segment/', $this->uri->slash_rsegment(1, 'trailing' ) );
 	}
 
 }

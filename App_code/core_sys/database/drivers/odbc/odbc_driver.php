@@ -104,7 +104,7 @@ class CI_DB_odbc_driver extends CI_DB {
 		parent::__construct( $params);
 
 		// Legacy support for DSN in the hostname field
-		if( empty( $this->dsn))
+		if( empty( $this->dsn ) )
 		{
 			$this->dsn = $this->hostname;
 		}
@@ -118,7 +118,7 @@ class CI_DB_odbc_driver extends CI_DB {
 	 * @param	bool	$persistent
 	 * @return	resource
 	 */
-	public function db_connect( $persistent = FALSE)
+	public function db_connect( $persistent = FALSE )
 	{
 		return  ( $persistent === TRUE)
 			? odbc_pconnect( $this->dsn, $this->username, $this->password)
@@ -147,7 +147,7 @@ class CI_DB_odbc_driver extends CI_DB {
 	 */
 	protected function _trans_begin()
 	{
-		return  odbc_autocommit( $this->conn_id, FALSE);
+		return  odbc_autocommit( $this->conn_id, FALSE );
 	}
 
 	// --------------------------------------------------------------------
@@ -159,7 +159,7 @@ class CI_DB_odbc_driver extends CI_DB {
 	 */
 	protected function _trans_commit()
 	{
-		if( odbc_commit( $this->conn_id))
+		if( odbc_commit( $this->conn_id ) )
 		{
 			odbc_autocommit( $this->conn_id, TRUE);
 			return  TRUE;
@@ -177,7 +177,7 @@ class CI_DB_odbc_driver extends CI_DB {
 	 */
 	protected function _trans_rollback()
 	{
-		if( odbc_rollback( $this->conn_id))
+		if( odbc_rollback( $this->conn_id ) )
 		{
 			odbc_autocommit( $this->conn_id, TRUE);
 			return  TRUE;
@@ -233,7 +233,7 @@ class CI_DB_odbc_driver extends CI_DB {
 	 * @param	bool	$prefix_limit
 	 * @return	string
 	 */
-	protected function _list_tables( $prefix_limit = FALSE)
+	protected function _list_tables( $prefix_limit = FALSE )
 	{
 		$sql = "SELECT table_name FROM information_schema.tables WHERE table_schema = '".$this->schema."'";
 
@@ -288,7 +288,7 @@ class CI_DB_odbc_driver extends CI_DB {
 	 */
 	public function error()
 	{
-		return  array( 'code' => odbc_error( $this->conn_id), 'message' => odbc_errormsg( $this->conn_id));
+		return  array( 'code' => odbc_error( $this->conn_id), 'message' => odbc_errormsg( $this->conn_id ) );
 	}
 
 	// --------------------------------------------------------------------

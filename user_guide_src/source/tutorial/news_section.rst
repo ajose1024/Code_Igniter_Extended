@@ -60,15 +60,15 @@ following code to your model.
 
 ::
 
-	public function get_news( $slug = FALSE)
+	public function get_news( $slug = FALSE )
 	{
-		if( $slug === FALSE)
+		if( $slug === FALSE )
 		{
 			$query = $this->db->get( 'news');
 			return  $query->result_array();
 		}
 
-		$query = $this->db->get_where( 'news', array( 'slug' => $slug));
+		$query = $this->db->get_where( 'news', array( 'slug' => $slug ) );
 		return  $query->row_array();
 	}
 
@@ -174,7 +174,7 @@ add some code to the controller and create a new view. Go back to the
 	{
 		$data[ 'news_item' ] = $this->news_model->get_news( $slug);
 
-		if( empty( $data[ 'news_item' ]))
+		if( empty( $data[ 'news_item' ] ) )
 		{
 			show_404();
 		}

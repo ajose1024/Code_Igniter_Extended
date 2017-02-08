@@ -40,7 +40,7 @@ class Join_test extends CI_TestCase {
 	public function test_join_escape_multiple_conditions()
 	{
 		// We just need a valid query produced, not one that makes sense
-		$fields = array( $this->db->protect_identifiers( 'table1.field1'), $this->db->protect_identifiers( 'table2.field2'));
+		$fields = array( $this->db->protect_identifiers( 'table1.field1'), $this->db->protect_identifiers( 'table2.field2' ) );
 
 		$expected = 'SELECT '.implode( ', ', $fields)
 				."\nFROM ".$this->db->escape_identifiers( 'table1')

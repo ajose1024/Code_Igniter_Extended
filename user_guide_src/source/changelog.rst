@@ -717,7 +717,7 @@ Release Date: March 30, 2015
       - `Standard Functions ``array_column()``, ``array_replace()``, ``array_replace_recursive()``, ``hex2bin()``, ``quoted_printable_encode()``.
 
    -  Removed ``CI_CORE`` boolean constant from *CodeIgniter.php* (no longer Reactor and Core versions).
-   -  Added support for HTTP-Only cookies with new config option *cookie_httponly* (default FALSE).
+   -  Added support for HTTP-Only cookies with new config option *cookie_httponly* (default FALSE ).
    -  ``$config[ 'time_reference' ]`` now supports all timezone strings supported by PHP.
    -  Fatal PHP errors are now also passed to ``_error_handler()``, so they can be logged.
 
@@ -842,7 +842,7 @@ Bug fixes for 3.0
 -  Fixed a bug (#1766) - :doc:`Query Builder <database/query_builder>` didn't always take into account the *dbprefix* setting.
 -  Fixed a bug (#779) - :doc:`URI Class <libraries/uri>` didn't always trim slashes from the *uri_string* as shown in the documentation.
 -  Fixed a bug (#134) - :doc:`Database Caching <database/caching>` method ``delete_cache()`` didn't work in some cases due to *cachedir* not being initialized properly.
--  Fixed a bug (#191) - :doc:`Loader Library <libraries/loader>` ignored attempts for (re)loading databases to ``get_instance()->db`` even when the old database connection is dead.
+-  Fixed a bug (#191) - :doc:`Loader Library <libraries/loader>` ignored attempts for( re)loading databases to ``get_instance()->db`` even when the old database connection is dead.
 -  Fixed a bug (#1255) - :doc:`User Agent Library <libraries/user_agent>` method ``is_referral()`` only checked if ``$_SERVER[ 'HTTP_REFERER' ]`` exists.
 -  Fixed a bug (#1146) - :doc:`Download Helper <helpers/download_helper>` function :php:func:`force_download()` incorrectly sent *Cache-Control* directives *pre-check* and *post-check* to Internet Explorer.
 -  Fixed a bug (#1811) - :doc:`URI Library <libraries/uri>` didn't properly cache segments for ``uri_to_assoc()`` and ``ruri_to_assoc()``.
@@ -1462,7 +1462,7 @@ Hg Tag: v2.0.0
    -  Added stripslashes() and trim()ing of double quotes from $_FILES
       type value to standardize input in Upload library.
    -  Added a second parameter (boolean) to
-      $this->zip->read_dir( '/path/to/directory', FALSE) to remove the
+      $this->zip->read_dir( '/path/to/directory', FALSE ) to remove the
       preceding trail of empty folders when creating a Zip archive. This
       example would contain a zip with "directory" and all of its
       contents.
@@ -1860,7 +1860,7 @@ Bug fixes for 1.7.1
 -  Fixed a bug with non-breaking space cleanup in
    Typography::auto_typography().
 -  Fixed a bug in database escaping where a compound statement (ie:
-   SUM()) wasn't handled correctly with database prefixes.
+   SUM( ) ) wasn't handled correctly with database prefixes.
 -  Fixed a bug when an opening quote is preceded by a paragraph tag and
    immediately followed by another tag.
 -  Fixed a bug in the Text Helper affecting some locales where

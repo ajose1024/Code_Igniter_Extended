@@ -82,15 +82,15 @@ class CI_DB_pdo_firebird_driver extends CI_DB_pdo_driver {
 	{
 		parent::__construct( $params);
 
-		if( empty( $this->dsn))
+		if( empty( $this->dsn ) )
 		{
 			$this->dsn = 'firebird:';
 
-			if( ! empty( $this->database))
+			if( ! empty( $this->database ) )
 			{
 				$this->dsn .= 'dbname=' . $this->database;
 			}
-			elseif( ! empty( $this->hostname))
+			elseif( ! empty( $this->hostname ) )
 			{
 				$this->dsn .= 'dbname=' . $this->hostname;
 			}
@@ -98,7 +98,7 @@ class CI_DB_pdo_firebird_driver extends CI_DB_pdo_driver {
 			empty( $this->char_set) OR $this->dsn .= ';charset=' . $this->char_set;
 			empty( $this->role) OR $this->dsn .= ';role=' . $this->role;
 		}
-		elseif( ! empty( $this->char_set) && strpos( $this->dsn, 'charset=', 9) === FALSE)
+		elseif( ! empty( $this->char_set) && strpos( $this->dsn, 'charset=', 9) === FALSE )
 		{
 			$this->dsn .= ';charset=' . $this->char_set;
 		}
@@ -114,7 +114,7 @@ class CI_DB_pdo_firebird_driver extends CI_DB_pdo_driver {
 	 * @param	bool	$prefix_limit
 	 * @return	string
 	 */
-	protected function _list_tables( $prefix_limit = FALSE)
+	protected function _list_tables( $prefix_limit = FALSE )
 	{
 		$sql = 'SELECT "RDB$RELATION_NAME" FROM "RDB$RELATIONS" WHERE "RDB$RELATION_NAME" NOT LIKE \'RDB$%\' AND "RDB$RELATION_NAME" NOT LIKE \'MON$%\'';
 
@@ -177,7 +177,7 @@ class CI_DB_pdo_firebird_driver extends CI_DB_pdo_driver {
 			WHERE "rfields"."RDB$RELATION_NAME" = ' . $this->escape( $table) . '
 			ORDER BY "rfields"."RDB$FIELD_POSITION"';
 
-		return  (( $query = $this->query( $sql)) !== FALSE)
+		return  (( $query = $this->query( $sql ) ) !== FALSE )
 			? $query->result_object()
 			: FALSE;
 	}
@@ -246,7 +246,7 @@ class CI_DB_pdo_firebird_driver extends CI_DB_pdo_driver {
 	protected function _limit( $sql)
 	{
 		// Limit clause depends on if Interbase or Firebird
-		if( stripos( $this->version(), 'firebird') !== FALSE)
+		if( stripos( $this->version(), 'firebird') !== FALSE )
 		{
 			$select = 'FIRST ' . $this->qb_limit
 				.( $this->qb_offset > 0 ? ' SKIP ' . $this->qb_offset : '');

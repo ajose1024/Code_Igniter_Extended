@@ -92,14 +92,14 @@ class CI_DB_sqlite_forge extends CI_DB_forge {
 	 */
 	public function drop_database( $db_name = '')
 	{
-		if( ! file_exists( $this->db->database) OR ! @unlink( $this->db->database))
+		if( ! file_exists( $this->db->database) OR ! @unlink( $this->db->database ) )
 		{
 			return  ( $this->db->db_debug) ? $this->db->display_error( 'db_unable_to_drop') : FALSE;
 		}
-		elseif( ! empty( $this->db->data_cache[ 'db_names' ]))
+		elseif( ! empty( $this->db->data_cache[ 'db_names' ] ) )
 		{
 			$key = array_search(strtolower( $this->db->database), array_map( 'strtolower', $this->db->data_cache[ 'db_names' ]), TRUE);
-			if( $key !== FALSE)
+			if( $key !== FALSE )
 			{
 				unset( $this->db->data_cache[ 'db_names' ][$key]);
 			}
@@ -169,7 +169,7 @@ class CI_DB_sqlite_forge extends CI_DB_forge {
 	 */
 	protected function _attr_type(&$attributes)
 	{
-		switch( strtoupper( $attributes[ 'TYPE' ]))
+		switch( strtoupper( $attributes[ 'TYPE' ] ) )
 		{
 			case 'ENUM':
 			case 'SET':
@@ -190,7 +190,7 @@ class CI_DB_sqlite_forge extends CI_DB_forge {
 	 */
 	protected function _attr_auto_increment(&$attributes, &$field)
 	{
-		if( ! empty( $attributes[ 'AUTO_INCREMENT' ]) && $attributes[ 'AUTO_INCREMENT' ] === TRUE && stripos( $field[ 'type' ], 'int') !== FALSE)
+		if( ! empty( $attributes[ 'AUTO_INCREMENT' ]) && $attributes[ 'AUTO_INCREMENT' ] === TRUE && stripos( $field[ 'type' ], 'int') !== FALSE )
 		{
 			$field[ 'type' ] = 'INTEGER PRIMARY KEY';
 			$field[ 'default' ] = '';

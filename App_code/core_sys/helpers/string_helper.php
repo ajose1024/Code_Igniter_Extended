@@ -49,7 +49,7 @@ defined( 'SYS_CORE_PATH') OR exit( 'No direct script access allowed') ;
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'trim_slashes'))
+if( ! function_exists( 'trim_slashes' ) )
 {
 	/**
 	 * Trim Slashes
@@ -76,7 +76,7 @@ if( ! function_exists( 'trim_slashes'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'strip_slashes'))
+if( ! function_exists( 'strip_slashes' ) )
 {
 	/**
 	 * Strip Slashes
@@ -88,7 +88,7 @@ if( ! function_exists( 'strip_slashes'))
 	 */
 	function strip_slashes( $str)
 	{
-		if( ! is_array( $str))
+		if( ! is_array( $str ) )
 		{
 			return  stripslashes( $str);
 		}
@@ -104,7 +104,7 @@ if( ! function_exists( 'strip_slashes'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'strip_quotes'))
+if( ! function_exists( 'strip_quotes' ) )
 {
 	/**
 	 * Strip Quotes
@@ -122,7 +122,7 @@ if( ! function_exists( 'strip_quotes'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'quotes_to_entities'))
+if( ! function_exists( 'quotes_to_entities' ) )
 {
 	/**
 	 * Quotes to Entities
@@ -140,7 +140,7 @@ if( ! function_exists( 'quotes_to_entities'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'reduce_double_slashes'))
+if( ! function_exists( 'reduce_double_slashes' ) )
 {
 	/**
 	 * Reduce Double Slashes
@@ -165,7 +165,7 @@ if( ! function_exists( 'reduce_double_slashes'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'reduce_multiples'))
+if( ! function_exists( 'reduce_multiples' ) )
 {
 	/**
 	 * Reduce Multiples
@@ -183,7 +183,7 @@ if( ! function_exists( 'reduce_multiples'))
 	 * @param	bool	TRUE/FALSE - whether to trim the character from the beginning/end
 	 * @return	string
 	 */
-	function reduce_multiples( $str, $character = ',', $trim = FALSE)
+	function reduce_multiples( $str, $character = ',', $trim = FALSE )
 	{
 		$str = preg_replace( '#'.preg_quote( $character, '#') . '{2,}#', $character, $str);
 		return  ( $trim === TRUE) ? trim( $str, $character) : $str;
@@ -192,7 +192,7 @@ if( ! function_exists( 'reduce_multiples'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'random_string'))
+if( ! function_exists( 'random_string' ) )
 {
 	/**
 	 * Create a Random String
@@ -228,20 +228,20 @@ if( ! function_exists( 'random_string'))
 						$pool = '123456789';
 						break;
 				}
-				return  substr(str_shuffle(str_repeat( $pool, ceil( $len / strlen( $pool)))), 0, $len);
+				return  substr(str_shuffle(str_repeat( $pool, ceil( $len / strlen( $pool ) ) ) ), 0, $len);
 			case 'unique': // todo: remove in 3.1+
 			case 'md5':
-				return  md5(uniqid(mt_rand()));
+				return  md5(uniqid(mt_rand( ) ));
 			case 'encrypt': // todo: remove in 3.1+
 			case 'sha1':
-				return  sha1(uniqid(mt_rand(), TRUE));
+				return  sha1(uniqid(mt_rand(), TRUE ) );
 		}
 	}
 }
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'increment_string'))
+if( ! function_exists( 'increment_string' ) )
 {
 	/**
 	 * Add's _1 to a string or increment the ending number to allow _2, _3, etc
@@ -260,7 +260,7 @@ if( ! function_exists( 'increment_string'))
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'alternator'))
+if( ! function_exists( 'alternator' ) )
 {
 	/**
 	 * Alternator
@@ -280,13 +280,13 @@ if( ! function_exists( 'alternator'))
 			return  '';
 		}
 		$args = func_get_args();
-		return  $args[( $i++ % count( $args))];
+		return  $args[( $i++ % count( $args ) )];
 	}
 }
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists( 'repeater'))
+if( ! function_exists( 'repeater' ) )
 {
 	/**
 	 * Repeater function

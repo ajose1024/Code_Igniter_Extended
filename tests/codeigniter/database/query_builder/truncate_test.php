@@ -24,14 +24,14 @@ class Truncate_test extends CI_TestCase {
 	{
 		// Check initial record
 		$jobs = $this->db->get( 'job')->result_array();
-		$this->assertEquals(4, count( $jobs));
+		$this->assertEquals(4, count( $jobs ) );
 
 		// Do the empty
 		$this->db->truncate( 'job');
 
 		// Check the record
 		$jobs = $this->db->get( 'job');
-		$this->assertEmpty( $jobs->result_array());
+		$this->assertEmpty( $jobs->result_array( ) );
 	}
 
 	// ------------------------------------------------------------------------
@@ -43,14 +43,14 @@ class Truncate_test extends CI_TestCase {
 	{
 		// Check initial record
 		$users = $this->db->get( 'user')->result_array();
-		$this->assertEquals(4, count( $users));
+		$this->assertEquals(4, count( $users ) );
 
 		// Do the empty
 		$this->db->from( 'user')->truncate();
 
 		// Check the record
 		$users = $this->db->get( 'user');
-		$this->assertEmpty( $users->result_array());
+		$this->assertEmpty( $users->result_array( ) );
 	}
 
 }

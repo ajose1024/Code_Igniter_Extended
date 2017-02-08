@@ -77,7 +77,7 @@ as *20121031100537_add_blog.php*.
 					'type' => 'TEXT',
 					'null' => TRUE,
 				),
-			));
+			 ) );
 			$this->dbforge->add_key( 'blog_id', TRUE);
 			$this->dbforge->create_table( 'blog');
 		}
@@ -106,9 +106,9 @@ to update the schema.::
 		{
 			$this->load->library( 'migration');
 
-			if( $this->migration->current() === FALSE)
+			if( $this->migration->current() === FALSE )
 			{
-				show_error( $this->migration->error_string());
+				show_error( $this->migration->error_string( ) );
 			}
 		}
 

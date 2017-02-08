@@ -186,10 +186,10 @@ to emulate CodeIgniter's default behavior.
 
 Example::
 
-	public function _remap( $method, $params = array())
+	public function _remap( $method, $params = array( ) )
 	{
 		$method = 'process_' . $method;
-		if( method_exists( $this, $method))
+		if( method_exists( $this, $method ) )
 		{
 			return  call_user_func_array(array( $this, $method), $params);
 		}

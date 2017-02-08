@@ -64,7 +64,7 @@ class CI_Javascript {
 	 * @param	array	$params
 	 * @return	void
 	 */
-	public function __construct( $params = array())
+	public function __construct( $params = array( ) )
 	{
 		$defaults = array( 'js_library_driver' => 'jquery', 'autoload' => TRUE);
 
@@ -81,7 +81,7 @@ class CI_Javascript {
 		$this->CI =& get_instance();
 
 		// load the requested js library
-		$this->CI->load->library( 'Javascript/' . $js_library_driver, array( 'autoload' => $autoload));
+		$this->CI->load->library( 'Javascript/' . $js_library_driver, array( 'autoload' => $autoload ) );
 		// make js to refer to current library
 		$this->js =& $this->CI->$js_library_driver;
 
@@ -136,7 +136,7 @@ class CI_Javascript {
 	 */
 	public function click( $element = 'this', $js = '', $ret_false = TRUE)
 	{
-		return  $this->js->_click( $element, $js, $ret_false);
+		return  $this->js->_click( $element, $js, $ret_false );
 	}
 
 	// --------------------------------------------------------------------
@@ -639,7 +639,7 @@ class CI_Javascript {
 	 * @param	bool	$relative
 	 * @return	string
 	 */
-	public function external( $external_file = '', $relative = FALSE)
+	public function external( $external_file = '', $relative = FALSE )
 	{
 		if( $external_file !== '')
 		{
@@ -654,7 +654,7 @@ class CI_Javascript {
 		{
 			$str = $this->_open_script( $external_file);
 		}
-		elseif( strpos( $this->_javascript_location, 'http://') !== FALSE)
+		elseif( strpos( $this->_javascript_location, 'http://') !== FALSE )
 		{
 			$str = $this->_open_script( $this->_javascript_location.$external_file);
 		}
@@ -696,7 +696,7 @@ class CI_Javascript {
 	 */
 	protected function _open_script( $src = '')
 	{
-		return  '<script type="text/javascript" charset="'.strtolower( $this->CI->config->item( 'charset')) . '"'
+		return  '<script type="text/javascript" charset="'.strtolower( $this->CI->config->item( 'charset' ) ) . '"'
 			.( $src === '' ? '>' : ' src="' . $src . '">');
 	}
 
@@ -745,17 +745,17 @@ class CI_Javascript {
 	 * @param	bool	match array types (defaults to objects)
 	 * @return	string	a json formatted string
 	 */
-	public function generate_json( $result = NULL, $match_array_type = FALSE)
+	public function generate_json( $result = NULL, $match_array_type = FALSE )
 	{
 		// JSON data can optionally be passed to this function
 		// either as a database result object or an array, or a user supplied array
 		if( $result !== NULL)
 		{
-			if( is_object( $result))
+			if( is_object( $result ) )
 			{
-				$json_result = is_callable(array( $result, 'result_array')) ? $result->result_array() : (array) $result;
+				$json_result = is_callable(array( $result, 'result_array' ) ) ? $result->result_array() : (array) $result;
 			}
-			elseif( is_array( $result))
+			elseif( is_array( $result ) )
 			{
 				$json_result = $result;
 			}
@@ -772,7 +772,7 @@ class CI_Javascript {
 		$json = array();
 		$_is_assoc = TRUE;
 
-		if( ! is_array( $json_result) && empty( $json_result))
+		if( ! is_array( $json_result) && empty( $json_result ) )
 		{
 			show_error( 'Generate JSON Failed - Illegal key, value pair . ');
 		}
@@ -833,13 +833,13 @@ class CI_Javascript {
 	 * @param	bool	$is_key = FALSE
 	 * @return	string
 	 */
-	protected function _prep_args( $result, $is_key = FALSE)
+	protected function _prep_args( $result, $is_key = FALSE )
 	{
 		if( $result === NULL)
 		{
 			return  'null';
 		}
-		elseif( is_bool( $result))
+		elseif( is_bool( $result ) )
 		{
 			return  ( $result === TRUE) ? 'true' : 'false';
 		}
@@ -847,7 +847,7 @@ class CI_Javascript {
 		{
 			return  '"'.str_replace(array( '\\', "\t", "\n", "\r", '"', '/'), array( '\\\\', '\\t', '\\n', "\\r", '\"', '\/'), $result) . '"';
 		}
-		elseif( is_scalar( $result))
+		elseif( is_scalar( $result ) )
 		{
 			return  $result;
 		}

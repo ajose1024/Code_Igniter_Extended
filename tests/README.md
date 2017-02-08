@@ -148,7 +148,7 @@ directory object.
 Creates a new VFS file. '.php' is automatically appended to the filename if
 it has no extension. Pass a directory object as the root, and an optional path
 to recurse and/or create for containing the file. Path may be a string (such
-as 'models/subdir') or an array (e.g. - array( 'models', 'subdir')). Existing
+as 'models/subdir') or an array (e.g. - array( 'models', 'subdir' ) ). Existing
 directories in the VFS root will be recursed until a new directory is
 identified - all others in the path will be created, so you can mix-and-match
 old and new directories. If $file is an array (key = name, value = content),
@@ -192,7 +192,7 @@ of the currently running test class.
 
 Testing common.php should be pretty simple. Include the file, and test the
 functions. May require some tweaking so that we can grab the statics from all
-methods (see is_loaded()). Testing the actual CodeIgniter.php file will most
+methods (see is_loaded( ) ). Testing the actual CodeIgniter.php file will most
 likely be an output test for the default view, with some object checking after
 the file runs. Needs consideration.
 

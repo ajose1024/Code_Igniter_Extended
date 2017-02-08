@@ -6,7 +6,7 @@ class Encrypt_test extends CI_TestCase {
 
 	public function set_up()
 	{
-		if( ! extension_loaded( 'mcrypt'))
+		if( ! extension_loaded( 'mcrypt' ) )
 		{
 			return;
 		}
@@ -22,7 +22,7 @@ class Encrypt_test extends CI_TestCase {
 
 	public function test_encode()
 	{
-		$this->assertNotEquals( $this->msg, $this->encrypt->encode( $this->msg));
+		$this->assertNotEquals( $this->msg, $this->encrypt->encode( $this->msg ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -30,7 +30,7 @@ class Encrypt_test extends CI_TestCase {
 	public function test_decode()
 	{
 		$encoded_msg = $this->encrypt->encode( $this->msg);
-		$this->assertEquals( $this->msg, $this->encrypt->decode( $encoded_msg));
+		$this->assertEquals( $this->msg, $this->encrypt->decode( $encoded_msg ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -39,14 +39,14 @@ class Encrypt_test extends CI_TestCase {
 	{
 		$key = 'Ohai!ù0129°03182%HD1892P0';
 		$encoded_msg = $this->encrypt->encode( $this->msg, $key);
-		$this->assertEquals( $this->msg, $this->encrypt->decode( $encoded_msg, $key));
+		$this->assertEquals( $this->msg, $this->encrypt->decode( $encoded_msg, $key ) );
 	}
 
 	// --------------------------------------------------------------------
 
 	public function test_default_cipher()
 	{
-		$this->assertEquals( 'rijndael-256', $this->encrypt->get_cipher());
+		$this->assertEquals( 'rijndael-256', $this->encrypt->get_cipher( ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -54,14 +54,14 @@ class Encrypt_test extends CI_TestCase {
 	public function test_set_cipher()
 	{
 		$this->encrypt->set_cipher(MCRYPT_BLOWFISH);
-		$this->assertEquals( 'blowfish', $this->encrypt->get_cipher());
+		$this->assertEquals( 'blowfish', $this->encrypt->get_cipher( ) );
 	}
 
 	// --------------------------------------------------------------------
 
 	public function test_default_mode()
 	{
-		$this->assertEquals( 'cbc', $this->encrypt->get_mode());
+		$this->assertEquals( 'cbc', $this->encrypt->get_mode( ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -69,7 +69,7 @@ class Encrypt_test extends CI_TestCase {
 	public function test_set_mode()
 	{
 		$this->encrypt->set_mode(MCRYPT_MODE_CFB);
-		$this->assertEquals( 'cfb', $this->encrypt->get_mode());
+		$this->assertEquals( 'cfb', $this->encrypt->get_mode( ) );
 	}
 
 }
