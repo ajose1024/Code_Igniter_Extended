@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<dwsync>
-<file name="mysql.phpunit.xml" server="ci-ext.dev.escrita-virtual.pt//public_html/" local="131303661541210365" remote="131303685000000000" />
-<file name="mysqli.phpunit.xml" server="ci-ext.dev.escrita-virtual.pt//public_html/" local="131303661541215371" remote="131303685000000000" />
-<file name="pgsql.phpunit.xml" server="ci-ext.dev.escrita-virtual.pt//public_html/" local="131303661541380526" remote="131303685000000000" />
-<file name="sqlite.phpunit.xml" server="ci-ext.dev.escrita-virtual.pt//public_html/" local="131303661541390537" remote="131303685000000000" />
-</dwsync>
