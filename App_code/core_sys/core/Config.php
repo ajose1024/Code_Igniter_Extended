@@ -216,7 +216,7 @@ class CI_Config implements CI_Config_Interface
      *
      * @param   string  $file               Configuration file name
      * @param   bool    $use_sections       Whether configuration values should be loaded into their own section
-     * @param   bool    $fail_gracefully    Whether to just return  FALSE or display an error message
+     * @param   bool    $fail_gracefully    Whether to just return  FALSE  or display an error message
      * 
      * @return  bool    TRUE if the file was loaded correctly or FALSE on failure
      */
